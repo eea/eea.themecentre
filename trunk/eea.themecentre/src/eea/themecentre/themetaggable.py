@@ -30,6 +30,14 @@ class ThemeTaggable(object):
         info = Attributes(IThemeTaggable, 'tags')
         notify(ObjectModifiedEvent(self.context, info))
 
-    @property
-    def tags(self):
-        return self.mapping['themes']
+    def tags():
+        def get(self):
+            anno = IAnnotations(self.context)
+            mapping = anno.get(KEY)
+            return mapping['themes']
+        def set(self, value):
+            anno = IAnnotations(self.context)
+            mapping = anno.get(KEY)
+            mapping['themes'] = PersistentList(value)
+        return property(get, set)
+    tags = tags()

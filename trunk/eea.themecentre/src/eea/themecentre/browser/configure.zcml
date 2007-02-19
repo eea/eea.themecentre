@@ -1,0 +1,19 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser">
+ 
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeTaggable"
+      name="themes_edit.html"
+      permission="cmf.ModifyPortalContent"
+      class=".themes.ThemeEditForm"
+      />
+
+  <browser:menuItem
+      for="eea.themecentre.interfaces.IThemeTaggable"
+      menu="object"
+      title="Themes"
+      action="themes_edit.html"
+      permission="cmf.ModifyPortalContent"
+      />
+
+</configure>
