@@ -2,7 +2,9 @@ Theme Centre is a folder that contains content on a certain theme.
 
 To get it working
 =================
-You need Five 1.4+ and plone.app.form
+You need
+ * Five 1.4+  (http://svn.zope.org/Products.Five/tags/1.4.2/)
+ * plone.app.form  (https://svn.plone.org/svn/plone/plone.app.form/trunk)
 
 There's a bug in Zope 2.9 (and probably in later versions as well)
 that raises AttributeError: debug when using plone.app.form. The
