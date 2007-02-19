@@ -13,6 +13,7 @@ class IThemeTagging(Interface):
         description = u"List of themes that this content object should be "
                        "associated with",
         required = False,
+        max_length = 3,
         value_type = Choice(
             title = u"Theme",
             vocabulary = "Allowed themes",
