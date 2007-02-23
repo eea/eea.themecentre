@@ -1,8 +1,10 @@
 from zope.interface import implements, alsoProvides
 from zope.component import getUtility
+from zope.event import notify
 from zope.formlib.form import Fields, EditForm
 from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.themecentre import PromotedToThemeCentreEvent
 from Products.CMFCore.utils import getToolByName
 
 from eea.mediacentre.interfaces import IMediaCentre
@@ -24,6 +26,7 @@ class PromoteThemeCentre(object):
         self.context.setImmediatelyAddableTypes( types )
         self.context.setConstrainTypesMode(ENABLE)
         self.context.layout = 'themecentre_view'
+        notify(PromotedToThemeCentreEvent(self.context))
         return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
     
 class ThemeCentreEdit(EditForm):

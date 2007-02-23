@@ -42,6 +42,10 @@
       factory="zope.app.traversing.adapters.DefaultTraversable"
       />
 
+  <subscriber
+      for=".interfaces.IThemeCentre
+           .themecentre.PromotedToThemeCentreEvent"
+      handler=".themecentre.promoted" />
 
   <include file="permissions.zcml"/>
 

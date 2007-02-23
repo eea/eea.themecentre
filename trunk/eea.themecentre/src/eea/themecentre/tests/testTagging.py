@@ -1,8 +1,10 @@
 import unittest
+from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 from zope.component import provideAdapter
 from zope.interface import classImplements
 from eea.themecentre.themetaggable import ThemeTaggable, ThemeCentreTaggable
+from eea.themecentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
 from zope.app.annotation.attribute import AttributeAnnotations
 from zope.app.annotation.interfaces import IAttributeAnnotatable
 from zope.app.folder.folder import Folder
@@ -13,6 +15,12 @@ def setUp(test):
     provideAdapter(AttributeAnnotations)
     classImplements(Folder, IAttributeAnnotatable)
 
+class TestThemeCentre(ThemeCentreTestCase):
+    def afterSetUp(self):
+        self.setRoles(['Manager'])
+        self.portal.invokeFactory('Folder', id='to_be_promoted')
+
+
 def test_suite():
 
     return unittest.TestSuite((
@@ -20,8 +28,9 @@ def test_suite():
                      setUp=setUp, #tearDown=tearDown,
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
-        doctest.DocFileSuite('themecentre.txt',
-                     setUp=setUp, #tearDown=tearDown,
+        FunctionalDocFileSuite('themecentre.txt',
+                     test_class=TestThemeCentre,
+                     package = 'eea.themecentre.tests',
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
         ))

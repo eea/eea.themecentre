@@ -1,0 +1,16 @@
+A folder can be promoted to a Theme Centre by calling a view.
+
+  >>> from Products.ATContentTypes.content.folder import ATFolder
+  >>> from eea.themecentre.browser.themecentre import PromoteThemeCentre
+
+  >>> folder = self.portal.to_be_promoted
+  >>> view = PromoteThemeCentre(folder, self.portal.REQUEST)
+  >>> view()
+  '...'
+
+When a folder is promoted to a Theme Centre a news folder should be
+created. Let's see if that worked.
+
+  >>> newsobj = getattr(folder, 'news', None)
+  >>> newsobj is not None
+  True
