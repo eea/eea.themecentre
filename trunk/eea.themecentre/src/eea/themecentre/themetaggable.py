@@ -1,12 +1,14 @@
-from eea.themecentre.interfaces import IThemeTagging
-from eea.themecentre.interfaces import IThemeTaggable
+from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
+from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
+from eea.themecentre.interfaces import IThemeCentreSchema
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
 from zope.app.annotation.interfaces import IAnnotations
-from zope.component import adapts
+from zope.component import adapts, getUtility
 from zope.event import notify
 from zope.interface import implements
 from zope.app.event.objectevent import ObjectModifiedEvent, Attributes
+from zope.app.schema.vocabulary import IVocabularyFactory
 
 KEY = 'eea.themecentre.themetaggable'
 
@@ -41,3 +43,25 @@ class ThemeTaggable(object):
             mapping['themes'] = PersistentList(value)
         return property(get, set)
     tags = tags()
+
+class ThemeCentreTaggable(object):
+    implements(IThemeCentreSchema)
+    adapts(IPossibleThemeCentre)
+
+    def __init__(self, context):
+        self.context = context
+
+    def tags():
+        def get(self):
+            tags = IThemeTagging(self.context).tags
+            if len(tags) > 0:
+                return tags[0]
+            return None
+        def set(self, value):
+            IThemeTagging(self.context).tags = (value,)
+            vocab = getUtility(IVocabularyFactory, 'Allowed themes')
+            themes = vocab(self)
+            self.context.setTitle( themes.getTerm(value).title )
+        return property(get, set)
+    tags = tags()
+        

@@ -1,11 +1,36 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser">
- 
+
+  <include package="Products.CMFonFive"/>
+  <include package="Products.eeawebapplication.browser"/>
+
   <browser:page
       for="eea.themecentre.interfaces.IThemeTaggable"
       name="themes_edit.html"
-      permission="cmf.ModifyPortalContent"
+      permission="eea.PromoteThemeCentre"
       class=".themes.ThemeEditForm"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IPossibleThemeCentre"
+      name="promote2ThemeCentre"
+      permission="eea.PromoteThemeCentre"
+      class=".themecentre.PromoteThemeCentre"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="themecentre_edit.html"
+      permission="eea.PromoteThemeCentre"
+      class=".themecentre.ThemeCentreEdit"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="themecentre"
+      permission="zope.Public"
+      class=".themecentre.ThemeCentre"
+      allowed_interface="eea.themecentre.interfaces.IThemeCentre"
       />
 
   <browser:menuItem
@@ -14,6 +39,32 @@
       title="Themes"
       action="themes_edit.html"
       permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:menuItem
+      for="eea.themecentre.interfaces.IThemeCentre"
+      menu="object"
+      title="Theme"
+      action="themecentre_edit.html"
+      permission="eea.PromoteThemeCentre"
+      />
+
+   <browser:menuItem
+      for="Products.ATContentTypes.interface.IATFolder"
+      menu="object_buttons"
+      title="Theme centre"
+      action="@@promote2ThemeCentre"
+      description="Promote to theme centre"
+      permission="eea.PromoteThemeCentre"
+      />
+
+   <browser:menuItem
+      for="eea.themecentre.interfaces.IThemeCentre"
+      menu="object_buttons"
+      title="NO Theme centre"
+      action="@@depromote2ThemeCentre"
+      description="depromote to theme centre"
+      permission="eea.PromoteThemeCentre"
       />
 
 </configure>
