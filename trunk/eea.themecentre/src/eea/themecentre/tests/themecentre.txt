@@ -8,9 +8,12 @@ A folder can be promoted to a Theme Centre by calling a view.
   >>> view()
   '...'
 
-When a folder is promoted to a Theme Centre a news folder should be
-created. Let's see if that worked.
+When a folder is promoted to a Theme Centre news, links and events folders
+should be created. Let's see if that worked.
 
-  >>> newsobj = getattr(folder, 'news', None)
-  >>> newsobj is not None
+  >>> getattr(folder, 'news', None) is not None
+  True
+  >>> getattr(folder, 'events', None) is not None
+  True
+  >>> getattr(folder, 'links', None) is not None
   True

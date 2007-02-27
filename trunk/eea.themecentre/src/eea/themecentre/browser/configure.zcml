@@ -67,4 +67,20 @@
       permission="eea.PromoteThemeCentre"
       />
 
+  <browser:page
+      for="..interfaces.IThemeCentre"
+      name="news_view"
+      class=".newsportlet.EEANewsPortlet"
+      allowed_interface="Products.CMFPlone.browser.interfaces.INewsPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="..interfaces.IThemeCentre"
+      name="events_view"
+      class=".eventsportlet.EEAEventsPortlet"
+      allowed_interface="Products.CMFPlone.browser.interfaces.IEventsPortlet"
+      permission="zope.Public"
+      />
+
 </configure>
