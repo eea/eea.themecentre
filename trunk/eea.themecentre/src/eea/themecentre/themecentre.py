@@ -1,6 +1,10 @@
 from zope.app.component.hooks import getSite
 from zope.app.event.objectevent import ObjectEvent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Acquisition import aq_parent
+
+from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 
 class PromotedToThemeCentreEvent(ObjectEvent):
     """ A theme tag has been added to an object. """
@@ -35,3 +39,18 @@ def promoted(obj, event):
         linksobj.setConstrainTypesMode(1)
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
+
+def getTheme(context):
+    """ looks up the closest theme centre """
+
+    while not IPloneSiteRoot.providedBy(context) and \
+          not IThemeCentre.providedBy(context):
+        context = aq_parent(context)
+
+    if IThemeCentre.providedBy(context):
+        themes = IThemeTagging(context)
+
+        if themes:
+            return themes.tags
+
+    return None

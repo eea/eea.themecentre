@@ -36,11 +36,12 @@ class ThemeTaggable(object):
         def get(self):
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
-            return mapping['themes']
+            return list(mapping['themes'])
         def set(self, value):
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
             mapping['themes'] = PersistentList(value)
+            self.context.reindexObject()
         return property(get, set)
     tags = tags()
 
