@@ -1,5 +1,5 @@
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
-from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
+from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
@@ -47,7 +47,7 @@ class ThemeTaggable(object):
 
 class ThemeCentreTaggable(object):
     implements(IThemeCentreSchema)
-    adapts(IPossibleThemeCentre)
+    adapts(IThemeCentre)
 
     def __init__(self, context):
         self.context = context

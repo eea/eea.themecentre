@@ -5,6 +5,7 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Acquisition import aq_parent
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
+from eea.themecentre.interfaces import IThemeCentreSchema
 
 class PromotedToThemeCentreEvent(ObjectEvent):
     """ A theme tag has been added to an object. """
@@ -40,15 +41,37 @@ def promoted(obj, event):
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
 
-def getTheme(context):
-    """ looks up the closest theme centre """
+def objectAdded(obj, event):
+    """ Checks if the object belongs to a theme centre. If it does and it
+        is taggable, then it is tagged with the current theme. """
 
-    while not IPloneSiteRoot.providedBy(context) and \
+    if IThemeCentre.providedBy(obj):
+        return
+
+    themeCentre = getThemeCentre(obj)
+    if themeCentre:
+        themes = IThemeTagging(obj, None)
+        if themes:
+            themeCentreThemes = IThemeCentreSchema(themeCentre)
+            themes.tags = [themeCentreThemes.tags]
+
+def getThemeCentre(context):
+    """ Looks up the closest theme centre. """
+
+    while context and not IPloneSiteRoot.providedBy(context) and \
           not IThemeCentre.providedBy(context):
         context = aq_parent(context)
 
     if IThemeCentre.providedBy(context):
-        themes = IThemeTagging(context)
+        return context
+    else:
+        return None
+
+def getTheme(context):
+    themeCentre = getThemeCentre(context)
+
+    if IThemeCentre.providedBy(themeCentre):
+        themes = IThemeTagging(themeCentre)
 
         if themes:
             return themes.tags

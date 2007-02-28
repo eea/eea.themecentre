@@ -11,6 +11,7 @@ from Products.PloneTestCase import PloneTestCase
 from zope.configuration.xmlconfig import XMLConfig
 import Products.Five
 import Products.FiveSite
+import eea.themecentre
 
 #XMLConfig('configure.zcml', Products.Five)()
 
@@ -22,6 +23,7 @@ PloneTestCase.installProduct('ThemeCentre')
 
 XMLConfig('meta.zcml', Products.Five)()
 XMLConfig('configure.zcml', Products.FiveSite)()
+XMLConfig('configure.zcml', eea.themecentre)()
 
 PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager',
             'EEAContentTypes', 'FiveSite', 'ThemeCentre')

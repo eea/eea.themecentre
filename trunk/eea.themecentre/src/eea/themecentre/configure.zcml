@@ -53,7 +53,13 @@
   <subscriber
       for=".interfaces.IThemeCentre
            .themecentre.PromotedToThemeCentreEvent"
-      handler=".themecentre.promoted" />
+      handler=".themecentre.promoted"
+      />
+
+  <subscriber
+      for="* zope.app.container.interfaces.IObjectAddedEvent"
+      handler=".themecentre.objectAdded"
+      />
 
   <include file="permissions.zcml"/>
 

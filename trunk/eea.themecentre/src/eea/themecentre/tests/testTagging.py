@@ -15,10 +15,22 @@ def setUp(test):
     provideAdapter(AttributeAnnotations)
     classImplements(Folder, IAttributeAnnotatable)
 
+def createObject(parent, portal_type, id):
+    parent.invokeFactory(portal_type, id=id)
+    newobj = getattr(parent, id, None)
+    if newobj is not None:
+        newobj.reindexObject()
+
 class TestThemeCentre(ThemeCentreTestCase):
     def afterSetUp(self):
         self.setRoles(['Manager'])
         self.portal.invokeFactory('Folder', id='to_be_promoted')
+        self.createObject = createObject
+
+        # add one entry to the themes vocabulary
+        vocab = self.portal.portal_vocabularies
+        vocab.themes.invokeFactory('SimpleVocabularyTerm', 'air')
+        vocab.themes['air'].setTitle('Air')
 
 
 def test_suite():
