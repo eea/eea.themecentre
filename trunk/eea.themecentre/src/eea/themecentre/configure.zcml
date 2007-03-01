@@ -35,9 +35,16 @@
       factory="zope.app.annotation.attribute.AttributeAnnotations"
       />
 
+  <adapter factory=".related.ThemeRelationAdapter" />
+
   <utility
       component=".vocabulary.ThemesVocabularyFactory"
       name="Allowed themes"
+      />
+
+  <utility
+      component=".vocabulary.ThemeCentresVocabularyFactory"
+      name="Theme Centres"
       />
 
   <!-- makes path expression traversal work for widgets that use zope3

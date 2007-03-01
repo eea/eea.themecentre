@@ -15,6 +15,7 @@ def setUp(test):
     provideAdapter(AttributeAnnotations)
     classImplements(Folder, IAttributeAnnotatable)
 
+# convenience method for creating and cataloging object
 def createObject(parent, portal_type, id):
     parent.invokeFactory(portal_type, id=id)
     newobj = getattr(parent, id, None)
@@ -25,12 +26,15 @@ class TestThemeCentre(ThemeCentreTestCase):
     def afterSetUp(self):
         self.setRoles(['Manager'])
         self.portal.invokeFactory('Folder', id='to_be_promoted')
+        self.portal.invokeFactory('Folder', id='to_be_promoted2')
         self.createObject = createObject
 
         # add one entry to the themes vocabulary
         vocab = self.portal.portal_vocabularies
         vocab.themes.invokeFactory('SimpleVocabularyTerm', 'air')
+        vocab.themes.invokeFactory('SimpleVocabularyTerm', 'agriculture')
         vocab.themes['air'].setTitle('Air')
+        vocab.themes['agriculture'].setTitle('Agriculture')
 
 
 def test_suite():

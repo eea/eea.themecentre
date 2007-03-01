@@ -14,3 +14,22 @@ class ThemesVocabulary(object):
         return SimpleVocabulary(terms)
 
 ThemesVocabularyFactory = ThemesVocabulary()
+
+class ThemeCentresVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, themeCentreAdapted):
+        themeCentre = themeCentreAdapted.context
+        catalog = getToolByName(themeCentre, 'portal_catalog')
+        iface = 'eea.themecentre.interfaces.IThemeCentre'
+        res = catalog.searchResults(object_provides=iface)
+        terms = []
+        for brain in res:
+            obj = brain.getObject()
+            uid = obj.UID()
+            # add the theme centre to vocabulary if it's not the current theme
+            if uid != themeCentre.UID():
+                terms.append(SimpleTerm(uid, uid, brain.Title))
+        return SimpleVocabulary(terms)
+
+ThemeCentresVocabularyFactory = ThemeCentresVocabulary()

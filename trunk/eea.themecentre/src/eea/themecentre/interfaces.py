@@ -60,3 +60,16 @@ class IThemeCentreSchema(Interface):
         )
 
 
+class IThemeRelation(Interface):
+    """ A theme can be related to other themes. """
+
+    related = List(
+        title = u"Related themes",
+        description = u"List of themes that this theme is related to.",
+        required = False,
+        max_length = 5,
+        value_type = Choice(
+            title = u"Theme",
+            vocabulary = "Theme Centres",
+            )
+        )

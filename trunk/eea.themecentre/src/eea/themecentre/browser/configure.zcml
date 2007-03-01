@@ -83,4 +83,12 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="themes_related_view"
+      class=".relatedportlet.EEARelatedPortlet"
+      allowed_interface=".interfaces.IRelatedPortlet"
+      permission="zope.Public"
+      />
+
 </configure>

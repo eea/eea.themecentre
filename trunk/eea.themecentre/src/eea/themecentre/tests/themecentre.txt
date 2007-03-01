@@ -33,3 +33,37 @@ tagged with the theme associated with the Theme Centre.
   >>> themeadapter = IThemeTagging(themeCentre.news.newsobj)
   >>> themeadapter.tags
   ['air']
+
+A theme can be related to other themes. To tell what themes this theme
+is related to, we adapt themecentre to IThemeRelation. In real cases
+the themes should be real UIDs, but here we can use random strings.
+
+  >>> from eea.themecentre.interfaces import IThemeRelation
+  >>> relation = IThemeRelation(themeCentre)
+  >>> relation.related = ['5j45j34', '1sloe45']
+  >>> relation.related
+  ['5j45j34', '1sloe45']
+
+There's a theme vocabulary that lists all existing theme centres. Until
+now we only created on theme centre. The theme vocabulary won't list the
+theme that is associated with the current theme, so let's make a new
+theme centre.
+
+  >>> folder = self.portal.to_be_promoted2
+  >>> view = PromoteThemeCentre(folder, self.portal.REQUEST)
+  >>> view()
+  '...'
+  >>> themeCentre2 = folder
+  >>> taggingadapter = IThemeCentreSchema(themeCentre2)
+  >>> taggingadapter.tags = 'agriculture'
+
+Now with context being the 'air' theme, the vocabulary should return only
+the 'agriculture' theme centre.
+
+  >>> from eea.themecentre.vocabulary import ThemeCentresVocabularyFactory
+  >>> class Adapted(object): pass
+  >>> adapted = Adapted()
+  >>> adapted.context = themeCentre
+  >>> vocab = ThemeCentresVocabularyFactory(adapted)
+  >>> [ term.value for term in vocab ] == [ themeCentre2.UID() ]
+  True

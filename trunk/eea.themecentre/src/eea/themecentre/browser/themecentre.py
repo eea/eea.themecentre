@@ -3,7 +3,7 @@ from zope.component import getUtility
 from zope.event import notify
 from zope.formlib.form import Fields, EditForm
 from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
-from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
 from eea.themecentre.themecentre import PromotedToThemeCentreEvent
 from Products.CMFCore.utils import getToolByName
 
@@ -32,9 +32,8 @@ class PromoteThemeCentre(object):
 class ThemeCentreEdit(EditForm):
     """ Form for setting theme for a theme centre. """
 
-    form_fields = Fields(IThemeCentreSchema)
+    form_fields = Fields(IThemeCentreSchema, IThemeRelation)
     label = u'Promote theme centre'
-
 
 class ThemeCentre(object):
     implements(IThemeCentre)
