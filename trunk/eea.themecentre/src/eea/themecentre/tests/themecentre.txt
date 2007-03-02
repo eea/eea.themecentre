@@ -25,6 +25,8 @@ should be created. Let's see if that worked.
   True
   >>> getattr(themeCentre, 'links', None) is not None
   True
+  >>> getattr(themeCentre, 'faq', None) is not None
+  True
 
 When an object is created inside a Theme Centre, the object should be
 tagged with the theme associated with the Theme Centre.

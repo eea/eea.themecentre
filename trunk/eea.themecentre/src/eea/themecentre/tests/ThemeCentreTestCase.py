@@ -19,6 +19,7 @@ dependencies = []
 PloneTestCase.installProduct('PloneRSSPortlet')
 PloneTestCase.installProduct('ATVocabularyManager')
 PloneTestCase.installProduct('EEAContentTypes')
+PloneTestCase.installProduct('PloneHelpCenter')
 PloneTestCase.installProduct('ThemeCentre')
 
 XMLConfig('meta.zcml', Products.Five)()
@@ -26,7 +27,9 @@ XMLConfig('configure.zcml', Products.FiveSite)()
 XMLConfig('configure.zcml', eea.themecentre)()
 
 PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager',
-            'EEAContentTypes', 'FiveSite', 'ThemeCentre')
+            'EEAContentTypes',
+            'PloneHelpCenter',
+            'FiveSite', 'ThemeCentre')
 
 PloneTestCase.setupPloneSite(products=PRODUCTS)
 

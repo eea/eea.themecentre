@@ -15,10 +15,12 @@ def promoted(obj, event):
     obj.invokeFactory('Folder', id='news', title='News')
     obj.invokeFactory('Folder', id='events', title='Events')
     obj.invokeFactory('Folder', id='links', title='Links')
+    obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='Faq folder')
 
     newsobj = getattr(obj, 'news', None)
     eventsobj = getattr(obj, 'events', None)
     linksobj = getattr(obj, 'links', None)
+    faqobj = getattr(obj, 'faq', None)
 
     if newsobj:
         workflow = getToolByName(obj, 'portal_workflow')
@@ -40,6 +42,9 @@ def promoted(obj, event):
         linksobj.setConstrainTypesMode(1)
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
+
+    if faqobj:
+        workflow = getToolByName(obj, 'portal_workflow')
 
 def objectAdded(obj, event):
     """ Checks if the object belongs to a theme centre. If it does and it
