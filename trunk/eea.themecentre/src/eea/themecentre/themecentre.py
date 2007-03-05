@@ -7,6 +7,8 @@ from Acquisition import aq_parent
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
 
+RDF_THEME_KEY = 'eea.themecentre.rdf'
+
 class PromotedToThemeCentreEvent(ObjectEvent):
     """ A theme tag has been added to an object. """
 
@@ -76,7 +78,7 @@ def getTheme(context):
     themeCentre = getThemeCentre(context)
 
     if IThemeCentre.providedBy(themeCentre):
-        themes = IThemeTagging(themeCentre)
+        themes = IThemeCentreSchema(themeCentre)
 
         if themes:
             return themes.tags

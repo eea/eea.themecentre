@@ -91,4 +91,12 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="themes_rdf_view"
+      class=".rdfportlet.EEARDFPortlet"
+      allowed_interface=".interfaces.IRDFPortlet"
+      permission="zope.Public"
+      />
+
 </configure>

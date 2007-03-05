@@ -17,6 +17,10 @@
       <implements interface="eea.themecentre.interfaces.IPossibleThemeCentre" />
   </class>
 
+  <class class="Products.PloneRSSPortlet.content.RSSFeed.RSSFeedRecipe">
+      <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+  </class>
+
   <adapter factory=".themetaggable.ThemeTaggable" />
   <adapter
       for=".interfaces.IThemeTaggable"
