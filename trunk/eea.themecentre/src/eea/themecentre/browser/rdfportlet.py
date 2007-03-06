@@ -14,16 +14,9 @@ class EEARDFPortlet(utils.BrowserView):
         context = utils.context(self)
         currentTheme = getTheme(context)
 
-        result = []
-
         if currentTheme:
             rdfrepository = getUtility(IRDFRepository)
             search = { RDF_THEME_KEY: { 'theme': currentTheme }}
-            feed = rdfrepository.getFeedData(search)
+            feeds = rdfrepository.getFeedData(search)
 
-            for struct in feed:
-                data = { 'title': struct['title'],
-                         'url': struct['link'] }
-                result.append(data)
-
-        return result
+        return feeds
