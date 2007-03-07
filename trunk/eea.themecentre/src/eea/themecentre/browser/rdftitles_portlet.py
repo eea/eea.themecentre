@@ -20,9 +20,9 @@ class EEARDFTitlesPortlet(utils.BrowserView):
         if self._theme:
             rdfrepository = getUtility(IRDFRepository)
             search = { RDF_THEME_KEY: { 'theme': self._theme }}
-            feeds = rdfrepository.getFeedData(search)
+            return rdfrepository.getFeedData(search)
 
-        return feeds
+        return []
 
     def theme(self):
         return self._theme

@@ -34,21 +34,24 @@ def promoted(obj, event):
         newsobj.setConstrainTypesMode(1)
         newsobj.setImmediatelyAddableTypes(['News Item'])
         newsobj.setLocallyAllowedTypes(['News Item'])
-
+        newsobj.layout = 'folder_listing'
+        
     if eventsobj:
         workflow = getToolByName(obj, 'portal_workflow')
         workflow.doActionFor(eventsobj, 'publish')
         eventsobj.setConstrainTypesMode(1)
         eventsobj.setImmediatelyAddableTypes(['Event'])
         eventsobj.setLocallyAllowedTypes(['Event'])
-
+        eventsobj.layout = 'folder_listing'
+        
     if linksobj:
         workflow = getToolByName(obj, 'portal_workflow')
         workflow.doActionFor(linksobj, 'publish')
         linksobj.setConstrainTypesMode(1)
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
-
+        linksobj.layout = 'folder_listing'
+        
     if faqobj:
         workflow = getToolByName(obj, 'portal_workflow')
 

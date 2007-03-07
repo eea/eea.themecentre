@@ -1,6 +1,9 @@
 import urllib
-from eea.themecentre.interfaces import IThemeRelation
+from zope.interface import alsoProvides
+from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
+from Acquisition import aq_base
+from Products.CMFPlone.browser.interfaces import INavigationRoot
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
 
@@ -13,15 +16,30 @@ class MigrateTheme(object):
 
     def __call__(self):
         themeId = self.context.getId()
-        self._title(themeId)
-        self._intro(themeId)
-        self._relatedThemes(themeId)
-
+        try:
+            self._title(themeId)
+            self._intro(themeId)
+            self._relatedThemes(themeId)
+            self._links(themeId)
+            self._image(themeId)
+        except:
+            print themeId + ' failed'
+        
     def _title(self, themeId):
         titleUrl = url % ('themeTitle', themeId)
         title = urllib.urlopen(titleUrl).read()
         self.context.setTitle(title)
 
+    def _image(self, themeId):
+        getUrl = url % ('themeUrl', themeId)
+        themeUrl  = urllib.urlopen(getUrl).read().strip()
+        imageUrl = themeUrl + '/theme_image'
+        imageData  = urllib.urlopen(imageUrl).read().strip()
+        image = self.context.invokeFactory('Image', id='theme_image', title='%s - Theme image' % self.context.Title())
+        obj = self.context[image]
+        obj.setImage(imageData)
+        obj.reindexObject()
+        
     def _relatedThemes(self, themeId):
         relatedUrl = url % ('themeRelated', themeId)
         related = urllib.urlopen(relatedUrl).read().strip()
@@ -48,21 +66,26 @@ class MigrateTheme(object):
             intro = self.context.invokeFactory('Document', id=intro)
             obj = self.context[intro]
             obj.setTitle(self.context.Title() + ' introduction')
-            obj.setText(introText)
+            obj.setText(introText, mimetype='text/html')
+            obj.reindexObject()
 
     def _links(self, themeId):
-        import pdb; pdb.set_trace()
         linksUrl = url % ('themeLinks', themeId)
         links = urllib.urlopen(linksUrl).read().strip()
         links = links.split('\n')
         folder = self.context.links
         for link in links:
             link = link.split(';')
+            if not link[0].strip():
+                continue
             linkId = folder.invokeFactory('Link', id=link[0].strip())
-            obj = linkfolder[linkId]
-            obj.setTitle(link[1].strip())
+            obj = folder[linkId]
+            try:
+                obj.setTitle(link[1].strip().decode('iso-8859-1'))
+            except:
+                obj.setTitle('link[2].strip()')
             obj.setRemoteUrl(link[2].strip())
-            
+            obj.reindexObject()
 
 class InitialThemeCentres(object):
     """ create inital theme structure """
@@ -73,9 +96,35 @@ class InitialThemeCentres(object):
 
     def __call__(self):
         context = self.context
-        themeids = self.context.portal_vocabularies.themes.objectIds()
+        themeids = context.portal_vocabularies.themes.objectIds()[1:]
+        noThemes = int(self.request.get('noThemes',0))
+        if noThemes > 0:
+            themeids = themeids[:noThemes]
+        toMigrate = self.request.get('migrate', False)
         for theme in themeids:
-            tc = context.invokeFactory('Folder', id=theme, title=theme)
-            tc = context[tc]
-            ptc = PromoteThemeCentre(tc, self.request)
+            folder = context.invokeFactory('Folder', id=theme, title=theme)
+            folder = context[folder]
+            ptc = PromoteThemeCentre(folder, self.request)
             ptc()
+            tc = IThemeCentreSchema(folder)
+            tc.tags = theme
+            
+
+        if toMigrate:
+            for theme in themeids:
+                tc = context[theme]
+                migrate = MigrateTheme(tc, self.request)
+                migrate()
+
+        if not hasattr(aq_base(context), 'right_slots'):
+            context.manage_addProperty('right_slots', ['here/portlet_themes_related/macros/portlet',], type='lines')
+        if not hasattr(aq_base(context), 'left_slots'):
+            context.manage_addProperty('left_slots', ['here/portlet_navigation/macros/portlet',
+                                                       'here/portlet_themes_rdftitles/macros/portlet'], type='lines')
+
+        #if hasattr(aq_base(context), 'navigationmanager_menuid'):
+        #    context.manage_addProperty('navigationmanager_menuid', 'themes', type='string')
+
+        alsoProvides(context, INavigationRoot)
+        context.layout = 'themes_view'
+        return self.request.RESPONSE.redirect(context.absolute_url())
