@@ -62,7 +62,6 @@ class ThemeCentreTaggable(object):
             IThemeTagging(self.context).tags = (value,)
             vocab = getUtility(IVocabularyFactory, 'Allowed themes')
             themes = vocab(self)
-            self.context.setTitle( themes.getTerm(value).title )
         return property(get, set)
     tags = tags()
         
