@@ -85,6 +85,22 @@
 
   <browser:page
       for="*"
+      name="themes_links_view"
+      class=".linksportlet.EEALinksPortlet"
+      allowed_interface=".interfaces.ILinksPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes_faq_view"
+      class=".faqportlet.EEAFaqPortlet"
+      allowed_interface=".interfaces.IFaqPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
       name="themes_related_view"
       class=".relatedportlet.EEARelatedPortlet"
       allowed_interface=".interfaces.IRelatedPortlet"
@@ -99,6 +115,13 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="themes_rdftitles_view"
+      class=".rdftitles_portlet.EEARDFTitlesPortlet"
+      allowed_interface=".interfaces.IRDFTitlesPortlet"
+      permission="zope.Public"
+      />
   
   <browser:page
       for="*"
