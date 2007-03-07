@@ -17,6 +17,6 @@ class EEARDFPortlet(utils.BrowserView):
         if currentTheme:
             rdfrepository = getUtility(IRDFRepository)
             search = { RDF_THEME_KEY: { 'theme': currentTheme }}
-            feeds = rdfrepository.getFeedData(search)
+            return rdfrepository.getFeedData(search)
 
-        return feeds
+        return []
