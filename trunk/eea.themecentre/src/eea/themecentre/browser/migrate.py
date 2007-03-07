@@ -75,7 +75,7 @@ class InitialThemeCentres(object):
         context = self.context
         themeids = self.context.portal_vocabularies.themes.objectIds()
         for theme in themeids:
-            tc = context.invokeFactory('Folder', id=theme)
+            tc = context.invokeFactory('Folder', id=theme, title=theme)
             tc = context[tc]
             ptc = PromoteThemeCentre(tc, self.request)
             ptc()
