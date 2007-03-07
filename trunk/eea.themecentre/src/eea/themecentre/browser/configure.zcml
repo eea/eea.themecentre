@@ -99,4 +99,19 @@
       permission="zope.Public"
       />
 
+  
+  <browser:page
+      for="*"
+      name="migrate"
+      class=".migrate.MigrateTheme"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="initiateThemes"
+      class=".migrate.InitialThemeCentres"
+      permission="zope.Public"
+      />
+
 </configure>
