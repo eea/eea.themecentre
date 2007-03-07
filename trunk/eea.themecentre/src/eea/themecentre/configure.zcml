@@ -13,6 +13,14 @@
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
   </class>
 
+  <class class="Products.ATContentTypes.content.link.ATLink">
+      <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+  </class>
+
+  <class class="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ">
+      <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+  </class>
+
   <class class="Products.ATContentTypes.content.folder.ATFolder">
       <implements interface="eea.themecentre.interfaces.IPossibleThemeCentre" />
   </class>
