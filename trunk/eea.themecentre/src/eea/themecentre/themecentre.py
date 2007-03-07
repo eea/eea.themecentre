@@ -13,6 +13,10 @@ class PromotedToThemeCentreEvent(ObjectEvent):
     """ A theme tag has been added to an object. """
 
 def promoted(obj, event):
+    # no AT field is changed on the object, so noone else knows that the
+    # folder should be reindexed because of the new interface we added
+    obj.reindexObject()
+
     # obj should be a folder and that's where we're gonna add a news folder
     obj.invokeFactory('Folder', id='news', title='News')
     obj.invokeFactory('Folder', id='events', title='Events')
