@@ -121,6 +121,7 @@ class MigrateTheme(object):
             obj.reindexObject()
 
     def _links(self, themeId):
+        workflow = getToolByName(self.context, 'portal_workflow')        
         linksUrl = url % ('themeLinks', themeId)
         links = urllib.urlopen(linksUrl).read().strip()
         links = links.split('\n')
@@ -136,7 +137,7 @@ class MigrateTheme(object):
             except:
                 obj.setTitle('link[2].strip()')
             obj.setRemoteUrl(link[2].strip())
-            obj.reindexObject()
+            workflow.doActionFor(obj, 'publish')
 
 class InitialThemeCentres(object):
     """ create inital theme structure """
@@ -147,7 +148,7 @@ class InitialThemeCentres(object):
 
     def __call__(self):
         context = self.context
-
+        workflow = getToolByName(self.context, 'portal_workflow')
         fixThemeIds = MigrateWrontThemeIds(context, self.request)
         fixThemeIds()
         
@@ -163,7 +164,7 @@ class InitialThemeCentres(object):
             ptc()
             tc = IThemeCentreSchema(folder)
             tc.tags = theme
-            
+            workflow.doActionFor(folder, 'publish')
 
         if toMigrate:
             for theme in themeids:
