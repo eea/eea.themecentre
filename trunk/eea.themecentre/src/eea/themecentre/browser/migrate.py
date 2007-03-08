@@ -5,6 +5,7 @@ from eea.themecentre.browser.themecentre import PromoteThemeCentre
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
+import socket
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
 
@@ -192,23 +193,29 @@ class RDF(object):
         self.request = request
 
     def __call__(self):
+        socket.setdefaulttimeout(15)
         workflow = getToolByName(self.context, 'portal_workflow')
         migrate_url = url % ('themeRDF', '')
         feeds = urllib.urlopen(migrate_url).readlines()
 
         for feed_line in feeds:
             id, title, feed_url = feed_line.split('|')
-            if not title:
+            if id.startswith("reports_"):
+                title = "Reports"
+            elif not title:
                 title = id
+
             self.context.invokeFactory('RSSFeedRecipe', id=id, title=title)
             recipe = self.context[id]
             recipe.setFeedURL(feed_url)
+
             x = feed_url.find('theme=')
             if x > -1:
                 theme = feed_url[x+6:].strip()
                 taggable = IThemeTagging(recipe)
-                taggable.addTag(theme)
-                
-            workflow.doActionFor(self.context[id], 'publish')
+                taggable.tags = [theme]
+
+            workflow.doActionFor(recipe, 'publish')
+
 
         return str(len(feeds)) + ' RDF/RSS files were successfully migrated.'
