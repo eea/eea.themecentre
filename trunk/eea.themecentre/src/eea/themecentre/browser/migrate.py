@@ -1,6 +1,6 @@
 import urllib
 from zope.interface import alsoProvides
-from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
+from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation, IThemeTagging
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
@@ -18,6 +18,40 @@ themeIdMap = { 'coasts_seas' : 'coast_sea',
                'env_reporting' : 'reporting',
                'env_scenarios' : 'scenarios',
                'various' : 'other_issues' }
+
+class MigrateWrontThemeIds(object):
+    """ migrate wrong theme ids to old correct """
+    
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        context = self.context
+        themeVocab = context.portal_vocabularies.themes         
+        themeIds = themeVocab.objectIds()
+
+        for theme in themeIds:
+            res = context.portal_catalog.searchResults(getThemes=theme)
+            for r in res:
+                obj = r.getObject()
+                try:
+                    currentThemes = obj.getThemes()
+                except:
+                    continue
+                if currentThemes == str(currentThemes):
+                    currentThemes = [currentThemes,]
+                newThemes = [ themeIdMap.get(r,r) for r in currentThemes ]
+                obj.setThemes(newThemes)
+                obj.reindexObject()
+                print '%s: %s -> %s' % (obj, currentThemes, newThemes) 
+
+        for t in themeIds:
+            newT = themeIdMap.get(t,t)
+            if newT != t:
+                obj = themeVocab[t]
+                obj.setId(newT)
+                obj.reindexObject()
 
 class MigrateTheme(object):
     """ Migrate theme info from themes.eea.europa.eu zope 2.6.4 """
@@ -112,6 +146,10 @@ class InitialThemeCentres(object):
 
     def __call__(self):
         context = self.context
+
+        fixThemeIds = MigrateWrontThemeIds(context, self.request)
+        fixThemeIds()
+        
         themeids = context.portal_vocabularies.themes.objectIds()[1:]
         noThemes = int(self.request.get('noThemes',0))
         if noThemes > 0:
@@ -164,7 +202,13 @@ class RDF(object):
                 title = id
             self.context.invokeFactory('RSSFeedRecipe', id=id, title=title)
             recipe = self.context[id]
-            recipe.setFeedURL(url)
+            recipe.setFeedURL(feed_url)
+            x = feed_url.find('theme=')
+            if x > -1:
+                theme = feed_url[x+6:].strip()
+                taggable = IThemeTagging(recipe)
+                taggable.addTag(theme)
+                
             workflow.doActionFor(self.context[id], 'publish')
 
         return str(len(feeds)) + ' RDF/RSS files were successfully migrated.'

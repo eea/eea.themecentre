@@ -139,6 +139,13 @@
 
   <browser:page
       for="*"
+      name="correctThemeIds"
+      class=".migrate.MigrateWrontThemeIds"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
       name="migrateRDF"
       class=".migrate.RDF"
       permission="zope.Public"
