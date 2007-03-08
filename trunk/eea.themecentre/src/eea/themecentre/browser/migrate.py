@@ -7,6 +7,17 @@ from Products.CMFPlone.browser.interfaces import INavigationRoot
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
 
+# Some new theme ids are not same as old
+themeIdMap = { 'coasts_seas' : 'coast_sea',
+               'fisheries' : 'fishery',
+               'human_health' : 'human',
+               'natural_resources' : 'natural',
+               'env_information' : 'information',
+               'env_management' : 'management',
+               'env_reporting' : 'reporting',
+               'env_scenarios' : 'scenarios',
+               'various' : 'other_issues' }
+
 class MigrateTheme(object):
     """ Migrate theme info from themes.eea.europa.eu zope 2.6.4 """
     
@@ -15,7 +26,8 @@ class MigrateTheme(object):
         self.request = request
 
     def __call__(self):
-        themeId = self.context.getId()
+        newThemeId = self.context.getId()
+        themeId = themeIdMap.get(newThemeId, newThemeId)
         try:
             self._title(themeId)
             self._intro(themeId)
@@ -51,6 +63,9 @@ class MigrateTheme(object):
         for tc in themeCentres:
             tcs[tc.getId] =  tc.getObject().UID()
         themeCentres = tcs
+
+        # map old theme id to new
+        related = [ themeIdMap.get(r, r) for r in related ]
         
         # XXX need to find UID for the related theme centres
         related = [ themeCentres.get(r) for r in related ]
