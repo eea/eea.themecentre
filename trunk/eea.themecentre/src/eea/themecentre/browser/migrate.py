@@ -3,6 +3,7 @@ from zope.interface import alsoProvides
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
 from Acquisition import aq_base
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
@@ -143,3 +144,27 @@ class InitialThemeCentres(object):
         alsoProvides(context, INavigationRoot)
         context.layout = 'themes_view'
         return self.request.RESPONSE.redirect(context.absolute_url())
+
+class RDF(object):
+    """ Copies RDF/RSS feeds from themes.eea.europa.eu to
+        RSSFeedRecipe objects in the current folder. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        workflow = getToolByName(self.context, 'portal_workflow')
+        migrate_url = url % ('themeRDF', '')
+        feeds = urllib.urlopen(migrate_url).readlines()
+
+        for feed_line in feeds:
+            id, title, feed_url = feed_line.split('|')
+            if not title:
+                title = id
+            self.context.invokeFactory('RSSFeedRecipe', id=id, title=title)
+            recipe = self.context[id]
+            recipe.setFeedURL(url)
+            workflow.doActionFor(self.context[id], 'publish')
+
+        return str(len(feeds)) + ' RDF/RSS files were successfully migrated.'
