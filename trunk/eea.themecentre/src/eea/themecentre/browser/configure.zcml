@@ -151,4 +151,11 @@
       permission="zope.Public"
       />
 
+    <browser:page
+        for="*"
+        name="migrateThemeTaggable"
+        class=".migrate.ThemeTaggable"
+        permission="zope.Public"
+        />
+
 </configure>

@@ -220,3 +220,22 @@ class RDF(object):
 
 
         return str(len(feeds)) + ' RDF/RSS files were successfully migrated.'
+
+class ThemeTaggable(object):
+    """ Migrate theme tags to anootations. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        types = ('Highlight', 'Promotion', 'QuickEvent', 'PressRelease',
+                'Speech')
+        brains = catalog.searchResults(portal_type=types)
+
+        for brain in brains:
+            obj = brain.getObject()
+            tagging = IThemeTagging(obj)
+            themes = filter(None, obj.schema['themes'].get(obj))
+            tagging.tags = themes
