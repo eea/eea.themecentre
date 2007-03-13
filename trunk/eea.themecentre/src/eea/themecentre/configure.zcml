@@ -69,6 +69,10 @@
       factory="zope.app.traversing.adapters.DefaultTraversable"
       />
 
+  <!--
+  <adapter factory=".themecentre.RDFTraversalAdapter" />
+  -->
+
   <subscriber
       for=".interfaces.IThemeCentre
            .themecentre.PromotedToThemeCentreEvent"

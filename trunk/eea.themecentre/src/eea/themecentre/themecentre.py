@@ -1,11 +1,15 @@
 from zope.app.component.hooks import getSite
 from zope.app.event.objectevent import ObjectEvent
+from zope.app.traversing.interfaces import ITraverser
+from zope.component import adapts
+from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Acquisition import aq_parent
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.vocabulary import ThemesVocabularyFactory
 
 RDF_THEME_KEY = 'eea.themecentre.rdf'
 
@@ -91,3 +95,22 @@ def getTheme(context):
             return themes.tags
 
     return None
+
+class O:
+    pass
+
+def getThemeTitle(context):
+    themeid = getTheme(context)
+    if themeid:
+        o = O()
+        o.context = context
+        vocab = ThemesVocabularyFactory(o)
+        return vocab.getTerm(themeid).title
+    return None
+
+#class RDFTraversalAdapter(FiveTraversable):
+#    implements(ITraverser)
+#    adapts(IThemeCentre)
+#
+#    def publishTraverse(self, request, name):
+#        return 'woo'

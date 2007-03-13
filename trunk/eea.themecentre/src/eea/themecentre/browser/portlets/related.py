@@ -3,12 +3,12 @@ from Products.CMFPlone import utils
 
 from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeRelation
+from eea.themecentre.browser.portlets.catalog import BasePortlet
 
-class EEARelatedPortlet(utils.BrowserView):
+class RelatedPortlet(BasePortlet):
 
-    def related(self):
+    def items(self):
         context = utils.context(self)
-        portal_catalog = getToolByName(context, 'portal_catalog')
         reference_catalog = getToolByName(context, 'reference_catalog')
         currentThemeCentre = getThemeCentre(context)
         result = []
@@ -17,8 +17,16 @@ class EEARelatedPortlet(utils.BrowserView):
             relation = IThemeRelation(currentThemeCentre)
             for uid in relation.related:
                 themeCentre = reference_catalog.lookupObject(uid)
-                data = { 'title': themeCentre.Title(),
-                         'url': themeCentre.absolute_url() }
-                result.append(data)
+                result.append(themeCentre)
 
         return result
+
+    def item_to_short_dict(self, item):
+        return { 'title': item.Title(),
+                 'url': item.absolute_url(),
+                 'detail': self.localized_time(item.modified()) }
+
+    def item_to_full_dict(self, item):
+        return { 'title': item.Title(),
+                 'url': item.absolute_url(),
+                 'published': self.localized_time(item.modified()) }

@@ -27,3 +27,29 @@ class IFaqPortlet(Interface):
 
     def published_faq_items():
         """ Returns the faq objects that match the current theme. """
+
+class IPortlet(Interface):
+
+    def all_link():
+        pass
+
+    def short_items():
+        pass
+
+    def full_items():
+        pass
+
+class INewsPortlet(Interface):
+
+    def short_items():
+        pass
+
+    def full_items():
+        pass
+
+class IEventsPortlet(Interface):
+    def published_events():
+        pass
+
+    def full_items():
+        pass

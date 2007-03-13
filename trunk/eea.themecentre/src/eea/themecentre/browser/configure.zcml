@@ -69,57 +69,58 @@
 
   <browser:page
       for="*"
-      name="themes_news_view"
-      class=".newsportlet.EEANewsPortlet"
-      allowed_interface="Products.CMFPlone.browser.interfaces.INewsPortlet"
+      name="themes_news"
+      class=".portlets.news.NewsPortlet"
+      allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
 
   <browser:page
       for="*"
-      name="themes_events_view"
-      class=".eventsportlet.EEAEventsPortlet"
-      allowed_interface="Products.CMFPlone.browser.interfaces.IEventsPortlet"
+      name="themes_events"
+      class=".portlets.events.EventsPortlet"
+      allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
 
   <browser:page
       for="*"
-      name="themes_links_view"
-      class=".linksportlet.EEALinksPortlet"
-      allowed_interface=".interfaces.ILinksPortlet"
+      name="themes_links"
+      class=".portlets.links.LinksPortlet"
+      allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
 
   <browser:page
       for="*"
-      name="themes_faq_view"
-      class=".faqportlet.EEAFaqPortlet"
-      allowed_interface=".interfaces.IFaqPortlet"
+      name="themes_faq"
+      class=".portlets.faq.FaqPortlet"
+      allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
 
   <browser:page
       for="*"
-      name="themes_related_view"
-      class=".relatedportlet.EEARelatedPortlet"
-      allowed_interface=".interfaces.IRelatedPortlet"
+      name="themes_related"
+      class=".portlets.related.RelatedPortlet"
+      allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
 
   <browser:page
       for="*"
-      name="themes_rdf_view"
-      class=".rdfportlet.EEARDFPortlet"
-      allowed_interface=".interfaces.IRDFPortlet"
+      name="themes_rdf"
+      class=".portlets.rdf.RDFPortlet"
+      allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
 
   <browser:page
       for="*"
-      name="themes_rdftitles_view"
-      class=".rdftitles_portlet.EEARDFTitlesPortlet"
-      allowed_interface=".interfaces.IRDFTitlesPortlet"
+      name="themes_rdftitles"
+      class=".portlets.rdftitles.RDFTitlesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      allowed_attributes="title"
       permission="zope.Public"
       />
   
@@ -151,11 +152,29 @@
       permission="zope.Public"
       />
 
-    <browser:page
-        for="*"
-        name="migrateThemeTaggable"
-        class=".migrate.ThemeTaggable"
-        permission="zope.Public"
-        />
+  <browser:page
+      for="*"
+      name="migrateThemeTaggable"
+      class=".migrate.ThemeTaggable"
+      permission="zope.Public"
+      />
+
+  <!--
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="allnews"
+      class=".portlets.news.NewsPortlet"
+      allowed_interface=".interfaces.INewsPortlet"
+      permission="zope.Public"
+      />
+  -->
+
+  <browser:page
+      for="*"
+      name="proxy"
+      class=".proxy.Proxy"
+      allowed_attributes="real_view"
+      permission="zope.Public"
+      />
 
 </configure>
