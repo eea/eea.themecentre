@@ -208,6 +208,7 @@ class RDF(object):
 
             self.context.invokeFactory('RSSFeedRecipe', id=id, title=title)
             recipe = self.context[id]
+            recipe.setEntriesSize(10000)
             recipe.setFeedURL(feed_url)
 
             x = feed_url.find('theme=')
