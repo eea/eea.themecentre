@@ -25,7 +25,7 @@ class RDFPortlet(BasePortlet):
             for feed in feeds:
                 feed_match = []
 
-                for entry in feed['items']:
+                for entry in feed['items'][:self.size]:
                     data = { 'title': entry['title'],
                              'url': entry['url'],
                              'detail': self.localized_time(entry['date']) }

@@ -8,7 +8,7 @@ class BasePortlet(utils.BrowserView):
     def short_items(self):
         items = self.items()
         result = []
-        for item in items:
+        for item in items[:self.size]:
             result.append(self.item_to_short_dict(item))
         return result
 
@@ -49,6 +49,9 @@ class BasePortlet(utils.BrowserView):
                 domain='plone')
         return localized_time
 
+    @property
+    def size(self):
+        return 3
 
 class CatalogBasePortlet(BasePortlet):
 
