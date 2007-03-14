@@ -28,13 +28,13 @@ class RDFPortlet(BasePortlet):
                 for entry in feed['items']:
                     data = { 'title': entry['title'],
                              'url': entry['url'],
-                             'detail': entry['date'] }
+                             'detail': self.localized_time(entry['date']) }
                     feed_match.append(data)
 
                 if feed_match:
                     result.append({'title': feed['title'],
                                    'url': feed['url'],
-                                   'detail': feed['date'],
+                                   'detail': self.localized_time(feed['date']),
                                    'all_link': themeCentre.absolute_url() + \
                                        '/listfeed?theme=' + feed['title'],
                                    'items': feed_match })
