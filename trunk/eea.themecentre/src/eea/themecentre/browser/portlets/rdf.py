@@ -36,20 +36,20 @@ class RDFPortlet(BasePortlet):
                                    'url': feed['url'],
                                    'detail': self.localized_time(feed['date']),
                                    'all_link': themeCentre.absolute_url() + \
-                                       '/listfeed?theme=' + feed['title'],
+                                       '/listfeed?feed=' + feed['id'],
                                    'items': feed_match })
 
         return result
 
     def full_items(self):
         context = utils.context(self)
-        feed_title = self.request['theme']
+        feed_id = self.request['feed']
         result = []
 
         currentTheme = getTheme(context)
         search = { RDF_THEME_KEY: { 'theme': currentTheme }}
         rdfrepository = getUtility(IRDFRepository)
-        feed = rdfrepository.getFeedDataInFeed(feed_title, search)
+        feed = rdfrepository.getFeedDataInFeed(feed_id, search)
 
         for item in feed[0]['items']:
             data = { 'title': item['title'],
