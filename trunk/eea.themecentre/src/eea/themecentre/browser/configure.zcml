@@ -77,6 +77,14 @@
 
   <browser:page
       for="*"
+      name="themes_highlights"
+      class=".portlets.highlights.HighlightsPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
       name="themes_events"
       class=".portlets.events.EventsPortlet"
       allowed_interface=".interfaces.IPortlet"
