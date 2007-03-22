@@ -26,14 +26,22 @@ def promoted(obj, event):
     obj.invokeFactory('Folder', id='events', title='Events')
     obj.invokeFactory('Folder', id='links', title='Links')
     obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='Faq folder')
+    obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
+    multimedia = getattr(obj, 'multimedia')
+    multimedia.invokeFactory('Folder', id='videos', title='Videos')
+    multimedia.invokeFactory('Folder', id='maps', title='Interactive Maps')
+    multimedia.invokeFactory('Folder', id='mindstretcher', title='Mind Stretcher')
+    multimedia.invokeFactory('Folder', id='interviews', title='Interviews')
+    multimedia.layout = 'mediacentre_view'
 
     newsobj = getattr(obj, 'news', None)
     eventsobj = getattr(obj, 'events', None)
     linksobj = getattr(obj, 'links', None)
     faqobj = getattr(obj, 'faq', None)
 
+    workflow = getToolByName(obj, 'portal_workflow')
+
     if newsobj:
-        workflow = getToolByName(obj, 'portal_workflow')
         workflow.doActionFor(newsobj, 'publish')
         newsobj.setConstrainTypesMode(1)
         newsobj.setImmediatelyAddableTypes(['News Item'])
@@ -41,7 +49,6 @@ def promoted(obj, event):
         newsobj.layout = 'folder_listing'
         
     if eventsobj:
-        workflow = getToolByName(obj, 'portal_workflow')
         workflow.doActionFor(eventsobj, 'publish')
         eventsobj.setConstrainTypesMode(1)
         eventsobj.setImmediatelyAddableTypes(['Event'])
@@ -49,15 +56,12 @@ def promoted(obj, event):
         eventsobj.layout = 'folder_listing'
         
     if linksobj:
-        workflow = getToolByName(obj, 'portal_workflow')
         workflow.doActionFor(linksobj, 'publish')
         linksobj.setConstrainTypesMode(1)
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
         linksobj.layout = 'folder_listing'
         
-    if faqobj:
-        workflow = getToolByName(obj, 'portal_workflow')
 
 def objectAdded(obj, event):
     """ Checks if the object belongs to a theme centre. If it does and it
