@@ -1,7 +1,7 @@
 from Products.CMFPlone import utils
 from zope.component import getUtility
 
-from eea.themecentre.themecentre import getTheme, getThemeTitle
+from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
 from eea.themecentre.themecentre import RDF_THEME_KEY
 from eea.rdfrepository.interfaces import IRDFRepository
 
@@ -23,14 +23,19 @@ class RDFTitlesPortlet(BasePortlet):
             
         return feeds
 
+    def _feedListUrl(self, item):
+        themeCentre = getThemeCentre(utils.context(self))
+        return themeCentre.absolute_url() + \
+               '/listfeed?feed=' + item['id']
+
     def item_to_short_dict(self, item):
         return  { 'title': item['title'],
-                  'url': item['url'],
+                  'url': self._feedListUrl(item),
                   'detail': None }
 
     def item_to_full_dict(self, item):
         return  { 'title': item['title'],
-                  'url': item['url'],
+                  'url': self._feedListUrl(item),
                   'description': '',
                   'body': '',
                   'published': None }
@@ -38,3 +43,7 @@ class RDFTitlesPortlet(BasePortlet):
     def title(self):
         context = utils.context(self)
         return getThemeTitle(context)
+
+    @property
+    def size(self):
+        return 10

@@ -130,7 +130,6 @@
       name="themes_rdftitles"
       class=".portlets.rdftitles.RDFTitlesPortlet"
       allowed_interface=".interfaces.IPortlet"
-      allowed_attributes="title"
       permission="zope.Public"
       />
 

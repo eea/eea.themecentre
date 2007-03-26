@@ -39,6 +39,9 @@ class IPortlet(Interface):
     def full_items():
         pass
 
+    def title():
+        pass
+    
 class INewsPortlet(Interface):
 
     def short_items():

@@ -64,6 +64,7 @@ class RDFPortlet(BasePortlet):
         feed = rdfrepository.getFeedDataInFeed(feed_id, search)
 
         if len(feed) > 0:
+            self.feedTitle = feed[0]['title']
             for item in feed[0]['items']:
                 data = { 'title': item['title'],
                          'url': item['url'],
@@ -72,3 +73,5 @@ class RDFPortlet(BasePortlet):
 
         return result
 
+    def title(self):
+        return getattr(self, 'feedTitle', '')

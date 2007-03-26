@@ -146,6 +146,7 @@ class MigrateTheme(object):
             workflow.doActionFor(obj, 'publish')
 
     def _indicators(self, themeId):
+        workflow = getToolByName(self.context, 'portal_workflow')        
         indiUrl = url % ('themeIndicator', themeId)
         indiText = urllib.urlopen(indiUrl).read().strip()
         indicators = 'indicators'
@@ -155,6 +156,7 @@ class MigrateTheme(object):
             obj.setTitle(self.context.Title() + ' indicators')
             obj.setText(indiText, mimetype='text/html')
             obj.layout = 'tc_indicators_view'
+            workflow.doActionFor(obj, 'publish')            
             obj.reindexObject()
 
         
