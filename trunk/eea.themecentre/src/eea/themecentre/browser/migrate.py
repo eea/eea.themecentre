@@ -20,7 +20,7 @@ themeIdMap = { 'coasts_seas' : 'coast_sea',
                'env_scenarios' : 'scenarios',
                'various' : 'other_issues' }
 
-class MigrateWrontThemeIds(object):
+class MigrateWrongThemeIds(object):
     """ migrate wrong theme ids to old correct """
     
     def __init__(self, context, request):
@@ -44,7 +44,6 @@ class MigrateWrontThemeIds(object):
                     currentThemes = [currentThemes,]
                 newThemes = [ themeIdMap.get(r,r) for r in currentThemes ]
                 obj.setThemes(newThemes)
-                obj.reindexObject()
                 print '%s: %s -> %s' % (obj, currentThemes, newThemes) 
 
         for t in themeIds:
@@ -52,7 +51,6 @@ class MigrateWrontThemeIds(object):
             if newT != t:
                 obj = themeVocab[t]
                 obj.setId(newT)
-                obj.reindexObject()
 
 class MigrateTheme(object):
     """ Migrate theme info from themes.eea.europa.eu zope 2.6.4 """
@@ -65,13 +63,21 @@ class MigrateTheme(object):
         newThemeId = self.context.getId()
         themeId = themeIdMap.get(newThemeId, newThemeId)
         try:
+            step = 0
             self._title(themeId)
+            step += 1            
             self._intro(themeId)
+            step += 1
             self._relatedThemes(themeId)
+            step += 1
             self._links(themeId)
+            step += 1
             self._image(themeId)
+            step += 1
+            self._indicators(themeId)            
         except:
-            print themeId + ' failed'
+            print themeId + ' failed on step %s' % step
+        self.context.reindexObject()
         
     def _title(self, themeId):
         titleUrl = url % ('themeTitle', themeId)
@@ -139,6 +145,19 @@ class MigrateTheme(object):
             obj.setRemoteUrl(link[2].strip())
             workflow.doActionFor(obj, 'publish')
 
+    def _indicators(self, themeId):
+        indiUrl = url % ('themeIndicator', themeId)
+        indiText = urllib.urlopen(indiUrl).read().strip()
+        indicators = 'indicators'
+        if not hasattr(self.context, indicators):
+            indicators = self.context.invokeFactory('Document', id=indicators)
+            obj = self.context[indicators]
+            obj.setTitle(self.context.Title() + ' indicators')
+            obj.setText(indiText, mimetype='text/html')
+            obj.layout = 'tc_indicators_view'
+            obj.reindexObject()
+
+        
 class InitialThemeCentres(object):
     """ create inital theme structure """
     
@@ -149,7 +168,7 @@ class InitialThemeCentres(object):
     def __call__(self):
         context = self.context
         workflow = getToolByName(self.context, 'portal_workflow')
-        fixThemeIds = MigrateWrontThemeIds(context, self.request)
+        fixThemeIds = MigrateWrongThemeIds(context, self.request)
         fixThemeIds()
         
         themeids = context.portal_vocabularies.themes.objectIds()[1:]
@@ -173,9 +192,10 @@ class InitialThemeCentres(object):
                 migrate()
 
         if not hasattr(aq_base(context), 'right_slots'):
-            context.manage_addProperty('right_slots', ['here/portlet_themes_related/macros/portlet',], type='lines')
+            context.manage_addProperty('right_slots', ['here/portlet_themes_related/macros/portlet',
+                                                       'here/portlet_themes_rdf/macros/portlet'], type='lines')
         if not hasattr(aq_base(context), 'left_slots'):
-            context.manage_addProperty('left_slots', ['here/portlet_navigation/macros/portlet',
+            context.manage_addProperty('left_slots', ['here/portlet_themes/macros/portlet',
                                                        'here/portlet_themes_rdftitles/macros/portlet'], type='lines')
 
         #if hasattr(aq_base(context), 'navigationmanager_menuid'):
@@ -222,6 +242,35 @@ class RDF(object):
 
         return str(len(feeds)) + ' RDF/RSS files were successfully migrated.'
 
+class IndicatorRDFs(object):
+    """ Create RSSFeedRecipes for indicator rss """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        context = self.context
+        workflow = getToolByName(self.context, 'portal_workflow')
+        url = 'http://themes.eea.europa.eu/indicators/bytheme.rss?theme_id=%s'
+        themeids = context.portal_vocabularies.themes.objectIds()[1:]
+        for theme in themeids:
+            feedId = 'indicators_%s' % theme
+            title = '%s indicators' % context.portal_vocabularies.themes[theme].Title()
+            feed_url = url % theme
+            self.context.invokeFactory('RSSFeedRecipe', id=feedId, title=title)
+            recipe = self.context[feedId]
+            recipe.setEntriesSize(10000)
+            recipe.setFeedURL(feed_url)
+
+            taggable = IThemeTagging(recipe)
+            taggable.tags = [theme]
+
+            workflow.doActionFor(recipe, 'publish')
+            recipe.reindexObject()
+            
+        return str(len(themeids)) + ' indicator fees created.'
+    
 class ThemeTaggable(object):
     """ Migrate theme tags to anootations. """
 

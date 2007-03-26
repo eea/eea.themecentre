@@ -9,6 +9,8 @@ from eea.themecentre.browser.portlets.catalog import BasePortlet
 
 class RDFTitlesPortlet(BasePortlet):
 
+    all_link = None
+    
     def items(self):
         context = utils.context(self)
         currentTheme = getTheme(context)
@@ -18,20 +20,20 @@ class RDFTitlesPortlet(BasePortlet):
             rdfrepository = getUtility(IRDFRepository)
             search = { RDF_THEME_KEY: { 'theme': currentTheme }}
             feeds = rdfrepository.getFeedData(search)
-
+            
         return feeds
 
     def item_to_short_dict(self, item):
         return  { 'title': item['title'],
                   'url': item['url'],
-                  'detail': self.localized_time(item['date']) }
+                  'detail': None }
 
     def item_to_full_dict(self, item):
         return  { 'title': item['title'],
                   'url': item['url'],
                   'description': '',
                   'body': '',
-                  'published': self.localized_time(item['date']) }
+                  'published': None }
 
     def title(self):
         context = utils.context(self)

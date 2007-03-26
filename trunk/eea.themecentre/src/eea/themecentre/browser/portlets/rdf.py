@@ -9,6 +9,18 @@ from eea.rdfrepository.interfaces import IRDFRepository
 
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 
+class IndicatorFeedId(object):
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        tc = getThemeCentre(self.context)
+        indiId = 'indicators_%s' % tc.getId()
+        self.request.set('feed', indiId)
+        return indiId
+                 
 class RDFPortlet(BasePortlet):
 
     def short_items(self):
@@ -51,10 +63,12 @@ class RDFPortlet(BasePortlet):
         rdfrepository = getUtility(IRDFRepository)
         feed = rdfrepository.getFeedDataInFeed(feed_id, search)
 
-        for item in feed[0]['items']:
-            data = { 'title': item['title'],
-                     'url': item['url'],
-                     'published': self.localized_time(item['date']) }
-            result.append(data)
+        if len(feed) > 0:
+            for item in feed[0]['items']:
+                data = { 'title': item['title'],
+                         'url': item['url'],
+                         'published': self.localized_time(item['date']) }
+                result.append(data)
 
         return result
+

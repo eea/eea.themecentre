@@ -7,26 +7,28 @@ from eea.themecentre.browser.portlets.catalog import BasePortlet
 
 class RelatedPortlet(BasePortlet):
 
+    all_link = None
+
     def items(self):
         context = utils.context(self)
         reference_catalog = getToolByName(context, 'reference_catalog')
         currentThemeCentre = getThemeCentre(context)
         result = []
-
         if currentThemeCentre:
             relation = IThemeRelation(currentThemeCentre)
             for uid in relation.related:
                 themeCentre = reference_catalog.lookupObject(uid)
-                result.append(themeCentre)
+                if themeCentre is not None:
+                    result.append(themeCentre)
 
         return result
 
     def item_to_short_dict(self, item):
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
-                 'detail': self.localized_time(item.modified()) }
+                 'detail': None }
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
-                 'published': self.localized_time(item.modified()) }
+                 'published': None }

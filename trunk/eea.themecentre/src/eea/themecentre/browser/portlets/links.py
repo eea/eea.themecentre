@@ -14,10 +14,10 @@ class LinksPortlet(CatalogBasePortlet):
         return { 'title': item.Title,
                  'description': item.Description,
                  'url': item.getObject().getRemoteUrl(),
-                 'detail': self.localized_time(item.Date) }
+                 'detail': None }
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title,
                  'description': item.Description,
                  'url': item.getObject().getRemoteUrl(),
-                 'published': self.localized_time(item.Date) }
+                 'published': None }

@@ -67,6 +67,8 @@
       permission="eea.PromoteThemeCentre"
       />
 
+  <!-- listing views -->
+
   <browser:page
       for="*"
       name="themes_news"
@@ -109,7 +111,7 @@
 
   <browser:page
       for="*"
-      name="themes_related"
+      name="themes-related"
       class=".portlets.related.RelatedPortlet"
       allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
@@ -131,7 +133,19 @@
       allowed_attributes="title"
       permission="zope.Public"
       />
-  
+
+  <!-- plone changes -->
+
+  <browser:page
+      for="*"
+      name="themes_navigation_view"
+      class=".portlets.navigation.NavigationPortlet"
+      permission="zope.Public"
+      allowed_interface=".portlets.navigation.INavigationPortlet"
+      />
+
+  <!-- migration stuff -->  
+
   <browser:page
       for="*"
       name="migrate"
@@ -149,7 +163,7 @@
   <browser:page
       for="*"
       name="correctThemeIds"
-      class=".migrate.MigrateWrontThemeIds"
+      class=".migrate.MigrateWrongThemeIds"
       permission="zope.Public"
       />
 
@@ -164,6 +178,21 @@
       for="*"
       name="migrateThemeTaggable"
       class=".migrate.ThemeTaggable"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="migrateIndicatorRDF"
+      class=".migrate.IndicatorRDFs"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
+      for="*"
+      name="setIndicatorFeedId"
+      class=".portlets.rdf.IndicatorFeedId"
       permission="zope.Public"
       />
 

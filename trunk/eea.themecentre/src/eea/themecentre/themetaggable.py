@@ -41,7 +41,8 @@ class ThemeTaggable(object):
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
             mapping['themes'] = PersistentList(value)
-            self.context.reindexObject()
+            info = Attributes(IThemeTaggable, 'tags')            
+            notify(ObjectModifiedEvent(self.context, info))
         return property(get, set)
     tags = tags()
 
