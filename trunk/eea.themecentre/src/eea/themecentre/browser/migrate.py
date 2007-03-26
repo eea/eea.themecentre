@@ -82,6 +82,7 @@ class MigrateTheme(object):
     def _title(self, themeId):
         titleUrl = url % ('themeTitle', themeId)
         title = urllib.urlopen(titleUrl).read()
+        title = title.replace('\n','')
         self.context.setTitle(title)
 
     def _image(self, themeId):

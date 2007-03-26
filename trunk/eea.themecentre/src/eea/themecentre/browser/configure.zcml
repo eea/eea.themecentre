@@ -127,7 +127,7 @@
 
   <browser:page
       for="*"
-      name="themes_rdftitles"
+      name="themes-rdftitles"
       class=".portlets.rdftitles.RDFTitlesPortlet"
       allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
