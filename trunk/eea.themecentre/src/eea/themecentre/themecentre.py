@@ -25,7 +25,7 @@ def promoted(obj, event):
     obj.invokeFactory('Folder', id='news', title='News')
     obj.invokeFactory('Folder', id='events', title='Events')
     obj.invokeFactory('Folder', id='links', title='Links')
-    obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='Faq folder')
+    obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
     multimedia.invokeFactory('Folder', id='videos', title='Videos')
