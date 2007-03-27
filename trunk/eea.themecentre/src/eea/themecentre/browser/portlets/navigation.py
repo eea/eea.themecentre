@@ -47,7 +47,7 @@ class NavigationPortlet(BaseNavigationPortlet):
             if product['item']['Title'] not in titles:
                 data.append(product)
 
-        data.append(self._overview())
+        data.extend(self._overview())
         
         properties = getToolByName(context, 'portal_properties')
         navtree_properties = getattr(properties, 'navtree_properties')
@@ -96,31 +96,32 @@ class NavigationPortlet(BaseNavigationPortlet):
     def _overview(self):
         context = utils.context(self)
         tc = getThemeCentre(context)
-        url = tc.absolute_url() + '/themecentre_overview'
-        currentItem = self.request.get('URL0','') == url
-        item = {'no_display': False,
-                'getURL': url,
-                'show_children': False,
-                'Description': '',
-                'Title': 'Overview',
-                'absolute_url': url,
-                'portal_type': 'RSSFeedRecipe',
-                'Creator': '',
-                'children': [],
-                'currentParent': False,
-                'creation_date': '2007-03-25 22:10:51',
-                'item': None,
-                'depth': 2,
-                'path': '',
-                'currentItem': currentItem,
-                'review_state': '',
-                'getRemoteUrl': None,
-                'icon': 'www/folder_icon.gif'}
-
-        newNode = {'item'          : item,
-                   'depth'         : '',
-                   'currentItem'   : currentItem,
-                   'currentParent' : False,
-                   'children' : []}
-
-        return newNode
+        if tc is not None:
+            url = tc.absolute_url() + '/themecentre_overview'
+            currentItem = self.request.get('URL0','') == url
+            item = {'no_display': False,
+                    'getURL': url,
+                    'show_children': False,
+                    'Description': '',
+                    'Title': 'Overview',
+                    'absolute_url': url,
+                    'portal_type': 'RSSFeedRecipe',
+                    'Creator': '',
+                    'children': [],
+                    'currentParent': False,
+                    'creation_date': '2007-03-25 22:10:51',
+                    'item': None,
+                    'depth': 2,
+                    'path': '',
+                    'currentItem': currentItem,
+                    'review_state': '',
+                    'getRemoteUrl': None,
+                    'icon': 'www/folder_icon.gif'}
+            
+            newNode = {'item'          : item,
+                       'depth'         : '',
+                       'currentItem'   : currentItem,
+                       'currentParent' : False,
+                       'children' : []}
+            return [newNode]
+        return []
