@@ -195,11 +195,15 @@ class InitialThemeCentres(object):
                 migrate()
 
         if not hasattr(aq_base(context), 'right_slots'):
-            context.manage_addProperty('right_slots', ['here/portlet_themes_related/macros/portlet',
-                                                       'here/portlet_themes_rdf/macros/portlet'], type='lines')
+            slots = ['here/portlet_themes_related/macros/portlet',
+                     'here/portlet_themes_rdf/macros/portlet']
+            context.manage_addProperty('right_slots', slots, type='lines')
+
         if not hasattr(aq_base(context), 'left_slots'):
-            context.manage_addProperty('left_slots', ['here/portlet_themes/macros/portlet',
-                                                       'here/portlet_themes_rdftitles/macros/portlet'], type='lines')
+            slots = ['here/portlet_themes/macros/portlet',
+                     'here/portlet_themes_rdftitles/macros/portlet',
+                     'here/portlet_media_nav/macros/portlet']
+            context.manage_addProperty('left_slots', slots, type='lines',),
 
         #if hasattr(aq_base(context), 'navigationmanager_menuid'):
         #    context.manage_addProperty('navigationmanager_menuid', 'themes', type='string')

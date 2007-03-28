@@ -21,6 +21,8 @@ def promoted(obj, event):
     # folder should be reindexed because of the new interface we added
     obj.reindexObject()
 
+    workflow = getToolByName(obj, 'portal_workflow')
+
     # obj should be a folder and that's where we're gonna add a news folder
     obj.invokeFactory('Folder', id='news', title='News')
     obj.invokeFactory('Folder', id='events', title='Events')
@@ -28,18 +30,14 @@ def promoted(obj, event):
     obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
-    multimedia.invokeFactory('Folder', id='videos', title='Videos')
-    multimedia.invokeFactory('Folder', id='maps', title='Interactive Maps')
-    multimedia.invokeFactory('Folder', id='mindstretcher', title='Mind Stretcher')
-    multimedia.invokeFactory('Folder', id='interviews', title='Interviews')
     multimedia.layout = 'mediacentre_view'
+    multimedia.exclude_from_nav = True
+    workflow.doActionFor(multimedia, 'publish')
 
     newsobj = getattr(obj, 'news', None)
     eventsobj = getattr(obj, 'events', None)
     linksobj = getattr(obj, 'links', None)
     faqobj = getattr(obj, 'faq', None)
-
-    workflow = getToolByName(obj, 'portal_workflow')
 
     if newsobj:
         workflow.doActionFor(newsobj, 'publish')
