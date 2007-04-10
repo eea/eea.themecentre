@@ -195,6 +195,14 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="migrateEpaedia"
+      class=".migrate_epaedia.MigrateMedia"
+      permission="cmf.ModifyPortalContent"
+      attribute="migrate"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"
