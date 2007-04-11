@@ -56,3 +56,13 @@ class IEventsPortlet(Interface):
 
     def full_items():
         pass
+
+class IDocumentRelated(Interface):
+    def feeds():
+        pass
+
+    def multimedia():
+        pass
+
+    def pages():
+        pass

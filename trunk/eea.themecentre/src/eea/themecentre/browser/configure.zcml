@@ -221,4 +221,12 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="document_related"
+      class=".related.DocumentRelated"
+      allowed_interface=".interfaces.IDocumentRelated"
+      permission="zope.Public"
+      />
+
 </configure>
