@@ -1,4 +1,5 @@
 <configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
            xmlns:browser="http://namespaces.zope.org/browser">
 
   <include package="Products.CMFonFive"/>
@@ -196,6 +197,7 @@
       />
 
   <browser:page
+      zcml:condition="installed MySQLdb"
       for="*"
       name="migrateEpaedia"
       class=".migrate_epaedia.MigrateMedia"
