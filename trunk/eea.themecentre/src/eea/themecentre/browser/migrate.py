@@ -180,13 +180,14 @@ class InitialThemeCentres(object):
             themeids = themeids[:noThemes]
         toMigrate = self.request.get('migrate', False)
         for theme in themeids:
-            folder = context.invokeFactory('Folder', id=theme, title=theme)
-            folder = context[folder]
-            ptc = PromoteThemeCentre(folder, self.request)
-            ptc()
-            tc = IThemeCentreSchema(folder)
-            tc.tags = theme
-            workflow.doActionFor(folder, 'publish')
+            if not hasattr(aq_base(context), theme):
+                folder = context.invokeFactory('Folder', id=theme, title=theme)
+                folder = context[folder]
+                ptc = PromoteThemeCentre(folder, self.request)
+                ptc()
+                tc = IThemeCentreSchema(folder)
+                tc.tags = theme
+                workflow.doActionFor(folder, 'publish')
 
         if toMigrate:
             for theme in themeids:
