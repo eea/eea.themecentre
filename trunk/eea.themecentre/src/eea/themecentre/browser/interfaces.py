@@ -66,3 +66,6 @@ class IDocumentRelated(Interface):
 
     def pages():
         pass
+
+    def other():
+        pass
