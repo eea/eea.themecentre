@@ -5,6 +5,7 @@ from zope.interface import implements
 from eea.mediacentre.interfaces import IMultimedia
 from eea.themecentre.browser.interfaces import IDocumentRelated
 from p4a.video.interfaces import IMediaPlayer
+from DateTime import DateTime
 
 class DocumentRelated(utils.BrowserView):
     implements(IDocumentRelated)
@@ -32,9 +33,18 @@ class DocumentRelated(utils.BrowserView):
         for item in self.related_feeds:
             feed = item.getFeed()
             for entry in feed:
+                date_str = entry.get('Date')
+                if date_str:
+                    if date_str[-1] == 'W':
+                        # feeds shouldn't have dates ending with W, but there
+                        # are those that do
+                        date_str = date_str[:-1] + 'Z'
+                    date = DateTime(date_str)
+                else:
+                    date = DateTime()
                 entries.append({ 'title': entry['title'],
                                  'url': entry['link'],
-                                 'date': entry['updated_parsed'] })
+                                 'date': date })
         entries.sort(cmp=lambda x,y: cmp(x['date'], y['date']))
         return entries
 
