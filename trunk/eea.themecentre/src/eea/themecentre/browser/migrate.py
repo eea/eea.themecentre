@@ -154,7 +154,7 @@ class MigrateTheme(object):
         if not hasattr(self.context, indicators):
             indicators = self.context.invokeFactory('Document', id=indicators)
             obj = self.context[indicators]
-            obj.setTitle(self.context.Title() + ' indicators')
+            obj.setTitle('Indicators')
             obj.setText(indiText, mimetype='text/html')
             obj.layout = 'tc_indicators_view'
             workflow.doActionFor(obj, 'publish')            
@@ -264,7 +264,7 @@ class IndicatorRDFs(object):
         themeids = context.portal_vocabularies.themes.objectIds()[1:]
         for theme in themeids:
             feedId = 'indicators_%s' % theme
-            title = '%s indicators' % context.portal_vocabularies.themes[theme].Title()
+            title = 'Indicators'
             feed_url = url % theme
             self.context.invokeFactory('RSSFeedRecipe', id=feedId, title=title)
             recipe = self.context[feedId]
