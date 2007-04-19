@@ -53,6 +53,8 @@ class DocumentRelated(utils.BrowserView):
         for item in self.related_media:
             mimetype = item.get_content_type()
             player_html = queryAdapter(item, name=mimetype, interface=IMediaPlayer)
+            player_html.max_width = 180
+            player_html.max_height = 135
             return player_html(None, None)
         return None
 
