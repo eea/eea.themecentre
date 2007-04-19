@@ -23,7 +23,7 @@ class DocumentRelated(utils.BrowserView):
                 self.related_feeds.append(item)
             elif IMultimedia.providedBy(item):
                 self.related_media.append(item)
-            elif item.portal_type == 'Document':
+            elif item.portal_type in ['Document', 'Highlight', 'PressRelease', 'Speech']:
                 self.related_pages.append(item)
             else:
                 self.related_other.append(item)
@@ -45,6 +45,7 @@ class DocumentRelated(utils.BrowserView):
                 entries.append({ 'title': entry['title'],
                                  'url': entry['link'],
                                  'date': date })
+
         entries.sort(cmp=lambda x,y: cmp(x['date'], y['date']))
         return entries
 

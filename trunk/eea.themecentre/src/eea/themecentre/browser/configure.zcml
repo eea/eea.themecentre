@@ -110,6 +110,14 @@
       permission="zope.Public"
       />
 
+   <browser:page
+      for="*"
+      name="themes-object"
+      class=".portlets.themes.ObjectThemesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
   <browser:page
       for="*"
       name="themes-related"
