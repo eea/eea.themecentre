@@ -7,6 +7,9 @@ from Products.CMFPlone.browser.interfaces import INavigationPortlet
 from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet as BaseNavigationPortlet
 from eea.themecentre.themecentre import getThemeCentre
 
+# items that shouldn't be displayed in main meny
+blacklistedNavigationItems = [ 'Multimedia',]
+
 class NavigationPortlet(BaseNavigationPortlet):
     implements(INavigationPortlet)
 
@@ -42,7 +45,14 @@ class NavigationPortlet(BaseNavigationPortlet):
                     break
 
         products = self._products()
-        titles = [ node['item']['Title'] for node in data ]
+        newData = []
+        titles = []
+        for node in data:
+            if node['item']['Title'] not in blacklistedNavigationItems:
+                newData.append(node)
+                titles.append(node['item']['Title'])
+        data = newData
+
         for product in products:
             if product['item']['Title'] not in titles:
                 data.append(product)
