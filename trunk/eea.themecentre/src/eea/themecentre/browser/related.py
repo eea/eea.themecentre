@@ -46,7 +46,7 @@ class DocumentRelated(utils.BrowserView):
                                  'url': entry['link'],
                                  'date': date })
 
-        entries.sort(cmp=lambda x,y: cmp(x['date'], y['date']))
+        entries.sort(cmp=lambda x,y: -cmp(x['date'], y['date']))
         return entries
 
     def multimedia(self):
