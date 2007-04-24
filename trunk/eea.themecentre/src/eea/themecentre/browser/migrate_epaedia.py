@@ -1,4 +1,5 @@
 import MySQLdb
+from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.browser.epaedia import *
@@ -7,13 +8,20 @@ from eea.mediacentre.interfaces import IMediaType
 
 types = { 'image':
             { 'sql': sql_images,
-              'method': 'images' },
+              'method': 'images',
+              'path': 'images' },
           'animation':
             { 'sql': sql_animations,
-              'method': 'animations' },
+              'method': 'animations',
+              'path': 'animations' },
           'mindstretcher':
             { 'sql': sql_mindstretchers,
-              'method': 'mindstretchers' },
+              'method': 'mindstretchers',
+              'path': 'mindstretchers' },
+          'video':
+            { 'sql': sql_videos,
+              'method': 'videos',
+              'path': 'videos' },
         }
 
 themes = { 'climate': 200 }
@@ -32,10 +40,10 @@ class MigrateMedia(utils.BrowserView):
 
         # create the media folders that need to be there
         for media_type in types:
-            path = types[media_type]
-            folder = getattr(context, media_type, None)
+            path = types[media_type]['path']
+            folder = getattr(aq_base(context), path, None)
             if not folder:
-                context.invokeFactory('Folder', id=media_type,
+                context.invokeFactory('Folder', id=path,
                         title=media_type)
 
         # copy all files from filesystem to the eea site
@@ -69,6 +77,26 @@ class MigrateMedia(utils.BrowserView):
     def mindstretchers(self, folder, db_row):
         return self.animations(folder, db_row)
 
+    def videos(self, folder, db_row):
+        eid, title, body, item = db_row
+
+        new_id = utils.normalizeString(title, encoding='latin1')
+        taken_ids = folder.objectIds()
+        if new_id in taken_ids:
+            extra = 1
+            while new_id + str(extra) in taken_ids:
+                extra += 1
+            new_id = new_id + str(extra)
+
+        path = self.path + '/website/elements/video/' + str(eid) + "_" + \
+               str(item) + '.flv'
+        folder.invokeFactory('File', id=new_id, title=title)
+        atfile = folder[new_id]
+        file = open(path, 'rb')
+        atfile.setFile(file)
+        atfile.setDescription(body)
+        return atfile
+
     def migrate_files(self, theme_id, page_id, media_type):
         context = utils.context(self)
         cursor = self.db.cursor()
@@ -76,7 +104,7 @@ class MigrateMedia(utils.BrowserView):
         files = cursor.fetchall()
 
         for db_row in files:
-            folder = getattr(context, media_type)
+            folder = getattr(context, types[media_type]['path'])
 
             method = getattr(self, types[media_type]['method'])
             new_file = method(folder, db_row)
@@ -87,4 +115,5 @@ class MigrateMedia(utils.BrowserView):
             themetag = IThemeTagging(new_file)
             themetag.tags = [theme_id]
 
+            self.workflow.doActionFor(new_file, 'publish')
             self.catalog.indexObject(new_file)
