@@ -22,6 +22,10 @@ types = { 'image':
             { 'sql': sql_videos,
               'method': 'videos',
               'path': 'videos' },
+          'link':
+            { 'sql': sql_links,
+              'method': 'links',
+              'path': 'links' },
         }
 
 themes = { 'climate': 200 }
@@ -97,6 +101,15 @@ class MigrateMedia(utils.BrowserView):
         atfile.setDescription(body)
         return atfile
 
+    def links(self, folder, db_row):
+        eid, link, title, body = db_row
+        new_id = utils.normalizeString(title, encoding='latin1')
+        folder.invokeFactory('Link', id=new_id, title=title)
+        linkobj = folder[new_id]
+        linkobj.setDescription(body)
+        linkobj.setRemoteUrl(link)
+        return linkobj
+
     def migrate_files(self, theme_id, page_id, media_type):
         context = utils.context(self)
         cursor = self.db.cursor()
@@ -109,8 +122,12 @@ class MigrateMedia(utils.BrowserView):
             method = getattr(self, types[media_type]['method'])
             new_file = method(folder, db_row)
 
-            media = IMediaType(new_file)
-            media.media_type = media_type
+            try:
+                media = IMediaType(new_file)
+                media.media_type = media_type
+            except:
+                # links can't be adapted and shouldn't be
+                pass
 
             themetag = IThemeTagging(new_file)
             themetag.tags = [theme_id]

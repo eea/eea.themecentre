@@ -32,3 +32,13 @@ sql_videos = \
     u"and tblVideos.eid=tblElements.eid " + \
     u"and tblVideosTitles.lid=1 " + \
     u"and tblVideosBody.lid=1"
+
+sql_links = \
+    u"select tblElements.eid, link, title, body " + \
+    u"from tblLinks, tblLinksBody, tblPagesElements, tblElements " + \
+    u"where tblPagesElements.eid=tblElements.eid and tblElements.tid=7 " + \
+    u"and tblPagesElements.pid=%d " + \
+    u"and tblLinks.hid=tblLinksBody.hid " + \
+    u"and tblLinks.hid=tblLinksBody.hid " + \
+    u"and tblLinks.eid=tblElements.eid " + \
+    u"and tblLinksBody.lid=1"
