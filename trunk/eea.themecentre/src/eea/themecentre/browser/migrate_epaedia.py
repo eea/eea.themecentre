@@ -7,12 +7,13 @@ from eea.mediacentre.interfaces import IMediaType
 
 types = { 'image':
             { 'sql': sql_images,
-              'tid': 5,
               'method': 'images' },
           'animation':
             { 'sql': sql_animations,
-              'tid': 4,
               'method': 'animations' },
+          'mindstretcher':
+            { 'sql': sql_mindstretchers,
+              'method': 'mindstretchers' },
         }
 
 themes = { 'climate': 200 }
@@ -64,6 +65,9 @@ class MigrateMedia(utils.BrowserView):
         file = open(path, 'rb')
         atfile.setFile(file)
         return atfile
+
+    def mindstretchers(self, folder, db_row):
+        return self.animations(folder, db_row)
 
     def migrate_files(self, theme_id, page_id, media_type):
         context = utils.context(self)

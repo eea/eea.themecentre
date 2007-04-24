@@ -12,3 +12,11 @@ sql_animations = \
     u"and tblPagesElements.pid=%d " + \
     u"and tblAnimations.kid=tblAnimationsTitle.kid " + \
     u"and tblAnimations.eid=tblElements.eid"
+
+sql_mindstretchers = \
+    u"select tblElements.eid, title " + \
+    u"from tblAnimations, tblAnimationsTitle, tblPagesElements, tblElements " + \
+    u"where tblPagesElements.eid=tblElements.eid and tblElements.tid=8 " + \
+    u"and tblPagesElements.pid=%d " + \
+    u"and tblAnimations.kid=tblAnimationsTitle.kid " + \
+    u"and tblAnimations.eid=tblElements.eid"
