@@ -5,6 +5,8 @@ from Products.CMFCore.utils import getToolByName
 from eea.themecentre.browser.epaedia import *
 from eea.themecentre.interfaces import IThemeTagging
 from eea.mediacentre.interfaces import IMediaType
+from zope.app.event.objectevent import ObjectModifiedEvent
+from zope.event import notify
 
 types = { 'image':
             { 'sql': sql_images,
@@ -99,6 +101,10 @@ class MigrateMedia(utils.BrowserView):
         file = open(path, 'rb')
         atfile.setFile(file)
         atfile.setDescription(body)
+
+        # p4a activates videos automatically by subscribing to modified events
+        notify(ObjectModifiedEvent(atfile))
+
         return atfile
 
     def links(self, folder, db_row):
