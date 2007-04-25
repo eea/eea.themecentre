@@ -7,6 +7,8 @@ from eea.themecentre.interfaces import IThemeTagging
 from eea.mediacentre.interfaces import IMediaType
 from zope.app.event.objectevent import ObjectModifiedEvent
 from zope.event import notify
+from zope.component import getAdapter
+from p4a.video.interfaces import IVideoDataAccessor
 
 types = { 'image':
             { 'sql': sql_images,
@@ -94,8 +96,8 @@ class MigrateMedia(utils.BrowserView):
                 extra += 1
             new_id = new_id + str(extra)
 
-        path = self.path + '/website/elements/video/' + str(eid) + "_" + \
-               str(item) + '.flv'
+        filename = str(eid) + "_" + str(item) + ".flv"
+        path = self.path + '/website/elements/video/' + filename
         folder.invokeFactory('File', id=new_id, title=title)
         atfile = folder[new_id]
         file = open(path, 'rb')
@@ -105,6 +107,11 @@ class MigrateMedia(utils.BrowserView):
         # p4a activates videos automatically by subscribing to modified events
         notify(ObjectModifiedEvent(atfile))
 
+        video = getAdapter(atfile, IVideoDataAccessor,
+                name="video/x-flv")
+        video._video_data['width'] = METADATA[filename]['width']
+        video._video_data['height'] = METADATA[filename]['height']
+        video._video_data['duration'] = METADATA[filename]['duration']
         return atfile
 
     def links(self, folder, db_row):
