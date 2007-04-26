@@ -104,8 +104,13 @@ class MigrateMedia(utils.BrowserView):
         atfile.setFile(file)
         atfile.setDescription(body)
 
-        # p4a activates videos automatically by subscribing to modified events
-        notify(ObjectModifiedEvent(atfile))
+        try:
+            # p4a activates videos automatically by subscribing to modified events
+            notify(ObjectModifiedEvent(atfile))
+        except:
+            # sometimes extracting metadata from file may fail and result in
+            # error, but we can continue as we set metadata below instead
+            pass
 
         video = getAdapter(atfile, IVideoDataAccessor,
                 name="video/x-flv")
