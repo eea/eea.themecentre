@@ -2,9 +2,8 @@ from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryAdapter
 from zope.interface import implements
-from eea.mediacentre.interfaces import IMultimedia
 from eea.themecentre.browser.interfaces import IDocumentRelated
-from p4a.video.interfaces import IMediaPlayer
+from p4a.video.interfaces import IMediaPlayer, IVideo
 from DateTime import DateTime
 
 class DocumentRelated(utils.BrowserView):
@@ -21,7 +20,7 @@ class DocumentRelated(utils.BrowserView):
         for item in self.related:
             if item.portal_type == 'RSSFeedRecipe':
                 self.related_feeds.append(item)
-            elif IMultimedia.providedBy(item):
+            elif queryAdapter(item, IVideo):
                 self.related_media.append(item)
             elif item.portal_type in ['Document', 'Highlight', 'PressRelease', 'Speech']:
                 self.related_pages.append(item)

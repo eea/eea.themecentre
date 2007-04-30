@@ -76,10 +76,13 @@ class MigrateMedia(utils.BrowserView):
         eid, title = db_row
         new_id = utils.normalizeString(title, encoding='latin1')
         path = self.path + '/website/elements/animations/' + str(eid) + '.swf'
-        folder.invokeFactory('File', id=new_id, title=title)
+        folder.invokeFactory('FlashFile', id=new_id, title=title)
         atfile = folder[new_id]
         file = open(path, 'rb')
         atfile.setFile(file)
+        atfile.setWidth(530)
+        atfile.setHeight(350)
+        notify(ObjectModifiedEvent(atfile))
         return atfile
 
     def mindstretchers(self, folder, db_row):
@@ -142,7 +145,7 @@ class MigrateMedia(utils.BrowserView):
 
             try:
                 media = IMediaType(new_file)
-                media.media_type = media_type
+                media.types = [media_type]
             except:
                 # links can't be adapted and shouldn't be
                 pass
