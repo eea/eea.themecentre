@@ -26,7 +26,7 @@ def promoted(obj, event):
     # obj should be a folder and that's where we're gonna add a news folder
     obj.invokeFactory('Folder', id='news', title='News')
     obj.invokeFactory('Folder', id='events', title='Events')
-    obj.invokeFactory('Folder', id='links', title='Links')
+    obj.invokeFactory('Folder', id='links', title='External Links')
     obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
