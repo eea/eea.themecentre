@@ -88,6 +88,11 @@
       handler=".themecentre.objectAdded"
       />
 
+  <subscriber
+      for="* zope.app.container.interfaces.IObjectModifiedEvent"
+      handler=".themecentre.objectThemeTagged"
+      />
+
   <include file="permissions.zcml"/>
 
   <include package="plone.app.form" />
