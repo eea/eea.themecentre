@@ -38,9 +38,15 @@ class RDFPortlet(BasePortlet):
                 feed_match = []
 
                 for entry in feed['items'][:self.size]:
+                    # not all rdf feeds have date
+                    if entry['date']:
+                         detail = self.localized_time(entry['date'])
+                    else:
+                         detail = None
+
                     data = { 'title': entry['title'],
                              'url': entry['url'],
-                             'detail': self.localized_time(entry['date']) }
+                             'detail': detail }
                     feed_match.append(data)
 
                 if feed_match:
