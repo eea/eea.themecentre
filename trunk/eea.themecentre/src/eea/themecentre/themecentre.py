@@ -4,6 +4,8 @@ from zope.app.traversing.interfaces import ITraverser
 from zope.component import adapts
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
+
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Acquisition import aq_parent
 
@@ -44,22 +46,62 @@ def promoted(obj, event):
         newsobj.setConstrainTypesMode(1)
         newsobj.setImmediatelyAddableTypes(['News Item'])
         newsobj.setLocallyAllowedTypes(['News Item'])
-        newsobj.layout = 'folder_listing'
+        newsobj.default_page = 'news_topic'
+
+        # add a smart folder to the news folder that shows all news and
+        # highlighs
+        _createObjectByType('Topic', newsobj, id='news_topic', title='News')
+        topic = getattr(newsobj, 'news_topic')
+        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        type_crit.setValue(['News Item', 'Highlight'])
+        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        state_crit = topic.addCriterion('review_state',
+                                        'ATSimpleStringCriterion')
+        state_crit.setValue('published')
+        topic.setSortCriterion('effective', True)
+        topic.setLayout('atct_topic_view')
         
     if eventsobj:
         workflow.doActionFor(eventsobj, 'publish')
         eventsobj.setConstrainTypesMode(1)
         eventsobj.setImmediatelyAddableTypes(['Event'])
         eventsobj.setLocallyAllowedTypes(['Event'])
-        eventsobj.layout = 'folder_listing'
+        eventsobj.default_page = 'events_topic'
         
+        # add a smart folder to the events folder that shows all events
+        _createObjectByType('Topic', eventsobj, id='events_topic', title='Events')
+        topic = getattr(eventsobj, 'events_topic')
+        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        type_crit.setValue('Event')
+        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        state_crit = topic.addCriterion('review_state',
+                                        'ATSimpleStringCriterion')
+        state_crit.setValue('published')
+        date_crit = topic.addCriterion('start', 'ATFriendlyDateCriteria')
+        date_crit.setValue(0)
+        date_crit.setDateRange('+')
+        date_crit.setOperation('more')
+        topic.setLayout('atct_topic_view')
+
     if linksobj:
         workflow.doActionFor(linksobj, 'publish')
         linksobj.setConstrainTypesMode(1)
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
-        linksobj.layout = 'folder_listing'
+        linksobj.default_page = 'links_topic'
         
+        # add a smart folder to the links folder that shows all links
+        _createObjectByType('Topic', linksobj, id='links_topic', title='Links')
+        topic = getattr(linksobj, 'links_topic')
+        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        type_crit.setValue('Link')
+        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        state_crit = topic.addCriterion('review_state',
+                                        'ATSimpleStringCriterion')
+        state_crit.setValue('published')
+        topic.setSortCriterion('effective', True)
+        topic.setLayout('atct_topic_view')
+
 
 def objectAdded(obj, event):
     """ Checks if the object belongs to a theme centre. If it does and it
