@@ -32,7 +32,7 @@ class MigrateWrongThemeIds(object):
         themeVocab = context.portal_vocabularies.themes         
         themeIds = themeVocab.objectIds()
 
-        for theme in themeIds:
+        for theme in themeIdMap.keys():
             res = context.portal_catalog.searchResults(getThemes=theme)
             for r in res:
                 obj = r.getObject()
