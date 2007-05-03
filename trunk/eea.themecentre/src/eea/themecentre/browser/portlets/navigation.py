@@ -50,7 +50,7 @@ class NavigationPortlet(BaseNavigationPortlet):
         titles = []
         for node in data:
             nodeTitle = node['item']['Title']
-            if nodeTitle not in blacklistedNavigationItems and node['children'] or nodeTitle in withoutChildren:
+            if nodeTitle not in blacklistedNavigationItems:
                 newData.append(node)
                 titles.append(nodeTitle)
         data = newData
