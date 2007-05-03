@@ -18,7 +18,7 @@ class PromoteThemeCentre(object):
         self.context = context
         self.request = request
 
-    def __call__(self):
+    def __call__(self, theme):
         alsoProvides(self.context, IThemeCentre)
         types = [ 'Folder', 'Document', 'Link', 'File', 'Image', 'Event',
                 'HelpCenterFAQFolder', 'FlashFile' ]
@@ -27,6 +27,10 @@ class PromoteThemeCentre(object):
         self.context.setImmediatelyAddableTypes( types )
         self.context.setConstrainTypesMode(ENABLE)
         self.context.layout = 'themecentre_view'
+
+        tc = IThemeCentreSchema(self.context)
+        tc.tags = theme
+
         notify(PromotedToThemeCentreEvent(self.context))
         return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
     

@@ -26,7 +26,7 @@ def promoted(obj, event):
     workflow = getToolByName(obj, 'portal_workflow')
 
     # obj should be a folder and that's where we're gonna add a news folder
-    obj.invokeFactory('Folder', id='news', title='News')
+    obj.invokeFactory('Folder', id='highlights', title='Highlights')
     obj.invokeFactory('Folder', id='events', title='Events')
     obj.invokeFactory('Folder', id='links', title='External Links')
     obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
@@ -36,28 +36,34 @@ def promoted(obj, event):
     multimedia.exclude_from_nav = True
     workflow.doActionFor(multimedia, 'publish')
 
-    newsobj = getattr(obj, 'news', None)
+    newsobj = getattr(obj, 'highlights', None)
     eventsobj = getattr(obj, 'events', None)
     linksobj = getattr(obj, 'links', None)
     faqobj = getattr(obj, 'faq', None)
+
+    theme_id = IThemeCentreSchema(obj).tags
 
     if newsobj:
         workflow.doActionFor(newsobj, 'publish')
         newsobj.setConstrainTypesMode(1)
         newsobj.setImmediatelyAddableTypes(['News Item'])
         newsobj.setLocallyAllowedTypes(['News Item'])
-        newsobj.default_page = 'news_topic'
+        newsobj.default_page = 'highlights_topic'
 
         # add a smart folder to the news folder that shows all news and
         # highlighs
-        _createObjectByType('Topic', newsobj, id='news_topic', title='News')
-        topic = getattr(newsobj, 'news_topic')
+        _createObjectByType('Topic', newsobj, id='highlights_topic',
+                title='Highlights')
+        topic = getattr(newsobj, 'highlights_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue(['News Item', 'Highlight'])
         sort_crit = topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
+        theme_crit = topic.addCriterion('getThemes',
+                                        'ATSimpleStringCriterion')
+        theme_crit.setValue(theme_id)
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
         
@@ -77,6 +83,9 @@ def promoted(obj, event):
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
+        theme_crit = topic.addCriterion('getThemes',
+                                        'ATSimpleStringCriterion')
+        theme_crit.setValue(theme_id)
         date_crit = topic.addCriterion('start', 'ATFriendlyDateCriteria')
         date_crit.setValue(0)
         date_crit.setDateRange('+')
@@ -99,6 +108,9 @@ def promoted(obj, event):
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
+        theme_crit = topic.addCriterion('getThemes',
+                                        'ATSimpleStringCriterion')
+        theme_crit.setValue(theme_id)
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
 

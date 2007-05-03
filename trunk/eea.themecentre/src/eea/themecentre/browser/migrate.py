@@ -184,9 +184,7 @@ class InitialThemeCentres(object):
                 folder = context.invokeFactory('Folder', id=theme, title=theme)
                 folder = context[folder]
                 ptc = PromoteThemeCentre(folder, self.request)
-                ptc()
-                tc = IThemeCentreSchema(folder)
-                tc.tags = theme
+                ptc(theme)
                 workflow.doActionFor(folder, 'publish')
 
         if toMigrate:
