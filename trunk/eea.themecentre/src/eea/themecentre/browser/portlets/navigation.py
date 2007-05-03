@@ -9,6 +9,7 @@ from eea.themecentre.themecentre import getThemeCentre
 
 # items that shouldn't be displayed in main meny
 blacklistedNavigationItems = [ 'Multimedia',]
+withoutChildren = ['Indicators',]
 
 class NavigationPortlet(BaseNavigationPortlet):
     implements(INavigationPortlet)
@@ -48,17 +49,16 @@ class NavigationPortlet(BaseNavigationPortlet):
         newData = []
         titles = []
         for node in data:
-            if node['item']['Title'] not in blacklistedNavigationItems:
+            nodeTitle = node['item']['Title']
+            if nodeTitle not in blacklistedNavigationItems and node['children'] or nodeTitle in withoutChildren:
                 newData.append(node)
-                titles.append(node['item']['Title'])
+                titles.append(nodeTitle)
         data = newData
 
         for product in products:
             if product['item']['Title'] not in titles:
                 data.append(product)
 
-        data.extend(self._overview())
-        
         properties = getToolByName(context, 'portal_properties')
         navtree_properties = getattr(properties, 'navtree_properties')
         bottomLevel = navtree_properties.getProperty('bottomLevel', 0)

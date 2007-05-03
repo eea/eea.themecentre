@@ -19,7 +19,7 @@ Let's associate the Theme Centre with a theme.
 When a folder is promoted to a Theme Centre news, links and events folders
 should be created. Let's see if that worked.
 
-  >>> getattr(themeCentre, 'news', None) is not None
+  >>> getattr(themeCentre, 'highlights', None) is not None
   True
   >>> getattr(themeCentre, 'events', None) is not None
   True
