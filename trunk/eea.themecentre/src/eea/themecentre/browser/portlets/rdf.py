@@ -40,9 +40,10 @@ class RDFPortlet(BasePortlet):
                 for entry in feed['items'][:self.size]:
                     # not all rdf feeds have date
                     if entry['date']:
-                         detail = self.localized_time(entry['date'])
+                        detail = self.localized_time(entry['date'])
                     else:
-                         detail = None
+                        # Those feeds that have no date should not be shown
+                        continue
 
                     data = { 'title': entry['title'],
                              'url': entry['url'],
