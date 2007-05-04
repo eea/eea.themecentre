@@ -68,7 +68,10 @@ class RDFPortlet(BasePortlet):
         if len(feed) > 0:
             self.feedTitle = feed[0]['title']
             for item in feed[0]['items']:
-                item['published'] = self.localized_time(item['date'])
+                if feed[0]['id'] in ('Atlas', 'datasets'):
+                    item['published'] = None
+                else:
+                    item['published'] = self.localized_time(item['date'])
                 result.append(item)
 
         return result
