@@ -199,13 +199,6 @@
 
 
   <browser:page
-      for="*"
-      name="setIndicatorFeedId"
-      class=".portlets.rdf.IndicatorFeedId"
-      permission="zope.Public"
-      />
-
-  <browser:page
       zcml:condition="installed MySQLdb"
       for="*"
       name="migrateEpaedia"

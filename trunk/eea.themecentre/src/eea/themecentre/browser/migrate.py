@@ -156,7 +156,10 @@ class MigrateTheme(object):
             obj = self.context[indicators]
             obj.setTitle('Indicators')
             obj.setText(indiText, mimetype='text/html')
-            obj.layout = 'tc_indicators_view'
+            catalog = getToolByName(self.context, 'portal_catalog')        
+            indicatorRSS = catalog.searchResults( portal_type='RSSFeedRecipe', id='indicators_' +themeId)
+            if len(indicatorRSS) > 0:
+                obj.setRelatedItems(indicatorRSS[0].getObject().UID())
             workflow.doActionFor(obj, 'publish')            
             obj.reindexObject()
 
@@ -199,9 +202,7 @@ class InitialThemeCentres(object):
             context.manage_addProperty('right_slots', slots, type='lines')
 
         if not hasattr(aq_base(context), 'left_slots'):
-            slots = ['here/portlet_themes/macros/portlet',
-                     'here/portlet_themes_rdftitles/macros/portlet',
-                     'here/portlet_media_nav/macros/portlet']
+            slots = ['here/portlet_themes/macros/portlet', ]
             context.manage_addProperty('left_slots', slots, type='lines',),
 
         #if hasattr(aq_base(context), 'navigationmanager_menuid'):
