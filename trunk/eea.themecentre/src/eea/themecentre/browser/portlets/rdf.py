@@ -35,6 +35,12 @@ class RDFPortlet(BasePortlet):
             feeds = rdfrepository.getFeedData(search)
 
             for feed in feeds:
+                # temporary fix, "datasets" and "maps and graphs" feeds
+                # should not be shown as portlets until they contain valid
+                # dates
+                if feed['id'] in ('datasets', 'Atlas'):
+                    continue
+
                 feed_match = []
 
                 for entry in feed['items'][:self.size]:
