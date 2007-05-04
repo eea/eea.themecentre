@@ -5,7 +5,7 @@ from eea.themecentre.browser.portlets.catalog import CatalogBasePortlet
 
 class EventsPortlet(CatalogBasePortlet):
 
-    query = { 'portal_type': 'Event',
+    query = { 'portal_type': ( 'Event', 'QuickEvent', 'RDFEvent' ),
               'end': { 'query': DateTime(), 'range': 'min' },
               'sort_on': 'start',
               'sort_limit': 5,
