@@ -79,10 +79,8 @@ class RDFPortlet(BasePortlet):
         if len(feed) > 0:
             self.feedTitle = feed[0]['title']
             for item in feed[0]['items']:
-                data = { 'title': item['title'],
-                         'url': item['url'],
-                         'published': self.localized_time(item['date']) }
-                result.append(data)
+                item['published'] = self.localized_time(item['date'])
+                result.append(item)
 
         return result
 
