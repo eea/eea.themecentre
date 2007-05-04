@@ -1,0 +1,36 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+	       xmlns:meta="http://namespaces.zope.org/meta"
+           xmlns:five="http://namespaces.zope.org/five">
+
+  <!-- Copy this file to your ``INSTANCE_HOME/etc`` directory -->
+
+  <include package="Products.Five" />
+  <meta:redefinePermission from="zope2.Public" to="zope.Public" />
+
+
+  <!-- Load the meta -->
+
+  <include files="package-includes/*-meta.zcml" />
+  <five:loadProducts file="meta.zcml"/>
+
+
+  <!-- Load the configuration -->
+
+  <include files="package-includes/*-configure.zcml" />
+  <five:loadProducts />
+
+<include package="plone.app.form" />
+<include package="eea.mediacentre" />
+<include package="eea.themecentre" />
+<include package="eea.rdfrepository" />
+<include package="p4a.z2utils" />
+<include package="p4a.fileimage" />
+<include package="p4a.video" />
+<include package="p4a.plonevideo" />
+
+  <!-- Load the configuration overrides-->
+
+  <includeOverrides files="package-includes/*-overrides.zcml" />
+  <five:loadProductsOverrides />
+
+</configure>
