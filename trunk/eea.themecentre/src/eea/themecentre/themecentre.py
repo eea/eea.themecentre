@@ -64,6 +64,10 @@ def promoted(obj, event):
         theme_crit = topic.addCriterion('getThemes',
                                         'ATSimpleStringCriterion')
         theme_crit.setValue(theme_id)
+        effective_crit = topic.addCriterion('effective', 'ATFriendlyDateCriteria')
+        effective_crit.setOperation('less')
+        effective_crit.setValue(0)
+        
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
         
@@ -78,7 +82,7 @@ def promoted(obj, event):
         _createObjectByType('Topic', eventsobj, id='events_topic', title='Events')
         topic = getattr(eventsobj, 'events_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue('Event')
+        type_crit.setValue(('Event','QuickEvent', 'RDFEvent'))
         sort_crit = topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')

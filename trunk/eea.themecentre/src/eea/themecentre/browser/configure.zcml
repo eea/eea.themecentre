@@ -72,14 +72,6 @@
 
   <browser:page
       for="*"
-      name="themes_news"
-      class=".portlets.news.NewsPortlet"
-      allowed_interface=".interfaces.IPortlet"
-      permission="zope.Public"
-      />
-
-  <browser:page
-      for="*"
       name="themes_highlights"
       class=".portlets.highlights.HighlightsPortlet"
       allowed_interface=".interfaces.IPortlet"

@@ -1,11 +1,18 @@
 from eea.themecentre.browser.portlets.catalog import CatalogBasePortlet
+from Products.CMFPlone import utils
+from DateTime import DateTime
 
 class HighlightsPortlet(CatalogBasePortlet):
 
-    query = { 'portal_type': 'Highlight',
-              'sort_on': 'Date',
+    query = { 'portal_type': ( 'Highlight', 'News Item' ),
+              'sort_on': 'effective',
               'sort_order': 'reverse',
-              'review_state': 'published' }
+              'review_state': 'published',
+              'effectiveRange' : DateTime() }
+
+    def all_link(self):
+        context = utils.context(self)
+        return context.absolute_url() + '/highlights'
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title,

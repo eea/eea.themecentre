@@ -11,6 +11,10 @@ class EventsPortlet(CatalogBasePortlet):
               'sort_limit': 5,
               'review_state': 'published' }
 
+    def all_link(self):
+        context = utils.context(self)
+        return context.absolute_url() + '/events'
+
     def item_to_short_dict(self, item):
         return { 'title': item.Title,
                  'description': item.Description,

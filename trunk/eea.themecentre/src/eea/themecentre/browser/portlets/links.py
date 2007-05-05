@@ -1,4 +1,5 @@
 from eea.themecentre.browser.portlets.catalog import CatalogBasePortlet
+from Products.CMFPlone import utils
 
 class LinksPortlet(CatalogBasePortlet):
 
@@ -6,6 +7,10 @@ class LinksPortlet(CatalogBasePortlet):
               'sort_on': 'Date',
               'sort_order': 'reverse',
               'review_state': 'published' }
+
+    def all_link(self):
+        context = utils.context(self)
+        return context.absolute_url() + '/links'
 
     def item_to_short_dict(self, item):
         """ This method overrides the one in CatalogBasePortlet because
