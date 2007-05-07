@@ -5,11 +5,14 @@ from eea.themecentre.browser.portlets.catalog import CatalogBasePortlet
 
 class EventsPortlet(CatalogBasePortlet):
 
-    query = { 'portal_type': ( 'Event', 'QuickEvent', 'RDFEvent' ),
-              'end': { 'query': DateTime(), 'range': 'min' },
-              'sort_on': 'start',
-              'sort_limit': 5,
-              'review_state': 'published' }
+    def __init__(self, context, request):
+        super(EventsPortlet, self).__init__(context, request)
+        self.query = {
+            'portal_type': ( 'Event', 'QuickEvent', 'RDFEvent' ),
+            'end': { 'query': DateTime(), 'range': 'min' },
+            'sort_on': 'start',
+            'sort_limit': 5,
+            'review_state': 'published' }
 
     def all_link(self):
         context = utils.context(self)

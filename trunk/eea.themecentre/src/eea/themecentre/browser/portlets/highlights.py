@@ -4,11 +4,14 @@ from DateTime import DateTime
 
 class HighlightsPortlet(CatalogBasePortlet):
 
-    query = { 'portal_type': ( 'Highlight', 'News Item' ),
-              'sort_on': 'effective',
-              'sort_order': 'reverse',
-              'review_state': 'published',
-              'effectiveRange' : DateTime() }
+    def __init__(self, context, request):
+        super(HighlightsPortlet, self).__init__(context, request)
+        self.query = {
+            'portal_type': ( 'Highlight', 'News Item' ),
+            'sort_on': 'effective',
+            'sort_order': 'reverse',
+            'review_state': 'published',
+            'effectiveRange' : DateTime() }
 
     def all_link(self):
         context = utils.context(self)
