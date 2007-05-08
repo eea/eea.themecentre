@@ -73,9 +73,7 @@
       factory="zope.app.traversing.adapters.DefaultTraversable"
       />
 
-  <!--
-  <adapter factory=".themecentre.RDFTraversalAdapter" />
-  -->
+  <adapter factory=".themecentre.objectTitle" />
 
   <subscriber
       for=".interfaces.IThemeCentre

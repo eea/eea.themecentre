@@ -1,12 +1,14 @@
 from zope.app.component.hooks import getSite
 from zope.app.event.objectevent import ObjectEvent
 from zope.app.traversing.interfaces import ITraverser
-from zope.component import adapts
-from zope.interface import implements
+from zope.component import adapts, adapter
+from zope.interface import implements, Interface, implementer
+from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
 from Acquisition import aq_parent
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
@@ -181,9 +183,33 @@ def getThemeTitle(context):
         return vocab.getTerm(themeid).title
     return None
 
-#class RDFTraversalAdapter(FiveTraversable):
-#    implements(ITraverser)
-#    adapts(IThemeCentre)
-#
-#    def publishTraverse(self, request, name):
-#        return 'woo'
+@implementer(IObjectTitle)
+@adapter(Interface, IBrowserRequest)
+def objectTitle(context, request):
+    """ An adapter that gets the title from the current object/template.
+        It's used for instance for showing title in the web browser title
+        bar. If the request has 'feed' variable then the feed's title
+        is used, otherwise some other adapter is used instead. """
+
+    class ObjectTitle(object):
+        implements(IObjectTitle)
+        def __init__(self, title):
+            self._title = title
+        @property
+        def title(self):
+            return self._title
+
+    feed = request.get('feed', None)
+    if feed:
+        portal_catalog = getToolByName(context, 'portal_catalog')
+        # TODO use refactored rdf repository and interfaces instead of catalog
+        brains = portal_catalog.searchResults(id=feed,
+                portal_type='RSSFeedRecipe')
+        if brains:
+            putils = getToolByName(context, 'plone_utils')
+            object_title = putils.pretty_title_or_id(context)
+            return ObjectTitle('%s - %s' % (brains[0].Title, object_title))
+        else:
+            return None
+    else:
+        return None
