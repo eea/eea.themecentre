@@ -25,8 +25,12 @@ class NavigationPortlet(BaseNavigationPortlet):
         return obj
         
     def createNavTree(self):
+        if hasattr(self, '_all') and hasattr(self, '_data'):
+            return self.template()
+
         context = utils.context(self)
-        all = self.getNavTree()
+
+        self._all = all = self.getNavTree()
 
         currentTheme = getThemeCentre(context)
         data = []
@@ -58,15 +62,38 @@ class NavigationPortlet(BaseNavigationPortlet):
         for product in products:
             if product['item']['Title'] not in titles:
                 data.append(product)
+                
+        # order menu as configured in ZMI on themes
+        order = getattr(context, 'themes_menu_order', ['highlights', 'reports_', 'indicators', 'Atlas', 'datasets','events','links'])
+        orderedData = [ None for n in range(0,len(order))]
+        unsortedData = []
 
-        properties = getToolByName(context, 'portal_properties')
-        navtree_properties = getattr(properties, 'navtree_properties')
-        bottomLevel = navtree_properties.getProperty('bottomLevel', 0)
+        for node in data:
+           n = 0
+           for urlPart in order:
+               if urlPart in node['getURL']:
+                   orderedData[n] = node
+                   break
+               n += 1
+           else:
+               unsortedData.append(node)
+               
+        data = [ node for node in orderedData
+                        if node is not None ]
+        data.extend(unsortedData)
+
+        self._data = data
+        
+        return self.template()
+
+    def template(self):
+        context = utils.context(self)
+        data = self._data
+        all = self._all
         
         return context.portlet_dropdown_navtree_macro(
             theme=data, children=all.get('children', []),
             level=1, show_children=True, isNaviTree=True, bottomLevel=3)
-
 
     def _products(self):
         context = utils.context(self)
@@ -95,6 +122,7 @@ class NavigationPortlet(BaseNavigationPortlet):
                     'icon': 'www/folder_icon.gif'}
 
             newNode = {'item'          : item,
+                       'getURL'        : product['url'],
                        'depth'         : '',
                        'currentItem'   : self.request.get('URL0','') == product['url'],
                        'currentParent' : False,
