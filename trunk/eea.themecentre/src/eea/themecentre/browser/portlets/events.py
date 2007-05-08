@@ -19,10 +19,15 @@ class EventsPortlet(CatalogBasePortlet):
         return context.absolute_url() + '/events'
 
     def item_to_short_dict(self, item):
+        detail = self.localized_time(item.start) + " - " + \
+                 self.localized_time(item.end)
+        if item.location:
+            detail += ", " + item.location
+
         return { 'title': item.Title,
                  'description': item.Description,
                  'url': item.getURL(),
-                 'detail': self.localized_time(item.start) }
+                 'detail': detail }
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title,
