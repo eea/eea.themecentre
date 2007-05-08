@@ -92,7 +92,7 @@ def promoted(obj, event):
         theme_crit = topic.addCriterion('getThemes',
                                         'ATSimpleStringCriterion')
         theme_crit.setValue(theme_id)
-        date_crit = topic.addCriterion('start', 'ATFriendlyDateCriteria')
+        date_crit = topic.addCriterion('end', 'ATFriendlyDateCriteria')
         date_crit.setValue(0)
         date_crit.setDateRange('+')
         date_crit.setOperation('more')

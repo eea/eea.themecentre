@@ -199,6 +199,13 @@
       attribute="migrate"
       />
 
+  <browser:page
+      for="*"
+      name="migrateEventsTopic"
+      class=".migrate.EventsTopicEndDate"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

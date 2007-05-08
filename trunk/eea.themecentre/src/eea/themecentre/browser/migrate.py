@@ -296,3 +296,27 @@ class ThemeTaggable(object):
             tagging = IThemeTagging(obj)
             themes = filter(None, obj.schema['themes'].get(obj))
             tagging.tags = themes
+
+class EventsTopicEndDate(object):
+    """ Change all event topics to have end instead of start in criteria. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        query = { 'portal_type': 'Topic',
+                  'id': 'events_topic' }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            topic = brain.getObject()
+            if 'crit__start_ATFriendlyDateCriteria' in topic.objectIds():
+                topic.deleteCriterion('crit__start_ATFriendlyDateCriteria')
+
+            if 'crit__end_ATFriendlyDateCriteria' not in topic.objectIds():
+                date_crit = topic.addCriterion('end', 'ATFriendlyDateCriteria')
+                date_crit.setValue(0)
+                date_crit.setDateRange('+')
+                date_crit.setOperation('more')
+        return 'success'
