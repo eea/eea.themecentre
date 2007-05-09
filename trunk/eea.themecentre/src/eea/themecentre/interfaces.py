@@ -1,4 +1,4 @@
-from zope.interface import Interface
+from zope.interface import Interface, Attribute
 from zope.schema import List, TextLine, Choice
 from zope.schema.vocabulary import SimpleVocabulary
 #from eea.themecentre.vocabulary import getThemesVocab
@@ -73,3 +73,27 @@ class IThemeRelation(Interface):
             vocabulary = "Theme Centres",
             )
         )
+
+class IThemeCentrePortletInfo(Interface):
+    """ Any object that wants to be displayed in a themecentre portlet
+        should provide an adapter providing this interface. """
+
+    title = Attribute("portlet title")
+    more_link = Attribute("portlet more link")
+    items = Attribute("a list of portlet items")
+
+class IThemeCentrePortletItem(Interface):
+    """ Each item in the themecentre portlets provides this interface. """
+
+    title = Attribute("portlet item title")
+    url = Attribute("portlet item link")
+    detail = Attribute("portlet item detail")
+    image = Attribute("portlet item image")
+
+class IThemeCentreListFeed(Interface):
+    """ Each item in themecentre full feed list provides this interface. """
+
+    title = Attribute("feed item title")
+    url = Attribute("feed item link")
+    summary = Attribute("feed item summary")
+    published = Attribute("feed item detail")

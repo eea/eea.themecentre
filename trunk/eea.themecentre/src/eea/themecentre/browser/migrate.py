@@ -1,7 +1,8 @@
 import urllib
-from zope.interface import alsoProvides
+from zope.interface import alsoProvides, directlyProvides, directlyProvidedBy
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation, IThemeTagging
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
+from eea.rdfrepository.interfaces import IFeed, IFeedContent
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
@@ -319,4 +320,22 @@ class EventsTopicEndDate(object):
                 date_crit.setValue(0)
                 date_crit.setDateRange('+')
                 date_crit.setOperation('more')
+        return 'success'
+
+class FeedMarkerInterface(object):
+    """ Changes all IFeed marker interfaces to be IFeedContent markers. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        query = { 'portal_type': 'RSSFeedRecipe' }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            feed = brain.getObject()
+            directlyProvides(feed, directlyProvidedBy(feed)-IFeed)
+            directlyProvides(feed, directlyProvidedBy(feed), IFeedContent)
+            feed.reindexObject()
         return 'success'

@@ -53,6 +53,38 @@
 
   <adapter factory=".related.ThemeRelationAdapter" />
 
+  <adapter factory=".ui_adapters.FeedPortletInfo" />
+  <class class=".ui_adapters.FeedPortletInfo">
+      <require
+          permission="zope2.Public"
+          interface=".interfaces.IThemeCentrePortletInfo"
+          />
+      <require
+          permission="cmf.ModifyPortalContent"
+          set_schema=".interfaces.IThemeCentrePortletInfo"
+          />
+  </class>
+
+  <adapter factory=".ui_adapters.FeedItemPortletInfo" />
+  <class class=".ui_adapters.FeedItemPortletInfo">
+      <require
+          permission="zope2.Public"
+          interface=".interfaces.IThemeCentrePortletItem"
+          />
+      <require
+          permission="cmf.ModifyPortalContent"
+          set_schema=".interfaces.IThemeCentrePortletItem"
+          />
+  </class>
+
+  <adapter factory=".ui_adapters.ListFeedInfo" />
+  <class class=".ui_adapters.ListFeedInfo">
+      <require
+          permission="zope2.Public"
+          interface=".interfaces.IThemeCentreListFeed"
+          />
+  </class>
+
   <utility
       component=".vocabulary.ThemesVocabularyFactory"
       name="Allowed themes"
@@ -93,7 +125,6 @@
 
   <include file="permissions.zcml"/>
 
-  <include package="plone.app.form" />
   <include package=".browser" />
 
 </configure>
