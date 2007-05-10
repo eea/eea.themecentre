@@ -35,7 +35,7 @@ def promoted(obj, event):
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
     multimedia.layout = 'mediacentre_view'
-    multimedia.exclude_from_nav = True
+    multimedia.setExcludeFromNav(True)
     workflow.doActionFor(multimedia, 'publish')
 
     newsobj = getattr(obj, 'highlights', None)
