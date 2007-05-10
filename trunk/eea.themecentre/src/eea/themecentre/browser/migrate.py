@@ -21,6 +21,22 @@ themeIdMap = { 'coasts_seas' : 'coast_sea',
                'env_scenarios' : 'scenarios',
                'various' : 'other_issues' }
 
+class FixExcludeFromNav(object):
+    """ fix overwritten exclude_from_nav """
+    
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        context = self.context
+        res = context.portal_catalog.searchResults(portal_type = 'Folder', id='multimedia', path = '/'.join(context.getPhysicalPath()))
+        for folder in res:
+            obj = folder.getObject()
+            if hasattr(aq_base(obj), 'exclude_from_nav'):
+                del obj.exclude_from_nav
+                obj.initializeLayers()
+            
 class MigrateWrongThemeIds(object):
     """ migrate wrong theme ids to old correct """
     

@@ -189,6 +189,13 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="fixExcludeFromNav"
+      class=".migrate.FixExcludeFromNav"
+      permission="zope.Public"
+      />
+
 
   <browser:page
       zcml:condition="installed MySQLdb"
