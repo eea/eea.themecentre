@@ -4,7 +4,7 @@ from eea.themecentre.interfaces import IThemeCentrePortletInfo
 from eea.themecentre.interfaces import IThemeCentrePortletItem
 from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreListFeed
-from eea.rdfrepository.interfaces import IFeedInfo, IFeedItem
+from eea.rdfrepository.interfaces import IFeedInfo, IFeedItem, IFeed
 from eea.themecentre.utils import localized_time
 from Products.CMFCore.utils import getToolByName
 from Products.EEAContentTypes import feeds
@@ -13,6 +13,10 @@ class FeedPortletInfo(feeds.FeedPortletInfo):
     implements(IThemeCentrePortletInfo)
     adapts(IThemeCentre, IFeed)
     
+    def __init__(self, themecentre, feed):
+        self.themecentre = themecentre
+        self.feed = feed
+
     @property
     def more_link(self):
         tc = self.themecentre
