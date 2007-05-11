@@ -251,10 +251,10 @@ class RDF(object):
             elif not title:
                 title = id
 
-            self.context.invokeFactory('RSSFeedRecipe', id=id, title=title)
+            if not hasattr(self.context, id):
+                self.context.invokeFactory('RSSFeedRecipe', id=id, title=title)
+
             recipe = self.context[id]
-            recipe.setEntriesSize(10000)
-            recipe.setFeedURL(feed_url)
             recipe.setEntriesWithDescription(0)
             recipe.setEntriesWithThumbnail(0)
 
@@ -262,13 +262,19 @@ class RDF(object):
             if parsed['feed'].has_key('link'):
                 recipe.setUrl(parsed['feed']['link'])
 
+            recipe.setEntriesSize(10000)
+            recipe.setFeedURL(feed_url)
+
             x = feed_url.find('theme=')
             if x > -1:
                 theme = feed_url[x+6:].strip()
                 taggable = IThemeTagging(recipe)
                 taggable.tags = [theme]
 
-            workflow.doActionFor(recipe, 'publish')
+            if workflow.getInfoFor(recipe, 'review_state') != \
+                    'published':
+                workflow.doActionFor(recipe, 'publish')
+            recipe.reindexObject()
 
 
         return str(len(feeds)) + ' RDF/RSS files were successfully migrated.'
@@ -289,18 +295,27 @@ class IndicatorRDFs(object):
             feedId = 'indicators_%s' % theme
             title = 'Indicators'
             feed_url = url % theme
-            self.context.invokeFactory('RSSFeedRecipe', id=feedId, title=title)
+            if not hasattr(self.context, feedId):
+                self.context.invokeFactory('RSSFeedRecipe', id=feedId, title=title)
             recipe = self.context[feedId]
             recipe.setEntriesSize(10000)
             recipe.setFeedURL(feed_url)
+            recipe.setEntriesWithDescription(0)
+            recipe.setEntriesWithThumbnail(0)
+
+            parsed = feedparser.parse(feed_url)
+            if parsed['feed'].has_key('link'):
+                recipe.setUrl(parsed['feed']['link'])
 
             taggable = IThemeTagging(recipe)
             taggable.tags = [theme]
 
-            workflow.doActionFor(recipe, 'publish')
+            if workflow.getInfoFor(recipe, 'review_state') != \
+                    'published':
+                workflow.doActionFor(recipe, 'publish')
             recipe.reindexObject()
             
-        return str(len(themeids)) + ' indicator fees created.'
+        return str(len(themeids)) + ' indicator fees migrated.'
     
 class ThemeTaggable(object):
     """ Migrate theme tags to anootations. """
