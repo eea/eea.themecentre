@@ -1,7 +1,8 @@
 from zope.interface import Interface, Attribute
 from zope.schema import List, TextLine, Choice
 from zope.schema.vocabulary import SimpleVocabulary
-#from eea.themecentre.vocabulary import getThemesVocab
+from Products.EEAContentTypes.interfaces import IFeedPortletInfo
+
 
 class IThemeTaggable(Interface):
     """ Marker interface for content objects that can be tagged. """
@@ -74,13 +75,9 @@ class IThemeRelation(Interface):
             )
         )
 
-class IThemeCentrePortletInfo(Interface):
+class IThemeCentrePortletInfo(IFeedPortletInfo):
     """ Any object that wants to be displayed in a themecentre portlet
         should provide an adapter providing this interface. """
-
-    title = Attribute("portlet title")
-    more_link = Attribute("portlet more link")
-    items = Attribute("a list of portlet items")
 
 class IThemeCentrePortletItem(Interface):
     """ Each item in the themecentre portlets provides this interface. """

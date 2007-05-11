@@ -53,7 +53,10 @@
 
   <adapter factory=".related.ThemeRelationAdapter" />
 
-  <adapter factory=".ui_adapters.FeedPortletInfo" />
+  <adapter
+      factory=".ui_adapters.FeedPortletInfo"
+      provides=".interfaces.IThemeCentrePortletInfo"
+      />
   <class class=".ui_adapters.FeedPortletInfo">
       <require
           permission="zope2.Public"
@@ -62,18 +65,6 @@
       <require
           permission="cmf.ModifyPortalContent"
           set_schema=".interfaces.IThemeCentrePortletInfo"
-          />
-  </class>
-
-  <adapter factory=".ui_adapters.FeedItemPortletInfo" />
-  <class class=".ui_adapters.FeedItemPortletInfo">
-      <require
-          permission="zope2.Public"
-          interface=".interfaces.IThemeCentrePortletItem"
-          />
-      <require
-          permission="cmf.ModifyPortalContent"
-          set_schema=".interfaces.IThemeCentrePortletItem"
           />
   </class>
 
