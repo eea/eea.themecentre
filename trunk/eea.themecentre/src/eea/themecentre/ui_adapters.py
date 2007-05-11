@@ -18,6 +18,10 @@ class FeedPortletInfo(feeds.FeedPortletInfo):
         self.feed = feed
 
     @property
+    def title_link(self):
+        return self.more_link
+
+    @property
     def more_link(self):
         tc = self.themecentre
         catalog = getToolByName(tc, 'portal_catalog')

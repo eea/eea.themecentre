@@ -7,6 +7,7 @@ from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
 import socket
+import feedparser
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
 
@@ -254,6 +255,12 @@ class RDF(object):
             recipe = self.context[id]
             recipe.setEntriesSize(10000)
             recipe.setFeedURL(feed_url)
+            recipe.setEntriesWithDescription(0)
+            recipe.setEntriesWithThumbnail(0)
+
+            parsed = feedparser.parse(feed_url)
+            if parsed['feed'].has_key('link'):
+                recipe.setUrl(parsed['feed']['link'])
 
             x = feed_url.find('theme=')
             if x > -1:
