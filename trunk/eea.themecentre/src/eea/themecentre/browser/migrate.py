@@ -377,3 +377,29 @@ class FeedMarkerInterface(object):
             directlyProvides(feed, directlyProvidedBy(feed), IFeedContent)
             feed.reindexObject()
         return 'success'
+
+class PromotionThemes(object):
+    """ Old promotions might have themes as strings instead of lists. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        query = { 'portal_type': 'Promotion' }
+        brains = catalog.searchResults(query)
+        not_migrated = ''
+        for brain in brains:
+            obj = brain.getObject()
+            if obj.schema['themes'].get(obj) == 'default':
+                if IThemeTagging(obj).tags == ['d', 'e', 'f', 'a',
+                                               'u', 'l', 't']:
+                    IThemeTagging(obj).tags = ['default']
+                else:
+                    not_migrated += brain.getURL() + '\n'
+
+        if not_migrated:
+            return 'Some objects were not migrated\n' + not_migrated
+        else:
+            return 'success'

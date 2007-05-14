@@ -220,6 +220,13 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="*"
+      name="migratePromotionThemes"
+      class=".migrate.PromotionThemes"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"
