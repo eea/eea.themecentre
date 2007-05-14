@@ -8,6 +8,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
 import socket
 import feedparser
+import urlparse
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
 
@@ -245,7 +246,7 @@ class RDF(object):
         feeds = urllib.urlopen(migrate_url).readlines()
 
         for feed_line in feeds:
-            id, title, feed_url = feed_line.split('|')
+            id, title, feed_url = feed_line.strip().split('|')
             if id.startswith("reports_"):
                 title = "Reports"
             elif not title:
@@ -263,13 +264,20 @@ class RDF(object):
                 recipe.setUrl(parsed['feed']['link'])
 
             recipe.setEntriesSize(10000)
-            recipe.setFeedURL(feed_url)
 
             x = feed_url.find('theme=')
             if x > -1:
                 theme = feed_url[x+6:].strip()
                 taggable = IThemeTagging(recipe)
                 taggable.tags = [theme]
+
+            parsed_url = urlparse.urlparse(feed_url)
+            if parsed_url[2] != '/schema.rdf' and parsed_url[2].endswith('.rdf'):
+                if parsed_url[4]:
+                    feed_url += '&image=yes'
+                else:
+                    feed_url += '?image=yes'
+            recipe.setFeedURL(feed_url)
 
             if workflow.getInfoFor(recipe, 'review_state') != \
                     'published':
