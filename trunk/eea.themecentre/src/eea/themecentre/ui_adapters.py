@@ -26,9 +26,9 @@ class FeedPortletInfo(feeds.FeedPortletInfo):
         tc = self.themecentre
         catalog = getToolByName(tc, 'portal_catalog')
         res = catalog.searchResults(path='/'.join(tc.getPhysicalPath()),
-                                    depth=1,
+                                    depth=0,
                                     Title=self.feed.title)
-        if len(res) == 1:
+        if len(res) > 0:
             return res[0].getURL()
         return self.themecentre.absolute_url() + '/listfeed?feed=' + self.feed.id
 
