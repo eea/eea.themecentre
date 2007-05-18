@@ -29,8 +29,8 @@ def promoted(obj, event):
 
     # obj should be a folder and that's where we're gonna add a news folder
     obj.invokeFactory('Folder', id='highlights', title='Highlights')
-    obj.invokeFactory('Folder', id='events', title='Events')
-    obj.invokeFactory('Folder', id='links', title='External Links')
+    obj.invokeFactory('Folder', id='events', title='Upcoming events')
+    obj.invokeFactory('Folder', id='links', title='External links')
     obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
@@ -72,6 +72,8 @@ def promoted(obj, event):
         
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
+        topic.setCustomViewFields(['EffectiveDate'])
+        topic._at_rename_after_creation = False
         
     if eventsobj:
         workflow.doActionFor(eventsobj, 'publish')
@@ -81,11 +83,12 @@ def promoted(obj, event):
         eventsobj.default_page = 'events_topic'
         
         # add a smart folder to the events folder that shows all events
-        _createObjectByType('Topic', eventsobj, id='events_topic', title='Events')
+        _createObjectByType('Topic', eventsobj, id='events_topic',
+                            title='Upcoming events')
         topic = getattr(eventsobj, 'events_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue(('Event','QuickEvent', 'RDFEvent'))
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        sort_crit = topic.addCriterion('start', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -97,6 +100,8 @@ def promoted(obj, event):
         date_crit.setDateRange('+')
         date_crit.setOperation('more')
         topic.setLayout('atct_topic_view')
+        topic.setCustomViewFields(['start', 'end', 'location'])
+        topic._at_rename_after_creation = False
 
     if linksobj:
         workflow.doActionFor(linksobj, 'publish')
@@ -106,7 +111,8 @@ def promoted(obj, event):
         linksobj.default_page = 'links_topic'
         
         # add a smart folder to the links folder that shows all links
-        _createObjectByType('Topic', linksobj, id='links_topic', title='Links')
+        _createObjectByType('Topic', linksobj, id='links_topic',
+                            title='External links')
         topic = getattr(linksobj, 'links_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue('Link')
@@ -119,6 +125,8 @@ def promoted(obj, event):
         theme_crit.setValue(theme_id)
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
+        topic.setCustomViewFields([])
+        topic._at_rename_after_creation = False
 
 
 def objectAdded(obj, event):

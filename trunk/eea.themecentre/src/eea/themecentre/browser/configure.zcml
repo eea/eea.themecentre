@@ -72,30 +72,6 @@
 
   <browser:page
       for="*"
-      name="themes_highlights"
-      class=".portlets.highlights.HighlightsPortlet"
-      allowed_interface=".interfaces.IPortlet"
-      permission="zope.Public"
-      />
-
-  <browser:page
-      for="*"
-      name="themes_events"
-      class=".portlets.events.EventsPortlet"
-      allowed_interface=".interfaces.IPortlet"
-      permission="zope.Public"
-      />
-
-  <browser:page
-      for="*"
-      name="themes_links"
-      class=".portlets.links.LinksPortlet"
-      allowed_interface=".interfaces.IPortlet"
-      permission="zope.Public"
-      />
-
-  <browser:page
-      for="*"
       name="themes_faq"
       class=".portlets.faq.FaqPortlet"
       allowed_interface=".interfaces.IPortlet"
@@ -130,6 +106,14 @@
       for="*"
       name="themes-rdftitles"
       class=".portlets.rdftitles.RDFTitlesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="theme_portlets"
+      class=".portlets.smartfolder.SmartFolderPortlets"
       allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
       />
@@ -208,8 +192,8 @@
 
   <browser:page
       for="*"
-      name="migrateEventsTopic"
-      class=".migrate.EventsTopicEndDate"
+      name="migrateTopic"
+      class=".migrate.UpdateSmartFoldersAndTitles"
       permission="cmf.ModifyPortalContent"
       />
 

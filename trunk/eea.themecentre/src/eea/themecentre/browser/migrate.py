@@ -1,4 +1,5 @@
 import urllib
+from zope.event import notify
 from zope.interface import alsoProvides, directlyProvides, directlyProvidedBy
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation, IThemeTagging
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
@@ -206,7 +207,11 @@ class InitialThemeCentres(object):
                 folder = context.invokeFactory('Folder', id=theme, title=theme)
                 folder = context[folder]
                 ptc = PromoteThemeCentre(folder, self.request)
-                ptc(theme)
+                ptc()
+
+                tc = IThemeCentreSchema(folder)
+                tc.tags = theme
+
                 workflow.doActionFor(folder, 'publish')
 
         if toMigrate:
@@ -344,7 +349,7 @@ class ThemeTaggable(object):
             themes = filter(None, obj.schema['themes'].get(obj))
             tagging.tags = themes
 
-class EventsTopicEndDate(object):
+class UpdateSmartFoldersAndTitles(object):
     """ Change all event topics to have end instead of start in criteria. """
 
     def __init__(self, context, request):
@@ -353,11 +358,16 @@ class EventsTopicEndDate(object):
 
     def __call__(self):
         catalog = getToolByName(self.context, 'portal_catalog')
+
+        # change criteria on event topic
         query = { 'portal_type': 'Topic',
                   'id': 'events_topic' }
         brains = catalog.searchResults(query)
         for brain in brains:
             topic = brain.getObject()
+            topic.setTitle('Upcoming events')
+            topic.reindexObject()
+
             if 'crit__start_ATFriendlyDateCriteria' in topic.objectIds():
                 topic.deleteCriterion('crit__start_ATFriendlyDateCriteria')
 
@@ -366,6 +376,56 @@ class EventsTopicEndDate(object):
                 date_crit.setValue(0)
                 date_crit.setDateRange('+')
                 date_crit.setOperation('more')
+
+            if 'crit__created_ATSortCriterion' in topic.objectIds():
+                topic.deleteCriterion('crit__created_ATSortCriterion')
+                topic.addCriterion('start', 'ATSortCriterion')
+
+            # add custom fields to the events and highlight folders, links don't
+            # need any as they shouldn't show anything in "detail"
+            topic.setCustomViewFields(['start', 'end', 'location'])
+
+        # add custom field on all highligh topic
+        query = { 'portal_type': 'Topic',
+                  'id': 'highlights_topic' }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            topic = brain.getObject()
+            topic.setCustomViewFields(['EffectiveDate'])
+
+        # remove custom field on all link topics
+        query = { 'portal_type': 'Topic',
+                  'id': 'links_topic' }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            topic = brain.getObject()
+            topic.setTitle('External links')
+            topic.reindexObject()
+            topic.setCustomViewFields([])
+
+        # rename titles on folders in themecentre
+        query = { 'object_provides': 'eea.themecentre.interfaces.IThemeCentre' }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            themecentre = brain.getObject()
+
+            events_folder = getattr(themecentre, 'events')
+            if events_folder:
+                events_folder.setTitle('Upcoming events')
+                events_folder.reindexObject()
+            links_folder = getattr(themecentre, 'links')
+            if links_folder:
+                links_folder.setTitle('External links')
+                links_folder.reindexObject()
+
+        # themecentre portlet smart folders should not rename themselves
+        query = { 'portal_type': 'Topic',
+                  'path': '/'.join(self.context.getPhysicalPath()) }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            topic = brain.getObject()
+            topic._at_rename_after_creation = False
+
         return 'success'
 
 class FeedMarkerInterface(object):

@@ -10,6 +10,24 @@ class RDFTitlesPortlet(BasePortlet):
 
     all_link = None
     
+    def __call__(self):
+        items = self.items()
+
+        portlet = {}
+        portlet['title'] = 'EEA products'
+        portlet['all_link'] = None
+        portlet['entries'] = []
+        portlet['feed_link'] = None
+
+        for item in items[:self.size]:
+            entry = self.item_to_short_dict(item)
+            portlet['entries'].append(entry)
+
+        if portlet['entries']:
+            return portlet
+        else:
+            return None
+
     def items(self):
         context = utils.context(self)
         currentTheme = getTheme(context)
