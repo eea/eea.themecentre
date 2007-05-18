@@ -28,7 +28,7 @@ class SmartFolderPortlets(object):
             portlet['entries'] = []
             portlet['title'] = self._title(topic)
             portlet['all_link'] = topic.aq_parent.absolute_url()
-            portlet['sort_key'] = topic.getId()
+            portlet['sort_key'] = self._sort_key(topic)
             portlet['feed_link'] = topic.absolute_url() + '/RSS'
 
             topic_query = topic.buildQuery()
@@ -65,6 +65,18 @@ class SmartFolderPortlets(object):
 
         return detail
 
+    def _sort_key(self, topic):
+        id = topic.getId()
+
+        if id == 'highlights_topic':
+            return "1"
+        elif id == 'events_topic':
+            return "2"
+        else:
+            # all topics don't need to be hardcoded, for the rest we
+            # rely on the topic id for sorting
+            return id
+
     def _title(self, topic):
         parent = topic.aq_parent
         parent_id = parent.getId()
@@ -72,6 +84,8 @@ class SmartFolderPortlets(object):
 
         if parent_id == 'events':
             title = 'Upcoming events'
+        elif parent_id == 'faq':
+            title = 'Latest FAQ'
         else:
             title = 'Latest ' + parent_title.lower()
         return title

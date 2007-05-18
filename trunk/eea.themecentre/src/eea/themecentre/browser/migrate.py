@@ -3,6 +3,7 @@ from zope.event import notify
 from zope.interface import alsoProvides, directlyProvides, directlyProvidedBy
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation, IThemeTagging
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
+from eea.themecentre.themecentre import createFaqSmartFolder
 from eea.rdfrepository.interfaces import IFeed, IFeedContent
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
@@ -417,6 +418,12 @@ class UpdateSmartFoldersAndTitles(object):
             if links_folder:
                 links_folder.setTitle('External links')
                 links_folder.reindexObject()
+
+            faqs_folder = getattr(themecentre, 'faq')
+            if faqs_folder:
+                if not getattr(faqs_folder, 'faqs_topic', None):
+                    theme_id = IThemeCentreSchema(themecentre).tags
+                    createFaqSmartFolder(faqs_folder, theme_id)
 
         # themecentre portlet smart folders should not rename themselves
         query = { 'portal_type': 'Topic',

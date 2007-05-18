@@ -128,6 +128,28 @@ def promoted(obj, event):
         topic.setCustomViewFields([])
         topic._at_rename_after_creation = False
 
+    if faqobj:
+        createFaqSmartFolder(faqobj, theme_id)
+
+def createFaqSmartFolder(parent, theme_id):
+        # add a smart folder to the faq folder that shows all faqs
+        _createObjectByType('Topic', parent, id='faqs_topic',
+                            title='FAQ')
+        topic = getattr(parent, 'faqs_topic')
+        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        type_crit.setValue('FAQ')
+        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        state_crit = topic.addCriterion('review_state',
+                                        'ATSimpleStringCriterion')
+        state_crit.setValue('published')
+        theme_crit = topic.addCriterion('getThemes',
+                                        'ATSimpleStringCriterion')
+        theme_crit.setValue(theme_id)
+        topic.setSortCriterion('effective', True)
+        topic.setLayout('atct_topic_view')
+        topic.setCustomViewFields([])
+        topic._at_rename_after_creation = False
+
 
 def objectAdded(obj, event):
     """ Checks if the object belongs to a theme centre. If it does and it
