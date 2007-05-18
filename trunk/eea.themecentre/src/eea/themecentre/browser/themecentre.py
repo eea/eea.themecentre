@@ -1,6 +1,5 @@
 from zope.interface import implements, alsoProvides
 from zope.component import getUtility
-from zope.event import notify
 from zope.formlib.form import Fields, EditForm
 from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
@@ -18,7 +17,7 @@ class PromoteThemeCentre(object):
         self.context = context
         self.request = request
 
-    def __call__(self, theme):
+    def __call__(self):
         alsoProvides(self.context, IThemeCentre)
         types = [ 'Folder', 'Document', 'Link', 'File', 'Image', 'Event',
                 'HelpCenterFAQFolder', 'FlashFile' ]
@@ -28,10 +27,6 @@ class PromoteThemeCentre(object):
         self.context.setConstrainTypesMode(ENABLE)
         self.context.layout = 'themecentre_view'
 
-        tc = IThemeCentreSchema(self.context)
-        tc.tags = theme
-
-        notify(PromotedToThemeCentreEvent(self.context))
         return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
     
 class ThemeCentreEdit(EditForm):

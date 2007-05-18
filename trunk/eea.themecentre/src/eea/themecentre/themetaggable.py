@@ -1,6 +1,7 @@
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.themecentre import PromotedToThemeCentreEvent
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
 from zope.app.annotation.interfaces import IAnnotations
@@ -60,9 +61,15 @@ class ThemeCentreTaggable(object):
                 return tags[0]
             return None
         def set(self, value):
+            # if folder didn't have a theme tag earlier we send an event
+            # so folders and stuff can be created in the themecentre
+            tags = IThemeTagging(self.context).tags
+            should_promote = not tags
+
             IThemeTagging(self.context).tags = (value,)
+            if value and should_promote:
+                notify(PromotedToThemeCentreEvent(self.context))
             vocab = getUtility(IVocabularyFactory, 'Allowed themes')
             themes = vocab(self)
         return property(get, set)
     tags = tags()
-        
