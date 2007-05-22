@@ -8,7 +8,7 @@ from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet as B
 from eea.themecentre.themecentre import getThemeCentre
 
 # items that shouldn't be displayed in main meny
-blacklistedNavigationItems = [ 'Multimedia',]
+blacklistedNavigationItems = []
 withoutChildren = ['Indicators',]
 
 class NavigationPortlet(BaseNavigationPortlet):

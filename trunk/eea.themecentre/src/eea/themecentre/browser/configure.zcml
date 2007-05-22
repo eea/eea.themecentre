@@ -112,6 +112,13 @@
 
   <browser:page
       for="*"
+      name="themesMenuPromotion"
+      class=".portlets.promotion.ThemeCentreMenuPromotion"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
       name="theme_portlets"
       class=".portlets.smartfolder.SmartFolderPortlets"
       allowed_interface=".interfaces.IPortlet"
