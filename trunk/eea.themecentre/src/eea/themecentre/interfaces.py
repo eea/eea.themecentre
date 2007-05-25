@@ -31,25 +31,6 @@ class IPossibleThemeCentre(Interface):
 class IThemeCentre(Interface):
     """ Marker interface for objects that are promoted to a theme centre. """
     
-    def getReports():
-        """ return a list of reports for this theme centre. """
-
-    def getHighlights():
-        """ return a list of highlits for this theme centre. """
-
-    def getArticles():
-        """ return a list of articles for this theme centre. """
-
-    def getIndicators():
-        """ return a list of indicators for this theme centre. """
-
-    def getData():
-        """ return a list of data from data service for this theme centre. """
-
-    def getVideos():
-        """ return a list of videos for this theme centre. """
-
-    
 class IThemeCentreSchema(Interface):
     """ Theme centre schema for the edit form. """
     

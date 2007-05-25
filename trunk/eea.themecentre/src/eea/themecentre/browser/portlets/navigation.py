@@ -9,11 +9,25 @@ from eea.themecentre.themecentre import getThemeCentre
 
 # items that shouldn't be displayed in main meny
 blacklistedNavigationItems = []
-withoutChildren = ['Indicators',]
 
 class NavigationPortlet(BaseNavigationPortlet):
     implements(INavigationPortlet)
 
+    def display(self, section='default'):
+        default = BaseNavigationPortlet.display(self)
+        if default:
+            if section == 'default':
+                return True
+
+            context = utils.context(self)
+            currentTheme = getThemeCentre(context)            
+            cat = getToolByName(context, 'portal_catalog')
+            result = cat.searchResults( path = '/'.join(currentTheme.getPhysicalPath()),
+                                        navSection=section)
+            if len(result) > 0:
+                return True
+        return False
+    
     def title(self):
         return self.navigationRoot().Title()
     
@@ -23,10 +37,10 @@ class NavigationPortlet(BaseNavigationPortlet):
         if obj is None:
             obj = BaseNavigationPortlet.navigationRoot(self)
         return obj
-        
-    def createNavTree(self):
+
+    def createNavTree(self, section='default'):
         if hasattr(self, '_all') and hasattr(self, '_data'):
-            return self.template()
+            return self.template(section)
 
         context = utils.context(self)
 
@@ -35,20 +49,12 @@ class NavigationPortlet(BaseNavigationPortlet):
         currentTheme = getThemeCentre(context)
         data = []
         if currentTheme is not None:
-            data = [ node for node in all.get('children',[])
-                                 if node['item'].getId == currentTheme.getId() ]
-            if len(data) > 0:
-                data = data[0].get('children',[])
-                
-            path = '/'.join(context.getPhysicalPath())
-
-            # we are not showing all levels so we want to set currentItem on higher
-            # level if sub item is selected
-            for node in data[0]['children']:
-                if node['path'] in path:
-                    node['currentItem'] = True
+            # find the node for current theme centre
+            for node in all.get('children',[]):
+                if node['item'].getId == currentTheme.getId():
+                    data = node['children']
                     break
-
+                
         products = self._products()
         newData = []
         titles = []
@@ -77,23 +83,28 @@ class NavigationPortlet(BaseNavigationPortlet):
                n += 1
            else:
                unsortedData.append(node)
-               
-        data = [ node for node in orderedData
-                        if node is not None ]
-        data.extend(unsortedData)
-
-        self._data = data
+        orderedData.extend(unsortedData)
         
-        return self.template()
+        navSections = {'default' : [] }
+        for node in orderedData:
+            if node is not None:
+                navSection = node['navSection']
+                sectionData = navSections.get(navSection, [])
+                sectionData.append(node)
+                navSections[navSection] = sectionData
+                
+        self._data = navSections
+        
+        return self.template(section)
 
-    def template(self):
+    def template(self, section='default'):
         context = utils.context(self)
-        data = self._data
         all = self._all
-        
+        data = self._data.get(section, [])
+
         return context.portlet_dropdown_navtree_macro(
-            theme=data, children=all.get('children', []),
-            level=1, show_children=True, isNaviTree=True, bottomLevel=3)
+                                 theme=data, children=all.get('children',[]),
+                                 level=1, show_children=True, isNaviTree=True, bottomLevel=3)
 
     def _products(self):
         context = utils.context(self)
@@ -119,14 +130,15 @@ class NavigationPortlet(BaseNavigationPortlet):
                     'currentItem': self.request.get('URL0','') == product['url'],
                     'review_state': '',
                     'getRemoteUrl': None,
-                    'icon': 'www/folder_icon.gif'}
+                    'icon': 'www/folder_icon.gif' }
 
             newNode = {'item'          : item,
                        'getURL'        : product['url'],
                        'depth'         : '',
                        'currentItem'   : self.request.get('URL0','') == product['url'],
                        'currentParent' : False,
-                       'children' : []}
+                       'navSection'    : 'default',
+                       'children'      : []}
             
             result.append(newNode)
         return result

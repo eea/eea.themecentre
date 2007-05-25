@@ -26,14 +26,6 @@
       class=".themecentre.ThemeCentreEdit"
       />
 
-  <browser:page
-      for="eea.themecentre.interfaces.IThemeCentre"
-      name="themecentre"
-      permission="zope.Public"
-      class=".themecentre.ThemeCentre"
-      allowed_interface="eea.themecentre.interfaces.IThemeCentre"
-      />
-
   <browser:menuItem
       for="eea.themecentre.interfaces.IThemeTaggable"
       menu="object"
