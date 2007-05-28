@@ -113,6 +113,11 @@ class NavigationPortlet(BaseNavigationPortlet):
 
         result = []
         for product in view.short_items():
+            url = self.request.get('URL0')
+            querystring = self.request.get('QUERY_STRING')
+            if querystring:
+                url += '?' + querystring
+
             item = {'no_display': False,
                     'getURL': product['url'],
                     'show_children': False,
@@ -127,7 +132,7 @@ class NavigationPortlet(BaseNavigationPortlet):
                     'item': None,
                     'depth': 2,
                     'path': '',
-                    'currentItem': self.request.get('URL0','') == product['url'],
+                    'currentItem': url == product['url'],
                     'review_state': '',
                     'getRemoteUrl': None,
                     'icon': 'www/folder_icon.gif' }
@@ -135,7 +140,7 @@ class NavigationPortlet(BaseNavigationPortlet):
             newNode = {'item'          : item,
                        'getURL'        : product['url'],
                        'depth'         : '',
-                       'currentItem'   : self.request.get('URL0','') == product['url'],
+                       'currentItem'   : url == product['url'],
                        'currentParent' : False,
                        'navSection'    : 'default',
                        'children'      : []}
