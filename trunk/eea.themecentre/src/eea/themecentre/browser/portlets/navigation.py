@@ -20,12 +20,13 @@ class NavigationPortlet(BaseNavigationPortlet):
                 return True
 
             context = utils.context(self)
-            currentTheme = getThemeCentre(context)            
-            cat = getToolByName(context, 'portal_catalog')
-            result = cat.searchResults( path = '/'.join(currentTheme.getPhysicalPath()),
+            currentTheme = getThemeCentre(context)
+            if currentTheme:
+                cat = getToolByName(context, 'portal_catalog')
+                result = cat.searchResults( path = '/'.join(currentTheme.getPhysicalPath()),
                                         navSection=section)
-            if len(result) > 0:
-                return True
+                if len(result) > 0:
+                    return True
         return False
     
     def title(self):
@@ -104,7 +105,7 @@ class NavigationPortlet(BaseNavigationPortlet):
 
         return context.portlet_dropdown_navtree_macro(
                                  theme=data, children=all.get('children',[]),
-                                 level=1, show_children=True, isNaviTree=True, bottomLevel=3)
+                                 level=1, show_children=True, isNaviTree=True, bottomLevel=5)
 
     def _products(self):
         context = utils.context(self)
