@@ -210,6 +210,13 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="*"
+      name="migrateThemeLayoutAndDefaultPage"
+      class=".migrate.ThemeLayoutAndDefaultPage"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

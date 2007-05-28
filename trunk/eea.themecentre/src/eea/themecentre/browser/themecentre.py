@@ -25,7 +25,6 @@ class PromoteThemeCentre(object):
         self.context.setLocallyAllowedTypes( types + ['RichTopic', 'Topic'] )
         self.context.setImmediatelyAddableTypes( types )
         self.context.setConstrainTypesMode(ENABLE)
-        self.context.layout = 'themecentre_view'
 
         return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
     

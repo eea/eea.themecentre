@@ -45,6 +45,12 @@ def promoted(obj, event):
 
     theme_id = IThemeCentreSchema(obj).tags
 
+    obj.invokeFactory('Document', id='intro', title=obj.Title()+' introduction')
+    obj.manage_addProperty('default_page', 'intro', 'string')
+    intro = getattr(obj, 'intro')
+    intro.manage_addProperty('layout', 'themecentre_view', 'string')
+    intro.reindexObject()
+
     if newsobj:
         workflow.doActionFor(newsobj, 'publish')
         newsobj.setConstrainTypesMode(1)

@@ -478,3 +478,29 @@ class PromotionThemes(object):
             return 'Some objects were not migrated\n' + not_migrated
         else:
             return 'success'
+
+class ThemeLayoutAndDefaultPage(object):
+    """ Removes the layout property on all themecentres and instead adds the
+        default_page property with 'intro'. The intro document gets a layout
+        property instead. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        query = {'object_provides': 'eea.themecentre.interfaces.IThemeCentre'}
+        brains = self.context.portal_catalog.searchResults(query)
+        for brain in brains:
+            themecentre = brain.getObject()
+            tc_base = aq_base(themecentre)
+            tc_layout = getattr(tc_base, 'layout', None)
+            if tc_layout:
+                tc_base.__delattr__('layout')
+            if not themecentre.hasProperty('default_page'):
+                themecentre.manage_addProperty('default_page', 'intro', 'string')
+            intro = getattr(themecentre, 'intro', None)
+            if intro and not intro.hasProperty('layout'):
+                intro.manage_addProperty('layout', 'themecentre_view', 'string')
+            themecentre._p_changed = True
+        return str(len(brains)) + ' themecentres migrated'
