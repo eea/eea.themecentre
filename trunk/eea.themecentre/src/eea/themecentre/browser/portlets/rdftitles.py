@@ -31,11 +31,13 @@ class RDFTitlesPortlet(BasePortlet):
     def items(self):
         context = utils.context(self)
         currentTheme = getTheme(context)
+        currentThemeTitle = getThemeTitle(context)
         feeds = []
 
         if currentTheme:
             rdfrepository = getUtility(IRDFRepository)
-            search = { 'theme': currentTheme }
+            search = { 'theme': currentTheme,
+                       'theme_title': currentThemeTitle }
             feeds = rdfrepository.getFeeds(search=search)
             
         return feeds

@@ -2,7 +2,7 @@ from Products.CMFPlone import utils
 from zope.component import getUtility, getMultiAdapter
 from zope.interface import implements
 
-from eea.themecentre.themecentre import getTheme, getThemeCentre
+from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
 from eea.themecentre.themecentre import RDF_THEME_KEY
 from eea.themecentre.browser.interfaces import IRDFPortlet
 from eea.themecentre.interfaces import IThemeCentrePortletInfo
@@ -40,7 +40,9 @@ class RDFPortlet(BasePortlet):
         result = []
 
         currentTheme = getTheme(context)
-        search = { 'theme': currentTheme, 'id': feed_id }
+        currentThemeTitle = getThemeTitle(context)
+        search = { 'theme': currentTheme, 'theme_title': currentThemeTitle,
+                   'id': feed_id }
         rdfrepository = getUtility(IRDFRepository)
         feeds = rdfrepository.getFeeds(search=search)
 
