@@ -257,7 +257,7 @@
       for="*"
       name="linkchecker"
       class=".links.ThemeCentreLinkChecker"
-      permission="cmf.ModifyPortalContent"
+      permission="zope.Public"
       allowed_attributes="showInTab"
       />
 
