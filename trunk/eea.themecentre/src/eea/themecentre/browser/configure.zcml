@@ -60,6 +60,16 @@
       permission="eea.PromoteThemeCentre"
       />
 
+  <browser:menuItem
+      for="*"
+      menu="object"
+      title="links overview"
+      action="linkchecker_summary"
+      filter="object/@@linkchecker/showInTab"
+      description="see status of links"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!-- listing views -->
 
   <browser:page
@@ -241,6 +251,22 @@
       class=".related.DocumentRelated"
       allowed_interface=".interfaces.IDocumentRelated"
       permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="linkchecker"
+      class=".links.ThemeCentreLinkChecker"
+      permission="cmf.ModifyPortalContent"
+      allowed_attributes="showInTab"
+      />
+
+  <browser:page
+      for="*"
+      name="linkchecker-objects"
+      class=".links.LinksByStatus"
+      permission="cmf.ModifyPortalContent"
+      allowed_attributes="documents links"
       />
 
 </configure>
