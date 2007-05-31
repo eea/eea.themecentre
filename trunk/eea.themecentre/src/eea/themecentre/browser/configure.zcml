@@ -135,7 +135,7 @@
       class=".portlets.navigation.NavigationPortlet"
       permission="zope.Public"
       allowed_interface=".portlets.navigation.INavigationPortlet"
-      allowed_attributes="getNavTree"
+      allowed_attributes="getNavTree displayLogo logoUrl logoParentUrl"
       />
 
   <!-- migration stuff -->  
