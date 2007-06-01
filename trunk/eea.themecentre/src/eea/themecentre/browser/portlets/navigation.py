@@ -30,26 +30,6 @@ class NavigationPortlet(BaseNavigationPortlet):
                     return True
         return False
     
-    def displayLogo(self):
-        logo = self._logo()
-        return logo is not None
-
-    def logoUrl(self):
-        logo = self._logo()
-        return logo.absolute_url()
-
-    def logoParentUrl(self):
-        context = utils.context(self)
-        portal_url = getToolByName(context, 'portal_url')
-        portal = portal_url.getPortalObject()
-        obj = getThemeCentre(context).aq_parent
-
-        while not INavigationRoot.providedBy(obj) and \
-                aq_base(obj) is not aq_base(portal):
-            obj = utils.parent(obj)
-
-        return obj.absolute_url()
-
     def title(self):
         return self.navigationRoot().Title()
     
@@ -127,13 +107,6 @@ class NavigationPortlet(BaseNavigationPortlet):
         return context.portlet_dropdown_navtree_macro(
                                  theme=data, children=all.get('children',[]),
                                  level=1, show_children=True, isNaviTree=True, bottomLevel=5)
-
-    def _logo(self):
-        context = utils.context(self)
-        themecentre = getThemeCentre(context)
-        if themecentre:
-            return getattr(themecentre, 'subsite-logo', None)
-        return None
 
     def _products(self):
         context = utils.context(self)
