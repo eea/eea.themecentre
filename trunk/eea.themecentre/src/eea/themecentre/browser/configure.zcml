@@ -255,6 +255,14 @@
 
   <browser:page
       for="*"
+      name="auto_related"
+      class=".related.AutoRelated"
+      allowed_interface=".interfaces.IAutoRelated"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
       name="linkchecker"
       class=".links.ThemeCentreLinkChecker"
       permission="zope.Public"

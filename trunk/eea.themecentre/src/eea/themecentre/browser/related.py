@@ -2,9 +2,25 @@ from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryAdapter
 from zope.interface import implements
-from eea.themecentre.browser.interfaces import IDocumentRelated
+from eea.themecentre.browser.interfaces import IDocumentRelated, IAutoRelated
 from p4a.video.interfaces import IMediaPlayer, IVideo
 from DateTime import DateTime
+
+class AutoRelated(utils.BrowserView):
+    implements(IAutoRelated)
+
+    def sameType(self):
+        context = utils.context(self)        
+        cat = getToolByName(context, 'portal_catalog')
+        result = cat.searchResults( portal_type = context.portal_type,
+                                    getThemes = context.getThemes())
+        related = []
+        for item in result:
+            related.append( {'title' : item.Title,
+                            'description': item.Description,
+                            'url': item.getURL(),
+                            'item_type': item.portal_type })
+        return related
 
 class DocumentRelated(utils.BrowserView):
     implements(IDocumentRelated)
@@ -13,6 +29,7 @@ class DocumentRelated(utils.BrowserView):
         super(DocumentRelated, self).__init__(context, request)
         self.related = context.unrestrictedTraverse('computeRelatedItems')() or []
 
+        
         self.related_feeds = []
         self.related_pages = []
         self.related_media = []
@@ -92,3 +109,4 @@ class DocumentRelated(utils.BrowserView):
                            'item_wf_state': item_wf_state,
                            'item_wf_state_class': item_wf_state_class })
         return other
+

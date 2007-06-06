@@ -69,3 +69,10 @@ class IDocumentRelated(Interface):
 
     def other():
         pass
+
+class IAutoRelated(Interface):
+
+    def sameType():
+        """ return related documents of the same type. Relation is by theme. """
+        
+    
