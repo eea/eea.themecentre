@@ -22,6 +22,8 @@ class ThemeCentreMenuPromotion(object):
                                     'Description' : t.Description,
                                     'Title' : t.Title,
                                     'url' : t.getUrl,
-                                    'style' : 'display: block;',
+                                    'style' : 'display: none;',
                                     'image' : t.getURL() + '/image' } )
+        if promotions:
+            promotions[0]['style'] = 'display: block'
         return promotions
