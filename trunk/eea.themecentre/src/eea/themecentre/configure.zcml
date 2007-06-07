@@ -21,6 +21,10 @@
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
   </class>
 
+  <class class="Products.ATContentTypes.content.document.ATDocument">
+      <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+  </class>
+
   <class class="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ">
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
   </class>
