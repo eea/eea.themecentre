@@ -56,23 +56,3 @@ class IEventsPortlet(Interface):
 
     def full_items():
         pass
-
-class IDocumentRelated(Interface):
-    def feeds():
-        pass
-
-    def multimedia():
-        pass
-
-    def pages():
-        pass
-
-    def other():
-        pass
-
-class IAutoRelated(Interface):
-
-    def sameType():
-        """ return related documents of the same type. Relation is by theme. """
-        
-    
