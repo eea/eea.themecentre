@@ -200,6 +200,15 @@
       />
 
   <browser:page
+      zcml:condition="installed MySQLdb"
+      for="*"
+      name="migrateEpaediaArticles"
+      class=".migrate_epaedia.MigrateArticles"
+      permission="cmf.ModifyPortalContent"
+      attribute="migrate"
+      />
+
+  <browser:page
       for="*"
       name="migrateTopic"
       class=".migrate.UpdateSmartFoldersAndTitles"

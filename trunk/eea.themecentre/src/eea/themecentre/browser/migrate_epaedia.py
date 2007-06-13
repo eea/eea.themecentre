@@ -1,9 +1,10 @@
 import MySQLdb
+import MySQLdb.cursors
 from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.browser.epaedia import *
-from eea.themecentre.interfaces import IThemeTagging
+from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
 from eea.mediacentre.interfaces import IMediaType
 from zope.app.event.objectevent import ObjectModifiedEvent
 from zope.event import notify
@@ -32,7 +33,14 @@ types = { 'image':
               'path': 'links' },
         }
 
-themes = { 'climate': 200 }
+themes = { 200: 'climate',
+           226: 'water',
+           372: 'natural',
+           373: 'human',
+           526: 'households',
+           534: 'transport',
+           556: 'biodiversity',
+           }
 
 class MigrateMedia(utils.BrowserView):
 
@@ -55,7 +63,7 @@ class MigrateMedia(utils.BrowserView):
                         title=media_type)
 
         # copy all files from filesystem to the eea site
-        for theme_id, page_id in themes.items():
+        for page_id, theme_id in themes.items():
             for media_type in types:
                 self.migrate_files(theme_id, page_id, media_type)
 
@@ -136,6 +144,7 @@ class MigrateMedia(utils.BrowserView):
         cursor = self.db.cursor()
         cursor.execute(types[media_type]['sql'] % page_id)
         files = cursor.fetchall()
+        cursor.close()
 
         for db_row in files:
             folder = getattr(context, types[media_type]['path'])
@@ -155,3 +164,199 @@ class MigrateMedia(utils.BrowserView):
 
             self.workflow.doActionFor(new_file, 'publish')
             self.catalog.indexObject(new_file)
+
+
+class MigrateArticles(object):
+    """ Migrates articles from epaedia website. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.db = MySQLdb.connect(host="localhost", user="root", db="epaedia",
+                                  cursorclass=MySQLdb.cursors.SSDictCursor)
+        self.catalog = getToolByName(self.context, 'portal_catalog')
+        self.plone_utils = getToolByName(context, 'plone_utils')
+
+    def migrate(self):
+        """ Some docstring. """
+
+        epaedia_themes = self._epaedia_themes()
+        for theme in epaedia_themes:
+            page_id = theme['pid']
+            themecentre = self._themecentre(themes[page_id])
+            self._migrate_articles(themecentre, theme)
+
+    def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
+        cursor = self.db.cursor()
+        cursor.execute(sql_title % page_id)
+        row = cursor.fetchone()
+        cursor.close()
+
+        doc_id = self.plone_utils.normalizeString(row['title']) + id_suffix
+        new_id = folder.invokeFactory('Document', id=doc_id,
+                                      title=title or row['title'])
+        article = getattr(folder, new_id)
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_sections % page_id)
+        sections = cursor.fetchall()
+        cursor.close()
+
+        total_body = ""
+
+        for section in sections:
+            section_no = section['section']
+            title = self._section_title(page_id, section_no)
+
+            # title and body
+            if type == 1 and section_no > 1 and len(title.trim()) > 0:
+                total_body += "<h2>%s</h2>\n" % title
+                if len(body) > 0:
+                    total_body += "<p>%s</p>\n" % body
+            # title, body and image
+            if type == 2 and section_no > 1 and len(title.trim()) > 0:
+                total_body += '<h2>%s</h2>\n' % title
+                image_url = "/multimedia/images/"
+                total_body += '<table><tr><td><img src="%s" alt="%s" />' % \
+                              (image_url, title) + \
+                              '</td><td>%s</td></tr></table>\n' % body
+            # title, quote, body
+            if type == 3 and section_no > 1 and len(title.trim()) > 0:
+                total_body += '<h2>%s</h2>\n' % title
+                total_body += '<blockquote>\n' + \
+                              '<p class="quote">%s/<p>\n' % quote + \
+                              '<p class="citation">%s</p>\n' % tag + \
+                              '</blockquote>\n'
+                if len(body) > 0:
+                    total_body += "<p>%s</p>\n" % body
+            # title, body, link
+            if type == 4 and section_no > 1 and len(title.trim()) > 0:
+                cursor = self.db.cursor()
+                cursor.execute(sql_article_links % eid)
+                links = cursor.fetchall()
+                cursor.close()
+
+                total_body += '<h2>%s</h2>\n' % title
+                link_url = "/multimedia/\nimages/"
+                total_body += '<table><tr><td><a href src="%s" alt="%s" />' + \
+                              '</td><td>%s</td></tr></table>\n' % \
+                              (link_url, title, body)
+
+        article.setText(total_body)
+        article.reindexObject()
+        return article.getId()
+
+    def _create_intro(self, folder, page_id):
+        return self._create_article_from_sections(folder, page_id)
+
+    def _create_snapshot(self, folder, page_id):
+        cursor = self.db.cursor()
+        cursor.execute(sql_cid_with_onetier_pid % page_id)
+        cid = cursor.fetchone()['cid']
+        cursor.close()
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_snapshot_pid % cid)
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            pid = result['pid']
+            return self._create_article_from_sections(folder, pid,
+                                                      id_suffix='-snapshot',
+                                                      title='Snapshot')
+        else:
+            return None
+
+    def _create_fullarticle(self, folder, page_id):
+        cursor = self.db.cursor()
+        cursor.execute(sql_cid_with_onetier_pid % page_id)
+        cid = cursor.fetchone()['cid']
+        cursor.close()
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_fullarticle_pid % cid)
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            pid = result['pid']
+            return self._create_article_from_sections(folder, pid,
+                                                      id_suffix='-fullarticle',
+                                                      title='Full article')
+        else:
+            return None
+
+    def _epaedia_themes(self):
+        cursor = self.db.cursor()
+        cursor.execute(sql_level_one)
+        level_one = cursor.fetchall()
+        cursor.close()
+        return level_one
+
+    def _migrate_articles(self, folder, theme):
+        """ migrates every article in mysql which belongs to the main
+            theme 'theme'. 'folder' is where the content will be added. """
+
+        page_id = theme['pid']
+        theme_id = themes[page_id]
+        cid = theme['cid']
+        
+        self._create_intro(folder, page_id)
+        self._create_snapshot(folder, page_id)
+        self._create_fullarticle(folder, page_id)
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_level_two % cid)
+        level_two = cursor.fetchall()
+        cursor.close()
+
+        for menu_item in level_two:
+            title = menu_item['title']
+            folder_id = self.plone_utils.normalizeString(title)
+            new_id = folder.invokeFactory('Folder', id=folder_id,
+                                                    title=title)
+            level_two_folder = getattr(folder, new_id)
+            level_two_folder.reindexObject()
+
+            pid = menu_item['pid']
+
+            new_id = self._create_intro(level_two_folder, pid)
+            if new_id:
+                level_two_folder.manage_addProperty('default_page', new_id,
+                                                    'string')
+
+            ciid = menu_item['ciid']
+            cursor = self.db.cursor()
+            cursor.execute(sql_level_three % ciid)
+            level_three = cursor.fetchall()
+            cursor.close()
+
+            for menu_item in level_three:
+                title = menu_item['title']
+                folder_id = self.plone_utils.normalizeString(title)
+                level_two_folder.invokeFactory('Folder',
+                        id=folder_id, title=title)
+                level_three_folder = getattr(level_two_folder, folder_id)
+                level_three_folder.reindexObject()
+
+                pid = menu_item['pid']
+
+                new_id = self._create_intro(level_three_folder, pid)
+                if new_id:
+                    level_three_folder.manage_addProperty('default_page',
+                                                          new_id, 'string')
+
+    def _section_title(self, page_id, section_no):
+        cursor = self.db.cursor()
+        cursor.execute(sql_section_title % (page_id, section_no))
+        result = cursor.fetchone()
+        cursor.close()
+        return result['title']
+
+    def _themecentre(self, theme_id):
+        iface = 'eea.themecentre.interfaces.IThemeCentre'
+        themes = self.catalog.searchResults(object_provides=iface)
+        # there should be exactly one themecentre for each theme
+        for theme in themes:
+            if IThemeCentreSchema(theme.getObject()).tags == theme_id:
+                return theme
+        raise 'No theme exists with id ' + theme_id

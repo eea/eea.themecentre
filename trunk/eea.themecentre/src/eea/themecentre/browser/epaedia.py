@@ -105,3 +105,81 @@ METADATA = {
     '755_1.flv': { 'height': 180, 'width': 240, 'duration': 36 },
     '757_1.flv': { 'height': 180, 'width': 240, 'duration': 33.52 },
 }
+
+sql_level_one = \
+    u"select title, tblTierOne.pid, cid " + \
+    u"from (tblPages inner join tblPagesSectionsBody " + \
+    u"on tblPages.pid = tblPagesSectionsBody.pid) " + \
+    u"inner join tblTierOne on tblPages.pid = tblTierOne.pid " + \
+    u"where tblPagesSectionsBody.section=1 " + \
+    u"and tblPages.status=4 " + \
+    u"and (trans not like '%%|1|%%' or trans=1) " + \
+    u"and tblPagesSectionsBody.lid=1 " + \
+    u"ORDER BY tblPagesSectionsBody.title asc"
+
+sql_level_two = \
+    u"select tblTierTwo.pid, tblTierTwo.ciid, tblPagesSectionsBody.title " + \
+    u"from (tblPages inner join tblPagesSectionsBody " + \
+    u"on tblPages.pid=tblPagesSectionsBody.pid) " + \
+    u"inner join tblTierTwo on tblPages.pid=tblTierTwo.pid " + \
+    u"where (tblPagesSectionsBody.section=1 " + \
+    u"and tblPagesSectionsBody.lid=1 " + \
+    u"and tblTierTwo.cid=%d and tblPages.status=4 " + \
+    u"and (trans not like '%%|1|%%' or trans=1)) " + \
+    u"order by tblPagesSectionsBody.title asc"
+
+sql_level_three = \
+    u"select tblPagesSectionsBody.pid, tblPagesSectionsBody.title " + \
+    u"from (tblPages inner join tblPagesSectionsBody " + \
+    u"on tblPages.pid=tblPagesSectionsBody.pid) " + \
+    u"inner join tblTierThree on tblPages.pid = tblTierThree.pid " + \
+    u"where tblPagesSectionsBody.section=1 " + \
+    u"and tblPagesSectionsBody.lid=1 " + \
+    u"and tblTierThree.ciid=%d and tblPages.status=4 " + \
+    u"and (trans not like '%%|1|%%' or trans=1) " + \
+    u"order by tblPagesSectionsBody.title asc"
+
+sql_sections = \
+    u"select tblPagesSections.pid, tblPagesSections.section, " + \
+    u"tblPagesSections.type, tblPagesSections.eid, " + \
+    u"tblPagesSections.align " + \
+    u"from tblPages " + \
+    u"inner join tblPagesSections on tblPages.pid = tblPagesSections.pid " + \
+    u"where tblPagesSections.pid=%d " + \
+    u"order by tblPagesSections.section"
+
+sql_title = \
+    u"select title " + \
+    u"from tblPagesSectionsBody " + \
+    u"where pid=%d " + \
+    u"and section=1"
+
+sql_section_title = \
+    u"select title " + \
+    u"from tblPagesSectionsBody " + \
+    u"where pid=%d " + \
+    u"and section=%d"
+
+sql_article_links = \
+    u"select eid, link, pid, title, body " + \
+    u"from tblLinks inner join tblLinksBody " + \
+    u"on tblLinks.hid=tblLinksBody.hid " + \
+    u"where tblLinks.eid=%d " + \
+    u"and tblLinksBody.lid=1"
+
+sql_snapshot_pid = \
+    u"select tblPages.pid, status, cid " + \
+    u"from tblPages inner join tblTierTwo " + \
+    u"on tblPages.pid=tblTierTwo.pid " + \
+    u"where tblTierTwo.cid=%d and tblPages.status=2"
+
+sql_fullarticle_pid = \
+    u"select tblPages.pid, status, cid " + \
+    u"from tblPages inner join tblTierTwo " + \
+    u"on tblPages.pid=tblTierTwo.pid " + \
+    u"where tblTierTwo.cid=%d and tblPages.status=3"
+
+sql_cid_with_onetier_pid = \
+    u"select cid " + \
+    u"from tblTierOne " + \
+    u"where pid=%d"
