@@ -217,21 +217,30 @@ class MigrateArticles(object):
             tag = unicode(content['tag'], 'latin1').encode('utf8')
             section_type = section['type']
 
+            # main title
+            if section_type == 1 and section_no == 1:
+                total_body += "<h1>%s</h1>\n" % title
+                if len(body) > 0:
+                    total_body += "<p>%s</p>\n" % body
+
             # title and body
-            if section_type == 1 and section_no > 1 and len(title.strip()) > 0:
-                total_body += "<h2>%s</h2>\n" % title
+            if section_type == 1 and section_no > 1:
+                if len(title.strip()) > 0:
+                    total_body += "<h2>%s</h2>\n" % title
                 if len(body) > 0:
                     total_body += "<p>%s</p>\n" % body
             # title, body and image
-            if section_type == 2 and section_no > 1 and len(title.strip()) > 0:
-                total_body += '<h2>%s</h2>\n' % title
+            if section_type == 2 and section_no > 1:
+                if len(title.strip()) > 0:
+                    total_body += '<h2>%s</h2>\n' % title
                 image_url = "/multimedia/images/"
                 total_body += '<table><tr><td><img src="%s" alt="%s" />' % \
                               (image_url, title) + \
                               '</td><td>%s</td></tr></table>\n' % body
             # title, quote, body
-            if section_type == 3 and section_no > 1 and len(title.strip()) > 0:
-                total_body += '<h2>%s</h2>\n' % title
+            if section_type == 3 and section_no > 1:
+                if len(title.strip()) > 0:
+                    total_body += '<h2>%s</h2>\n' % title
                 total_body += '<blockquote>\n' + \
                               '<p class="quote">%s/<p>\n' % quote + \
                               '<p class="citation">%s</p>\n' % tag + \
@@ -239,17 +248,18 @@ class MigrateArticles(object):
                 if len(body) > 0:
                     total_body += "<p>%s</p>\n" % body
             # title, body, link
-            if section_type == 4 and section_no > 1 and len(title.strip()) > 0:
+            if section_type == 4 and section_no > 1:
                 cursor = self.db.cursor()
-                cursor.execute(sql_article_links % eid)
+                cursor.execute(sql_article_links % section['eid'])
                 links = cursor.fetchall()
                 cursor.close()
 
-                total_body += '<h2>%s</h2>\n' % title
+                if len(title.strip()) > 0:
+                    total_body += '<h2>%s</h2>\n' % title
                 link_url = "/multimedia/\nimages/"
-                total_body += '<table><tr><td><a href src="%s" alt="%s" />' + \
-                              '</td><td>%s</td></tr></table>\n' % \
-                              (link_url, title, body)
+                total_body += '<table><tr><td><a href src="%s" alt="%s" />' % \
+                              (link_url, title) + \
+                              '</td><td>%s</td></tr></table>\n' % body
 
         article.setText(total_body)
         article.reindexObject()
