@@ -154,10 +154,11 @@ sql_title = \
     u"where pid=%d " + \
     u"and section=1"
 
-sql_section_title = \
-    u"select title " + \
+sql_section_content = \
+    u"select title, body, quote, tag " + \
     u"from tblPagesSectionsBody " + \
     u"where pid=%d " + \
+    u"and lid=1 " + \
     u"and section=%d"
 
 sql_article_links = \

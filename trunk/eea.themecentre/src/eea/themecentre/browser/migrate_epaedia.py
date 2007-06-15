@@ -176,6 +176,7 @@ class MigrateArticles(object):
                                   cursorclass=MySQLdb.cursors.SSDictCursor)
         self.catalog = getToolByName(self.context, 'portal_catalog')
         self.plone_utils = getToolByName(context, 'plone_utils')
+        self.workflow = getToolByName(context, 'portal_workflow')
 
     def migrate(self):
         """ Some docstring. """
@@ -185,6 +186,7 @@ class MigrateArticles(object):
             page_id = theme['pid']
             themecentre = self._themecentre(themes[page_id])
             self._migrate_articles(themecentre, theme)
+        return 'migration of epaedia articles is successfully finished'
 
     def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
         cursor = self.db.cursor()
@@ -196,6 +198,8 @@ class MigrateArticles(object):
         new_id = folder.invokeFactory('Document', id=doc_id,
                                       title=title or row['title'])
         article = getattr(folder, new_id)
+        self.workflow.doActionFor(article, 'publish')
+        article.reindexObject()
 
         cursor = self.db.cursor()
         cursor.execute(sql_sections % page_id)
@@ -206,22 +210,27 @@ class MigrateArticles(object):
 
         for section in sections:
             section_no = section['section']
-            title = self._section_title(page_id, section_no)
+            content = self._section_content(page_id, section_no)
+            title = unicode(content['title'], 'latin1').encode('utf8')
+            body = unicode(content['body'], 'latin1').encode('utf8')
+            quote = unicode(content['quote'], 'latin1').encode('utf8')
+            tag = unicode(content['tag'], 'latin1').encode('utf8')
+            section_type = section['type']
 
             # title and body
-            if type == 1 and section_no > 1 and len(title.trim()) > 0:
+            if section_type == 1 and section_no > 1 and len(title.strip()) > 0:
                 total_body += "<h2>%s</h2>\n" % title
                 if len(body) > 0:
                     total_body += "<p>%s</p>\n" % body
             # title, body and image
-            if type == 2 and section_no > 1 and len(title.trim()) > 0:
+            if section_type == 2 and section_no > 1 and len(title.strip()) > 0:
                 total_body += '<h2>%s</h2>\n' % title
                 image_url = "/multimedia/images/"
                 total_body += '<table><tr><td><img src="%s" alt="%s" />' % \
                               (image_url, title) + \
                               '</td><td>%s</td></tr></table>\n' % body
             # title, quote, body
-            if type == 3 and section_no > 1 and len(title.trim()) > 0:
+            if section_type == 3 and section_no > 1 and len(title.strip()) > 0:
                 total_body += '<h2>%s</h2>\n' % title
                 total_body += '<blockquote>\n' + \
                               '<p class="quote">%s/<p>\n' % quote + \
@@ -230,7 +239,7 @@ class MigrateArticles(object):
                 if len(body) > 0:
                     total_body += "<p>%s</p>\n" % body
             # title, body, link
-            if type == 4 and section_no > 1 and len(title.trim()) > 0:
+            if section_type == 4 and section_no > 1 and len(title.strip()) > 0:
                 cursor = self.db.cursor()
                 cursor.execute(sql_article_links % eid)
                 links = cursor.fetchall()
@@ -247,7 +256,8 @@ class MigrateArticles(object):
         return article.getId()
 
     def _create_intro(self, folder, page_id):
-        return self._create_article_from_sections(folder, page_id)
+        return self._create_article_from_sections(folder, page_id,
+                                                  id_suffix='-intro')
 
     def _create_snapshot(self, folder, page_id):
         cursor = self.db.cursor()
@@ -300,9 +310,14 @@ class MigrateArticles(object):
         theme_id = themes[page_id]
         cid = theme['cid']
         
-        self._create_intro(folder, page_id)
-        self._create_snapshot(folder, page_id)
-        self._create_fullarticle(folder, page_id)
+        doc_id = self._create_intro(folder, page_id)
+        intro = getattr(folder, doc_id)
+        doc_id = self._create_snapshot(folder, page_id)
+        snapshot = getattr(folder, doc_id)
+        doc_id = self._create_fullarticle(folder, page_id)
+        fullarticle = getattr(folder, doc_id)
+
+        self._relate(intro, snapshot, fullarticle)
 
         cursor = self.db.cursor()
         cursor.execute(sql_level_two % cid)
@@ -315,6 +330,7 @@ class MigrateArticles(object):
             new_id = folder.invokeFactory('Folder', id=folder_id,
                                                     title=title)
             level_two_folder = getattr(folder, new_id)
+            self.workflow.doActionFor(level_two_folder, 'publish')
             level_two_folder.reindexObject()
 
             pid = menu_item['pid']
@@ -336,6 +352,7 @@ class MigrateArticles(object):
                 level_two_folder.invokeFactory('Folder',
                         id=folder_id, title=title)
                 level_three_folder = getattr(level_two_folder, folder_id)
+                self.workflow.doActionFor(level_three_folder, 'publish')
                 level_three_folder.reindexObject()
 
                 pid = menu_item['pid']
@@ -345,18 +362,28 @@ class MigrateArticles(object):
                     level_three_folder.manage_addProperty('default_page',
                                                           new_id, 'string')
 
-    def _section_title(self, page_id, section_no):
+    def _relate(self, intro, snapshot, fullarticle):
+        intro.setRelatedItems([snapshot, fullarticle])
+        snapshot.setRelatedItems([intro, fullarticle])
+        fullarticle.setRelatedItems([intro, snapshot])
+
+        intro.reindexObject()
+        snapshot.reindexObject()
+        fullarticle.reindexObject()
+
+    def _section_content(self, page_id, section_no):
         cursor = self.db.cursor()
-        cursor.execute(sql_section_title % (page_id, section_no))
+        cursor.execute(sql_section_content % (page_id, section_no))
         result = cursor.fetchone()
         cursor.close()
-        return result['title']
+        return result
 
     def _themecentre(self, theme_id):
         iface = 'eea.themecentre.interfaces.IThemeCentre'
         themes = self.catalog.searchResults(object_provides=iface)
         # there should be exactly one themecentre for each theme
         for theme in themes:
-            if IThemeCentreSchema(theme.getObject()).tags == theme_id:
-                return theme
+            obj = theme.getObject()
+            if IThemeCentreSchema(obj).tags == theme_id:
+                return obj
         raise 'No theme exists with id ' + theme_id
