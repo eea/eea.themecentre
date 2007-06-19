@@ -175,8 +175,8 @@ class MigrateArticles(object):
         self.db = MySQLdb.connect(host="localhost", user="root", db="epaedia",
                                   cursorclass=MySQLdb.cursors.SSDictCursor)
         self.catalog = getToolByName(self.context, 'portal_catalog')
-        self.plone_utils = getToolByName(context, 'plone_utils')
         self.workflow = getToolByName(context, 'portal_workflow')
+        self.multimedia_path = request.get('multimedia')
 
     def migrate(self):
         """ Some docstring. """
@@ -185,7 +185,8 @@ class MigrateArticles(object):
         for theme in epaedia_themes:
             page_id = theme['pid']
             themecentre = self._themecentre(themes[page_id])
-            self._migrate_articles(themecentre, theme)
+            if page_id == 200:
+                self._migrate_articles(themecentre, theme)
         return 'migration of epaedia articles is successfully finished'
 
     def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
@@ -194,10 +195,12 @@ class MigrateArticles(object):
         row = cursor.fetchone()
         cursor.close()
 
-        doc_id = self.plone_utils.normalizeString(row['title']) + id_suffix
+        doc_id = utils.normalizeString(row['title'], encoding='latin1') + \
+                id_suffix
         new_id = folder.invokeFactory('Document', id=doc_id,
                                       title=title or row['title'])
         article = getattr(folder, new_id)
+        article.setDescription(row['title'])
         self.workflow.doActionFor(article, 'publish')
         article.reindexObject()
 
@@ -215,51 +218,69 @@ class MigrateArticles(object):
             body = unicode(content['body'], 'latin1').encode('utf8')
             quote = unicode(content['quote'], 'latin1').encode('utf8')
             tag = unicode(content['tag'], 'latin1').encode('utf8')
+            align = unicode(section['align'], 'latin1').encode('utf8')
             section_type = section['type']
-
-            # main title
-            if section_type == 1 and section_no == 1:
-                total_body += "<h1>%s</h1>\n" % title
-                if len(body) > 0:
-                    total_body += "<p>%s</p>\n" % body
+            body_html = self._nl_to_p(body)
 
             # title and body
             if section_type == 1 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += "<h2>%s</h2>\n" % title
                 if len(body) > 0:
-                    total_body += "<p>%s</p>\n" % body
+                    total_body += body_html + '\n'
             # title, body and image
             if section_type == 2 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                image_url = "/multimedia/images/"
-                total_body += '<table><tr><td><img src="%s" alt="%s" />' % \
-                              (image_url, title) + \
-                              '</td><td>%s</td></tr></table>\n' % body
+                image_url = self._image_url(section['eid']) + '/image_mini'
+                #image_url = "/multimedia/images/"
+                image_html = '<img src="%s" alt="%s" />' % \
+                              (image_url, title)
+                if align == 'l':
+                    left = image_html
+                    right = body_html
+                else:
+                    left = body_html
+                    right = image_html
+                total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
+                              (left, right)
             # title, quote, body
             if section_type == 3 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                total_body += '<blockquote>\n' + \
-                              '<p class="quote">%s/<p>\n' % quote + \
-                              '<p class="citation">%s</p>\n' % tag + \
-                              '</blockquote>\n'
+                total_body += '<blockquote class="quote-left">\n' + \
+                              '<p>%s</p>\n' % quote + \
+                              '<p class="source">%s</p>\n' % tag + \
+                              '</blockquote>\n' + \
+                              '<div class="visualClear"><!-- --></div>\n'
                 if len(body) > 0:
-                    total_body += "<p>%s</p>\n" % body
+                    total_body += "<p>%s</p>\n" % body_html
             # title, body, link
             if section_type == 4 and section_no > 1:
                 cursor = self.db.cursor()
                 cursor.execute(sql_article_links % section['eid'])
-                links = cursor.fetchall()
+                link = cursor.fetchone()
                 cursor.close()
+
+                link_id = utils.normalizeString(title, encoding='latin1')
+                path = '/'.join((self.multimedia_path, types['link']['path'],
+                         link_id))
 
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                link_url = "/multimedia/\nimages/"
-                total_body += '<table><tr><td><a href src="%s" alt="%s" />' % \
-                              (link_url, title) + \
-                              '</td><td>%s</td></tr></table>\n' % body
+                total_body += '<table><tr><td><a href="%s" alt="%s">%s</a>' % \
+                              (path, link['title'], link['title']) + \
+                              '</td></tr><tr><td>%s</td></tr></table>\n' % \
+                              link['body']
+            if section_type == 5 and section_no > 1:
+                if len(title.strip()) > 0:
+                    total_body += '<h2>%s</h2>\n' % title
+                if quote:
+                    total_body += '<ul>\n'
+                    for listitem in quote.split('|'):
+                        total_body += '<li>%s</li>\n' % listitem.strip()
+                    total_body += '</ul>\n'
+
 
         article.setText(total_body)
         article.reindexObject()
@@ -312,6 +333,18 @@ class MigrateArticles(object):
         cursor.close()
         return level_one
 
+    def _image_url(self, eid):
+        cursor = self.db.cursor()
+        cursor.execute(sql_image_by_eid % eid)
+        image = cursor.fetchone()
+        cursor.close()
+
+        title = image['title']
+        image_id = utils.normalizeString(title, encoding='latin1')
+        path = '/'.join((self.multimedia_path, types['image']['path'],
+                         image_id))
+        return path
+
     def _migrate_articles(self, folder, theme):
         """ migrates every article in mysql which belongs to the main
             theme 'theme'. 'folder' is where the content will be added. """
@@ -326,7 +359,7 @@ class MigrateArticles(object):
         snapshot = getattr(folder, doc_id)
         doc_id = self._create_fullarticle(folder, page_id)
         fullarticle = getattr(folder, doc_id)
-
+        return
         self._relate(intro, snapshot, fullarticle)
 
         cursor = self.db.cursor()
@@ -336,7 +369,7 @@ class MigrateArticles(object):
 
         for menu_item in level_two:
             title = menu_item['title']
-            folder_id = self.plone_utils.normalizeString(title)
+            folder_id = utils.normalizeString(title, encoding='latin1')
             new_id = folder.invokeFactory('Folder', id=folder_id,
                                                     title=title)
             level_two_folder = getattr(folder, new_id)
@@ -358,7 +391,7 @@ class MigrateArticles(object):
 
             for menu_item in level_three:
                 title = menu_item['title']
-                folder_id = self.plone_utils.normalizeString(title)
+                folder_id = utils.normalizeString(title, encoding='latin1')
                 level_two_folder.invokeFactory('Folder',
                         id=folder_id, title=title)
                 level_three_folder = getattr(level_two_folder, folder_id)
@@ -371,6 +404,12 @@ class MigrateArticles(object):
                 if new_id:
                     level_three_folder.manage_addProperty('default_page',
                                                           new_id, 'string')
+
+    def _nl_to_p(self, text):
+        result = ''
+        for para in text.split('\n'):
+            result += '<p>%s</p>' % para
+        return result
 
     def _relate(self, intro, snapshot, fullarticle):
         intro.setRelatedItems([snapshot, fullarticle])

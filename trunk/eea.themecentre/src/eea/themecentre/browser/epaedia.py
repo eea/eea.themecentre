@@ -184,3 +184,9 @@ sql_cid_with_onetier_pid = \
     u"select cid " + \
     u"from tblTierOne " + \
     u"where pid=%d"
+
+sql_image_by_eid = \
+    u"select title, extension, source, note " + \
+    u"from tblImages inner join tblImagesBody " + \
+    u"on tblImages.yid = tblImagesBody.yid " + \
+    u"where tblImages.eid=%d and tblImagesBody.lid=1"
