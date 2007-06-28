@@ -504,3 +504,24 @@ class ThemeLayoutAndDefaultPage(object):
                 intro.manage_addProperty('layout', 'themecentre_view', 'string')
             themecentre._p_changed = True
         return str(len(brains)) + ' themecentres migrated'
+
+class GenericThemeToDefault(object):
+    """ Migrates theme tags ['G','e','n','e','r','i','c'] to ['default']. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        query = { 'getThemes': 'G' }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            if not brain.getThemes == ['G', 'e', 'n', 'e', 'r', 'i', 'c']:
+                continue
+
+            obj = brain.getObject()
+            themes = IThemeTagging(obj)
+            themes.tags = ['default']
+            obj.reindexObject()
+        return 'themes are migrated'

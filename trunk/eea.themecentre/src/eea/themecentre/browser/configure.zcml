@@ -236,6 +236,13 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="*"
+      name="migrateGenericTheme"
+      class=".migrate.GenericThemeToDefault"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"
