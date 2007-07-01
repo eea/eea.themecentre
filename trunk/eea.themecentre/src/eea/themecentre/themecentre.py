@@ -182,7 +182,7 @@ def objectThemeTagged(obj, event):
     portal_catalog = getToolByName(getSite(), 'portal_catalog')
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
-            portal_catalog.reindexObject(obj)
+            portal_catalog.reindexObject(obj.context)
 
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """

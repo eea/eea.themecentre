@@ -43,7 +43,7 @@ class ThemeTaggable(object):
             mapping = anno.get(KEY)
             mapping['themes'] = PersistentList(value)
             info = Attributes(IThemeTagging, 'tags')
-            notify(ObjectModifiedEvent(self.context, info))
+            notify(ObjectModifiedEvent(self, info))
         return property(get, set)
     tags = tags()
 
