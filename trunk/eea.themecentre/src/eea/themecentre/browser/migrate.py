@@ -506,7 +506,7 @@ class ThemeLayoutAndDefaultPage(object):
         return str(len(brains)) + ' themecentres migrated'
 
 class GenericThemeToDefault(object):
-    """ Migrates theme tags ['G','e','n','e','r','i','c'] to ['default']. """
+    """ Migrates theme tags ['G','e','n','e','r','i','c'] or ['D', 'e', 'f', 'a', 'u', 'l', 't'] to ['default']. """
 
     def __init__(self, context, request):
         self.context = context
@@ -514,14 +514,21 @@ class GenericThemeToDefault(object):
 
     def __call__(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-        query = { 'getThemes': 'G' }
-        brains = catalog.searchResults(query)
-        for brain in brains:
-            if not brain.getThemes == ['G', 'e', 'n', 'e', 'r', 'i', 'c']:
-                continue
-
-            obj = brain.getObject()
-            themes = IThemeTagging(obj)
-            themes.tags = ['default']
-            obj.reindexObject()
-        return 'themes are migrated'
+        query1 = { 'getThemes': 'G' }
+        query2 = { 'getThemes': 'D' }
+        query3 = { 'getThemes': 'g' }
+        query4 = { 'getThemes': 'd' }
+        queries = [query1,query2,query3,query4]
+        output=''
+        for query in queries:
+           brains = catalog.searchResults(query)
+           for brain in brains:
+               if brain.getThemes == ['G', 'e', 'n', 'e', 'r', 'i', 'c'] or brain.getThemes == ['g', 'e', 'n', 'e', 'r', 'i', 'c'] or brain.getThemes == ['D', 'e', 'f', 'a', 'u', 'l', 't'] or brain.getThemes == ['d', 'e', 'f', 'a', 'u', 'l', 't']:
+                  obj = brain.getObject()
+                  themes = IThemeTagging(obj)
+                  output=output+'NOTOK: '+obj.id+': '+'brain.getThemes[0]: '+ brain.getThemes[0] + ' themes.tags[0]: '+ themes.tags[0] + ' URL: ' + obj.absolute_url() +'\r'
+                  themes.tags = ['default']
+                  obj.reindexObject()
+               else:
+                  output=output+'OK: '+brain.id+': '+'brain.getThemes[0]: '+ brain.getThemes[0] + 'URL:'+ brain.getURL() +'\r'
+        return 'themes are migrated, RESULT:\r' + output
