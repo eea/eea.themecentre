@@ -190,3 +190,6 @@ sql_image_by_eid = \
     u"from tblImages inner join tblImagesBody " + \
     u"on tblImages.yid = tblImagesBody.yid " + \
     u"where tblImages.eid=%d and tblImagesBody.lid=1"
+
+sql_eids_by_pid = \
+    u"select eid from tblPagesElements where pid=%d"

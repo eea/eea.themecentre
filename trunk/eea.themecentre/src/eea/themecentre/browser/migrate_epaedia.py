@@ -1,5 +1,6 @@
 import MySQLdb
 import MySQLdb.cursors
+import os
 from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
@@ -10,6 +11,7 @@ from zope.app.event.objectevent import ObjectModifiedEvent
 from zope.event import notify
 from zope.component import getAdapter
 from p4a.video.interfaces import IVideoDataAccessor
+from Products.NavigationManager.sections import INavigationSectionPosition
 
 types = { 'image':
             { 'sql': sql_images,
@@ -42,46 +44,106 @@ themes = { 200: 'climate',
            556: 'biodiversity',
            }
 
-class MigrateMedia(utils.BrowserView):
+missing_title = {
+    625: 'EU coastline',
+}
+
+class MigrateMedia(object):
+    """ Migrates media from epaedia database. """
 
     def __init__(self, context, request):
-        super(MigrateMedia, self).__init__(context, request)
+        self.context = context
+        self.request = request
         self.db = MySQLdb.connect(host="localhost", user="root", db="epaedia")
         self.path = request.get('path')
         self.workflow = getToolByName(context, 'portal_workflow')
         self.catalog = getToolByName(context, 'portal_catalog')
 
     def migrate(self):
-        context = utils.context(self)
+        self.file = open('media_files.txt', 'w')
+        self.eids = {}
 
         # create the media folders that need to be there
-        for media_type in types:
-            path = types[media_type]['path']
-            folder = getattr(aq_base(context), path, None)
-            if not folder:
-                context.invokeFactory('Folder', id=path,
-                        title=media_type)
+        #for media_type in types:
+        #    path = types[media_type]['path']
+        #    folder = getattr(aq_base(context), path, None)
+        #    if not folder:
+        #        context.invokeFactory('Folder', id=path,
+        #                title=media_type)
 
         # copy all files from filesystem to the eea site
-        for page_id, theme_id in themes.items():
+        #for page_id, theme_id in themes.items():
+        #    for media_type in types:
+        #        self.migrate_files(theme_id, page_id, media_type)
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_level_one)
+        level_one = cursor.fetchall()
+        cursor.close()
+
+        print "L E V E L O N E"
+        print "L E V E L O N E"
+        for levelone in level_one:
+            page_id = levelone[1]
+            theme_id = themes[page_id]
+            cid = levelone[2]
             for media_type in types:
                 self.migrate_files(theme_id, page_id, media_type)
 
-        self.request.RESPONSE.redirect(context.absolute_url())
+            cursor = self.db.cursor()
+            cursor.execute(sql_level_two % cid)
+            level_two = cursor.fetchall()
+            cursor.close()
 
-    def images(self, folder, db_row):
+            print "L E V E L T W O"
+            print "L E V E L T W O"
+            for leveltwo in level_two:
+                page_id = leveltwo[0]
+                ciid = leveltwo[1]
+                for media_type in types:
+                    self.migrate_files(theme_id, page_id, media_type)
+
+                cursor = self.db.cursor()
+                cursor.execute(sql_level_three % ciid)
+                level_three = cursor.fetchall()
+                cursor.close()
+
+                for levelthree in level_three:
+                    page_id = levelthree[0]
+                    for media_type in types:
+                        self.migrate_files(theme_id, page_id, media_type)
+
+        self.file.close()
+        self.request.RESPONSE.redirect(self.context.absolute_url())
+
+    def images(self, folder, db_row, theme_id):
         eid, title, extension = db_row
+        if not title:
+            title = missing_title[eid]
         new_id = utils.normalizeString(title, encoding='latin1')
         path = self.path + '/website/elements/images/' + str(eid) + \
             '_large.' + extension
+        if not os.path.exists(path):
+            path = self.path + '/website/elements/images/' + str(eid) + \
+                '.' + extension
+        title = unicode(title, 'latin1').encode('utf-8')
+
+        # if there already is an object with this id, use a counter
+        count = 1
+        while getattr(folder, new_id, None):
+            count += 1
+            new_id = new_id + str(count)
+
         folder.invokeFactory('Image', id=new_id, title=title)
         atimage = folder[new_id]
         image = open(path, 'rb')
         atimage.setImage(image)
         return atimage
 
-    def animations(self, folder, db_row):
+    def animations(self, folder, db_row, theme_id):
         eid, title = db_row
+        if not title:
+            title = missing_title[eid]
         new_id = utils.normalizeString(title, encoding='latin1')
         path = self.path + '/website/elements/animations/' + str(eid) + '.swf'
         folder.invokeFactory('FlashFile', id=new_id, title=title)
@@ -93,12 +155,14 @@ class MigrateMedia(utils.BrowserView):
         notify(ObjectModifiedEvent(atfile))
         return atfile
 
-    def mindstretchers(self, folder, db_row):
-        return self.animations(folder, db_row)
+    def mindstretchers(self, folder, db_row, theme_id):
+        return self.animations(folder, db_row, theme_id)
 
-    def videos(self, folder, db_row):
+    def videos(self, folder, db_row, theme_id):
         eid, title, body, item = db_row
 
+        if not title:
+            title = missing_title[eid]
         new_id = utils.normalizeString(title, encoding='latin1')
         taken_ids = folder.objectIds()
         if new_id in taken_ids:
@@ -130,27 +194,36 @@ class MigrateMedia(utils.BrowserView):
         video._video_data['duration'] = METADATA[filename]['duration']
         return atfile
 
-    def links(self, folder, db_row):
+    def links(self, folder, db_row, theme_id):
         eid, link, title, body = db_row
+        if not title:
+            title = missing_title[eid]
         new_id = utils.normalizeString(title, encoding='latin1')
-        folder.invokeFactory('Link', id=new_id, title=title)
-        linkobj = folder[new_id]
+        query = { 'object_provides': 'eea.themecentre.interfaces.IThemeCentre' }
+        brains = self.catalog.searchResults(query)
+        themecentre = brains[0].getObject()
+        linksfolder = getattr(themecentre, 'links')
+        linksfolder.invokeFactory('Link', id=new_id, title=title)
+        linkobj = linksfolder[new_id]
         linkobj.setDescription(body)
         linkobj.setRemoteUrl(link)
         return linkobj
 
     def migrate_files(self, theme_id, page_id, media_type):
-        context = utils.context(self)
         cursor = self.db.cursor()
         cursor.execute(types[media_type]['sql'] % page_id)
         files = cursor.fetchall()
         cursor.close()
 
         for db_row in files:
-            folder = getattr(context, types[media_type]['path'])
+            if self.eids.has_key(db_row[0]):
+                continue
+
+            #folder = getattr(context, types[media_type]['path'])
+            folder = self.context
 
             method = getattr(self, types[media_type]['method'])
-            new_file = method(folder, db_row)
+            new_file = method(folder, db_row, theme_id)
 
             try:
                 media = IMediaType(new_file)
@@ -164,6 +237,12 @@ class MigrateMedia(utils.BrowserView):
 
             self.workflow.doActionFor(new_file, 'publish')
             self.catalog.indexObject(new_file)
+            self._save_to_file(db_row[0],
+                               '/'.join(new_file.getPhysicalPath()))
+
+    def _save_to_file(self, eid, path):
+        self.file.write(str(eid) + '|' + path + '\n')
+        self.eids[eid] = True
 
 
 class MigrateArticles(object):
@@ -177,17 +256,52 @@ class MigrateArticles(object):
         self.catalog = getToolByName(self.context, 'portal_catalog')
         self.workflow = getToolByName(context, 'portal_workflow')
         self.multimedia_path = request.get('multimedia')
+        self._read_file()
 
     def migrate(self):
         """ Some docstring. """
 
+        themes_folder = self.context
+        if not themes_folder.hasProperty('navigation_sections_left'):
+            themes_folder.manage_addProperty('navigation_sections_left',
+                                             'subpages, Sub pages', 'lines')
+        portlet = 'here/@@leftNavigationSections'
+        portlets = themes_folder.getProperty('left_slots')
+        if not portlet in portlets:
+            new_portlets = portlets + (portlet,)
+            themes_folder.manage_changeProperties(left_slots=new_portlets)
+
+        themes_folder.getProperty('left_slots')
         epaedia_themes = self._epaedia_themes()
         for theme in epaedia_themes:
             page_id = theme['pid']
             themecentre = self._themecentre(themes[page_id])
-            if page_id == 200:
+            if themecentre.getId() == 'climate':
                 self._migrate_articles(themecentre, theme)
         return 'migration of epaedia articles is successfully finished'
+
+    def _apply_media_relations(self, folder, doc_id, page_id):
+        doc = getattr(folder, doc_id)
+        cursor = self.db.cursor()
+        cursor.execute(sql_eids_by_pid % page_id)
+        rows = cursor.fetchall()
+        cursor.close()
+
+        related = doc.getRelatedItems()
+        for row in rows:
+            eid = row['eid']
+            # only apply relations to those media files that are migrated
+            if not self.file_paths.has_key(eid):
+                continue
+            path = self.file_paths[eid].strip()
+            file_obj = self.context.unrestrictedTraverse(path)
+            related.append(file_obj)
+        doc.setRelatedItems(related)
+
+    def _assign_subpages_section(self, obj):
+        navContext = INavigationSectionPosition(obj)
+        navContext.section = 'subpages'
+        obj.reindexObject()
 
     def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
         cursor = self.db.cursor()
@@ -281,14 +395,16 @@ class MigrateArticles(object):
                         total_body += '<li>%s</li>\n' % listitem.strip()
                     total_body += '</ul>\n'
 
-
         article.setText(total_body)
         article.reindexObject()
-        return article.getId()
+        return article
 
     def _create_intro(self, folder, page_id):
-        return self._create_article_from_sections(folder, page_id,
+        article = self._create_article_from_sections(folder, page_id,
                                                   id_suffix='-intro')
+        self._apply_media_relations(folder, article.getId(), page_id)
+        self._assign_subpages_section(article)
+        return article.getId()
 
     def _create_snapshot(self, folder, page_id):
         cursor = self.db.cursor()
@@ -302,9 +418,13 @@ class MigrateArticles(object):
         cursor.close()
         if result:
             pid = result['pid']
-            return self._create_article_from_sections(folder, pid,
+            article = self._create_article_from_sections(folder, pid,
                                                       id_suffix='-snapshot',
                                                       title='Snapshot')
+            self._apply_media_relations(folder, article.getId(), page_id)
+            self._assign_subpages_section(article)
+
+            return article.getId()
         else:
             return None
 
@@ -320,9 +440,12 @@ class MigrateArticles(object):
         cursor.close()
         if result:
             pid = result['pid']
-            return self._create_article_from_sections(folder, pid,
+            article = self._create_article_from_sections(folder, pid,
                                                       id_suffix='-fullarticle',
                                                       title='Full article')
+            self._apply_media_relations(folder, article.getId(), page_id)
+            self._assign_subpages_section(article)
+            return article.getId()
         else:
             return None
 
@@ -359,7 +482,7 @@ class MigrateArticles(object):
         snapshot = getattr(folder, doc_id)
         doc_id = self._create_fullarticle(folder, page_id)
         fullarticle = getattr(folder, doc_id)
-        return
+
         self._relate(intro, snapshot, fullarticle)
 
         cursor = self.db.cursor()
@@ -373,6 +496,7 @@ class MigrateArticles(object):
             new_id = folder.invokeFactory('Folder', id=folder_id,
                                                     title=title)
             level_two_folder = getattr(folder, new_id)
+            self._assign_subpages_section(level_two_folder)
             self.workflow.doActionFor(level_two_folder, 'publish')
             level_two_folder.reindexObject()
 
@@ -395,6 +519,7 @@ class MigrateArticles(object):
                 level_two_folder.invokeFactory('Folder',
                         id=folder_id, title=title)
                 level_three_folder = getattr(level_two_folder, folder_id)
+                self._assign_subpages_section(level_two_folder)
                 self.workflow.doActionFor(level_three_folder, 'publish')
                 level_three_folder.reindexObject()
 
@@ -411,10 +536,22 @@ class MigrateArticles(object):
             result += '<p>%s</p>' % para
         return result
 
+    def _read_file(self):
+        self.file_paths = {}
+        file = open('media_files.txt', 'r')
+        for line in file:
+            eid, file_path = line.split('|')
+            self.file_paths[int(eid)] = file_path
+        file.close()
+
     def _relate(self, intro, snapshot, fullarticle):
-        intro.setRelatedItems([snapshot, fullarticle])
-        snapshot.setRelatedItems([intro, fullarticle])
-        fullarticle.setRelatedItems([intro, snapshot])
+        current_intro = intro.getRelatedItems()
+        current_snap = intro.getRelatedItems()
+        current_full = intro.getRelatedItems()
+
+        intro.setRelatedItems([snapshot, fullarticle] + current_intro)
+        snapshot.setRelatedItems([intro, fullarticle] + current_snap)
+        fullarticle.setRelatedItems([intro, snapshot] + current_full)
 
         intro.reindexObject()
         snapshot.reindexObject()
