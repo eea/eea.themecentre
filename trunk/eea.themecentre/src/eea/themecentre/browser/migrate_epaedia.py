@@ -264,7 +264,7 @@ class MigrateArticles(object):
         themes_folder = self.context
         if not themes_folder.hasProperty('navigation_sections_left'):
             themes_folder.manage_addProperty('navigation_sections_left',
-                                             'subpages, Sub pages', 'lines')
+                                             'subpages, Topics', 'lines')
         portlet = 'here/@@leftNavigationSections'
         portlets = themes_folder.getProperty('left_slots')
         if not portlet in portlets:
