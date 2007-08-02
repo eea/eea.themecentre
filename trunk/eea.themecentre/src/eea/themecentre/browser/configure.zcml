@@ -243,6 +243,13 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="eea.rdfrepository.interfaces.IRDFRepository"
+      name="migrateEntriesWithThumbnail"
+      class=".migrate.EntriesWithThumbnail"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

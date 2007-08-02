@@ -532,3 +532,22 @@ class GenericThemeToDefault(object):
                else:
                   output=output+'OK: '+brain.id+': '+'brain.getThemes[0]: '+ brain.getThemes[0] + 'URL:'+ brain.getURL() +'\r'
         return 'themes are migrated, RESULT:\r' + output
+
+class EntriesWithThumbnail(object):
+    """ Changes 'entries with thumbnail' to 10000 on all rss feed recipes
+        in the rdf repository. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        repository = self.context
+        catalog = getToolByName(self.context, 'portal_catalog')
+        query = {'portal_type': 'RSSFeedRecipe',
+                 'path': repository.getPhysicalPath() }
+        brains = catalog.searchResults(query)
+        for brain in brains:
+            recipe = brain.getObject()
+            recipe.setEntriesWithThumbnail(10000)
+        return '%d rss recipes were migrated' % len(brains)
