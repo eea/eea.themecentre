@@ -202,9 +202,8 @@ class MigrateMedia(object):
         query = { 'object_provides': 'eea.themecentre.interfaces.IThemeCentre' }
         brains = self.catalog.searchResults(query)
         themecentre = brains[0].getObject()
-        linksfolder = getattr(themecentre, 'links')
-        linksfolder.invokeFactory('Link', id=new_id, title=title)
-        linkobj = linksfolder[new_id]
+        folder.invokeFactory('Link', id=new_id, title=title)
+        linkobj = folder[new_id]
         linkobj.setDescription(body)
         linkobj.setRemoteUrl(link)
         return linkobj
@@ -264,7 +263,7 @@ class MigrateArticles(object):
         themes_folder = self.context
         if not themes_folder.hasProperty('navigation_sections_left'):
             themes_folder.manage_addProperty('navigation_sections_left',
-                                             'subpages, Topics', 'lines')
+                                             'subpages,Topics', 'lines')
         portlet = 'here/@@leftNavigationSections'
         portlets = themes_folder.getProperty('left_slots')
         if not portlet in portlets:
@@ -301,7 +300,6 @@ class MigrateArticles(object):
     def _assign_subpages_section(self, obj):
         navContext = INavigationSectionPosition(obj)
         navContext.section = 'subpages'
-        obj.reindexObject()
 
     def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
         cursor = self.db.cursor()
