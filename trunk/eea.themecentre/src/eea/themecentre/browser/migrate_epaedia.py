@@ -195,7 +195,13 @@ class MigrateMedia(object):
         return atfile
 
     def links(self, folder, db_row, theme_id):
-        eid, link, title, body = db_row
+        eid, link, title, body, pid = db_row
+
+        # if pid is not 0, then this is an internal link which
+        # we are not interested in
+        if pid > 0:
+            return None
+
         if not title:
             title = missing_title[eid]
         new_id = utils.normalizeString(title, encoding='latin1')
@@ -256,6 +262,7 @@ class MigrateArticles(object):
         self.workflow = getToolByName(context, 'portal_workflow')
         self.multimedia_path = request.get('multimedia')
         self._read_file()
+        self.pidpaths = {}
 
     def migrate(self):
         """ Some docstring. """
@@ -315,6 +322,7 @@ class MigrateArticles(object):
         article.setDescription(row['title'])
         self.workflow.doActionFor(article, 'publish')
         article.reindexObject()
+        self._save_pid_path(page_id, article)
 
         cursor = self.db.cursor()
         cursor.execute(sql_sections % page_id)
@@ -374,14 +382,18 @@ class MigrateArticles(object):
                 link = cursor.fetchone()
                 cursor.close()
 
-                link_id = utils.normalizeString(title, encoding='latin1')
-                path = '/'.join((self.multimedia_path, types['link']['path'],
-                         link_id))
+                #link_id = utils.normalizeString(title, encoding='latin1')
+                #path = '/'.join(self.multimedia_path, link_id)
 
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
+                if page_id > 0:
+                    link_str = 'PID' + str(page_id) + 'PID'
+                else:
+                    link_str = link['link']
+
                 total_body += '<table><tr><td><a href="%s" alt="%s">%s</a>' % \
-                              (path, link['title'], link['title']) + \
+                              (link_str, link['title'], link['title']) + \
                               '</td></tr><tr><td>%s</td></tr></table>\n' % \
                               link['body']
             if section_type == 5 and section_no > 1:
@@ -462,8 +474,7 @@ class MigrateArticles(object):
 
         title = image['title']
         image_id = utils.normalizeString(title, encoding='latin1')
-        path = '/'.join((self.multimedia_path, types['image']['path'],
-                         image_id))
+        path = '/'.join([self.multimedia_path, image_id])
         return path
 
     def _migrate_articles(self, folder, theme):
@@ -527,6 +538,13 @@ class MigrateArticles(object):
                 if new_id:
                     level_three_folder.manage_addProperty('default_page',
                                                           new_id, 'string')
+        for pid, obj in self.pidpaths.items():
+            text = obj.getText()
+            to_replace = 'PID' + str(pid) + 'PID'
+            link = '/'.join(obj.getPhysicalPath())
+            new_text = text.replace(to_replace, link)
+            obj.setText(new_text)
+            obj.reindexObject()
 
     def _nl_to_p(self, text):
         result = ''
@@ -571,3 +589,6 @@ class MigrateArticles(object):
             if IThemeCentreSchema(obj).tags == theme_id:
                 return obj
         raise 'No theme exists with id ' + theme_id
+
+    def _save_pid_path(self, pid, obj):
+        self.pidpaths[pid] = obj

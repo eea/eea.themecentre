@@ -34,7 +34,7 @@ sql_videos = \
     u"and tblVideosBody.lid=1"
 
 sql_links = \
-    u"select tblElements.eid, link, title, body " + \
+    u"select tblElements.eid, link, title, body, pid " + \
     u"from tblLinks, tblLinksBody, tblPagesElements, tblElements " + \
     u"where tblPagesElements.eid=tblElements.eid and tblElements.tid=7 " + \
     u"and tblPagesElements.pid=%d " + \
