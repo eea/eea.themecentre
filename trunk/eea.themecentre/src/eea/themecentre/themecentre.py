@@ -56,7 +56,8 @@ def promoted(obj, event):
         newsobj.setConstrainTypesMode(1)
         newsobj.setImmediatelyAddableTypes(['News Item'])
         newsobj.setLocallyAllowedTypes(['News Item'])
-        newsobj.default_page = 'highlights_topic'
+        newsobj.manage_addProperty('default_page', 'highlights_topic',
+                                   'string')
 
         # add a smart folder to the news folder that shows all news and
         # highlighs
@@ -86,7 +87,8 @@ def promoted(obj, event):
         eventsobj.setConstrainTypesMode(1)
         eventsobj.setImmediatelyAddableTypes(['Event'])
         eventsobj.setLocallyAllowedTypes(['Event'])
-        eventsobj.default_page = 'events_topic'
+        eventsobj.manage_addProperty('default_page', 'events_topic',
+                                   'string')
         
         # add a smart folder to the events folder that shows all events
         _createObjectByType('Topic', eventsobj, id='events_topic',
@@ -114,7 +116,8 @@ def promoted(obj, event):
         linksobj.setConstrainTypesMode(1)
         linksobj.setImmediatelyAddableTypes(['Link'])
         linksobj.setLocallyAllowedTypes(['Link'])
-        linksobj.default_page = 'links_topic'
+        linksobj.manage_addProperty('default_page', 'links_topic',
+                                   'string')
         
         # add a smart folder to the links folder that shows all links
         _createObjectByType('Topic', linksobj, id='links_topic',

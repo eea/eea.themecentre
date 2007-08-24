@@ -250,6 +250,13 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="*"
+      name="migrateThemeCentreFoldersProperties"
+      class=".migrate.ChangeDefaultPageToProperty"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

@@ -551,3 +551,29 @@ class EntriesWithThumbnail(object):
             recipe = brain.getObject()
             recipe.setEntriesWithThumbnail(10000)
         return '%d rss recipes were migrated' % len(brains)
+
+class ChangeDefaultPageToProperty(object):
+    """ Changes default_page to being a property so it's visible in ZMI """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        query = {'object_provides': 'eea.themecentre.interfaces.IThemeCentre'}
+        brains = self.context.portal_catalog.searchResults(query)
+        for brain in brains:
+            themecentre = brain.getObject()
+            links = getattr(themecentre, 'links', None)
+            news = getattr(themecentre, 'news', None)
+            events = getattr(themecentre, 'events', None)
+
+            for folder in filter(None, (links, news, events)):
+                base = aq_base(folder)
+                attr = getattr(base, 'default_page', None)
+                has_property = base.hasProperty('default_page')
+                # if object has a default_page attribute that is not a property
+                if attr is not None and not has_property:
+                    del base.default_page
+                    base.manage_addProperty('default_page', attr, 'string')
+        return "successfully migrated properties"
