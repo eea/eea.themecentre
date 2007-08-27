@@ -6,7 +6,7 @@ from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
 from eea.themecentre.themecentre import RDF_THEME_KEY
 from eea.themecentre.browser.interfaces import IRDFPortlet
 from eea.themecentre.interfaces import IThemeCentrePortletInfo
-from eea.themecentre.interfaces import IThemeCentreListFeed
+from Products.EEAContentTypes.interfaces import IFeedPortletInfo
 from eea.themecentre.utils import localized_time
 from eea.rdfrepository.interfaces import IRDFRepository
 
@@ -37,7 +37,6 @@ class RDFPortlet(BasePortlet):
     def full_items(self):
         context = utils.context(self)
         feed_id = self.request['feed']
-        result = []
 
         currentTheme = getTheme(context)
         currentThemeTitle = getThemeTitle(context)
@@ -48,11 +47,10 @@ class RDFPortlet(BasePortlet):
 
         if len(feeds) > 0:
             self.feedTitle = feeds[0].title
-            for item in feeds[0].items:
-                item = IThemeCentreListFeed(item)
-                result.append(item)
+            feed = IFeedPortletInfo(feeds[0])
+            return feed.items
 
-        return result
+        return []
 
     def title(self):
         return getattr(self, 'feedTitle', '')
