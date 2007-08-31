@@ -34,14 +34,15 @@ sql_videos = \
     u"and tblVideosBody.lid=1"
 
 sql_links = \
-    u"select tblElements.eid, link, title, body, pid " + \
+    u"select tblElements.eid, link, title, body, tblLinks.pid " + \
     u"from tblLinks, tblLinksBody, tblPagesElements, tblElements " + \
     u"where tblPagesElements.eid=tblElements.eid and tblElements.tid=7 " + \
     u"and tblPagesElements.pid=%d " + \
     u"and tblLinks.hid=tblLinksBody.hid " + \
     u"and tblLinks.hid=tblLinksBody.hid " + \
     u"and tblLinks.eid=tblElements.eid " + \
-    u"and tblLinksBody.lid=1"
+    u"and tblLinksBody.lid=1 " + \
+    u"and link != 'NULL'"
 
 METADATA = {
     '1004_1.flv': { 'height': 180, 'width': 240, 'duration': 46.866 },

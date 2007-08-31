@@ -35,21 +35,24 @@ types = { 'image':
               'path': 'links' },
         }
 
-themes = { 200: 'climate',
-           226: 'water',
-           372: 'natural',
-           373: 'human',
-           526: 'households',
-           534: 'transport',
-           556: 'biodiversity',
-           }
-
 missing_title = {
     625: 'EU coastline',
 }
 
+def load_pid_theme_mapping():
+    path = os.path.dirname(__file__) + os.path.sep + 'epaedia-mapping.csv'
+    mapping = {}
+
+    for line in open(path, 'r'):
+        pid, title, maintheme, theme2, theme3, theme4 = line.split('@')
+        themes = filter(lambda x:len(x.strip())>0, [maintheme, theme2, theme3, theme4])
+        mapping[int(pid)] = themes
+
+    return mapping
+            
+
 class MigrateMedia(object):
-    """ Migrates media from epaedia database. """
+    """ Migrates media from epaedia database."""
 
     def __init__(self, context, request):
         self.context = context
@@ -58,10 +61,13 @@ class MigrateMedia(object):
         self.path = request.get('path')
         self.workflow = getToolByName(context, 'portal_workflow')
         self.catalog = getToolByName(context, 'portal_catalog')
+        self.themes = {}
 
     def migrate(self):
         self.file = open('media_files.txt', 'w')
         self.eids = {}
+
+        self.themes = load_pid_theme_mapping()
 
         # create the media folders that need to be there
         #for media_type in types:
@@ -81,11 +87,12 @@ class MigrateMedia(object):
         level_one = cursor.fetchall()
         cursor.close()
 
-        print "L E V E L O N E"
-        print "L E V E L O N E"
         for levelone in level_one:
             page_id = levelone[1]
-            theme_id = themes[page_id]
+            if self.themes[page_id]:
+                theme_id = self.themes[page_id][0]
+            else:
+                continue
             cid = levelone[2]
             for media_type in types:
                 self.migrate_files(theme_id, page_id, media_type)
@@ -95,8 +102,6 @@ class MigrateMedia(object):
             level_two = cursor.fetchall()
             cursor.close()
 
-            print "L E V E L T W O"
-            print "L E V E L T W O"
             for leveltwo in level_two:
                 page_id = leveltwo[0]
                 ciid = leveltwo[1]
@@ -237,13 +242,20 @@ class MigrateMedia(object):
                 # links can't be adapted and shouldn't be
                 pass
 
-            themetag = IThemeTagging(new_file)
-            themetag.tags = [theme_id]
+            self._apply_themes(theme_id, new_file, page_id)
 
             self.workflow.doActionFor(new_file, 'publish')
             self.catalog.indexObject(new_file)
             self._save_to_file(db_row[0],
                                '/'.join(new_file.getPhysicalPath()))
+
+    def _apply_themes(self, theme_id, new_file, page_id):
+        themetag = IThemeTagging(new_file)
+        tags = self.themes[page_id]
+        if theme_id == tags[0]:
+            themetag.tags = tags
+        else:
+            1/0
 
     def _save_to_file(self, eid, path):
         self.file.write(str(eid) + '|' + path + '\n')
@@ -263,9 +275,12 @@ class MigrateArticles(object):
         self.multimedia_path = request.get('multimedia')
         self._read_file()
         self.pidpaths = {}
+        self.themes = {}
 
     def migrate(self):
         """ Some docstring. """
+
+        self.themes = load_pid_theme_mapping()
 
         themes_folder = self.context
         if not themes_folder.hasProperty('navigation_sections_left'):
@@ -281,8 +296,10 @@ class MigrateArticles(object):
         epaedia_themes = self._epaedia_themes()
         for theme in epaedia_themes:
             page_id = theme['pid']
-            themecentre = self._themecentre(themes[page_id])
-            if themecentre.getId() == 'climate':
+            # if the page has a theme migrate, not everyone has a theme
+            # for instance 'Sustainable resources'
+            if self.themes[page_id]:
+                themecentre = self._themecentre(self.themes[page_id][0])
                 self._migrate_articles(themecentre, theme)
         return 'migration of epaedia articles is successfully finished'
 
@@ -482,7 +499,7 @@ class MigrateArticles(object):
             theme 'theme'. 'folder' is where the content will be added. """
 
         page_id = theme['pid']
-        theme_id = themes[page_id]
+        theme_id = self.themes[page_id][0]
         cid = theme['cid']
         
         doc_id = self._create_intro(folder, page_id)
