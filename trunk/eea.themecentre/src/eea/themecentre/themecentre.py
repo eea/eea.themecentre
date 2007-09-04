@@ -9,7 +9,7 @@ from Products.CMFPlone.utils import _createObjectByType
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
-from Acquisition import aq_parent
+from Acquisition import aq_parent, aq_base
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
@@ -46,7 +46,8 @@ def promoted(obj, event):
     theme_id = IThemeCentreSchema(obj).tags
 
     obj.invokeFactory('Document', id='intro', title=obj.Title()+' introduction')
-    obj.manage_addProperty('default_page', 'intro', 'string')
+    if not hasattr(aq_base(obj), 'default_page'):
+        obj.manage_addProperty('default_page', 'intro', 'string')
     intro = getattr(obj, 'intro')
     intro.manage_addProperty('layout', 'themecentre_view', 'string')
     intro.reindexObject()
