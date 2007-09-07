@@ -9,15 +9,20 @@ class ThemeCentreMenuPromotion(object):
         self.context = context
         self.request = request
 
-    def __call__(self):
+    def promotions(self, section=None):
         currentTheme = getTheme(self.context)
         catalog = getToolByName(self.context, 'portal_catalog')
-        result = catalog.searchResults( { 'portal_type' : 'Promotion',
-                                          'review_state' : 'published',
-                                          'getThemes' : currentTheme } )
+        query = { 'portal_type' : 'Promotion',
+                  'review_state' : 'published',
+                  'getThemes' : currentTheme }
+        if section is not None:
+            query['navSection'] = section
+        
+        result = catalog.searchResults( query )
         promotions = []
 
         for t in result:
+            if section is not None or (section is None and t.navSection in [None, 'default']):
                 promotions.append( {'id' : t.getId,
                                     'Description' : t.Description,
                                     'Title' : t.Title,

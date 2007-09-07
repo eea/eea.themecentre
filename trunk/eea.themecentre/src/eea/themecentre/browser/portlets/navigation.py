@@ -63,8 +63,32 @@ class NavigationPortlet(BaseNavigationPortlet):
         for node in data:
             nodeTitle = node['item']['Title']
             if nodeTitle not in blacklistedNavigationItems:
-                newData.append(node)
-                titles.append(nodeTitle)
+                if node['item'].getId == node['navSection'] and node['portal_type'] == 'Folder':
+                    parentSection = node['navSection']
+                    depth = node['depth']
+                    # show children for a section which has the same ID as a Folder
+                    children = node['children']
+                    if children == []:
+                        view = getMultiAdapter((node['item'].getObject(), self.request),
+                                               name='navtree_builder_view')
+                        tmp = view.navigationTree()
+                        for t in tmp['children']:
+                            if t['item'].getId == currentTheme.getId():
+                                break
+                        for t in t['children']:
+                            if t['path'] == node['path']:
+                                children = t['children']
+                                break
+
+                    for n in children:
+                        n['navSection'] = parentSection
+                        nodeTitle = n['item']['Title']
+                        newData.append(n)
+                        titles.append(nodeTitle)
+                else:
+                    newData.append(node)
+                    titles.append(nodeTitle)
+
         data = newData
 
         for product in products:
@@ -92,9 +116,9 @@ class NavigationPortlet(BaseNavigationPortlet):
             if node is not None:
                 navSection = node['navSection']
                 sectionData = navSections.get(navSection, [])
-                sectionData.append(node)
+                sectionData.append(node)                 
                 navSections[navSection] = sectionData
-                
+
         self._data = navSections
         
         return self.template(section)

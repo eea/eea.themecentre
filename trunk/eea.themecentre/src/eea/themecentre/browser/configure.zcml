@@ -117,6 +117,7 @@
       name="themesMenuPromotion"
       class=".portlets.promotion.ThemeCentreMenuPromotion"
       permission="zope.Public"
+      allowed_attributes="promotions"
       />
 
   <browser:page
