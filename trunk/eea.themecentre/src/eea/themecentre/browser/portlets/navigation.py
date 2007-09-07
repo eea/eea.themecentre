@@ -1,7 +1,9 @@
 from zope.interface import implements
 from zope.component import getMultiAdapter
-from Products.CMFCore.utils import getToolByName
 
+from Acquisition import aq_parent
+
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils
 from Products.CMFPlone.browser.interfaces import INavigationPortlet
 from Products.CMFPlone.browser.interfaces import INavigationRoot
@@ -94,7 +96,8 @@ class NavigationPortlet(BaseNavigationPortlet):
         for product in products:
             if product['item']['Title'] not in titles:
                 data.append(product)
-                
+        data.extend(self._overview())
+        
         # order menu as configured in ZMI on themes
         order = getattr(context, 'themes_menu_order', ['highlights', 'reports_', 'indicators', 'Atlas', 'datasets','events','links'])
         orderedData = [ None for n in range(0,len(order))]
@@ -110,7 +113,7 @@ class NavigationPortlet(BaseNavigationPortlet):
            else:
                unsortedData.append(node)
         orderedData.extend(unsortedData)
-        
+
         navSections = {'default' : [] }
         for node in orderedData:
             if node is not None:
@@ -178,7 +181,7 @@ class NavigationPortlet(BaseNavigationPortlet):
         context = utils.context(self)
         tc = getThemeCentre(context)
         if tc is not None:
-            url = tc.absolute_url() + '/themecentre_overview'
+            url = tc.absolute_url() + '/overview'
             currentItem = self.request.get('URL0','') == url
             item = {'no_display': False,
                     'getURL': url,
@@ -200,9 +203,11 @@ class NavigationPortlet(BaseNavigationPortlet):
                     'icon': 'www/folder_icon.gif'}
             
             newNode = {'item'          : item,
+                       'getURL'        : url,
                        'depth'         : '',
                        'currentItem'   : currentItem,
                        'currentParent' : False,
+                       'navSection'    : 'default',
                        'children' : []}
             return [newNode]
         return []

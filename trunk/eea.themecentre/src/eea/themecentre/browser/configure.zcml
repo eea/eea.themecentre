@@ -139,6 +139,11 @@
       allowed_attributes="getNavTree displayLogo logoUrl logoParentUrl"
       />
 
+   <adapter for="..interfaces.IThemeCentre
+                Products.CMFPlone.browser.interfaces.ISiteMap"
+            factory=".sitemap.SitemapThemeCentreStrategy"
+            provides="Products.CMFPlone.browser.interfaces.INavtreeStrategy" />
+
   <!-- migration stuff -->  
 
   <browser:page
