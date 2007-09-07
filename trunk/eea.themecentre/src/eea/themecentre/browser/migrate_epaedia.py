@@ -416,7 +416,8 @@ class MigrateArticles(object):
             # for instance 'Sustainable resources'
             if self.themes[page_id]:
                 themecentre = self._themecentre(self.themes[page_id][0])
-                self._migrate_articles(themecentre, theme)
+                if themecentre.getId() == 'climate':
+                    self._migrate_articles(themecentre, theme)
         return 'migration of epaedia articles is successfully finished'
 
     def _apply_media_relations(self, folder, doc_id, page_id):
@@ -506,7 +507,7 @@ class MigrateArticles(object):
                     right = image_html
                 #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
                               #(left, right)
-                total_body += '<div class="theme-article-section">\n' + \
+                total_body += '<div>\n' + \
                                 image_html + '\n' + body_html + \
                               '</div>\n'
 
