@@ -532,15 +532,17 @@ class MigrateArticles(object):
 
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                if link['pid'] > 0:
-                    link_str = 'PID' + str(page_id) + 'PID'
-                else:
-                    link_str = link['link']
 
-                total_body += '<p><a href="%s" alt="%s">%s</a>' % \
-                              (link_str, link['title'], link['title']) + \
-                              '<br />%s</p>\n' % \
-                              link['body']
+                #if link['pid'] > 0:
+                    #link_str = 'PID' + str(page_id) + 'PID'
+
+                # only migrate external links, not glossary links
+                # external links have pid=0
+                if link['pid'] == 0:
+                    total_body += '<p><a href="%s" alt="%s">%s</a>' % \
+                                  (link['link'], link['title'], link['title']) + \
+                                  '<br />%s</p>\n' % \
+                                  link['body']
             if section_type == 5 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
