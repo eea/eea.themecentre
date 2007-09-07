@@ -532,14 +532,14 @@ class MigrateArticles(object):
 
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                if page_id > 0:
+                if link['pid'] > 0:
                     link_str = 'PID' + str(page_id) + 'PID'
                 else:
                     link_str = link['link']
 
-                total_body += '<table><tr><td><a href="%s" alt="%s">%s</a>' % \
+                total_body += '<p><a href="%s" alt="%s">%s</a>' % \
                               (link_str, link['title'], link['title']) + \
-                              '</td></tr><tr><td>%s</td></tr></table>\n' % \
+                              '<br />%s</p>\n' % \
                               link['body']
             if section_type == 5 and section_no > 1:
                 if len(title.strip()) > 0:
