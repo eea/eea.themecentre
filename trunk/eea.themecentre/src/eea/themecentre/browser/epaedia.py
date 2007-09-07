@@ -194,3 +194,8 @@ sql_image_by_eid = \
 
 sql_eids_by_pid = \
     u"select eid from tblPagesElements where pid=%d"
+
+sql_all_images = \
+    u"select eid, title, extension " + \
+    u"from tblImages, tblImagesBody " + \
+    u"where tblImages.yid=tblImagesBody.yid"

@@ -193,7 +193,7 @@
   <browser:page
       zcml:condition="installed MySQLdb"
       for="*"
-      name="migrateEpaedia"
+      name="migrateEpaediaMultimedia"
       class=".migrate_epaedia.MigrateMedia"
       permission="cmf.ModifyPortalContent"
       attribute="migrate"

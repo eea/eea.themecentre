@@ -35,8 +35,18 @@ types = { 'image':
               'path': 'links' },
         }
 
+eids_not_migrate = [607]
+
 missing_title = {
+    609: 'Fossil fuels in plants',
+    621: 'Snow and mountains',
+    623: 'Ice bears',
     625: 'EU coastline',
+    633: 'Dandelions',
+    635: 'Ox-eye daisy',
+    641: 'Tree branches',
+    649: 'Parking',
+    653: 'People and umbrellas',
 }
 
 def load_pid_theme_mapping():
@@ -86,6 +96,8 @@ class MigrateMedia(object):
         cursor.execute(sql_level_one)
         level_one = cursor.fetchall()
         cursor.close()
+        media_types = types.keys()
+        media_types.remove('image')
 
         for levelone in level_one:
             page_id = levelone[1]
@@ -94,8 +106,13 @@ class MigrateMedia(object):
             else:
                 continue
             cid = levelone[2]
-            for media_type in types:
-                self.migrate_files(theme_id, page_id, media_type)
+            snapshot_pid = self._snapshot_pid(int(page_id))
+            fullarticle_pid = self._fullarticle_pid((page_id))
+            for media_type in media_types:
+                for pid in filter(None, (page_id, snapshot_pid, \
+                        fullarticle_pid)):
+                    self.migrate_files(theme_id, pid, media_type)
+                    #self.migrate_section_files(theme_id, pid, media_type)
 
             cursor = self.db.cursor()
             cursor.execute(sql_level_two % cid)
@@ -105,8 +122,9 @@ class MigrateMedia(object):
             for leveltwo in level_two:
                 page_id = leveltwo[0]
                 ciid = leveltwo[1]
-                for media_type in types:
+                for media_type in media_types:
                     self.migrate_files(theme_id, page_id, media_type)
+                    #self.migrate_section_files(theme_id, pid, media_type)
 
                 cursor = self.db.cursor()
                 cursor.execute(sql_level_three % ciid)
@@ -115,8 +133,12 @@ class MigrateMedia(object):
 
                 for levelthree in level_three:
                     page_id = levelthree[0]
-                    for media_type in types:
+                    for media_type in media_types:
                         self.migrate_files(theme_id, page_id, media_type)
+                        #self.migrate_section_files(theme_id, pid, media_type)
+
+
+        self._migrate_images()
 
         self.file.close()
         self.request.RESPONSE.redirect(self.context.absolute_url())
@@ -131,6 +153,9 @@ class MigrateMedia(object):
         if not os.path.exists(path):
             path = self.path + '/website/elements/images/' + str(eid) + \
                 '.' + extension
+        if not os.path.exists(path):
+            return None
+
         title = unicode(title, 'latin1').encode('utf-8')
 
         # if there already is an object with this id, use a counter
@@ -249,6 +274,30 @@ class MigrateMedia(object):
             self._save_to_file(db_row[0],
                                '/'.join(new_file.getPhysicalPath()))
 
+
+    #def _migrate_section_files(self, theme_id, page_id, media_type):
+    #    if media_type not in ('image', 'link'):
+    #        return
+#
+#        cursor = self.db.cursor()
+#        cursor.execute(sql_sections % page_id)
+#        files2 = cursor.fetchall()
+#        cursor.close()
+#
+#        for db_row in files2:
+#            if self.eids.has_key(db_row[0]):
+#                continue
+#
+#            eid = db_row[3]
+#            if media_type == 'image':
+#                cursor = self.db.cursor()
+#                cursor.execute(sql_image_by_eid % eid)
+#                db_row = cursor.fetchone()
+#                cursor.close()
+#
+#                self.images(self.multimedia_folder, db_row, page_id)
+
+
     def _apply_themes(self, theme_id, new_file, page_id):
         themetag = IThemeTagging(new_file)
         tags = self.themes[page_id]
@@ -257,9 +306,75 @@ class MigrateMedia(object):
         else:
             1/0
 
+    def _fullarticle_pid(self, page_id):
+        cursor = self.db.cursor()
+        cursor.execute(sql_cid_with_onetier_pid % page_id)
+        cid = cursor.fetchone()[0]
+        cursor.close()
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_fullarticle_pid % cid)
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            return result[0]
+        else:
+            return None
+
+    def _migrate_images(self):
+        """ Migrate all images that migrate_files didn't migrate.
+            When migrate_files runs it will tag the images with theme
+            tags. In this method those are not tagged.
+        """
+        cursor = self.db.cursor()
+        cursor.execute(sql_all_images)
+        result = cursor.fetchall()
+        cursor.close()
+
+        for db_row in result:
+            if self.eids.has_key(db_row[0]):
+                continue
+            if db_row[0] in eids_not_migrate:
+                continue
+            image = self.images(self.context, db_row, None)
+            if not image:
+                continue
+
+            try:
+                media = IMediaType(image)
+                media.types = ['image']
+            except:
+                # links can't be adapted and shouldn't be
+                pass
+
+            #self._apply_themes(theme_id, image, page_id)
+
+            self.workflow.doActionFor(image, 'publish')
+            self.catalog.indexObject(image)
+            self._save_to_file(db_row[0],
+                               '/'.join(image.getPhysicalPath()))
+
     def _save_to_file(self, eid, path):
         self.file.write(str(eid) + '|' + path + '\n')
         self.eids[eid] = True
+
+    def _snapshot_pid(self, page_id):
+        # media belonging to snapshot article
+        cursor = self.db.cursor()
+        cursor.execute(sql_cid_with_onetier_pid % page_id)
+        cid = cursor.fetchone()[0]
+        cursor.close()
+
+        cursor = self.db.cursor()
+        cursor.execute(sql_snapshot_pid % cid)
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            return result[0]
+        else:
+            return None
 
 
 class MigrateArticles(object):
@@ -272,10 +387,11 @@ class MigrateArticles(object):
                                   cursorclass=MySQLdb.cursors.SSDictCursor)
         self.catalog = getToolByName(self.context, 'portal_catalog')
         self.workflow = getToolByName(context, 'portal_workflow')
-        self.multimedia_path = request.get('multimedia')
         self._read_file()
         self.pidpaths = {}
         self.themes = {}
+        multimedia_path = request.get('multimedia_path')
+        self.multimedia_folder = context.unrestrictedTraverse(multimedia_path)
 
     def migrate(self):
         """ Some docstring. """
@@ -369,27 +485,39 @@ class MigrateArticles(object):
             if section_type == 2 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                image_url = self._image_url(section['eid']) + '/image_mini'
+                image = self._image_info(section['eid'])
                 #image_url = "/multimedia/images/"
-                image_html = '<img src="%s" alt="%s" />' % \
-                              (image_url, title)
+                image_html = '<div class="figure-plus theme-article-image">\n' + \
+                             '<div class="figure-image">\n' + \
+                             ('<img src="%s" alt="%s" />' % \
+                                 (image['path']+'/image_mini', image['title'])) + \
+                             '</div>\n' + \
+                             ('<p class="figure-title">%s</p>\n' % \
+                                 image['title']) + \
+                             (len(image['copyright'])>0 and ('<p class="figure-source-copyright">%s</p>\n' %
+                                 image['copyright']) or '') + \
+                              '</div>\n'
+
                 if align == 'l':
                     left = image_html
                     right = body_html
                 else:
                     left = body_html
                     right = image_html
-                total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
-                              (left, right)
+                #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
+                              #(left, right)
+                total_body += '<div class="theme-article-section">\n' + \
+                                image_html + '\n' + body_html + \
+                              '</div>\n'
+
             # title, quote, body
             if section_type == 3 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
-                total_body += '<blockquote class="quote-left">\n' + \
+                total_body += '<blockquote>\n' + \
                               '<p>%s</p>\n' % quote + \
                               '<p class="source">%s</p>\n' % tag + \
-                              '</blockquote>\n' + \
-                              '<div class="visualClear"><!-- --></div>\n'
+                              '</blockquote>\n'
                 if len(body) > 0:
                     total_body += "<p>%s</p>\n" % body_html
             # title, body, link
@@ -450,6 +578,7 @@ class MigrateArticles(object):
                                                       title='Snapshot')
             self._apply_media_relations(folder, article.getId(), page_id)
             self._assign_subpages_section(article)
+            article.setExcludeFromNav(True)
 
             return article.getId()
         else:
@@ -472,6 +601,7 @@ class MigrateArticles(object):
                                                       title='Full article')
             self._apply_media_relations(folder, article.getId(), page_id)
             self._assign_subpages_section(article)
+            article.setExcludeFromNav(True)
             return article.getId()
         else:
             return None
@@ -483,16 +613,26 @@ class MigrateArticles(object):
         cursor.close()
         return level_one
 
-    def _image_url(self, eid):
+    def _image_info(self, eid):
         cursor = self.db.cursor()
         cursor.execute(sql_image_by_eid % eid)
         image = cursor.fetchone()
         cursor.close()
 
-        title = image['title']
+        if eid in missing_title:
+            title = missing_title[eid]
+        else:
+            title = image['title']
         image_id = utils.normalizeString(title, encoding='latin1')
-        path = '/'.join([self.multimedia_path, image_id])
-        return path
+        print "image: ", image_id
+        try:
+            imageobj = getattr(self.multimedia_folder, image_id)
+            path = 'resolveuid/' + imageobj.UID()
+        except:
+            import pdb; pdb.set_trace()
+        #path = '/'.join([self.multimedia_path, image_id])
+        return { 'path': path, 'title': image['title'],
+                 'copyright': image['source'] }
 
     def _migrate_articles(self, folder, theme):
         """ migrates every article in mysql which belongs to the main
@@ -502,6 +642,8 @@ class MigrateArticles(object):
         theme_id = self.themes[page_id][0]
         cid = theme['cid']
         
+        if page_id == 207:
+            import pdb; pdb.set_trace()
         doc_id = self._create_intro(folder, page_id)
         intro = getattr(folder, doc_id)
         doc_id = self._create_snapshot(folder, page_id)
