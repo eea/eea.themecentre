@@ -1,4 +1,5 @@
-from zope.formlib.form import Fields, EditForm
+from Products.Five.formlib.formbase import EditForm
+from zope.formlib.form import Fields
 from eea.themecentre.interfaces import IThemeTagging
 
 class ThemeEditForm(EditForm):

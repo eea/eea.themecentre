@@ -55,7 +55,7 @@ def load_pid_theme_mapping():
 
     for line in open(path, 'r'):
         pid, title, maintheme, theme2, theme3, theme4 = line.split('@')
-        themes = filter(lambda x:len(x.strip())>0, [maintheme, theme2, theme3, theme4])
+        themes = filter(lambda x:len(x.strip())>0, [maintheme, theme2, theme3, theme4.strip()])
         mapping[int(pid)] = themes
 
     return mapping
@@ -438,6 +438,11 @@ class MigrateArticles(object):
             related.append(file_obj)
         doc.setRelatedItems(related)
 
+    def _apply_themes(self, article, page_id):
+        themetag = IThemeTagging(article)
+        tags = self.themes[page_id]
+        themetag.tags = tags
+
     def _assign_subpages_section(self, obj):
         navContext = INavigationSectionPosition(obj)
         navContext.section = 'subpages'
@@ -555,6 +560,7 @@ class MigrateArticles(object):
 
         article.setText(total_body)
         article.reindexObject()
+        self._apply_themes(article, page_id)
         return article
 
     def _create_intro(self, folder, page_id):
@@ -627,13 +633,8 @@ class MigrateArticles(object):
         else:
             title = image['title']
         image_id = utils.normalizeString(title, encoding='latin1')
-        print "image: ", image_id
-        try:
-            imageobj = getattr(self.multimedia_folder, image_id)
-            path = 'resolveuid/' + imageobj.UID()
-        except:
-            import pdb; pdb.set_trace()
-        #path = '/'.join([self.multimedia_path, image_id])
+        imageobj = getattr(self.multimedia_folder, image_id)
+        path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
                  'copyright': image['source'] }
 
