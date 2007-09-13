@@ -392,6 +392,7 @@ class MigrateArticles(object):
         self.themes = {}
         multimedia_path = request.get('multimedia_path')
         self.multimedia_folder = context.unrestrictedTraverse(multimedia_path)
+        self.objects_with_links = {}
 
     def migrate(self):
         """ Some docstring. """
@@ -416,8 +417,8 @@ class MigrateArticles(object):
             # for instance 'Sustainable resources'
             if self.themes[page_id]:
                 themecentre = self._themecentre(self.themes[page_id][0])
-                if themecentre.getId() == 'climate':
-                    self._migrate_articles(themecentre, theme)
+                self._migrate_articles(themecentre, theme)
+        self._fix_internal_links()
         return 'migration of epaedia articles is successfully finished'
 
     def _apply_media_relations(self, folder, doc_id, page_id):
@@ -539,16 +540,22 @@ class MigrateArticles(object):
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
 
-                #if link['pid'] > 0:
-                    #link_str = 'PID' + str(page_id) + 'PID'
+                if link['pid'] > 0:
+                    # internal link, pid>0
+                    link_str = 'PID' + str(link['pid']) + 'PID'
 
-                # only migrate external links, not glossary links
-                # external links have pid=0
-                if link['pid'] == 0:
-                    total_body += '<p><a href="%s" alt="%s">%s</a>' % \
-                                  (link['link'], link['title'], link['title']) + \
-                                  '<br />%s</p>\n' % \
-                                  link['body']
+                    if not self.objects_with_links.has_key(page_id):
+                        self.objects_with_links[page_id] = []
+                    self.objects_with_links[page_id].append(link['pid'])
+                else:
+                    # external links, pid=0
+                    link_str = link['link']
+
+                total_body += '<p><a href="%s" alt="%s">%s</a>' % \
+                              (link_str, link['title'], link['title']) + \
+                              '<br />%s</p>\n' % \
+                              link['body']
+                    
             if section_type == 5 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
@@ -622,6 +629,19 @@ class MigrateArticles(object):
         cursor.close()
         return level_one
 
+    def _fix_internal_links(self):
+        for obj_pid, link_pids in self.objects_with_links.items():
+            obj = self.pidpaths[obj_pid]
+            text = obj.getText()
+            
+            for pid in link_pids:
+                to_replace = 'PID' + str(pid) + 'PID'
+                link_to = self.pidpaths[pid]
+                link = "resolveuid/" + link_to.UID()
+                new_text = text.replace(to_replace, link)
+                obj.setText(new_text)
+                obj.reindexObject()
+
     def _image_info(self, eid):
         cursor = self.db.cursor()
         cursor.execute(sql_image_by_eid % eid)
@@ -646,8 +666,6 @@ class MigrateArticles(object):
         theme_id = self.themes[page_id][0]
         cid = theme['cid']
         
-        if page_id == 207:
-            import pdb; pdb.set_trace()
         doc_id = self._create_intro(folder, page_id)
         intro = getattr(folder, doc_id)
         doc_id = self._create_snapshot(folder, page_id)
@@ -701,14 +719,6 @@ class MigrateArticles(object):
                 if new_id:
                     level_three_folder.manage_addProperty('default_page',
                                                           new_id, 'string')
-        for pid, obj in self.pidpaths.items():
-            text = obj.getText()
-            to_replace = 'PID' + str(pid) + 'PID'
-            link = '/'.join(obj.getPhysicalPath())
-            new_text = text.replace(to_replace, link)
-            obj.setText(new_text)
-            obj.reindexObject()
-
     def _nl_to_p(self, text):
         result = ''
         for para in text.split('\n'):
@@ -735,6 +745,13 @@ class MigrateArticles(object):
         intro.reindexObject()
         snapshot.reindexObject()
         fullarticle.reindexObject()
+
+    def _relate_link(self, article1, linked_article):
+        current_relations = article1.getRelatedItems()
+        #current_article2 = linked_article.getRelatedItems()
+
+        article1.setRelatedItems([linked_article] + current_relations)
+        #linked_article.setRelatedItems([article1] + current_article2)
 
     def _section_content(self, page_id, section_no):
         cursor = self.db.cursor()
