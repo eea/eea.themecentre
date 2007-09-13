@@ -27,23 +27,6 @@
 566@Wetlands@biodiversity@@@
 567@Wetland habitats and species@biodiversity@@@
 568@Wetland pressures@biodiversity@@@
-461@Biodiversity_old2@@@@
-474@Adopting to change@@@@
-475@A historical approach to Europe@@@@
-480@Biotechnology and biosafety@@@@
-479@Climate change@@@@
-477@Land cover changes@@@@
-476@Species trends and movements@@@@
-486@Transported pollutants@@@@
-465@Europe's footprint@@@@
-466@Economics@@@@
-487@Valuation of biodiversity@@@@
-462@Loss of biodiversity@@@@
-464@Political recognition@@@@
-467@Trends and Issues@@@@
-468@Farmland and high nature value areas@@@@
-469@Forests and sustainable management@@@@
-470@Freshwater ecosystems and habitats@@@@
 200@Climate change@climate@@@
 346@Agriculture@climate@agriculture@@
 205@Atmosphere and Climate@climate@air@@
@@ -73,9 +56,9 @@
 338@Marine species@climate@water@coast_sea@
 335@Rise in sea level@climate@water@coast_sea@
 336@Sea temperatures@climate@water@coast_sea@
-526@Household consumption@households@@@
-528@Snapshot of why household consumption matters@households@@@
-527@Why household consumption matters@households@@@
+526@Household consumption@household@@@
+528@Snapshot of why household consumption matters@household@@@
+527@Why household consumption matters@household@@@
 373@Human health@human@@@
 382@Brain and body@human@@@
 498@Body disorder - causes@human@@@
@@ -97,57 +80,28 @@
 402@Human health concerns@human@@@
 403@Snapshot of human health concerns@human@@@
 389@Wildlife early warning signs@human@@@
-371@Old Biodiversity@@@@
-432@Arctic region@@@@
-437@Characteristics@@@@
-438@Events@@@@
-446@Policies@@@@
-447@Boreal region@@@@
-448@Characteristics@@@@
-449@Events@@@@
-450@Policies@@@@
-430@Macaronesian region@@@@
-431@Characteristics@@@@
-445@Policies@@@@
-455@The Baltic Sea@@@@
-456@Characteristcs@@@@
-457@Events@@@@
-458@Policies@@@@
-459@The caspian Sea@@@@
-460@The Mediterranean Sea@@@@
-451@The NE Atlantic Ocean@@@@
-452@Characteristics@@@@
-453@Events@@@@
-454@Policies@@@@
-441@The North Sea@@@@
-442@Characteristics@@@@
-443@Events@@@@
-444@Policies@@@@
-530@Pour Voir@@@@
-532@Pour voir Sub section@@@@
-533@sub subsection@@@@
-372@Sustainable resources@@@@
-524@Construction minerals@@@@
-409@Consumption drivers@@@@
-413@Development@@@@
-411@Economics@population@@@
-410@Population@population@@@
-414@Fish resources under pressure@fishery@@@
-415@Cod example@fishery@@@
-416@Forests resources@@@@
-417@EU forest strategy@@@@
-418@Fossil fuel resources@@@@
-429@Historical lessons for sustainable resources@@@@
-419@Land resources@land_use@@@
-421@Land contamination@land_use@@@
-422@Land erosion@land_use@@@
-420@Land use for agriculture@land_use@agriculture@@
-423@Metals@@@@
-405@Resource consumption in perspective@@@@
-406@Snapshot of resource consumption@@@@
-426@Water resources under pressure@water@@@
-427@Water quality@water@@@
-428@Water use and agriculture@water@agriculture@@
+372@Sustainable resources@waste@@@
+524@Construction minerals@waste@@@
+409@Consumption drivers@waste@@@
+413@Development@waste@@@
+411@Economics@waste@population@@
+410@Population@waste@population@@
+414@Fish resources under pressure@waste@fishery@@
+415@Cod example@waste@fishery@@
+416@Forests resources@waste@@@
+417@EU forest strategy@waste@@@
+418@Fossil fuel resources@waste@@@
+429@Historical lessons for sustainable resources@waste@@@
+419@Land resources@waste@land_use@@
+421@Land contamination@waste@land_use@@
+422@Land erosion@waste@land_use@@
+420@Land use for agriculture@waste@land_use@agriculture@
+423@Metals@waste@@@
+405@Resource consumption in perspective@waste@@@
+406@Snapshot of resource consumption@waste@@@
+426@Water resources under pressure@waste@water@@
+427@Water quality@waste@water@@
+428@Water use and agriculture@waste@water@agriculture@
 534@Transport@transport@@@
 539@Freight transport@transport@@@
 544@Air freight@transport@air@@
@@ -167,7 +121,6 @@
 543@Transport charges@transport@@@
 553@Distance related charges@transport@@@
 554@Fuel prices@transport@@@
-531@Une autre Pour voir@@@@
 226@Water@water@@@
 505@Europe's freshwater@water@@@
 519@Freshwater quality and pollution@water@@@
@@ -189,6 +142,5 @@
 523@Late lessons from marine anti fouling paints@water@coast_sea@@
 522@Lessons from the great North American lakes@water@@@
 507@History of European water pollution control@water@@@
-529@PourVoir@water@@@
 501@Water - a precious resource@water@@@
 502@Water - a precious resource@water@@@
