@@ -269,7 +269,7 @@ class MigrateMedia(object):
 
             self._apply_themes(theme_id, new_file, page_id)
 
-            self.workflow.doActionFor(new_file, 'publish')
+            self._change_workflow(new_file)
             self.catalog.indexObject(new_file)
             self._save_to_file(db_row[0],
                                '/'.join(new_file.getPhysicalPath()))
@@ -350,7 +350,7 @@ class MigrateMedia(object):
 
             #self._apply_themes(theme_id, image, page_id)
 
-            self.workflow.doActionFor(image, 'publish')
+            self._change_workflow(image)
             self.catalog.indexObject(image)
             self._save_to_file(db_row[0],
                                '/'.join(image.getPhysicalPath()))
@@ -448,6 +448,9 @@ class MigrateArticles(object):
         navContext = INavigationSectionPosition(obj)
         navContext.section = 'subpages'
 
+    def _change_workflow(self, obj):
+        pass
+
     def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
         cursor = self.db.cursor()
         cursor.execute(sql_title % page_id)
@@ -460,7 +463,7 @@ class MigrateArticles(object):
                                       title=title or row['title'])
         article = getattr(folder, new_id)
         article.setDescription(row['title'])
-        self.workflow.doActionFor(article, 'publish')
+        self._change_workflow(article)
         article.reindexObject()
         self._save_pid_path(page_id, article)
 
@@ -687,7 +690,7 @@ class MigrateArticles(object):
                                                     title=title)
             level_two_folder = getattr(folder, new_id)
             self._assign_subpages_section(level_two_folder)
-            self.workflow.doActionFor(level_two_folder, 'publish')
+            self._change_workflow(level_two_folder)
             level_two_folder.reindexObject()
 
             pid = menu_item['pid']
@@ -710,7 +713,7 @@ class MigrateArticles(object):
                         id=folder_id, title=title)
                 level_three_folder = getattr(level_two_folder, folder_id)
                 self._assign_subpages_section(level_two_folder)
-                self.workflow.doActionFor(level_three_folder, 'publish')
+                self._change_workflow(level_three_folder)
                 level_three_folder.reindexObject()
 
                 pid = menu_item['pid']
