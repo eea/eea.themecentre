@@ -497,8 +497,8 @@ class MigrateArticles(object):
                     total_body += '<h2>%s</h2>\n' % title
                 image = self._image_info(section['eid'])
                 #image_url = "/multimedia/images/"
-                image_html = '<div class="figure-plus theme-article-image">\n' + \
-                             '<div class="figure-image">\n' + \
+                image_html = '<div class="image-left">\n' + \
+                             '<div>\n' + \
                              ('<img src="%s" alt="%s" />' % \
                                  (image['path']+'/image_mini', image['title'])) + \
                              '</div>\n' + \
@@ -516,7 +516,7 @@ class MigrateArticles(object):
                     right = image_html
                 #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
                               #(left, right)
-                total_body += '<div>\n' + \
+                total_body += '<div class="articleSection">\n' + \
                                 image_html + '\n' + body_html + \
                               '</div>\n'
 
