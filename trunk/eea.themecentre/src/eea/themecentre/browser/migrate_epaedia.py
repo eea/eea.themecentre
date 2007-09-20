@@ -502,8 +502,8 @@ class MigrateArticles(object):
                              ('<img src="%s" alt="%s" />' % \
                                  (image['path']+'/image_mini', image['title'])) + \
                              '</div>\n' + \
-                             ('<p class="figure-title">%s</p>\n' % \
-                                 image['title']) + \
+                             ('<p class="figure-title" style="width:%d">%s</p>\n' % \
+                                 (image['width'], image['title'])) + \
                              (len(image['copyright'])>0 and ('<p class="figure-source-copyright">%s</p>\n' %
                                  image['copyright']) or '') + \
                               '</div>\n'
@@ -516,7 +516,7 @@ class MigrateArticles(object):
                     right = image_html
                 #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
                               #(left, right)
-                total_body += '<div class="articleSection">\n' + \
+                total_body += '<div>\n' + \
                                 image_html + '\n' + body_html + \
                               '</div>\n'
 
@@ -659,7 +659,8 @@ class MigrateArticles(object):
         imageobj = getattr(self.multimedia_folder, image_id)
         path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
-                 'copyright': image['source'] }
+                'copyright': image['source'], 'width': imageobj.getWidth(),
+                'height': imageobj.getHeight() }
 
     def _migrate_articles(self, folder, theme):
         """ migrates every article in mysql which belongs to the main
