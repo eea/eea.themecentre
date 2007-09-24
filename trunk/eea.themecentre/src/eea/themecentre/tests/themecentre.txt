@@ -31,8 +31,8 @@ should be created. Let's see if that worked.
 When an object is created inside a Theme Centre, the object should be
 tagged with the theme associated with the Theme Centre.
 
-  >>> self.createObject(themeCentre.news, 'News Item', 'newsobj')
-  >>> themeadapter = IThemeTagging(themeCentre.news.newsobj)
+  >>> self.createObject(themeCentre.highlights, 'News Item', 'newsobj')
+  >>> themeadapter = IThemeTagging(themeCentre.highlights.newsobj)
   >>> themeadapter.tags
   ['air']
 

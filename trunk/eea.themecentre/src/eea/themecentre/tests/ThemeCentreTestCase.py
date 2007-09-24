@@ -16,6 +16,7 @@ import eea.themecentre
 #XMLConfig('configure.zcml', Products.Five)()
 
 dependencies = []
+PloneTestCase.installProduct('Five')
 PloneTestCase.installProduct('PloneRSSPortlet')
 PloneTestCase.installProduct('ATVocabularyManager')
 PloneTestCase.installProduct('EEAContentTypes')

@@ -31,10 +31,6 @@ class TestThemeCentre(ThemeCentreTestCase):
 
         # add one entry to the themes vocabulary
         vocab = self.portal.portal_vocabularies
-        vocab.themes.invokeFactory('SimpleVocabularyTerm', 'air')
-        vocab.themes.invokeFactory('SimpleVocabularyTerm', 'agriculture')
-        vocab.themes['air'].setTitle('Air')
-        vocab.themes['agriculture'].setTitle('Agriculture')
 
 
 def test_suite():
