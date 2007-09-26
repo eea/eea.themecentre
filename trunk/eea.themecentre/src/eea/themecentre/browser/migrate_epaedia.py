@@ -141,6 +141,7 @@ class MigrateMedia(object):
         self._migrate_images()
 
         self.file.close()
+        import pdb; pdb.set_trace()
         self.request.RESPONSE.redirect(self.context.absolute_url())
 
     def images(self, folder, db_row, theme_id):
@@ -235,13 +236,16 @@ class MigrateMedia(object):
         if not title:
             title = missing_title[eid]
         new_id = utils.normalizeString(title, encoding='latin1')
-        query = { 'object_provides': 'eea.themecentre.interfaces.IThemeCentre' }
+        query = { 'object_provides': 'eea.themecentre.interfaces.IThemeCentre',
+                  'getId': theme_id }
         brains = self.catalog.searchResults(query)
         themecentre = brains[0].getObject()
-        folder.invokeFactory('Link', id=new_id, title=title)
-        linkobj = folder[new_id]
+        linksfolder = getattr(themecentre, 'links')
+        linksfolder.invokeFactory('Link', id=new_id, title=title)
+        linkobj = linksfolder[new_id]
         linkobj.setDescription(body)
         linkobj.setRemoteUrl(link)
+        print linkobj.getPhysicalPath()
         return linkobj
 
     def migrate_files(self, theme_id, page_id, media_type):
@@ -267,9 +271,9 @@ class MigrateMedia(object):
                 # links can't be adapted and shouldn't be
                 pass
 
-            self._apply_themes(theme_id, new_file, page_id)
+            if media_type != 'link':
+                self._apply_themes(theme_id, new_file, page_id)
 
-            self._change_workflow(new_file)
             self.catalog.indexObject(new_file)
             self._save_to_file(db_row[0],
                                '/'.join(new_file.getPhysicalPath()))
@@ -305,6 +309,9 @@ class MigrateMedia(object):
             themetag.tags = tags
         else:
             1/0
+
+    def _change_workflow(self, obj):
+        pass
 
     def _fullarticle_pid(self, page_id):
         cursor = self.db.cursor()
@@ -398,6 +405,7 @@ class MigrateArticles(object):
         """ Some docstring. """
 
         self.themes = load_pid_theme_mapping()
+        self._image_sizes = self._load_images()
 
         themes_folder = self.context
         if not themes_folder.hasProperty('navigation_sections_left'):
@@ -496,14 +504,13 @@ class MigrateArticles(object):
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
                 image = self._image_info(section['eid'])
-                #image_url = "/multimedia/images/"
-                image_html = '<div class="image-left">\n' + \
+                image_width = self._image_sizes[section['eid']]
+                image_html = ('<div class="figure-left" style="width:%dpx">\n' % image_width) + \
                              '<div>\n' + \
                              ('<img src="%s" alt="%s" />' % \
                                  (image['path']+'/image_mini', image['title'])) + \
                              '</div>\n' + \
-                             ('<p class="figure-title" style="width:%d">%s</p>\n' % \
-                                 (image['width'], image['title'])) + \
+                             ('<p class="figure-title">%s</p>\n' % image['title']) + \
                              (len(image['copyright'])>0 and ('<p class="figure-source-copyright">%s</p>\n' %
                                  image['copyright']) or '') + \
                               '</div>\n'
@@ -554,9 +561,9 @@ class MigrateArticles(object):
                     # external links, pid=0
                     link_str = link['link']
 
-                total_body += '<p><a href="%s" alt="%s">%s</a>' % \
+                total_body += '<div class="linkbox"><div class="linkhref"><a href="%s" alt="%s">%s</a></div>' % \
                               (link_str, link['title'], link['title']) + \
-                              '<br />%s</p>\n' % \
+                              '<div class="linkdesc">%s</div></div>\n' % \
                               link['body']
                     
             if section_type == 5 and section_no > 1:
@@ -642,6 +649,10 @@ class MigrateArticles(object):
                 link_to = self.pidpaths[pid]
                 link = "resolveuid/" + link_to.UID()
                 new_text = text.replace(to_replace, link)
+                # add object to "related pages"
+                relations = obj.getRelatedItems()
+                obj.setRelatedItems(relations + [link_to])
+
                 obj.setText(new_text)
                 obj.reindexObject()
 
@@ -656,11 +667,23 @@ class MigrateArticles(object):
         else:
             title = image['title']
         image_id = utils.normalizeString(title, encoding='latin1')
-        imageobj = getattr(self.multimedia_folder, image_id)
+        try:
+            imageobj = getattr(self.multimedia_folder, image_id)
+        except:
+            import pdb; pdb.set_trace()
         path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
-                'copyright': image['source'], 'width': imageobj.getWidth(),
-                'height': imageobj.getHeight() }
+                'copyright': image['source'] }
+
+    def _load_images(self):
+        path = os.path.dirname(__file__) + os.path.sep + 'epaedia-images.csv'
+        mapping = {}
+
+        for line in open(path, 'r'):
+            eid, orig_size, new_size = line.split(',')
+            mapping[int(eid)] = int(new_size.split('x')[0])
+
+        return mapping
 
     def _migrate_articles(self, folder, theme):
         """ migrates every article in mysql which belongs to the main
@@ -766,6 +789,10 @@ class MigrateArticles(object):
 
     def _themecentre(self, theme_id):
         iface = 'eea.themecentre.interfaces.IThemeCentre'
+        themes = self.catalog.searchResults(object_provides=iface)
+        # there should be exactly one themecentre for each theme
+        for theme in themes:
+            obj = theme.getObject()
         themes = self.catalog.searchResults(object_provides=iface)
         # there should be exactly one themecentre for each theme
         for theme in themes:

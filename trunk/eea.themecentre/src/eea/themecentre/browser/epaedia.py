@@ -198,4 +198,5 @@ sql_eids_by_pid = \
 sql_all_images = \
     u"select eid, title, extension " + \
     u"from tblImages, tblImagesBody " + \
-    u"where tblImages.yid=tblImagesBody.yid"
+    u"where tblImages.yid=tblImagesBody.yid " + \
+    u"and lid=1"
