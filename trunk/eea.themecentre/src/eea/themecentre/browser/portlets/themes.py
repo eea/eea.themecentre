@@ -1,4 +1,5 @@
 from zope.component import queryAdapter
+from eea.themecentre.themecentre import getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils
 
@@ -28,6 +29,10 @@ class ObjectThemesPortlet(BasePortlet):
                   'getId' : themeIds }
         result = catalog.searchResults(query)
         themes = [ brain.getObject() for brain in result ]
+
+        currentTheme = getThemeCentre(context)
+        if currentTheme and currentTheme in themes:
+            themes.remove(currentTheme)
 
         return themes
 
