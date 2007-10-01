@@ -11,6 +11,11 @@
 # /www/SITE/multimedia/@@migrateEpaediaMultimedia?path=/home/tim/epaedia/E3-Encyclopedia
 # /www/SITE/themes/@@migrateEpaediaArticles?multimedia_path=/www/SITE/multimedia
 #
+# Except path and multimedia_path four other parameters can be passed in the url
+#  * host - defaults to 'localhost'
+#  * db - defaults to 'epaedia'
+#  * user - defaults to 'root'
+#  * password - defaults to empty string
 
 import MySQLdb
 import MySQLdb.cursors
@@ -81,7 +86,12 @@ class MigrateMedia(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.db = MySQLdb.connect(host="localhost", user="root", db="epaedia")
+        self.dbname = request.get('db', 'epaedia')
+        self.user = request.get('user', 'root')
+        self.password = request.get('password', '')
+        self.host = request.get('host', 'localhost')
+        self.db = MySQLdb.connect(host=self.host, user=self.user, db=self.dbname,
+                                  passwd=self.password)
         self.path = request.get('path')
         self.workflow = getToolByName(context, 'portal_workflow')
         self.catalog = getToolByName(context, 'portal_catalog')
@@ -404,7 +414,12 @@ class MigrateArticles(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.db = MySQLdb.connect(host="localhost", user="root", db="epaedia",
+        self.dbname = request.get('db', 'epaedia')
+        self.user = request.get('user', 'root')
+        self.password = request.get('password', '')
+        self.host = request.get('host', 'localhost')
+        self.db = MySQLdb.connect(host=self.host, user=self.user, db=self.dbname,
+                                  passwd=self.password,
                                   cursorclass=MySQLdb.cursors.SSDictCursor)
         self.catalog = getToolByName(self.context, 'portal_catalog')
         self.workflow = getToolByName(context, 'portal_workflow')
