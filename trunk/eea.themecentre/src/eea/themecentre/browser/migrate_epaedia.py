@@ -1,3 +1,17 @@
+# To run epaedia migration:
+# First import mysql data
+#
+#  $ mysql -u root
+#  mysql> create database epaedia;
+#  mysql> quit
+#
+#  $ mysql -u root epaedia < epaedia.mysql
+#
+# Then run the migration, it's two views
+# /www/SITE/multimedia/@@migrateEpaediaMultimedia?path=/home/tim/epaedia/E3-Encyclopedia
+# /www/SITE/themes/@@migrateEpaediaArticles?multimedia_path=/www/SITE/multimedia
+#
+
 import MySQLdb
 import MySQLdb.cursors
 import os
@@ -427,6 +441,7 @@ class MigrateArticles(object):
                 themecentre = self._themecentre(self.themes[page_id][0])
                 self._migrate_articles(themecentre, theme)
         self._fix_internal_links()
+        #self._fix_external_links()
         return 'migration of epaedia articles is successfully finished'
 
     def _apply_media_relations(self, folder, doc_id, page_id):
@@ -435,6 +450,9 @@ class MigrateArticles(object):
         cursor.execute(sql_eids_by_pid % page_id)
         rows = cursor.fetchall()
         cursor.close()
+
+        if page_id == 200:
+            import pdb; pdb.set_trace()
 
         related = doc.getRelatedItems()
         for row in rows:
@@ -505,13 +523,13 @@ class MigrateArticles(object):
                     total_body += '<h2>%s</h2>\n' % title
                 image = self._image_info(section['eid'])
                 image_width = self._image_sizes[section['eid']]
-                image_html = ('<div class="figure-left" style="width:%dpx">\n' % image_width) + \
+                image_html = ('<div class="figure-plus-container figure-plus" style="width:%dpx">\n' % image_width) + \
                              '<div>\n' + \
                              ('<img src="%s" alt="%s" />' % \
                                  (image['path']+'/image_mini', image['title'])) + \
                              '</div>\n' + \
-                             ('<p class="figure-title">%s</p>\n' % image['title']) + \
-                             (len(image['copyright'])>0 and ('<p class="figure-source-copyright">%s</p>\n' %
+                             ('<div class="figure-title">%s</div>\n' % image['title']) + \
+                             (len(image['copyright'])>0 and ('<div class="figure-source-copyright">%s</div>\n' %
                                  image['copyright']) or '') + \
                               '</div>\n'
 
@@ -523,7 +541,7 @@ class MigrateArticles(object):
                     right = image_html
                 #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
                               #(left, right)
-                total_body += '<div>\n' + \
+                total_body += '<div class="figure-left">\n' + \
                                 image_html + '\n' + body_html + \
                               '</div>\n'
 
@@ -560,6 +578,9 @@ class MigrateArticles(object):
                 else:
                     # external links, pid=0
                     link_str = link['link']
+                    #if not self.external_links.has_key(page_id):
+                    #    self.external_links[page_id] = []
+                    #self.external_links[page_id].append(link['pid'])
 
                 total_body += '<div class="linkbox"><div class="linkhref"><a href="%s" alt="%s">%s</a></div>' % \
                               (link_str, link['title'], link['title']) + \
@@ -656,6 +677,11 @@ class MigrateArticles(object):
                 obj.setText(new_text)
                 obj.reindexObject()
 
+    #def _fix_external_links(self):
+    #    for obj_pid, link_pids in self.external_links.items():
+    #        obj = self.pidpaths[obj_pid]
+    #        link_obj = 
+
     def _image_info(self, eid):
         cursor = self.db.cursor()
         cursor.execute(sql_image_by_eid % eid)
@@ -692,7 +718,7 @@ class MigrateArticles(object):
         page_id = theme['pid']
         theme_id = self.themes[page_id][0]
         cid = theme['cid']
-        
+
         doc_id = self._create_intro(folder, page_id)
         intro = getattr(folder, doc_id)
         doc_id = self._create_snapshot(folder, page_id)
