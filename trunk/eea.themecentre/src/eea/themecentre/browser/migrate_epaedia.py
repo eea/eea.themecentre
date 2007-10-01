@@ -155,7 +155,7 @@ class MigrateMedia(object):
         self._migrate_images()
 
         self.file.close()
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         self.request.RESPONSE.redirect(self.context.absolute_url())
 
     def images(self, folder, db_row, theme_id):
@@ -451,8 +451,8 @@ class MigrateArticles(object):
         rows = cursor.fetchall()
         cursor.close()
 
-        if page_id == 200:
-            import pdb; pdb.set_trace()
+        #if page_id == 200:
+        #    import pdb; pdb.set_trace()
 
         related = doc.getRelatedItems()
         for row in rows:
@@ -696,7 +696,8 @@ class MigrateArticles(object):
         try:
             imageobj = getattr(self.multimedia_folder, image_id)
         except:
-            import pdb; pdb.set_trace()
+            1/0
+            #import pdb; pdb.set_trace()
         path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
                 'copyright': image['source'] }
