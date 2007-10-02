@@ -363,12 +363,16 @@ class MigrateMedia(object):
         result = cursor.fetchall()
         cursor.close()
 
+        portal_url = getToolByName(self.context, 'portal_url')
+        portal = portal_url.getPortalObject()
+        folder = portal.SITE.images
+
         for db_row in result:
             if self.eids.has_key(db_row[0]):
                 continue
             if db_row[0] in eids_not_migrate:
                 continue
-            image = self.images(self.context, db_row, None)
+            image = self.images(folder, db_row, None)
             if not image:
                 continue
 
@@ -430,6 +434,10 @@ class MigrateArticles(object):
         self.multimedia_folder = context.unrestrictedTraverse(multimedia_path)
         self.objects_with_links = {}
 
+        portal_url = getToolByName(context, 'portal_url')
+        portal = portal_url.getPortalObject()
+        self.image_folder = portal.SITE.images
+
     def migrate(self):
         """ Some docstring. """
 
@@ -465,9 +473,6 @@ class MigrateArticles(object):
         cursor.execute(sql_eids_by_pid % page_id)
         rows = cursor.fetchall()
         cursor.close()
-
-        #if page_id == 200:
-        #    import pdb; pdb.set_trace()
 
         related = doc.getRelatedItems()
         for row in rows:
@@ -709,10 +714,9 @@ class MigrateArticles(object):
             title = image['title']
         image_id = utils.normalizeString(title, encoding='latin1')
         try:
-            imageobj = getattr(self.multimedia_folder, image_id)
+            imageobj = getattr(self.image_folder, image_id)
         except:
             1/0
-            #import pdb; pdb.set_trace()
         path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
                 'copyright': image['source'] }
