@@ -37,7 +37,8 @@ class FixExcludeFromNav(object):
         res = context.portal_catalog.searchResults(portal_type = 'Folder', id='multimedia', path = '/'.join(context.getPhysicalPath()))
         for folder in res:
             obj = folder.getObject()
-            if hasattr(aq_base(obj), 'exclude_from_nav'):
+            exclude_from_nav = getattr(aq_base(obj), 'exclude_from_nav', None)
+            if exclude_from_nav and not callable(exclude_from_nav):
                 del obj.exclude_from_nav
                 obj.initializeLayers()
             
