@@ -96,7 +96,7 @@ class NavigationPortlet(BaseNavigationPortlet):
         for product in products:
             if product['item']['Title'] not in titles:
                 data.append(product)
-        data.extend(self._overview())
+        #data.extend(self._overview())
         
         # order menu as configured in ZMI on themes
         order = getattr(context, 'themes_menu_order', ['highlights', 'reports_', 'indicators', 'Atlas', 'datasets','events','links'])
