@@ -795,7 +795,8 @@ class MigrateArticles(object):
     def _nl_to_p(self, text):
         result = ''
         for para in text.split('\n'):
-            result += '<p>%s</p>' % para
+            if para.strip():
+                result += '<p>%s</p>' % para
         return result
 
     def _read_file(self):
