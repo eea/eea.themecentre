@@ -20,6 +20,7 @@
 import MySQLdb
 import MySQLdb.cursors
 import os
+from DateTime import DateTime
 from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
@@ -550,8 +551,8 @@ class MigrateArticles(object):
                 image_width = self._image_sizes[section['eid']]
                 image_html = ('<div class="figure-plus-container figure-plus" style="width:%dpx">\n' % image_width) + \
                              '<div>\n' + \
-                             ('<img src="%s" alt="%s" />' % \
-                                 (image['path']+'/image_mini', image['title'])) + \
+                             ('<a href="%s"><img src="%s" alt="%s" /></a>' % \
+                                 (image[path]+'/image_view_fullscreen', image['path']+'/image_mini', image['title'])) + \
                              '</div>\n' + \
                              ('<div class="figure-title">%s</div>\n' % image['title']) + \
                              (len(image['copyright'])>0 and ('<div class="figure-source-copyright">%s</div>\n' %
