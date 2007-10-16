@@ -196,6 +196,7 @@ class MigrateMedia(object):
         image = open(path, 'rb')
         atimage.setImage(image)
         atimage.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
+        atimage.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         return atimage
 
     def animations(self, folder, db_row, theme_id):
@@ -212,6 +213,7 @@ class MigrateMedia(object):
         atfile.setHeight(350)
         atfile.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
         notify(ObjectModifiedEvent(atfile))
+        atfile.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         return atfile
 
     def mindstretchers(self, folder, db_row, theme_id):
@@ -252,6 +254,7 @@ class MigrateMedia(object):
         video._video_data['width'] = METADATA[filename]['width']
         video._video_data['height'] = METADATA[filename]['height']
         video._video_data['duration'] = METADATA[filename]['duration']
+        atfile.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         return atfile
 
     def links(self, folder, db_row, theme_id):
@@ -275,6 +278,7 @@ class MigrateMedia(object):
         linkobj.setDescription(body)
         linkobj.setRemoteUrl(link)
         linkobj.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
+        linkobj.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         return linkobj
 
     def migrate_files(self, theme_id, page_id, media_type):
@@ -515,6 +519,7 @@ class MigrateArticles(object):
         article = getattr(folder, new_id)
         article.setDescription(row['title'])
         article.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
+        article.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         self._change_workflow(article)
         article.reindexObject()
         self._save_pid_path(page_id, article)
@@ -552,7 +557,7 @@ class MigrateArticles(object):
                 image_html = ('<div class="figure-plus-container figure-plus" style="width:%dpx">\n' % image_width) + \
                              '<div>\n' + \
                              ('<a href="%s"><img src="%s" alt="%s" /></a>' % \
-                                 (image[path]+'/image_view_fullscreen', image['path']+'/image_mini', image['title'])) + \
+                                 (image['path']+'/image_view_fullscreen', image['path']+'/image_mini', image['title'])) + \
                              '</div>\n' + \
                              ('<div class="figure-title">%s</div>\n' % image['title']) + \
                              (len(image['copyright'])>0 and ('<div class="figure-source-copyright">%s</div>\n' %
@@ -766,6 +771,7 @@ class MigrateArticles(object):
                                                     title=title)
             level_two_folder = getattr(folder, new_id)
             level_two_folder.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
+            level_two_folder.setModificationDate(DEFAULT_EFFECTIVE_DATE)
             self._assign_subpages_section(level_two_folder)
             self._change_workflow(level_two_folder)
             level_two_folder.reindexObject()
@@ -790,6 +796,7 @@ class MigrateArticles(object):
                         id=folder_id, title=title)
                 level_three_folder = getattr(level_two_folder, folder_id)
                 level_three_folder.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
+                level_three_folder.setModificationDate(DEFAULT_EFFECTIVE_DATE)
                 self._assign_subpages_section(level_two_folder)
                 self._change_workflow(level_three_folder)
                 level_three_folder.reindexObject()
