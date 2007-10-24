@@ -99,19 +99,22 @@ class NavigationPortlet(BaseNavigationPortlet):
         #data.extend(self._overview())
         
         # order menu as configured in ZMI on themes
-        order = getattr(context, 'themes_menu_order', ['highlights', 'reports_', 'indicators', 'Atlas', 'datasets','events','links'])
-        orderedData = [ None for n in range(0,len(order))]
+        order = getattr(context, 'themes_menu_order', ['highlights', 'reports', 'indicators', 'maps-and-graphs', 'datasets','events','links'])
+        orderedData = [ None for n in range(0,len(order)+1)]
         unsortedData = []
-
         for node in data:
-           n = 0
-           for urlPart in order:
-               if urlPart in node['getURL']:
-                   orderedData[n] = node
-                   break
-               n += 1
+           n = 1
+           # default page always first
+           if  node.get('defaultPage', False):
+               orderedData[0] = node
            else:
-               unsortedData.append(node)
+               for urlPart in order:
+                   if urlPart in node['getURL']:
+                       orderedData[n] = node
+                       break
+                   n += 1
+               else:
+                   unsortedData.append(node)
         orderedData.extend(unsortedData)
 
         navSections = {'default' : [] }
