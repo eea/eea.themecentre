@@ -495,15 +495,16 @@ class ThemeLayoutAndDefaultPage(object):
         for brain in brains:
             themecentre = brain.getObject()
             tc_base = aq_base(themecentre)
-            tc_layout = getattr(tc_base, 'layout', None)
-            if tc_layout:
-                tc_base.__delattr__('layout')
-            if not themecentre.hasProperty('default_page'):
-                themecentre.manage_addProperty('default_page', 'intro', 'string')
             intro = getattr(themecentre, 'intro', None)
-            if intro and not intro.hasProperty('layout'):
-                intro.manage_addProperty('layout', 'themecentre_view', 'string')
-            themecentre._p_changed = True
+            tc_layout = getattr(tc_base, 'layout', None)
+            if intro:
+                if tc_layout:
+                    tc_base.__delattr__('layout')
+                if not themecentre.hasProperty('default_page'):
+                    themecentre.manage_addProperty('default_page', 'intro', 'string')
+                if not intro.hasProperty('layout'):
+                    intro.manage_addProperty('layout', 'themecentre_view', 'string')
+                themecentre._p_changed = True
         return str(len(brains)) + ' themecentres migrated'
 
 class GenericThemeToDefault(object):
