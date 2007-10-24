@@ -1,9 +1,10 @@
 import urllib
 from zope.event import notify
 from zope.interface import alsoProvides, directlyProvides, directlyProvidedBy
-from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation, IThemeTagging
+from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
+from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
-from eea.themecentre.themecentre import createFaqSmartFolder
+from eea.themecentre.themecentre import createFaqSmartFolder, getThemeCentre
 from eea.rdfrepository.interfaces import IFeed, IFeedContent
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
@@ -579,3 +580,31 @@ class ChangeDefaultPageToProperty(object):
                     del base.default_page
                     base.manage_addProperty('default_page', attr, 'string')
         return "successfully migrated properties"
+
+class EnsureAllObjectsHaveTags(object):
+    """ Adds themecentre tag to all its objects if they don't have it
+        already. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        themesdir = self.context
+        portal_catalog = getToolByName(self.context, 'portal_catalog')
+
+        count = 0
+        path = '/'.join(themesdir.getPhysicalPath())
+        brains = portal_catalog.searchResults(path=path)
+        for brain in brains:
+            if not brain.getThemes:
+                obj = brain.getObject()
+                themeCentre = getThemeCentre(obj)
+                if themeCentre: 
+                    themes = IThemeTagging(obj, None)
+                    if themes:
+                        themeCentreThemes = IThemeCentreSchema(themeCentre)
+                        themes.tags = [themeCentreThemes.tags]
+                        count += 1
+
+        return str(count)  + " objects were tagged"
