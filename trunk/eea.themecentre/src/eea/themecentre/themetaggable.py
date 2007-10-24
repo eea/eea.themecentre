@@ -26,18 +26,12 @@ class ThemeTaggable(object):
             mapping = annotations[KEY] = PersistentDict(themes)
         self.mapping = mapping
 
-    def addTag(self, theme):
-        existing_themes = self.mapping['themes']
-        existing_themes.append(theme)
-
-        info = Attributes(IThemeTaggable, 'tags')
-        notify(ObjectModifiedEvent(self.context, info))
-
     def tags():
         def get(self):
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
-            return list(mapping['themes'])
+            tags = list(mapping['themes'])
+            return tags 
         def set(self, value):
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
@@ -73,3 +67,4 @@ class ThemeCentreTaggable(object):
             themes = vocab(self)
         return property(get, set)
     tags = tags()
+

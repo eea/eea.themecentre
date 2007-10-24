@@ -25,8 +25,7 @@ Because the folder object is new it shouldn't have any tags.
 
 Let's add a few tags.
 
-  >>> taggable.addTag('alaska')
-  >>> taggable.addTag('climate change')
+  >>> taggale.tags  = ['alaska', 'climate change']
 
 Let's see what tags there are.
 
