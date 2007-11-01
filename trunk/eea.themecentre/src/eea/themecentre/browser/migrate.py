@@ -529,7 +529,7 @@ class GenericThemeToDefault(object):
                if brain.getThemes == ['G', 'e', 'n', 'e', 'r', 'i', 'c'] or brain.getThemes == ['g', 'e', 'n', 'e', 'r', 'i', 'c'] or brain.getThemes == ['D', 'e', 'f', 'a', 'u', 'l', 't'] or brain.getThemes == ['d', 'e', 'f', 'a', 'u', 'l', 't']:
                   obj = brain.getObject()
                   themes = IThemeTagging(obj)
-                  output=output+'NOTOK: '+obj.id+': '+'brain.getThemes[0]: '+ brain.getThemes[0] + ' themes.tags[0]: '+ themes.tags[0] + ' URL: ' + obj.absolute_url() +'\r'
+                  output=output+'NOTOK: '+obj.id+': '+'brain.getThemes[0]: '+ brain.getThemes[0] + ' themes.tags[0]: '+ (len(themes.tags) > 0 and themes.tags[0] or '') + ' URL: ' + obj.absolute_url() +'\r'
                   themes.tags = ['default']
                   obj.reindexObject()
                else:
