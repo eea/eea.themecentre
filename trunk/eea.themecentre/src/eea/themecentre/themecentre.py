@@ -182,8 +182,8 @@ def objectThemeTagged(obj, event):
     site = getSite()
     if site is None:
         return
-    
-    portal_catalog = getToolByName(getSite(), 'portal_catalog')
+
+    portal_catalog = getToolByName(site, 'portal_catalog')
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
             portal_catalog.reindexObject(obj.context)
