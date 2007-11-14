@@ -26,7 +26,8 @@ class ObjectThemesPortlet(BasePortlet):
 
         catalog = getToolByName(context, 'portal_catalog')
         query = { 'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
-                  'getId' : themeIds }
+                  'getId' : themeIds,
+                  'review_state' : 'published' }
         result = catalog.searchResults(query)
         themes = [ brain.getObject() for brain in result ]
 

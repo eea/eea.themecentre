@@ -15,10 +15,15 @@ class RelatedPortlet(BasePortlet):
         currentThemeCentre = getThemeCentre(context)
         result = []
         if currentThemeCentre:
+            catalog = getToolByName(context, 'portal_catalog')
+            query = { 'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
+                      'review_state' : 'published' }
+            tcs = catalog.searchResults(query)
+            tcsIds = [ brain.getId for brain in tcs ]
             relation = IThemeRelation(currentThemeCentre)
             for uid in relation.related:
                 themeCentre = reference_catalog.lookupObject(uid)
-                if themeCentre is not None:
+                if themeCentre is not None and themeCentre.getId() in tcsIds:
                     result.append(themeCentre)
 
         return result
