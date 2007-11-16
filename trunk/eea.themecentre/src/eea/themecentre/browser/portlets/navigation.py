@@ -58,8 +58,7 @@ class NavigationPortlet(BaseNavigationPortlet):
                 if node['item'].getId == currentTheme.getId():
                     data = node['children']
                     break
-                
-        products = self._products()
+
         newData = []
         titles = []
         for node in data:
@@ -93,9 +92,6 @@ class NavigationPortlet(BaseNavigationPortlet):
 
         data = newData
 
-        for product in products:
-            if product['item']['Title'] not in titles:
-                data.append(product)
         #data.extend(self._overview())
         
         # order menu as configured in ZMI on themes
@@ -138,48 +134,6 @@ class NavigationPortlet(BaseNavigationPortlet):
                                  theme=data, children=all.get('children',[]),
                                  level=1, show_children=True, isNaviTree=True, bottomLevel=5)
 
-    def _products(self):
-        context = utils.context(self)
-        view = getMultiAdapter((context, self.request),
-                               name='themes-rdftitles')
-
-        result = []
-        for product in view.short_items():
-            url = self.request.get('URL0')
-            querystring = self.request.get('QUERY_STRING')
-            if querystring:
-                url += '?' + querystring
-
-            item = {'no_display': False,
-                    'getURL': product['url'],
-                    'show_children': False,
-                    'Description': '',
-                    'Title': product['title'],
-                    'absolute_url': product['url'],
-                    'portal_type': 'RSSFeedRecipe',
-                    'Creator': '',
-                    'children': [],
-                    'currentParent': False,
-                    'creation_date': '2007-03-25 22:10:51',
-                    'item': None,
-                    'depth': 2,
-                    'path': '',
-                    'currentItem': url == product['url'],
-                    'review_state': '',
-                    'getRemoteUrl': None,
-                    'icon': 'www/folder_icon.gif' }
-
-            newNode = {'item'          : item,
-                       'getURL'        : product['url'],
-                       'depth'         : '',
-                       'currentItem'   : url == product['url'],
-                       'currentParent' : False,
-                       'navSection'    : 'default',
-                       'children'      : []}
-            
-            result.append(newNode)
-        return result
-    
     def _overview(self):
         context = utils.context(self)
         tc = getThemeCentre(context)
