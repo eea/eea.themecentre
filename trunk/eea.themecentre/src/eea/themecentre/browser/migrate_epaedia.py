@@ -434,6 +434,7 @@ class MigrateArticles(object):
         self.db = MySQLdb.connect(host=self.host, user=self.user, db=self.dbname,
                                   passwd=self.password,
                                   cursorclass=MySQLdb.cursors.SSDictCursor)
+        self._article_file = open('articles.txt', 'w')
         self.catalog = getToolByName(self.context, 'portal_catalog')
         self.workflow = getToolByName(context, 'portal_workflow')
         self._read_file()
@@ -474,6 +475,7 @@ class MigrateArticles(object):
                 self._migrate_articles(themecentre, theme)
         self._fix_internal_links()
         #self._fix_external_links()
+        self._article_file.close()
         return 'migration of epaedia articles is successfully finished'
 
     def _apply_media_relations(self, folder, doc_id, page_id):
@@ -630,6 +632,7 @@ class MigrateArticles(object):
         article.setText(total_body)
         article.reindexObject()
         self._apply_themes(article, page_id)
+        self._save_article(article, page_id)
         return article
 
     def _create_intro(self, folder, page_id):
@@ -841,6 +844,9 @@ class MigrateArticles(object):
 
         article1.setRelatedItems([linked_article] + current_relations)
         #linked_article.setRelatedItems([article1] + current_article2)
+
+    def _save_article(self, article, page_id):
+        self._article_file.write(str(page_id) + '|' + '/'.join(article.getPhysicalPath()) + '\n')
 
     def _section_content(self, page_id, section_no):
         cursor = self.db.cursor()
