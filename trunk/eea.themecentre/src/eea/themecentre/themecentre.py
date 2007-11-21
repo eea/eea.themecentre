@@ -36,12 +36,17 @@ def promoted(obj, event):
     multimedia = getattr(obj, 'multimedia')
     multimedia.layout = 'mediacentre_view'
     multimedia.setExcludeFromNav(True)
+    multimedia.processForm()
     workflow.doActionFor(multimedia, 'publish')
 
     newsobj = getattr(obj, 'highlights', None)
+    newsobj.processForm()
     eventsobj = getattr(obj, 'events', None)
+    eventsobj.processForm()
     linksobj = getattr(obj, 'links', None)
+    linksobj.processForm()
     faqobj = getattr(obj, 'faq', None)
+    faqobj.processForm()
 
     theme_id = IThemeCentreSchema(obj).tags
 
@@ -50,7 +55,7 @@ def promoted(obj, event):
         obj.manage_addProperty('default_page', 'intro', 'string')
     intro = getattr(obj, 'intro')
     intro.manage_addProperty('layout', 'themecentre_view', 'string')
-    intro.reindexObject()
+    intro.processForm()
 
     if newsobj:
         workflow.doActionFor(newsobj, 'publish')
