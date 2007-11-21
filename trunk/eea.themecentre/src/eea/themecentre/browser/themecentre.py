@@ -1,6 +1,7 @@
 from zope.interface import implements, alsoProvides
 from zope.component import getUtility
-from zope.formlib.form import Fields, EditForm
+from zope.formlib.form import Fields
+from Products.Five.formlib.formbase import EditForm
 from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
 from eea.themecentre.themecentre import PromotedToThemeCentreEvent
