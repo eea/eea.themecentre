@@ -193,6 +193,7 @@ class MigrateMedia(object):
 
         folder.invokeFactory('Image', id=new_id, title=title)
         atimage = folder[new_id]
+        atimage.processForm()
         image = open(path, 'rb')
         atimage.setImage(image)
         atimage.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
@@ -212,7 +213,8 @@ class MigrateMedia(object):
         atfile.setWidth(530)
         atfile.setHeight(350)
         atfile.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
-        notify(ObjectModifiedEvent(atfile))
+        atfile.processForm()
+        #notify(ObjectModifiedEvent(atfile))
         atfile.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         return atfile
 
@@ -240,6 +242,7 @@ class MigrateMedia(object):
         atfile.setFile(file)
         atfile.setDescription(body)
         atfile.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
+        atfile.processForm()
 
         try:
             # p4a activates videos automatically by subscribing to modified events
@@ -277,6 +280,7 @@ class MigrateMedia(object):
         linkobj = linksfolder[new_id]
         linkobj.setDescription(body)
         linkobj.setRemoteUrl(link)
+        linkobj.processForm()
         linkobj.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
         linkobj.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         return linkobj
@@ -520,6 +524,7 @@ class MigrateArticles(object):
                                       title=title or row['title'])
         article = getattr(folder, new_id)
         article.setDescription(row['title'])
+        article.processForm()
         article.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
         article.setModificationDate(DEFAULT_EFFECTIVE_DATE)
         self._change_workflow(article)
@@ -773,6 +778,7 @@ class MigrateArticles(object):
             new_id = folder.invokeFactory('Folder', id=folder_id,
                                                     title=title)
             level_two_folder = getattr(folder, new_id)
+            level_two_folder.processForm()
             level_two_folder.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
             level_two_folder.setModificationDate(DEFAULT_EFFECTIVE_DATE)
             self._assign_subpages_section(level_two_folder)
@@ -798,6 +804,7 @@ class MigrateArticles(object):
                 level_two_folder.invokeFactory('Folder',
                         id=folder_id, title=title)
                 level_three_folder = getattr(level_two_folder, folder_id)
+                level_three_folder.processForm()
                 level_three_folder.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
                 level_three_folder.setModificationDate(DEFAULT_EFFECTIVE_DATE)
                 self._assign_subpages_section(level_two_folder)
