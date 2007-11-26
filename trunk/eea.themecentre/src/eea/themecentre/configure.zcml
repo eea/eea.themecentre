@@ -87,6 +87,11 @@
       />
 
   <utility
+      component=".vocabulary.ThemesEditVocabularyFactory"
+      name="Allowed themes for edit"
+      />
+
+  <utility
       component=".vocabulary.ThemeCentresVocabularyFactory"
       name="Theme Centres"
       />

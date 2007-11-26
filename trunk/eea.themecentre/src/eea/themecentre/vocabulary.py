@@ -15,6 +15,29 @@ class ThemesVocabulary(object):
 
 ThemesVocabularyFactory = ThemesVocabulary()
 
+class ThemesEditVocabulary(object):
+    """ Theme vocabulary that is used for the 'themes' tab. This vocabulary
+        has knowledge about deprecated themes. """
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        portal_vocab = getToolByName(context.context, 'portal_vocabularies')
+        wftool = getToolByName(context.context, 'portal_workflow')
+
+        themes = portal_vocab.themes.objectValues()
+        terms = []
+        for theme in themes:
+            key = theme.getId()
+            state = wftool.getInfoFor(theme, 'review_state', 'published')
+            if state != 'published':
+                title = theme.Title() + ' (deprecated)'
+            else:
+                title = theme.Title()
+            terms.append(SimpleTerm(key, key, title))
+        return SimpleVocabulary(terms)
+
+ThemesEditVocabularyFactory = ThemesEditVocabulary()
+
 class ThemeCentresVocabulary(object):
     implements(IVocabularyFactory)
 
