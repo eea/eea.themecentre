@@ -304,4 +304,13 @@
       allowed_attributes="documents links"
       />
 
+  <!-- provides videos that are shown in the themecentre's multimedia section -->
+  <browser:page
+      for="*"
+      name="themecentre_multimedia"
+      class=".themecentre.Multimedia"
+      permission="zope.Public"
+      allowed_attributes="types media_items"
+      />
+
 </configure>
