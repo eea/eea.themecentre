@@ -6,6 +6,7 @@ from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
 from eea.themecentre.themecentre import createFaqSmartFolder, getThemeCentre
 from eea.rdfrepository.interfaces import IFeed, IFeedContent
+from eea.mediacentre.interfaces import IMediaType
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
@@ -608,3 +609,23 @@ class EnsureAllObjectsHaveTags(object):
                         count += 1
 
         return str(count)  + " objects were tagged"
+
+class ChangeMediaTypesDefault(object):
+    """ Changes the media type on file's don't have any media type set.
+        If media type not set, the type 'other' is set on the file. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brains = catalog.searchResults(object_provides='p4a.video.interfaces.IVideoEnhanced')
+        for brain in brains:
+            file = brain.getObject()
+            media = IMediaType(file)
+            if not media.types:
+                media.types = ['other']
+            file.reindexObject()
+
+        return "migration successful"

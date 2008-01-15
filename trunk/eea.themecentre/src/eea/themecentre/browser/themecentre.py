@@ -6,11 +6,11 @@ from Products.Five.formlib.formbase import EditForm
 from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
 from eea.themecentre.themecentre import PromotedToThemeCentreEvent, getTheme
+from eea.themecentre.themecentre import getThemeTitle
 from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
 from eea.mediacentre.mediatypes import MediaTypesVocabularyFactory
-from Products.CMFCore.utils import getToolByName
-
 from eea.mediacentre.interfaces import IMediaCentre
+from Products.CMFCore.utils import getToolByName
 
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
 
@@ -46,14 +46,26 @@ class Multimedia(object):
         self.request = request
 
     def types(self):
-        from zope.interface import Interface
         mediacentre = getUtility(IMediaCentre)
         types = sorted(mediacentre.getMediaTypes())
         vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
-        return [{'id':term.value, 'title':term.title} for term in vocab]
+        types_ = [{'url':'theme'+term.value, 'title':term.title}
+                  for term in vocab if term.value != 'other']
+        types_.append({'url': 'themeother', 'title': 'Other'})
+        return types_
 
     def media_items(self):
         currentTheme = getTheme(self.context)
         mediacentre = getUtility(IMediaCentre)
         search = { MEDIA_SEARCH_KEY: { 'theme': currentTheme }}
         return [file['object'] for file in mediacentre.getMedia(search=search)]
+
+class Theme(object):
+    """ Provides information about this theme/themecentre. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def name(self):
+        return getThemeTitle(self.context)

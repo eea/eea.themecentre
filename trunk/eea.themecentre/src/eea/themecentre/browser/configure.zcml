@@ -270,6 +270,13 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="*"
+      name="changeMediaTypesDefault"
+      class=".migrate.ChangeMediaTypesDefault"
+      permission="cmf.ManagePortal"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"
@@ -311,6 +318,14 @@
       class=".themecentre.Multimedia"
       permission="zope.Public"
       allowed_attributes="types media_items"
+      />
+
+  <browser:page
+      for="*"
+      name="theme"
+      class=".themecentre.Theme"
+      permission="zope.Public"
+      allowed_attributes="name"
       />
 
 </configure>
