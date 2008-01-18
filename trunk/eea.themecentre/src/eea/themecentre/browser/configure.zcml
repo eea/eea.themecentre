@@ -328,4 +328,13 @@
       allowed_attributes="name"
       />
 
+  <!-- provides info for the related topics portlet -->
+  <browser:page
+      for="*"
+      name="relatedtopics"
+      class=".related.Topics"
+      permission="zope.Public"
+      allowed_attributes="menu"
+      />
+
 </configure>
