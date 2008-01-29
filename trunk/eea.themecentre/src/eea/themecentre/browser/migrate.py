@@ -7,6 +7,7 @@ from eea.themecentre.browser.themecentre import PromoteThemeCentre
 from eea.themecentre.themecentre import createFaqSmartFolder, getThemeCentre
 from eea.rdfrepository.interfaces import IFeed, IFeedContent
 from eea.mediacentre.interfaces import IMediaType
+from p4a.video.interfaces import IVideo
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
@@ -629,3 +630,23 @@ class ChangeMediaTypesDefault(object):
             file.reindexObject()
 
         return "migration successful"
+
+class AddRichTextDescriptionToVideos(object):
+    """ Adds an empty string to the rich_description field on all
+        IVideoEnhanced objects. As this is a new field it's None
+        and the edit page fails with a traceback. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brains = catalog.searchResults(object_provides='p4a.video.interfaces.IVideoEnhanced')
+        for brain in brains:
+            file = brain.getObject()
+            video = IVideo(file)
+            video.rich_description = u''
+            video.urls = ()
+
+        return str(len(brains)) + " videos where migrated."
