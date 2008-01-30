@@ -2,6 +2,7 @@ from zope.app.schema.vocabulary import IVocabularyFactory
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
+from zope.app.component.hooks import getSite
 
 class ThemesVocabulary(object):
     implements(IVocabularyFactory)
@@ -12,8 +13,9 @@ class ThemesVocabulary(object):
         else:
             obj = context
 
-        portal_vocab = getToolByName(obj, 'portal_vocabularies')
-        themes = getattr(portal_vocab, 'themes').getDisplayList(obj)
+        site = getSite()
+        portal_vocab = getToolByName(site, 'portal_vocabularies')
+        themes = getattr(portal_vocab, 'themes').getDisplayList(site)
         terms = [SimpleTerm(key, key, value) for key, value in themes.items()]
         return SimpleVocabulary(terms)
 
@@ -25,19 +27,17 @@ class ThemesEditVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        portal_vocab = getToolByName(context.context, 'portal_vocabularies')
-        wftool = getToolByName(context.context, 'portal_workflow')
+        site = getSite()
+        portal_vocab = getToolByName(site, 'portal_vocabularies')
+        wftool = getToolByName(site, 'portal_workflow')
 
         themes = portal_vocab.themes.objectValues()
         terms = []
         for theme in themes:
             key = theme.getId()
             state = wftool.getInfoFor(theme, 'review_state', 'published')
-            if state != 'published':
-                title = theme.Title() + ' (deprecated)'
-            else:
-                title = theme.Title()
-            terms.append(SimpleTerm(key, key, title))
+            if state == 'published':
+                terms.append(SimpleTerm(key, key, theme.Title()))
         return SimpleVocabulary(terms)
 
 ThemesEditVocabularyFactory = ThemesEditVocabulary()

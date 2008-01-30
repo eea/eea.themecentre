@@ -17,7 +17,7 @@ class IThemeTagging(Interface):
         max_length = 3,
         value_type = Choice(
             title = u"Theme",
-            vocabulary = "Allowed themes for edit",
+            vocabulary = "Allowed themes",
             )
         )
 
