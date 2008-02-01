@@ -1,3 +1,4 @@
+from Products.CMFCore.utils import getToolByName
 from Products.Five.formlib.formbase import EditForm
 from zope.app.form.browser.itemswidgets import OrderedMultiSelectWidget
 from zope.formlib.form import Fields
@@ -51,9 +52,21 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
     def required(self):
         return False
 
+
 class ThemeEditForm(EditForm):
     """ Form for editing themes. """
 
-    form_fields = Fields(IThemeTagging)
-    form_fields['tags'].custom_widget = ThemesOrderedWidget
     label = u'Edit themes'
+
+    def __call__(self):
+        mtool = getToolByName(self.context, 'portal_membership')
+
+        self.form_fields = Fields(IThemeTagging)
+        self.form_fields['tags'].custom_widget = ThemesOrderedWidget
+
+        # by default max_length is decided by the IThemeTagging interface
+        # but managers want to be able to add any number of themes
+        if mtool.checkPermission('Manage portal', self.context):
+            self.form_fields['tags'].field.max_length = None
+
+        return super(ThemeEditForm, self).__call__()
