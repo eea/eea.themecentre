@@ -167,7 +167,6 @@ class MigrateMedia(object):
         self._migrate_images()
 
         self.file.close()
-        #import pdb; pdb.set_trace()
         self.request.RESPONSE.redirect(self.context.absolute_url())
 
     def images(self, folder, db_row, theme_id):
@@ -461,7 +460,7 @@ class MigrateArticles(object):
         themes_folder = self.context
         if not themes_folder.hasProperty('navigation_sections_left'):
             themes_folder.manage_addProperty('navigation_sections_left',
-                                             'subpages,Topics', 'lines')
+                                             'topics,Topics', 'lines')
         portlet = 'here/@@leftNavigationSections'
         portlets = themes_folder.getProperty('left_slots')
         if not portlet in portlets:
@@ -507,7 +506,7 @@ class MigrateArticles(object):
 
     def _assign_subpages_section(self, obj):
         navContext = INavigationSectionPosition(obj)
-        navContext.section = 'subpages'
+        navContext.section = 'topics'
 
     def _change_workflow(self, obj):
         pass
