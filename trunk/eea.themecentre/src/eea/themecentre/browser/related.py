@@ -24,6 +24,9 @@ class Topics(object):
 
         vocab = ThemesVocabularyFactory(self.context, checkContext=False)
         themecentre = getThemeCentre(self.context)
+        if themecentre is None:
+            return None
+
         themecentre_url = themecentre.absolute_url()
         tags = IThemeTagging(themecentre).tags
         query = { 'navSection': TOPICS_ID }
