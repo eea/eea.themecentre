@@ -93,7 +93,8 @@ class MigrateMedia(object):
         self.password = request.get('password', '')
         self.host = request.get('host', 'localhost')
         self.db = MySQLdb.connect(host=self.host, user=self.user, db=self.dbname,
-                                  passwd=self.password)
+                                  passwd=self.password,
+                                  charset='utf8')
         self.path = request.get('path')
         self.workflow = getToolByName(context, 'portal_workflow')
         self.catalog = getToolByName(context, 'portal_catalog')
