@@ -709,18 +709,13 @@ class MigrateArticles(object):
                 to_replace = 'PID' + str(pid) + 'PID'
                 link_to = self.pidpaths[pid]
                 link = "resolveuid/" + link_to.UID()
-                new_text = text.replace(to_replace, link)
+                text = text.replace(to_replace, link)
                 # add object to "related pages"
                 relations = obj.getRelatedItems()
                 obj.setRelatedItems(relations + [link_to])
 
-                obj.setText(new_text)
+                obj.setText(text)
                 obj.reindexObject()
-
-    #def _fix_external_links(self):
-    #    for obj_pid, link_pids in self.external_links.items():
-    #        obj = self.pidpaths[obj_pid]
-    #        link_obj = 
 
     def _image_info(self, eid):
         cursor = self.db.cursor()
