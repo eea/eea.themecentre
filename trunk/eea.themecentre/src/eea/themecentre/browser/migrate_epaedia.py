@@ -438,7 +438,8 @@ class MigrateArticles(object):
         self.host = request.get('host', 'localhost')
         self.db = MySQLdb.connect(host=self.host, user=self.user, db=self.dbname,
                                   passwd=self.password,
-                                  cursorclass=MySQLdb.cursors.SSDictCursor)
+                                  cursorclass=MySQLdb.cursors.SSDictCursor,
+                                  charset='utf8')
         self._article_file = open('articles.txt', 'w')
         self.catalog = getToolByName(self.context, 'portal_catalog')
         self.workflow = getToolByName(context, 'portal_workflow')
