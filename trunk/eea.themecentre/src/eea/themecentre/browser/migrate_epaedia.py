@@ -197,6 +197,8 @@ class MigrateMedia(object):
         atimage.setImage(image)
         atimage.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
         atimage.setModificationDate(DEFAULT_EFFECTIVE_DATE)
+        self.workflow.doActionFor(atimage, 'submit')
+        self.workflow.doActionFor(atimage, 'show')
         return atimage
 
     def animations(self, folder, db_row, theme_id):
