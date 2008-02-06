@@ -14,6 +14,9 @@ class SmartFolderPortlets(object):
 
     def __call__(self):
         themecentre = getThemeCentre(self.context)
+        if themecentre is None:
+            return []
+
         catalog = getToolByName(getSite(), 'portal_catalog')
         query = { 'portal_type': 'Topic',
                   'path': '/'.join(themecentre.getPhysicalPath()) }
