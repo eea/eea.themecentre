@@ -168,6 +168,7 @@ class MigrateMedia(object):
         self._migrate_images()
 
         self.file.close()
+        import pdb; pdb.set_trace()
         self.request.RESPONSE.redirect(self.context.absolute_url())
 
     def images(self, folder, db_row, theme_id):

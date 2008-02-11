@@ -23,6 +23,7 @@ def createObject(parent, portal_type, id):
         newobj.reindexObject()
 
 class TestThemeCentre(ThemeCentreTestCase):
+
     def afterSetUp(self):
         self.setRoles(['Manager'])
         self.portal.invokeFactory('Folder', id='to_be_promoted')
@@ -35,7 +36,7 @@ class TestThemeCentre(ThemeCentreTestCase):
 
 def test_suite():
 
-    return unittest.TestSuite((
+    suite = unittest.TestSuite((
         doctest.DocFileSuite('tagging.txt',
                      setUp=setUp, #tearDown=tearDown,
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
@@ -46,6 +47,7 @@ def test_suite():
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
         ))
+    return suite
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

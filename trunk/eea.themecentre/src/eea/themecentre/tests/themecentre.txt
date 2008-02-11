@@ -4,9 +4,11 @@ A folder can be promoted to a Theme Centre by calling a view.
   >>> from eea.themecentre.interfaces import IThemeTagging
   >>> from eea.themecentre.interfaces import IThemeCentreSchema
   >>> from eea.themecentre.browser.themecentre import PromoteThemeCentre
+  >>> from zope.app.component.hooks import setSite
+  >>> setSite(self.portal)
 
   >>> folder = self.portal.to_be_promoted
-  >>> view = PromoteThemeCentre(folder, self.portal.REQUEST)
+  >>> view = folder.unrestrictedTraverse('@@promote2ThemeCentre')
   >>> view()
   '...'
 
@@ -22,8 +24,6 @@ should be created. Let's see if that worked.
   >>> getattr(themeCentre, 'highlights', None) is not None
   True
   >>> getattr(themeCentre, 'events', None) is not None
-  True
-  >>> getattr(themeCentre, 'links', None) is not None
   True
   >>> getattr(themeCentre, 'faq', None) is not None
   True

@@ -2,59 +2,40 @@
 # Base TestCase for Audit
 #
 
-import os, sys, code
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
 from Testing import ZopeTestCase
 from Products.PloneTestCase import PloneTestCase
-from zope.configuration.xmlconfig import XMLConfig
-import Products.Five
-import Products.FiveSite
-import eea.themecentre
-
-#XMLConfig('configure.zcml', Products.Five)()
+from Products.PloneTestCase.layer import onsetup
+from Products.Five import zcml
+from Products.Five import fiveconfigure
 
 dependencies = []
-PloneTestCase.installProduct('Five')
-PloneTestCase.installProduct('PloneRSSPortlet')
-PloneTestCase.installProduct('ATVocabularyManager')
-PloneTestCase.installProduct('EEAContentTypes')
-PloneTestCase.installProduct('PloneHelpCenter')
-PloneTestCase.installProduct('ThemeCentre')
-
-XMLConfig('meta.zcml', Products.Five)()
-XMLConfig('configure.zcml', Products.FiveSite)()
-XMLConfig('configure.zcml', eea.themecentre)()
 
 PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager',
-            'EEAContentTypes',
             'PloneHelpCenter',
-            'FiveSite', 'ThemeCentre')
+            'FiveSite', 'ThemeCentre',
+            'EEAContentTypes',)
 
+
+@onsetup
+def setup_themecentre():
+    fiveconfigure.debug_mode = True
+    import Products.Five
+    import Products.FiveSite
+    import eea.themecentre
+    zcml.load_config('meta.zcml', Products.Five)
+    zcml.load_config('configure.zcml', Products.FiveSite)
+    zcml.load_config('configure.zcml', eea.themecentre)
+    fiveconfigure.debug_mode = False
+
+    PloneTestCase.installProduct('Five')
+    PloneTestCase.installProduct('PloneRSSPortlet')
+    PloneTestCase.installProduct('ATVocabularyManager')
+    PloneTestCase.installProduct('ThemeCentre')
+    PloneTestCase.installProduct('PloneHelpCenter')
+    PloneTestCase.installProduct('EEAContentTypes')
+
+setup_themecentre()
 PloneTestCase.setupPloneSite(products=PRODUCTS)
 
 class ThemeCentreTestCase(PloneTestCase.FunctionalTestCase):
-    def interact(self, locals=None):
-        savestdout = sys.stdout
-        sys.stdout = sys.stderr
-        sys.stderr.write("="*70)
-        console = code.InteractiveConsole(locals)
-        console.interact("""
-ZopeTestCase Interactive Console
-(c) BlueDynamics Alliance, Austria  - 2005
-
-Note: You have the same locals available as in your test case.
-""")
-        sys.stdout.write('\nend of ZopeTestCase Interactive Console sessions\n')
-        sys.stdout.write('='*70+'\n')
-        sys.stdout = savestdout
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(ThemeCentreTestCase))
-    return suite
-
-if __name__ == '__main__':
-    framework()
+    """ Test case class used for functional themecentre tests. """
