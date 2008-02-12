@@ -7,7 +7,7 @@
   <browser:page
       for="eea.themecentre.interfaces.IThemeTaggable"
       name="themes_edit.html"
-      permission="eea.PromoteThemeCentre"
+      permission="cmf.ModifyPortalContent"
       class=".themes.ThemeEditForm"
       />
 

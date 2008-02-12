@@ -2,6 +2,7 @@ from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
 from eea.themecentre.themecentre import PromotedToThemeCentreEvent
+from eea.themecentre.themecentre import getThemeCentre
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
 from zope.app.annotation.interfaces import IAnnotations
@@ -12,6 +13,16 @@ from zope.app.event.objectevent import ObjectModifiedEvent, Attributes
 from zope.app.schema.vocabulary import IVocabularyFactory
 
 KEY = 'eea.themecentre.themetaggable'
+
+def checkTheme(context, themes):
+    # make sure the object is tagged with the current themecentre
+    themecentre = getThemeCentre(context)
+    if themecentre:
+        themeCentreThemes = IThemeCentreSchema(themecentre)
+        if themeCentreThemes.tags:
+            tag = themeCentreThemes.tags
+            if tag not in themes:
+                themes.append(tag)
 
 class ThemeTaggable(object):
     implements(IThemeTagging)
@@ -35,7 +46,14 @@ class ThemeTaggable(object):
         def set(self, value):
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
-            mapping['themes'] = PersistentList(value)
+
+            # if value is a tuple, convert it
+            themes = list(value)
+            # make sure object is tagged with the current themecentre
+            # if not, add the themecentre to the tags
+            checkTheme(self.context, themes)
+
+            mapping['themes'] = PersistentList(themes)
             info = Attributes(IThemeTagging, 'tags')
             notify(ObjectModifiedEvent(self, info))
         return property(get, set)

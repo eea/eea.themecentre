@@ -1,4 +1,5 @@
 import unittest
+from Products.CMFCore.utils import getToolByName
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 from zope.component import provideAdapter

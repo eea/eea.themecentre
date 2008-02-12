@@ -1,6 +1,7 @@
 A folder can be promoted to a Theme Centre by calling a view.
 
   >>> from Products.ATContentTypes.content.folder import ATFolder
+  >>> from Products.CMFCore.utils import getToolByName
   >>> from eea.themecentre.interfaces import IThemeTagging
   >>> from eea.themecentre.interfaces import IThemeCentreSchema
   >>> from eea.themecentre.browser.themecentre import PromoteThemeCentre
@@ -34,7 +35,14 @@ tagged with the theme associated with the Theme Centre.
   >>> self.createObject(themeCentre.highlights, 'News Item', 'newsobj')
   >>> themeadapter = IThemeTagging(themeCentre.highlights.newsobj)
   >>> themeadapter.tags
-  ['air']
+  ['air', 'air_quality']
+
+An object should always have its themecentre as a tag, so even if the
+user removes it it should be added again automatically.
+
+  >>> themeadapter.tags = []
+  >>> themeadapter.tags
+  ['air', 'air_quality']
 
 A theme can be related to other themes. To tell what themes this theme
 is related to, we adapt themecentre to IThemeRelation. In real cases
@@ -69,3 +77,12 @@ the 'agriculture' theme centre.
   >>> vocab = ThemeCentresVocabularyFactory(adapted)
   >>> [ term.value for term in vocab ] == [ themeCentre2.UID() ]
   True
+
+
+Modify portal content should be enough for accessing the themes tab.
+
+  >>> self.setRoles(['Member'])
+  >>> mtool = getToolByName(self.portal, 'portal_membership')
+  >>> self.portal.to_be_promoted.manage_permission('Modify portal content', roles=['Member'])
+  >>> self.portal.to_be_promoted.unrestrictedTraverse('themes_edit.html')()
+  u'...'

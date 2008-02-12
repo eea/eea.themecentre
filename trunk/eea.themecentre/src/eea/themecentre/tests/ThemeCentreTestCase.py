@@ -22,9 +22,11 @@ def setup_themecentre():
     import Products.Five
     import Products.FiveSite
     import eea.themecentre
+    import Products.ThemeCentre
     zcml.load_config('meta.zcml', Products.Five)
     zcml.load_config('configure.zcml', Products.FiveSite)
     zcml.load_config('configure.zcml', eea.themecentre)
+    zcml.load_config('overrides.zcml', Products.ThemeCentre)
     fiveconfigure.debug_mode = False
 
     PloneTestCase.installProduct('Five')
