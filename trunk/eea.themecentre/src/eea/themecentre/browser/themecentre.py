@@ -49,9 +49,9 @@ class Multimedia(object):
         mediacentre = getUtility(IMediaCentre)
         types = sorted(mediacentre.getMediaTypes())
         vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
-        types_ = [{'url':'theme'+term.value, 'title':term.title}
+        types_ = [{'typeid':term.value, 'title':term.title}
                   for term in vocab if term.value != 'other']
-        types_.append({'url': 'themeother', 'title': 'Other'})
+        types_.append({'typeid':'other', 'title': 'Other'})
         return types_
 
     def media_items(self):
