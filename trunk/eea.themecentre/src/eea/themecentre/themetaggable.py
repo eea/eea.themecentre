@@ -1,5 +1,5 @@
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
-from eea.themecentre.interfaces import IThemeCentre
+from eea.themecentre.interfaces import IThemeCentre, IMainThemeTagging
 from eea.themecentre.interfaces import IThemeCentreSchema
 from eea.themecentre.themecentre import PromotedToThemeCentreEvent
 from eea.themecentre.themecentre import getThemeCentre
@@ -58,6 +58,10 @@ class ThemeTaggable(object):
             notify(ObjectModifiedEvent(self, info))
         return property(get, set)
     tags = tags()
+
+class MainThemeTaggable(ThemeTaggable):
+    implements(IMainThemeTagging)
+    adapts(IThemeTaggable)
 
 class ThemeCentreTaggable(object):
     implements(IThemeCentreSchema)

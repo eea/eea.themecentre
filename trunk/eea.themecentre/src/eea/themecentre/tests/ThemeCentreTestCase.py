@@ -30,6 +30,7 @@ def setup_themecentre():
     fiveconfigure.debug_mode = False
 
     PloneTestCase.installProduct('Five')
+    PloneTestCase.installProduct('FiveSite')
     PloneTestCase.installProduct('PloneRSSPortlet')
     PloneTestCase.installProduct('ATVocabularyManager')
     PloneTestCase.installProduct('ThemeCentre')

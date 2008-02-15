@@ -34,7 +34,6 @@ class TestThemeCentre(ThemeCentreTestCase):
         # add one entry to the themes vocabulary
         vocab = self.portal.portal_vocabularies
 
-
 def test_suite():
 
     suite = unittest.TestSuite((

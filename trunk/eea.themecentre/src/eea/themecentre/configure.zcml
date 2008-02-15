@@ -40,6 +40,9 @@
 
   <adapter factory=".themetaggable.ThemeTaggable" />
   <adapter
+      provides=".interfaces.IMainThemeTagging"
+      factory=".themetaggable.MainThemeTaggable" />
+  <adapter
       for=".interfaces.IThemeTaggable"
       provides="zope.app.annotation.interfaces.IAnnotations"
       factory="zope.app.annotation.attribute.AttributeAnnotations"

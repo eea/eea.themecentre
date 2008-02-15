@@ -21,9 +21,8 @@ class IThemeTagging(Interface):
             )
         )
 
-    def addTag(self, theme):
-        """ Adds 'theme' tag to the content object. """
-
+class IMainThemeTagging(IThemeTagging):
+    """ Works like IThemeTagging, but only returns the main theme. """
 
 class IPossibleThemeCentre(Interface):
     """ Marker interface for objects that can become a theme centre. """

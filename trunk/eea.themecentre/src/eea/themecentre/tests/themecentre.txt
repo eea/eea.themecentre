@@ -30,7 +30,7 @@ should be created. Let's see if that worked.
   True
 
 When an object is created inside a Theme Centre, the object should be
-tagged with the theme associated with the Theme Centre.
+tagged with the themes associated with the Theme Centre.
 
   >>> self.createObject(themeCentre.highlights, 'News Item', 'newsobj')
   >>> themeadapter = IThemeTagging(themeCentre.highlights.newsobj)
@@ -43,6 +43,12 @@ user removes it it should be added again automatically.
   >>> themeadapter.tags = []
   >>> themeadapter.tags
   ['air', 'air_quality']
+
+The object still has just one main theme.
+
+  >>> from eea.themecentre.interfaces import IMainThemeTagging
+  >>> IMainThemeTagging(themeCentre.highlights.newsobj).tags
+  ['air']
 
 A theme can be related to other themes. To tell what themes this theme
 is related to, we adapt themecentre to IThemeRelation. In real cases
