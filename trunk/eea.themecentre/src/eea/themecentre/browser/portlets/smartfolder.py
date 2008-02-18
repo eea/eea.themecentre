@@ -54,13 +54,13 @@ class SmartFolderPortlets(object):
 
         for index, field in enumerate(extra_fields):
             if field in DATE_FIELDS:
-                if index > 0 and extra_fields[index-1] in DATE_FIELDS:
-                    detail += ' - ' + localized_time(brain[field])
-                else:
-                    if detail:
-                        detail += ', ' + localized_time(brain[field])
-                    else:
-                        detail += localized_time(brain[field])
+                time = localized_time(brain[field])
+                if index > 0 and extra_fields[index-1] in DATE_FIELDS and time:
+                    detail += ' - ' + time
+                elif detail and time:
+                    detail += ', ' + time
+                elif time:
+                    detail += time
             elif detail:
                 detail += ', ' + brain[field]
             else:
