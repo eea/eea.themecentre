@@ -59,6 +59,7 @@
       permission="eea.PromoteThemeCentre"
       />
 
+  <!-- disable until we know what link solution we want
   <browser:menuItem
       for="*"
       menu="object"
@@ -68,6 +69,7 @@
       description="see status of links"
       permission="cmf.ModifyPortalContent"
       />
+  -->
 
   <!-- listing views -->
 
