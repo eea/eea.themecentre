@@ -1,7 +1,6 @@
 from zope.app.component.hooks import getSite
 from zope.app.event.objectevent import ObjectEvent
-from zope.app.traversing.interfaces import ITraverser
-from zope.component import adapts, adapter
+from zope.component import adapter
 from zope.interface import implements, Interface, implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.CMFCore.utils import getToolByName
@@ -178,7 +177,13 @@ def objectAdded(obj, event):
         themes = IThemeTagging(obj, None)
         if themes:
             themeCentreThemes = IThemeCentreSchema(themeCentre)
-            themes.tags = [themeCentreThemes.tags]
+            themes.tags += [themeCentreThemes.tags]
+
+def objectMoved(obj, event):
+    # IObjectMovedEvent is a very generic event, so we have to check
+    # source and destination to make sure it's really a cut & paste
+    if event.oldParent is not None and event.newParent is not None:
+       objectAdded(obj, event)
 
 def objectThemeTagged(obj, event):
     """ Checks if the object's theme tags are modified. If true, catalog

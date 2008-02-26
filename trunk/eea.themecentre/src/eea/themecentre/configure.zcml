@@ -123,6 +123,11 @@
       />
 
   <subscriber
+      for="* zope.app.container.interfaces.IObjectMovedEvent"
+      handler=".themecentre.objectMoved"
+      />
+
+  <subscriber
       for="* zope.app.container.interfaces.IObjectModifiedEvent"
       handler=".themecentre.objectThemeTagged"
       />

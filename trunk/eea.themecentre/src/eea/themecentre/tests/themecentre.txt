@@ -35,14 +35,14 @@ tagged with the themes associated with the Theme Centre.
   >>> self.createObject(themeCentre.highlights, 'News Item', 'newsobj')
   >>> themeadapter = IThemeTagging(themeCentre.highlights.newsobj)
   >>> themeadapter.tags
-  ['air', 'air_quality']
+  ['air']
 
 An object should always have its themecentre as a tag, so even if the
 user removes it it should be added again automatically.
 
   >>> themeadapter.tags = []
   >>> themeadapter.tags
-  ['air', 'air_quality']
+  ['air']
 
 The object still has just one main theme.
 
@@ -92,3 +92,21 @@ Modify portal content should be enough for accessing the themes tab.
   >>> self.portal.to_be_promoted.manage_permission('Modify portal content', roles=['Member'])
   >>> self.portal.to_be_promoted.unrestrictedTraverse('themes_edit.html')()
   u'...'
+
+Let's make sure copy and paste works. When copying an object within
+a themecentre nothing special should happen. When an object is copied
+from outside the destination themecentre, the existing theme tags should
+still be there and a new one should be added. The objects are tagged with
+'climate' and copied to 'air' themecentre, so the object will get both
+tags.
+
+  >>> self.setRoles(['Manager'])
+  >>> cut = self.portal.manage_cutObjects(['cut_and_paste'])
+  >>> paste = themeCentre.manage_pasteObjects(cut)
+  >>> IThemeTagging(getattr(themeCentre, 'cut_and_paste')).tags
+  ['climate', 'air']
+
+  >>> copy = self.portal.manage_copyObjects(['copy_and_paste'])
+  >>> paste = themeCentre.manage_pasteObjects(copy)
+  >>> IThemeTagging(getattr(themeCentre, 'copy_and_paste')).tags
+  ['climate', 'air']

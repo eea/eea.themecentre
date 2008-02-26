@@ -1,11 +1,11 @@
 import unittest
-from Products.CMFCore.utils import getToolByName
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 from zope.component import provideAdapter
 from zope.interface import classImplements
 from eea.themecentre.themetaggable import ThemeTaggable, ThemeCentreTaggable
 from eea.themecentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
+from eea.themecentre.interfaces import IThemeTagging
 from zope.app.annotation.attribute import AttributeAnnotations
 from zope.app.annotation.interfaces import IAttributeAnnotatable
 from zope.app.folder.folder import Folder
@@ -29,6 +29,10 @@ class TestThemeCentre(ThemeCentreTestCase):
         self.setRoles(['Manager'])
         self.portal.invokeFactory('Folder', id='to_be_promoted')
         self.portal.invokeFactory('Folder', id='to_be_promoted2')
+        self.portal.invokeFactory('Document', id='cut_and_paste')
+        IThemeTagging(self.portal.cut_and_paste).tags = ['climate']
+        self.portal.invokeFactory('Document', id='copy_and_paste')
+        IThemeTagging(self.portal.copy_and_paste).tags = ['climate']
         self.createObject = createObject
 
         # add one entry to the themes vocabulary
