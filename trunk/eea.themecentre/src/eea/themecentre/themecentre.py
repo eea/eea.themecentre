@@ -177,7 +177,8 @@ def objectAdded(obj, event):
         themes = IThemeTagging(obj, None)
         if themes:
             themeCentreThemes = IThemeCentreSchema(themeCentre)
-            themes.tags += [themeCentreThemes.tags]
+            if themeCentreThemes.tags not in themes.tags:
+                themes.tags += [themeCentreThemes.tags]
 
 def objectMoved(obj, event):
     # IObjectMovedEvent is a very generic event, so we have to check

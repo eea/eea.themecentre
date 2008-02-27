@@ -110,3 +110,11 @@ tags.
   >>> paste = themeCentre.manage_pasteObjects(copy)
   >>> IThemeTagging(getattr(themeCentre, 'copy_and_paste')).tags
   ['climate', 'air']
+
+Also make sure we don't get double 'air' tags when copying from
+and to the 'air' themecentre.
+
+  >>> copy = themeCentre.highlights.manage_copyObjects(['newsobj'])
+  >>> paste = themeCentre.highlights.manage_pasteObjects(copy)
+  >>> IThemeTagging(getattr(themeCentre.highlights, 'copy_of_newsobj')).tags
+  ['air']
