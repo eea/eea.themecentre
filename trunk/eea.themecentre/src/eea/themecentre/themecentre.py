@@ -48,12 +48,13 @@ def promoted(obj, event):
     faqobj.processForm()
 
     theme_id = IThemeCentreSchema(obj).tags
-
     obj.invokeFactory('Document', id='intro', title=obj.Title()+' introduction')
     if not hasattr(aq_base(obj), 'default_page'):
         obj.manage_addProperty('default_page', 'intro', 'string')
     intro = getattr(obj, 'intro')
     intro.manage_addProperty('layout', 'themecentre_view', 'string')
+    # we must turn off rename otherwise it will be renamed to 'introduction'
+    intro._at_rename_after_creation = False
     intro.processForm()
 
     if newsobj:
