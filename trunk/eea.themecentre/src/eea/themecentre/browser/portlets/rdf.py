@@ -1,36 +1,18 @@
 from Products.CMFPlone import utils
 from Products.EEAContentTypes.interfaces import IFeedPortletInfo
-from Products.ThemeCentre.mergedtheme import getFeedsForSynonymousThemes
-from zope.component import getUtility, getMultiAdapter
-from zope.interface import implements
+from zope.component import getUtility
 
 from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
-from eea.themecentre.themecentre import RDF_THEME_KEY
-from eea.themecentre.browser.interfaces import IRDFPortlet
-from eea.themecentre.interfaces import IThemeCentrePortletInfo
-from eea.themecentre.utils import localized_time
-from eea.rdfrepository.interfaces import IRDFRepository
-
 from eea.themecentre.browser.portlets.catalog import BasePortlet
+from eea.rdfrepository.interfaces import IRDFRepository
+from eea.rdfrepository.utils import getRdfPortletData
 
 class RDFPortlet(BasePortlet):
 
     def short_items(self):
         context = utils.context(self)
-        currentTheme = getTheme(context)
         currentThemeCentre = getThemeCentre(context)
-
-        if currentTheme:
-            feeds = getFeedsForSynonymousThemes(currentTheme)
-
-            for feed in feeds:
-                feed.items = feed.items[:self.size]
-
-            return [getMultiAdapter((currentThemeCentre, feed),
-                                     IThemeCentrePortletInfo)
-                    for feed in feeds]
-        else:
-            return []
+        return getRdfPortletData(currentThemeCentre, max_items=3)
 
     def full_items(self):
         context = utils.context(self)

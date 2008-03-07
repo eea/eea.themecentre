@@ -1,16 +1,15 @@
 from zope.component import adapts
 from zope.interface import implements
-from eea.themecentre.interfaces import IThemeCentrePortletInfo
-from eea.themecentre.interfaces import IThemeCentrePortletItem
 from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreListFeed
-from eea.rdfrepository.interfaces import IFeedInfo, IFeedItem, IFeed
+from eea.rdfrepository.interfaces import IFeedItem, IFeed
+from eea.rdfrepository.interfaces import IRDFPortletInfo
 from eea.themecentre.utils import localized_time
 from Products.CMFCore.utils import getToolByName
 from Products.EEAContentTypes import feeds
 
 class FeedPortletInfo(feeds.FeedPortletInfo):
-    implements(IThemeCentrePortletInfo)
+    implements(IRDFPortletInfo)
     adapts(IThemeCentre, IFeed)
     
     def __init__(self, themecentre, feed):
