@@ -39,12 +39,16 @@ def promoted(obj, event):
     workflow.doActionFor(multimedia, 'publish')
 
     newsobj = getattr(obj, 'highlights', None)
+    newsobj._at_rename_after_creation = False
     newsobj.processForm()
     eventsobj = getattr(obj, 'events', None)
+    eventsobj._at_rename_after_creation = False
     eventsobj.processForm()
     linksobj = getattr(obj, 'links', None)
+    linksobj._at_rename_after_creation = False
     linksobj.processForm()
     faqobj = getattr(obj, 'faq', None)
+    faqobj._at_rename_after_creation = False
     faqobj.processForm()
 
     theme_id = IThemeCentreSchema(obj).tags
@@ -120,8 +124,8 @@ def promoted(obj, event):
     if linksobj:
         workflow.doActionFor(linksobj, 'publish')
         linksobj.setConstrainTypesMode(1)
-        linksobj.setImmediatelyAddableTypes(['Link'])
-        linksobj.setLocallyAllowedTypes(['Link'])
+        linksobj.setImmediatelyAddableTypes(['Folder', 'Link'])
+        linksobj.setLocallyAllowedTypes(['Folder', 'Link'])
         linksobj.manage_addProperty('default_page', 'links_topic',
                                    'string')
         
