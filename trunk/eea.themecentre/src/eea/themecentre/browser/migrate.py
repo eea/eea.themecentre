@@ -1,8 +1,7 @@
 import urllib
-from zope.event import notify
 from zope.interface import alsoProvides, directlyProvides, directlyProvidedBy
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
-from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
+from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.browser.themecentre import PromoteThemeCentre
 from eea.themecentre.themecentre import createFaqSmartFolder, getThemeCentre
 from eea.rdfrepository.interfaces import IFeed, IFeedContent
@@ -650,3 +649,32 @@ class AddRichTextDescriptionToVideos(object):
             video.urls = ()
 
         return str(len(brains)) + " videos where migrated."
+
+
+class AddFolderAsLocallyAllowedTypeInLinks(object):
+    """ Add the 'Folder' type as a locally addable type to all 'External link' folders in themecentres. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brains = catalog.searchResults(object_provides=IThemeCentre.__identifier__)
+        objs = [b.getObject() for b in brains]
+        for obj in objs:
+            linkfolder = None
+            if 'links' in obj.objectIds():
+                linkfolder = obj.links
+            elif 'external-links' in obj.objectIds():
+                linkfolder = obj['external-links']
+    
+            if linkfolder is not None:
+                local = linkfolder.getLocallyAllowedTypes()
+                immediate = linkfolder.getImmediatelyAddableTypes()
+                if 'Folder' not in local:
+                    linkfolder.setLocallyAllowedTypes(local + ('Folder',))
+                if 'Folder' not in immediate:
+                    linkfolder.setImmediatelyAddableTypes(immediate + ('Folder',))
+    
+        return 'successfully run'

@@ -285,6 +285,13 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="*"
+      name="addFolderAsLocallyAllowedTypeInLinks"
+      class=".migrate.AddFolderAsLocallyAllowedTypeInLinks"
+      permission="cmf.ManagePortal"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"
