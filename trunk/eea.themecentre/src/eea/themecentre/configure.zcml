@@ -61,29 +61,6 @@
 
   <adapter factory=".related.ThemeRelationAdapter" />
 
-  <adapter
-      factory=".ui_adapters.FeedPortletInfo"
-      provides="eea.rdfrepository.interfaces.IRDFPortletInfo"
-      />
-  <class class=".ui_adapters.FeedPortletInfo">
-      <require
-          permission="zope2.Public"
-          interface="eea.rdfrepository.interfaces.IRDFPortletInfo"
-          />
-      <require
-          permission="cmf.ModifyPortalContent"
-          set_schema="eea.rdfrepository.interfaces.IRDFPortletInfo"
-          />
-  </class>
-
-  <adapter factory=".ui_adapters.ListFeedInfo" />
-  <class class=".ui_adapters.ListFeedInfo">
-      <require
-          permission="zope2.Public"
-          interface=".interfaces.IThemeCentreListFeed"
-          />
-  </class>
-
   <utility
       component=".vocabulary.ThemesVocabularyFactory"
       name="Allowed themes"
