@@ -1,12 +1,9 @@
 from zope.interface import implements
 from zope.component import getMultiAdapter
 
-from Acquisition import aq_parent
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils
 from Products.CMFPlone.browser.interfaces import INavigationPortlet
-from Products.CMFPlone.browser.interfaces import INavigationRoot
 from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet as BaseNavigationPortlet
 from eea.themecentre.themecentre import getThemeCentre
 
@@ -105,7 +102,7 @@ class NavigationPortlet(BaseNavigationPortlet):
                orderedData[0] = node
            else:
                for urlPart in order:
-                   if urlPart in node['getURL']:
+                   if urlPart == node['item'].getId:
                        orderedData[n] = node
                        break
                    n += 1
