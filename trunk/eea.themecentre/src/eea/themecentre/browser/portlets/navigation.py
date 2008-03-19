@@ -102,7 +102,7 @@ class NavigationPortlet(BaseNavigationPortlet):
                orderedData[0] = node
            else:
                for urlPart in order:
-                   if urlPart == node['item'].getId:
+                   if urlPart in node['item'].getId:
                        orderedData[n] = node
                        break
                    n += 1
