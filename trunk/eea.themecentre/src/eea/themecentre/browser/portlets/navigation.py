@@ -23,8 +23,15 @@ class NavigationPortlet(BaseNavigationPortlet):
             currentTheme = getThemeCentre(context)
             if currentTheme:
                 cat = getToolByName(context, 'portal_catalog')
-                result = cat.searchResults( path = '/'.join(currentTheme.getPhysicalPath()),
-                                        navSection=section)
+                query = {'path': '/'.join(currentTheme.getPhysicalPath()),
+                         'navSection': section}
+                # Filter on workflow states, if enabled
+                portal_properties = getToolByName(context, 'portal_properties')
+                navtree_properties = getattr(portal_properties, 'navtree_properties')
+                isAnon = getToolByName(context, 'portal_membership').isAnonymousUser()
+                if isAnon and navtree_properties.getProperty('enable_wf_state_filtering', False):
+                    query['review_state'] = navtree_properties.getProperty('wf_states_to_show', ())
+                result = cat.searchResults(query)
                 if len(result) > 0:
                     return True
         return False
