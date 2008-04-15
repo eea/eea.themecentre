@@ -3,19 +3,7 @@ Theme Tagging
 
 An object is taggable only if it provides IThemeTaggable.
 
-  >>> from zope.app.folder.folder import Folder
   >>> from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
-  >>> folder = Folder()
-  >>> taggable = IThemeTagging(folder)
-  Traceback (most recent call last):
-  ...
-  TypeError: ('Could not adapt', <zope.app.folder.folder.Folder object at ...>,
-              <InterfaceClass eea.themecentre.interfaces.IThemeTagging>)
-
-Let's make it taggable.
-
-  >>> from zope.interface import alsoProvides
-  >>> alsoProvides(folder, IThemeTaggable)
   >>> taggable = IThemeTagging(folder)
 
 Because the folder object is new it shouldn't have any tags.
@@ -25,9 +13,16 @@ Because the folder object is new it shouldn't have any tags.
 
 Let's add a few tags.
 
-  >>> taggable.tags  = ['alaska', 'climate change']
+  >>> taggable.tags  = ['air', 'climate']
 
 Let's see what tags there are.
 
   >>> taggable.tags
-  ['alaska', 'climate change']
+  ['air', 'climate']
+
+Theme tags can be marked as deprecated in the themes vocabulary.
+Climate change is marked as deprecated in the test set up so then
+we only have air left.
+
+  >>> taggable.nondeprecated_tags
+  ['air']

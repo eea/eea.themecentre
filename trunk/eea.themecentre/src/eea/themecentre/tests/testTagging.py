@@ -8,13 +8,19 @@ from eea.themecentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
 from zope.app.annotation.attribute import AttributeAnnotations
 from zope.app.annotation.interfaces import IAttributeAnnotatable
+from zope.app.component.hooks import setSite
 from zope.app.folder.folder import Folder
 
-def setUp(test):
-    provideAdapter(ThemeTaggable)
-    provideAdapter(ThemeCentreTaggable)
-    provideAdapter(AttributeAnnotations)
-    classImplements(Folder, IAttributeAnnotatable)
+
+class TestTagging(ThemeCentreTestCase):
+
+    def afterSetUp(self):
+        setSite(self.portal)
+        self.setRoles(['Manager'])
+
+        # make the air theme non deprecated
+        air = self.portal.portal_vocabularies.themes.air
+        self.portal.portal_workflow.doActionFor(air, 'publish') 
 
 # convenience method for creating and cataloging object
 def createObject(parent, portal_type, id):
@@ -41,8 +47,9 @@ class TestThemeCentre(ThemeCentreTestCase):
 def test_suite():
 
     suite = unittest.TestSuite((
-        doctest.DocFileSuite('tagging.txt',
-                     setUp=setUp, #tearDown=tearDown,
+        FunctionalDocFileSuite('tagging.txt',
+                     test_class=TestTagging,
+                     package = 'eea.themecentre.tests',
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
         FunctionalDocFileSuite('themecentre.txt',

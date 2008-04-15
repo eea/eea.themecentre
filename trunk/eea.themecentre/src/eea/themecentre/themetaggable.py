@@ -59,6 +59,14 @@ class ThemeTaggable(object):
         return property(get, set)
     tags = tags()
 
+    def nondeprecated_tags(self):
+        tags = self.tags
+        vocab = getUtility(IVocabularyFactory, 'Allowed themes for edit')
+        current_themes = [term.value for term in vocab(self)]
+        return [tag for tag in tags if tag in current_themes]
+
+    nondeprecated_tags = property(nondeprecated_tags)
+
 class MainThemeTaggable(ThemeTaggable):
     implements(IMainThemeTagging)
     adapts(IThemeTaggable)

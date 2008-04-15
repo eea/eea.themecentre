@@ -216,6 +216,16 @@ def getThemeCentre(context):
     else:
         return None
 
+def getThemeCentreByName(name):
+    catalog = getToolByName(getSite(), 'portal_catalog')
+    brains = catalog.searchResults(
+            object_provides=IThemeCentre.__identifier__,
+            getId=name)
+    if brains:
+        return brains[0].getObject()
+    else:
+        return None
+
 def getTheme(context):
     themeCentre = getThemeCentre(context)
 

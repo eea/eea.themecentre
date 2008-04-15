@@ -20,22 +20,32 @@ class ObjectThemesPortlet(BasePortlet):
         if themeIds == 'default':
             return []
         
-        # return only the first 3 if more
-        if len(themeIds) > 3:
-            themeIds = themeIds[:3]
-
         catalog = getToolByName(context, 'portal_catalog')
         query = { 'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
                   'getId' : themeIds,
                   'review_state' : 'published' }
         result = catalog.searchResults(query)
+
+        # return only the first 3 if more
+        if len(result) > 3:
+            result = result[:3]
+
         themes = [ brain.getObject() for brain in result ]
+        # arrange the themes in the order they are stored on the object
+        themes_dict = {}
+        themes_sorted = []
+        for theme in themes:
+            themes_dict[theme.getId()] = theme
+        for themeId in themeIds:
+            theme = themes_dict.get(themeId, None)
+            if theme:
+                themes_sorted.append(theme)
 
         currentTheme = getThemeCentre(context)
-        if currentTheme and currentTheme in themes:
-            themes.remove(currentTheme)
+        if currentTheme and currentTheme in themes_sorted:
+            themes_sorted.remove(currentTheme)
 
-        return themes
+        return themes_sorted
 
     def item_to_short_dict(self, item):
         return { 'title': item.Title(),
