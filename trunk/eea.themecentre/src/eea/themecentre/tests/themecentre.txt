@@ -118,3 +118,15 @@ and to the 'air' themecentre.
   >>> paste = themeCentre.highlights.manage_pasteObjects(copy)
   >>> IThemeTagging(getattr(themeCentre.highlights, 'copy_of_newsobj')).tags
   ['air']
+
+We add a press release to the themecentre and the highlights smart
+folder should find it.
+
+  >>> themeCentre.highlights.setLocallyAllowedTypes(['News Item', 'PressRelease'])
+  >>> objid = themeCentre.highlights.invokeFactory('PressRelease', id='rel1')
+  >>> self.portal.portal_workflow.doActionFor(themeCentre.highlights.rel1,
+  ...                                         'publish')
+  >>> query = {'portal_type': 'PressRelease', 'getId': 'rel1',
+  ...          'getThemes': 'air'}
+  >>> len(self.portal.portal_catalog.searchResults(query))
+  1

@@ -11,7 +11,7 @@ from Products.Five import fiveconfigure
 dependencies = []
 
 PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager',
-            'PloneHelpCenter',
+            'PloneHelpCenter', 'EEAPloneAdmin',
             'FiveSite', 'ThemeCentre',
             'EEAContentTypes',)
 
@@ -35,6 +35,7 @@ def setup_themecentre():
     PloneTestCase.installProduct('ATVocabularyManager')
     PloneTestCase.installProduct('ThemeCentre')
     PloneTestCase.installProduct('PloneHelpCenter')
+    PloneTestCase.installProduct('EEAPloneAdmin')
     PloneTestCase.installProduct('EEAContentTypes')
 
 setup_themecentre()

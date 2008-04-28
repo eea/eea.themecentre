@@ -292,6 +292,13 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="*"
+      name="addPressReleaseToHighlightsTopic"
+      class=".migrate.AddPressReleaseToHighlightsTopic"
+      permission="cmf.ManagePortal"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

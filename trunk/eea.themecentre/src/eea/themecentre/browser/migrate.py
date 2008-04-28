@@ -678,3 +678,27 @@ class AddFolderAsLocallyAllowedTypeInLinks(object):
                     linkfolder.setImmediatelyAddableTypes(immediate + ('Folder',))
     
         return 'successfully run'
+
+class AddPressReleaseToHighlightsTopic(object):
+    """ Adds PressRelease to the highlight topic's search criteria. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brains = catalog.searchResults(object_provides=IThemeCentre.__identifier__)
+        themecentres = [b.getObject() for b in brains]
+        successful = 0
+        
+        for themecentre in themecentres:
+            highlights_folder = getattr(themecentre, 'highlights')
+            topic = getattr(highlights_folder, 'highlights_topic')
+            crit = topic.getCriterion('Type_ATPortalTypeCriterion')
+            value = crit.Value()
+            if not 'Press Release' in value:
+                crit.setValue(value + ('Press Release',))
+            successful += 1
+
+        return '%d highlight smart folders were modified' % successful

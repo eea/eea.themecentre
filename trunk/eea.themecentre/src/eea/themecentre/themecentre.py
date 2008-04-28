@@ -75,7 +75,7 @@ def promoted(obj, event):
                 title='Highlights')
         topic = getattr(newsobj, 'highlights_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue(['News Item', 'Highlight'])
+        type_crit.setValue(['News Item', 'Highlight', 'Press Release'])
         sort_crit = topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
