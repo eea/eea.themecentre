@@ -359,4 +359,12 @@
       allowed_attributes="menu"
       />
 
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="contentbytypeview"
+      class=".content.ContentByType"
+      permission="zope.Public"
+      allowed_attributes="title description content"
+      />
+
 </configure>

@@ -220,7 +220,7 @@ def getThemeCentreByName(name):
     catalog = getToolByName(getSite(), 'portal_catalog')
     brains = catalog.searchResults(
             object_provides=IThemeCentre.__identifier__,
-            getId=name)
+            getThemes=name)
     if brains:
         return brains[0].getObject()
     else:

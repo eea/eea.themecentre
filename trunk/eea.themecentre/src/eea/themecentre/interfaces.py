@@ -59,3 +59,7 @@ class IThemeCentreListFeed(Interface):
     url = Attribute("feed item link")
     summary = Attribute("feed item summary")
     published = Attribute("feed item detail")
+
+class IThemeMoreLink(Interface):
+    """ Refers to a more link. """
+    url = Attribute("more link")

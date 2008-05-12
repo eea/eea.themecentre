@@ -90,6 +90,12 @@
 
   <adapter factory=".datacollectors.RDFPortletDataCollector" />
 
+  <adapter factory=".links.LinkAdapter" />
+  <adapter factory=".links.MediaLink"
+           for="p4a.video.interfaces.IVideoEnhanced" />
+  <adapter factory=".links.MediaLink"
+           for="Products.ATContentTypes.content.image.ATImage" />
+
   <subscriber
       for=".interfaces.IThemeCentre
            .themecentre.PromotedToThemeCentreEvent"
