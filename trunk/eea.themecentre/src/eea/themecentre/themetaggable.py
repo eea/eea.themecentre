@@ -44,6 +44,10 @@ class ThemeTaggable(object):
             tags = list(mapping['themes'])
             return tags 
         def set(self, value):
+            # if the value didn't change we don't need to do anything
+            if value == self.tags:
+                return
+
             anno = IAnnotations(self.context)
             mapping = anno.get(KEY)
 
@@ -52,7 +56,6 @@ class ThemeTaggable(object):
             # make sure object is tagged with the current themecentre
             # if not, add the themecentre to the tags
             checkTheme(self.context, themes)
-
             mapping['themes'] = PersistentList(themes)
             info = Attributes(IThemeTagging, 'tags')
             notify(ObjectModifiedEvent(self, info))
