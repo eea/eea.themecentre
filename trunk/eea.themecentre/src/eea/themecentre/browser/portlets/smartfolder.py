@@ -16,7 +16,8 @@ class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
         if id == 'highlights_topic':
             return "1"
         elif id == 'events_topic':
-            return "2"
+            # we want events at the end
+            return "zzz"
         else:
             # all topics don't need to be hardcoded, for the rest we
             # rely on the topic id for sorting
