@@ -117,6 +117,11 @@
       handler=".themecentre.objectThemeTagged"
       />
 
+  <subscriber
+      for=".interfaces.IThemeTaggable  Products.LinguaPlone.events.IObjectTranslatedEvent"
+      handler=".themetaggable.tagTranslation"
+      />
+
   <include file="permissions.zcml"/>
 
   <include package=".browser" />

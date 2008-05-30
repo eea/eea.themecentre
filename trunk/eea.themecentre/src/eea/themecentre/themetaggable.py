@@ -101,3 +101,8 @@ class ThemeCentreTaggable(object):
         return property(get, set)
     tags = tags()
 
+
+def tagTranslation(obj, event):
+    canonical = obj.getCanonical()
+    IThemeTagging(obj).tags = IThemeTagging(canonical).tags
+    

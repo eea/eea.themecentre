@@ -219,10 +219,17 @@ def getThemeCentre(context):
 def getThemeCentreByName(name):
     catalog = getToolByName(getSite(), 'portal_catalog')
     brains = catalog.searchResults(
+            Language='en',
             object_provides=IThemeCentre.__identifier__,
             getThemes=name)
     if brains:
-        return brains[0].getObject()
+        tc =  brains[0].getObject()
+        lang = catalog.REQUEST.get('Language', 'en')
+        if lang is not 'en':
+            tcTranslation = tc.getTranslation(lang)
+            if tcTranslation is not None:
+                tc = tcTranslation
+        return tc 
     else:
         return None
 

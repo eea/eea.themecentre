@@ -19,7 +19,7 @@ class ObjectThemesPortlet(BasePortlet):
         themeIds = adapter.tags
         if themeIds == 'default':
             return []
-        
+
         catalog = getToolByName(context, 'portal_catalog')
         query = { 'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
                   'getId' : themeIds,
@@ -29,13 +29,18 @@ class ObjectThemesPortlet(BasePortlet):
         # return only the first 3 if more
         if len(result) > 3:
             result = result[:3]
-
-        themes = [ brain.getObject() for brain in result ]
+        
         # arrange the themes in the order they are stored on the object
         themes_dict = {}
         themes_sorted = []
-        for theme in themes:
+        language = self.request.get('LANGUAGE', 'en')
+        for brain in result:
+            theme = brain.getObject()
+            translation = theme.getTranslation(language)
+            if translation is not None:
+                theme = translation
             themes_dict[theme.getId()] = theme
+            
         for themeId in themeIds:
             theme = themes_dict.get(themeId, None)
             if theme:
@@ -48,10 +53,12 @@ class ObjectThemesPortlet(BasePortlet):
         return themes_sorted
 
     def item_to_short_dict(self, item):
-        return { 'title': item.Title(),
+        res =  { 'title': item.Title(),
                  'url': item.absolute_url(),
                  'id': item.getId(),
                  'detail': None }
+        print res
+        return res
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title(),

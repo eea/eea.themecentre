@@ -35,6 +35,9 @@ class LinkAdapter(object):
 
     def url(self, theme):
         self.themecentre = self._themecentre(theme)
+        if self.themecentre is None:
+            return ''
+        
         topic = self._find_topic()
         if topic:
             return topic.absolute_url()
