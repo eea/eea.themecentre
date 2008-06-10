@@ -299,6 +299,13 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="*"
+      name="changeMultimediaLayout"
+      class=".migrate.ChangeMultimediaLayout"
+      permission="cmf.ManagePortal"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

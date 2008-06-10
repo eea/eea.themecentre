@@ -702,3 +702,24 @@ class AddPressReleaseToHighlightsTopic(object):
             successful += 1
 
         return '%d highlight smart folders were modified' % successful
+
+
+class ChangeMultimediaLayout(object):
+    """ Changes layout to mediacentre_view in the global multimedia folder """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        portal_url = getToolByName(self.context, 'portal_url')
+        portal = portal_url.getPortalObject()
+        default_page = getattr(portal.SITE.multimedia, 'default_page', None)
+        if default_page:
+            multimedia = getattr(portal.SITE.multimedia, default_page)
+            multimedia.manage_changeProperties(layout = 'mediacentre_view')
+            return "layout property of %s is changed to %s." % \
+                    (multimedia.absolute_url(), 'mediacentre_view')
+        else:
+            return "default_page property of multimedia not found, " \
+                   "no migration done"
