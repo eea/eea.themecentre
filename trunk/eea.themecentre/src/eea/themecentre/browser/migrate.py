@@ -723,3 +723,26 @@ class ChangeMultimediaLayout(object):
         else:
             return "default_page property of multimedia not found, " \
                    "no migration done"
+
+class MakeThemeMultimediaLayoutAProperty(object):
+    """ Multimedia folders in themecentres have a layout property that's
+        not visible in ZMI. Add it as a real property. """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        themeCentres = catalog.searchResults(object_provides=IThemeCentre.__identifier__)
+        props = 0
+        for tc in themeCentres:
+            multimedia = getattr(aq_base(tc.getObject()), 'multimedia', None)
+            if multimedia is not None:
+                multimedia = aq_base(multimedia)
+                layout = getattr(multimedia, 'layout', None)
+                if not multimedia.hasProperty('layout'):
+                    del multimedia.layout
+                    multimedia.manage_addProperty('layout', layout, 'string')
+                    props += 1
+        return '%d layout properties are fixed' % props

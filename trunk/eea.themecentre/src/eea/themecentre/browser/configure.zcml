@@ -306,6 +306,13 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="*"
+      name="makeThemeMultimediaLayoutAProperty"
+      class=".migrate.MakeThemeMultimediaLayoutAProperty"
+      permission="cmf.ManagePortal"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

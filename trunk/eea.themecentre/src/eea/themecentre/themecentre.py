@@ -33,7 +33,7 @@ def promoted(obj, event):
     obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
-    multimedia.layout = 'mediacentre_view'
+    multimedia.setLayout('mediacentre_view')
     multimedia.setExcludeFromNav(True)
     multimedia.processForm()
     workflow.doActionFor(multimedia, 'publish')
