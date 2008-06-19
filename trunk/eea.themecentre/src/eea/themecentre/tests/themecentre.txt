@@ -125,7 +125,7 @@ folder should find it.
   >>> themeCentre.highlights.setLocallyAllowedTypes(['News Item', 'PressRelease'])
   >>> objid = themeCentre.highlights.invokeFactory('PressRelease', id='rel1')
   >>> self.portal.portal_workflow.doActionFor(themeCentre.highlights.rel1,
-  ...                                         'publish')
+  ...                                         'submit')
   >>> query = {'portal_type': 'PressRelease', 'getId': 'rel1',
   ...          'getThemes': 'air'}
   >>> len(self.portal.portal_catalog.searchResults(query))
