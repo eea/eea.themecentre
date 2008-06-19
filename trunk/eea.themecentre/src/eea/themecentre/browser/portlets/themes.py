@@ -4,6 +4,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils
 
 from eea.themecentre.interfaces import IThemeTagging
+from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 
 class ObjectThemesPortlet(BasePortlet):
@@ -56,12 +57,13 @@ class ObjectThemesPortlet(BasePortlet):
         res =  { 'title': item.Title(),
                  'url': item.absolute_url(),
                  'id': item.getId(),
-                 'detail': None }
-        print res
+                 'detail': None,
+                 'image' : IThemeCentreImageUrl(item) }
         return res
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
                  'id': item.getId(),
-                 'published': None }
+                 'published': None,
+                 'image' : IThemeCentreImageUrl(item) }

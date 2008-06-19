@@ -87,6 +87,7 @@
       />
 
   <adapter factory=".themecentre.objectTitle" />
+  <adapter factory=".themecentre.imageUrl" />
 
   <adapter factory=".datacollectors.RDFPortletDataCollector" />
 

@@ -12,6 +12,7 @@ from Acquisition import aq_parent, aq_base
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
 
 RDF_THEME_KEY = 'eea.themecentre.rdf'
@@ -286,3 +287,17 @@ def objectTitle(context, request):
             return None
     else:
         return None
+
+
+@implementer(IThemeCentreImageUrl)
+@adapter(IThemeCentre)
+def imageUrl(context):
+    """ An adapter that checks if the translation has an theme_image if not it
+        returns the url to the canonical theme centre image. """
+
+    tc = context
+    if not hasattr(tc, 'theme_image'):
+        tc = context.getCanonical()
+    image = getattr(tc, 'theme_image')
+    return '%s/image_icon' % image.absolute_url()
+    

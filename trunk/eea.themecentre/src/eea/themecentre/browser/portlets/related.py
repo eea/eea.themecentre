@@ -3,6 +3,7 @@ from Products.CMFPlone import utils
 
 from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeRelation
+from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 
 class RelatedPortlet(BasePortlet):
@@ -31,9 +32,11 @@ class RelatedPortlet(BasePortlet):
     def item_to_short_dict(self, item):
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
-                 'detail': None }
+                 'detail': None,
+                 'image' : IThemeCentreImageUrl(item) }
 
     def item_to_full_dict(self, item):
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
-                 'published': None }
+                 'published': None,
+                 'image' : IThemeCentreImageUrl(item) }

@@ -63,3 +63,7 @@ class IThemeCentreListFeed(Interface):
 class IThemeMoreLink(Interface):
     """ Refers to a more link. """
     url = Attribute("more link")
+
+class IThemeCentreImageUrl(Interface):
+    """ Returns the url to the image in the canonical theme centre. """
+    
