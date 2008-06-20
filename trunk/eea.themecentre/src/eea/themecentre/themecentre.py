@@ -196,14 +196,9 @@ def objectThemeTagged(obj, event):
     """ Checks if the object's theme tags are modified. If true, catalog
         is updated. """
 
-    site = getSite()
-    if site is None:
-        return
-
-    portal_catalog = getToolByName(site, 'portal_catalog')
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
-            portal_catalog.reindexObject(obj.context)
+           obj.context.reindexObject()
 
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """
