@@ -10,9 +10,11 @@ from p4a.video.interfaces import IVideo
 from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationRoot
+from Products.CMFPlone.utils import normalizeString
 import socket
 import feedparser
 import urlparse
+import os
 
 url = 'http://themes.eea.europa.eu/migrate/%s?theme=%s'
 
@@ -746,3 +748,35 @@ class MakeThemeMultimediaLayoutAProperty(object):
                     multimedia.manage_addProperty('layout', layout, 'string')
                     props += 1
         return '%d layout properties are fixed' % props
+
+class CreateEcoTipsFromCSV(object):
+    """ Creates a bunch of EcoTip objects from the
+        EEAWEBSITE_ECOTIP_Migration.csv file """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        if not self.context.portal_type == 'Folder':
+            return "EcoTips can only be added to folder."
+
+        count = 0
+        filename = os.path.join(os.path.dirname(__file__),
+                                'EEAWEBSITE_ECOTIP_Migration.csv')
+        file = open(filename, 'r')
+        for line in file:
+            title, descr, themes, body = line.split('#')
+            title = title.strip()
+            descr = descr.strip()
+            body = '<br />'.join('<a href="'+field+'">' +field+'</a>' for field in body.strip().split())
+            newid = self.context.invokeFactory('EcoTip', id=normalizeString(title, context=self.context))
+            ecotip = getattr(self.context, newid)
+            ecotip.processForm(values={'title': title, 'description': descr})
+            ecotip.setText(body, mimetype='text/html')
+            tagging = IThemeTagging(ecotip)
+            theme_tags = [theme for theme in themes.split(',') if len(theme) > 0]
+            tagging.tags = theme_tags
+            count += 1
+
+        return "%d EcoTip objects were created." % count

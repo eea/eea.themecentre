@@ -313,6 +313,13 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="*"
+      name="createEcoTipsFromCSV"
+      class=".migrate.CreateEcoTipsFromCSV"
+      permission="cmf.ManagePortal"
+      />
+
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"
