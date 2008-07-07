@@ -769,16 +769,17 @@ class CreateEcoTipsFromCSV(object):
             title, descr, themes, body = line.split('#')
             title = title.strip()
             descr = descr.strip()
-            body = '<br />'.join('Read more: <a href="'+field+'">' +field+'</a>' for 
-field 
-in body.strip().split())
+            body = '<br />'.join('Read more: <a href="'+field+'">' +field+'</a>' \
+                    for field in body.strip().split())
             newid = self.context.invokeFactory('EcoTip', id=normalizeString(title, context=self.context))
             ecotip = getattr(self.context, newid)
-            eco1tip.processForm(values={'title': title, 'description': descr})
+            ecotip.setTitle(title)
+            ecotip.setDescription(descr)
             ecotip.setText(body, mimetype='text/html')
             tagging = IThemeTagging(ecotip)
             theme_tags = [theme for theme in themes.split(',') if len(theme) > 0]
             tagging.tags = theme_tags
+            ecotip.reindexObject()
             count += 1
 
         return "%d EcoTip objects were created." % count
