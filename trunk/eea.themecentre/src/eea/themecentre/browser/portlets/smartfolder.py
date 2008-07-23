@@ -24,14 +24,14 @@ class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
             return id
 
     def _title(self, topic):
-        parent = topic.aq_parent
-        parent_id = parent.getId()
-        parent_title = parent.Title()
+        obj = self._parent_or_topic(topic)
+        obj_id = obj.getId()
+        obj_title = obj.Title()
 
-        if parent_id == 'events':
+        if obj_id == 'events':
             title = 'Upcoming events'
-        elif parent_id == 'faq':
+        elif obj_id == 'faq':
             title = 'Latest FAQ'
         else:
-            title = 'Latest ' + parent_title.lower()
+            title = 'Latest ' + obj_title.lower()
         return title
