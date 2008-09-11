@@ -30,6 +30,9 @@ class Topics(object):
         themecentre_url = themecentre.absolute_url()
         tags = IThemeTagging(themecentre).tags
         query = { 'navSection': TOPICS_ID }
+        memtool = getToolByName(self.context, 'portal_membership')
+        if memtool is not None and memtool.isAnonymousUser():
+            query['review_state'] = 'published'
 
         # get all objects that have the same theme as the current themecentre
         related_brains = IRelations(themecentre).byTheme(getBrains=True,
