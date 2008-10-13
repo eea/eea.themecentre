@@ -49,7 +49,8 @@ class ThemeCentresVocabulary(object):
         themeCentre = themeCentreAdapted.context
         catalog = getToolByName(themeCentre, 'portal_catalog')
         iface = 'eea.themecentre.interfaces.IThemeCentre'
-        res = catalog.searchResults(object_provides=iface)
+        res = catalog.searchResults({ 'Language' : 'en',
+                                      'object_provides' : iface })
         terms = []
         for brain in res:
             obj = brain.getObject()
