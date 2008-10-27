@@ -7,6 +7,12 @@ from Products.CMFPlone.browser.interfaces import INavigationPortlet
 from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet as BaseNavigationPortlet
 from eea.themecentre.themecentre import getThemeCentre
 
+
+try:
+    from Products.LinguaPlone.interfaces import ITranslatable
+except:
+    ITranslatable = None
+
 # items that shouldn't be displayed in main meny
 blacklistedNavigationItems = []
 
@@ -99,7 +105,13 @@ class NavigationPortlet(BaseNavigationPortlet):
         #data.extend(self._overview())
         
         # order menu as configured in ZMI on themes
-        order = getattr(context, 'themes_menu_order', ['highlights', 'reports', 'indicators', 'maps-and-graphs', 'datasets','events','links'])
+        originalOrder = ['highlights', 'reports', 'indicators', 'maps-and-graphs', 'datasets','events','links']
+        if ITranslatable is not None and ITranslatable.providedBy(context):
+            # get order defined on canonical
+            order = getattr(context.getCanonical(), 'themes_menu_order', originalOrder)
+        # try to get the order on a translation otherwise use one of above
+        order = getattr(context, 'themes_menu_order', originalOrder)
+        
         orderedData = [ None for n in range(0,len(order)+1)]
         unsortedData = []
         for node in data:
