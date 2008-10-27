@@ -33,11 +33,11 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
         if hasattr(self.context.context, self.context.__name__):
             # merge in values from content
             for value in self.context.get(self.context.context):
-                if value not in values:
+                if value not in values and value is not None:
                     values.append(value)
 
         terms = [self.vocabulary.getTerm(value)
-                 for value in values]
+                 for value in values if value is not None]
         nondeprecated = ThemesEditVocabularyFactory(self.context)
         result = []
         for term in terms:
