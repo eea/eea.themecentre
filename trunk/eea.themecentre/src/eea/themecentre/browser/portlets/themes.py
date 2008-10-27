@@ -6,11 +6,15 @@ from Products.CMFPlone import utils
 from eea.themecentre.interfaces import IThemeTagging
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.browser.portlets.catalog import BasePortlet
+from eea.themecentre import _
 
 class ObjectThemesPortlet(BasePortlet):
 
     all_link = None
 
+    def title(self):
+        return _(u'Themes')
+    
     def items(self):
         context = utils.context(self)
         adapter = queryAdapter(context, IThemeTagging, default=None)
