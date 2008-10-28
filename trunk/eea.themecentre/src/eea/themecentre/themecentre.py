@@ -220,8 +220,8 @@ def getThemeCentreByName(name):
             getThemes=name)
     if brains:
         tc =  brains[0].getObject()
-        lang = catalog.REQUEST.get('Language', 'en')
-        if lang is not 'en':
+        lang = catalog.REQUEST.get('LANGUAGE', 'en')
+        if lang != 'en':
             tcTranslation = tc.getTranslation(lang)
             if tcTranslation is not None:
                 tc = tcTranslation
