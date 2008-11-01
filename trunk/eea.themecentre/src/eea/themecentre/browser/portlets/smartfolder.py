@@ -1,6 +1,6 @@
 from Products.EEAContentTypes.browser import smartfolder
 from eea.themecentre.themecentre import getThemeCentre
-from eea.translations import _ 
+from eea.themecentre import _ 
 
 class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
 
@@ -32,7 +32,7 @@ class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
         if obj_id == 'events':
             title = _(u'Upcoming events')
         elif obj_id == 'faq':
-            title = 'Latest FAQ'
+            title = _(u'Latest FAQ')
         else:
-            title = _(obj_title)
+            title = obj_title
         return title

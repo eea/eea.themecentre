@@ -12,6 +12,8 @@ from eea.mediacentre.mediatypes import MediaTypesVocabularyFactory
 from eea.mediacentre.interfaces import IMediaCentre
 from Products.CMFCore.utils import getToolByName
 
+from eea.themecentre import _
+
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
 
 class PromoteThemeCentre(object):
@@ -49,9 +51,11 @@ class Multimedia(object):
         mediacentre = getUtility(IMediaCentre)
         types = sorted(mediacentre.getMediaTypes())
         vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
-        types_ = [{'typeid':term.value, 'title':term.title}
+        # we have titles of single name so we add 's' and since we know it's in
+        # english
+        types_ = [{'typeid':term.value, 'title':_(term.title+'s')}
                   for term in vocab if term.value != 'other']
-        types_.append({'typeid':'other', 'title': 'Other'})
+        types_.append({'typeid':'other', 'title': _(u'Other')})
         return types_
 
     def media_items(self):

@@ -5,10 +5,14 @@ from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeRelation
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.browser.portlets.catalog import BasePortlet
+from eea.themecentre import _
 
 class RelatedPortlet(BasePortlet):
 
     all_link = None
+
+    def title(self):
+        return _(u'Related themes')
 
     def items(self):
         context = utils.context(self)
@@ -22,9 +26,12 @@ class RelatedPortlet(BasePortlet):
             tcs = catalog.searchResults(query)
             tcsIds = [ brain.getId for brain in tcs ]
             relation = IThemeRelation(currentThemeCentre)
+            language = self.request.get('LANGUAGE', 'en')
             for uid in relation.related:
                 themeCentre = reference_catalog.lookupObject(uid)
                 if themeCentre is not None and themeCentre.getId() in tcsIds:
+                    if themeCentre.hasTranslation(language):
+                        themeCentre = themeCentre.getTranslation(language)
                     result.append(themeCentre)
 
         return result
