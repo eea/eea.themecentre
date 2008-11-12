@@ -108,7 +108,7 @@ class NavigationPortlet(BaseNavigationPortlet):
         originalOrder = ['highlights', 'reports', 'indicators', 'maps-and-graphs', 'datasets','events','links']
         if ITranslatable is not None and ITranslatable.providedBy(context):
             # get order defined on canonical
-            order = getattr(context.getCanonical(), 'themes_menu_order', originalOrder)
+            originalOrder = getattr(context.getCanonical(), 'themes_menu_order', originalOrder)
         # try to get the order on a translation otherwise use one of above
         order = getattr(context, 'themes_menu_order', originalOrder)
         
