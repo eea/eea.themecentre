@@ -119,18 +119,6 @@ and to the 'air' themecentre.
   >>> IThemeTagging(getattr(themeCentre.highlights, 'copy_of_newsobj')).tags
   ['air']
 
-We add a press release to the themecentre and the highlights smart
-folder should find it.
-
-  >>> themeCentre.highlights.setLocallyAllowedTypes(['News Item', 'PressRelease'])
-  >>> objid = themeCentre.highlights.invokeFactory('PressRelease', id='rel1')
-  >>> self.portal.portal_workflow.doActionFor(themeCentre.highlights.rel1,
-  ...                                         'submit')
-  >>> query = {'portal_type': 'PressRelease', 'getId': 'rel1',
-  ...          'getThemes': 'air'}
-  >>> len(self.portal.portal_catalog.searchResults(query))
-  1
-
 Some portlets have a more link that points to a location where you can see all
 content of the same theme and type. For events and press releases the links should
 point to the smart folders in the themecentre. Documents don't have a smart folder

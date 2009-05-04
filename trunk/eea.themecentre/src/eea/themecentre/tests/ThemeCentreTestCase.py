@@ -10,10 +10,10 @@ from Products.Five import fiveconfigure
 
 dependencies = []
 
-PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager',
-            'PloneHelpCenter', 'EEAPloneAdmin',
-            'FiveSite', 'ThemeCentre',
-            'EEAContentTypes',)
+PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager', 'LinguaPlone',
+            'PloneHelpCenter', 'EEAContentTypes','valentine.linguaflow', 'PloneLanguageTool', 'EEAPloneAdmin',
+            'FiveSite', 'ThemeCentre')
+
 
 
 @onsetup
@@ -30,13 +30,9 @@ def setup_themecentre():
     fiveconfigure.debug_mode = False
 
     PloneTestCase.installProduct('Five')
-    PloneTestCase.installProduct('FiveSite')
-    PloneTestCase.installProduct('PloneRSSPortlet')
-    PloneTestCase.installProduct('ATVocabularyManager')
-    PloneTestCase.installProduct('ThemeCentre')
-    PloneTestCase.installProduct('PloneHelpCenter')
-    PloneTestCase.installProduct('EEAPloneAdmin')
-    PloneTestCase.installProduct('EEAContentTypes')
+    for product in PRODUCTS:
+        PloneTestCase.installProduct(product)
+
 
 setup_themecentre()
 PloneTestCase.setupPloneSite(products=PRODUCTS)
