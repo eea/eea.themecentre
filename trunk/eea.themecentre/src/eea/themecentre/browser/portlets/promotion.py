@@ -23,7 +23,7 @@ class ThemeCentreMenuPromotion(object):
             query['navSection'] = section
         result = catalog.searchResults( query )
         for t in result:
-            if section is not None or (section is None and t.navSection in [None, 'default']):
+            if (section is not None) or (section is None and t.navSection in [None, 'default']):
                 promotions.append( {'id' : t.getId,
                                     'Description' : t.Description,
                                     'Title' : t.Title,
@@ -41,14 +41,15 @@ class ThemeCentreMenuPromotion(object):
                 continue
             if not currentTheme in promo.themes:
                 continue
-            if (section != None) and (section != promo.themepage_section):
+            if (section is not None) and (section != promo.themepage_section):
                 continue
-            promotions.append( {'id' : t.getId,
-                                'Description' : t.Description,
-                                'Title' : t.Title,
-                                'url' : t.getUrl,
-                                'style' : 'display: none;',
-                                'image' : t.getURL() + '/image' } )
+            if (section is not None) or (section is None and promo.themepage_section in [None, 'default']):
+                promotions.append( {'id' : t.getId,
+                                    'Description' : t.Description,
+                                    'Title' : t.Title,
+                                    'url' : t.getUrl,
+                                    'style' : 'display: none;',
+                                    'image' : t.getURL() + '/image' } )
 
         if promotions:
             promotions[0]['style'] = 'display: block'
