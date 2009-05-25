@@ -47,7 +47,7 @@ class ThemeCentreMenuPromotion(object):
                 promotions.append( {'id' : t.getId,
                                     'Description' : t.Description,
                                     'Title' : t.Title,
-                                    'url' : t.getUrl,
+                                    'url' : t.getURL(),
                                     'style' : 'display: none;',
                                     'image' : t.getURL() + '/image' } )
 
