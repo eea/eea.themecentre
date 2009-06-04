@@ -1,3 +1,4 @@
+from zope.component import getMultiAdapter
 from eea.themecentre.themecentre import getTheme, getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from eea.promotion.interfaces import IPromotion
@@ -23,20 +24,25 @@ class ThemeCentreMenuPromotion(object):
             query['navSection'] = section
         result = catalog.searchResults( query )
         for t in result:
+            obj = t.getObject()
             if (section is not None) or (section is None and t.navSection in [None, 'default']):
-                promotions.append( {'id' : t.getId,
-                                    'Description' : t.Description,
-                                    'Title' : t.Title,
-                                    'url' : t.getUrl,
-                                    'style' : 'display: none;',
-                                    'image' : t.getURL() + '/image' } )
+                info = { 'id' : t.getId,
+                         'Description' : t.Description,
+                         'Title' : t.Title,
+                         'url' : t.getUrl,
+                         'style' : 'display: none;',
+                         'imglink' : getMultiAdapter((obj, obj.REQUEST),
+                             name='promo_imglink')('thumb'),
+                         'image' : t.getURL() + '/image' }
+                promotions.append(info)
 
         # Internal promotions
         query = {'object_provides': 'eea.promotion.interfaces.IPromoted',
                  'review_state': 'published'}
         result = catalog.searchResults(query)
         for t in result:
-            promo = IPromotion(t.getObject())
+            obj = t.getObject()
+            promo = IPromotion(obj)
             if not promo.display_on_themepage:
                 continue
             if not currentTheme in promo.themes:
@@ -44,12 +50,15 @@ class ThemeCentreMenuPromotion(object):
             if (section is not None) and (section != promo.themepage_section):
                 continue
             if (section is not None) or (section is None and promo.themepage_section in [None, 'default']):
-                promotions.append( {'id' : t.getId,
-                                    'Description' : t.Description,
-                                    'Title' : t.Title,
-                                    'url' : t.getURL(),
-                                    'style' : 'display: none;',
-                                    'image' : t.getURL() + '/image' } )
+                info = { 'id' : t.getId,
+                         'Description' : t.Description,
+                         'Title' : t.Title,
+                         'url' : t.getURL(),
+                         'style' : 'display: none;',
+                         'imglink' : getMultiAdapter((obj, obj.REQUEST),
+                             name='promo_imglink')('thumb'),
+                         'image' : t.getURL() + '/image' }
+                promotions.append(info)
 
         if promotions:
             promotions[0]['style'] = 'display: block'
