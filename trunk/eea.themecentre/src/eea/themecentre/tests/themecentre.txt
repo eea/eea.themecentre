@@ -19,7 +19,7 @@ Let's associate the Theme Centre with a theme.
   >>> taggingadapter = IThemeCentreSchema(themeCentre)
   >>> taggingadapter.tags = 'air'
 
-When a folder is promoted to a Theme Centre news, links and events folders
+When a folder is promoted to a Theme Centre, news, links and events folders
 should be created. Let's see if that worked.
 
   >>> getattr(themeCentre, 'highlights', None) is not None
@@ -61,7 +61,7 @@ the themes should be real UIDs, but here we can use random strings.
   ['5j45j34', '1sloe45']
 
 There's a theme vocabulary that lists all existing theme centres. Until
-now we only created on theme centre. The theme vocabulary won't list the
+now we only created one theme centre. The theme vocabulary won't list the
 theme that is associated with the current theme, so let's make a new
 theme centre.
 
@@ -70,6 +70,8 @@ theme centre.
   >>> view()
   '...'
   >>> themeCentre2 = folder
+  >>> themeCentre2.setLanguage('en')
+  >>> themeCentre2.reindexObject()
   >>> taggingadapter = IThemeCentreSchema(themeCentre2)
   >>> taggingadapter.tags = 'agriculture'
 
@@ -125,9 +127,9 @@ point to the smart folders in the themecentre. Documents don't have a smart fold
 in themecentre so a document should get a link to themecentre/contentbytype?contenttype=<theme>
 
   >>> from eea.themecentre.interfaces import IThemeMoreLink
-  >>> IThemeMoreLink(self.folder.pr_link).url('air')
-  'http://nohost/plone/to_be_promoted/highlights/highlights_topic'
-  >>> IThemeMoreLink(self.folder.event_link).url('air')
-  'http://nohost/plone/to_be_promoted/events/events_topic'
-  >>> IThemeMoreLink(self.folder.doc_link).url('air')
-  'http://nohost/plone/to_be_promoted/contentbytype?contenttype=Document'
+  >>> IThemeMoreLink(self.folder.pr_link).url('agriculture')
+  'http://nohost/plone/to_be_promoted2/highlights/highlights_topic'
+  >>> IThemeMoreLink(self.folder.event_link).url('agriculture')
+  'http://nohost/plone/to_be_promoted2/events/events_topic'
+  >>> IThemeMoreLink(self.folder.doc_link).url('agriculture')
+  'http://nohost/plone/to_be_promoted2/contentbytype?contenttype=Document'
