@@ -17,30 +17,19 @@ class ThemeCentreMenuPromotion(object):
         promotions = []
 
         # External promotions
-        query = { 'portal_type' : 'Promotion',
-                  'review_state' : 'published',
-                  'getThemes' : currentTheme }
+        query = { 'object_provides': 'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
+                  'review_state': 'published',
+                  'getThemes': currentTheme }
         if section is not None:
             query['navSection'] = section
-        result = catalog.searchResults( query )
-        for t in result:
-            obj = t.getObject()
-            if (section is not None) or (section is None and t.navSection in [None, 'default']):
-                info = { 'id' : t.getId,
-                         'Description' : t.Description,
-                         'Title' : t.Title,
-                         'url' : t.getUrl,
-                         'style' : 'display: none;',
-                         'imglink' : getMultiAdapter((obj, obj.REQUEST),
-                             name='promo_imglink')('thumb'),
-                         'image' : t.getURL() + '/image' }
-                promotions.append(info)
+        result1 = catalog.searchResults( query )
 
         # Internal promotions
         query = {'object_provides': 'eea.promotion.interfaces.IPromoted',
                  'review_state': 'published'}
-        result = catalog.searchResults(query)
-        for t in result:
+        result2 = catalog.searchResults( query )
+
+        for t in result1 + result2:
             obj = t.getObject()
             promo = IPromotion(obj)
             if not promo.display_on_themepage:
