@@ -61,6 +61,11 @@ def test_suite():
                      package = 'eea.themecentre.tests',
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
+        FunctionalDocFileSuite('bugs.txt',
+                     test_class=TestTagging,
+                     package = 'eea.themecentre.tests',
+                     optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                     ),
         ))
     return suite
 

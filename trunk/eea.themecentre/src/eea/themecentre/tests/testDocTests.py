@@ -7,7 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 
 
-class Test(ThemeCentreTestCase):
+class PortletTestCase(ThemeCentreTestCase):
 
     def afterSetUp(self):
         portal = self.portal
@@ -37,7 +37,7 @@ def test_suite():
     return unittest.TestSuite((
         FunctionalDocFileSuite('promotion.txt',
                      package = 'eea.themecentre.browser.portlets',
-                     test_class = Test,
+                     test_class = PortletTestCase,
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
         ))
