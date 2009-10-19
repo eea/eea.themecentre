@@ -1,0 +1,236 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+  <include package="Products.CMFonFive"/>
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeTaggable"
+      name="themes_edit.html"
+      permission="cmf.ModifyPortalContent"
+      class=".themes.ThemeEditForm"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IPossibleThemeCentre"
+      name="promote2ThemeCentre"
+      permission="eea.PromoteThemeCentre"
+      class=".themecentre.PromoteThemeCentre"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="themecentre_edit.html"
+      permission="eea.PromoteThemeCentre"
+      class=".themecentre.ThemeCentreEdit"
+      />
+
+  <browser:menuItem
+      for="eea.themecentre.interfaces.IThemeTaggable"
+      menu="object"
+      title="Themes"
+      action="themes_edit.html"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:menuItem
+      for="eea.themecentre.interfaces.IThemeCentre"
+      menu="object"
+      title="Theme"
+      action="themecentre_edit.html"
+      permission="eea.PromoteThemeCentre"
+      />
+
+   <browser:menuItem
+      for="Products.ATContentTypes.interface.IATFolder"
+      menu="object_buttons"
+      title="Theme centre"
+      action="@@promote2ThemeCentre"
+      description="Promote to theme centre"
+      permission="eea.PromoteThemeCentre"
+      />
+
+   <browser:menuItem
+      for="eea.themecentre.interfaces.IThemeCentre"
+      menu="object_buttons"
+      title="NO Theme centre"
+      action="@@depromote2ThemeCentre"
+      description="depromote to theme centre"
+      permission="eea.PromoteThemeCentre"
+      />
+
+  <!-- disable until we know what link solution we want
+  <browser:menuItem
+      for="*"
+      menu="object"
+      title="links overview"
+      action="linkchecker_summary"
+      filter="object/@@linkchecker/showInTab"
+      description="see status of links"
+      permission="cmf.ModifyPortalContent"
+      />
+  -->
+
+  <!-- listing views -->
+
+  <browser:page
+      for="*"
+      name="themes_faq"
+      class=".portlets.faq.FaqPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+   <browser:page
+      for="*"
+      name="themes-object"
+      class=".portlets.themes.ObjectThemesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes-related"
+      class=".portlets.related.RelatedPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes_rdf"
+      class=".portlets.rdf.RDFPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes-rdftitles"
+      class=".portlets.rdftitles.RDFTitlesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themesMenuPromotion"
+      class=".portlets.promotion.ThemeCentreMenuPromotion"
+      permission="zope.Public"
+      allowed_attributes="promotions"
+      />
+
+  <browser:page
+      for="*"
+      name="theme_portlets"
+      class=".portlets.smartfolder.SmartFolderPortlets"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <!-- plone changes -->
+
+  <browser:page
+      for="*"
+      name="themes_navigation_view"
+      class=".portlets.navigation.NavigationPortlet"
+      permission="zope.Public"
+      allowed_interface=".portlets.navigation.INavigationPortlet"
+      allowed_attributes="getNavTree displayLogo logoUrl logoParentUrl"
+      />
+
+   <adapter for="..interfaces.IThemeCentre
+                Products.CMFPlone.browser.interfaces.ISiteMap"
+            factory=".sitemap.SitemapThemeCentreStrategy"
+            provides="Products.CMFPlone.browser.interfaces.INavtreeStrategy" />
+
+  <!-- migration stuff -->  
+
+  <browser:page
+      zcml:condition="installed MySQLdb"
+      for="*"
+      name="migrateEpaediaMultimedia"
+      class=".migrate_epaedia.MigrateMedia"
+      permission="cmf.ModifyPortalContent"
+      attribute="migrate"
+      />
+
+  <browser:page
+      zcml:condition="installed MySQLdb"
+      for="*"
+      name="migrateEpaediaArticles"
+      class=".migrate_epaedia.MigrateArticles"
+      permission="cmf.ModifyPortalContent"
+      attribute="migrate"
+      />
+
+  <!--
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="allnews"
+      class=".portlets.news.NewsPortlet"
+      allowed_interface=".interfaces.INewsPortlet"
+      permission="zope.Public"
+      />
+  -->
+
+  <browser:page
+      for="*"
+      name="proxy"
+      class=".proxy.Proxy"
+      allowed_attributes="real_view"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="linkchecker"
+      class=".links.ThemeCentreLinkChecker"
+      permission="zope.Public"
+      allowed_attributes="showInTab"
+      />
+
+  <browser:page
+      for="*"
+      name="linkchecker-objects"
+      class=".links.LinksByStatus"
+      permission="cmf.ModifyPortalContent"
+      allowed_attributes="documents links"
+      />
+
+  <!-- provides videos that are shown in the themecentre's multimedia section -->
+  <browser:page
+      for="*"
+      name="themecentre_multimedia"
+      class=".themecentre.Multimedia"
+      permission="zope.Public"
+      allowed_attributes="types media_items"
+      />
+
+  <browser:page
+      for="*"
+      name="theme"
+      class=".themecentre.Theme"
+      permission="zope.Public"
+      allowed_attributes="name"
+      />
+
+  <!-- provides info for the related topics portlet -->
+  <browser:page
+      for="*"
+      name="relatedtopics"
+      class=".related.Topics"
+      permission="zope.Public"
+      allowed_attributes="menu"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="contentbytypeview"
+      class=".content.ContentByType"
+      permission="zope.Public"
+      allowed_attributes="title description content"
+      />
+
+</configure>
