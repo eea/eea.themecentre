@@ -22,6 +22,22 @@ Mark it as a promotion:
   >>> alsoProvides(item, IPromoted)
   >>> promo = IPromotion(item)
 
+The items first theme tag control on which theme page it will show up. We want
+it on the energy page:
+
+  >>> from eea.themecentre.interfaces import IThemeTagging
+  >>> IThemeTagging(item).tags = [u'energy', u'agriculture']
+  >>> promo.themes
+  [u'energy', u'agriculture']
+
+We want to show it on the 'default' navigation section:
+
+  >>> promo.locations = [u'Themes']
+  >>> from Products.NavigationManager.sections import INavigationSectionPosition
+  >>> INavigationSectionPosition(item).section = 'default'
+  >>> promo.themepage_section
+  'default'
+
 Catalog should have it indexed:
 
   >>> catalog.indexObject(item)
@@ -30,12 +46,6 @@ Catalog should have it indexed:
   >>> results = catalog.searchResults(query)
   >>> item == results[0].getObject()
   True
-
-We want to show it on the energy theme page in the default section:
-
-  >>> promo.locations = [u'Themes']
-  >>> promo.themes = [u'energy']
-  >>> promo.themepage_section = 'default'
 
 The energy theme page should include it:
 
@@ -50,8 +60,8 @@ The energy theme page should include it:
 
 We can also ask explicitly for promotions in the data-center-services:
 
-  >>> promo.themepage_section = 'data-center-services'
-  >>> promos = themepage.promotions('data-center-services')
+  >>> INavigationSectionPosition(item).section = u'data-center-services'
+  >>> promos = themepage.promotions(u'data-center-services')
   >>> len(promos)
   1
 
