@@ -1,0 +1,63 @@
+===============================
+Promotion/Themepage integration
+===============================
+
+  >>> from Products.CMFCore.utils import getToolByName
+  >>> catalog = getToolByName(self.portal, 'portal_catalog')
+  >>> wf = getToolByName(self.portal, 'portal_workflow')
+
+Create a news item:
+
+  >>> self.setRoles(['Manager'])
+  >>> id = portal.invokeFactory('News Item', id='test')
+  >>> item = portal[id]
+  >>> item.setTitle('Foobar')
+  >>> wf.doActionFor(item, 'publish')
+
+Mark it as a promotion:
+
+  >>> from eea.promotion.interfaces import IPromotable, IPromoted, IPromotion
+  >>> from zope.interface import alsoProvides
+  >>> alsoProvides(item, IPromotable)
+  >>> alsoProvides(item, IPromoted)
+  >>> promo = IPromotion(item)
+
+Catalog should have it indexed:
+
+  >>> catalog.indexObject(item)
+  >>> query = {'object_provides': 'eea.promotion.interfaces.IPromoted',
+  ...          'review_state': 'published'}
+  >>> results = catalog.searchResults(query)
+  >>> item == results[0].getObject()
+  True
+
+We want to show it on the energy theme page in the default section:
+
+  >>> promo.locations = [u'Themes']
+  >>> promo.themes = [u'energy']
+  >>> promo.themepage_section = 'default'
+
+The energy theme page should include it:
+
+  >>> from zope.publisher.browser import TestRequest
+  >>> from eea.themecentre.browser.portlets.promotion import ThemeCentreMenuPromotion
+  >>> request = TestRequest()
+  >>> energy = self.portal.SITE.themes.energy
+  >>> themepage = ThemeCentreMenuPromotion(energy, request)
+  >>> promos = themepage.promotions() 
+  >>> len(promos)
+  1
+
+We can also ask explicitly for promotions in the data-center-services:
+
+  >>> promo.themepage_section = 'data-center-services'
+  >>> promos = themepage.promotions('data-center-services')
+  >>> len(promos)
+  1
+
+... but should not be included if we specify another section:
+
+  >>> promos = themepage.promotions('topics')
+  >>> len(promos)
+  0
+
