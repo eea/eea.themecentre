@@ -1,0 +1,8 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <permission
+    id="eea.PromoteThemeCentre"
+    title="EEA: promote to theme centre"
+    />
+
+</configure>
