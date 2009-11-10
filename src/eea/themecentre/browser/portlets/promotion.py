@@ -18,40 +18,38 @@ class ThemeCentreMenuPromotion(object):
         promotions = []
         now = DateTime()
 
-        # External promotions
-        query = { 'object_provides': 'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
-                  'review_state': 'published',
-                  'getThemes': currentTheme,
-                  'effectiveRange' : now}
-        if section is not None:
-            query['navSection'] = section
-        result1 = catalog.searchResults( query )
+        result = catalog({
+            'object_provides': {
+                'query': [
+                    'eea.promotion.interfaces.IPromoted',
+                    'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
+                ],
+                'operator': 'or',
+            },
+            'review_state': 'published',
+            'effectiveRange' : now,
+        })
 
-        # Internal promotions
-        query = {'object_provides': 'eea.promotion.interfaces.IPromoted',
-                 'review_state': 'published',
-                 'effectiveRange' : now}
-        result2 = catalog.searchResults( query )
-
-        for t in result1 + result2:
-            obj = t.getObject()
+        for brain in result:
+            obj = brain.getObject()
             promo = IPromotion(obj)
             if not promo.display_on_themepage:
                 continue
-            if not currentTheme in promo.themes:
+            if not currentTheme == promo.themes[0]:
                 continue
             if (section is not None) and (section != promo.themepage_section):
                 continue
             if (section is not None) or (section is None and promo.themepage_section in [None, 'default']):
-                info = { 'id' : t.getId,
-                         'Description' : t.Description,
-                         'Title' : t.Title,
-                         'url' : t.getURL(),
-                         'style' : 'display: none;',
-                         'imglink' : getMultiAdapter((obj, obj.REQUEST),
-                             name='promo_imglink')('thumb'),
-                         'image' : t.getURL() + '/image' }
-                promotions.append(info)
+                promotions.append({
+                    'id' : brain.getId,
+                    'Description' : brain.Description,
+                    'Title' : brain.Title,
+                    'url' : brain.getURL(),
+                    'style' : 'display: none;',
+                    'imglink' : getMultiAdapter((obj, obj.REQUEST),
+                        name='promo_imglink')('thumb'),
+                    'image' : brain.getURL() + '/image',
+                })
 
         if promotions:
             promotions[0]['style'] = 'display: block'
