@@ -1,6 +1,7 @@
 from zope.component import getMultiAdapter
 from eea.themecentre.themecentre import getTheme, getThemeCentre
 from Products.CMFCore.utils import getToolByName
+from p4a.video.interfaces import IVideoEnhanced
 from eea.promotion.interfaces import IPromotion
 from DateTime.DateTime import DateTime
 
@@ -44,13 +45,9 @@ class ThemeCentreMenuPromotion(object):
                     'id' : brain.getId,
                     'Description' : brain.Description,
                     'Title' : brain.Title,
-                    'url' : brain.getURL(),
-                    'style' : 'display: none;',
-                    'imglink' : getMultiAdapter((obj, obj.REQUEST),
-                        name='promo_imglink')('thumb'),
-                    'image' : brain.getURL() + '/image',
+                    'url' : promo.url,
+                    'absolute_url' : brain.getURL(),
+                    'is_video' : IVideoEnhanced.providedBy(obj),
                 })
 
-        if promotions:
-            promotions[0]['style'] = 'display: block'
         return promotions
