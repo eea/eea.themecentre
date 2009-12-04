@@ -41,8 +41,16 @@ class ThemeCentreMenuPromotion(object):
             if (section is not None) and (section != promo.themepage_section):
                 continue
             if (section is not None) or (section is None and promo.themepage_section in [None, 'default']):
+                uid = brain.getId
+                ids = [i['id'] for i in promotions]
+                count = 0
+                while uid in ids:
+                    count += 1
+                    new_id = uid + '-' + str(count)
+                    if not new_id in ids:
+                        uid = new_id
                 promotions.append({
-                    'id' : brain.getId,
+                    'id' : uid,
                     'Description' : brain.Description,
                     'Title' : brain.Title,
                     'url' : promo.url,

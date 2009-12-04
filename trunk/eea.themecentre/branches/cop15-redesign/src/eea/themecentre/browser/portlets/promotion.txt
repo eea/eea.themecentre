@@ -58,6 +58,29 @@ The energy theme page should include it:
   >>> len(promos)
   1
 
+Let's add another promotion that will have the same id. Let's see what the system
+does:
+
+  >>> tmpfolder = portal[portal.invokeFactory('Folder', 'tmp')]
+  >>> item = tmpfolder[tmpfolder.invokeFactory('News Item', id='test')]
+  >>> wf.doActionFor(item, 'publish')
+
+Mark it as a promotion just like the previous:
+
+  >>> alsoProvides(item, IPromotable)
+  >>> alsoProvides(item, IPromoted)
+  >>> promo = IPromotion(item)
+  >>> IThemeTagging(item).tags = [u'energy', u'agriculture']
+  >>> promo.locations = [u'Themes']
+  >>> INavigationSectionPosition(item).section = 'default'
+  >>> catalog.indexObject(item)
+
+Now we should have two promos, but their id's should be different:
+
+  >>> promos = themepage.promotions() 
+  >>> [i['id'] for i in promos]
+  ['test', 'test-1']
+
 We can also ask explicitly for promotions in the data-center-services:
 
   >>> INavigationSectionPosition(item).section = u'data-center-services'
@@ -70,4 +93,3 @@ We can also ask explicitly for promotions in the data-center-services:
   >>> promos = themepage.promotions('topics')
   >>> len(promos)
   0
-
