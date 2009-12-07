@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='eea.themecentre',
-      version = '0.1',
+      version = '0.2',
       url = 'http://svn.eionet.europa.eu/repositories/Zope',
       description = 'ThemeCentre',
       author = 'Tim Terlegard, Sasha Vincic',
