@@ -4,3 +4,5 @@ Changelog
 0.3 - (Unreleased)
 ------------------
 
+ * Fixed bug where modifications to themes were not copied to translations [thuliper #2587]
+
