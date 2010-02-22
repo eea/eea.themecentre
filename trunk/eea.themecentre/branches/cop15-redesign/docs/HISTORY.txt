@@ -3,6 +3,7 @@ Changelog
 
 0.4 - (Unreleased)
 ------------------
+ * Fixed "LinksByStatus" when CMFLinkChecker product is not installed [ghicaale #2971]
 
 0.3 - (2010-01-18)
 ------------------
