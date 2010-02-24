@@ -1,0 +1,12 @@
+Changelog
+=========
+
+0.4 - (2010-02-24)
+------------------
+ * Fixed "LinksByStatus" when CMFLinkChecker product is not installed [ghicaale #2971]
+
+0.3 - (2010-01-18)
+------------------
+
+ * Fixed bug where modifications to themes were not copied to translations [thuliper #2587]
+

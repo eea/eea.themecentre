@@ -193,12 +193,15 @@ def objectMoved(obj, event):
        objectAdded(obj, event)
 
 def objectThemeTagged(obj, event):
-    """ Checks if the object's theme tags are modified. If true, catalog
-        is updated. """
-
+    """ Checks if the object's theme tags are modified. If true, tags are
+        copied to eventual translations, and catalog is updated. """
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
-           obj.context.reindexObject()
+            context = obj.context
+            if context.isCanonical():
+                for lang, trans in context.getTranslations().items():
+                    IThemeTagging(trans[0]).tags = IThemeTagging(context).tags
+            context.reindexObject()
 
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """
