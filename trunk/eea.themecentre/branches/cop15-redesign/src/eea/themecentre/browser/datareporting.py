@@ -27,7 +27,7 @@ class DataCentreReporting(object):
             'effectiveRange' : now,
         })
         
-        for res in result[:10]:
+        for res in result:
             reso=res.getObject()
             for rodid in reso.reportingObligations:
                 if rodid not in rodsdone:

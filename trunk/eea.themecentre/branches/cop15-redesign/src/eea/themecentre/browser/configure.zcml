@@ -232,5 +232,14 @@
       permission="zope.Public"
       allowed_attributes="title description content"
       />
+      
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="dataCentreReporting"
+      class=".datareporting.DataCentreReporting"
+      permission="zope.Public"
+      allowed_attributes="relatedReportingObligations"
+      />
+
 
 </configure>
