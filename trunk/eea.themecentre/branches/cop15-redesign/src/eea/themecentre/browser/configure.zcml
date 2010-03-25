@@ -234,12 +234,18 @@
       />
       
   <browser:page
-      for="eea.themecentre.interfaces.IThemeCentre"
+      for="*"
       name="dataCentreReporting"
       class=".datareporting.DataCentreReporting"
       permission="zope.Public"
       allowed_attributes="relatedReportingObligations"
       />
 
+  <browser:page
+      for="*"
+      name="reportingObligationInfo"
+      class=".datareporting.ReportingObligationInfo"
+      permission="zope.Public"
+      />
 
 </configure>

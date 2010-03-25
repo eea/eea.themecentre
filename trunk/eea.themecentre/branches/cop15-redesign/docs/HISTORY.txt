@@ -4,6 +4,8 @@ Changelog
 0.5 - (Unreleased)
 ------------------
 
+ * Added base functionality for getting the related data centre and reporting obligations [demarant #2934]
+
 0.4 - (2010-02-24)
 ------------------
  * Fixed "LinksByStatus" when CMFLinkChecker product is not installed [ghicaale #2971]
