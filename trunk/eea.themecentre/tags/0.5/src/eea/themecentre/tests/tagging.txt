@@ -1,0 +1,28 @@
+Theme Tagging
+=============
+
+An object is taggable only if it provides IThemeTaggable.
+
+  >>> from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
+  >>> taggable = IThemeTagging(folder)
+
+Because the folder object is new it shouldn't have any tags.
+
+  >>> taggable.tags
+  []
+
+Let's add a few tags.
+
+  >>> taggable.tags  = ['air', 'climate']
+
+Let's see what tags there are.
+
+  >>> taggable.tags
+  ['air', 'climate']
+
+Theme tags can be marked as deprecated in the themes vocabulary.
+Climate change is marked as deprecated in the test set up so then
+we only have air left.
+
+  >>> taggable.nondeprecated_tags
+  ['air']
