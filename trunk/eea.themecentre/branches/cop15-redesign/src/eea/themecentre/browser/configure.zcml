@@ -248,4 +248,12 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="dc_view_logic"
+      class=".dc_view_logic.DCViewLogic"
+      permission="zope.Public"
+      allowed_interface=".interfaces.IDCViewLogic"
+      />
+
 </configure>
