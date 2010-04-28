@@ -26,22 +26,29 @@ class DCViewLogic(BrowserView):
         """Get the folderish items in cachable list/dict format"""
         themecentre = getThemeCentre(self.context)
         size_limit = int(self.request.get('size_limit', size_limit))
-        ret = []
+        ret = {
+            'folderish': [],
+            'nonfolderish': [],
+        }
         navSection = INavigationSectionPosition(self.context).section
         for brain in themecentre.getFolderContents(contentFilter={'navSection':navSection}):
             if brain.getURL() == self.context.absolute_url():
                 continue
-            item = {
-                'title': brain.Title,
-                'description': brain.Description,
-                'url': brain.getURL(),
-                'portal_type': brain.portal_type,
-                'folderish': False,
-            }
             if brain.portal_type in ['Folder', 'Topic', 'RichTopic']:
                 contents = _get_contents(brain)
-                item['contents'] = contents[:size_limit]
-                item['has_more'] = len(contents) > size_limit
-                item['folderish'] = True
-            ret.append(item)
+                ret['folderish'].append({
+                    'title': brain.Title,
+                    'description': brain.Description,
+                    'url': brain.getURL(),
+                    'portal_type': brain.portal_type,
+                    'contents': contents[:size_limit],
+                    'has_more': len(contents) > size_limit,
+                })
+            else:
+                ret['nonfolderish'].append({
+                    'title': brain.Title,
+                    'description': brain.Description,
+                    'url': brain.getURL(),
+                    'portal_type': brain.portal_type,
+                })
         return ret
