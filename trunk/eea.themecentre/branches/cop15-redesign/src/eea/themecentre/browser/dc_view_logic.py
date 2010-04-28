@@ -31,14 +31,17 @@ class DCViewLogic(BrowserView):
         for brain in themecentre.getFolderContents(contentFilter={'navSection':navSection}):
             if brain.getURL() == self.context.absolute_url():
                 continue
+            item = {
+                'title': brain.Title,
+                'description': brain.Description,
+                'url': brain.getURL(),
+                'portal_type': brain.portal_type,
+                'folderish': False,
+            }
             if brain.portal_type in ['Folder', 'Topic', 'RichTopic']:
                 contents = _get_contents(brain)
-                ret.append({
-                    'title': brain.Title,
-                    'description': brain.Description,
-                    'url': brain.getURL(),
-                    'portal_type': brain.portal_type,
-                    'contents': contents[:size_limit],
-                    'has_more': len(contents) > size_limit,
-                })
+                item['contents'] = contents[:size_limit]
+                item['has_more'] = len(contents) > size_limit
+                item['folderish'] = True
+            ret.append(item)
         return ret
