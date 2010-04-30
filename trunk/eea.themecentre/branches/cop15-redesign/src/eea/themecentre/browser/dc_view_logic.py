@@ -1,8 +1,9 @@
-from Products.CMFPlone.PloneBatch import Batch
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
+from eea.rdfrepository.interfaces import IFeed
 from eea.themecentre.themecentre import getThemeCentre
 from Products.NavigationManager.sections import INavigationSectionPosition
-
+from Products.EEAContentTypes.interfaces import IFeedPortletInfo
 
 def _get_contents(folder_brain):
     """Get contents of folderish brain (cachable list/dict format)"""
@@ -30,8 +31,19 @@ class DCViewLogic(BrowserView):
             'folderish': [],
             'nonfolderish': [],
         }
+
         navSection = INavigationSectionPosition(self.context).section
-        for brain in themecentre.getFolderContents(contentFilter={'navSection':navSection}):
+        query = { 'navSection' : navSection}
+
+        navtree_properties = getToolByName(self.context, 'portal_properties').navtree_properties
+        sortAttribute = navtree_properties.getProperty('sortAttribute', None)
+        if sortAttribute is not None:
+            query['sort_on'] = sortAttribute
+            sortOrder = navtree_properties.getProperty('sortOrder', None)
+            if sortOrder is not None:
+                query['sort_order'] = sortOrder
+
+        for brain in themecentre.getFolderContents(contentFilter=query):
             if brain.getURL() == self.context.absolute_url():
                 continue
             if brain.portal_type in ['Folder', 'Topic', 'RichTopic']:
@@ -45,10 +57,31 @@ class DCViewLogic(BrowserView):
                     'has_more': len(contents) > size_limit,
                 })
             else:
-                ret['nonfolderish'].append({
-                    'title': brain.Title,
-                    'description': brain.Description,
-                    'url': brain.getURL(),
-                    'portal_type': brain.portal_type,
-                })
+                obj = brain.getObject()
+                relatedObjects = obj.getRelatedItems()
+                if relatedObjects: 
+                    for relatedObj in  relatedObjects:
+                        if relatedObj.portal_type == 'RSSFeedRecipe':
+                            feed = IFeedPortletInfo(IFeed(relatedObj))
+                            ret['folderish'].append({
+                                'title': brain.Title,
+                                'description': brain.Description,
+                                'url': brain.getURL(),
+                                'portal_type': brain.portal_type,
+                                'contents': [ {'title': item.title,
+                                               'description': item.title,
+                                               'url': item.url,
+                                               'image' : item.image,
+                                               'portal_type': 'FeedItem',
+                                               } for item in feed.items[:size_limit] ],
+                                'has_more': True,
+                                })
+
+                else:
+                    ret['nonfolderish'].append({
+                        'title': brain.Title,
+                        'description': brain.Description,
+                        'url': brain.getURL(),
+                        'portal_type': brain.portal_type,
+                        })
         return ret
