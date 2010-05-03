@@ -1,16 +1,39 @@
+from zope.component import queryMultiAdapter
+from zope.component import queryAdapter
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
+from eea.facetednavigation.interfaces import ICriteria
 from eea.rdfrepository.interfaces import IFeed
 from eea.themecentre.themecentre import getThemeCentre
 from Products.NavigationManager.sections import INavigationSectionPosition
 from Products.EEAContentTypes.interfaces import IFeedPortletInfo
 
-def _get_contents(folder_brain):
+# Remove when I've found 
+HARDCODED_FACETED_SETTINGS = {
+    'c1': ['Data', 'Graph', 'Map'],
+    'c0': 10,
+    'c11': 'all',
+}
+
+def _get_contents(folder_brain, facetednav=None):
     """Get contents of folderish brain (cachable list/dict format)"""
-    if folder_brain.portal_type == 'Folder':
-        brains = folder_brain.getObject().getFolderContents()
+    obj = folder_brain.getObject()
+    if facetednav:
+        criteria = queryAdapter(obj, ICriteria)
+        query = {}
+        for cid, criterion in criteria.items():
+            default = criterion.get('default', None)
+            if default:
+                if isinstance(default, unicode):
+                    default = default.encode('utf-8')
+                elif isinstance(default, list):
+                    default = [s.encode('utf-8') for s in default]
+                query[cid.encode('utf-8')] = default
+        brains = facetednav.query(batch=False, sort=True, **query)
+    elif folder_brain.portal_type == 'Folder':
+        brains = obj.getFolderContents()
     elif folder_brain.portal_type in ['Topic', 'RichTopic']:
-        brains = folder_brain.getObject().queryCatalog()
+        brains = obj.queryCatalog()
     return [{
         'title': brain.Title,
         'description': brain.Title,
@@ -46,8 +69,10 @@ class DCViewLogic(BrowserView):
         for brain in themecentre.getFolderContents(contentFilter=query):
             if brain.getURL() == self.context.absolute_url():
                 continue
-            if brain.portal_type in ['Folder', 'Topic', 'RichTopic']:
-                contents = _get_contents(brain)
+            obj = brain.getObject()
+            facetednav = queryMultiAdapter((obj, self.request), name=u'faceted_query')
+            if (brain.portal_type in ['Folder', 'Topic', 'RichTopic']) or facetednav:
+                contents = _get_contents(brain, facetednav)
                 ret['folderish'].append({
                     'title': brain.Title,
                     'description': brain.Description,
@@ -57,7 +82,6 @@ class DCViewLogic(BrowserView):
                     'has_more': len(contents) > size_limit,
                 })
             else:
-                obj = brain.getObject()
                 relatedObjects = obj.getRelatedItems()
                 if relatedObjects: 
                     for relatedObj in  relatedObjects:
