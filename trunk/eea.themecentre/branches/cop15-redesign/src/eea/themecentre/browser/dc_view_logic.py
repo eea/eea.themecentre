@@ -61,6 +61,7 @@ class DCViewLogic(BrowserView):
                     'portal_type': brain.portal_type,
                     'contents': contents[:size_limit],
                     'has_more': len(contents) > size_limit,
+                    'nitems': len(contents),
                 })
             else:
                 relatedObjects = obj.getRelatedItems()
@@ -79,6 +80,7 @@ class DCViewLogic(BrowserView):
                                                'image' : item.image,
                                                'portal_type': 'FeedItem',
                                                } for item in feed.items[:size_limit] ],
+                                'nitems': len(feed.items),
                                 'has_more': True,
                                 })
 
