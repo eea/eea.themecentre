@@ -81,7 +81,7 @@ class DCViewLogic(BrowserView):
                                                'portal_type': 'FeedItem',
                                                } for item in feed.items[:size_limit] ],
                                 'nitems': len(feed.items),
-                                'has_more': True,
+                                'has_more': len(feed.items) > size_limit,
                                 })
 
                 else:
