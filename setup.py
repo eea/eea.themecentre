@@ -1,7 +1,13 @@
 from setuptools import setup, find_packages
+import os
+from os.path import join
+
+name = 'eea.themecentre'
+path = ['src'] + name.split('.') + ['version.txt']
+version = open(join(*path)).read().strip()
 
 setup(name='eea.themecentre',
-      version = '0.1',
+      version=version,
       url = 'http://svn.eionet.europa.eu/repositories/Zope',
       description = 'ThemeCentre',
       author = 'Tim Terlegard, Sasha Vincic',
