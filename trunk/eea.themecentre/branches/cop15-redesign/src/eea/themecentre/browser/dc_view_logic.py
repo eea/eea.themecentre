@@ -1,4 +1,5 @@
 from zope.component import queryMultiAdapter
+from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from eea.rdfrepository.interfaces import IFeed
@@ -20,6 +21,7 @@ def _get_contents(folder_brain, facetednav=None):
         'title': brain.Title,
         'description': brain.Title,
         'url': brain.getURL(),
+        'listing_url': brain.getURL(), # Should use URL adapter, but could wake up a lot of objects
         'portal_type': brain.portal_type,
     } for brain in brains]
 
@@ -51,6 +53,7 @@ class DCViewLogic(BrowserView):
             if brain.getURL() == self.context.absolute_url():
                 continue
             obj = brain.getObject()
+            listing_url = getMultiAdapter((obj, self.request), name=u'url').listing_url
             facetednav = queryMultiAdapter((obj, self.request), name=u'faceted_query')
             if (brain.portal_type in ['Folder', 'Topic', 'RichTopic']) or facetednav:
                 contents = _get_contents(brain, facetednav)
@@ -58,6 +61,7 @@ class DCViewLogic(BrowserView):
                     'title': brain.Title,
                     'description': brain.Description,
                     'url': brain.getURL(),
+                    'listing_url': listing_url,
                     'portal_type': brain.portal_type,
                     'contents': contents[:size_limit],
                     'has_more': len(contents) > size_limit,
@@ -74,10 +78,12 @@ class DCViewLogic(BrowserView):
                                 'title': brain.Title,
                                 'description': brain.Description,
                                 'url': brain.getURL(),
+                                'listing_url': listing_url,
                                 'portal_type': brain.portal_type,
                                 'contents': [ {'title': item.title,
                                                'description': item.title,
                                                'url': item.url,
+                                               'listing_url': item.url,
                                                'image' : item.image,
                                                'portal_type': 'FeedItem',
                                                } for item in feed.items[:size_limit] ],
@@ -89,7 +95,8 @@ class DCViewLogic(BrowserView):
                     ret['nonfolderish'].append({
                         'title': brain.Title,
                         'description': brain.Description,
-                        'url': brain.getURL(), # TODO use URL adapter so that external links point correctly
+                        'url': brain.getURL(),
+                        'listing_url': listing_url,
                         'portal_type': brain.portal_type,
                     })
         return ret

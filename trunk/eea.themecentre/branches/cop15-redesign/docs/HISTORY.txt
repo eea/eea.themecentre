@@ -3,6 +3,7 @@ Changelog
 
 0.7 - (unreleased)
 
+ * Fixed bug where ATLink would point to object URL instead of URL adapters listing_url [thuliper]
  * Fixed bug where some non-folderish items would disappear in dc_view [thuliper, #3303]
 
 0.6 - (2010-05-07)
