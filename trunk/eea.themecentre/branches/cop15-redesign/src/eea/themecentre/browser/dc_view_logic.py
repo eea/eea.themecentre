@@ -65,6 +65,7 @@ class DCViewLogic(BrowserView):
                 })
             else:
                 relatedObjects = obj.getRelatedItems()
+                foundRSSFeedRecipe = False
                 if relatedObjects:
                     for relatedObj in  relatedObjects:
                         if relatedObj.portal_type == 'RSSFeedRecipe':
@@ -82,13 +83,13 @@ class DCViewLogic(BrowserView):
                                                } for item in feed.items[:size_limit] ],
                                 'nitems': len(feed.items),
                                 'has_more': len(feed.items) > size_limit,
-                                })
-
-                else:
+                            })
+                            foundRSSFeedRecipe = True
+                if (not relatedObjects) or (not foundRSSFeedRecipe):
                     ret['nonfolderish'].append({
                         'title': brain.Title,
                         'description': brain.Description,
-                        'url': brain.getURL(),
+                        'url': brain.getURL(), # TODO use URL adapter so that external links point correctly
                         'portal_type': brain.portal_type,
-                        })
+                    })
         return ret
