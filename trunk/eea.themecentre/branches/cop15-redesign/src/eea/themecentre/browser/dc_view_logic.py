@@ -7,7 +7,7 @@ from eea.themecentre.themecentre import getThemeCentre
 from Products.NavigationManager.sections import INavigationSectionPosition
 from Products.EEAContentTypes.interfaces import IFeedPortletInfo
 
-def _get_contents(folder_brain, facetednav=None):
+def _get_contents(folder_brain, size_limit, request, facetednav=None):
     """Get contents of folderish brain (cachable list/dict format)"""
     obj = folder_brain.getObject()
     if facetednav:
@@ -21,9 +21,9 @@ def _get_contents(folder_brain, facetednav=None):
         'title': brain.Title,
         'description': brain.Title,
         'url': brain.getURL(),
-        'listing_url': brain.getURL(), # Should use URL adapter, but could wake up a lot of objects
+        'listing_url': getMultiAdapter((brain.getObject(), request), name=u'url').listing_url,
         'portal_type': brain.portal_type,
-    } for brain in brains]
+    } for brain in brains[:size_limit]], len(brains)
 
 class DCViewLogic(BrowserView):
     """ View that shows the contents of all subfolders to the themecentre
@@ -56,16 +56,16 @@ class DCViewLogic(BrowserView):
             listing_url = getMultiAdapter((obj, self.request), name=u'url').listing_url
             facetednav = queryMultiAdapter((obj, self.request), name=u'faceted_query')
             if (brain.portal_type in ['Folder', 'Topic', 'RichTopic']) or facetednav:
-                contents = _get_contents(brain, facetednav)
+                contents, nitems = _get_contents(brain, size_limit, self.request, facetednav)
                 ret['folderish'].append({
                     'title': brain.Title,
                     'description': brain.Description,
                     'url': brain.getURL(),
                     'listing_url': listing_url,
                     'portal_type': brain.portal_type,
-                    'contents': contents[:size_limit],
-                    'has_more': len(contents) > size_limit,
-                    'nitems': len(contents),
+                    'contents': contents,
+                    'has_more': nitems > size_limit,
+                    'nitems': nitems,
                 })
             else:
                 relatedObjects = obj.getRelatedItems()
