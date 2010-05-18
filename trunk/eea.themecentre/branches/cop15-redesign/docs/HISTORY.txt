@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 - (Unreleased)
+0.8 - (2010-05-18)
 ------------------
 
  * Fixed bug where listing_url (URL adapter) was not used for dc_view sub items [thuliper]
