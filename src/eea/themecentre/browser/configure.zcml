@@ -232,5 +232,28 @@
       permission="zope.Public"
       allowed_attributes="title description content"
       />
+      
+  <browser:page
+      for="*"
+      name="dataCentreReporting"
+      class=".datareporting.DataCentreReporting"
+      permission="zope.Public"
+      allowed_attributes="relatedReportingObligations"
+      />
+
+  <browser:page
+      for="*"
+      name="reportingObligationInfo"
+      class=".datareporting.ReportingObligationInfo"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="dc_view_logic"
+      class=".dc_view_logic.DCViewLogic"
+      permission="zope.Public"
+      allowed_interface=".interfaces.IDCViewLogic"
+      />
 
 </configure>
