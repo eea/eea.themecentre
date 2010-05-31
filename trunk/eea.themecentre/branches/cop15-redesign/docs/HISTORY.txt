@@ -4,6 +4,8 @@ Changelog
 0.9 - (Unreleased)
 ------------------
 
+ * Merged subfolder_view and dc_view [thuliper, #3372]
+
 0.8 - (2010-05-18)
 ------------------
 
