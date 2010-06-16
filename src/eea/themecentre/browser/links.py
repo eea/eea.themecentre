@@ -53,7 +53,7 @@ class ThemeCentreLinkChecker(object):
 
     def _generate_data(self):
         lc = getToolByName(self.context, 'portal_linkchecker')
-   
+
         themecentre = getThemeCentre(self.context)
         links = lc.database.query(objects=uids(themecentre))
 
@@ -104,7 +104,7 @@ class LinksByStatus(object):
         self.context = context
         self.request = request
         self.state = self.request.get('link_state')
-        self.lc = getToolByName(self.context, 'portal_linkchecker')
+        self.lc = getToolByName(self.context, 'portal_linkchecker', None)
 
     def documents(self):
         documents = {}
@@ -123,11 +123,11 @@ class LinksByStatus(object):
                 else:
                     item["owner_mail"] = member.getProperty("email")
                     item["owner"] = member.getProperty("fullname", doc.Creator)
-            
+
             item["instate"] += 1
-        
+
         return documents.values()
-        
+
     def links(self):
         """Returns a list of links in the given state."""
 
@@ -139,14 +139,14 @@ class LinksByStatus(object):
             item["reason"] = link.reason
             item["lastcheck"] = link.lastcheck
             item["document"] = doc
-            
+
             if member is None:
                 item["owner_mail"] = ""
                 item["owner"] = doc.Creator
             else:
                 item["owner_mail"] = member.getProperty("email")
                 item["owner"] = member.getProperty("fullname", doc.Creator)
-                
+
             items.append(item)
 
         return items
