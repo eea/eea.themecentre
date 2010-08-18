@@ -129,6 +129,14 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="portlet_faceted_logic"
+      class=".portlets.faceted.FacetedPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
   <!-- plone changes -->
 
   <browser:page
