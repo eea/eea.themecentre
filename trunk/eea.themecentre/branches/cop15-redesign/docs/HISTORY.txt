@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0 - (2010-09-06)
+------------------
+ * Feature: Added new faceted nav portlet. Replace old indicators RSS portlets with new one. [thuliper #3547]
+
 0.9 - (2010-06-16)
 ------------------
 
