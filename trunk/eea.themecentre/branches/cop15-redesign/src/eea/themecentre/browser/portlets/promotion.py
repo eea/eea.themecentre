@@ -36,7 +36,7 @@ class ThemeCentreMenuPromotion(object):
             promo = IPromotion(obj)
             if not promo.display_on_themepage:
                 continue
-            if not currentTheme == promo.themes[0]:
+            if not promo.themes or not currentTheme == promo.themes[0]:
                 continue
             if (section is not None) and (section != promo.themepage_section):
                 continue
