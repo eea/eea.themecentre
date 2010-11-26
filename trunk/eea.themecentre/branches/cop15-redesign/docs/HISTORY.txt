@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.3-dev - (unreleased)
+----------------------
+
 1.2 - (2010-11-26)
 ------------------
  * Bug fix: don't fail on indicators theme if the faceted query can't be found [tiberich #3893]
