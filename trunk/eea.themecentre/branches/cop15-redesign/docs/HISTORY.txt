@@ -1,13 +1,13 @@
 Changelog
 =========
 
-1.2-dev - (unreleased)
-----------------------
+1.2 - (2010-11-26)
+------------------
  * Bug fix: don't fail on indicators theme if the faceted query can't be found [tiberich #3893]
 
 1.1 - (2010-11-10)
 ------------------
- * don't fail if a promotion doesn't have any themes set #3829 [vincisas]
+ * Bug fix: don't fail if a promotion doesn't have any themes set #3829 [vincisas]
 
 1.0 - (2010-09-06)
 ------------------
@@ -41,3 +41,4 @@ Changelog
 0.3 - (2010-01-18)
 ------------------
  * Fixed bug where modifications to themes were not copied to translations [thuliper #2587]
+
