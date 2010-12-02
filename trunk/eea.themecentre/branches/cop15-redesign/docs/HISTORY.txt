@@ -3,6 +3,7 @@ Changelog
 
 1.3-dev - (unreleased)
 ----------------------
+ * Bug fix: Return NotFound when feed id is not specified for list_feed view [tiberich #3893]
 
 1.2 - (2010-11-26)
 ------------------
