@@ -106,7 +106,7 @@ def promoted(obj, event):
                             title='Upcoming events')
         topic = getattr(eventsobj, 'events_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue(('Event','QuickEvent', 'RDFEvent'))
+        type_crit.setValue(('Event','QuickEvent'))
         sort_crit = topic.addCriterion('start', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
