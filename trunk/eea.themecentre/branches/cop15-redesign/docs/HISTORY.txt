@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.4-dev - (unreleased)
-----------------------
+1.4 - (2011-03-01)
+------------------
  * Cleanup: Removed Product PloneRDFCalendar & RDFEvent type [ichimdav #2931]
  * Cleanup: Removed Product CMFLinkChecker [batradav #3219]
 
