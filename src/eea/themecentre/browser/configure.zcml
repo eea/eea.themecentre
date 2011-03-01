@@ -59,18 +59,6 @@
       permission="eea.PromoteThemeCentre"
       />
 
-  <!-- disable until we know what link solution we want
-  <browser:menuItem
-      for="*"
-      menu="object"
-      title="links overview"
-      action="linkchecker_summary"
-      filter="object/@@linkchecker/showInTab"
-      description="see status of links"
-      permission="cmf.ModifyPortalContent"
-      />
-  -->
-
   <!-- listing views -->
 
   <browser:page
@@ -129,6 +117,14 @@
       permission="zope.Public"
       />
 
+  <browser:page
+      for="*"
+      name="portlet_faceted_logic"
+      class=".portlets.faceted.FacetedPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
   <!-- plone changes -->
 
   <browser:page
@@ -145,7 +141,7 @@
             factory=".sitemap.SitemapThemeCentreStrategy"
             provides="Products.CMFPlone.browser.interfaces.INavtreeStrategy" />
 
-  <!-- migration stuff -->  
+  <!-- migration stuff -->
 
   <browser:page
       zcml:condition="installed MySQLdb"
@@ -183,22 +179,6 @@
       permission="zope.Public"
       />
 
-  <browser:page
-      for="*"
-      name="linkchecker"
-      class=".links.ThemeCentreLinkChecker"
-      permission="zope.Public"
-      allowed_attributes="showInTab"
-      />
-
-  <browser:page
-      for="*"
-      name="linkchecker-objects"
-      class=".links.LinksByStatus"
-      permission="cmf.ModifyPortalContent"
-      allowed_attributes="documents links"
-      />
-
   <!-- provides videos that are shown in the themecentre's multimedia section -->
   <browser:page
       for="*"
@@ -231,6 +211,29 @@
       class=".content.ContentByType"
       permission="zope.Public"
       allowed_attributes="title description content"
+      />
+
+  <browser:page
+      for="*"
+      name="dataCentreReporting"
+      class=".datareporting.DataCentreReporting"
+      permission="zope.Public"
+      allowed_attributes="relatedReportingObligations"
+      />
+
+  <browser:page
+      for="*"
+      name="reportingObligationInfo"
+      class=".datareporting.ReportingObligationInfo"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="dc_view_logic"
+      class=".dc_view_logic.DCViewLogic"
+      permission="zope.Public"
+      allowed_interface=".interfaces.IDCViewLogic"
       />
 
 </configure>

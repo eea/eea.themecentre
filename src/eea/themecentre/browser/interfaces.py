@@ -56,3 +56,10 @@ class IEventsPortlet(Interface):
 
     def full_items():
         pass
+
+class IDCViewLogic(Interface):
+    """Marker interface
+    """
+
+    def folder_contents(size_limit):
+        """ """
