@@ -21,10 +21,19 @@ import MySQLdb
 import MySQLdb.cursors
 import os
 from DateTime import DateTime
-from Acquisition import aq_base
+#from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
-from eea.themecentre.browser.epaedia import *
+from eea.themecentre.browser.epaedia import sql_images, sql_animations
+from eea.themecentre.browser.epaedia import sql_mindstretchers, sql_videos
+from eea.themecentre.browser.epaedia import sql_links, sql_level_one
+from eea.themecentre.browser.epaedia import sql_level_two, sql_level_three
+from eea.themecentre.browser.epaedia import METADATA, sql_cid_with_onetier_pid
+from eea.themecentre.browser.epaedia import sql_fullarticle_pid, sql_all_images
+from eea.themecentre.browser.epaedia import sql_snapshot_pid, sql_eids_by_pid
+from eea.themecentre.browser.epaedia import sql_title, sql_section_content
+from eea.themecentre.browser.epaedia import sql_article_links 
+from eea.themecentre.browser.epaedia import sql_image_by_eid, sql_sections
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
 from eea.mediacentre.interfaces import IMediaType
 from zope.app.event.objectevent import ObjectModifiedEvent
@@ -32,6 +41,9 @@ from zope.event import notify
 from zope.component import getAdapter
 from p4a.video.interfaces import IVideoDataAccessor
 from Products.NavigationManager.sections import INavigationSectionPosition
+import logging
+
+logger = logging.getLogger("eea.themecentre")
 
 types = { 'image':
             { 'sql': sql_images,
@@ -74,15 +86,15 @@ def load_pid_theme_mapping():
     mapping = {}
 
     for line in open(path, 'r'):
-        pid, title, maintheme, theme2, theme3, theme4 = line.split('@')
-        themes = filter(lambda x:len(x.strip())>0, [maintheme, theme2, theme3, theme4.strip()])
+        pid, _title, maintheme, theme2, theme3, theme4 = line.split('@')
+        themes = filter(lambda x:len(x.strip())>0, [maintheme, theme2, theme3, theme4.strip()]) #pylint: disable-msg = W0141
         mapping[int(pid)] = themes
 
     return mapping
             
 DEFAULT_EFFECTIVE_DATE = DateTime('2006-02-02')
 
-class MigrateMedia(object):
+class MigrateMedia(object): 
     """ Migrates media from epaedia database."""
 
     def __init__(self, context, request):
@@ -100,7 +112,7 @@ class MigrateMedia(object):
         self.catalog = getToolByName(context, 'portal_catalog')
         self.themes = {}
 
-    def migrate(self):
+    def migrate(self): 
         self.file = open('media_files.txt', 'w')
         self.eids = {}
 
@@ -136,8 +148,7 @@ class MigrateMedia(object):
             snapshot_pid = self._snapshot_pid(int(page_id))
             fullarticle_pid = self._fullarticle_pid((page_id))
             for media_type in media_types:
-                for pid in filter(None, (page_id, snapshot_pid, \
-                        fullarticle_pid)):
+                for pid in filter(None, (page_id, snapshot_pid, fullarticle_pid)):
                     self.migrate_files(theme_id, pid, media_type)
                     #self.migrate_section_files(theme_id, pid, media_type)
 
@@ -211,8 +222,8 @@ class MigrateMedia(object):
         path = self.path + '/website/elements/animations/' + str(eid) + '.swf'
         folder.invokeFactory('FlashFile', id=new_id, title=title)
         atfile = folder[new_id]
-        file = open(path, 'rb')
-        atfile.setFile(file)
+        afile = open(path, 'rb')
+        atfile.setFile(afile)
         atfile.setWidth(530)
         atfile.setHeight(350)
         atfile.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
@@ -224,7 +235,7 @@ class MigrateMedia(object):
     def mindstretchers(self, folder, db_row, theme_id):
         return self.animations(folder, db_row, theme_id)
 
-    def videos(self, folder, db_row, theme_id):
+    def videos(self, folder, db_row, theme_id): 
         eid, title, body, item = db_row
 
         if not title:
@@ -241,8 +252,8 @@ class MigrateMedia(object):
         path = self.path + '/website/elements/video/' + filename
         folder.invokeFactory('File', id=new_id, title=title)
         atfile = folder[new_id]
-        file = open(path, 'rb')
-        atfile.setFile(file)
+        vfile = open(path, 'rb')
+        atfile.setFile(vfile)
         atfile.setDescription(body)
         atfile.setEffectiveDate(DEFAULT_EFFECTIVE_DATE)
         atfile.processForm()
@@ -250,10 +261,10 @@ class MigrateMedia(object):
         try:
             # p4a activates videos automatically by subscribing to modified events
             notify(ObjectModifiedEvent(atfile))
-        except:
+        except Exception: 
             # sometimes extracting metadata from file may fail and result in
             # error, but we can continue as we set metadata below instead
-            pass
+            logger.debug("metadata extraction failed on eea.themecentre migrate_epaedia")
 
         video = getAdapter(atfile, IVideoDataAccessor,
                 name="video/x-flv")
@@ -307,9 +318,9 @@ class MigrateMedia(object):
             try:
                 media = IMediaType(new_file)
                 media.types = [media_type]
-            except:
+            except Exception: 
                 # links can't be adapted and shouldn't be
-                pass
+                logger.debug("links cant be adapted and shouldn't be for eea.themecentre")
 
             if media_type != 'link':
                 self._apply_themes(theme_id, new_file, page_id)
@@ -348,7 +359,7 @@ class MigrateMedia(object):
         if theme_id == tags[0]:
             themetag.tags = tags
         else:
-            1/0
+            raise ValueError
 
     def _change_workflow(self, obj):
         pass
@@ -395,7 +406,7 @@ class MigrateMedia(object):
             try:
                 media = IMediaType(image)
                 media.types = ['image']
-            except:
+            except Exception: #pylint: disable-msg = W0704
                 # links can't be adapted and shouldn't be
                 pass
 
@@ -428,7 +439,7 @@ class MigrateMedia(object):
             return None
 
 
-class MigrateArticles(object):
+class MigrateArticles(object): 
     """ Migrates articles from epaedia website. """
 
     def __init__(self, context, request):
@@ -516,7 +527,7 @@ class MigrateArticles(object):
     def _change_workflow(self, obj):
         pass
 
-    def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
+    def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None): 
         cursor = self.db.cursor()
         cursor.execute(sql_title % page_id)
         row = cursor.fetchone()
@@ -549,7 +560,7 @@ class MigrateArticles(object):
             body = unicode(content['body'], 'latin1').encode('utf8')
             quote = unicode(content['quote'], 'latin1').encode('utf8')
             tag = unicode(content['tag'], 'latin1').encode('utf8')
-            align = unicode(section['align'], 'latin1').encode('utf8')
+            #align = unicode(section['align'], 'latin1').encode('utf8')
             section_type = section['type']
             body_html = self._nl_to_p(body)
 
@@ -575,12 +586,12 @@ class MigrateArticles(object):
                                  image['copyright']) or '') + \
                               '</div>\n'
 
-                if align == 'l':
-                    left = image_html
-                    right = body_html
-                else:
-                    left = body_html
-                    right = image_html
+                #if align == 'l':
+                #    left = image_html
+                #    right = body_html
+                #else:
+                #    left = body_html  
+                #    right = image_html 
                 #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
                               #(left, right)
                 total_body += '<div class="figure-left">\n' + \
@@ -733,8 +744,9 @@ class MigrateArticles(object):
         image_id = utils.normalizeString(title, encoding='latin1')
         try:
             imageobj = getattr(self.image_folder, image_id)
-        except:
-            1/0
+        except Exception:
+            raise AttributeError 
+            #1/0
         path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
                 'copyright': image['source'] }
@@ -744,17 +756,17 @@ class MigrateArticles(object):
         mapping = {}
 
         for line in open(path, 'r'):
-            eid, orig_size, new_size = line.split(',')
+            eid, _orig_size, new_size = line.split(',')
             mapping[int(eid)] = int(new_size.split('x')[0])
 
         return mapping
 
-    def _migrate_articles(self, folder, theme):
+    def _migrate_articles(self, folder, theme): 
         """ migrates every article in mysql which belongs to the main
             theme 'theme'. 'folder' is where the content will be added. """
 
         page_id = theme['pid']
-        theme_id = self.themes[page_id][0]
+        #theme_id = self.themes[page_id][0] 
         cid = theme['cid']
 
         doc_id = self._create_intro(folder, page_id)
@@ -825,11 +837,11 @@ class MigrateArticles(object):
 
     def _read_file(self):
         self.file_paths = {}
-        file = open('media_files.txt', 'r')
-        for line in file:
+        mfile = open('media_files.txt', 'r')
+        for line in mfile:
             eid, file_path = line.split('|')
             self.file_paths[int(eid)] = file_path
-        file.close()
+        mfile.close()
 
     def _relate(self, intro, snapshot, fullarticle):
         current_intro = intro.getRelatedItems()

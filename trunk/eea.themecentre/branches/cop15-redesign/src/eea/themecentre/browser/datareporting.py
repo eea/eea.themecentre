@@ -1,4 +1,4 @@
-from eea.themecentre.themecentre import getTheme, getThemeCentre
+from eea.themecentre.themecentre import getTheme #, getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
 import xmlrpclib

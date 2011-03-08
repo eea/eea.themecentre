@@ -1,5 +1,5 @@
-from zope.component import getMultiAdapter
-from eea.themecentre.themecentre import getTheme, getThemeCentre
+#from zope.component import getMultiAdapter
+from eea.themecentre.themecentre import getTheme # getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from p4a.video.interfaces import IVideoEnhanced
 from eea.promotion.interfaces import IPromotion

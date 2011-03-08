@@ -1,6 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from Products.EEAContentTypes.interfaces import IRelations
-from eea.themecentre.themecentre import getThemeCentre, ThemesVocabularyFactory
+from eea.themecentre.themecentre import getThemeCentre #ThemesVocabularyFactory
 from eea.themecentre.interfaces import IThemeTagging
 
 # This is what is used in ZMI for navigation_sections_left and right
@@ -13,7 +13,7 @@ class Topics(object):
         self.context = context
         self.request = request
 
-    def menu(self):
+    def menu(self): 
         plone_utils = getToolByName(self.context, 'plone_utils')
         propstool = getToolByName(self.context, 'portal_properties')
         siteprops = getattr(propstool, 'site_properties', None)
@@ -22,7 +22,7 @@ class Topics(object):
         else:
             viewActions = []
 
-        vocab = ThemesVocabularyFactory(self.context, checkContext=False)
+        #vocab = ThemesVocabularyFactory(self.context, checkContext=False)
         themecentre = getThemeCentre(self.context)
         if themecentre is None:
             return None

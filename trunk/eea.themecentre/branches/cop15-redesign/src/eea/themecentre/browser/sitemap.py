@@ -2,7 +2,7 @@ from zope.interface import implements
 from zope.component import adapts
 
 from Products.CMFPlone.browser.navtree import SitemapNavtreeStrategy, INavtreeStrategy
-from Products.CMFPlone import utils
+#from Products.CMFPlone import utils
 
 from eea.themecentre.interfaces import IThemeCentre
 
