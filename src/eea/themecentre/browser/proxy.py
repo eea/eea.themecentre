@@ -1,6 +1,6 @@
 from Products.CMFPlone import utils
 from zope.component import getMultiAdapter
-from zope.publisher.interfaces.browser import  IBrowserRequest
+#from zope.publisher.interfaces.browser import  IBrowserRequest
 
 class Proxy(utils.BrowserView):
 

@@ -77,7 +77,7 @@ def promoted(obj, event):
         topic = getattr(newsobj, 'highlights_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue(['News Item', 'Highlight', 'Press Release'])
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -106,8 +106,8 @@ def promoted(obj, event):
                             title='Upcoming events')
         topic = getattr(eventsobj, 'events_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue(('Event','QuickEvent', 'RDFEvent'))
-        sort_crit = topic.addCriterion('start', 'ATSortCriterion')
+        type_crit.setValue(('Event','QuickEvent'))
+        topic.addCriterion('start', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -136,7 +136,7 @@ def promoted(obj, event):
         topic = getattr(linksobj, 'links_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue('Link')
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -152,23 +152,23 @@ def promoted(obj, event):
         createFaqSmartFolder(faqobj, theme_id)
 
 def createFaqSmartFolder(parent, theme_id):
-        # add a smart folder to the faq folder that shows all faqs
-        _createObjectByType('Topic', parent, id='faqs_topic',
-                            title='FAQ')
-        topic = getattr(parent, 'faqs_topic')
-        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue('FAQ')
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
-        state_crit = topic.addCriterion('review_state',
-                                        'ATSimpleStringCriterion')
-        state_crit.setValue('published')
-        theme_crit = topic.addCriterion('getThemes',
-                                        'ATSimpleStringCriterion')
-        theme_crit.setValue(theme_id)
-        topic.setSortCriterion('effective', True)
-        topic.setLayout('atct_topic_view')
-        topic.setCustomViewFields([])
-        topic._at_rename_after_creation = False
+    # add a smart folder to the faq folder that shows all faqs
+    _createObjectByType('Topic', parent, id='faqs_topic',
+                        title='FAQ')
+    topic = getattr(parent, 'faqs_topic')
+    type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+    type_crit.setValue('FAQ')
+    topic.addCriterion('created', 'ATSortCriterion')
+    state_crit = topic.addCriterion('review_state',
+                                    'ATSimpleStringCriterion')
+    state_crit.setValue('published')
+    theme_crit = topic.addCriterion('getThemes',
+                                    'ATSimpleStringCriterion')
+    theme_crit.setValue(theme_id)
+    topic.setSortCriterion('effective', True)
+    topic.setLayout('atct_topic_view')
+    topic.setCustomViewFields([])
+    topic._at_rename_after_creation = False
 
 
 def objectAdded(obj, event):
@@ -190,15 +190,18 @@ def objectMoved(obj, event):
     # IObjectMovedEvent is a very generic event, so we have to check
     # source and destination to make sure it's really a cut & paste
     if event.oldParent is not None and event.newParent is not None:
-       objectAdded(obj, event)
+        objectAdded(obj, event)
 
 def objectThemeTagged(obj, event):
-    """ Checks if the object's theme tags are modified. If true, catalog
-        is updated. """
-
+    """ Checks if the object's theme tags are modified. If true, tags are
+        copied to eventual translations, and catalog is updated. """
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
-           obj.context.reindexObject()
+            context = obj.context
+            if context.isCanonical():
+                for _lang, trans in context.getTranslations().items():
+                    IThemeTagging(trans[0]).tags = IThemeTagging(context).tags
+            context.reindexObject()
 
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """

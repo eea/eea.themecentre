@@ -2,7 +2,7 @@ import unittest
 from zope.interface import alsoProvides
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
-from ThemeCentreTestCase import ThemeCentreTestCase
+from eea.themecentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 

@@ -12,17 +12,17 @@ class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
             return self.portlets(themecentre)
 
     def _sort_key(self, topic):
-        id = topic.getId()
+        tid = topic.getId()
 
-        if id == 'highlights_topic':
+        if tid == 'highlights_topic':
             return "1"
-        elif id == 'events_topic':
+        elif tid == 'events_topic':
             # we want events at the end
             return "zzz"
         else:
             # all topics don't need to be hardcoded, for the rest we
             # rely on the topic id for sorting
-            return id
+            return tid
 
     def _title(self, topic):
         obj = self._parent_or_topic(topic)

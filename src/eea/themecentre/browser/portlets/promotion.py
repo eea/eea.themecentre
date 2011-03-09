@@ -1,6 +1,7 @@
-from zope.component import getMultiAdapter
-from eea.themecentre.themecentre import getTheme, getThemeCentre
+#from zope.component import getMultiAdapter
+from eea.themecentre.themecentre import getTheme # getThemeCentre
 from Products.CMFCore.utils import getToolByName
+from p4a.video.interfaces import IVideoEnhanced
 from eea.promotion.interfaces import IPromotion
 from DateTime.DateTime import DateTime
 
@@ -18,41 +19,43 @@ class ThemeCentreMenuPromotion(object):
         promotions = []
         now = DateTime()
 
-        # External promotions
-        query = { 'object_provides': 'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
-                  'review_state': 'published',
-                  'getThemes': currentTheme,
-                  'effectiveRange' : now}
-        if section is not None:
-            query['navSection'] = section
-        result1 = catalog.searchResults( query )
+        result = catalog({
+            'object_provides': {
+                'query': [
+                    'eea.promotion.interfaces.IPromoted',
+                    'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
+                ],
+                'operator': 'or',
+            },
+            'review_state': 'published',
+            'effectiveRange' : now,
+        })
 
-        # Internal promotions
-        query = {'object_provides': 'eea.promotion.interfaces.IPromoted',
-                 'review_state': 'published',
-                 'effectiveRange' : now}
-        result2 = catalog.searchResults( query )
-
-        for t in result1 + result2:
-            obj = t.getObject()
+        for brain in result:
+            obj = brain.getObject()
             promo = IPromotion(obj)
             if not promo.display_on_themepage:
                 continue
-            if not currentTheme in promo.themes:
+            if not promo.themes or not currentTheme == promo.themes[0]:
                 continue
             if (section is not None) and (section != promo.themepage_section):
                 continue
             if (section is not None) or (section is None and promo.themepage_section in [None, 'default']):
-                info = { 'id' : t.getId,
-                         'Description' : t.Description,
-                         'Title' : t.Title,
-                         'url' : t.getURL(),
-                         'style' : 'display: none;',
-                         'imglink' : getMultiAdapter((obj, obj.REQUEST),
-                             name='promo_imglink')('thumb'),
-                         'image' : t.getURL() + '/image' }
-                promotions.append(info)
+                uid = brain.getId
+                ids = [i['id'] for i in promotions]
+                count = 0
+                while uid in ids:
+                    count += 1
+                    new_id = uid + '-' + str(count)
+                    if not new_id in ids:
+                        uid = new_id
+                promotions.append({
+                    'id' : uid,
+                    'Description' : brain.Description,
+                    'Title' : brain.Title,
+                    'url' : promo.url,
+                    'absolute_url' : brain.getURL(),
+                    'is_video' : IVideoEnhanced.providedBy(obj),
+                })
 
-        if promotions:
-            promotions[0]['style'] = 'display: block'
         return promotions

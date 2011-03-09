@@ -2,7 +2,7 @@
 # Base TestCase for Audit
 #
 
-from Testing import ZopeTestCase
+#from Testing import ZopeTestCase
 from Products.PloneTestCase import PloneTestCase
 from Products.PloneTestCase.layer import onsetup
 from Products.Five import zcml
