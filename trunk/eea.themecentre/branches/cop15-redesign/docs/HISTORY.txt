@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.5-dev - (unreleased)
-----------------------
+1.5 - (2011-03-09)
+------------------
  * Change: clean up package of pyflakes compiler warnings [ichimdav #4141]
  * Change: clean up package of pylint violations [ichimdav #4140]
 
