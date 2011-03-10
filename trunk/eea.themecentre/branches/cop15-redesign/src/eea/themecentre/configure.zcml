@@ -1,5 +1,6 @@
-<configure xmlns="http://namespaces.zope.org/zope">
- 
+<configure xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="eea.themecentre">
+
   <!-- add marker interfaces to those content types that should be taggable -->
   <class class="Products.ATContentTypes.content.file.ATFile">
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
@@ -49,7 +50,7 @@
       />
   <adapter factory=".themetaggable.ThemeCentreTaggable" />
 
-  <adapter 
+  <adapter
       for=".interfaces.IThemeCentre"
       factory=".themetaggable.ThemeTaggable" />
 
