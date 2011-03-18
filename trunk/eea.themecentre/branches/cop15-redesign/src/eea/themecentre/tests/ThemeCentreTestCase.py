@@ -7,7 +7,8 @@ from Products.PloneTestCase import PloneTestCase
 from Products.PloneTestCase.layer import onsetup
 from Products.Five import zcml
 from Products.Five import fiveconfigure
-
+from plone.app.blob.tests import db
+db 
 dependencies = []
 
 PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager', 'LinguaPlone',
