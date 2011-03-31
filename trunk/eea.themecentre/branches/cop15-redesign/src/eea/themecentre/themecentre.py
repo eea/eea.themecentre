@@ -53,7 +53,7 @@ def promoted(obj, event):
     faqobj.processForm()
 
     theme_id = IThemeCentreSchema(obj).tags
-    obj.invokeFactory('Document', id='intro', title=obj.Title()+' introduction')
+    obj.invokeFactory('Document', id='intro', title=obj.Title() + ' introduction')
     if not hasattr(aq_base(obj), 'default_page'):
         obj.manage_addProperty('default_page', 'intro', 'string')
     intro = getattr(obj, 'intro')
@@ -87,12 +87,12 @@ def promoted(obj, event):
         effective_crit = topic.addCriterion('effective', 'ATFriendlyDateCriteria')
         effective_crit.setOperation('less')
         effective_crit.setValue(0)
-        
+
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
         topic.setCustomViewFields(['EffectiveDate'])
         topic._at_rename_after_creation = False
-        
+
     if eventsobj:
         workflow.doActionFor(eventsobj, 'publish')
         eventsobj.setConstrainTypesMode(1)
@@ -100,13 +100,13 @@ def promoted(obj, event):
         eventsobj.setLocallyAllowedTypes(['Event'])
         eventsobj.manage_addProperty('default_page', 'events_topic',
                                    'string')
-        
+
         # add a smart folder to the events folder that shows all events
         _createObjectByType('Topic', eventsobj, id='events_topic',
                             title='Upcoming events')
         topic = getattr(eventsobj, 'events_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue(('Event','QuickEvent'))
+        type_crit.setValue(('Event', 'QuickEvent'))
         topic.addCriterion('start', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
@@ -129,7 +129,7 @@ def promoted(obj, event):
         linksobj.setLocallyAllowedTypes(['Folder', 'Link'])
         linksobj.manage_addProperty('default_page', 'links_topic',
                                    'string')
-        
+
         # add a smart folder to the links folder that shows all links
         _createObjectByType('Topic', linksobj, id='links_topic',
                             title='External links')
@@ -222,13 +222,13 @@ def getThemeCentreByName(name):
             object_provides=IThemeCentre.__identifier__,
             getThemes=name)
     if brains:
-        tc =  brains[0].getObject()
+        tc = brains[0].getObject()
         lang = catalog.REQUEST.get('LANGUAGE', 'en')
         if lang != 'en':
             tcTranslation = tc.getTranslation(lang)
             if tcTranslation is not None:
                 tc = tcTranslation
-        return tc 
+        return tc
     else:
         return None
 
@@ -262,30 +262,7 @@ def objectTitle(context, request):
         It's used for instance for showing title in the web browser title
         bar. If the request has 'feed' variable then the feed's title
         is used, otherwise some other adapter is used instead. """
-
-    class ObjectTitle(object):
-        implements(IObjectTitle)
-        def __init__(self, title):
-            self._title = title
-        @property
-        def title(self):
-            return self._title
-
-    feed = request.get('feed', None)
-    if feed:
-        portal_catalog = getToolByName(context, 'portal_catalog')
-        # TODO use refactored rdf repository and interfaces instead of catalog
-        brains = portal_catalog.searchResults(id=feed,
-                portal_type='RSSFeedRecipe')
-        if brains:
-            putils = getToolByName(context, 'plone_utils')
-            object_title = putils.pretty_title_or_id(context)
-            return ObjectTitle('%s - %s' % (brains[0].Title, object_title))
-        else:
-            return None
-    else:
-        return None
-
+    return None
 
 @implementer(IThemeCentreImageUrl)
 @adapter(IThemeCentre)
@@ -298,4 +275,4 @@ def imageUrl(context):
         tc = context.getCanonical()
     image = getattr(tc, 'theme_image')
     return '%s/image_icon' % image.absolute_url()
-    
+

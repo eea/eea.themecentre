@@ -3,7 +3,8 @@ Changelog
 
 1.6-dev - (unreleased)
 ----------------------
-* Bug fix: Added translation domain to ZCML files [voineali #4139]
+ * Cleanup: Removed PloneRSSPortlet [voineali #4169]
+ * Bug fix: Added translation domain to ZCML files [voineali #4139]
 
 1.5 - (2011-03-09)
 ------------------

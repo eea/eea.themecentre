@@ -8,11 +8,12 @@ from Products.PloneTestCase.layer import onsetup
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 from plone.app.blob.tests import db
-db 
+db
 dependencies = []
 
-PRODUCTS = ('PloneRSSPortlet', 'ATVocabularyManager', 'LinguaPlone',
-            'PloneHelpCenter', 'EEAContentTypes','valentine.linguaflow', 'PloneLanguageTool', 'EEAPloneAdmin',
+PRODUCTS = ('ATVocabularyManager', 'LinguaPlone',
+            'PloneHelpCenter', 'EEAContentTypes', 'valentine.linguaflow',
+            'PloneLanguageTool', 'EEAPloneAdmin',
             'FiveSite', 'ThemeCentre')
 
 
