@@ -36,8 +36,7 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
                 if value not in values and value is not None:
                     values.append(value)
 
-        terms = [self.vocabulary.getTerm(value)
-                 for value in values if value not in [None, '']] # or ''
+        terms = [self.vocabulary.getTerm(val) for val in values if val not in [None, '']] # or ''
         nondeprecated = ThemesEditVocabularyFactory(self.context)
         result = []
         for term in terms:

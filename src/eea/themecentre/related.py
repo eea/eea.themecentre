@@ -22,17 +22,17 @@ class ThemeRelationAdapter(object):
             mapping = annotations[KEY] = PersistentDict(related)
         self.mapping = mapping
 
-    def related():
-        def get(self):
-            anno = IAnnotations(self.context)
-            mapping = anno.get(KEY)
-            return list(mapping['related'])
-        def set(self, value):
-            anno = IAnnotations(self.context)
-            mapping = anno.get(KEY)
-            mapping['related'] = PersistentList(value)
-            
-            info = Attributes(IThemeRelation, 'related')            
-            notify(ObjectModifiedEvent(self.context, info))
-        return property(get, set)
-    related = related()
+    #def related():
+    def getr(self):
+        anno = IAnnotations(self.context)
+        mapping = anno.get(KEY)
+        return list(mapping['related'])
+    def setr(self, value):
+        anno = IAnnotations(self.context)
+        mapping = anno.get(KEY)
+        mapping['related'] = PersistentList(value)
+        
+        info = Attributes(IThemeRelation, 'related')            
+        notify(ObjectModifiedEvent(self.context, info))
+    #return property(get, set)
+    related = property(getr, setr)
