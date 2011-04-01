@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.6-dev - (unreleased)
-----------------------
+1.6 - (2011-04-01)
+------------------
  * Cleanup: Removed PloneRSSPortlet [voineali #4169]
  * Bug fix: Added translation domain to ZCML files [voineali #4139]
 
