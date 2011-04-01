@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.7-dev - (unreleased)
+----------------------
+
 1.6 - (2011-04-01)
 ------------------
  * Cleanup: Removed PloneRSSPortlet [voineali #4169]
