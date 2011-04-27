@@ -1,9 +1,10 @@
+""" Browser catalog module
+"""
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import utils
-
+from Products.Five import BrowserView
 from eea.themecentre.themecentre import getThemeCentre, getTheme
 
-class BasePortlet(utils.BrowserView):
+class BasePortlet(BrowserView):
 
     def short_items(self):
         items = self.items()
@@ -20,7 +21,7 @@ class BasePortlet(utils.BrowserView):
         return result
 
     def all_link(self):
-        context = utils.context(self)
+        context = self.context()
         themeCentre = getThemeCentre(context)
         if themeCentre:
             # first let's see if view_name is in the request
@@ -37,7 +38,7 @@ class BasePortlet(utils.BrowserView):
         return ''
 
     def localized_time(self, time):
-        context = utils.context(self)
+        context = self.context()
         translation = getToolByName(context, 'translation_service')
 
         # sometimes time ends with a 'W'. That violates iso 8601, but
@@ -56,7 +57,7 @@ class BasePortlet(utils.BrowserView):
 class CatalogBasePortlet(BasePortlet):
 
     def items(self):
-        context = utils.context(self)
+        context = self.context()
         portal_catalog = getToolByName(context, 'portal_catalog')
         currentTheme = getTheme(context)
 

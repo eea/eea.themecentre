@@ -1,11 +1,13 @@
+""" Related module
+"""
 from eea.themecentre.interfaces import IThemeCentre, IThemeRelation
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
 from zope.event import notify
 from zope.component import adapts
 from zope.interface import implements
-from zope.app.annotation.interfaces import IAnnotations
-from zope.app.event.objectevent import ObjectModifiedEvent, Attributes
+from zope.annotation.interfaces import IAnnotations
+from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 
 KEY = 'eea.themecentre.relatedthemecentres'
 
@@ -31,8 +33,8 @@ class ThemeRelationAdapter(object):
         anno = IAnnotations(self.context)
         mapping = anno.get(KEY)
         mapping['related'] = PersistentList(value)
-        
-        info = Attributes(IThemeRelation, 'related')            
+
+        info = Attributes(IThemeRelation, 'related')
         notify(ObjectModifiedEvent(self.context, info))
     #return property(get, set)
     related = property(getr, setr)

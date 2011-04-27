@@ -1,7 +1,14 @@
 from Products.CMFCore.utils import getToolByName
-from Products.EEAContentTypes.interfaces import IRelations
 from eea.themecentre.themecentre import getThemeCentre #ThemesVocabularyFactory
 from eea.themecentre.interfaces import IThemeTagging
+#TODO: fix me
+#from Products.EEAContentTypes.interfaces import IRelations
+#TODO: fix me
+# - just delete the dummy interface
+from zope.interface import Interface
+class IRelations(Interface):
+    """ Dummy interface
+    """
 
 # This is what is used in ZMI for navigation_sections_left and right
 TOPICS_ID = 'topics'
@@ -13,7 +20,7 @@ class Topics(object):
         self.context = context
         self.request = request
 
-    def menu(self): 
+    def menu(self):
         plone_utils = getToolByName(self.context, 'plone_utils')
         propstool = getToolByName(self.context, 'portal_properties')
         siteprops = getattr(propstool, 'site_properties', None)

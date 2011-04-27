@@ -1,24 +1,45 @@
-from setuptools import setup, find_packages
+""" EEA Theme centre installer
+"""
 import os
-from os.path import join
+from setuptools import setup, find_packages
 
 name = 'eea.themecentre'
 path = ['src'] + name.split('.') + ['version.txt']
-version = open(join(*path)).read().strip()
+version = open(os.path.join(*path)).read().strip()
 
 setup(name='eea.themecentre',
       version=version,
-      url = 'http://svn.eionet.europa.eu/repositories/Zope',
-      description = 'ThemeCentre',
-      author = 'Tim Terlegard, Sasha Vincic, Antonio De Marinis (EEA), European Environment Agency (EEA)',
-      author_email = "webadmin@eea.europa.eu",
-      long_description = file('README.txt').read(),
-      classifiers = ['Development Status :: 5 - Production/Stable',
-                    'Framework :: Zope3',
-                    'Intended Audience :: Developers'],
-      packages = find_packages('src'),
-      package_dir = {'': 'src'},
-      namespace_packages = ['eea'],
-      include_package_data = True,
-      zip_safe = False,
+      description='EEA Theme centre',
+      long_description=open("README.txt").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      classifiers=[
+        "Framework :: Plone",
+        "Programming Language :: Python",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        ],
+      keywords='EEA theme centre plone zope python',
+      author='Tim Terlegard, Sasha Vincic, Antonio De Marinis (EEA), '
+             'European Environment Agency (EEA)',
+      author_email='webadmin@eea.europa.eu',
+      url="https://svn.eionet.europa.eu/projects/"
+          "Zope/browser/trunk/eea.themecentre",
+      license='GPL',
+      packages=find_packages('src'),
+      package_dir={'': 'src'},
+      namespace_packages=['eea'],
+      include_package_data=True,
+      zip_safe=False,
+      install_requires=[
+          'setuptools',
+          'p4a.video',
+          #TODO: fix me
+          #'eea.rdfrepository',
+          #'eea.mediacentre',
+          #'eea.promotion',
+          #'Products.ThemeCentre',
+          #'Products.EEAContentTypes',
+      ],
+      entry_points="""
+      # -*- Entry points: -*-
+      """,
       )

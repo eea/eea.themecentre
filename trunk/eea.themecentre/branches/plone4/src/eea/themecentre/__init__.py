@@ -1,3 +1,5 @@
+""" eea.themecentre package """
+
 # monkey patch of Zope
 from ZPublisher import HTTPRequest
 from zope.publisher.base import DebugFlags

@@ -1,3 +1,5 @@
+""" Theme taggable module
+"""
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.interfaces import IThemeCentre, IMainThemeTagging
 from eea.themecentre.interfaces import IThemeCentreSchema
@@ -5,11 +7,11 @@ from eea.themecentre.themecentre import PromotedToThemeCentreEvent
 from eea.themecentre.themecentre import getThemeCentre
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
-from zope.app.annotation.interfaces import IAnnotations
+from zope.annotation.interfaces import IAnnotations
 from zope.component import adapts, getUtility
 from zope.event import notify
 from zope.interface import implements
-from zope.app.event.objectevent import ObjectModifiedEvent, Attributes
+from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 from zope.app.schema.vocabulary import IVocabularyFactory
 
 KEY = 'eea.themecentre.themetaggable'
@@ -42,7 +44,7 @@ class ThemeTaggable(object):
         anno = IAnnotations(self.context)
         mapping = anno.get(KEY)
         tags = list(mapping['themes'])
-        return tags 
+        return tags
     def sett(self, value):
         # if the value didn't change we don't need to do anything
         if value == self.tags:
@@ -105,4 +107,4 @@ class ThemeCentreTaggable(object):
 def tagTranslation(obj, event):
     canonical = obj.getCanonical()
     IThemeTagging(obj).tags = IThemeTagging(canonical).tags
-    
+

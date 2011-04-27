@@ -1,3 +1,5 @@
+""" Browser themecentre module
+"""
 from zope.app.schema.vocabulary import IVocabularyFactory
 from zope.interface import alsoProvides # implements
 from zope.component import getUtility
@@ -7,10 +9,17 @@ from eea.themecentre.interfaces import IThemeCentre #I PossibleThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
 from eea.themecentre.themecentre import getTheme # PromotedToThemeCentreEvent
 from eea.themecentre.themecentre import getThemeTitle
-from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
-#from eea.mediacentre.mediatypes import MediaTypesVocabularyFactory
-from eea.mediacentre.interfaces import IMediaCentre
-#from Products.CMFCore.utils import getToolByName
+#TODO: fix me
+#from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
+#TODO: fix me
+#from eea.mediacentre.interfaces import IMediaCentre
+#TODO: fix me
+# - cleanup the below, is just to fix the imports
+MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
+from zope.interface import Interface
+class IMediaCentre(Interface):
+    """ Dummy interface
+    """
 
 from eea.themecentre import _
 
@@ -25,15 +34,15 @@ class PromoteThemeCentre(object):
 
     def __call__(self):
         alsoProvides(self.context, IThemeCentre)
-        types = [ 'Folder', 'Document', 'Link', 'File', 'Image', 'Event',
-                'HelpCenterFAQFolder', 'FlashFile' ]
+        types = ['Folder', 'Document', 'Link', 'File', 'Image', 'Event',
+                 'HelpCenterFAQFolder', 'FlashFile' ]
 
         self.context.setLocallyAllowedTypes( types + ['RichTopic', 'Topic'] )
         self.context.setImmediatelyAddableTypes( types )
         self.context.setConstrainTypesMode(ENABLE)
 
         return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
-    
+
 class ThemeCentreEdit(EditForm):
     """ Form for setting theme for a theme centre. """
 

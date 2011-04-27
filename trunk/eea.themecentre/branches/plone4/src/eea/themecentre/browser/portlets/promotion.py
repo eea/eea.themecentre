@@ -2,8 +2,15 @@
 from eea.themecentre.themecentre import getTheme # getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from p4a.video.interfaces import IVideoEnhanced
-from eea.promotion.interfaces import IPromotion
 from DateTime.DateTime import DateTime
+#TODO: fix me
+#from eea.promotion.interfaces import IPromotion
+#TODO: fix me
+# - just delete the dummy interface
+from zope.interface import Interface
+class IPromotion(Interface):
+    """ Dummy interface
+    """
 
 class ThemeCentreMenuPromotion(object):
     """ Return the promotion to show as part of navigation. Most of the time an

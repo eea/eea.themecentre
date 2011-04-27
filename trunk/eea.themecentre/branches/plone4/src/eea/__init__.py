@@ -1,7 +1,8 @@
-try:
-    # Declare this a namespace package if pkg_resources is available.
-    import pkg_resources
-    pkg_resources.declare_namespace('eea')
-except ImportError: #pylint: disable-msg = W0704
+""" See http://peak.telecommunity.com/DevCenter/setuptools#namespace-packages
+"""
 
-    pass
+try:
+    __import__('pkg_resources').declare_namespace(__name__)
+except ImportError:
+    from pkgutil import extend_path
+    __path__ = extend_path(__path__, __name__)

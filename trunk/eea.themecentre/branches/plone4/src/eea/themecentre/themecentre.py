@@ -1,5 +1,7 @@
+""" Theme centre module
+"""
 from zope.app.component.hooks import getSite
-from zope.app.event.objectevent import ObjectEvent
+from zope.component.interfaces import ObjectEvent
 from zope.component import adapter
 from zope.interface import implements, Interface, implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
@@ -7,7 +9,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
+#TODO: fix me
+#from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
 from Acquisition import aq_parent, aq_base
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
@@ -255,7 +258,8 @@ def getThemeTitle(context):
         return vocab.getTerm(themeid).title
     return None
 
-@implementer(IObjectTitle)
+#TODO: fix me
+#@implementer(IObjectTitle)
 @adapter(Interface, IBrowserRequest)
 def objectTitle(context, request):
     """ An adapter that gets the title from the current object/template.

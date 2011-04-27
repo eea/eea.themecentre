@@ -1,14 +1,15 @@
-from Products.CMFPlone import utils
+""" Proxy module
+"""
 from zope.component import getMultiAdapter
-#from zope.publisher.interfaces.browser import  IBrowserRequest
+from Products.Five import BrowserView
 
-class Proxy(utils.BrowserView):
+class Proxy(BrowserView):
 
     def real_view(self, view_name=None):
         if not view_name:
             view_name = self.request['view_name']
 
-        context = utils.context(self)
+        context = self.context()
         view = getMultiAdapter((context, self.request),
                                name=view_name)
         view.view_name = view_name

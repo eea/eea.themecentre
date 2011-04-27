@@ -1,9 +1,7 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:zcml="http://namespaces.zope.org/zcml"
            xmlns:browser="http://namespaces.zope.org/browser"
-           i18n_domain="eea.themecentre">
-
-  <include package="Products.CMFonFive"/>
+           i18n_domain="eea">
 
   <browser:page
       for="eea.themecentre.interfaces.IThemeTaggable"
@@ -26,21 +24,23 @@
       class=".themecentre.ThemeCentreEdit"
       />
 
-  <browser:menuItem
+  <!-- #TODO: fix me -->
+  <!-- browser:menuItem
       for="eea.themecentre.interfaces.IThemeTaggable"
       menu="object"
       title="Themes"
       action="themes_edit.html"
       permission="cmf.ModifyPortalContent"
-      />
+      / -->
 
-  <browser:menuItem
+  <!-- #TODO: fix me -->
+  <!-- browser:menuItem
       for="eea.themecentre.interfaces.IThemeCentre"
       menu="object"
       title="Theme"
       action="themecentre_edit.html"
       permission="eea.PromoteThemeCentre"
-      />
+      / -->
 
    <browser:menuItem
       for="Products.ATContentTypes.interface.IATFolder"
@@ -110,13 +110,14 @@
       allowed_attributes="promotions"
       />
 
-  <browser:page
+  <!-- #TODO: fix -->
+  <!-- browser:page
       for="*"
       name="theme_portlets"
       class=".portlets.smartfolder.SmartFolderPortlets"
       allowed_interface=".interfaces.IPortlet"
       permission="zope.Public"
-      />
+      / -->
 
   <browser:page
       for="*"
@@ -128,19 +129,20 @@
 
   <!-- plone changes -->
 
-  <browser:page
+  <!-- #TODO: fix me -->
+  <!-- browser:page
       for="*"
       name="themes_navigation_view"
       class=".portlets.navigation.NavigationPortlet"
       permission="zope.Public"
       allowed_interface=".portlets.navigation.INavigationPortlet"
       allowed_attributes="getNavTree displayLogo logoUrl logoParentUrl"
-      />
+      / -->
 
    <adapter for="..interfaces.IThemeCentre
                 Products.CMFPlone.browser.interfaces.ISiteMap"
             factory=".sitemap.SitemapThemeCentreStrategy"
-            provides="Products.CMFPlone.browser.interfaces.INavtreeStrategy" />
+            provides="plone.app.layout.navigation.interfaces.INavtreeStrategy" />
 
   <!-- migration stuff -->
 

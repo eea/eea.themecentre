@@ -1,11 +1,25 @@
+""" RDF module
+"""
 from Products.CMFPlone import utils
-from Products.EEAContentTypes.interfaces import IFeedPortletInfo
-from eea.rdfrepository.interfaces import IRDFRepository
-from eea.rdfrepository.utils import getRdfPortletData
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
 from zExceptions import NotFound
 from zope.component import getUtility
+#TODO: fix me
+#from eea.rdfrepository.interfaces import IRDFRepository
+#TODO: fix me
+#from eea.rdfrepository.utils import getRdfPortletData
+#TODO: fix me
+#from Products.EEAContentTypes.interfaces import IFeedPortletInfo
+#TODO: fix me
+# - just delete the dummy interfaces and fuction
+from zope.interface import Interface
+class IFeedPortletInfo(Interface):
+    """ Dummy interface
+    """
+class IFeedPortletInfo(Interface):
+    """ Dummy interface
+    """
 
 
 class RDFPortlet(BasePortlet):
@@ -13,7 +27,9 @@ class RDFPortlet(BasePortlet):
     def short_items(self):
         context = utils.context(self)
         currentThemeCentre = getThemeCentre(context)
-        return getRdfPortletData(currentThemeCentre, max_items=3)
+        #TODO: fix me
+        #return getRdfPortletData(currentThemeCentre, max_items=3)
+        return []
 
     def full_items(self):
         feed_id = self.request.get('feed')

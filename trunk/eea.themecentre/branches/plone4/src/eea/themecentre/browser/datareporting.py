@@ -2,10 +2,12 @@ from eea.themecentre.themecentre import getTheme #, getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
 import xmlrpclib
-from eea.dataservice.config import ROD_SERVER
+
+#from eea.dataservice.config import ROD_SERVER
+ROD_SERVER = 'http://rod.eionet.europa.eu/rpcrouter'
 
 class DataCentreReporting(object):
-    """ Return reporting obligations related to this theme. 
+    """ Return reporting obligations related to this theme.
     This is done by getting first all data sets tagged with this theme and then
     getting all the ROD urls used for those datasets."""
 
@@ -13,7 +15,7 @@ class DataCentreReporting(object):
         self.context = context
         self.request = request
 
-        
+
     def relatedReportingObligations(self):
         """ return a list of Reporting Obligations related to this theme """
         currentTheme = getTheme(self.context)
@@ -35,7 +37,7 @@ class DataCentreReporting(object):
             'review_state': 'published',
             'effectiveRange' : now,
         })
-        
+
         for res in result:
             reso = res.getObject()
             for rodid in reso.reportingObligations:
@@ -51,7 +53,7 @@ class DataCentreReporting(object):
                      })
 
         return rods
-    
+
 class ReportingObligationInfo(object):
     """ return complete info about all reporting obligations from ROD """
     def __init__(self, context, request):
@@ -67,5 +69,5 @@ class ReportingObligationInfo(object):
             for obligation in result:
                 rods[int(obligation['PK_RA_ID'])] = obligation
         return rods
-    
-    
+
+

@@ -1,15 +1,20 @@
 from Products.CMFPlone import utils
 from zope.component import getUtility
-
 from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
-from eea.rdfrepository.interfaces import IRDFRepository
-
 from eea.themecentre.browser.portlets.catalog import BasePortlet
+#TODO: fix me
+#from eea.rdfrepository.interfaces import IRDFRepository
+#TODO: fix me
+# - just delete the dummy interfaces and fuction
+from zope.interface import Interface
+class IRDFRepository(Interface):
+    """ Dummy interface
+    """
 
 class RDFTitlesPortlet(BasePortlet):
 
     all_link = None
-    
+
     def __call__(self):
         items = self.items()
 
@@ -39,7 +44,7 @@ class RDFTitlesPortlet(BasePortlet):
             search = { 'theme': currentTheme,
                        'theme_title': currentThemeTitle }
             feeds = rdfrepository.getFeeds(search=search)
-            
+
         return feeds
 
     def _feedListUrl(self, item):
