@@ -1,9 +1,15 @@
 Changelog
 =========
+[Alexandru Ghica - alec.ghica@eaudeweb.ro]
+[Sasha Vincic - Valentine Web Systems]
 
 4.0-dev - (unreleased)
 ----------------------
- * Feature: Plone 4 compatibility [ghicaale #4257]
+ * TODO: fix all #TODO:
+ * TODO: fix tests
+ * TODO: add builds on Jenkins
+ * TODO: fix pylint/pyflakes warrnings
+ * Feature: Plone 4.0.4 compatible release [ghicaale #4257]
 
 1.6 - (2011-04-01)
 ------------------
