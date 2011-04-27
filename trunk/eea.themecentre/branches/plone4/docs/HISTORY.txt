@@ -1,9 +1,9 @@
 Changelog
 =========
 
-2.0-dev - (unreleased)
+4.0-dev - (unreleased)
 ----------------------
- * * Feature: Plone 4 compatibility [ghicaale #4257]
+ * Feature: Plone 4 compatibility [ghicaale #4257]
 
 1.6 - (2011-04-01)
 ------------------
