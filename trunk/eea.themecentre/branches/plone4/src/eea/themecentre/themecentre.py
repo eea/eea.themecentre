@@ -200,6 +200,16 @@ def objectThemeTagged(obj, event):
         copied to eventual translations, and catalog is updated. """
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
+
+            #TODO: fix me
+            #      - the event is triggered for object directelly, and
+            #        obj.context ends up in error. I presume is becouse of the
+            #        commented subscribers (check when when all is fixed)
+            try:
+                obj.context
+            except:
+                return None
+
             context = obj.context
             if context.isCanonical():
                 for _lang, trans in context.getTranslations().items():

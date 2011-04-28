@@ -16,8 +16,6 @@ PRODUCTS = ('ATVocabularyManager', 'LinguaPlone',
             'PloneLanguageTool', 'EEAPloneAdmin',
             'FiveSite', 'ThemeCentre')
 
-
-
 @onsetup
 def setup_themecentre():
     fiveconfigure.debug_mode = True

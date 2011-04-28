@@ -5,6 +5,7 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
+ * TODO: "themes" vocabulary should be add from here?
  * TODO: fix all #TODO:
  * TODO: fix tests
  * TODO: add builds on Jenkins

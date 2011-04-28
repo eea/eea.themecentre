@@ -51,17 +51,15 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
     def required(self):
         return False
 
-
 class ThemeEditForm(EditForm):
     """ Form for editing themes. """
 
     label = u'Edit themes'
+    form_fields = Fields(IThemeTagging)
+    form_fields['tags'].custom_widget = ThemesOrderedWidget
 
     def __call__(self):
         mtool = getToolByName(self.context, 'portal_membership')
-
-        self.form_fields = Fields(IThemeTagging)
-        self.form_fields['tags'].custom_widget = ThemesOrderedWidget
 
         # by default max_length is decided by the IThemeTagging interface
         # but managers want to be able to add any number of themes
