@@ -1,6 +1,8 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            i18n_domain="eea">
 
+  <include file="profiles.zcml" />
+
   <!-- add marker interfaces to those content types that should be taggable -->
   <class class="Products.ATContentTypes.content.file.ATFile">
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
@@ -86,8 +88,6 @@
   <!-- #TODO: fix me -->
   <!-- adapter factory=".themecentre.objectTitle" / -->
   <adapter factory=".themecentre.imageUrl" />
-
-  <adapter factory=".datacollectors.RDFPortletDataCollector" />
 
   <adapter factory=".links.LinkAdapter" />
   <adapter factory=".links.MediaLink"

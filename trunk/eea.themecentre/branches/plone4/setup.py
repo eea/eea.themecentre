@@ -33,11 +33,17 @@ setup(name='eea.themecentre',
           'setuptools',
           'p4a.video',
           #TODO: fix me
-          #'eea.rdfrepository',
           #'eea.mediacentre',
           #'eea.promotion',
           #'Products.ThemeCentre',
           #'Products.EEAContentTypes',
+          #'Products.PloneHelpCenter',
+          #'Products.ATVocabularyManager',
+          #'Products.LinguaPlone',
+          #'valentine.linguaflow',
+          #'Products.PloneLanguageTool',
+          #'Products.EEAPloneAdmin',
+          #'Products.FiveSite',
       ],
       entry_points="""
       # -*- Entry points: -*-

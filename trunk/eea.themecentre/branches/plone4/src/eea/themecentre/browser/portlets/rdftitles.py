@@ -1,15 +1,11 @@
+""" RDF Titles module
+"""
 from Products.CMFPlone import utils
 from zope.component import getUtility
 from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
 from eea.themecentre.browser.portlets.catalog import BasePortlet
-#TODO: fix me
-#from eea.rdfrepository.interfaces import IRDFRepository
-#TODO: fix me
-# - just delete the dummy interfaces and fuction
-from zope.interface import Interface
-class IRDFRepository(Interface):
-    """ Dummy interface
-    """
+from eea.rdfrepository.interfaces import IRDFRepository
+
 
 class RDFTitlesPortlet(BasePortlet):
 

@@ -24,42 +24,6 @@
       class=".themecentre.ThemeCentreEdit"
       />
 
-  <!-- #TODO: fix me -->
-  <!-- browser:menuItem
-      for="eea.themecentre.interfaces.IThemeTaggable"
-      menu="object"
-      title="Themes"
-      action="themes_edit.html"
-      permission="cmf.ModifyPortalContent"
-      / -->
-
-  <!-- #TODO: fix me -->
-  <!-- browser:menuItem
-      for="eea.themecentre.interfaces.IThemeCentre"
-      menu="object"
-      title="Theme"
-      action="themecentre_edit.html"
-      permission="eea.PromoteThemeCentre"
-      / -->
-
-   <browser:menuItem
-      for="Products.ATContentTypes.interface.IATFolder"
-      menu="object_buttons"
-      title="Theme centre"
-      action="@@promote2ThemeCentre"
-      description="Promote to theme centre"
-      permission="eea.PromoteThemeCentre"
-      />
-
-   <browser:menuItem
-      for="eea.themecentre.interfaces.IThemeCentre"
-      menu="object_buttons"
-      title="NO Theme centre"
-      action="@@depromote2ThemeCentre"
-      description="depromote to theme centre"
-      permission="eea.PromoteThemeCentre"
-      />
-
   <!-- listing views -->
 
   <browser:page
