@@ -42,7 +42,6 @@ setup(name='eea.themecentre',
           #'Products.ThemeCentre',
           #'Products.EEAContentTypes',
           #'valentine.linguaflow',
-          #'Products.PloneLanguageTool',
           #'Products.EEAPloneAdmin',
       ],
       entry_points="""

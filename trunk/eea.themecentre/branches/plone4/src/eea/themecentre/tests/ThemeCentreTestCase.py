@@ -5,14 +5,9 @@ from Products.PloneTestCase.layer import onsetup
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 
-PRODUCTS = (#'ATVocabularyManager',
-            #'LinguaPlone',
-            #'PloneHelpCenter',
-            'EEAContentTypes',
+PRODUCTS = ('EEAContentTypes',
             'valentine.linguaflow',
-            'PloneLanguageTool',
             'EEAPloneAdmin',
-            #'FiveSite',
             'ThemeCentre')
 
 PloneTestCase.installProduct('ATVocabularyManager')

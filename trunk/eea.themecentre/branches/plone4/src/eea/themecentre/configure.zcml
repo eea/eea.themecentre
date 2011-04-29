@@ -99,6 +99,11 @@
   <adapter factory=".links.MediaLink"
            for="Products.ATContentTypes.content.image.ATImage" />
 
+  <!-- Catalog indexers -->
+  <adapter name="getThemes" factory=".catalog.getThemesForIndex" />
+  <adapter name="object_provides" factory=".catalog.getInterfaces" />
+  <adapter name="media_types" factory=".catalog.getMediaTypes" />
+
   <subscriber
       for=".interfaces.IThemeCentre
            .themecentre.PromotedToThemeCentreEvent"
