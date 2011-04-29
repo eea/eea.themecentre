@@ -1,6 +1,9 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            i18n_domain="eea">
 
+  <include package="Products.ATVocabularyManager" />
+  <include package="Products.PloneHelpCenter" />
+
   <include file="profiles.zcml" />
 
   <!-- add marker interfaces to those content types that should be taggable -->

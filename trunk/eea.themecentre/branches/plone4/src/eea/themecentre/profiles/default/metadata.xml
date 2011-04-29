@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <metadata>
- <description>eea.themecentre profile</description>
+ <description>EEA Theme centre profile</description>
  <version>1</version>
+ <dependencies>
+  <dependency>profile-Products.ATVocabularyManager:default</dependency>
+  <dependency>profile-Products.PloneHelpCenter:default</dependency>
+ </dependencies>
 </metadata>

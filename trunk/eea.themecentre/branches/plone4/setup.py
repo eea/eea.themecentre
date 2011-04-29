@@ -32,13 +32,14 @@ setup(name='eea.themecentre',
       install_requires=[
           'setuptools',
           'p4a.video',
+          'Products.PloneHelpCenter',
+          'Products.ATVocabularyManager',
+
           #TODO: fix me
           #'eea.mediacentre',
           #'eea.promotion',
           #'Products.ThemeCentre',
           #'Products.EEAContentTypes',
-          #'Products.PloneHelpCenter',
-          #'Products.ATVocabularyManager',
           #'Products.LinguaPlone',
           #'valentine.linguaflow',
           #'Products.PloneLanguageTool',
