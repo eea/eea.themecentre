@@ -219,6 +219,7 @@ def objectThemeTagged(obj, event):
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """
 
+    #import pdb; pdb.set_trace()
     while context and not IPloneSiteRoot.providedBy(context) and \
           not IThemeCentre.providedBy(context):
         context = aq_parent(context)

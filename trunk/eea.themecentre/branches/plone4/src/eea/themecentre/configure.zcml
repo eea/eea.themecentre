@@ -3,6 +3,7 @@
 
   <include package="Products.ATVocabularyManager" />
   <include package="Products.PloneHelpCenter" />
+  <include package="Products.LinguaPlone" />
 
   <include file="profiles.zcml" />
 
