@@ -1,0 +1,37 @@
+<div metal:define-macro="portlet"
+       i18n:domain="plone"
+       tal:omit-tag=""
+       tal:define="view context/@@themes_navigation_view;
+                   root view/navigationRoot;
+		   section section|options/section;
+		   menu here/@@themesMenuPromotion;
+                   promotions python:menu.promotions(section);
+                   items python:view.display(section)">
+
+<dl class="portlet portlet-navigation-tree eea-accordion-portlet" 
+    tal:condition="python:items or promotions"
+    tal:attributes="id string:portlet-navigation-tree-${section}">
+    <dt class="portletHeader eea-accordion-header">
+        <span class="tile" tal:content="sectionTitle|options/sectionTitle|nothing">
+            Title
+        </span>
+    </dt>
+    <tal:themepromo define="catInfo python:{'id': section, 'Title': ''}">
+      <dd class="portletItem menuPromotion" tal:condition="promotions">
+            <metal:portlet use-macro="here/portlet_promotions/macros/portlet" />
+      </dd>
+    </tal:themepromo>
+
+    <tal:items condition="items">
+    <dd class="portletItem lastItem">
+        <ul class="portletNavigationTree navTreeLevel3">
+            <li tal:replace="structure python:view.createNavTree(section)">
+                SUBTREE
+            </li>
+        </ul>
+    </dd>
+    </tal:items>
+</dl>
+<div class="visualClear"><!-- &nbsp;--></div>
+<div class="hiddenStructure template-file-name">portlet_navigation_sections.pt</div>
+</div>

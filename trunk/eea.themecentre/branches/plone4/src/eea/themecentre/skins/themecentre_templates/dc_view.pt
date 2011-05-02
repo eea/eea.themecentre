@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+    <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main">
+        <h1 tal:content="object_title" class="documentFirstHeading">
+            Title or id
+        </h1>
+
+        <div metal:use-macro="here/document_actions/macros/document_actions">
+            Document actions (print, sendto etc)
+        </div>
+
+        <div class="visualClear"></div>
+
+        <p class="documentDescription"
+           tal:content="here/Description"
+           tal:condition="here/Description">
+            Description
+        </p>
+
+        <div class="visualClear"></div>
+
+        <metal:listingmacro define-macro="listing" tal:define="subfolderView here/@@dc_view_logic">
+            <metal:block use-macro="here/subfolder_view/macros/listing"/>
+        </metal:listingmacro>
+
+    </metal:main-macro>
+    </div>
+</body>
+</html>

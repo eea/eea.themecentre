@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+</head>
+<body>
+
+    <metal:column-two fill-slot="column_two_slot"></metal:column-two>
+
+    <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main">
+
+        <h1 tal:content="object_title" class="documentFirstHeading">
+            Title or id
+        </h1>
+
+        <div metal:use-macro="context/document_actions/macros/document_actions">
+            Document actions (print, sendto etc)
+        </div>
+
+	<div class="visualClear"><!--&nbsp; --></div>
+
+	<div class="figure-right"
+	     tal:condition="python: hasattr(context.getCanonical(), 'theme_image')">
+            <div class="figure">
+	         <img src=""
+		      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image';alt object_title"  />
+	     </div>
+	</div>
+
+        <p class="documentDescription"
+           tal:content="context/Description"
+           tal:condition="context/Description">
+            Description
+        </p>
+
+        <div class="plain" tal:condition="context/CookedBody|nothing">
+            <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
+	      tal:replace="structure text" /> 
+        </div>
+
+	<div class="visualClear"><!--&nbsp; --></div>
+
+	<metal:portlets use-macro="context/themecentre_overview/macros/main" />
+
+        <div class="visualClear"><!-- --></div>
+
+    </metal:main-macro>
+    </div>
+
+</body>
+</html>

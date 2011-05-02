@@ -39,10 +39,6 @@ def getThemesForIndex(obj, **kwargs):
         raise AttributeError
 
 @indexer(Interface)
-def getInterfaces(obj, **kwargs):
-    return [i.__identifier__ for i in providedBy(obj).flattened()]
-
-@indexer(Interface)
 def getMediaTypes(obj, **kwargs):
     try:
         #TODO: fix me plone4

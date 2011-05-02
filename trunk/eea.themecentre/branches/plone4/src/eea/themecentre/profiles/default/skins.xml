@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<object name="portal_skins">
+
+  <object name="themecentre_images" meta_type="Filesystem Directory View"
+          directory="ThemeCentre/skins/themecentre_images"/>
+  <object name="themecentre_styles" meta_type="Filesystem Directory View"
+          directory="ThemeCentre/skins/themecentre_styles"/>
+  <object name="themecentre_templates" meta_type="Filesystem Directory View"
+          directory="ThemeCentre/skins/themecentre_templates"/>
+
+</object>

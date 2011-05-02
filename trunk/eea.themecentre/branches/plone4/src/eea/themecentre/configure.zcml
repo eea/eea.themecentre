@@ -6,6 +6,7 @@
   <include package="Products.LinguaPlone" />
 
   <include file="profiles.zcml" />
+  <include file="skins.zcml" />
 
   <!-- add marker interfaces to those content types that should be taggable -->
   <class class="Products.ATContentTypes.content.file.ATFile">
@@ -101,7 +102,6 @@
 
   <!-- Catalog indexers -->
   <adapter name="getThemes" factory=".catalog.getThemesForIndex" />
-  <adapter name="object_provides" factory=".catalog.getInterfaces" />
   <adapter name="media_types" factory=".catalog.getMediaTypes" />
 
   <subscriber
