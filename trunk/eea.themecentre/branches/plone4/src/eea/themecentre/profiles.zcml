@@ -7,7 +7,6 @@
     title="EEA Theme Centre"
     directory="profiles/default"
     description="Profile for EEA Theme Centre"
-    provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
+    provides="Products.GenericSetup.interfaces.EXTENSION" />
 
 </configure>

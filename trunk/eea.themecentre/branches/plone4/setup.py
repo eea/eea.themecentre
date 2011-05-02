@@ -38,6 +38,7 @@ setup(name='eea.themecentre',
 
           #TODO: fix me
           #'eea.mediacentre',
+          #'eea.design',
           #'eea.promotion',
           #'Products.ThemeCentre',
           #'Products.EEAContentTypes',

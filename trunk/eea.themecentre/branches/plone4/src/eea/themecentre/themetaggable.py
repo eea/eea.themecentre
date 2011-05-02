@@ -8,6 +8,7 @@ from eea.themecentre.themecentre import getThemeCentre
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
 from zope.annotation.interfaces import IAnnotations
+from Products.CMFCore.utils import getToolByName
 from zope.component import adapts, getUtility
 from zope.event import notify
 from zope.interface import implements
@@ -15,6 +16,35 @@ from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 from zope.app.schema.vocabulary import IVocabularyFactory
 
 KEY = 'eea.themecentre.themetaggable'
+
+def getMergedThemes(context, themes):
+    if not themes:
+        return themes
+
+    vocabularies = getToolByName(context, 'portal_vocabularies', None)
+    root = None
+    if vocabularies is not None:
+        root = vocabularies.getVocabularyByName('themesmerged')
+    if root is None:
+        return themes
+
+    extra_themes = []
+    synonyms = []
+    synObjs = {}
+    for obj in root.objectValues():
+        theme = obj.Title()
+        synonyms.append(theme)
+        synObjs[theme] = obj
+
+    for theme in themes:
+        if theme in synonyms:
+            merged = synObjs[theme]
+            for synonym in merged.objectValues():
+                synonym = synonym.Title()
+                if synonym not in themes and synonym not in extra_themes:
+                    extra_themes.append(synonym)
+
+    return themes + extra_themes
 
 def checkTheme(context, themes):
     # make sure the object is tagged with the current themecentre
@@ -39,12 +69,12 @@ class ThemeTaggable(object):
             mapping = annotations[KEY] = PersistentDict(themes)
         self.mapping = mapping
 
-    #def tags():
     def gett(self):
         anno = IAnnotations(self.context)
         mapping = anno.get(KEY)
         tags = list(mapping['themes'])
-        return tags
+        return getMergedThemes(self.context, tags)
+
     def sett(self, value):
         # if the value didn't change we don't need to do anything
         if value == self.tags:
@@ -58,11 +88,10 @@ class ThemeTaggable(object):
         # make sure object is tagged with the current themecentre
         # if not, add the themecentre to the tags
         checkTheme(self.context, themes)
+
         mapping['themes'] = PersistentList(themes)
         info = Attributes(IThemeTagging, 'tags')
         notify(ObjectModifiedEvent(self, info))
-    #return property(get, set)
-    tags = property(gett,sett)
 
     def nondeprecated_tags(self):
         tags = self.tags
@@ -70,6 +99,7 @@ class ThemeTaggable(object):
         current_themes = [term.value for term in vocab(self)]
         return [tag for tag in tags if tag in current_themes]
 
+    tags = property(gett,sett)
     nondeprecated_tags = property(nondeprecated_tags)
 
 class MainThemeTaggable(ThemeTaggable):

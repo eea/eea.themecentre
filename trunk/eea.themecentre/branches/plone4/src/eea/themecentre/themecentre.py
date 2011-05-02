@@ -221,6 +221,20 @@ def getThemeCentre(context):
 
     while context and not IPloneSiteRoot.providedBy(context) and \
           not IThemeCentre.providedBy(context):
+
+        #TODO: fix me, plone4
+        # If type(context) == 'plone.keyring.keyring.Keyring'
+        #  enters a infinite cycle or
+        #  context is <plone.app.portlets.portlets.navigation ..
+        context_id = getattr(context, 'getId', None)
+        if context_id:
+            context_id = context_id()
+        if context == [None, None, None, None]:
+            break
+        elif context_id in ['navigation',
+                            '++contextportlets++plone.rightcolumn']:
+            break
+
         context = aq_parent(context)
 
     if IThemeCentre.providedBy(context):
