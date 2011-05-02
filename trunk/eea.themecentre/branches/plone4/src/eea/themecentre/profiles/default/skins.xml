@@ -3,10 +3,10 @@
 <object name="portal_skins">
 
   <object name="themecentre_images" meta_type="Filesystem Directory View"
-          directory="ThemeCentre/skins/themecentre_images"/>
+          directory="eea.themecentre:skins/themecentre_images"/>
   <object name="themecentre_styles" meta_type="Filesystem Directory View"
-          directory="ThemeCentre/skins/themecentre_styles"/>
+          directory="eea.themecentre:skins/themecentre_styles"/>
   <object name="themecentre_templates" meta_type="Filesystem Directory View"
-          directory="ThemeCentre/skins/themecentre_templates"/>
+          directory="eea.themecentre:skins/themecentre_templates"/>
 
 </object>

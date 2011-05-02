@@ -1,12 +1,3 @@
-/*
-  This file is based on the ploneCustom.css.dtml shipped with Plone.
-
-  <dtml-with base_properties> (do not remove this)
-  <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either)
-*/
-
-/* YOUR CSS RULES START HERE */
-
 #content .content-column-one {
     float: left;
     width: 48%;
@@ -172,11 +163,3 @@ body.section-themes #content div.plain blockquote {
     width: 50%;
     margin: 0 0 0 10%;
 }
-
-/* YOUR CSS RULES STOP HERE */
-
-/* </dtml-with> */
-
-/* Latest version of the documentation on pre-defined properties from Plone 
-   can be found in CMFPlone/skins/plone_styles/ploneCustom.css.dtml */
-
