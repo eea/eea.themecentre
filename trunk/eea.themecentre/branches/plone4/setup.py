@@ -35,13 +35,13 @@ setup(name='eea.themecentre',
           'Products.PloneHelpCenter',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
+          'valentine.linguaflow',
 
           #TODO: fix me
           #'eea.mediacentre',
           #'eea.design',
           #'eea.promotion',
           #'Products.EEAContentTypes',
-          #'valentine.linguaflow',
           #'Products.EEAPloneAdmin',
       ],
       entry_points="""

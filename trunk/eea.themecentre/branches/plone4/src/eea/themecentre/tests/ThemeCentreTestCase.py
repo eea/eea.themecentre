@@ -13,6 +13,7 @@ PRODUCTS = ('EEAContentTypes',
 PloneTestCase.installProduct('ATVocabularyManager')
 PloneTestCase.installProduct('PloneHelpCenter')
 PloneTestCase.installProduct('LinguaPlone')
+PloneTestCase.installProduct('valentine.linguaflow')
 
 @onsetup
 def setup_themecentre():
