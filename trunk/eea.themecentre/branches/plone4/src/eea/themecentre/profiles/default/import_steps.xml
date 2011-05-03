@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<import-steps>
- <import-step id="eea.themecentre.various" version="20110503-01"
-              handler="eea.themecentre.setuphandlers.setupVarious"
-              title="EEA Theme Centre setup">
-    EEA Theme Centre installation step.
- </import-step>
-</import-steps>

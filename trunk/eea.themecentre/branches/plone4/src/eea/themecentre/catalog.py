@@ -1,7 +1,6 @@
 """ Catalog module
 """
-#TODO: fix me plone4
-#from zope.component.exceptions import ComponentLookupError
+from zope.component.interfaces import ComponentLookupError
 from zope.interface import providedBy, Interface
 from eea.themecentre.interfaces import IThemeTagging
 #TODO: fix me plone4
@@ -28,9 +27,7 @@ def getThemesForIndex(obj, **kwargs):
     try:
         themes = IThemeTagging(obj)
         return themes.tags
-    #TODO: fix me plone4
-    #except (ComponentLookupError, TypeError, ValueError):
-    except (TypeError, ValueError):
+    except (ComponentLookupError, TypeError, ValueError):
         # if can't be adapted, see if it's an AT object with getThemes method
         if hasattr(obj, 'getThemes'):
             return obj.getThemes()
@@ -45,7 +42,5 @@ def getMediaTypes(obj, **kwargs):
         #adapter = IMediaType(obj)
         #return adapter.types
         return ''
-    #TODO: fix me plone4
-    #except (ComponentLookupError, TypeError, ValueError):
-    except (TypeError, ValueError):
+    except (ComponentLookupError, TypeError, ValueError):
         raise AttributeError

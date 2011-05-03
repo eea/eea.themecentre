@@ -7,7 +7,7 @@ Changelog
 ----------------------
  * TODO: "themes" vocabulary should be add from here?
  * TODO: cleanup eea.rdfrepository dependency
- * TODO: fix all #TODO:
+ * TODO: fix all #TODO: plone4
  * TODO: fix tests
  * TODO: add builds on Jenkins
  * TODO: fix pylint/pyflakes warrnings

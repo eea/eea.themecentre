@@ -3,10 +3,17 @@
            i18n_domain="eea">
 
   <genericsetup:registerProfile
-    name="default"
-    title="EEA Theme Centre"
-    directory="profiles/default"
-    description="Profile for EEA Theme Centre"
-    provides="Products.GenericSetup.interfaces.EXTENSION" />
+        name="default"
+        title="EEA Theme Centre"
+        directory="profiles/default"
+        description="Profile for EEA Theme Centre"
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:importStep
+        name="eea-themecentre-various"
+        title="EEA Theme Centre setup"
+        description="Various setup for eea.themecentre"
+        handler="eea.themecentre.setuphandlers.setupVarious">
+  </genericsetup:importStep>
 
 </configure>
