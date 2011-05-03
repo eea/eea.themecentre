@@ -18,11 +18,7 @@ PloneTestCase.installProduct('LinguaPlone')
 def setup_themecentre():
     fiveconfigure.debug_mode = True
     import eea.themecentre
-    #TODO: fix me plone4
-    #import Products.ThemeCentre
     zcml.load_config('configure.zcml', eea.themecentre)
-    #TODO: fix me plone4
-    #zcml.load_config('overrides.zcml', Products.ThemeCentre)
     fiveconfigure.debug_mode = False
 
 setup_themecentre()

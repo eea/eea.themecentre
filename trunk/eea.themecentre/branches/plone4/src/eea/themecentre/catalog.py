@@ -1,4 +1,4 @@
-""" Module merged from deprecated Products.ThemeCentre
+""" Catalog module
 """
 #TODO: fix me plone4
 #from zope.component.exceptions import ComponentLookupError
