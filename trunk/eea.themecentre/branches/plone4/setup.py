@@ -36,10 +36,10 @@ setup(name='eea.themecentre',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
           'valentine.linguaflow',
+          'eea.design',
 
           #TODO: fix me
           #'eea.mediacentre',
-          #'eea.design',
           #'eea.promotion',
           #'Products.EEAContentTypes',
           #'Products.EEAPloneAdmin',

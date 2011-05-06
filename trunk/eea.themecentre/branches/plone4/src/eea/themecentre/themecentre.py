@@ -218,9 +218,18 @@ def objectThemeTagged(obj, event):
 
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """
+    #TODO: fix me, plone4
+    #       the while enter in a infinite cycle
+
+    count = 0
 
     while context and not IPloneSiteRoot.providedBy(context) and \
           not IThemeCentre.providedBy(context):
+
+        #TODO: fix me, plone4
+        count += 1
+        if count == 50:
+            break
 
         #TODO: fix me, plone4
         # If type(context) == 'plone.keyring.keyring.Keyring'

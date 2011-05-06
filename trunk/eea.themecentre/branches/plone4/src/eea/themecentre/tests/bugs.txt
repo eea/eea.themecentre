@@ -37,8 +37,7 @@ Log in to the CMS so that we can edit the themes:
 
 The problem occurs when rendering the form and the ThemesOrderedWidget asks for
 the themes vocabulary terms. Let's make sure that the ThemesEditForm from
-eea.themecentre.browser.themes renders OK with our empty themes tag: 
+eea.themecentre.browser.themes renders OK with our empty themes tag:
 
   >>> url = newsitem.absolute_url() + '/@@themes_edit.html'
   >>> browser.open(url)
-
