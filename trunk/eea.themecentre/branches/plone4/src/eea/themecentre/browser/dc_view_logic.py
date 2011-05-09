@@ -10,6 +10,7 @@ class INavigationSectionPosition(Interface):
     """ Dummy interface
     """
 
+
 class DCViewLogic(SubFolderView):
     """ View that shows the contents of all subfolders to the themecentre
     """
@@ -20,7 +21,8 @@ class DCViewLogic(SubFolderView):
         query = {
             'navSection': navSection,
         }
-        navtree_properties = getToolByName(self.context, 'portal_properties').navtree_properties
+        navtree_properties = \
+           getToolByName(self.context, 'portal_properties').navtree_properties
         sortAttribute = navtree_properties.getProperty('sortAttribute', None)
         if sortAttribute is not None:
             query['sort_on'] = sortAttribute

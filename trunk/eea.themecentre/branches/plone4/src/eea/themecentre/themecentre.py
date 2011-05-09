@@ -220,7 +220,6 @@ def getThemeCentre(context):
     """ Looks up the closest theme centre. """
     #TODO: fix me, plone4
     #       the while enter in a infinite cycle
-
     count = 0
 
     while context and not IPloneSiteRoot.providedBy(context) and \

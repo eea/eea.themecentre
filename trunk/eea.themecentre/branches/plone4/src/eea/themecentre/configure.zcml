@@ -4,10 +4,12 @@
   <include package="Products.ATVocabularyManager" />
   <include package="Products.PloneHelpCenter" />
   <include package="Products.LinguaPlone" />
+  <include package="eea.promotion" />
 
   <include file="profiles.zcml" />
   <include file="skins.zcml" />
   <include file="permissions.zcml"/>
+
   <include package=".browser" />
 
   <!-- Add marker interfaces to those content types that should be taggable -->
