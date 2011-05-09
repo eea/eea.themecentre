@@ -5,14 +5,13 @@
 
 from Acquisition import aq_base
 from Products.ATContentTypes.content.newsitem import ATNewsItem
-from Products.Five.site.localsite import enableLocalSiteHook
 from Products.ThemeCentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
 from eea.rdfrepository.rdfrepository import RDFRepository
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.rdfrepository.interfaces import IRDFRepository
 from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 from zope.app.annotation.attribute import AttributeAnnotations
-from zope.app.component.hooks import setSite
+from zope.site.hooks import setSite
 from zope.component import provideAdapter, provideUtility, getUtility
 from zope.interface import directlyProvides, classImplements, alsoProvides
 from os.path import dirname, join
@@ -28,7 +27,6 @@ class TestThemeCentre(ThemeCentreTestCase):
     def afterSetUp(self):
         """ After setup
         """
-        enableLocalSiteHook(self.portal)
         setSite(self.portal)
 
         provideAdapter(ThemeTaggableMerged)
