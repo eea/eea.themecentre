@@ -20,11 +20,15 @@ class IFeedPortletInfo(Interface):
 class RDFPortlet(BasePortlet):
 
     def short_items(self):
+        """ Short items
+        """
         context = utils.context(self)
         currentThemeCentre = getThemeCentre(context)
         return getRdfPortletData(currentThemeCentre, max_items=3)
 
     def full_items(self):
+        """ Full items
+        """
         feed_id = self.request.get('feed')
         if not feed_id:
             raise NotFound
@@ -45,4 +49,6 @@ class RDFPortlet(BasePortlet):
         return []
 
     def title(self):
+        """ Title
+        """
         return getattr(self, 'feedTitle', '')

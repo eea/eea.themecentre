@@ -26,7 +26,8 @@ from eea.themecentre import _
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
 
 class PromoteThemeCentre(object):
-    """ Promote a folder to a theme centre. """
+    """ Promote a folder to a theme centre.
+    """
 
     def __init__(self, context, request):
         self.context = context
@@ -44,19 +45,23 @@ class PromoteThemeCentre(object):
         return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
 
 class ThemeCentreEdit(EditForm):
-    """ Form for setting theme for a theme centre. """
+    """ Form for setting theme for a theme centre.
+    """
 
     form_fields = Fields(IThemeCentreSchema, IThemeRelation)
     label = u'Promote theme centre'
 
 class Multimedia(object):
-    """ Provides multimedia information for a themecentre's multimedia section. """
+    """ Provides multimedia information for a themecentre's multimedia section.
+    """
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def types(self):
+        """ Types
+        """
         #mediacentre = getUtility(IMediaCentre)
         #types = sorted(mediacentre.getMediaTypes())
         vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
@@ -68,17 +73,22 @@ class Multimedia(object):
         return types_
 
     def media_items(self):
+        """ Media items
+        """
         currentTheme = getTheme(self.context)
         mediacentre = getUtility(IMediaCentre)
         search = { MEDIA_SEARCH_KEY: { 'theme': currentTheme }}
         return [mfile['object'] for mfile in mediacentre.getMedia(search=search)]
 
 class Theme(object):
-    """ Provides information about this theme/themecentre. """
+    """ Provides information about this theme/themecentre.
+    """
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def name(self):
+        """ Name
+        """
         return getThemeTitle(self.context)

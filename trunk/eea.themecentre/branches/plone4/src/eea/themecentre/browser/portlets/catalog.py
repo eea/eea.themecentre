@@ -5,8 +5,12 @@ from Products.Five import BrowserView
 from eea.themecentre.themecentre import getThemeCentre, getTheme
 
 class BasePortlet(BrowserView):
+    """ Base portlet
+    """
 
     def short_items(self):
+        """ Short items
+        """
         items = self.items()
         result = []
         for item in items[:self.size]:
@@ -14,6 +18,8 @@ class BasePortlet(BrowserView):
         return result
 
     def full_items(self):
+        """ Full items
+        """
         items = self.items()
         result = []
         for item in items:
@@ -21,6 +27,8 @@ class BasePortlet(BrowserView):
         return result
 
     def all_link(self):
+        """ All link
+        """
         context = self.context()
         themeCentre = getThemeCentre(context)
         if themeCentre:
@@ -38,6 +46,8 @@ class BasePortlet(BrowserView):
         return ''
 
     def localized_time(self, time):
+        """ Localized time
+        """
         context = self.context()
         translation = getToolByName(context, 'translation_service')
 
@@ -52,11 +62,17 @@ class BasePortlet(BrowserView):
 
     @property
     def size(self):
+        """ Size
+        """
         return 3
 
 class CatalogBasePortlet(BasePortlet):
+    """ Catalog Base Portlet
+    """
 
     def items(self):
+        """ Items
+        """
         context = self.context()
         portal_catalog = getToolByName(context, 'portal_catalog')
         currentTheme = getTheme(context)
@@ -70,12 +86,16 @@ class CatalogBasePortlet(BasePortlet):
         return res
 
     def item_to_short_dict(self, item):
+        """ Item to short dict
+        """
         return { 'title': item.Title,
                  'description': item.Description,
                  'url': item.getURL(),
                  'detail': self.localized_time(item.Date) }
 
     def item_to_full_dict(self, item):
+        """ Item to full dict
+        """
         return { 'title': item.Title,
                  'description': item.Description,
                  'url': item.getURL(),

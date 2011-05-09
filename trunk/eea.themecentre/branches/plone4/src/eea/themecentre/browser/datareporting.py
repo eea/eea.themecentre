@@ -1,3 +1,5 @@
+""" Data reporting
+"""
 from eea.themecentre.themecentre import getTheme #, getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
@@ -8,8 +10,9 @@ ROD_SERVER = 'http://rod.eionet.europa.eu/rpcrouter'
 
 class DataCentreReporting(object):
     """ Return reporting obligations related to this theme.
-    This is done by getting first all data sets tagged with this theme and then
-    getting all the ROD urls used for those datasets."""
+        This is done by getting first all data sets tagged with this theme and then
+        getting all the ROD urls used for those datasets.
+    """
 
     def __init__(self, context, request):
         self.context = context
@@ -17,7 +20,8 @@ class DataCentreReporting(object):
 
 
     def relatedReportingObligations(self):
-        """ return a list of Reporting Obligations related to this theme """
+        """ Return a list of Reporting Obligations related to this theme
+        """
         currentTheme = getTheme(self.context)
         catalog = getToolByName(self.context, 'portal_catalog')
         rodbaseurl = 'http://rod.eionet.europa.eu/obligations/'
@@ -55,13 +59,15 @@ class DataCentreReporting(object):
         return rods
 
 class ReportingObligationInfo(object):
-    """ return complete info about all reporting obligations from ROD """
+    """ Return complete info about all reporting obligations from ROD
+    """
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def __call__(self):
-        """ return a struct with full info for obligation with id=rodid """
+        """ Return a struct with full info for obligation with id=rodid
+        """
         rods = {}
         server = xmlrpclib.Server(ROD_SERVER)
         result = server.WebRODService.getROComplete()

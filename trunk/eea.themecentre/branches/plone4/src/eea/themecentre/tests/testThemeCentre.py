@@ -1,3 +1,5 @@
+""" Test theme centre
+"""
 #TODO: fix me, plone4
 #      tests from deprecated Products.ThemeCentre, to be merged into existing tests
 
@@ -16,11 +18,16 @@ from zope.interface import directlyProvides, classImplements, alsoProvides
 from os.path import dirname, join
 from Products.ThemeCentre import tests
 from Products.ThemeCentre.mergedtheme import ThemeTaggableMerged
+from unittest import TestSuite, makeSuite
 
 
 class TestThemeCentre(ThemeCentreTestCase):
+    """ Test Theme Centre
+    """
 
     def afterSetUp(self):
+        """ After setup
+        """
         enableLocalSiteHook(self.portal)
         setSite(self.portal)
 
@@ -45,23 +52,26 @@ class TestThemeCentre(ThemeCentreTestCase):
         self.portal.portal_catalog.reindexObject(self.portal)
 
     def testSearchTheme(self):
-        # there should be one item with the 'agriculture' themes tag
+        """ There should be one item with the 'agriculture' themes tag
+        """
         res = self.portal.portal_catalog.searchResults(getThemes=['agriculture'])
         self.assertEqual(len(res), 1)
 
     def testObjectProvides(self):
+        """ We should find one news item that provides IThemeTaggable
+        """
         catalog = self.portal.portal_catalog
         self.failUnless('object_provides' in catalog.indexes())
 
-        # we should find one news item that provides IThemeTaggable
         res = catalog.searchResults(portal_type='News Item',
                 object_provides='eea.themecentre.interfaces.IThemeTaggable')
         self.assertEqual(len(res), 1)
 
 
     def testMergedThemes(self):
-        # air_quality is merged with air
-        # create and theme tag a news item
+        """ air_quality is merged with air
+            create and theme tag a news item
+        """
         self.portal.invokeFactory('News Item', id='news2')
         obj = self.portal.news2
         themes = IThemeTagging(obj)
@@ -83,7 +93,8 @@ class TestThemeCentre(ThemeCentreTestCase):
 
 
 def test_suite():
-    from unittest import TestSuite, makeSuite
+    """ Test suite
+    """
 
     suite = TestSuite(makeSuite(TestThemeCentre))
 

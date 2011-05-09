@@ -1,3 +1,5 @@
+""" Epaedia
+"""
 sql_images = \
     u"select tblElements.eid, title, extension from tblImages, tblImagesBody, " + \
     u"tblPagesElements, tblElements " + \

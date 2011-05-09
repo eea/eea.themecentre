@@ -18,6 +18,8 @@ from zope.app.schema.vocabulary import IVocabularyFactory
 KEY = 'eea.themecentre.themetaggable'
 
 def getMergedThemes(context, themes):
+    """ Get Merged Themes
+    """
     if not themes:
         return themes
 
@@ -47,7 +49,8 @@ def getMergedThemes(context, themes):
     return themes + extra_themes
 
 def checkTheme(context, themes):
-    # make sure the object is tagged with the current themecentre
+    """ Make sure the object is tagged with the current themecentre
+    """
     themecentre = getThemeCentre(context)
     if themecentre:
         themeCentreThemes = IThemeCentreSchema(themecentre)
@@ -57,6 +60,8 @@ def checkTheme(context, themes):
                 themes.append(tag)
 
 class ThemeTaggable(object):
+    """ Theme Taggable
+    """
     implements(IThemeTagging)
     adapts(IThemeTaggable)
 
@@ -70,12 +75,16 @@ class ThemeTaggable(object):
         self.mapping = mapping
 
     def gett(self):
+        """ Get tags
+        """
         anno = IAnnotations(self.context)
         mapping = anno.get(KEY)
         tags = list(mapping['themes'])
         return getMergedThemes(self.context, tags)
 
     def sett(self, value):
+        """ Set tags
+        """
         # if the value didn't change we don't need to do anything
         if value == self.tags:
             return
@@ -94,6 +103,8 @@ class ThemeTaggable(object):
         notify(ObjectModifiedEvent(self, info))
 
     def nondeprecated_tags(self):
+        """ Non deprecated tags
+        """
         tags = self.tags
         vocab = getUtility(IVocabularyFactory, 'Allowed themes for edit')
         current_themes = [term.value for term in vocab(self)]
@@ -103,23 +114,30 @@ class ThemeTaggable(object):
     nondeprecated_tags = property(nondeprecated_tags)
 
 class MainThemeTaggable(ThemeTaggable):
+    """ Main Theme Taggable
+    """
     implements(IMainThemeTagging)
     adapts(IThemeTaggable)
 
 class ThemeCentreTaggable(object):
+    """ Theme Centre Taggable
+    """
     implements(IThemeCentreSchema)
     adapts(IThemeCentre)
 
     def __init__(self, context):
         self.context = context
 
-    #def tags():
     def gett(self):
+        """ Get tags
+        """
         tags = IThemeTagging(self.context).tags
         if len(tags) > 0:
             return tags[0]
         return None
     def sett(self, value):
+        """ Set tags
+        """
         # if folder didn't have a theme tag earlier we send an event
         # so folders and stuff can be created in the themecentre
         tags = IThemeTagging(self.context).tags
@@ -130,11 +148,11 @@ class ThemeCentreTaggable(object):
             notify(PromotedToThemeCentreEvent(self.context))
         #vocab = getUtility(IVocabularyFactory, 'Allowed themes')
         #themes = vocab(self)
-    #return property(get, set)
+
     tags = property(gett, sett)
 
-
 def tagTranslation(obj, event):
+    """ Tag Translation
+    """
     canonical = obj.getCanonical()
     IThemeTagging(obj).tags = IThemeTagging(canonical).tags
-

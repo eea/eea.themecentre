@@ -16,6 +16,8 @@ class ThemeCentreMenuPromotion(object):
         self.request = request
 
     def promotions(self, section=None):
+        """ Promotions
+        """
         currentTheme = getTheme(self.context)
         catalog = getToolByName(self.context, 'portal_catalog')
         promotions = []

@@ -1,4 +1,6 @@
-import unittest
+""" Test Doc Tests
+"""
+from unittest import TestSuite
 from zope.interface import alsoProvides
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
@@ -8,8 +10,12 @@ from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 
 
 class PortletTestCase(ThemeCentreTestCase):
+    """ Portlet Test Case
+    """
 
     def afterSetUp(self):
+        """ After setup
+        """
         portal = self.portal
         self.setRoles(['Manager'])
 
@@ -33,14 +39,13 @@ class PortletTestCase(ThemeCentreTestCase):
 
 
 def test_suite():
+    """ Test suite
+    """
 
-    return unittest.TestSuite((
+    return TestSuite((
         FunctionalDocFileSuite('promotion.txt',
                      package = 'eea.themecentre.browser.portlets',
                      test_class = PortletTestCase,
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
         ))
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')

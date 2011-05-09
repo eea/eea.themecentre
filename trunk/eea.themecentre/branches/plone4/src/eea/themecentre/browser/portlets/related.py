@@ -1,3 +1,5 @@
+""" Related
+"""
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils
 
@@ -8,13 +10,19 @@ from eea.themecentre.browser.portlets.catalog import BasePortlet
 from eea.themecentre import _
 
 class RelatedPortlet(BasePortlet):
+    """ Related Portlet
+    """
 
     all_link = None
 
     def title(self):
+        """ Title
+        """
         return _(u'Related themes')
 
     def items(self):
+        """ Items
+        """
         context = utils.context(self)
         reference_catalog = getToolByName(context, 'reference_catalog')
         currentThemeCentre = getThemeCentre(context)
@@ -37,12 +45,16 @@ class RelatedPortlet(BasePortlet):
         return result
 
     def item_to_short_dict(self, item):
+        """ Item to short dict
+        """
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
                  'detail': None,
                  'image' : IThemeCentreImageUrl(item) }
 
     def item_to_full_dict(self, item):
+        """ Item to full dict
+        """
         return { 'title': item.Title(),
                  'url': item.absolute_url(),
                  'published': None,

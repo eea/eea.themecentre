@@ -1,7 +1,11 @@
+""" Utils
+"""
 from Products.CMFCore.utils import getToolByName
 from zope.app.component.hooks import getSite
 
 def localized_time(time):
+    """ Localized time
+    """
     context = getSite()
     translation = getToolByName(context, 'translation_service')
 

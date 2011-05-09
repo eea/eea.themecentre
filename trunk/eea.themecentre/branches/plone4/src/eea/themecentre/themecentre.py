@@ -21,11 +21,13 @@ from eea.themecentre.vocabulary import ThemesVocabularyFactory
 RDF_THEME_KEY = 'eea.themecentre.rdf'
 
 class PromotedToThemeCentreEvent(ObjectEvent):
-    """ A theme tag has been added to an object. """
+    """ A theme tag has been added to an object.
+    """
 
 def promoted(obj, event):
-    # no AT field is changed on the object, so noone else knows that the
-    # folder should be reindexed because of the new interface we added
+    """ No AT field is changed on the object, so noone else knows that the
+        folder should be reindexed because of the new interface we added
+    """
     obj.reindexObject()
 
     workflow = getToolByName(obj, 'portal_workflow')
@@ -155,7 +157,8 @@ def promoted(obj, event):
         createFaqSmartFolder(faqobj, theme_id)
 
 def createFaqSmartFolder(parent, theme_id):
-    # add a smart folder to the faq folder that shows all faqs
+    """ Add a smart folder to the faq folder that shows all faqs
+    """
     _createObjectByType('Topic', parent, id='faqs_topic',
                         title='FAQ')
     topic = getattr(parent, 'faqs_topic')
@@ -190,14 +193,16 @@ def objectAdded(obj, event):
                 themes.tags += [themeCentreThemes.tags]
 
 def objectMoved(obj, event):
-    # IObjectMovedEvent is a very generic event, so we have to check
-    # source and destination to make sure it's really a cut & paste
+    """ IObjectMovedEvent is a very generic event, so we have to check
+        source and destination to make sure it's really a cut & paste
+    """
     if event.oldParent is not None and event.newParent is not None:
         objectAdded(obj, event)
 
 def objectThemeTagged(obj, event):
     """ Checks if the object's theme tags are modified. If true, tags are
-        copied to eventual translations, and catalog is updated. """
+        copied to eventual translations, and catalog is updated.
+    """
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
 
@@ -217,7 +222,8 @@ def objectThemeTagged(obj, event):
             context.reindexObject()
 
 def getThemeCentre(context):
-    """ Looks up the closest theme centre. """
+    """ Looks up the closest theme centre.
+    """
     #TODO: fix me, plone4
     #       the while enter in a infinite cycle
     count = 0
@@ -251,6 +257,8 @@ def getThemeCentre(context):
         return None
 
 def getThemeCentreByName(name):
+    """ Get Theme Centre by Name
+    """
     catalog = getToolByName(getSite(), 'portal_catalog')
     brains = catalog.searchResults(
             Language='en',
@@ -268,6 +276,8 @@ def getThemeCentreByName(name):
         return None
 
 def getTheme(context):
+    """ Get theme
+    """
     themeCentre = getThemeCentre(context)
 
     if IThemeCentre.providedBy(themeCentre):
@@ -279,9 +289,13 @@ def getTheme(context):
     return None
 
 class O:
+    """ Dummy class
+    """
     pass
 
 def getThemeTitle(context):
+    """ Get Theme Title
+    """
     themeid = getTheme(context)
     if themeid:
         o = O()
@@ -311,4 +325,3 @@ def imageUrl(context):
         tc = context.getCanonical()
     image = getattr(tc, 'theme_image')
     return '%s/image_icon' % image.absolute_url()
-

@@ -1,3 +1,5 @@
+""" Faceted
+"""
 from zope.component import queryMultiAdapter
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 import logging
@@ -5,18 +7,26 @@ import logging
 log = logging.getLogger("eea.themecentre")
 
 class FacetedPortlet(BasePortlet):
+    """ Faceted Portlet
+    """
 
     @property
     def all_link(self):
+        """ All link
+        """
         context = self.context[0]
         return context.absolute_url()
 
     @property
     def title(self):
+        """ Title
+        """
         context = self.context[0]
         return context.Title()
-    
+
     def items(self):
+        """ Items
+        """
         context = self.context[0]
         facetednav = queryMultiAdapter((context, self.request), name=u'faceted_query')
         if facetednav is None:
@@ -37,6 +47,8 @@ class FacetedPortlet(BasePortlet):
             }
 
     def item_to_short_dict(self, item):
+        """ Item to short dict
+        """
         return {
             'title': item.Title,
             'url': item.getURL(),
@@ -46,6 +58,8 @@ class FacetedPortlet(BasePortlet):
          }
 
     def item_to_full_dict(self, item):
+        """ Item to full dict
+        """
         return {
             'title': item.Title,
             'url': item.getURL(),

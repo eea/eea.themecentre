@@ -9,9 +9,11 @@ from zope.interface import implements
 from zope.annotation.interfaces import IAnnotations
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 
+
 KEY = 'eea.themecentre.relatedthemecentres'
 
 class ThemeRelationAdapter(object):
+    """ Theme relation adapter """
     implements(IThemeRelation)
     adapts(IThemeCentre)
 
@@ -24,17 +26,19 @@ class ThemeRelationAdapter(object):
             mapping = annotations[KEY] = PersistentDict(related)
         self.mapping = mapping
 
-    #def related():
     def getr(self):
+        """ Ger related """
         anno = IAnnotations(self.context)
         mapping = anno.get(KEY)
         return list(mapping['related'])
+
     def setr(self, value):
+        """ Set related """
         anno = IAnnotations(self.context)
         mapping = anno.get(KEY)
         mapping['related'] = PersistentList(value)
 
         info = Attributes(IThemeRelation, 'related')
         notify(ObjectModifiedEvent(self.context, info))
-    #return property(get, set)
+
     related = property(getr, setr)

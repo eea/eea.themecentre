@@ -1,3 +1,5 @@
+""" Related
+"""
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.themecentre import getThemeCentre #ThemesVocabularyFactory
 from eea.themecentre.interfaces import IThemeTagging
@@ -14,13 +16,16 @@ class IRelations(Interface):
 TOPICS_ID = 'topics'
 
 class Topics(object):
-    """ Provides related topic data for portlets. """
+    """ Provides related topic data for portlets.
+    """
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def menu(self):
+        """ Menu
+        """
         plone_utils = getToolByName(self.context, 'plone_utils')
         propstool = getToolByName(self.context, 'portal_properties')
         siteprops = getattr(propstool, 'site_properties', None)

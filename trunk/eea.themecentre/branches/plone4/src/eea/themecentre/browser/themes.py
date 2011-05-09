@@ -1,3 +1,5 @@
+""" Themes
+"""
 from Products.CMFCore.utils import getToolByName
 from Products.Five.formlib.formbase import EditForm
 from zope.app.form.browser.itemswidgets import OrderedMultiSelectWidget
@@ -7,14 +9,16 @@ from eea.themecentre.vocabulary import ThemesEditVocabularyFactory
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
 
 class ThemesOrderedWidget(OrderedMultiSelectWidget):
-    """ Widget showing the themes that are selected and available. """
+    """ Widget showing the themes that are selected and available.
+    """
 
     def __init__(self, field, request):
         vocabulary = ThemesVocabularyFactory(field)
         super(ThemesOrderedWidget, self).__init__(field, vocabulary, request)
 
     def choices(self):
-        """Return a set of tuples (text, value) that are available."""
+        """ Return a set of tuples (text, value) that are available.
+        """
         # Not all content objects must necessarily support the attributes
         if hasattr(self.context.context, self.context.__name__):
             available_values = self.context.get(self.context.context)
@@ -26,7 +30,8 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
                 if term.value not in available_values]
 
     def selected(self):
-        """Return a list of tuples (text, value) that are selected."""
+        """ Return a list of tuples (text, value) that are selected.
+        """
         # Get form values
         values = self._getFormValue()
         # Not all content objects must necessarily support the attributes
@@ -49,10 +54,13 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
         return result
 
     def required(self):
+        """ Required
+        """
         return False
 
 class ThemeEditForm(EditForm):
-    """ Form for editing themes. """
+    """ Form for editing themes.
+    """
 
     label = u'Edit themes'
     form_fields = Fields(IThemeTagging)

@@ -1,3 +1,5 @@
+""" DC view logic
+"""
 from Products.CMFCore.utils import getToolByName
 from eea.design.browser.subfolder_view_logic import SubFolderView
 from eea.themecentre.themecentre import getThemeCentre
@@ -16,6 +18,8 @@ class DCViewLogic(SubFolderView):
     """
 
     def get_start_items(self):
+        """ get start items
+        """
         navSection = INavigationSectionPosition(self.context).section
         themecentre = getThemeCentre(self.context)
         query = {

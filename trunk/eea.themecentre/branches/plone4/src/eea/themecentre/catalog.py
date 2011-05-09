@@ -8,9 +8,10 @@ from eea.themecentre.interfaces import IThemeTagging
 from Products.CMFCore.utils import getToolByName
 from plone.indexer.decorator import indexer
 
+
 #TODO: not used? plone4
 def getSynonyms(portal):
-    # used to return true synonyms
+    """ Used to return true synonyms """
     vocabularies = getToolByName(portal, 'portal_vocabularies')
     root = getattr(vocabularies, 'themesmerged', None)
     synonyms = {}
@@ -24,6 +25,7 @@ def getSynonyms(portal):
 
 @indexer(Interface)
 def getThemesForIndex(obj, **kwargs):
+    """ Get themes for catalog index """
     try:
         themes = IThemeTagging(obj)
         return themes.tags
@@ -37,6 +39,7 @@ def getThemesForIndex(obj, **kwargs):
 
 @indexer(Interface)
 def getMediaTypes(obj, **kwargs):
+    """ Get media types """
     try:
         #TODO: fix me plone4
         #adapter = IMediaType(obj)

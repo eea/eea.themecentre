@@ -1,3 +1,5 @@
+""" Links
+"""
 #from Products.ATContentTypes.content.event import ATEvent
 #from Products.ATContentTypes.content.image import ATImage
 from Products.CMFCore.utils import getToolByName
@@ -11,6 +13,7 @@ from zope.component import adapts
 from zope.interface import Interface, implements
 
 class LinkAdapter(object):
+    """ Link adapter """
     adapts(Interface)
     implements(IThemeMoreLink)
 
@@ -18,9 +21,11 @@ class LinkAdapter(object):
         self.context = context
 
     def _themecentre(self, theme):
-        return getThemeCentreByName(theme)                            
- 
+        """ Theme centre """
+        return getThemeCentreByName(theme)
+
     def _find_topic(self):
+        """ Find topic """
         catalog = getToolByName(self.context, 'portal_catalog')
         query = { 'portal_type': ('Topic', 'RichTopic'),
                   'path': '/'.join(self.themecentre.getPhysicalPath()) }
@@ -37,7 +42,7 @@ class LinkAdapter(object):
         self.themecentre = self._themecentre(theme)
         if self.themecentre is None:
             return ''
-        
+
         topic = self._find_topic()
         if topic:
             return topic.absolute_url()
@@ -47,5 +52,6 @@ class LinkAdapter(object):
                     '/contentbytype?contenttype=' + portal_type
 
 class MediaLink(LinkAdapter):
+    """ Media link """
     def url(self, theme):
-        return self._themecentre(theme).absolute_url() + '/multimedia' 
+        return self._themecentre(theme).absolute_url() + '/multimedia'

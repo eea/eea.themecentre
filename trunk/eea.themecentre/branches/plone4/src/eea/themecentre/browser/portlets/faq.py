@@ -1,6 +1,8 @@
 from eea.themecentre.browser.portlets.catalog import CatalogBasePortlet
 
 class FaqPortlet(CatalogBasePortlet):
+    """ Faq Portlet
+    """
 
     query = { 'portal_type': 'HelpCenterFAQ',
               'sort_on': 'Date',
@@ -8,6 +10,8 @@ class FaqPortlet(CatalogBasePortlet):
               'review_state': 'published' }
 
     def item_to_full_dict(self, item):
+        """ Item to full dict
+        """
         obj = item.getObject()
 
         return { 'title': item.Title,

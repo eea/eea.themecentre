@@ -30,6 +30,8 @@ class RDFTitlesPortlet(BasePortlet):
             return None
 
     def items(self):
+        """ Items
+        """
         context = utils.context(self)
         currentTheme = getTheme(context)
         currentThemeTitle = getThemeTitle(context)
@@ -44,16 +46,22 @@ class RDFTitlesPortlet(BasePortlet):
         return feeds
 
     def _feedListUrl(self, item):
+        """ Feed List Url
+        """
         themeCentre = getThemeCentre(utils.context(self))
         return themeCentre.absolute_url() + \
                '/listfeed?feed=' + item.id
 
     def item_to_short_dict(self, item):
+        """ Item to short dict
+        """
         return  { 'title': item.title,
                   'url': self._feedListUrl(item),
                   'detail': None }
 
     def item_to_full_dict(self, item):
+        """ Item to full dict
+        """
         return  { 'title': item.title,
                   'url': self._feedListUrl(item),
                   'description': '',
@@ -61,9 +69,13 @@ class RDFTitlesPortlet(BasePortlet):
                   'published': None }
 
     def title(self):
+        """ Title
+        """
         context = utils.context(self)
         return getThemeTitle(context)
 
     @property
     def size(self):
+        """ Size
+        """
         return 10

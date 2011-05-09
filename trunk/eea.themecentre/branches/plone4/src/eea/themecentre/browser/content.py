@@ -1,3 +1,5 @@
+""" Content
+"""
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 
@@ -6,7 +8,8 @@ from eea.themecentre.interfaces import IThemeCentreSchema
 class ContentByType(object):
     """ Provides data to the contentbytheme template that shows a list
         of all content objects with certain portal type and certain
-        theme tags. """
+        theme tags.
+    """
 
     def __init__(self, context, request):
         b_start = request.get('b_start', 0)

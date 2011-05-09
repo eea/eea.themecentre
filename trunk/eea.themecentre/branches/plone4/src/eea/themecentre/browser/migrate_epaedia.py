@@ -1,21 +1,23 @@
-# To run epaedia migration:
-# First import mysql data
-#
-#  $ mysql -u root
-#  mysql> create database epaedia;
-#  mysql> quit
-#
-#  $ mysql -u root epaedia < epaedia.mysql
-#
-# Then run the migration, it's two views
-# /www/SITE/multimedia/@@migrateEpaediaMultimedia?path=/home/tim/epaedia/E3-Encyclopedia
-# /www/SITE/themes/@@migrateEpaediaArticles?multimedia_path=/www/SITE/multimedia
-#
-# Except path and multimedia_path four other parameters can be passed in the url
-#  * host - defaults to 'localhost'
-#  * db - defaults to 'epaedia'
-#  * user - defaults to 'root'
-#  * password - defaults to empty string
+"""
+ To run epaedia migration:
+ First import mysql data
+
+  $ mysql -u root
+  mysql> create database epaedia;
+  mysql> quit
+
+  $ mysql -u root epaedia < epaedia.mysql
+
+ Then run the migration, it's two views
+ /www/SITE/multimedia/@@migrateEpaediaMultimedia?path=/home/tim/epaedia/E3-Encyclopedia
+ /www/SITE/themes/@@migrateEpaediaArticles?multimedia_path=/www/SITE/multimedia
+
+ Except path and multimedia_path four other parameters can be passed in the url
+  * host - defaults to 'localhost'
+  * db - defaults to 'epaedia'
+  * user - defaults to 'root'
+  * password - defaults to empty string
+"""
 
 import MySQLdb
 import MySQLdb.cursors
@@ -32,7 +34,7 @@ from eea.themecentre.browser.epaedia import METADATA, sql_cid_with_onetier_pid
 from eea.themecentre.browser.epaedia import sql_fullarticle_pid, sql_all_images
 from eea.themecentre.browser.epaedia import sql_snapshot_pid, sql_eids_by_pid
 from eea.themecentre.browser.epaedia import sql_title, sql_section_content
-from eea.themecentre.browser.epaedia import sql_article_links 
+from eea.themecentre.browser.epaedia import sql_article_links
 from eea.themecentre.browser.epaedia import sql_image_by_eid, sql_sections
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
 from eea.mediacentre.interfaces import IMediaType
@@ -82,6 +84,8 @@ missing_title = {
 }
 
 def load_pid_theme_mapping():
+    """ Load pid theme mapping
+    """
     path = os.path.dirname(__file__) + os.path.sep + 'epaedia-mapping.csv'
     mapping = {}
 
@@ -91,11 +95,12 @@ def load_pid_theme_mapping():
         mapping[int(pid)] = themes
 
     return mapping
-            
+
 DEFAULT_EFFECTIVE_DATE = DateTime('2006-02-02')
 
-class MigrateMedia(object): 
-    """ Migrates media from epaedia database."""
+class MigrateMedia(object):
+    """ Migrates media from epaedia database.
+    """
 
     def __init__(self, context, request):
         self.context = context
@@ -112,7 +117,9 @@ class MigrateMedia(object):
         self.catalog = getToolByName(context, 'portal_catalog')
         self.themes = {}
 
-    def migrate(self): 
+    def migrate(self):
+        """ Migrate
+        """
         self.file = open('media_files.txt', 'w')
         self.eids = {}
 
@@ -183,6 +190,8 @@ class MigrateMedia(object):
         self.request.RESPONSE.redirect(self.context.absolute_url())
 
     def images(self, folder, db_row, theme_id):
+        """ Images
+        """
         eid, title, extension = db_row
         if not title:
             title = missing_title[eid]
@@ -215,6 +224,8 @@ class MigrateMedia(object):
         return atimage
 
     def animations(self, folder, db_row, theme_id):
+        """ Animations
+        """
         eid, title = db_row
         if not title:
             title = missing_title[eid]
@@ -233,9 +244,13 @@ class MigrateMedia(object):
         return atfile
 
     def mindstretchers(self, folder, db_row, theme_id):
+        """ Mindstretchers
+        """
         return self.animations(folder, db_row, theme_id)
 
-    def videos(self, folder, db_row, theme_id): 
+    def videos(self, folder, db_row, theme_id):
+        """ Videos
+        """
         eid, title, body, item = db_row
 
         if not title:
@@ -261,7 +276,7 @@ class MigrateMedia(object):
         try:
             # p4a activates videos automatically by subscribing to modified events
             notify(ObjectModifiedEvent(atfile))
-        except Exception: 
+        except Exception:
             # sometimes extracting metadata from file may fail and result in
             # error, but we can continue as we set metadata below instead
             logger.debug("metadata extraction failed on eea.themecentre migrate_epaedia")
@@ -275,6 +290,8 @@ class MigrateMedia(object):
         return atfile
 
     def links(self, folder, db_row, theme_id):
+        """ Links
+        """
         eid, link, title, body, pid = db_row
 
         # if pid is not 0, then this is an internal link which
@@ -300,6 +317,8 @@ class MigrateMedia(object):
         return linkobj
 
     def migrate_files(self, theme_id, page_id, media_type):
+        """ Migrate files
+        """
         cursor = self.db.cursor()
         cursor.execute(types[media_type]['sql'] % page_id)
         files = cursor.fetchall()
@@ -318,7 +337,7 @@ class MigrateMedia(object):
             try:
                 media = IMediaType(new_file)
                 media.types = [media_type]
-            except Exception: 
+            except Exception:
                 # links can't be adapted and shouldn't be
                 logger.debug("links cant be adapted and shouldn't be for eea.themecentre")
 
@@ -354,6 +373,8 @@ class MigrateMedia(object):
 
 
     def _apply_themes(self, theme_id, new_file, page_id):
+        """ Apply themes
+        """
         themetag = IThemeTagging(new_file)
         tags = self.themes[page_id]
         if theme_id == tags[0]:
@@ -362,9 +383,13 @@ class MigrateMedia(object):
             raise ValueError
 
     def _change_workflow(self, obj):
+        """ Change workflow
+        """
         pass
 
     def _fullarticle_pid(self, page_id):
+        """ Fullarticle pid
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_cid_with_onetier_pid % page_id)
         cid = cursor.fetchone()[0]
@@ -418,11 +443,14 @@ class MigrateMedia(object):
                                '/'.join(image.getPhysicalPath()))
 
     def _save_to_file(self, eid, path):
+        """ Save_to_file
+        """
         self.file.write(str(eid) + '|' + path + '\n')
         self.eids[eid] = True
 
     def _snapshot_pid(self, page_id):
-        # media belonging to snapshot article
+        """ Media belonging to snapshot article
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_cid_with_onetier_pid % page_id)
         cid = cursor.fetchone()[0]
@@ -439,8 +467,9 @@ class MigrateMedia(object):
             return None
 
 
-class MigrateArticles(object): 
-    """ Migrates articles from epaedia website. """
+class MigrateArticles(object):
+    """ Migrates articles from epaedia website.
+    """
 
     def __init__(self, context, request):
         self.context = context
@@ -468,7 +497,8 @@ class MigrateArticles(object):
         self.image_folder = portal.SITE.images
 
     def migrate(self):
-        """ Some docstring. """
+        """ Some docstring.
+        """
 
         self.themes = load_pid_theme_mapping()
         self._image_sizes = self._load_images()
@@ -498,6 +528,8 @@ class MigrateArticles(object):
         return 'migration of epaedia articles is successfully finished'
 
     def _apply_media_relations(self, folder, doc_id, page_id):
+        """ Apply media relations
+        """
         doc = getattr(folder, doc_id)
         cursor = self.db.cursor()
         cursor.execute(sql_eids_by_pid % page_id)
@@ -516,18 +548,26 @@ class MigrateArticles(object):
         doc.setRelatedItems(related)
 
     def _apply_themes(self, article, page_id):
+        """ Apply themes
+        """
         themetag = IThemeTagging(article)
         tags = self.themes[page_id]
         themetag.tags = tags
 
     def _assign_subpages_section(self, obj):
+        """ Assign subpages section
+        """
         navContext = INavigationSectionPosition(obj)
         navContext.section = 'topics'
 
     def _change_workflow(self, obj):
+        """ Change workflow
+        """
         pass
 
-    def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None): 
+    def _create_article_from_sections(self, folder, page_id, id_suffix='', title=None):
+        """ Create article from sections
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_title % page_id)
         row = cursor.fetchone()
@@ -590,8 +630,8 @@ class MigrateArticles(object):
                 #    left = image_html
                 #    right = body_html
                 #else:
-                #    left = body_html  
-                #    right = image_html 
+                #    left = body_html
+                #    right = image_html
                 #total_body += '<table><td>%s</td><td>%s</td></table>\n' % \
                               #(left, right)
                 total_body += '<div class="figure-left">\n' + \
@@ -639,7 +679,7 @@ class MigrateArticles(object):
                               (link_str, link['title'], link['title']) + \
                               '<div class="linkdesc">%s</div></div>\n' % \
                               link['body']
-                    
+
             if section_type == 5 and section_no > 1:
                 if len(title.strip()) > 0:
                     total_body += '<h2>%s</h2>\n' % title
@@ -656,6 +696,8 @@ class MigrateArticles(object):
         return article
 
     def _create_intro(self, folder, page_id):
+        """ Create intro
+        """
         article = self._create_article_from_sections(folder, page_id,
                                                   id_suffix='-intro')
         self._apply_media_relations(folder, article.getId(), page_id)
@@ -663,6 +705,8 @@ class MigrateArticles(object):
         return article.getId()
 
     def _create_snapshot(self, folder, page_id):
+        """ Create snapshot
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_cid_with_onetier_pid % page_id)
         cid = cursor.fetchone()['cid']
@@ -686,6 +730,8 @@ class MigrateArticles(object):
             return None
 
     def _create_fullarticle(self, folder, page_id):
+        """ Create fullarticle
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_cid_with_onetier_pid % page_id)
         cid = cursor.fetchone()['cid']
@@ -708,6 +754,8 @@ class MigrateArticles(object):
             return None
 
     def _epaedia_themes(self):
+        """ Epaedia themes
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_level_one)
         level_one = cursor.fetchall()
@@ -715,10 +763,12 @@ class MigrateArticles(object):
         return level_one
 
     def _fix_internal_links(self):
+        """ Fix internal links
+        """
         for obj_pid, link_pids in self.objects_with_links.items():
             obj = self.pidpaths[obj_pid]
             text = obj.getText()
-            
+
             for pid in link_pids:
                 to_replace = 'PID' + str(pid) + 'PID'
                 link_to = self.pidpaths[pid]
@@ -732,6 +782,8 @@ class MigrateArticles(object):
                 obj.reindexObject()
 
     def _image_info(self, eid):
+        """ Image info
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_image_by_eid % eid)
         image = cursor.fetchone()
@@ -745,13 +797,15 @@ class MigrateArticles(object):
         try:
             imageobj = getattr(self.image_folder, image_id)
         except Exception:
-            raise AttributeError 
+            raise AttributeError
             #1/0
         path = 'resolveuid/' + imageobj.UID()
         return { 'path': path, 'title': image['title'],
                 'copyright': image['source'] }
 
     def _load_images(self):
+        """ Load images
+        """
         path = os.path.dirname(__file__) + os.path.sep + 'epaedia-images.csv'
         mapping = {}
 
@@ -761,12 +815,13 @@ class MigrateArticles(object):
 
         return mapping
 
-    def _migrate_articles(self, folder, theme): 
+    def _migrate_articles(self, folder, theme):
         """ migrates every article in mysql which belongs to the main
-            theme 'theme'. 'folder' is where the content will be added. """
+            theme 'theme'. 'folder' is where the content will be added.
+        """
 
         page_id = theme['pid']
-        #theme_id = self.themes[page_id][0] 
+        #theme_id = self.themes[page_id][0]
         cid = theme['cid']
 
         doc_id = self._create_intro(folder, page_id)
@@ -829,6 +884,8 @@ class MigrateArticles(object):
                     level_three_folder.manage_addProperty('default_page',
                                                           new_id, 'string')
     def _nl_to_p(self, text):
+        """ NL to P
+        """
         result = ''
         for para in text.split('\n'):
             if para.strip():
@@ -836,6 +893,8 @@ class MigrateArticles(object):
         return result
 
     def _read_file(self):
+        """ Read file
+        """
         self.file_paths = {}
         mfile = open('media_files.txt', 'r')
         for line in mfile:
@@ -844,6 +903,8 @@ class MigrateArticles(object):
         mfile.close()
 
     def _relate(self, intro, snapshot, fullarticle):
+        """ Relate
+        """
         current_intro = intro.getRelatedItems()
         current_snap = intro.getRelatedItems()
         current_full = intro.getRelatedItems()
@@ -857,6 +918,8 @@ class MigrateArticles(object):
         fullarticle.reindexObject()
 
     def _relate_link(self, article1, linked_article):
+        """ Relate link
+        """
         current_relations = article1.getRelatedItems()
         #current_article2 = linked_article.getRelatedItems()
 
@@ -864,9 +927,13 @@ class MigrateArticles(object):
         #linked_article.setRelatedItems([article1] + current_article2)
 
     def _save_article(self, article, page_id):
+        """ Save article
+        """
         self._article_file.write(str(page_id) + '|' + '/'.join(article.getPhysicalPath()) + '\n')
 
     def _section_content(self, page_id, section_no):
+        """ Section content
+        """
         cursor = self.db.cursor()
         cursor.execute(sql_section_content % (page_id, section_no))
         result = cursor.fetchone()
@@ -874,6 +941,8 @@ class MigrateArticles(object):
         return result
 
     def _themecentre(self, theme_id):
+        """ Themecentre
+        """
         iface = 'eea.themecentre.interfaces.IThemeCentre'
         themes = self.catalog.searchResults(object_provides=iface)
         # there should be exactly one themecentre for each theme
@@ -888,4 +957,6 @@ class MigrateArticles(object):
         raise 'No theme exists with id ' + theme_id
 
     def _save_pid_path(self, pid, obj):
+        """ Save pid path
+        """
         self.pidpaths[pid] = obj

@@ -5,6 +5,7 @@ from Products.PloneTestCase.layer import onsetup
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 
+
 #TODO: fix me, plone4
 PRODUCTS = ('EEAContentTypes',
             'EEAPloneAdmin')
@@ -17,6 +18,8 @@ PloneTestCase.installProduct('valentine.linguaflow')
 
 @onsetup
 def setup_themecentre():
+    """ Setup theme centre
+    """
     fiveconfigure.debug_mode = True
     import eea.themecentre
     zcml.load_config('configure.zcml', eea.themecentre)

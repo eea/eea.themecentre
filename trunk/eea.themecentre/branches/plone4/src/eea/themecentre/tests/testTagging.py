@@ -1,4 +1,6 @@
-import unittest
+""" Test tagging
+"""
+from unittest import TestSuite
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 #from zope.component import provideAdapter
@@ -13,25 +15,34 @@ from zope.app.component.hooks import setSite
 
 
 class TestTagging(ThemeCentreTestCase):
+    """ Test tagging
+    """
 
     def afterSetUp(self):
+        """ After setup
+        """
         setSite(self.portal)
         self.setRoles(['Manager'])
 
         # make the air theme non deprecated
         air = self.portal.portal_vocabularies.themes.air
-        self.portal.portal_workflow.doActionFor(air, 'publish') 
+        self.portal.portal_workflow.doActionFor(air, 'publish')
 
-# convenience method for creating and cataloging object
 def createObject(parent, portal_type, oid):
+    """ Convenience method for creating and cataloging object
+    """
     parent.invokeFactory(portal_type, id=oid)
     newobj = getattr(parent, oid, None)
     if newobj is not None:
         newobj.reindexObject()
 
 class TestThemeCentre(ThemeCentreTestCase):
+    """ Test Theme Centre
+    """
 
     def afterSetUp(self):
+        """ After setup
+        """
         self.setRoles(['Manager'])
         self.portal.invokeFactory('Folder', id='to_be_promoted')
         self.portal.invokeFactory('Folder', id='to_be_promoted2')
@@ -49,8 +60,10 @@ class TestThemeCentre(ThemeCentreTestCase):
         #vocab = self.portal.portal_vocabularies
 
 def test_suite():
+    """ Test suite
+    """
 
-    suite = unittest.TestSuite((
+    suite = TestSuite((
         FunctionalDocFileSuite('tagging.txt',
                      test_class=TestTagging,
                      package = 'eea.themecentre.tests',
@@ -68,6 +81,3 @@ def test_suite():
                      ),
         ))
     return suite
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')

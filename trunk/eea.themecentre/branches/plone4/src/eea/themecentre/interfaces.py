@@ -1,10 +1,13 @@
+""" Interfaces """
 from zope.interface import Interface, Attribute
 from zope.schema import List, Choice
+
 
 class IThemeTaggable(Interface):
     """ Marker interface for content objects that can be tagged. """
 
 class IThemeTagging(Interface):
+    """ Theme tagging """
 
     tags = List(
         title = u"Themes",
@@ -26,14 +29,14 @@ class IPossibleThemeCentre(Interface):
 
 class IThemeCentre(Interface):
     """ Marker interface for objects that are promoted to a theme centre. """
-    
+
 class IThemeCentreSchema(Interface):
     """ Theme centre schema for the edit form. """
-    
+
     tags = Choice(
             title = u"Theme",
             description = u"Theme that this object should be centre for",
-            required = True,            
+            required = True,
             vocabulary = "Allowed themes",
         )
 
@@ -62,8 +65,8 @@ class IThemeCentreListFeed(Interface):
 
 class IThemeMoreLink(Interface):
     """ Refers to a more link. """
+
     url = Attribute("more link")
 
 class IThemeCentreImageUrl(Interface):
     """ Returns the url to the image in the canonical theme centre. """
-    
