@@ -38,7 +38,7 @@ from eea.themecentre.browser.epaedia import sql_article_links
 from eea.themecentre.browser.epaedia import sql_image_by_eid, sql_sections
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentreSchema
 from eea.mediacentre.interfaces import IMediaType
-from zope.app.event.objectevent import ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
 from zope.event import notify
 from zope.component import getAdapter
 from p4a.video.interfaces import IVideoDataAccessor
