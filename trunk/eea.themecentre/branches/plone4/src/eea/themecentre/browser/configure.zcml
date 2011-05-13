@@ -108,26 +108,6 @@
             factory=".sitemap.SitemapThemeCentreStrategy"
             provides="plone.app.layout.navigation.interfaces.INavtreeStrategy" />
 
-  <!-- migration stuff -->
-
-  <browser:page
-      zcml:condition="installed MySQLdb"
-      for="*"
-      name="migrateEpaediaMultimedia"
-      class=".migrate_epaedia.MigrateMedia"
-      permission="cmf.ModifyPortalContent"
-      attribute="migrate"
-      />
-
-  <browser:page
-      zcml:condition="installed MySQLdb"
-      for="*"
-      name="migrateEpaediaArticles"
-      class=".migrate_epaedia.MigrateArticles"
-      permission="cmf.ModifyPortalContent"
-      attribute="migrate"
-      />
-
   <!--
   <browser:page
       for="eea.themecentre.interfaces.IThemeCentre"

@@ -39,9 +39,9 @@ setup(name='eea.themecentre',
           'valentine.linguaflow',
           'eea.design',
           'eea.promotion',
+          'eea.mediacentre',
 
           #TODO: fix me
-          #'eea.mediacentre',
           #'Products.EEAContentTypes',
       ],
       entry_points="""

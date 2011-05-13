@@ -1,26 +1,18 @@
 """ Browser themecentre module
 """
 from zope.app.schema.vocabulary import IVocabularyFactory
-from zope.interface import alsoProvides # implements
+from zope.interface import alsoProvides
 from zope.component import getUtility
 from zope.formlib.form import Fields
 from Products.Five.formlib.formbase import EditForm
-from eea.themecentre.interfaces import IThemeCentre #I PossibleThemeCentre
-from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
-from eea.themecentre.themecentre import getTheme # PromotedToThemeCentreEvent
-from eea.themecentre.themecentre import getThemeTitle
-#TODO: fix me
-#from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
-#TODO: fix me
-#from eea.mediacentre.interfaces import IMediaCentre
-#TODO: fix me
-# - cleanup the below, is just to fix the imports
-MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
-from zope.interface import Interface
-class IMediaCentre(Interface):
-    """ Dummy interface
-    """
-
+from eea.themecentre.interfaces import (
+    IThemeCentreSchema,
+    IThemeRelation,
+    IThemeCentre
+)
+from eea.themecentre.themecentre import getTheme, getThemeTitle
+from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
+from eea.mediacentre.interfaces import IMediaCentre
 from eea.themecentre import _
 
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
