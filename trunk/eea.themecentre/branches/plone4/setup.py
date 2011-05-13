@@ -35,6 +35,7 @@ setup(name='eea.themecentre',
           'Products.PloneHelpCenter',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
+          'Products.EEAPloneAdmin',
           'valentine.linguaflow',
           'eea.design',
           'eea.promotion',
@@ -42,7 +43,6 @@ setup(name='eea.themecentre',
           #TODO: fix me
           #'eea.mediacentre',
           #'Products.EEAContentTypes',
-          #'Products.EEAPloneAdmin',
       ],
       entry_points="""
       # -*- Entry points: -*-

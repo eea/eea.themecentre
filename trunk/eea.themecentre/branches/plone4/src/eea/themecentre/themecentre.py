@@ -9,8 +9,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-#TODO: fix me
-#from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
+from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
 from Acquisition import aq_parent, aq_base
 
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
@@ -304,8 +303,7 @@ def getThemeTitle(context):
         return vocab.getTerm(themeid).title
     return None
 
-#TODO: fix me
-#@implementer(IObjectTitle)
+@implementer(IObjectTitle)
 @adapter(Interface, IBrowserRequest)
 def objectTitle(context, request):
     """ An adapter that gets the title from the current object/template.
