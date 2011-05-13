@@ -57,17 +57,19 @@ def test_suite():
     """
 
     suite = TestSuite((
-        #TODO: plone4
+        #TODO: plone4 - need 'themes' vocabulary
         #FunctionalDocFileSuite('tagging.txt',
                      #test_class=TestTagging,
                      #package = 'eea.themecentre.tests',
                      #optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      #),
+        #TODO: plone4 - need Products.EEAContentTypes
         #FunctionalDocFileSuite('themecentre.txt',
                      #test_class=TestThemeCentre,
                      #package = 'eea.themecentre.tests',
                      #optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      #),
+        #TODO: plone4 - need 'themes' vocabulary
         #FunctionalDocFileSuite('bugs.txt',
                      #test_class=TestTagging,
                      #package = 'eea.themecentre.tests',

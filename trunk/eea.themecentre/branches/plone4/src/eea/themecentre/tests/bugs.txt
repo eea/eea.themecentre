@@ -2,7 +2,6 @@
 eea.themecentre bugs
 ====================
 
-
 #2485 - Themes tab doesn't work
 -------------------------------
 
