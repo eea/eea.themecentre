@@ -1,14 +1,14 @@
 """ Themes
 """
-from zope.component import queryAdapter
-from eea.themecentre.themecentre import getThemeCentre
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import utils
 
-from eea.themecentre.interfaces import IThemeTagging
-from eea.themecentre.interfaces import IThemeCentreImageUrl
-from eea.themecentre.browser.portlets.catalog import BasePortlet
+from Products.CMFCore.utils import getToolByName
 from eea.themecentre import _
+from eea.themecentre.browser.portlets.catalog import BasePortlet
+from eea.themecentre.interfaces import IThemeCentreImageUrl
+from eea.themecentre.interfaces import IThemeTagging
+from eea.themecentre.themecentre import getThemeCentre
+from zope.component import queryAdapter
+
 
 class ObjectThemesPortlet(BasePortlet):
     """ Object Themes Portlet
@@ -24,7 +24,7 @@ class ObjectThemesPortlet(BasePortlet):
     def items(self):
         """ Items
         """
-        context = utils.context(self)
+        context = self.context
         adapter = queryAdapter(context, IThemeTagging, default=None)
         if adapter is None:
             return []
