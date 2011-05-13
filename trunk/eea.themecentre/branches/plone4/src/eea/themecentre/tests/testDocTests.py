@@ -4,12 +4,11 @@ from unittest import TestSuite
 from zope.interface import alsoProvides
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
-from eea.themecentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
+from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 
-
-class PortletTestCase(ThemeCentreTestCase):
+class PortletTestCase(EEAThemeCentreTestCase):
     """ Portlet Test Case
     """
 
@@ -19,24 +18,22 @@ class PortletTestCase(ThemeCentreTestCase):
         portal = self.portal
         self.setRoles(['Manager'])
 
-        portal.SITE.invokeFactory('Folder', id='themes')
-        portal.SITE.themes.invokeFactory('Folder', id='energy')
+        portal.invokeFactory('Folder', id='themes')
+        portal.themes.invokeFactory('Folder', id='energy')
 
-        portal.SITE.reindexObject()
-        portal.SITE.themes.reindexObject()
-        portal.SITE.themes.energy.reindexObject()
+        portal.reindexObject()
+        portal.themes.reindexObject()
+        portal.themes.energy.reindexObject()
 
         wf = getToolByName(portal, 'portal_workflow')
-        wf.doActionFor(portal.SITE, 'publish')
-        wf.doActionFor(portal.SITE.themes, 'publish')
-        wf.doActionFor(portal.SITE.themes.energy, 'publish')
+        wf.doActionFor(portal.themes, 'publish')
+        wf.doActionFor(portal.themes.energy, 'publish')
 
-        context = portal.SITE.themes.energy
+        context = portal.themes.energy
         alsoProvides(context, IThemeCentre)
         alsoProvides(context, IThemeCentreSchema)
         themecentre = IThemeCentreSchema(context)
         themecentre.tags = u'energy'
-
 
 def test_suite():
     """ Test suite

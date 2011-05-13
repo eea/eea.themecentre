@@ -1,4 +1,4 @@
-""" Base TestCase for Audit
+""" Base
 """
 from Products.PloneTestCase import PloneTestCase
 from Products.PloneTestCase.layer import onsetup
@@ -28,5 +28,5 @@ def setup_themecentre():
 setup_themecentre()
 PloneTestCase.setupPloneSite(extension_profiles=('eea.themecentre:default',))
 
-class ThemeCentreTestCase(PloneTestCase.FunctionalTestCase):
+class EEAThemeCentreTestCase(PloneTestCase.FunctionalTestCase):
     """ Test case class used for functional themecentre tests. """

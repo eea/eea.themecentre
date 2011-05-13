@@ -52,9 +52,9 @@ The energy theme page should include it:
   >>> from zope.publisher.browser import TestRequest
   >>> from eea.themecentre.browser.portlets.promotion import ThemeCentreMenuPromotion
   >>> request = TestRequest()
-  >>> energy = self.portal.SITE.themes.energy
+  >>> energy = self.portal.themes.energy
   >>> themepage = ThemeCentreMenuPromotion(energy, request)
-  >>> promos = themepage.promotions() 
+  >>> promos = themepage.promotions()
   >>> len(promos)
   1
 
@@ -77,7 +77,7 @@ Mark it as a promotion just like the previous:
 
 Now we should have two promos, but their id's should be different:
 
-  >>> promos = themepage.promotions() 
+  >>> promos = themepage.promotions()
   >>> [i['id'] for i in promos]
   ['test', 'test-1']
 
