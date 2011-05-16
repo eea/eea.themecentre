@@ -4,7 +4,13 @@
     <include package="Products.ATVocabularyManager" />
     <include package="Products.PloneHelpCenter" />
     <include package="Products.LinguaPlone" />
+    <include package="Products.EEAPloneAdmin" />
     <include package="eea.promotion" />
+    <include package="eea.design" />
+    <include package="eea.mediacentre" />
+    <include package="eea.rdfrepository" />
+    <include package="p4a.video" />
+    <include package="valentine.linguaflow" />
 
     <include file="profiles.zcml" />
     <include file="skins.zcml" />

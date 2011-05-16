@@ -40,6 +40,7 @@ setup(name='eea.themecentre',
           'eea.design',
           'eea.promotion',
           'eea.mediacentre',
+          'eea.rdfrepository',
 
           #TODO: fix me
           #'Products.EEAContentTypes',
