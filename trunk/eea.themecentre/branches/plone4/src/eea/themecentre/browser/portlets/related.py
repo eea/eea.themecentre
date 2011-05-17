@@ -29,8 +29,9 @@ class RelatedPortlet(BasePortlet):
         result = []
         if currentThemeCentre:
             catalog = getToolByName(context, 'portal_catalog')
-            query = { 'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
-                      'review_state' : 'published' }
+            query = {
+               'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
+               'review_state' : 'published' }
             tcs = catalog.searchResults(query)
             tcsIds = [ brain.getId for brain in tcs ]
             relation = IThemeRelation(currentThemeCentre)

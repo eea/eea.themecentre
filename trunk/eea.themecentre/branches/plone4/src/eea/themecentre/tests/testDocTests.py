@@ -8,6 +8,10 @@ from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 
+optionflags =  (doctest.ELLIPSIS |
+                doctest.NORMALIZE_WHITESPACE |
+                doctest.REPORT_ONLY_FIRST_FAILURE)
+
 class PortletTestCase(EEAThemeCentreTestCase):
     """ Portlet Test Case
     """
@@ -43,6 +47,6 @@ def test_suite():
         FunctionalDocFileSuite('promotion.txt',
                      package = 'eea.themecentre.browser.portlets',
                      test_class = PortletTestCase,
-                     optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                     optionflags=optionflags,
                      ),
         ))

@@ -1,14 +1,8 @@
 """ Links
 """
-#from Products.ATContentTypes.content.event import ATEvent
-#from Products.ATContentTypes.content.image import ATImage
 from Products.CMFCore.utils import getToolByName
-#from Products.EEAContentTypes.content.Highlight import Highlight
-#from Products.EEAContentTypes.content.PressRelease import PressRelease
-
 from eea.themecentre.interfaces import IThemeMoreLink
 from eea.themecentre.themecentre import getThemeCentreByName
-#from p4a.video.interfaces import IVideoEnhanced
 from zope.component import adapts
 from zope.interface import Interface, implements
 
@@ -39,6 +33,8 @@ class LinkAdapter(object):
         return None
 
     def url(self, theme):
+        """ URL
+        """
         self.themecentre = self._themecentre(theme)
         if self.themecentre is None:
             return ''
@@ -53,5 +49,8 @@ class LinkAdapter(object):
 
 class MediaLink(LinkAdapter):
     """ Media link """
+
     def url(self, theme):
+        """ URL
+        """
         return self._themecentre(theme).absolute_url() + '/multimedia'

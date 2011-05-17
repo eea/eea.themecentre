@@ -74,7 +74,7 @@
       allowed_attributes="promotions"
       />
 
-  <!-- #TODO: fix -->
+  <!-- #TODO: fix me, plone4-->
   <!-- browser:page
       for="*"
       name="theme_portlets"
@@ -93,7 +93,7 @@
 
   <!-- plone changes -->
 
-  <!-- #TODO: fix me -->
+  <!-- #TODO: fix me, plone4 -->
   <!-- browser:page
       for="*"
       name="themes_navigation_view"

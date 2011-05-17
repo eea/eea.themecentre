@@ -41,7 +41,8 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
                 if value not in values and value is not None:
                     values.append(value)
 
-        terms = [self.vocabulary.getTerm(val) for val in values if val not in [None, '']] # or ''
+        terms = [self.vocabulary.getTerm(val)
+                     for val in values if val not in [None, '']]
         nondeprecated = ThemesEditVocabularyFactory(self.context)
         result = []
         for term in terms:
@@ -49,8 +50,9 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
                 result.append({'text': self.textForValue(term),
                               'value': term.token})
             else:
-                result.append({'text': self.textForValue(term) + ' (deprecated)',
-                              'value': term.token})
+                result.append({
+                        'text': self.textForValue(term) + ' (deprecated)',
+                        'value': term.token})
         return result
 
     def required(self):

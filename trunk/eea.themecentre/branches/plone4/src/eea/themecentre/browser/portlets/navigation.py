@@ -1,15 +1,20 @@
+""" Navigation
+"""
+#TODO: fix me, plone4
 #from zope.interface import implements
 #from zope.component import getMultiAdapter
-
 #from Products.CMFCore.utils import getToolByName
 #from Products.CMFPlone import utils
 #from Products.CMFPlone.browser.interfaces import INavigationPortlet
 #from eea.themecentre.themecentre import getThemeCentre
 #import logging
-
-#from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet as BaseNavigationPortlet
+#from Products.CMFPlone.browser.portlets.navigation import (
+#    NavigationPortlet as BaseNavigationPortlet,
+#)
 ##TODO: below is current location
-##from plone.app.portlets.portlets.navigation import INavigationPortlet as BaseNavigationPortlet
+##from plone.app.portlets.portlets.navigation import (
+##    INavigationPortlet as BaseNavigationPortlet
+##)
 
 #logger = logging.getLogger("eea.themecentre")
 
@@ -39,10 +44,15 @@
                          #'navSection': section}
                 ## Filter on workflow states, if enabled
                 #portal_properties = getToolByName(context, 'portal_properties')
-                #navtree_properties = getattr(portal_properties, 'navtree_properties')
-                #isAnon = getToolByName(context, 'portal_membership').isAnonymousUser()
-                #if isAnon and navtree_properties.getProperty('enable_wf_state_filtering', False):
-                    #query['review_state'] = navtree_properties.getProperty('wf_states_to_show', ())
+                #navtree_properties = getattr(portal_properties,
+                #                             'navtree_properties')
+                #isAnon = getToolByName(context,
+                #                       'portal_membership').isAnonymousUser()
+                #prop_name = 'enable_wf_state_filtering'
+                #enable_wf = navtree_properties.getProperty(prop_name, False)
+                #if isAnon and enable_wf:
+                    #query['review_state'] = \
+                    #   navtree_properties.getProperty('wf_states_to_show', ())
                 #result = cat.searchResults(query)
                 #if len(result) > 0:
                     #return True
@@ -80,13 +90,16 @@
         #for node in data:
             #nodeTitle = node['item']['Title']
             #if nodeTitle not in blacklistedNavigationItems:
-                #if node['item'].getId == node['navSection'] and node['portal_type'] == 'Folder':
+                #if node['item'].getId == node['navSection'] and \
+                                        #node['portal_type'] == 'Folder':
                     #parentSection = node['navSection']
                     ##depth = node['depth']
-                    ## show children for a section which has the same ID as a Folder
+                    ## show children for a section which has
+                    ## the same ID as a Folder
                     #children = node['children']
                     #if children == []:
-                        #view = getMultiAdapter((node['item'].getObject(), self.request),
+                        #view = getMultiAdapter((node['item'].getObject(),
+                                                 #self.request),
                                                #name='navtree_builder_view')
                         #tmp = view.navigationTree()
                         #for t in tmp['children']:
@@ -111,10 +124,18 @@
         ##data.extend(self._overview())
 
         ## order menu as configured in ZMI on themes
-        #originalOrder = ['highlights', 'reports', 'indicators', 'maps-and-graphs', 'datasets', 'events', 'links']
+        #originalOrder = ['highlights',
+                          #'reports',
+                          #'indicators',
+                          #'maps-and-graphs',
+                          #'datasets',
+                          #'events',
+                          #'links']
         #if ITranslatable is not None and ITranslatable.providedBy(context):
             ## get order defined on canonical
-            #originalOrder = getattr(context.getCanonical(), 'themes_menu_order', originalOrder)
+            #originalOrder = getattr(context.getCanonical(),
+                                     #'themes_menu_order',
+                                     #originalOrder)
         ## try to get the order on a translation otherwise use one of above
         #order = getattr(context, 'themes_menu_order', originalOrder)
 
@@ -153,8 +174,12 @@
         #data = self._data.get(section, [])
 
         #return context.portlet_dropdown_navtree_macro(
-                                 #theme=data, children=all.get('children',[]),
-                                 #level=1, show_children=True, isNaviTree=True, bottomLevel=5)
+                                 #theme=data,
+                                 #children=all.get('children',[]),
+                                 #level=1,
+                                 #show_children=True,
+                                 #isNaviTree=True,
+                                 #bottomLevel=5)
 
     #def _overview(self):
         #context = utils.context(self)

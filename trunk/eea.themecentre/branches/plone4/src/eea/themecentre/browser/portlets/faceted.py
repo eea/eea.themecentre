@@ -28,9 +28,11 @@ class FacetedPortlet(BasePortlet):
         """ Items
         """
         context = self.context[0]
-        facetednav = queryMultiAdapter((context, self.request), name=u'faceted_query')
+        facetednav = queryMultiAdapter((context, self.request),
+                                       name=u'faceted_query')
         if facetednav is None:
-            logging.warn("faceted_query view could not be found for %s, returning nothing." % context)
+            logging.warn("faceted_query view could not be found for %s, "
+                         "returning nothing." % context)
             return []
         query = facetednav.default_criteria
         return facetednav.query(batch=False, sort=True, **query)

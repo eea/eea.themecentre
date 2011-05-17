@@ -6,11 +6,9 @@ Changelog
 4.0-dev - (unreleased)
 ----------------------
  * TODO: "themes" vocabulary should be add from here?
- * TODO: cleanup eea.rdfrepository dependency
+ * TODO: fix EEAContentTypes dependencies
  * TODO: fix all #TODO: plone4
  * TODO: fix tests
- * TODO: add builds on Jenkins
- * TODO: fix pylint/pyflakes warrnings
  * Feature: Plone 4.0.4 compatible release [ghicaale #4257]
 
 1.6 - (2011-04-01)

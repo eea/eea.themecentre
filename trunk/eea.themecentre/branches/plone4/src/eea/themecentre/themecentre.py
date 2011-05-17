@@ -3,15 +3,13 @@
 from zope.app.component.hooks import getSite
 from zope.component.interfaces import ObjectEvent
 from zope.component import adapter
-from zope.interface import implements, Interface, implementer
+from zope.interface import Interface, implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
-
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
 from Acquisition import aq_parent, aq_base
-
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
 from eea.themecentre.interfaces import IThemeCentreImageUrl
@@ -57,7 +55,9 @@ def promoted(obj, event):
     faqobj.processForm()
 
     theme_id = IThemeCentreSchema(obj).tags
-    obj.invokeFactory('Document', id='intro', title=obj.Title() + ' introduction')
+    obj.invokeFactory('Document',
+                      id='intro',
+                      title=obj.Title() + ' introduction')
     if not hasattr(aq_base(obj), 'default_page'):
         obj.manage_addProperty('default_page', 'intro', 'string')
     intro = getattr(obj, 'intro')
@@ -88,7 +88,8 @@ def promoted(obj, event):
         theme_crit = topic.addCriterion('getThemes',
                                         'ATSimpleStringCriterion')
         theme_crit.setValue(theme_id)
-        effective_crit = topic.addCriterion('effective', 'ATFriendlyDateCriteria')
+        effective_crit = topic.addCriterion('effective',
+                                            'ATFriendlyDateCriteria')
         effective_crit.setOperation('less')
         effective_crit.setValue(0)
 
@@ -205,7 +206,7 @@ def objectThemeTagged(obj, event):
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
 
-            #TODO: fix me
+            #TODO: fix me, plone4
             #      - the event is triggered for object directelly, and
             #        obj.context ends up in error. I presume is becouse of the
             #        commented subscribers (check when when all is fixed)

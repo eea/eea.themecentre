@@ -110,7 +110,7 @@ class ThemeTaggable(object):
         current_themes = [term.value for term in vocab(self)]
         return [tag for tag in tags if tag in current_themes]
 
-    tags = property(gett,sett)
+    tags = property(gett, sett)
     nondeprecated_tags = property(nondeprecated_tags)
 
 class MainThemeTaggable(ThemeTaggable):

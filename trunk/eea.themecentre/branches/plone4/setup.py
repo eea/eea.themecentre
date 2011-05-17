@@ -42,7 +42,7 @@ setup(name='eea.themecentre',
           'eea.mediacentre',
           'eea.rdfrepository',
 
-          #TODO: fix me
+          #TODO: fix me, plone4
           #'Products.EEAContentTypes',
       ],
       entry_points="""

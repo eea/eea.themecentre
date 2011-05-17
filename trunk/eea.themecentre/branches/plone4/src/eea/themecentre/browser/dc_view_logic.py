@@ -3,15 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 from eea.design.browser.subfolder_view_logic import SubFolderView
 from eea.themecentre.themecentre import getThemeCentre
-#TODO: fix me
-#from Products.NavigationManager.sections import INavigationSectionPosition
-#TODO: fix me
-# - just delete the dummy interface
-from zope.interface import Interface
-class INavigationSectionPosition(Interface):
-    """ Dummy interface
-    """
-
+from Products.NavigationManager.sections import INavigationSectionPosition
 
 class DCViewLogic(SubFolderView):
     """ View that shows the contents of all subfolders to the themecentre

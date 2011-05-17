@@ -26,8 +26,8 @@ class ThemeCentreMenuPromotion(object):
         result = catalog({
             'object_provides': {
                 'query': [
-                    'eea.promotion.interfaces.IPromoted',
-                    'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
+             'eea.promotion.interfaces.IPromoted',
+             'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
                 ],
                 'operator': 'or',
             },
@@ -44,7 +44,9 @@ class ThemeCentreMenuPromotion(object):
                 continue
             if (section is not None) and (section != promo.themepage_section):
                 continue
-            if (section is not None) or (section is None and promo.themepage_section in [None, 'default']):
+            if (section is not None) or \
+                           (section is None and \
+                            promo.themepage_section in [None, 'default']):
                 uid = brain.getId
                 ids = [i['id'] for i in promotions]
                 count = 0

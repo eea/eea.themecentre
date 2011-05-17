@@ -1,3 +1,5 @@
+""" FAQ
+"""
 from eea.themecentre.browser.portlets.catalog import CatalogBasePortlet
 
 class FaqPortlet(CatalogBasePortlet):

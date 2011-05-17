@@ -8,6 +8,8 @@ from eea.rdfrepository.interfaces import IRDFRepository
 
 
 class RDFTitlesPortlet(BasePortlet):
+    """ RDF Titles Portlet
+    """
 
     all_link = None
 

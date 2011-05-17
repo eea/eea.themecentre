@@ -7,17 +7,18 @@ from zExceptions import NotFound
 from zope.component import getUtility
 from eea.rdfrepository.interfaces import IRDFRepository
 from eea.rdfrepository.utils import getRdfPortletData
-#TODO: fix me
+#TODO: fix me, plone4
 #from Products.EEAContentTypes.interfaces import IFeedPortletInfo
-#TODO: fix me
-# - just delete the dummy interfaces and fuction
+#TODO: fix me, plone4
+# - just delete the dummy interface
 from zope.interface import Interface
 class IFeedPortletInfo(Interface):
     """ Dummy interface
     """
 
-
 class RDFPortlet(BasePortlet):
+    """ RDF Portlet
+    """
 
     def short_items(self):
         """ Short items

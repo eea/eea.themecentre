@@ -1,10 +1,9 @@
 """ Catalog module
 """
 from zope.component.interfaces import ComponentLookupError
-from zope.interface import providedBy, Interface
+from zope.interface import Interface
 from eea.themecentre.interfaces import IThemeTagging
 from eea.mediacentre.interfaces import IMediaType
-from Products.CMFCore.utils import getToolByName
 from plone.indexer.decorator import indexer
 
 @indexer(Interface)

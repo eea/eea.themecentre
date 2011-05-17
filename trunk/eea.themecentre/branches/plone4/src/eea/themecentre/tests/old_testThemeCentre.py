@@ -1,7 +1,8 @@
-#""" Test theme centre
-#"""
+""" Test theme centre
+"""
 ##TODO: fix me, plone4
-##      tests from deprecated Products.ThemeCentre, to be merged into existing tests
+##      tests from deprecated Products.ThemeCentre,
+##      to be merged into existing tests
 
 #from Acquisition import aq_base
 #from Products.ATContentTypes.content.newsitem import ATNewsItem
@@ -52,7 +53,8 @@
     #def testSearchTheme(self):
         #""" There should be one item with the 'agriculture' themes tag
         #"""
-        #res = self.portal.portal_catalog.searchResults(getThemes=['agriculture'])
+        #res = self.portal.portal_catalog.searchResults(
+        #                                       getThemes=['agriculture'])
         #self.assertEqual(len(res), 1)
 
     #def testObjectProvides(self):

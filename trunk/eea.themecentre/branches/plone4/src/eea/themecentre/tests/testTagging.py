@@ -7,6 +7,10 @@ from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
 from zope.app.component.hooks import setSite
 
+optionflags =  (doctest.ELLIPSIS |
+                doctest.NORMALIZE_WHITESPACE |
+                doctest.REPORT_ONLY_FIRST_FAILURE)
+
 class TestTagging(EEAThemeCentreTestCase):
     """ Test tagging
     """
@@ -61,19 +65,19 @@ def test_suite():
         #FunctionalDocFileSuite('tagging.txt',
                      #test_class=TestTagging,
                      #package = 'eea.themecentre.tests',
-                     #optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                     #optionflags=optionflags,
                      #),
         #TODO: plone4 - need Products.EEAContentTypes
         #FunctionalDocFileSuite('themecentre.txt',
                      #test_class=TestThemeCentre,
                      #package = 'eea.themecentre.tests',
-                     #optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                     #optionflags=optionflags,
                      #),
         #TODO: plone4 - need 'themes' vocabulary
         #FunctionalDocFileSuite('bugs.txt',
                      #test_class=TestTagging,
                      #package = 'eea.themecentre.tests',
-                     #optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                     #optionflags=optionflags,
                      #),
         ))
     return suite

@@ -34,7 +34,8 @@ class PromoteThemeCentre(object):
         self.context.setImmediatelyAddableTypes( types )
         self.context.setConstrainTypesMode(ENABLE)
 
-        return self.request.RESPONSE.redirect(self.context.absolute_url() + '/themecentre_edit.html')
+        return self.request.RESPONSE.redirect(
+            self.context.absolute_url() + '/themecentre_edit.html')
 
 class ThemeCentreEdit(EditForm):
     """ Form for setting theme for a theme centre.
@@ -70,7 +71,8 @@ class Multimedia(object):
         currentTheme = getTheme(self.context)
         mediacentre = getUtility(IMediaCentre)
         search = { MEDIA_SEARCH_KEY: { 'theme': currentTheme }}
-        return [mfile['object'] for mfile in mediacentre.getMedia(search=search)]
+        return [mfile['object']
+                    for mfile in mediacentre.getMedia(search=search)]
 
 class Theme(object):
     """ Provides information about this theme/themecentre.

@@ -3,9 +3,9 @@
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.themecentre import getThemeCentre #ThemesVocabularyFactory
 from eea.themecentre.interfaces import IThemeTagging
-#TODO: fix me
+#TODO: fix me, plone4
 #from Products.EEAContentTypes.interfaces import IRelations
-#TODO: fix me
+#TODO: fix me, plone4
 # - just delete the dummy interface
 from zope.interface import Interface
 class IRelations(Interface):
@@ -30,7 +30,8 @@ class Topics(object):
         propstool = getToolByName(self.context, 'portal_properties')
         siteprops = getattr(propstool, 'site_properties', None)
         if siteprops:
-            viewActions = siteprops.getProperty('typesUseViewActionInListings', [])
+            viewActions = siteprops.getProperty(
+                'typesUseViewActionInListings', [])
         else:
             viewActions = []
 
@@ -66,7 +67,8 @@ class Topics(object):
 
                 item = { 'title': brain.Title,
                          'url': url,
-                         'portal_type': plone_utils.normalizeString(brain.portal_type),
+                         'portal_type': plone_utils.normalizeString(
+                                            brain.portal_type),
                          'wf_state': wf_state, }
 
                 menu.append(item)

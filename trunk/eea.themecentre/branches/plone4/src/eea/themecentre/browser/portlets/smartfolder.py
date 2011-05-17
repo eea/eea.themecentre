@@ -1,4 +1,4 @@
-#TODO: fix me
+#TODO: fix me, plone4
 #from Products.EEAContentTypes.browser import smartfolder
 #from eea.themecentre.themecentre import getThemeCentre
 #from eea.themecentre import _
