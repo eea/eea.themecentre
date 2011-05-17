@@ -1,7 +1,8 @@
 """ Test tagging
 """
 from unittest import TestSuite
-from Testing.ZopeTestCase import FunctionalDocFileSuite
+#TODO: fix me, plone4
+#from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
