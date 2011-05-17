@@ -24,6 +24,7 @@ def setup_themecentre():
 
     PloneTestCase.installPackage('valentine.linguaflow')
     PloneTestCase.installPackage('eea.design')
+    PloneTestCase.installPackage('eea.vocab')
 
 setup_themecentre()
 PloneTestCase.setupPloneSite(extension_profiles=('eea.themecentre:default',))

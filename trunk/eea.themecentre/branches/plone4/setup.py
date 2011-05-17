@@ -41,6 +41,7 @@ setup(name='eea.themecentre',
           'eea.promotion',
           'eea.mediacentre',
           'eea.rdfrepository',
+          'eea.vocab',
 
           #TODO: fix me, plone4
           #'Products.EEAContentTypes',

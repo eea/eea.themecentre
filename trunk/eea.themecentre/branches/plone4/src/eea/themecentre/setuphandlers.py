@@ -3,7 +3,8 @@
 from Products.CMFCore.utils import getToolByName
 
 def setupMergedThemesVocabulary(context):
-    """ Setup Merged Themes Vocabulary """
+    """ Setup Merged Themes Vocabulary
+    """
     site = context.getSite()
     vocab = getToolByName(site, 'portal_vocabularies')
 
@@ -32,7 +33,8 @@ def setupMergedThemesVocabulary(context):
             t[mId].setTitle(mergedwith)
 
 def setupVarious(context):
-    """ Setup various """
+    """ Setup various
+    """
     if context.readDataFile('eea.themecentre.txt') is None:
         return
 

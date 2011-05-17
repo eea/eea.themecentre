@@ -5,7 +5,6 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
- * TODO: "themes" vocabulary should be add from here?
  * TODO: fix EEAContentTypes dependencies
  * TODO: fix all #TODO: plone4
  * TODO: fix tests

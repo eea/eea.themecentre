@@ -6,5 +6,6 @@
   <dependency>profile-Products.ATVocabularyManager:default</dependency>
   <dependency>profile-Products.PloneHelpCenter:default</dependency>
   <dependency>profile-Products.LinguaPlone:LinguaPlone</dependency>
+  <dependency>profile-eea.vocab:default</dependency>
  </dependencies>
 </metadata>
