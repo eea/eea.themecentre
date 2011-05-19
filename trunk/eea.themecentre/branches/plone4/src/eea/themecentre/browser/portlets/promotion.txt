@@ -33,7 +33,7 @@ it on the energy page:
 We want to show it on the 'default' navigation section:
 
   >>> promo.locations = [u'Themes']
-  >>> from Products.NavigationManager.sections import INavigationSectionPosition
+  >>> from Products.NavigationManager.sections.interfaces import INavigationSectionPosition
   >>> INavigationSectionPosition(item).section = 'default'
   >>> promo.themepage_section
   'default'
