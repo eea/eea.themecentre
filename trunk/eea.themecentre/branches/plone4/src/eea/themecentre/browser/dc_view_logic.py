@@ -3,7 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 from eea.design.browser.subfolder_view_logic import SubFolderView
 from eea.themecentre.themecentre import getThemeCentre
-from Products.NavigationManager.sections.interfaces import INavigationSectionPosition
+from Products.NavigationManager.interfaces import INavigationSectionPosition
 
 class DCViewLogic(SubFolderView):
     """ View that shows the contents of all subfolders to the themecentre
