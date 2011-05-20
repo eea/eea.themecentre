@@ -5,7 +5,7 @@
 <body>
 
 <div metal:fill-slot="main"
-     tal:define="proxy context/@@proxy;
+     tal:define="proxy context/@@proxy_view;
                  view proxy/real_view;
                  items view/full_items;
                  Batch python: modules['Products.CMFPlone'].Batch;

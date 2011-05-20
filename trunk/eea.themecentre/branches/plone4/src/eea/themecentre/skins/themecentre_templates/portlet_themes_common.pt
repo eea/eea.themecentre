@@ -78,7 +78,7 @@
 
 
 <div metal:define-macro="simple-list"
-     tal:define="proxy context/@@proxy;
+     tal:define="proxy context/@@proxy_view;
                  view python: proxy.real_view(view_name);
                  items view/short_items;
                  title title|view/title"
@@ -116,7 +116,7 @@
 
 
 <div metal:define-macro="thumbnail-list"
-     tal:define="proxy context/@@proxy;
+     tal:define="proxy context/@@proxy_view;
                  view python: proxy.real_view(view_name);
                  items view/short_items;
                  title title|view/title"

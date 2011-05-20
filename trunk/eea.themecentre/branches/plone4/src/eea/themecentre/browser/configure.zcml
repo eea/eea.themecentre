@@ -120,7 +120,7 @@
 
   <browser:page
       for="*"
-      name="proxy"
+      name="proxy_view"
       class=".proxy.Proxy"
       allowed_attributes="real_view"
       permission="zope.Public"
