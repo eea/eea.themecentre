@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.7-dev - (unreleased)
-----------------------
+1.7 - (2011-05-24)
+------------------
  * Bug fix: Don't break if a theme does not have a "theme_image" object [ichimdav #4361]
  * Change: now implement IThemeTaggable for all archetypes based content [tiberich #4362]
 
