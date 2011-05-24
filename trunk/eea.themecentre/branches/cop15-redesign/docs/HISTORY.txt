@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.8-dev - (unreleased)
+----------------------
+
 1.7 - (2011-05-24)
 ------------------
  * Bug fix: Don't break if a theme does not have a "theme_image" object [ichimdav #4361]
