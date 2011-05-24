@@ -273,6 +273,8 @@ def imageUrl(context):
     tc = context
     if not hasattr(tc, 'theme_image'):
         tc = context.getCanonical()
-    image = getattr(tc, 'theme_image')
-    return '%s/image_icon' % image.absolute_url()
-
+    image = getattr(tc, 'theme_image', None)
+    if image:
+        return '%s/image_icon' % image.absolute_url()
+    else:
+        return ''

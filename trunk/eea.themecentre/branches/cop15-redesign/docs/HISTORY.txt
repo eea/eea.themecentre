@@ -3,6 +3,7 @@ Changelog
 
 1.7-dev - (unreleased)
 ----------------------
+ * Bug fix: Don't break if a theme does not have a "theme_image" object [ichimdav #4361]
 
 1.6 - (2011-04-01)
 ------------------
