@@ -30,4 +30,5 @@ setup_themecentre()
 PloneTestCase.setupPloneSite(extension_profiles=('eea.themecentre:default',))
 
 class EEAThemeCentreTestCase(PloneTestCase.FunctionalTestCase):
-    """ Test case class used for functional themecentre tests. """
+    """ Test case class used for functional themecentre tests.
+    """
