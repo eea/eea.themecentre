@@ -16,19 +16,20 @@
             Title or id
         </h1>
 
-        <div metal:use-macro="context/document_actions/macros/document_actions">
+        <!-- #TODO: plone4 -->
+        <!-- div metal:use-macro="context/document_actions/macros/document_actions">
             Document actions (print, sendto etc)
-        </div>
+        </div -->
 
-	<div class="visualClear"><!--&nbsp; --></div>
+        <div class="visualClear"><!--&nbsp; --></div>
 
-	<div class="figure-right"
-	     tal:condition="python: hasattr(context.getCanonical(), 'theme_image')">
+        <div class="figure-right"
+             tal:condition="python: hasattr(context.getCanonical(), 'theme_image')">
             <div class="figure">
-	         <img src=""
-		      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image';alt object_title"  />
-	     </div>
-	</div>
+                 <img src=""
+                      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image';alt object_title"  />
+             </div>
+        </div>
 
         <p class="documentDescription"
            tal:content="context/Description"
@@ -38,12 +39,12 @@
 
         <div class="plain" tal:condition="context/CookedBody|nothing">
             <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
-	      tal:replace="structure text" /> 
+              tal:replace="structure text" />
         </div>
 
-	<div class="visualClear"><!--&nbsp; --></div>
+        <div class="visualClear"><!--&nbsp; --></div>
 
-	<metal:portlets use-macro="context/themecentre_overview/macros/main" />
+        <metal:portlets use-macro="context/themecentre_overview/macros/main" />
 
         <div class="visualClear"><!-- --></div>
 
