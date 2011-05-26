@@ -22,32 +22,34 @@
          <h1 tal:content="string:${here/Title} - overview"></h1>
     <metal:main-macro define-macro="main">
 
-	<div class="content-column-one">
-        <tal:articles define="specific nocall:context/articles/articles_topic|nothing;
-	                      feeds specific/@@smartfolder_portlets|nothing"
-	              repeat="portlet feeds"
-		      tal:condition="specific">
+        <div class="content-column-one">
+        <!-- #TODO: plone4 -->
+        <!-- tal:articles define="specific nocall:context/articles/articles_topic|nothing;
+                              feeds specific/@@smartfolder_portlets|nothing"
+                      repeat="portlet feeds"
+                      tal:condition="specific" -->
         <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
         </tal:articles>
-        <tal:publications define="specific nocall:context/publications/publications_topic|nothing;
-	                      feeds specific/@@smartfolder_portlets|nothing"
-	              repeat="portlet feeds"
-		      tal:condition="specific">
+        <!-- #TODO: plone4 -->
+        <!-- tal:publications define="specific nocall:context/publications/publications_topic|nothing;
+                              feeds specific/@@smartfolder_portlets|nothing"
+                      repeat="portlet feeds"
+                      tal:condition="specific" -->
         <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
         </tal:publications>
         <metal:macro use-macro="here/portlet_themes_rdf/macros/portlet" />
         <tal:indicators tal:define="portlet context/indicators/@@portlet_faceted_logic|nothing">
             <metal:portlet use-macro="here/portlet_themes_common/macros/portlet" />
         </tal:indicators>
-	</div>
+        </div>
 
-	<div class="content-column-two">
+        <div class="content-column-two">
         <metal:macro use-macro="here/portlet_themes_related/macros/portlet" />
 
         <tal:portlets repeat="portlet context/@@theme_portlets">
         <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
         </tal:portlets>
-	</div>
+        </div>
 
     </metal:main-macro>
     </div>
