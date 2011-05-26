@@ -46,9 +46,10 @@
         <div class="content-column-two">
         <metal:macro use-macro="here/portlet_themes_related/macros/portlet" />
 
-        <tal:portlets repeat="portlet context/@@theme_portlets">
+	<!-- #TODO: plone4 -->
+        <!-- tal:portlets repeat="portlet context/@@theme_portlets">
         <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
-        </tal:portlets>
+        </tal:portlets -->
         </div>
 
     </metal:main-macro>

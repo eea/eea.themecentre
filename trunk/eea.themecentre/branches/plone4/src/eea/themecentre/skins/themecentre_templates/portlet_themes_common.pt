@@ -77,7 +77,10 @@
 </div>
 
 
-<div metal:define-macro="simple-list"
+<!-- #TODO: plone4 -->
+<div metal:define-macro="simple-list" tal:omit-tag="">
+</div>
+<!-- div metal:define-macro="simple-list"
   tal:define="portlet python:path('context/@@'+view_name);
   view nocall:portlet;
   items view/short_items;
@@ -111,9 +114,13 @@
     </dd>
 
   </dl>
-</div>
+</div -->
 
-<div metal:define-macro="thumbnail-list"
+
+<!-- #TODO: plone4 -->
+<div metal:define-macro="thumbnail-list" tal:omit-tag="">
+</div>
+<!-- div metal:define-macro="thumbnail-list"
   tal:define="portlet python:path('context/@@'+view_name);
   view nocall:portlet;
   items view/short_items;
@@ -164,7 +171,7 @@
     </dd>
 
   </dl>
-</div>
+</div -->
 
 
 
