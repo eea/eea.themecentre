@@ -8,6 +8,7 @@ Changelog
  * TODO: fix EEAContentTypes dependencies
  * TODO: fix all #TODO: plone4
  * TODO: fix tests
+ * Change: Removed the @@proxy view, using python:path() instead [tiberich #4257]
  * Feature: Plone 4.0.4 compatible release [ghicaale #4257]
 
 1.6 - (2011-04-01)

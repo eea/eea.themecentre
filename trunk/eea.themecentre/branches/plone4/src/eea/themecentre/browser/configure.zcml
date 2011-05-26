@@ -118,14 +118,6 @@
       />
   -->
 
-  <browser:page
-      for="*"
-      name="proxy_view"
-      class=".proxy.Proxy"
-      allowed_attributes="real_view"
-      permission="zope.Public"
-      />
-
   <!-- provides videos that are shown in the themecentre's multimedia section -->
   <browser:page
       for="*"
