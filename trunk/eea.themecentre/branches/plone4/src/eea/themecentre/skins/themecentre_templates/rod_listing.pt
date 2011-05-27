@@ -5,7 +5,9 @@
 
 <body>
     <div metal:fill-slot="main">
-    <metal:main-macro define-macro="main" tal:define="view here/@@dataCentreReporting;rodsinfo here/@@reportingObligationInfo">
+    <metal:main-macro define-macro="main" tal:define="view here/@@dataCentreReporting;
+                                                      rodsinfo here/@@reportingObligationInfo;
+                                                      object_title context/@@plone_context_state/object_title">
         <h1 class="documentFirstHeading">
             <span tal:content="object_title">Title or id</span> &mdash; related reporting obligations
         </h1>
