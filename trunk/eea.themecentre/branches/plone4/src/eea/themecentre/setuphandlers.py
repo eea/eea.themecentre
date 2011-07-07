@@ -12,12 +12,14 @@ def setupMergedThemesVocabulary(context):
         vocab.invokeFactory('TreeVocabulary', id='themesmerged')
     mergedthemes = vocab.getVocabularyByName('themesmerged')
 
-    themes = {'air_quality': 'air',
-              'acidification': 'air',
+    themes = {'acidification': 'air',
+              'air_quality': 'air',
+              'health': 'human',
               'information': 'reporting',
               'management': 'policy',
               'nature': 'biodiversity',
               'ozone': 'climate',
+              'population': 'economy',
               'reporting': 'policy'}
 
     for theme, mergedwith in themes.items():

@@ -1,16 +1,9 @@
 """ Related
 """
 from Products.CMFCore.utils import getToolByName
-from eea.themecentre.themecentre import getThemeCentre #ThemesVocabularyFactory
+from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeTagging
-#TODO: fix me, plone4
-#from Products.EEAContentTypes.interfaces import IRelations
-#TODO: fix me, plone4
-# - just delete the dummy interface
-from zope.interface import Interface
-class IRelations(Interface):
-    """ Dummy interface
-    """
+from Products.EEAContentTypes.interfaces import IRelations
 
 # This is what is used in ZMI for navigation_sections_left and right
 TOPICS_ID = 'topics'
@@ -35,7 +28,6 @@ class Topics(object):
         else:
             viewActions = []
 
-        #vocab = ThemesVocabularyFactory(self.context, checkContext=False)
         themecentre = getThemeCentre(self.context)
         if themecentre is None:
             return None

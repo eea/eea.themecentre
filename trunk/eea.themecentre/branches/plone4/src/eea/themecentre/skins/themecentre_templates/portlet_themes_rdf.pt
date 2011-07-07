@@ -4,10 +4,13 @@
 
 <body>
 
-<!-- #TODO: plone4 -->
-<div metal:define-macro="portlet" tal:omit-tag="">
-</div>
-<!-- div metal:define-macro="portlet"
+<tal:comment replace="nothing">
+#NOTE: portlet_feed is coming from EEAContenTypes 
+
+#TODO: plone4 
+</tal:comment>
+
+<div metal:define-macro="portlet"
      tal:define="view context/@@themes_rdf;
                  feeds view/short_items;"
      tal:condition="feeds"
@@ -17,6 +20,6 @@
     <metal:macro use-macro="here/portlet_feed/macros/portlet" />
 </tal:portlets>
 
-</div -->
+</div>
 </body>
 </html>

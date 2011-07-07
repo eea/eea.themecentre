@@ -16,10 +16,7 @@
             Title or id
         </h1>
 
-        <!-- #TODO: plone4 -->
-        <!-- div metal:use-macro="context/document_actions/macros/document_actions">
-            Document actions (print, sendto etc)
-        </div -->
+        <div tal:replace="structure provider:plone.documentactions" />
 
         <div class="visualClear"><!--&nbsp; --></div>
 

@@ -4,7 +4,6 @@
 #from zope.interface import implements
 #from zope.component import getMultiAdapter
 #from Products.CMFCore.utils import getToolByName
-#from Products.CMFPlone import utils
 #from Products.CMFPlone.browser.interfaces import INavigationPortlet
 #from eea.themecentre.themecentre import getThemeCentre
 #import logging
@@ -36,7 +35,7 @@
             #if section == 'default':
                 #return True
 
-            #context = utils.context(self)
+            #context = self.context
             #currentTheme = getThemeCentre(context)
             #if currentTheme:
                 #cat = getToolByName(context, 'portal_catalog')
@@ -62,7 +61,7 @@
         #return self.navigationRoot().Title()
 
     #def navigationRoot(self):
-        #context = utils.context(self)
+        #context = self.context
         #obj = getThemeCentre(context)
         #if obj is None:
             #obj = BaseNavigationPortlet.navigationRoot(self)
@@ -72,7 +71,7 @@
         #if hasattr(self, '_all') and hasattr(self, '_data'):
             #return self.template(section)
 
-        #context = utils.context(self)
+        #context = self.context
 
         #self._all = all = self.getNavTree()
 
@@ -169,7 +168,7 @@
         #return self.template(section)
 
     #def template(self, section='default'):
-        #context = utils.context(self)
+        #context = self.context
         #all = self._all
         #data = self._data.get(section, [])
 
@@ -182,7 +181,7 @@
                                  #bottomLevel=5)
 
     #def _overview(self):
-        #context = utils.context(self)
+        #context = self.context
         #tc = getThemeCentre(context)
         #if tc is not None:
             #url = tc.absolute_url() + '/overview'

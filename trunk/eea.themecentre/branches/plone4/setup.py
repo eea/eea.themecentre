@@ -42,10 +42,8 @@ setup(name='eea.themecentre',
           'eea.mediacentre',
           'eea.rdfrepository',
           'eea.vocab',
-          'eea.versions',   #because of @@get_interfaces. TODO plone4: fix this
-
-          #TODO: fix me, plone4
-          #'Products.EEAContentTypes',
+          'Products.EEAContentTypes',
+          'eea.versions', #because of @@get_interfaces. TODO plone4: fix this
       ],
       entry_points="""
       # -*- Entry points: -*-

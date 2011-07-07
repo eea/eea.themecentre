@@ -12,9 +12,7 @@
             <span tal:content="object_title">Title or id</span> &mdash; related reporting obligations
         </h1>
 
-        <div metal:use-macro="here/document_actions/macros/document_actions">
-            Document actions (print, sendto etc)
-        </div>
+        <div tal:replace="structure provider:plone.documentactions" />
 
         <div class="visualClear"></div>
         <div class="documentDescription">

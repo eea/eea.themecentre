@@ -2,6 +2,8 @@
            xmlns:cmf="http://namespaces.zope.org/cmf"
            i18n_domain="eea">
 
-  <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
+  <cmf:registerDirectory name="skins"
+                         directory="skins"
+                         recursive="True" />
 
 </configure>

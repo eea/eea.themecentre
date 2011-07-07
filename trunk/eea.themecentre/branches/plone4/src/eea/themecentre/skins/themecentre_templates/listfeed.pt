@@ -14,9 +14,8 @@
                  b_start request/b_start | b_start">
 
     <h1 tal:content="view/title">Title</h1>
-        <div metal:use-macro="here/document_actions/macros/document_actions">
-            Document actions (print, sendto etc)
-        </div>
+     <div tal:replace="structure provider:plone.documentactions" />
+
 
     <div tal:define="batch python: Batch(items, b_size, int(b_start), orphan=1)"
          tal:condition="items">

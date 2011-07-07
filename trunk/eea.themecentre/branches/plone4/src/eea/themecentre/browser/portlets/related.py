@@ -1,8 +1,6 @@
 """ Related
 """
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import utils
-
 from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeRelation
 from eea.themecentre.interfaces import IThemeCentreImageUrl
@@ -23,7 +21,7 @@ class RelatedPortlet(BasePortlet):
     def items(self):
         """ Items
         """
-        context = utils.context(self)
+        context = self.context
         reference_catalog = getToolByName(context, 'reference_catalog')
         currentThemeCentre = getThemeCentre(context)
         result = []

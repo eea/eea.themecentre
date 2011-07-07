@@ -6,10 +6,10 @@ from p4a.video.interfaces import IVideoEnhanced
 from DateTime.DateTime import DateTime
 from eea.promotion.interfaces import IPromotion
 
-
 class ThemeCentreMenuPromotion(object):
     """ Return the promotion to show as part of navigation. Most of the time an
-        interactive map. """
+        interactive map.
+    """
 
     def __init__(self, context, request):
         self.context = context
@@ -26,9 +26,8 @@ class ThemeCentreMenuPromotion(object):
         result = catalog({
             'object_provides': {
                 'query': [
-             'eea.promotion.interfaces.IPromoted',
-             'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
-                ],
+          'eea.promotion.interfaces.IPromoted',
+          'Products.EEAContentTypes.content.interfaces.IExternalPromotion', ],
                 'operator': 'or',
             },
             'review_state': 'published',

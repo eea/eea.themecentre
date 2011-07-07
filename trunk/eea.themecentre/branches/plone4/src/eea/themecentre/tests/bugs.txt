@@ -16,7 +16,7 @@ some unknown cases this has happened on production.
 Let's tag our newsitem with the problematic string:
 
   >>> from eea.themecentre.interfaces import IThemeTagging
-  >>> IThemeTagging(newsitem).tags = ['agriculture', '']
+  >>> IThemeTagging(newsitem).tags = ['air', '']
 
 We're going to use the test browser to test the form:
 

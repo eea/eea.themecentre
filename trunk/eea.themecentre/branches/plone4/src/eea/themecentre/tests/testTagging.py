@@ -1,8 +1,7 @@
 """ Test tagging
 """
 from unittest import TestSuite
-#TODO: fix me, plone4
-#from Testing.ZopeTestCase import FunctionalDocFileSuite
+from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
@@ -54,31 +53,25 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         self.portal.invokeFactory('Event', id='event_link')
         self.portal.invokeFactory('Document', id='doc_link')
 
-        # add one entry to the themes vocabulary
-        #vocab = self.portal.portal_vocabularies
-
 def test_suite():
     """ Test suite
     """
 
     suite = TestSuite((
-        #TODO: plone4 - need 'themes' vocabulary
-        #FunctionalDocFileSuite('tagging.txt',
-                     #test_class=TestTagging,
-                     #package = 'eea.themecentre.tests',
-                     #optionflags=optionflags,
-                     #),
-        #TODO: plone4 - need Products.EEAContentTypes
-        #FunctionalDocFileSuite('themecentre.txt',
-                     #test_class=TestThemeCentre,
-                     #package = 'eea.themecentre.tests',
-                     #optionflags=optionflags,
-                     #),
-        #TODO: plone4 - need 'themes' vocabulary
-        #FunctionalDocFileSuite('bugs.txt',
-                     #test_class=TestTagging,
-                     #package = 'eea.themecentre.tests',
-                     #optionflags=optionflags,
-                     #),
+        FunctionalDocFileSuite('tagging.txt',
+                     test_class=TestTagging,
+                     package = 'eea.themecentre.tests',
+                     optionflags=optionflags,
+                     ),
+        FunctionalDocFileSuite('themecentre.txt',
+                     test_class=TestThemeCentre,
+                     package = 'eea.themecentre.tests',
+                     optionflags=optionflags,
+                     ),
+        FunctionalDocFileSuite('bugs.txt',
+                     test_class=TestTagging,
+                     package = 'eea.themecentre.tests',
+                     optionflags=optionflags,
+                     ),
         ))
     return suite

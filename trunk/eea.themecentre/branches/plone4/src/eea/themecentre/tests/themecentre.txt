@@ -93,7 +93,7 @@ Modify portal content should be enough for accessing the themes tab.
   >>> mtool = getToolByName(self.portal, 'portal_membership')
   >>> self.portal.to_be_promoted.manage_permission('Modify portal content', roles=['Member'])
   >>> self.portal.to_be_promoted.unrestrictedTraverse('themes_edit.html')()
-  u'...'
+  ''
 
 Let's make sure copy and paste works. When copying an object within
 a themecentre nothing special should happen. When an object is copied

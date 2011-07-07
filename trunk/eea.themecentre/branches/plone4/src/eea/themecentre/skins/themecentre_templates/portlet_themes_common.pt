@@ -5,7 +5,8 @@
   <body>
 
     <div metal:define-macro="portlet"
-      tal:condition="portlet"
+        tal:condition="portlet"
+        tal:define="portal_url context/@@plone_portal_state/portal_url;"
       tal:omit-tag="">
 
       <dl class="portlet portlet-rss">
@@ -57,7 +58,7 @@
         </tal:linkclass>
       </dt>
 
-      <dd class="portletItem date" tal:content="item/detail"
+      <dd class="portletItem date" tal:content="structure item/detail"
         tal:condition="item/detail">
         07 Dec 2005
       </dd>
@@ -77,10 +78,7 @@
 </div>
 
 
-<!-- #TODO: plone4 -->
-<div metal:define-macro="simple-list" tal:omit-tag="">
-</div>
-<!-- div metal:define-macro="simple-list"
+<div metal:define-macro="simple-list"
   tal:define="portlet python:path('context/@@'+view_name);
   view nocall:portlet;
   items view/short_items;
@@ -114,13 +112,10 @@
     </dd>
 
   </dl>
-</div -->
-
-
-<!-- #TODO: plone4 -->
-<div metal:define-macro="thumbnail-list" tal:omit-tag="">
 </div>
-<!-- div metal:define-macro="thumbnail-list"
+
+
+<div metal:define-macro="thumbnail-list"
   tal:define="portlet python:path('context/@@'+view_name);
   view nocall:portlet;
   items view/short_items;
@@ -171,7 +166,7 @@
     </dd>
 
   </dl>
-</div -->
+</div>
 
 
 

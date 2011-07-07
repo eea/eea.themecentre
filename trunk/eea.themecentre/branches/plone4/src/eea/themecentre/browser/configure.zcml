@@ -74,14 +74,11 @@
       allowed_attributes="promotions"
       />
 
-  <!-- #TODO: fix me, plone4-->
-  <!-- browser:page
-      for="*"
-      name="theme_portlets"
-      class=".portlets.smartfolder.SmartFolderPortlets"
-      allowed_interface=".interfaces.IPortlet"
-      permission="zope.Public"
-      / -->
+  <browser:page for="*"
+                name="theme_portlets"
+                class=".portlets.smartfolder.SmartFolderPortlets"
+                allowed_interface=".interfaces.IPortlet"
+                permission="zope.Public" />
 
   <browser:page
       for="*"
@@ -107,16 +104,6 @@
                 Products.CMFPlone.browser.interfaces.ISiteMap"
             factory=".sitemap.SitemapThemeCentreStrategy"
             provides="plone.app.layout.navigation.interfaces.INavtreeStrategy" />
-
-  <!--
-  <browser:page
-      for="eea.themecentre.interfaces.IThemeCentre"
-      name="allnews"
-      class=".portlets.news.NewsPortlet"
-      allowed_interface=".interfaces.INewsPortlet"
-      permission="zope.Public"
-      />
-  -->
 
   <!-- provides videos that are shown in the themecentre's multimedia section -->
   <browser:page

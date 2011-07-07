@@ -28,7 +28,6 @@ def promoted(obj, event):
     obj.reindexObject()
 
     workflow = getToolByName(obj, 'portal_workflow')
-
     # obj should be a folder and that's where we're gonna add a news folder
     obj.invokeFactory('Folder', id='highlights', title='Highlights')
     obj.invokeFactory('Folder', id='events', title='Upcoming events')
@@ -205,17 +204,11 @@ def objectThemeTagged(obj, event):
     """
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
-
-            #TODO: fix me, plone4
-            #      - the event is triggered for object directelly, and
-            #        obj.context ends up in error. I presume is becouse of the
-            #        commented subscribers (check when when all is fixed)
             try:
-                obj.context
-            except:
-                return None
+                context = obj.context
+            except AttributeError:
+                context = obj
 
-            context = obj.context
             if context.isCanonical():
                 for _lang, trans in context.getTranslations().items():
                     IThemeTagging(trans[0]).tags = IThemeTagging(context).tags
@@ -224,29 +217,28 @@ def objectThemeTagged(obj, event):
 def getThemeCentre(context):
     """ Looks up the closest theme centre.
     """
-    #TODO: fix me, plone4
-    #       the while enter in a infinite cycle
     count = 0
 
     while context and not IPloneSiteRoot.providedBy(context) and \
           not IThemeCentre.providedBy(context):
 
-        #TODO: fix me, plone4
-        count += 1
-        if count == 50:
-            break
-
-        #TODO: fix me, plone4
+        #TODO: plone4 migration
         # If type(context) == 'plone.keyring.keyring.Keyring'
         #  enters a infinite cycle or
         #  context is <plone.app.portlets.portlets.navigation ..
+        # Below there are some cases trated not to enter a infinite cycle.
+        # This happens only on tests.
+        count += 1
+        if count == 50:
+            break
         context_id = getattr(context, 'getId', None)
         if context_id:
             context_id = context_id()
+            if context_id in ['navigation']:
+                break
+            elif '++' in context_id:
+                break
         if context == [None, None, None, None]:
-            break
-        elif context_id in ['navigation',
-                            '++contextportlets++plone.rightcolumn']:
             break
 
         context = aq_parent(context)
@@ -322,5 +314,8 @@ def imageUrl(context):
     tc = context
     if not hasattr(tc, 'theme_image'):
         tc = context.getCanonical()
-    image = getattr(tc, 'theme_image')
-    return '%s/image_icon' % image.absolute_url()
+    image = getattr(tc, 'theme_image', None)
+    if image:
+        return '%s/image_icon' % image.absolute_url()
+    else:
+        return ''

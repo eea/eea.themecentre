@@ -6,13 +6,11 @@ from Products.Five import zcml
 from Products.Five import fiveconfigure
 import eea.themecentre
 
-#TODO: fix me, plone4
-PRODUCTS = ('EEAContentTypes',)
-
 PloneTestCase.installProduct('ATVocabularyManager')
 PloneTestCase.installProduct('PloneHelpCenter')
 PloneTestCase.installProduct('LinguaPlone')
 PloneTestCase.installProduct('EEAPloneAdmin')
+PloneTestCase.installProduct('EEAContentTypes')
 
 @onsetup
 def setup_themecentre():
@@ -27,7 +25,10 @@ def setup_themecentre():
     PloneTestCase.installPackage('eea.vocab')
 
 setup_themecentre()
-PloneTestCase.setupPloneSite(extension_profiles=('eea.themecentre:default',))
+PloneTestCase.setupPloneSite(extension_profiles=(
+                                         'eea.themecentre:default',
+                                         'Products.EEAContentTypes:default',
+                                         'Products.EEAPloneAdmin:default'))
 
 class EEAThemeCentreTestCase(PloneTestCase.FunctionalTestCase):
     """ Test case class used for functional themecentre tests.

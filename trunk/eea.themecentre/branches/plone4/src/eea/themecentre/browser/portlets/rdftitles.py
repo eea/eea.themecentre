@@ -1,6 +1,5 @@
 """ RDF Titles module
 """
-from Products.CMFPlone import utils
 from zope.component import getUtility
 from eea.themecentre.themecentre import getTheme, getThemeTitle, getThemeCentre
 from eea.themecentre.browser.portlets.catalog import BasePortlet
@@ -34,7 +33,7 @@ class RDFTitlesPortlet(BasePortlet):
     def items(self):
         """ Items
         """
-        context = utils.context(self)
+        context = self.context
         currentTheme = getTheme(context)
         currentThemeTitle = getThemeTitle(context)
         feeds = []
@@ -50,7 +49,7 @@ class RDFTitlesPortlet(BasePortlet):
     def _feedListUrl(self, item):
         """ Feed List Url
         """
-        themeCentre = getThemeCentre(utils.context(self))
+        themeCentre = getThemeCentre(self.context)
         return themeCentre.absolute_url() + \
                '/listfeed?feed=' + item.id
 
@@ -73,8 +72,7 @@ class RDFTitlesPortlet(BasePortlet):
     def title(self):
         """ Title
         """
-        context = utils.context(self)
-        return getThemeTitle(context)
+        return getThemeTitle(self.context)
 
     @property
     def size(self):

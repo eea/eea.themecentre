@@ -29,7 +29,7 @@ class BasePortlet(BrowserView):
     def all_link(self):
         """ All link
         """
-        context = self.context()
+        context = self.context
         themeCentre = getThemeCentre(context)
         if themeCentre:
             # first let's see if view_name is in the request
@@ -48,7 +48,7 @@ class BasePortlet(BrowserView):
     def localized_time(self, time):
         """ Localized time
         """
-        context = self.context()
+        context = self.context
         translation = getToolByName(context, 'translation_service')
 
         # sometimes time ends with a 'W'. That violates iso 8601, but
@@ -73,7 +73,7 @@ class CatalogBasePortlet(BasePortlet):
     def items(self):
         """ Items
         """
-        context = self.context()
+        context = self.context
         portal_catalog = getToolByName(context, 'portal_catalog')
         currentTheme = getTheme(context)
 
