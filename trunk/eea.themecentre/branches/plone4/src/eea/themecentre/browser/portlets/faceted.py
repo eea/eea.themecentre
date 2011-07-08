@@ -2,6 +2,8 @@
 """
 from zope.component import queryMultiAdapter
 from eea.themecentre.browser.portlets.catalog import BasePortlet
+from types import GeneratorType
+import itertools
 import logging
 
 log = logging.getLogger("eea.themecentre")
@@ -14,20 +16,20 @@ class FacetedPortlet(BasePortlet):
     def all_link(self):
         """ All link
         """
-        context = self.context[0]
+        context = self.context
         return context.absolute_url()
 
     @property
     def title(self):
         """ Title
         """
-        context = self.context[0]
+        context = self.context
         return context.Title()
 
     def items(self):
         """ Items
         """
-        context = self.context[0]
+        context = self.context
         facetednav = queryMultiAdapter((context, self.request),
                                        name=u'faceted_query')
         if facetednav is None:
@@ -38,8 +40,13 @@ class FacetedPortlet(BasePortlet):
         return facetednav.query(batch=False, sort=True, **query)
 
     def __call__(self):
-        context = self.context[0]
-        items = self.items()[:self.size]
+        context = self.context
+        items = self.items()
+        # NOTE: plone4 items is now a generator if found else an empty batch         
+        if isinstance(items, GeneratorType):
+            items = list(itertools.islice(items, self.size))
+        else:
+            items = None
         if items:
             return {
                 'title': self.title,
