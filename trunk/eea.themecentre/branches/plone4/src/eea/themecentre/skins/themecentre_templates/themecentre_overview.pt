@@ -46,7 +46,6 @@
             </tal:cond>
         </tal:publications>
 
-        <metal:macro use-macro="here/portlet_themes_rdf/macros/portlet" />
         <tal:indicators tal:define="portlet context/indicators/@@portlet_faceted_logic|nothing">
             <metal:portlet use-macro="here/portlet_themes_common/macros/portlet" />
         </tal:indicators>
