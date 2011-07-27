@@ -7,7 +7,8 @@ Changelog
 
 * TODO: plone4
     - Cleanup navigation.py
-    - Once Products.PloneHelpCenter profile is fixed re-activate it in profiles/metadata.xml
+
+* Change: Reactivated Products.PloneHelpCenter [szabozo0 #4430]
 
 * Change: Removed the @@proxy view, using python:path() instead
   [tiberich #4257]

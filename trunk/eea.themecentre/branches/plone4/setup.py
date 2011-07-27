@@ -32,7 +32,7 @@ setup(name='eea.themecentre',
       install_requires=[
           'setuptools',
           'p4a.video',
-          #'Products.PloneHelpCenter',
+          'Products.PloneHelpCenter',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
           'Products.EEAPloneAdmin',
