@@ -8,6 +8,8 @@ Changelog
 * TODO: plone4
     - Cleanup navigation.py
 
+* Bugfix: Fixed publishing dates on the portlets under Theme Centre [szabozo0 #4440]
+
 * Change: Reactivated Products.PloneHelpCenter [szabozo0 #4430]
 
 * Change: Removed the @@proxy view, using python:path() instead

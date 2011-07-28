@@ -14,6 +14,6 @@ def localized_time(time):
     if isinstance(time, (unicode, str)) and time.endswith('W'):
         time = time[:-1] + 'Z'
 
-    local_time = translation.ulocalized_time(time, None, context,
+    local_time = translation.ulocalized_time(time, None, None,  context,
             domain='plone')
     return local_time
