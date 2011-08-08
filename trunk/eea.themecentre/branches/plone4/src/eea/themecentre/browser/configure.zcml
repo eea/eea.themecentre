@@ -88,18 +88,6 @@
       permission="zope.Public"
       />
 
-  <!-- plone changes -->
-
-  <!-- #TODO: fix me, plone4 -->
-  <!-- browser:page
-      for="*"
-      name="themes_navigation_view"
-      class=".portlets.navigation.NavigationPortlet"
-      permission="zope.Public"
-      allowed_interface=".portlets.navigation.INavigationPortlet"
-      allowed_attributes="getNavTree displayLogo logoUrl logoParentUrl"
-      / -->
-
    <adapter for="..interfaces.IThemeCentre
                 Products.CMFPlone.browser.interfaces.ISiteMap"
             factory=".sitemap.SitemapThemeCentreStrategy"
