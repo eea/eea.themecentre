@@ -20,13 +20,15 @@
 
     <div metal:fill-slot="main">
          <h1 tal:content="string:${here/Title} - overview"></h1>
-    <metal:main-macro define-macro="main">
+    <metal:main-macro define-macro="main"
+    tal:define="frontpage_view context/@@frontpage_highlights;">
 
         <div class="content-column-one">
 
         <tal:comment replace="nothing">
          #NOTE: plone4 ichimdav smartfolder_portlets comes from EEAContentTypes 
         </tal:comment>
+        
 
         <tal:articles tal:define="specific nocall:context/articles/articles_topic|nothing;">
             <tal:cond tal:condition="specific">
@@ -52,6 +54,29 @@
         </div>
 
         <div class="content-column-two">
+            <div metal:use-macro="here/frontpage_view/macros/promo-gallery-files">promo js and css</div>
+            <div id="promotions"
+                tal:define="frontpage python: False;">
+                            <div metal:use-macro="here/frontpage_macros/macros/promo-gallery">
+                                promoted item
+                            </div>
+                            <div class="controls">
+                            <a  href="#" id="next-promo"></a>
+                            <a  href="#" id="prev-promo"></a>
+                            <a  href="#" id="play-pause" title="Pause slideshow" class="pause disabled" aria-pressed="true" role="button">Pause</a>
+                            </div>
+                    </div>   
+                    <!-- end promotions_gallery_slideshow -->
+            <div id="featured-box" class="roundedCorners">
+              <a href="articles" class="archives">More articles</a>
+              <h2 class="column-title" i18n:domain="eea" i18n:translate="featured-articles">Featured article</h2>
+              <tal:articles tal:define= "
+              highlights python: frontpage_view.getHighArticles(topic =  True);">
+                <div metal:use-macro="here/frontpage_macros/macros/highArticles">
+                    item title, description and image
+                </div>
+             </tal:articles>
+            </div>
         <metal:macro use-macro="here/portlet_themes_related/macros/portlet" />
 
         <tal:portlets repeat="portlet context/@@theme_portlets">
