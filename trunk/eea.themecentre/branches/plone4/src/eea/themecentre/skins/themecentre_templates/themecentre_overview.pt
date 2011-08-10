@@ -54,7 +54,7 @@
         </div>
 
         <div class="content-column-two">
-            <div metal:use-macro="here/frontpage_view/macros/promo-gallery-files">promo js and css</div>
+            <div metal:use-macro="here/frontpage_macros/macros/promo-gallery-files">promo js and css</div>
             <div id="promotions"
                 tal:define="frontpage python: False;">
                             <div metal:use-macro="here/frontpage_macros/macros/promo-gallery">
