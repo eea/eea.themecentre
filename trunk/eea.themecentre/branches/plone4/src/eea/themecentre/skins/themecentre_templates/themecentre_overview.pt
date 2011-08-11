@@ -54,6 +54,16 @@
         </div>
 
         <div class="content-column-two">
+            <div class="promo roundedCorners">
+                <h3>
+                    <a href="dc" class="internal-link" title="Data centre overview">
+                        <img alt="Data centre icon" 
+                        tal:replace="structure here/themes/water/data_centre_icon.png/image_tile"
+                        class="image-inline captioned" />
+                        <span tal:content="string: ${here/Title} data centre">theme data centre</span>
+                    </a>
+                </h3>
+            </div>
             <div metal:use-macro="here/frontpage_macros/macros/promo-gallery-files">promo js and css</div>
             <div id="promotions"
                 tal:define="frontpage python: False;">
@@ -67,7 +77,7 @@
                             </div>
                     </div>   
                     <!-- end promotions_gallery_slideshow -->
-            <div id="featured-box" class="roundedCorners">
+            <div class="featured roundedCorners">
               <a href="articles" class="archives">More articles</a>
               <h2 class="column-title" i18n:domain="eea" i18n:translate="featured-articles">Featured article</h2>
               <tal:articles tal:define= "
