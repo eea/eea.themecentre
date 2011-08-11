@@ -31,7 +31,7 @@
         
 
         <tal:articles tal:define="specific nocall:context/articles/articles_topic|nothing;">
-            <tal:cond tal:condition="specific">
+            <tal:cond tal:condition="nocall:specific">
                 <tal:article tal:define="feeds specific/@@smartfolder_portlets|nothing;"
                           tal:repeat="portlet feeds">
                     <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
@@ -40,11 +40,13 @@
         </tal:articles>
         
         <tal:publications tal:define="specific nocall:context/publications/publications_topic|nothing;">
-            <tal:cond tal:condition="specific">
+            <tal:cond tal:condition="nocall:specific">
+
                 <tal:publication tal:define="feeds specific/@@smartfolder_portlets|nothing;"
                         tal:repeat="portlet feeds">
                     <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
                 </tal:publication>
+
             </tal:cond>
         </tal:publications>
 
