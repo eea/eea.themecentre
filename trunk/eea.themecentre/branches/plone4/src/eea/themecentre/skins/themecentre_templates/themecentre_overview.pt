@@ -53,6 +53,11 @@
         <tal:indicators tal:define="portlet context/indicators/@@portlet_faceted_logic|nothing">
             <metal:portlet use-macro="here/portlet_themes_common/macros/portlet" />
         </tal:indicators>
+
+        <div metal:use-macro="here/frontpage_view/macros/whatsnew-gallery">
+            whatsnew gallery
+        </div>
+
         </div>
 
         <div class="content-column-two">
