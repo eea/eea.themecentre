@@ -19,7 +19,7 @@ class ObjectThemesPortlet(BasePortlet):
     def title(self):
         """ Title
         """
-        return _(u'Themes')
+        return _(u'Topics')
 
     def items(self):
         """ Items
