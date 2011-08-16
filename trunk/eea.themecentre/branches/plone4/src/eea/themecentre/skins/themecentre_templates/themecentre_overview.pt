@@ -60,47 +60,6 @@
 
         </div>
 
-        <div class="content-column-two">
-            <div class="promo roundedCorners">
-                <h3>
-                    <a href="dc" class="internal-link" title="Data centre overview">
-                        <img alt="Data centre icon" 
-                        tal:replace="structure here/themes/water/data_centre_icon.png/image_tile"
-                        class="image-inline captioned" />
-                        <span tal:content="string: ${here/Title} data centre">theme data centre</span>
-                    </a>
-                </h3>
-            </div>
-            <div metal:use-macro="here/frontpage_macros/macros/promo-gallery-files">promo js and css</div>
-            <div id="promotions"
-                tal:define="frontpage python: False;">
-                            <div metal:use-macro="here/frontpage_macros/macros/promo-gallery">
-                                promoted item
-                            </div>
-                            <div class="controls">
-                            <a  href="#" id="next-promo"></a>
-                            <a  href="#" id="prev-promo"></a>
-                            <a  href="#" id="play-pause" title="Pause slideshow" class="pause disabled" aria-pressed="true" role="button">Pause</a>
-                            </div>
-                    </div>   
-                    <!-- end promotions_gallery_slideshow -->
-            <div class="featured roundedCorners">
-              <a href="articles" class="archives">More articles</a>
-              <h2 class="column-title" i18n:domain="eea" i18n:translate="featured-articles">Featured article</h2>
-              <tal:articles tal:define= "
-              highlights python: frontpage_view.getHighArticles(topic =  True);">
-                <div metal:use-macro="here/frontpage_macros/macros/highArticles">
-                    item title, description and image
-                </div>
-             </tal:articles>
-            </div>
-        <metal:macro use-macro="here/portlet_themes_related/macros/portlet" />
-
-        <tal:portlets repeat="portlet context/@@theme_portlets">
-        <metal:macro use-macro="here/portlet_themes_common/macros/portlet" />
-        </tal:portlets>
-        </div>
-
     </metal:main-macro>
     </div>
 

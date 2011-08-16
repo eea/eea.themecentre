@@ -8,8 +8,6 @@
 </head>
 <body>
 
-    <metal:column-two fill-slot="column_two_slot"></metal:column-two>
-
     <div metal:fill-slot="main">
     <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
 

@@ -7,13 +7,8 @@
 
 #content .content-column-one {
     float: left;
-    width: 48%;
+    width: 100%;
     padding-right: 1em;
-}
-
-#content .content-column-two {
-    float: right;
-    width: 48%;
 }
 
 #themes-related dt img {
