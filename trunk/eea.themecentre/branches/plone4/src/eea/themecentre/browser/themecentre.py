@@ -111,3 +111,14 @@ class ThemecentreUtils(BrowserView):
                 'effectiveRange'     : self.now
         }
         return self.catalog.searchResults(query)
+
+    def getDataCentreName(self):
+        """ get the name of the datacentre for the given theme of the context """
+        name = ''
+        name = getTheme(self.context)
+        if name:
+            return name.capitalize()
+        else:
+            name = getTheme(self.context.aq_inner.aq_parent)
+            name = [name.capitalize() if name else ''].pop()
+            return name
