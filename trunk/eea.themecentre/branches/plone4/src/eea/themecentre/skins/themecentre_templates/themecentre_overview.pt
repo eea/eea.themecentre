@@ -29,6 +29,16 @@
          #NOTE: plone4 ichimdav smartfolder_portlets comes from EEAContentTypes 
         </tal:comment>
         
+        <div metal:define-macro="subfolders"
+             tal:define="themecentre_view context/@@themecentre_utils;
+             folders themecentre_view/getThemeFolders;"
+             id="subfolders">
+            <ul> 
+                <li tal:repeat="folder folders"> 
+                    <a tal:attributes="href folder/getPath; title folder/Title;" tal:content="folder/Title">Folder links</a>
+                </li>
+            </ul>
+        </div>
 
         <tal:articles tal:define="specific nocall:context/articles/articles_topic|nothing;">
             <tal:cond tal:condition="nocall:specific">

@@ -14,6 +14,9 @@ from eea.themecentre.themecentre import getTheme, getThemeTitle
 from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
 from eea.mediacentre.interfaces import IMediaCentre
 from eea.themecentre import _
+from Products.Five import BrowserView
+from Products.CMFCore.utils import getToolByName
+from DateTime import DateTime
 
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
 
@@ -86,3 +89,25 @@ class Theme(object):
         """ Name
         """
         return getThemeTitle(self.context)
+
+class ThemecentreUtils(BrowserView):
+    """ Themecentre catalog search and utils methods """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.catalog = getToolByName(context, 'portal_catalog')
+        self.now = DateTime()
+
+    def getThemeFolders(self):
+        """ get folders from current theme object """
+        folder_path = '/'.join(self.context.aq_parent.getPhysicalPath())
+        query = {
+                'portal_type'        : 'Folder',
+                'review_state'       : 'published',
+                'sort_on'            : 'effective',
+                'exclude_from_nav'   : False,
+                'sort_order'         : 'reverse',
+                'path'               : {'query': folder_path, 'depth': 1},
+                'effectiveRange'     : self.now
+        }
+        return self.catalog.searchResults(query)

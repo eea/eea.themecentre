@@ -110,6 +110,13 @@
       allowed_attributes="name"
       />
 
+  <browser:page
+      for="*"
+      name="themecentre_utils"
+      class=".themecentre.ThemecentreUtils"
+      permission="zope.Public"
+      />
+
   <!-- provides info for the related topics portlet -->
   <browser:page
       for="*"
