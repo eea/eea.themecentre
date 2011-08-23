@@ -5,6 +5,9 @@ Changelog
 4.0-dev - (unreleased)
 ----------------------
 
+* Change: Added upgrade step to make IThemeTaggable navigation roots
+  [voineali #4376]
+
 * Change: #4206, #4458 Made the portlet themes as viewlet and registered below content title. css cleanup. [demarant]
 
 * Bugfix: Fixed publishing dates on the portlets under Theme Centre [szabozo0 #4440]
