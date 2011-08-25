@@ -5,83 +5,16 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="plone">
 <head>
-<metal:css fill-slot="css_slot">
-<style>
-
-#portal-column-two {
-display:none;
-}
-
-#portal-column-one {
-display:none;
-}
-
-#portal-column-content #content {
-    margin: 0 0 0 0 !important;
-}
-
-</style>
-
-</metal:css>
 </head>
 <body>
     
-<div id="themes-sitemap"  metal:fill-slot="main">
-<metal:main-macro define-macro="main">
-    <h1>Environmental themes</h1>
+<div id="themes-sitemap"  metal:fill-slot="content-core">
 
-<div>
-    <div class="contentColumnOne">
-    <h2>What is happening?<br/>Environmental issues</h2>
-    <ul>
-    <li><a href="air">Air pollution</a></li>
-    <li><a href="biodiversity">Biodiversity</a></li>
-    <li><a href="chemicals">Chemicals</a></li>
-    <li><a href="climate">Climate change</a></li>
-    <li><a href="human">Environment and health</a></li>
-    <li><a href="natural">Natural resources</a></li>
-    <li><a href="noise">Noise</a></li>
-    <li><a href="soil">Soil</a></li>
-    <li><a href="waste">Waste and material resources</a></li>
-    <li><a href="water">Water</a></li>
-    <li><a href="other_issues">Various other issues</a></li>
-    </ul>
-    </div>
-    <div class="contentColumnTwo">
-    <h2>Why is it happening?<br/>Sectors and activities</h2>
-    <ul>
-    <li><a href="agriculture">Agriculture</a></li>
-    <li><a href="energy">Energy</a></li>
-    <li><a href="fishery">Fisheries</a></li>
-    <li><a href="households">Household consumption</a></li>
-    <li><a href="industry">Industry</a></li>
-    <li><a href="population">Population and economy</a></li>
-    <li><a href="tourism">Tourism</a></li>
-    <li><a href="transport">Transport</a></li>
-    </ul>
-    </div>
-</div>
-<div class="visualClear">
-  <div class="contentColumnOne">
-    <h2>Environment in different regions and specific areas</h2>
-    <ul>
-    <li><a href="coast_sea">Coasts and seas</a></li>
-    <li><a href="regions">Specific regions</a></li>
-    <li><a href="urban">Urban environment</a></li>
-    </ul> 
-  </div>
-  <div class="contentColumnTwo">
-    <h2>Actions for improving the environment</h2>
-    <ul>
-    <li><a href="reporting">Assessment methods and tools</a></li>
-    <li><a href="management">Environmental management and practices</a></li>
-    <li><a href="policy">Policy analysis</a></li>
-    <li><a href="scenarios">Environmental scenarios</a></li>
-    </ul>
-</div>
-</div>
+        <div class="plain" tal:condition="context/CookedBody|nothing">
+            <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
+              tal:replace="structure text" />
+        </div>
 
-</metal:main-macro>
 </div>
 
 </body>
