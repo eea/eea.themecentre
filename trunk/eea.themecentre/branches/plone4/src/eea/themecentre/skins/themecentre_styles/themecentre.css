@@ -44,29 +44,6 @@ width:47%;
 
 /* New design of portlets for now only under themes */
 
-body.section-themes .portlet-promotions .portlet {
-   border: 0;
-   background: #f0f4f5;
-   margin: 0;
-}
-
-body.section-themes .portlet-promotions a.portletHeader {
-   display: block;
-   text-align:left;
-}
-
-#portlet-navigation-tree .promo-nav-portlet  .portletHeader {
-background:transparent;
-font-size:1.2em;
-margin-bottom:0pt;
-margin-top:0pt;
-padding:0.5em 0.2em 0.5em 0.5em;
-}
-
-#themepromo-portlet a:hover{
-background:transparent;
-}
-
 
 body.section-themes .portlet-rss .portletHeader {
    padding: 0.5em;
@@ -85,27 +62,6 @@ body.section-themes #content dt.portletItem img {
 body.section-themes #content dt.portletItem a {
 }
 
-.switchThemeMenu {
-    background-image: url(&dtml-portal_url;/arrow-up-blue.gif);
-    background-repeat: no-repeat;
-    background-position: 0% 50%;
-    padding: 0.5em 0.2em 0.5em 0;
-    cursor:pointer;
-    margin-left:2em;
-    line-height:2em;
-    clear:left;
-    margin-top:-2.2em;
-    padding-left:2em;
-    position: relative;
-}
-
-#portlet-navigation-tree .switchTheme a:hover {
-background:transparent;
-}
-
-#switchThemeDrop {
- margin: 0 0 0 2em;
-}
 
 .commonThemes {
     font-size: 65%;
