@@ -1,6 +1,6 @@
 <metal:portlet metal:define-macro="portlet">
 <tal:cond tal:define="isViewTemplate context/@@plone_context_state/is_view_template;" tal:condition="isViewTemplate">
-<div class="promo roundedCorners"
+<div class="shortcut-default roundedCorners"
     tal:define="themecentre_view context/@@themecentre_utils;
     title themecentre_view/getDataCentreName|nothing;
     eea_datacentres python:('Air Pollution','Biodiversity','Climate change','Land use','Water')"
@@ -14,3 +14,4 @@
     </div>
 </tal:cond>
 </metal:portlet>
+        
