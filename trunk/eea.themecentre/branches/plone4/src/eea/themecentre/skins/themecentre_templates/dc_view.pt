@@ -1,32 +1,43 @@
+<tal:block tal:define="foo python:request.set('disable_plone.leftcolumn', 1);
+            bar python:request.set('disable_plone.rightcolumn', 1);"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="plone">
 
 <body>
-    <div metal:fill-slot="main">
+    <div metal:fill-slot="content-core">
     <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
-        <h1 tal:content="object_title" class="documentFirstHeading">
-            Title or id
-        </h1>
-
- <div tal:replace="structure provider:plone.documentactions" />
-
 
         <div class="visualClear"></div>
 
-        <p class="documentDescription"
-           tal:content="here/Description"
-           tal:condition="here/Description">
-            Description
-        </p>
+        <div class="plain" tal:condition="context/CookedBody|nothing">
+            <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
+              tal:replace="structure text" />
+        </div>
 
-        <div class="visualClear"></div>
+    <div id="highlights-area" class="column-area">
+        <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
+    </div>
 
-        <metal:listingmacro define-macro="listing" tal:define="subfolderView here/@@dc_view_logic">
-            <metal:block use-macro="here/subfolder_view/macros/listing"/>
+    <div id="articles-area" class="column-area">
+        
+        <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
+                <div tal:replace="structure dcview/render_nav_portlet" />
         </metal:listingmacro>
 
+        <!-- promotions_gallery_slideshow-->
+        <metal:promotions 
+                tal:define="frontpage python: False; 
+                        promo_view context/@@data_and_maps_logic;">
+                <div metal:use-macro="here/portlet_promo_gallery/macros/portlet">
+                    promoted item
+                </div>
+        </metal:promotions>   
+        <!-- end promotions_gallery_slideshow -->
+        
+        <div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
+    </div>
     </metal:main-macro>
     </div>
 </body>
