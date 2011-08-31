@@ -16,12 +16,20 @@
               tal:replace="structure text" />
         </div>
 
-    <div id="highlights-area" class="column-area">
+    <div class="column-area">
         <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
     </div>
 
-    <div id="articles-area" class="column-area">
+    <div class="right-column-area">
         
+<div class="shortcut-default roundedCorners">
+        <h3 tal:define="themecentre_view context/@@themecentre_utils;
+                    title themecentre_view/getDataCentreName|nothing;">
+                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage" i18n:name="themes-featured-homepage">
+                <span id="theme-datacentre"  tal:content="string: ${title} homepage">Go to homepage</span>
+            </a>
+        </h3>
+    </div>
         <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
                 <div tal:replace="structure dcview/render_nav_portlet" />
         </metal:listingmacro>

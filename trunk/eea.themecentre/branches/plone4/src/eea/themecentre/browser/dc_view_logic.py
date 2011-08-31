@@ -1,9 +1,9 @@
 """ DC view logic
 """
-from Products.CMFCore.utils import getToolByName
+#from Products.CMFCore.utils import getToolByName
 #from eea.design.browser.subfolder_view_logic import SubFolderView
-from eea.themecentre.themecentre import getThemeCentre
-from Products.NavigationManager.interfaces import INavigationSectionPosition
+#from eea.themecentre.themecentre import getThemeCentre
+#from Products.NavigationManager.interfaces import INavigationSectionPosition
 
 from Products.Five import BrowserView
 
