@@ -25,7 +25,7 @@
 <div class="shortcut-default roundedCorners">
         <h3 tal:define="themecentre_view context/@@themecentre_utils;
                     title themecentre_view/getDataCentreName|nothing;">
-                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage" i18n:name="themes-featured-homepage">
+                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage" i18n:translate="themes-featured-homepage">
                 <span id="theme-datacentre"  tal:content="string: ${title} homepage">Go to homepage</span>
             </a>
         </h3>
