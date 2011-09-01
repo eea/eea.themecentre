@@ -113,7 +113,9 @@ class ThemecentreUtils(BrowserView):
         return self.catalog.searchResults(query)
 
     def getDataCentreName(self):
-        """ get the name of the datacentre for the given theme of the context """
+        """ Get the name of the datacentre for the given theme
+            of the context
+        """
         name = ''
         name = getTheme(self.context)
         if name:

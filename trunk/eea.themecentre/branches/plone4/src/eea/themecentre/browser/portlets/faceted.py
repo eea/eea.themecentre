@@ -42,7 +42,7 @@ class FacetedPortlet(BasePortlet):
     def __call__(self):
         context = self.context
         items = self.items()
-        # NOTE: plone4 items is now a generator if found else an empty batch         
+        # NOTE: plone4 items is now a generator if found else an empty batch
         if isinstance(items, GeneratorType):
             items = list(itertools.islice(items, self.size))
         else:

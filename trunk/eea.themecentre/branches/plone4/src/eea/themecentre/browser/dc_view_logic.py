@@ -6,10 +6,12 @@
 #from Products.NavigationManager.interfaces import INavigationSectionPosition
 
 from Products.Five import BrowserView
-
-import Acquisition
 from zope.component import getUtility, getMultiAdapter, queryMultiAdapter
-from plone.portlets.interfaces import IPortletRetriever, IPortletManager, IPortletRenderer
+from plone.portlets.interfaces import (
+    IPortletRetriever,
+    IPortletManager,
+    IPortletRenderer
+)
 
 #class DCViewLogic(SubFolderView):
 #    """ View that shows the contents of all subfolders to the themecentre
@@ -59,13 +61,15 @@ def render_portlet(context, request, view, manager, interface):
         # Did not find a portlet
         return ""
 
-    renderer = queryMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
+    renderer = queryMultiAdapter((context, request, view, manager, assignment),
+                                 IPortletRenderer)
 
     # Make sure we have working acquisition chain
     renderer = renderer.__of__(context)
 
     if renderer is None:
-        raise RuntimeError("No portlet renderer found for portlet assignment:" + str(assignment))
+        raise RuntimeError("No portlet renderer found for \
+                            portlet assignment:" + str(assignment))
 
     renderer.update()
     # Does not check visibility here... force render always
@@ -87,5 +91,9 @@ class DCViewLogic(BrowserView):
         column = "plone.rightcolumn"
         from plone.app.portlets.portlets.navigation import INavigationPortlet
         manager = get_portlet_manager(column)
-        html = render_portlet(context, request, view, manager, INavigationPortlet)
+        html = render_portlet(context,
+                              request,
+                              view,
+                              manager,
+                              INavigationPortlet)
         return html
