@@ -16,8 +16,23 @@
               tal:replace="structure text" />
         </div>
 
+        
+
     <div class="column-area">
-        <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
+    
+       <div class="featured">
+       <h2>Global search</h2>
+	    <form action="dm" method="get" id="faceted-text-search">
+                                <p>
+                                    <input type="text" onkeypress="return disableEnterKey(event)" name="c12">
+                                    <input type="submit" value="Search" name="search" class="searchButton" style="cursor: pointer; cursor: hand;">
+                                </p>
+	    </form>
+       </div>
+
+       <div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
+       <h3>Browse catalogue</h3>
+       <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
     </div>
 
     <div class="right-column-area">
@@ -30,21 +45,21 @@
             </a>
         </h3>
     </div>
-        <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
-                <div tal:replace="structure dcview/render_nav_portlet" />
-        </metal:listingmacro>
-
-        <!-- promotions_gallery_slideshow-->
-        <metal:promotions 
-                tal:define="frontpage python: False; 
+		
+        <h2>In the spotlight</h2>
+	<!-- promotions_gallery_slideshow-->
+        <metal:promotions tal:define="frontpage python: False; 
                         promo_view context/@@data_and_maps_logic;">
                 <div metal:use-macro="here/portlet_promo_gallery/macros/portlet">
                     promoted item
                 </div>
         </metal:promotions>   
         <!-- end promotions_gallery_slideshow -->
-        
-        <div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
+	
+        <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
+                <div tal:replace="structure dcview/render_nav_portlet" />
+        </metal:listingmacro>
+
     </div>
     </metal:main-macro>
     </div>
