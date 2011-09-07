@@ -32,7 +32,9 @@
 
        <div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
        <h3>Browse catalogue</h3>
-       <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
+       <tal:datapage tal:define="datapage string:dcview">
+            <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
+       </tal:datapage>
     </div>
 
     <div class="right-column-area">
