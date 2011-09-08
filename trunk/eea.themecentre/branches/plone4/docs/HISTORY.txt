@@ -4,6 +4,7 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
+* Change: Added themes tab on video edit page [szabozo0 #4510]
 
 * Change: Added upgrade step to make IThemeTaggable navigation roots
   [voineali #4376]
