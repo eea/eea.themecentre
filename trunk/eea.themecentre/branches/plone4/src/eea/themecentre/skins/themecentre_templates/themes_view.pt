@@ -12,7 +12,7 @@
 
     <tal:promos condition="python:request.get('LANGUAGE','en') == 'en'"> 
         <div id="top-news-area"> 
-    <h2>Main enviremental topics</h2> 
+    <h2>Main environmental topics</h2> 
             <metal:promotions use-macro="here/portlet_promotions/macros/hardcoded_promotions" /> 
         <div class="visualClear"><!-- &nbsp; --></div> 
         </div> 
