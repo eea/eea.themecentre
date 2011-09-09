@@ -36,6 +36,12 @@ body.section-themes #themes-sitemap h2 {
 float:left;
 width:47%;
 }
+.column-list li {
+background: url("bullet.gif") no-repeat scroll 0 0 transparent;
+    display: inline-block !important;
+    padding-left: 10px;
+    width: 213px;
+}
 
 .contentColumnTwo {
 float:right;
