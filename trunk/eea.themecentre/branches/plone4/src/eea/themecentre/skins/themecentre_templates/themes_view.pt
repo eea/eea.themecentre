@@ -10,15 +10,13 @@
     
 <div id="themes-sitemap"  metal:fill-slot="content-core">
 
-    <h2>Main enviremental topics</h2> 
     <tal:promos condition="python:request.get('LANGUAGE','en') == 'en'"> 
         <div id="top-news-area"> 
+    <h2>Main enviremental topics</h2> 
             <metal:promotions use-macro="here/portlet_promotions/macros/hardcoded_promotions" /> 
         <div class="visualClear"><!-- &nbsp; --></div> 
         </div> 
     </tal:promos> 
-
-    <h2>More enviremental topics</h2> 
 
         <div class="plain" tal:condition="context/CookedBody|nothing">
             <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
