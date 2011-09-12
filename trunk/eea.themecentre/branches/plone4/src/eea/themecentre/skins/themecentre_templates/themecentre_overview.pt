@@ -12,22 +12,11 @@
     tal:define="frontpage_view context/@@frontpage_highlights;">
 
         <div class="content-column-one">
-            <div metal:define-macro="subfolders"
-                 tal:define="themecentre_view context/@@themecentre_utils;
-                 folders themecentre_view/getThemeFolders;"
-                 id="subfolders">
-                 <h2>Subtopics</h2>
-                <ul> 
-                    <li tal:repeat="folder folders"> 
-                        <a tal:attributes="href folder/getPath; title folder/Title;" tal:content="folder/Title">Folder links</a>
-                    </li>
-                </ul>
-            </div>
-       <tal:datapage tal:define="datapage string:themecentre">
+         <tal:datapage tal:define="datapage string:themecentre">
             <div metal:use-macro="here/frontpage_view/macros/whatsnew-gallery">
                 whatsnew gallery
             </div>
-       </tal:datapage>
+         </tal:datapage>
         </div>
 
     </metal:main-macro>
