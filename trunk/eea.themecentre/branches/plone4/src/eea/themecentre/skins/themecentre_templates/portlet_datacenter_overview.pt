@@ -7,8 +7,15 @@
     tal:condition="python: title and isViewTemplate">
         <h3>
             <a href="dc" class="internal-link" title="Data centre overview">
-                <span tal:condition="python: title in eea_datacentres" id="theme-datacentre"  tal:content="string: ${title} data centre">data centre</span>
-                <span tal:condition="python: not (title in eea_datacentres)" id="theme-datacentre"  tal:content="string: ${title} data service">data service</span>
+
+                    <span tal:condition="python: title in eea_datacentres" id="theme-datacentre">
+                        <tal:title tal:content="string:${title}">title</tal:title>
+                        <tal:datacentre i18n:translate="themecentre_datacentre">data centre</tal:datacentre>
+                    </span>
+                    <span tal:condition="python: not (title in eea_datacentres)" id="theme-datacentre">
+                        <tal:title tal:content="string:${title}">title</tal:title>
+                        <tal:dataservice i18n:translate="themecentre_dataservice">data service</tal:dataservice>
+                    </span>
             </a>
         </h3>
     </div>

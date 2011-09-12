@@ -21,7 +21,7 @@
     <div class="column-area">
     
        <div class="featured">
-       <h2>Global search</h2>
+       <h2 i18n:translate="featured_global_search">Global search</h2>
 	    <form action="dm" method="get" id="faceted-text-search">
                                 <p>
                                     <input type="text" onkeypress="return disableEnterKey(event)" name="c12">
@@ -31,7 +31,7 @@
        </div>
 
        <div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
-       <h3>Browse catalogue</h3>
+       <h3 i18n:translate="">Browse catalogue</h3>
        <tal:datapage tal:define="datapage string:dcview">
             <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
        </tal:datapage>
@@ -43,12 +43,15 @@
         <h3 tal:define="themecentre_view context/@@themecentre_utils;
                     title themecentre_view/getDataCentreName|nothing;">
                     <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage" i18n:translate="themes-featured-homepage">
-                <span id="theme-datacentre"  tal:content="string: ${title} homepage">Go to homepage</span>
+                    <span id="theme-datacentre">
+                        <tal:title tal:content="string:${title}">title</tal:title>
+                        <tal:homepage i18n:translate="themecentre_homepage">homepage</tal:homepage>
+                    </span>
             </a>
         </h3>
     </div>
 		
-        <h2>In the spotlight</h2>
+        <h2 i18n:translate="">In the spotlight</h2>
 	<!-- promotions_gallery_slideshow-->
         <metal:promotions tal:define="frontpage python: False; 
                         promo_view context/@@data_and_maps_logic;">
