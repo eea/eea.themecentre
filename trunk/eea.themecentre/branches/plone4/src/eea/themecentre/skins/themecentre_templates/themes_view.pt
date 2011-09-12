@@ -17,9 +17,12 @@
         <div class="visualClear"><!-- &nbsp; --></div> 
         </div> 
     </tal:promos> 
-<div class="visualClear">
+    
+
+<div id="all-topics-list" style="margin:4em 0 0 0;">
+ <h2>All topics</h2>
 <div class="contentColumnOne">
-<h2>What is happening?<br />Environmental issues</h2>
+<h3>What is happening?<br />Environmental issues</h3>
 <ul>
 <li><a href="resolveuid/0d2e3d3da1d2f8f1cc4f029a27b931d0">Air pollution</a></li>
 <li><a href="resolveuid/cd6bef0c97b6c8ea3e216267af7f1605">Biodiversity</a></li>
@@ -36,7 +39,7 @@
 </ul>
 </div>
 <div class="contentColumnTwo">
-<h2>Why is it happening?<br />Sectors and activities</h2>
+<h3>Why is it happening?<br />Sectors and activities</h3>
 <ul>
 <li><a href="resolveuid/47c19827e0f4e840c77ae6281f124f50">Agriculture</a></li>
 <li><a href="resolveuid/3cdc3686b331e7d580f9ade779c72ad9">Energy</a></li>
@@ -51,7 +54,7 @@
 </div>
 <div class="visualClear">
 <div class="contentColumnOne">
-<h2>Environment in different regions and specific areas</h2>
+<h3>Environment in different regions and specific areas</h3>
 <ul>
 <li><a href="resolveuid/c79b3492043943b66cffa48c47f4c3a2">Coasts and seas</a></li>
 <li><a href="resolveuid/515694fae21c1d760e5179a63291750b">Specific regions</a></li>
@@ -59,7 +62,7 @@
 </ul>
 </div>
 <div class="contentColumnTwo">
-<h2>Across environmental issues and sectors</h2>
+<h3>Across environmental issues and sectors</h3>
 <ul>
 <li><a class="internal-link" href="resolveuid/0742501c1bd96c82e8bb993ee49f120c" title="Environmental technology">Environmental technology</a></li>
 <li><a href="resolveuid/f68e62dd80ecbc75f123197e48ef3ceb">Policy instruments<br /></a></li>
