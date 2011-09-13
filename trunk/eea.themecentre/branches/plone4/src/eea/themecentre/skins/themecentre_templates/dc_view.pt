@@ -22,9 +22,9 @@
     
        <div class="featured">
        <h2 i18n:translate="featured_global_search">Global search</h2>
-	    <form action="dm" method="get" id="faceted-text-search">
+	    <form action="dm" method="get" id="faceted-text-search" class="searchforms">
                                 <p>
-                                    <input type="text" onkeypress="return disableEnterKey(event)" name="c12">
+                                    <input type="text" onkeypress="return disableEnterKey(event)" name="c12" title="Search data, maps, indicators">
                                     <input type="submit" value="Search" name="search" class="searchButton" style="cursor: pointer; cursor: hand;">
                                 </p>
 	    </form>
