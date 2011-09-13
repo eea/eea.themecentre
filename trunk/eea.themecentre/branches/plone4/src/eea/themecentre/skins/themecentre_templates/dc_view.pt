@@ -16,15 +16,15 @@
               tal:replace="structure text" />
         </div>
 
-        
+
 
     <div class="column-area">
-    
+
        <div class="featured">
        <h2 i18n:translate="featured_global_search">Global search</h2>
-	    <form action="dm" method="get" id="faceted-text-search" class="searchforms">
+	    <form action="dm" method="get" id="faceted-text-search" class="searchforms faceted-external-search">
                                 <p>
-                                    <input type="text" onkeypress="return disableEnterKey(event)" name="c12" title="Search data, maps, indicators">
+                                    <input type="text" name="c12" title="Search data, maps, indicators">
                                     <input type="submit" value="Search" name="search" class="searchButton" style="cursor: pointer; cursor: hand;">
                                 </p>
 	    </form>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="right-column-area">
-        
+
 <div class="shortcut-default roundedCorners">
         <h3 tal:define="themecentre_view context/@@themecentre_utils;
                     title themecentre_view/getDataCentreName|nothing;">
@@ -50,17 +50,17 @@
             </a>
         </h3>
     </div>
-		
+
         <h2 i18n:translate="">In the spotlight</h2>
 	<!-- promotions_gallery_slideshow-->
-        <metal:promotions tal:define="frontpage python: False; 
+        <metal:promotions tal:define="frontpage python: False;
                         promo_view context/@@data_and_maps_logic;">
                 <div metal:use-macro="here/portlet_promo_gallery/macros/portlet">
                     promoted item
                 </div>
-        </metal:promotions>   
+        </metal:promotions>
         <!-- end promotions_gallery_slideshow -->
-	
+
         <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
                 <div tal:replace="structure dcview/render_nav_portlet" />
         </metal:listingmacro>
