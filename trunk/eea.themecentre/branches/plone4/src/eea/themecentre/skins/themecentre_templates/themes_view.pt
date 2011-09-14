@@ -9,7 +9,6 @@
 <body>
     
 <div id="themes-sitemap"  metal:fill-slot="content-core">
-
     <tal:promos condition="python:request.get('LANGUAGE','en') == 'en'"> 
 
         <h2 i18n:translate="">Main environmental topics</h2> 

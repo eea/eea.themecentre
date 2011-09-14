@@ -23,7 +23,7 @@
              tal:condition="python: hasattr(context.getCanonical(), 'theme_image')">
             <div class="figure">
                  <img src=""
-                      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image';alt object_title"  />
+                      tal:attributes="src python: context.getCanonical().absolute_url() + '/image_mini';alt object_title"  />
              </div>
         </div>
 
@@ -39,6 +39,22 @@
         </div>
 
         <div class="visualClear"><!--&nbsp; --></div>
+
+            <div id="boxes" tal:define="view nocall:context/@@soer_frontpage_logic;">
+                <div id="soer-top-area" style="margin:20px 0 50px 0;">
+                    <!-- all key facts and messages -->
+                    <dl style="float:left;width:370px;" class="portlet slidePortlet" >
+                        <dt class="portletHeader" style="padding:5px;">Key facts and messages</dt>
+                         <dd class="portletItem" style="left: 370px;"  tal:repeat="item view/getAllFactsAndMessages">
+                           <span>
+                              <span tal:replace="structure item/text"></span>
+                               <a href="" title="Read more of the key fact" class="moreLink"
+                               tal:attributes="href item/url">more</a>
+                            </span>
+                         </dd>
+                    </dl>
+                </div>
+            </div>
 
         <metal:portlets use-macro="context/themecentre_overview/macros/main" />
 
