@@ -23,7 +23,7 @@
              tal:condition="python: hasattr(context.getCanonical(), 'theme_image')">
             <div class="figure">
                  <img src=""
-                      tal:attributes="src python: context.getCanonical().absolute_url() + '/image_mini';alt object_title"  />
+                      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image/image_mini';alt object_title"  />
              </div>
         </div>
 
