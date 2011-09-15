@@ -32,11 +32,10 @@
            tal:condition="context/Description">
             Description
         </p>
-
-        <div class="plain" tal:condition="context/CookedBody|nothing">
-            <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
-              tal:replace="structure text" />
-        </div>
+        
+        <p>
+            <a class="internal-link moreLink" href="intro">More</a>
+        </p>
 
         <div class="visualClear"><!--&nbsp; --></div>
 
