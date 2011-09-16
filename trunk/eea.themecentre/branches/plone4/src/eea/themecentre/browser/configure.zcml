@@ -117,13 +117,6 @@
       permission="zope.Public"
       />
 
-  <browser:page
-      for="eea.themecentre.interfaces.IThemeTaggable"
-      name="migrate_themes_folders"
-      permission="cmf.ModifyPortalContent"
-      class=".themecentre.ThemecentreUtils"
-      attribute="migrateThemeFolders"
-      />
   <!-- provides info for the related topics portlet -->
   <browser:page
       for="*"
