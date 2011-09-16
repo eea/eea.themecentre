@@ -124,3 +124,45 @@ class ThemecentreUtils(BrowserView):
             name = getTheme(self.context.aq_inner.aq_parent)
             name = [name.capitalize() if name else ''].pop()
             return name
+
+    def migrateThemeFolders(self):
+        """ Removes the intro page as the default_page and sets
+            the layout of theme folders to themecentre_view and
+            sets as description for the folder the description
+            of the intro page if exists, otherwise it constucts
+            one from the first paragraph
+        """
+        query = { 'object_provides' :
+                'eea.themecentre.interfaces.IThemeCentre',
+                'review_state': 'published', 'path' :
+                {'query': '/www/SITE/themes', 'depth': 1}}
+        res = self.catalog.searchResults(query)
+        res = [obj.getObject() for obj in res]
+        for obj in res:
+            if hasattr(obj, 'intro'):
+                intro = obj.intro
+            else:
+                intro = obj.restrictedTraverse(obj.getProperty('default_page'))
+            if obj.hasProperty('layout'):
+                obj.manage_changeProperties({'layout' : 'themecentre_view'})
+            else:
+                obj.manage_addProperty('layout', 'themecentre_view', 'string')
+            if obj.hasProperty('default_page'):
+                obj.manage_delProperties(['default_page'])
+            if intro.hasProperty('layout'):
+                obj.manage_delProperties(['layout'])
+            intro_desc = intro.Description()
+            if intro_desc:
+                obj.setDescription(intro_desc)
+            else:
+                import lxml.html
+                body = lxml.html.fromstring(intro.CookedBody())
+                if len(body.findall('p')) > 0:
+                    first_paragraph = body.findall('p')[0].text
+                else:
+                    first_paragraph = body.text
+                obj.setDescription(first_paragraph)
+        return "done"
+
+
+
