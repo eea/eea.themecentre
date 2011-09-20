@@ -23,7 +23,7 @@
              
             <div class="figure">
                  <img src=""
-                      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image';alt object_title" style="width:615px;"  />
+                      tal:attributes="src python: context.getCanonical().absolute_url() + '/theme_image';alt object_title" style="width:615px; height: 364px;"  />
                     <div id="boxes" tal:define="view nocall:context/@@soer_frontpage_logic;
                       items view/getAllFactsAndMessages">
                             <div id="soer-top-area">
