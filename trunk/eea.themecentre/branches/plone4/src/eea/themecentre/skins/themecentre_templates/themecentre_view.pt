@@ -15,7 +15,7 @@
             Title or id
         </h1>
 
-        <div tal:replace="structure provider:plone.documentactions" />
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <div class="visualClear"><!--&nbsp; --></div>
         
@@ -29,12 +29,12 @@
                             <div id="soer-top-area">
                                 <!-- all key facts and messages -->
                                 <dl style="width: 616px;
-                                           height: 170px !important;
+                                           height: 156px !important;
                                            position: relative;
-                                           top: -174px;
+                                           top: -160px;
                                            left: -2px;
                                            opacity: 0.9;
-                                           margin-bottom: -160px;" 
+                                           margin-bottom: -140px;" 
                                     class="portlet slidePortlet" >
                                     <dt class="portletHeader" style="padding:5px;">Key facts and messages</dt>
                                      <dd class="portletItem" style="left: 615px;"  tal:repeat="item items">
