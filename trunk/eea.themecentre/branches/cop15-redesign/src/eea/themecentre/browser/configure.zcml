@@ -142,36 +142,6 @@
             factory=".sitemap.SitemapThemeCentreStrategy"
             provides="Products.CMFPlone.browser.interfaces.INavtreeStrategy" />
 
-  <!-- migration stuff -->
-
-  <browser:page
-      zcml:condition="installed MySQLdb"
-      for="*"
-      name="migrateEpaediaMultimedia"
-      class=".migrate_epaedia.MigrateMedia"
-      permission="cmf.ModifyPortalContent"
-      attribute="migrate"
-      />
-
-  <browser:page
-      zcml:condition="installed MySQLdb"
-      for="*"
-      name="migrateEpaediaArticles"
-      class=".migrate_epaedia.MigrateArticles"
-      permission="cmf.ModifyPortalContent"
-      attribute="migrate"
-      />
-
-  <!--
-  <browser:page
-      for="eea.themecentre.interfaces.IThemeCentre"
-      name="allnews"
-      class=".portlets.news.NewsPortlet"
-      allowed_interface=".interfaces.INewsPortlet"
-      permission="zope.Public"
-      />
-  -->
-
   <browser:page
       for="*"
       name="proxy"
