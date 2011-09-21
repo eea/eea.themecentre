@@ -16,10 +16,11 @@
         </h1>
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
-
+        <p class="documentDescription">
+           <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
+           <a class="internal-link moreLink" href="intro">More</a>
+        </p>
         <div class="visualClear"><!--&nbsp; --></div>
-        
-        <div >
              
             <div class="figure">
                  <img src=""
@@ -47,17 +48,11 @@
                     </dl>
                 </div>
             </div>
-             </div>
         </div>
-
-        <p class="documentDescription">
-           <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
-           <a class="internal-link moreLink" href="intro">More</a>
-        </p>
 
         <div class="visualClear"><!--&nbsp; --></div>
 
-
+        <h3>Browse catalogue</h3>
         <metal:portlets use-macro="context/themecentre_overview/macros/main" />
 
         <div class="visualClear"><!-- --></div>
