@@ -1,12 +1,10 @@
 Changelog
 =========
 
-1.8-dev - (unreleased)
-----------------------
-
+1.8 - (2011-09-21)
+------------------
  * Bug fix: Removed deprecated epaedia migration scripts that breaks eea.daviz
    [voineali #4528]
-
 
 1.7 - (2011-05-24)
 ------------------
