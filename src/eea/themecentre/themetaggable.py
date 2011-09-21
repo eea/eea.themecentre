@@ -37,30 +37,30 @@ class ThemeTaggable(object):
             mapping = annotations[KEY] = PersistentDict(themes)
         self.mapping = mapping
 
-    def tags():
-        def get(self):
-            anno = IAnnotations(self.context)
-            mapping = anno.get(KEY)
-            tags = list(mapping['themes'])
-            return tags 
-        def set(self, value):
-            # if the value didn't change we don't need to do anything
-            if value == self.tags:
-                return
+    #def tags():
+    def gett(self):
+        anno = IAnnotations(self.context)
+        mapping = anno.get(KEY)
+        tags = list(mapping['themes'])
+        return tags 
+    def sett(self, value):
+        # if the value didn't change we don't need to do anything
+        if value == self.tags:
+            return
 
-            anno = IAnnotations(self.context)
-            mapping = anno.get(KEY)
+        anno = IAnnotations(self.context)
+        mapping = anno.get(KEY)
 
-            # if value is a tuple, convert it
-            themes = list(value)
-            # make sure object is tagged with the current themecentre
-            # if not, add the themecentre to the tags
-            checkTheme(self.context, themes)
-            mapping['themes'] = PersistentList(themes)
-            info = Attributes(IThemeTagging, 'tags')
-            notify(ObjectModifiedEvent(self, info))
-        return property(get, set)
-    tags = tags()
+        # if value is a tuple, convert it
+        themes = list(value)
+        # make sure object is tagged with the current themecentre
+        # if not, add the themecentre to the tags
+        checkTheme(self.context, themes)
+        mapping['themes'] = PersistentList(themes)
+        info = Attributes(IThemeTagging, 'tags')
+        notify(ObjectModifiedEvent(self, info))
+    #return property(get, set)
+    tags = property(gett,sett)
 
     def nondeprecated_tags(self):
         tags = self.tags
@@ -81,25 +81,25 @@ class ThemeCentreTaggable(object):
     def __init__(self, context):
         self.context = context
 
-    def tags():
-        def get(self):
-            tags = IThemeTagging(self.context).tags
-            if len(tags) > 0:
-                return tags[0]
-            return None
-        def set(self, value):
-            # if folder didn't have a theme tag earlier we send an event
-            # so folders and stuff can be created in the themecentre
-            tags = IThemeTagging(self.context).tags
-            should_promote = not tags
+    #def tags():
+    def gett(self):
+        tags = IThemeTagging(self.context).tags
+        if len(tags) > 0:
+            return tags[0]
+        return None
+    def sett(self, value):
+        # if folder didn't have a theme tag earlier we send an event
+        # so folders and stuff can be created in the themecentre
+        tags = IThemeTagging(self.context).tags
+        should_promote = not tags
 
-            IThemeTagging(self.context).tags = (value,)
-            if value and should_promote:
-                notify(PromotedToThemeCentreEvent(self.context))
-            vocab = getUtility(IVocabularyFactory, 'Allowed themes')
-            themes = vocab(self)
-        return property(get, set)
-    tags = tags()
+        IThemeTagging(self.context).tags = (value,)
+        if value and should_promote:
+            notify(PromotedToThemeCentreEvent(self.context))
+        #vocab = getUtility(IVocabularyFactory, 'Allowed themes')
+        #themes = vocab(self)
+    #return property(get, set)
+    tags = property(gett, sett)
 
 
 def tagTranslation(obj, event):

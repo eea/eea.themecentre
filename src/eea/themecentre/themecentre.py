@@ -53,7 +53,7 @@ def promoted(obj, event):
     faqobj.processForm()
 
     theme_id = IThemeCentreSchema(obj).tags
-    obj.invokeFactory('Document', id='intro', title=obj.Title()+' introduction')
+    obj.invokeFactory('Document', id='intro', title=obj.Title() + ' introduction')
     if not hasattr(aq_base(obj), 'default_page'):
         obj.manage_addProperty('default_page', 'intro', 'string')
     intro = getattr(obj, 'intro')
@@ -77,7 +77,7 @@ def promoted(obj, event):
         topic = getattr(newsobj, 'highlights_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue(['News Item', 'Highlight', 'Press Release'])
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -87,12 +87,12 @@ def promoted(obj, event):
         effective_crit = topic.addCriterion('effective', 'ATFriendlyDateCriteria')
         effective_crit.setOperation('less')
         effective_crit.setValue(0)
-        
+
         topic.setSortCriterion('effective', True)
         topic.setLayout('atct_topic_view')
         topic.setCustomViewFields(['EffectiveDate'])
         topic._at_rename_after_creation = False
-        
+
     if eventsobj:
         workflow.doActionFor(eventsobj, 'publish')
         eventsobj.setConstrainTypesMode(1)
@@ -100,14 +100,14 @@ def promoted(obj, event):
         eventsobj.setLocallyAllowedTypes(['Event'])
         eventsobj.manage_addProperty('default_page', 'events_topic',
                                    'string')
-        
+
         # add a smart folder to the events folder that shows all events
         _createObjectByType('Topic', eventsobj, id='events_topic',
                             title='Upcoming events')
         topic = getattr(eventsobj, 'events_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue(('Event','QuickEvent', 'RDFEvent'))
-        sort_crit = topic.addCriterion('start', 'ATSortCriterion')
+        type_crit.setValue(('Event', 'QuickEvent'))
+        topic.addCriterion('start', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -129,14 +129,14 @@ def promoted(obj, event):
         linksobj.setLocallyAllowedTypes(['Folder', 'Link'])
         linksobj.manage_addProperty('default_page', 'links_topic',
                                    'string')
-        
+
         # add a smart folder to the links folder that shows all links
         _createObjectByType('Topic', linksobj, id='links_topic',
                             title='External links')
         topic = getattr(linksobj, 'links_topic')
         type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
         type_crit.setValue('Link')
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
+        topic.addCriterion('created', 'ATSortCriterion')
         state_crit = topic.addCriterion('review_state',
                                         'ATSimpleStringCriterion')
         state_crit.setValue('published')
@@ -152,23 +152,23 @@ def promoted(obj, event):
         createFaqSmartFolder(faqobj, theme_id)
 
 def createFaqSmartFolder(parent, theme_id):
-        # add a smart folder to the faq folder that shows all faqs
-        _createObjectByType('Topic', parent, id='faqs_topic',
-                            title='FAQ')
-        topic = getattr(parent, 'faqs_topic')
-        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue('FAQ')
-        sort_crit = topic.addCriterion('created', 'ATSortCriterion')
-        state_crit = topic.addCriterion('review_state',
-                                        'ATSimpleStringCriterion')
-        state_crit.setValue('published')
-        theme_crit = topic.addCriterion('getThemes',
-                                        'ATSimpleStringCriterion')
-        theme_crit.setValue(theme_id)
-        topic.setSortCriterion('effective', True)
-        topic.setLayout('atct_topic_view')
-        topic.setCustomViewFields([])
-        topic._at_rename_after_creation = False
+    # add a smart folder to the faq folder that shows all faqs
+    _createObjectByType('Topic', parent, id='faqs_topic',
+                        title='FAQ')
+    topic = getattr(parent, 'faqs_topic')
+    type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+    type_crit.setValue('FAQ')
+    topic.addCriterion('created', 'ATSortCriterion')
+    state_crit = topic.addCriterion('review_state',
+                                    'ATSimpleStringCriterion')
+    state_crit.setValue('published')
+    theme_crit = topic.addCriterion('getThemes',
+                                    'ATSimpleStringCriterion')
+    theme_crit.setValue(theme_id)
+    topic.setSortCriterion('effective', True)
+    topic.setLayout('atct_topic_view')
+    topic.setCustomViewFields([])
+    topic._at_rename_after_creation = False
 
 
 def objectAdded(obj, event):
@@ -190,15 +190,18 @@ def objectMoved(obj, event):
     # IObjectMovedEvent is a very generic event, so we have to check
     # source and destination to make sure it's really a cut & paste
     if event.oldParent is not None and event.newParent is not None:
-       objectAdded(obj, event)
+        objectAdded(obj, event)
 
 def objectThemeTagged(obj, event):
-    """ Checks if the object's theme tags are modified. If true, catalog
-        is updated. """
-
+    """ Checks if the object's theme tags are modified. If true, tags are
+        copied to eventual translations, and catalog is updated. """
     for desc in event.descriptions:
         if desc.interface == IThemeTagging:
-           obj.context.reindexObject()
+            context = obj.context
+            if context.isCanonical():
+                for _lang, trans in context.getTranslations().items():
+                    IThemeTagging(trans[0]).tags = IThemeTagging(context).tags
+            context.reindexObject()
 
 def getThemeCentre(context):
     """ Looks up the closest theme centre. """
@@ -219,13 +222,13 @@ def getThemeCentreByName(name):
             object_provides=IThemeCentre.__identifier__,
             getThemes=name)
     if brains:
-        tc =  brains[0].getObject()
+        tc = brains[0].getObject()
         lang = catalog.REQUEST.get('LANGUAGE', 'en')
         if lang != 'en':
             tcTranslation = tc.getTranslation(lang)
             if tcTranslation is not None:
                 tc = tcTranslation
-        return tc 
+        return tc
     else:
         return None
 
@@ -259,30 +262,7 @@ def objectTitle(context, request):
         It's used for instance for showing title in the web browser title
         bar. If the request has 'feed' variable then the feed's title
         is used, otherwise some other adapter is used instead. """
-
-    class ObjectTitle(object):
-        implements(IObjectTitle)
-        def __init__(self, title):
-            self._title = title
-        @property
-        def title(self):
-            return self._title
-
-    feed = request.get('feed', None)
-    if feed:
-        portal_catalog = getToolByName(context, 'portal_catalog')
-        # TODO use refactored rdf repository and interfaces instead of catalog
-        brains = portal_catalog.searchResults(id=feed,
-                portal_type='RSSFeedRecipe')
-        if brains:
-            putils = getToolByName(context, 'plone_utils')
-            object_title = putils.pretty_title_or_id(context)
-            return ObjectTitle('%s - %s' % (brains[0].Title, object_title))
-        else:
-            return None
-    else:
-        return None
-
+    return None
 
 @implementer(IThemeCentreImageUrl)
 @adapter(IThemeCentre)
@@ -293,6 +273,8 @@ def imageUrl(context):
     tc = context
     if not hasattr(tc, 'theme_image'):
         tc = context.getCanonical()
-    image = getattr(tc, 'theme_image')
-    return '%s/image_icon' % image.absolute_url()
-    
+    image = getattr(tc, 'theme_image', None)
+    if image:
+        return '%s/image_icon' % image.absolute_url()
+    else:
+        return ''

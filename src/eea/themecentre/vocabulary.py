@@ -8,10 +8,10 @@ class ThemesVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context, checkContext=True):
-        if checkContext:
-            obj = context.context
-        else:
-            obj = context
+       # if checkContext:
+       #     obj = context.context
+       # else:
+       #     obj = context
 
         site = getSite()
         portal_vocab = getToolByName(site, 'portal_vocabularies')

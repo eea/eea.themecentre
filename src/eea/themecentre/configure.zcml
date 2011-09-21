@@ -1,6 +1,11 @@
-<configure xmlns="http://namespaces.zope.org/zope">
- 
+<configure xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="eea.themecentre">
+
   <!-- add marker interfaces to those content types that should be taggable -->
+  <class class="Products.Archetypes.BaseContent.BaseContent">
+      <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+  </class>
+
   <class class="Products.ATContentTypes.content.file.ATFile">
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
   </class>
@@ -34,10 +39,6 @@
       <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
     </class>
 
-  <class class="Products.PloneRSSPortlet.content.RSSFeed.RSSFeedRecipe">
-      <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
-  </class>
-
   <adapter factory=".themetaggable.ThemeTaggable" />
   <adapter
       provides=".interfaces.IMainThemeTagging"
@@ -49,7 +50,7 @@
       />
   <adapter factory=".themetaggable.ThemeCentreTaggable" />
 
-  <adapter 
+  <adapter
       for=".interfaces.IThemeCentre"
       factory=".themetaggable.ThemeTaggable" />
 

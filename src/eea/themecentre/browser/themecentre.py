@@ -1,16 +1,16 @@
 from zope.app.schema.vocabulary import IVocabularyFactory
-from zope.interface import implements, alsoProvides
+from zope.interface import alsoProvides # implements
 from zope.component import getUtility
 from zope.formlib.form import Fields
 from Products.Five.formlib.formbase import EditForm
-from eea.themecentre.interfaces import IThemeCentre, IPossibleThemeCentre
+from eea.themecentre.interfaces import IThemeCentre #I PossibleThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema, IThemeRelation
-from eea.themecentre.themecentre import PromotedToThemeCentreEvent, getTheme
+from eea.themecentre.themecentre import getTheme # PromotedToThemeCentreEvent
 from eea.themecentre.themecentre import getThemeTitle
 from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
-from eea.mediacentre.mediatypes import MediaTypesVocabularyFactory
+#from eea.mediacentre.mediatypes import MediaTypesVocabularyFactory
 from eea.mediacentre.interfaces import IMediaCentre
-from Products.CMFCore.utils import getToolByName
+#from Products.CMFCore.utils import getToolByName
 
 from eea.themecentre import _
 
@@ -48,8 +48,8 @@ class Multimedia(object):
         self.request = request
 
     def types(self):
-        mediacentre = getUtility(IMediaCentre)
-        types = sorted(mediacentre.getMediaTypes())
+        #mediacentre = getUtility(IMediaCentre)
+        #types = sorted(mediacentre.getMediaTypes())
         vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
         # we have titles of single name so we add 's' and since we know it's in
         # english
@@ -62,7 +62,7 @@ class Multimedia(object):
         currentTheme = getTheme(self.context)
         mediacentre = getUtility(IMediaCentre)
         search = { MEDIA_SEARCH_KEY: { 'theme': currentTheme }}
-        return [file['object'] for file in mediacentre.getMedia(search=search)]
+        return [mfile['object'] for mfile in mediacentre.getMedia(search=search)]
 
 class Theme(object):
     """ Provides information about this theme/themecentre. """

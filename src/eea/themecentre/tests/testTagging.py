@@ -1,15 +1,15 @@
 import unittest
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
-from zope.component import provideAdapter
-from zope.interface import classImplements
-from eea.themecentre.themetaggable import ThemeTaggable, ThemeCentreTaggable
+#from zope.component import provideAdapter
+#from zope.interface import classImplements
+#from eea.themecentre.themetaggable import ThemeTaggable , ThemeCentreTaggable
 from eea.themecentre.tests.ThemeCentreTestCase import ThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
-from zope.app.annotation.attribute import AttributeAnnotations
-from zope.app.annotation.interfaces import IAttributeAnnotatable
+#from zope.app.annotation.attribute import AttributeAnnotations
+#from zope.app.annotation.interfaces import IAttributeAnnotatable
 from zope.app.component.hooks import setSite
-from zope.app.folder.folder import Folder
+#from zope.app.folder.folder import Folder
 
 
 class TestTagging(ThemeCentreTestCase):
@@ -23,9 +23,9 @@ class TestTagging(ThemeCentreTestCase):
         self.portal.portal_workflow.doActionFor(air, 'publish') 
 
 # convenience method for creating and cataloging object
-def createObject(parent, portal_type, id):
-    parent.invokeFactory(portal_type, id=id)
-    newobj = getattr(parent, id, None)
+def createObject(parent, portal_type, oid):
+    parent.invokeFactory(portal_type, id=oid)
+    newobj = getattr(parent, oid, None)
     if newobj is not None:
         newobj.reindexObject()
 
@@ -46,7 +46,7 @@ class TestThemeCentre(ThemeCentreTestCase):
         self.portal.invokeFactory('Document', id='doc_link')
 
         # add one entry to the themes vocabulary
-        vocab = self.portal.portal_vocabularies
+        #vocab = self.portal.portal_vocabularies
 
 def test_suite():
 
