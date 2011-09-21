@@ -50,14 +50,9 @@
              </div>
         </div>
 
-        <p class="documentDescription"
-           tal:content="context/Description"
-           tal:condition="context/Description">
-            Description
-        </p>
-        
-        <p>
-            <a class="internal-link moreLink" href="intro">More</a>
+        <p class="documentDescription">
+           <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
+           <a class="internal-link moreLink" href="intro">More</a>
         </p>
 
         <div class="visualClear"><!--&nbsp; --></div>
