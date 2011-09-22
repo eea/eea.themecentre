@@ -4,6 +4,8 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
+* Bugfix: Fixed date format [szabozo0 #4549]
+
 * Change: removed the subtopics listing on topic entrance page. it was just
   redundant with the right navigation and tabs. most of the content is outdated.
   [demarant #4537]

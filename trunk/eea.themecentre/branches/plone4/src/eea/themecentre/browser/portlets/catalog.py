@@ -56,7 +56,7 @@ class BasePortlet(BrowserView):
         if isinstance(time, (unicode, str)) and time.endswith('W'):
             time = time[:-1] + 'Z'
 
-        localized_time = translation.ulocalized_time(time, None, context,
+        localized_time = translation.ulocalized_time(time, None, None, context,
                 domain='plone')
         return localized_time
 
