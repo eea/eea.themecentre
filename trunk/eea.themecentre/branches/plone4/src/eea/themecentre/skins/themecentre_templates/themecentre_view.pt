@@ -18,7 +18,7 @@
         <div tal:replace="structure provider:plone.belowcontenttitle" />
         <p class="documentDescription">
            <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
-           <a class="internal-link moreLink" href="intro">More</a>
+           <a tal:condition="python:context.has_key('intro')" class="internal-link moreLink" href="intro">More</a>
         </p>
         <div class="visualClear"><!--&nbsp; --></div>
              
