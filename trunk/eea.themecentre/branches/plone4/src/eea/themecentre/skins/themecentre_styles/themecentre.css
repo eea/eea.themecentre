@@ -157,11 +157,11 @@ body.section-themes #content div.plain blockquote {
 #top-news-area .portlet-promotions {
     width: 20%;
     float: left;
-    border: 1px solid #c6c6c7;
+/*    border: 1px solid #c6c6c7; */
 }
 
 #top-news-area .portlet,
-#top-news-area dl.portlet, #top-news-area dd  {
+#top-news-area dl.portlet, #top-news-area dd {
     margin: 0;
     padding: 0;
 }
