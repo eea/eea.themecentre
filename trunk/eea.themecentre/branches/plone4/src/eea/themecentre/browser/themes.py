@@ -1,7 +1,7 @@
 """ Themes
 """
 from Products.CMFCore.utils import getToolByName
-from Products.Five.formlib.formbase import EditForm
+from five.formlib.formbase import EditForm
 from zope.app.form.browser.itemswidgets import OrderedMultiSelectWidget
 from zope.formlib.form import Fields
 from eea.themecentre.interfaces import IThemeTagging

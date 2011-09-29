@@ -13,7 +13,7 @@ from zope.component import adapts, getUtility
 from zope.event import notify
 from zope.interface import implements
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 
 KEY = 'eea.themecentre.themetaggable'
 

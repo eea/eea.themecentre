@@ -1,10 +1,10 @@
 """ Browser themecentre module
 """
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import alsoProvides
 from zope.component import getUtility
 from zope.formlib.form import Fields
-from Products.Five.formlib.formbase import EditForm
+from five.formlib.formbase import EditForm
 from eea.themecentre.interfaces import (
     IThemeCentreSchema,
     IThemeRelation,
