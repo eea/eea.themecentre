@@ -35,12 +35,14 @@ class DataCentreReporting(object):
             for obligation in result:
                 rodsinfo[int(obligation['PK_RA_ID'])] = obligation
 
-        result = catalog({
+        query = {
             'object_provides': 'eea.dataservice.interfaces.IDataset',
-            'getThemes': currentTheme,
             'review_state': 'published',
             'effectiveRange' : now,
         })
+        if currentTheme:
+            query['getThemes'] = currentTheme
+        result = catalog.searchResults(query)
 
         for res in result:
             reso = res.getObject()

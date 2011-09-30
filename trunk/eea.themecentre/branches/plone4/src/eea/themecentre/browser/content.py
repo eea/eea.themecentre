@@ -27,9 +27,10 @@ class ContentByType(object):
         catalog = getToolByName(context, 'portal_catalog')
         query = { 'portal_type': contenttype,
                   'review_state': 'published',
-                  'getThemes': themes,
                   'sort_on': 'effective',
                 }
+        if themes:
+            query['getThemes'] = themes
         contentobjects = []
         brains = catalog.searchResults(query)
         for brain in brains:

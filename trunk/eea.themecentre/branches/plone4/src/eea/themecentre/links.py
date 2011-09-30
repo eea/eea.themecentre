@@ -21,7 +21,7 @@ class LinkAdapter(object):
     def _find_topic(self):
         """ Find topic """
         catalog = getToolByName(self.context, 'portal_catalog')
-        query = { 'portal_type': ('Topic', 'RichTopic'),
+        query = { 'portal_type': 'Topic',
                   'path': '/'.join(self.themecentre.getPhysicalPath()) }
         brains = catalog.searchResults(query)
         topics = [brain.getObject() for brain in brains]
