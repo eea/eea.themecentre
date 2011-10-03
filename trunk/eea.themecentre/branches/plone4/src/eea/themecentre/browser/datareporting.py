@@ -39,7 +39,7 @@ class DataCentreReporting(object):
             'object_provides': 'eea.dataservice.interfaces.IDataset',
             'review_state': 'published',
             'effectiveRange' : now,
-        })
+        }
         if currentTheme:
             query['getThemes'] = currentTheme
         result = catalog.searchResults(query)
