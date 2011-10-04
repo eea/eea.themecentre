@@ -32,7 +32,7 @@ class PromoteThemeCentre(object):
         types = ['Folder', 'Document', 'Link', 'File', 'Image', 'Event',
                  'HelpCenterFAQFolder', 'FlashFile' ]
 
-        self.context.setLocallyAllowedTypes( types + ['RichTopic', 'Topic'] )
+        self.context.setLocallyAllowedTypes( types + ['Topic'] )
         self.context.setImmediatelyAddableTypes( types )
         self.context.setConstrainTypesMode(ENABLE)
 
