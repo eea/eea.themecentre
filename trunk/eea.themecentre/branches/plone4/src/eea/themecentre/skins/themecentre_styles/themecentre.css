@@ -35,7 +35,7 @@ float:left;
 width:47%;
 }
 .column-list li {
-background: url("bullet.gif") no-repeat scroll 0 0 transparent;
+    background: url("bullet.gif") no-repeat scroll 0 0 transparent;
     display: inline-block !important;
     padding-left: 10px;
     width: 213px;
@@ -45,6 +45,8 @@ background: url("bullet.gif") no-repeat scroll 0 0 transparent;
 float:right;
 width:47%;
 }
+
+
 
 /***** New design of portlets for now only under themes *****/
 body.section-themes .portlet-rss .portletHeader {
@@ -129,6 +131,25 @@ body.section-themes #content div.plain blockquote {
 #themes-sitemap #all-topics-list {
     margin:4em 0 0 0;
 }
+
+#subtopics {
+    margin: 0 0 2em 0;
+}
+
+#subtopics li {
+    background: url("bullet.gif") no-repeat scroll 0 0 transparent;
+    display: inline-block !important;
+    padding: 0 15px;
+    margin-right: 20px;
+    width: 220px;
+    vertical-align: top;
+}
+
+#subtopics h2, #subtopics h3 {
+    background: none;
+    padding: 0px;
+}
+
 
 /***** Theme promotions *****/
 #top-news-area {

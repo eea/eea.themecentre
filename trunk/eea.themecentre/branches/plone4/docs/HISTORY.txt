@@ -4,6 +4,9 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
+* Feature: Implemented right logic and display of "Subtopics" under a theme.
+  [demarant #4610]
+
 * Bugfix: Fixed date format [szabozo0 #4549]
 
 * Change: removed the subtopics listing on topic entrance page. it was just

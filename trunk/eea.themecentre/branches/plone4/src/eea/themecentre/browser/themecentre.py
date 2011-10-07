@@ -17,6 +17,7 @@ from eea.themecentre import _
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
+from Products.NavigationManager.sections import INavigationSectionPosition
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
 
 class PromoteThemeCentre(object):
@@ -97,19 +98,20 @@ class ThemecentreUtils(BrowserView):
         self.catalog = getToolByName(context, 'portal_catalog')
         self.now = DateTime()
 
-    def getThemeFolders(self):
-        """ get folders from current theme object """
-        folder_path = '/'.join(self.context.aq_parent.getPhysicalPath())
+    def getSubtopics(self):
+        """ get sub objects from current theme object 
+        that are assigned to nav section topics, this is
+        regarded as the subtopics of the theme. Return list sorted on title."""
+        folder_path = '/'.join(self.context.getPhysicalPath())
         query = {
-                'portal_type'        : 'Folder',
+                'navSection' : 'topics',
                 'review_state'       : 'published',
-                'sort_on'            : 'effective',
-                'exclude_from_nav'   : False,
-                'sort_order'         : 'reverse',
+                'sort_on'            : 'sortable_title',
                 'path'               : {'query': folder_path, 'depth': 1},
                 'effectiveRange'     : self.now
         }
-        return self.catalog.searchResults(query)
+        res = self.catalog.searchResults(query)
+        return res
 
     def getDataCentreName(self):
         """ Get the name of the datacentre for the given theme

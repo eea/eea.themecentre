@@ -30,8 +30,21 @@
                     </metal:keyfacts>   
 
         <div class="visualClear"><!--&nbsp; --></div>
+        
+	<div metal:define-macro="subtopics" class="portletGradientStandard"
+	     tal:define="themecentre_view context/@@themecentre_utils; 
+	                 folders themecentre_view/getSubtopics;" id="subtopics"
+			 tal:condition="folders"> 
+	   <h2>Subtopics</h2> 
+	   <ul>  
+		<li tal:repeat="folder folders">  
+		    <a tal:attributes="href folder/getURL; title folder/Title;" 
+		    tal:content="folder/Title">Folder links</a> 
+		</li> 
+           </ul> 
+	</div> 
 
-        <h3>Browse catalogue</h3>
+
         <metal:portlets use-macro="context/themecentre_overview/macros/main" />
 
         <div class="visualClear"><!-- --></div>
