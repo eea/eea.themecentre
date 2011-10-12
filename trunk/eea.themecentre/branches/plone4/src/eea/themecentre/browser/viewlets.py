@@ -2,9 +2,13 @@
 """
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets import common
+from zope.component import getMultiAdapter
 
 class ThemesTagsViewlet(common.ViewletBase):
     """ A custom viewlet registered below the title for showing
         the tagged themes/topics
     """
-    render = ViewPageTemplateFile('templates/themes_tags.pt')
+    index = ViewPageTemplateFile('templates/themes_tags.pt')
+    def available(self):
+        plone = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
+        return plone.is_view_template()

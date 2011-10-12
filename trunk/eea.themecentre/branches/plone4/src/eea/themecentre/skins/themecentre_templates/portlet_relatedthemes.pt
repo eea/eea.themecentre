@@ -7,9 +7,9 @@
        i18n:domain="plone"
        tal:define="view context/@@relatedtopics;
                    menu view/menu"
-       tal:condition="menu">
+       tal:condition="context/@@plone_context_state/is_view_template">
 
-<dl class="portlet portlet-navigation-tree eea-accordion-portlet">
+       <dl class="portlet portlet-navigation-tree eea-accordion-portlet" tal:condition="menu">
     <dt class="portletHeader eea-accordion-header">
         <span class="tile">
             Related topics
