@@ -134,6 +134,9 @@ body.section-themes #content div.plain blockquote {
 
 #subtopics {
     margin: 0 0 2em 0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 #subtopics li {
