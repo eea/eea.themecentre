@@ -2,12 +2,11 @@
     <tal:featured_item 
          tal:define="featured_class context/@@data_and_maps_logic;
                      highlights featured_class/getLatestIndicators;
-                     translate_tag string:featured-indicator-item;
                      nr_items python:1;
-                     box_title string:Featured indicator;
-                     archive_text string:See all;
-                     archive_href string:indicators;
-                     archive_translate_tag string:see-all;">
-        <div metal:use-macro="here/frontpage_macros/macros/featured-item" />
+                     archive_href string:indicators;">
+        <div metal:use-macro="here/frontpage_macros/macros/featured-item">
+             <span metal:fill-slot="archive" i18n:translate="">See all</span>
+             <span metal:fill-slot="box_title" i18n:translate="">Featured indicator</span>
+        </div>
     </tal:featured_item>
 </div>
