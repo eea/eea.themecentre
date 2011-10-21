@@ -17,7 +17,6 @@ from eea.themecentre import _
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
-from Products.NavigationManager.sections import INavigationSectionPosition
 ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
 
 class PromoteThemeCentre(object):
@@ -99,7 +98,7 @@ class ThemecentreUtils(BrowserView):
         self.now = DateTime()
 
     def getSubtopics(self):
-        """ get sub objects from current theme object 
+        """ get sub objects from current theme object
         that are assigned to nav section topics, this is
         regarded as the subtopics of the theme. Return list sorted on title."""
         folder_path = '/'.join(self.context.getPhysicalPath())

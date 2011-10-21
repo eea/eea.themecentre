@@ -10,5 +10,8 @@ class ThemesTagsViewlet(common.ViewletBase):
     """
     index = ViewPageTemplateFile('templates/themes_tags.pt')
     def available(self):
-        plone = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
+        """ Available
+        """
+        plone = getMultiAdapter((self.context, self.request),
+                                name=u'plone_context_state')
         return plone.is_view_template()
