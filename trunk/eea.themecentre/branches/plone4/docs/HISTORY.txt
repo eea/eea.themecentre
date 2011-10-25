@@ -4,6 +4,9 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
+* Bugfix: Removed "Promote to theme centre" from tab
+  [szabozo0 #4635]
+  
 * Feature: Implemented right logic and display of "Subtopics" under a theme.
   [demarant #4610]
 

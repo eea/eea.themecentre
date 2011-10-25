@@ -11,16 +11,8 @@
       </property>
       <property name="visible">True</property>
     </object>
-    <object name="promote_themecentre" meta_type="CMF Action" i18n:domain="eea">
-      <property name="title" i18n:translate="">Promote to theme centre</property>
-      <property name="description" i18n:translate=""/>
-      <property name="url_expr">string:${object_url}/themecentre_edit.html</property>
-      <property name="available_expr">python:'eea.themecentre.interfaces.IThemeCentre' in object.restrictedTraverse('@@get_interfaces')()</property>
-      <property name="permissions">
-        <element value="EEA: promote to theme centre"/>
-      </property>
-      <property name="visible">True</property>
-    </object>
+    <!--remove promote to theme centre from tab" -->
+    <object name="promote_themecentre" remove="True"/>
   </object>
   <object name="object_buttons">
     <object name="promote_themecentre" meta_type="CMF Action" i18n:domain="eea">
