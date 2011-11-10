@@ -18,7 +18,6 @@
      tal:on-error="string:Deprecated theme">
 
     <metal:block use-macro="here/media_type_common/macros/header" />
-    <metal:block use-macro="here/mediacentre_macros/macros/toc" />
     <metal:block use-macro="here/media_type_common/macros/header2" />
     <div metal:use-macro="here/media_type_common/macros/main" />
 
