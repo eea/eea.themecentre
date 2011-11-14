@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      i18n:domain="plone">
+<body>
+
+    <div metal:define-macro="main"
+         tal:define="Batch python: modules['Products.CMFPlone'].Batch;
+                     b_size python: 20;
+                     b_start python: 0;
+                     b_start request/b_start | b_start;
+                     batch python: Batch(video_items, b_size, int(b_start), orphan=1);
+                     single nocall:context/@@obj_listed_single"
+         class="media-listing">
+
+        <tal:block condition="video_items"
+                   repeat="videobrain batch">
+
+            <div tal:replace="structure python:single.single(videobrain.getObject(), repeat['videobrain'].index)" />
+
+        </tal:block>
+
+        <div class="discreet"
+           i18n:translate="text_no_media_file_uploaded"
+           tal:condition="python:not video_items">
+          <p>No media files of this kind yet.</p> 
+          <p>Choose another media type or <a href="/multimedia" title="EEA Multimedia Centre">browse all multimedia products</a> (via EEA Multimedia Centre).</p>
+        </div>
+
+        <!-- Navigation -->
+        <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+    </div>
+
+    <div metal:define-macro="header">
+        <h1 i18n:translate="Multimedia" class="documentFirstHeading">Multimedia</h1>
+
+ <div tal:replace="structure provider:plone.documentactions" />
+
+
+	    <div class="visualClear"><!--&nbsp; --></div>
+    </div>
+
+    <div metal:define-macro="header2"
+         tal:define="mediatypes context/@@mediatypes;
+                     abouttheme python: themename is not None and ' about ' + themename.lower() or ''">
+        <tal:block condition="mediatype">
+        <h2 tal:define="typename python: mediatypes.title(mediatype)" tal:content="string: ${typename}s${abouttheme}" />
+        </tal:block>
+        <tal:block condition="python:mediatype is None" define="typename string:All multimedia">
+        <h2 tal:content="string: ${typename}${abouttheme}" />
+        </tal:block>
+    </div>
+
+  </body>
+</html>
