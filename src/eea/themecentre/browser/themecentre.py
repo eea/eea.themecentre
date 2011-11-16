@@ -117,11 +117,11 @@ class ThemecentreUtils(BrowserView):
             of the context
         """
         name = ''
-        name = getTheme(self.context)
+        name = getThemeTitle(self.context)
         if name:
             return name.capitalize()
         else:
-            name = getTheme(self.context.aq_inner.aq_parent)
+            name = getThemeTitle(self.context.aq_inner.aq_parent)
             name = [name.capitalize() if name else ''].pop()
             return name
 

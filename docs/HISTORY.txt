@@ -4,7 +4,9 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
-* Change: Migrated mediacentre_view from custom [szabozo0]
+* Bugfix: Fixed theme title in portlets [szabozo0 #4691]
+
+* Change: Migrated mediacentre_view from custom [szabozo0 #4161]
 
 * Bugfix: Removed "Promote to theme centre" from tab
   [szabozo0 #4635]
