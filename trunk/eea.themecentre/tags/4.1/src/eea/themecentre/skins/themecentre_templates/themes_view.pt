@@ -1,0 +1,147 @@
+<tal:block tal:define="foo python:request.set('disable_plone.leftcolumn', 1);
+                       bar python:request.set('disable_plone.rightcolumn', 1);"/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+</head>
+
+<body>
+<div id="themes-sitemap"  metal:fill-slot="content-core">
+
+<div id="top-news-area">
+    <metal:promotions use-macro="here/portlet_promotions/macros/hardcoded_promotions" />
+<div class="visualClear"><!-- &nbsp; --></div>
+</div>
+
+<div id="all-topics-list" class="themes-view-image-icon">
+    <h2 i18n:translate="">All topics</h2>
+
+    <div class="contentColumnOne">
+        <h3 i18n:translate="">What is happening?<br />Environmental issues</h3>
+        <ul>
+            <li>
+                <img src="resolveuid/0d2e3d3da1d2f8f1cc4f029a27b931d0/theme_image/image_icon" />
+                <a href="resolveuid/0d2e3d3da1d2f8f1cc4f029a27b931d0" i18n:translate="">Air pollution</a>
+            </li>
+            <li>
+                <img src="resolveuid/cd6bef0c97b6c8ea3e216267af7f1605/theme_image/image_icon" />
+                <a href="resolveuid/cd6bef0c97b6c8ea3e216267af7f1605" i18n:translate="">Biodiversity</a></li>
+            <li>
+                <img src="resolveuid/619d5ebc70dbdf9895dda7c815c5364b/theme_image/image_icon" />
+                <a href="resolveuid/619d5ebc70dbdf9895dda7c815c5364b" i18n:translate="">Chemicals</a></li>
+            <li>
+                <img src="resolveuid/6723e6872d33d022a07eeae0e235ac48/theme_image/image_icon" />
+                <a href="resolveuid/6723e6872d33d022a07eeae0e235ac48" i18n:translate="">Climate change</a></li>
+            <li>
+                <img src="resolveuid/25f41725a7916d7368797edf78f06cad/theme_image/image_icon" />
+                <a href="resolveuid/25f41725a7916d7368797edf78f06cad" i18n:translate="">Environment and health</a></li>
+            <li>
+                <img src="resolveuid/5412da76e31aedcea4ce1d520518604f/theme_image/image_icon" />
+                <a class="internal-link" href="resolveuid/5412da76e31aedcea4ce1d520518604f" title="Land use" i18n:translate="">Land use</a></li>
+            <li>
+                <img src="resolveuid/c64f9ed39bae175c77ee5fe3729472f6/theme_image/image_icon" />
+                <a href="resolveuid/c64f9ed39bae175c77ee5fe3729472f6" i18n:translate="">Natural resources</a></li>
+            <li>
+                <img src="resolveuid/5757e1ebd370ac9f0b9d9c4c41667304/theme_image/image_icon" />
+                <a href="resolveuid/5757e1ebd370ac9f0b9d9c4c41667304" i18n:translate="">Noise</a></li>
+            <li>
+                <img src="resolveuid/e1129312d1ed476a3c54cf1c256e972f/theme_image/image_icon" />
+                <a href="resolveuid/e1129312d1ed476a3c54cf1c256e972f" i18n:translate="">Soil</a></li>
+            <li>
+                <img src="resolveuid/912645e2479b571df739342b290cabbc/theme_image/image_icon" />
+                <a href="resolveuid/912645e2479b571df739342b290cabbc" i18n:translate="">Waste and material resources</a></li>
+            <li>
+                <img src="resolveuid/b6ef38c3f2e84948314b397d7668ea41/theme_image/image_icon" />
+                <a href="resolveuid/b6ef38c3f2e84948314b397d7668ea41" i18n:translate="">Water</a></li>
+            <li>
+                <img src="resolveuid/057759082066e8d4cc5ff7f3f8364442/theme_image/image_icon" />
+                <a href="resolveuid/057759082066e8d4cc5ff7f3f8364442" i18n:translate="">Various other issues</a></li>
+        </ul>
+    </div>
+
+    <div class="contentColumnTwo themes-view-image-icon">
+        <h3 i18n:translate="">Why is it happening?<br />Sectors and activities</h3>
+        <ul>
+            <li>
+                <img src="resolveuid/47c19827e0f4e840c77ae6281f124f50/theme_image/image_icon" />
+                <a href="resolveuid/47c19827e0f4e840c77ae6281f124f50" i18n:translate="">Agriculture</a>
+            </li>
+            <li>
+                <img src="resolveuid/3cdc3686b331e7d580f9ade779c72ad9/theme_image/image_icon" />
+                <a href="resolveuid/3cdc3686b331e7d580f9ade779c72ad9" i18n:translate="">Energy</a>
+            </li>
+            <li>
+                <img src="resolveuid/61d1a9fbb975c5f3032dae362b3fff3b/theme_image/image_icon" />
+                <a href="resolveuid/61d1a9fbb975c5f3032dae362b3fff3b" i18n:translate="">Fisheries</a>
+            </li>
+            <li>
+                <img src="resolveuid/5608e23801e3ac58668f8db1bdc0dc66/theme_image/image_icon" />
+                <a href="resolveuid/5608e23801e3ac58668f8db1bdc0dc66" i18n:translate="">Household consumption</a>
+            </li>
+            <li>
+                <img src="resolveuid/701da5f4fedf304c23433cba18a76fa2/theme_image/image_icon" />
+                <a href="resolveuid/701da5f4fedf304c23433cba18a76fa2" i18n:translate="">Industry</a>
+            </li>
+            <li>
+                <img src="resolveuid/e6a0723e37a75edc6a5387f8881eb183/theme_image/image_icon" />
+                <a href="resolveuid/e6a0723e37a75edc6a5387f8881eb183" i18n:translate="">Green economy</a>
+            </li>
+            <li>
+                <img src="resolveuid/29c22f68b31a59ba5e93f965ae506868/theme_image/image_icon" />
+                <a href="resolveuid/29c22f68b31a59ba5e93f965ae506868" i18n:translate="">Tourism</a>
+            </li>
+            <li>
+                <img src="resolveuid/ca85d70438bcda31f0014606bced7455/theme_image/image_icon" />
+                <a href="resolveuid/ca85d70438bcda31f0014606bced7455" i18n:translate="">Transport</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="visualClear">
+    <div class="contentColumnOne themes-view-image-icon">
+        <h3 i18n:translate="">Environment in different regions and specific areas</h3>
+        <ul>
+            <li>
+                <img src="resolveuid/c79b3492043943b66cffa48c47f4c3a2/theme_image/image_icon" />
+                <a href="resolveuid/c79b3492043943b66cffa48c47f4c3a2" i18n:translate="">Coasts and seas</a>
+            </li>
+            <li>
+                <img src="resolveuid/515694fae21c1d760e5179a63291750b/theme_image/image_icon" />
+                <a href="resolveuid/515694fae21c1d760e5179a63291750b" i18n:translate="">Specific regions</a>
+            </li>
+            <li>
+                <img src="resolveuid/e1a9f122c53c04739892f0e81a902989/theme_image/image_icon" />
+                <a href="resolveuid/e1a9f122c53c04739892f0e81a902989" i18n:translate="">Urban environment</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="contentColumnTwo themes-view-image-icon">
+        <h3 i18n:translate="">Across environmental issues and sectors</h3>
+        <ul>
+            <li>
+                <img src="resolveuid/0742501c1bd96c82e8bb993ee49f120c/theme_image/image_icon" />
+                <a class="internal-link" href="resolveuid/0742501c1bd96c82e8bb993ee49f120c" title="Environmental technology" i18n:translate="">Environmental technology</a>
+            </li>
+            <li>
+                <img src="resolveuid/f68e62dd80ecbc75f123197e48ef3ceb/theme_image/image_icon" />
+                <a href="resolveuid/f68e62dd80ecbc75f123197e48ef3ceb" i18n:translate="">Policy instruments<br /></a>
+            </li>
+            <li>
+                <img src="resolveuid/bd4c672611920251e0ae681dfcbfd285/theme_image/image_icon" />
+                <a href="resolveuid/bd4c672611920251e0ae681dfcbfd285" i18n:translate="">Environmental scenarios</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="visualClear"><!-- --></div>
+<br /><br />
+
+</div>
+</body>
+</html>

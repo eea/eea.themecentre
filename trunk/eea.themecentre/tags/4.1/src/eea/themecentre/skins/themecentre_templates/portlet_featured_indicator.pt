@@ -1,0 +1,12 @@
+<div metal:define-macro="portlet">
+    <tal:featured_item 
+         tal:define="featured_class context/@@data_and_maps_logic;
+                     highlights featured_class/getLatestIndicators;
+                     nr_items python:1;
+                     archive_href string:indicators;">
+        <div metal:use-macro="here/frontpage_macros/macros/featured-item">
+             <span metal:fill-slot="archive" i18n:translate="">See all</span>
+             <span metal:fill-slot="box_title" i18n:translate="">Featured indicator</span>
+        </div>
+    </tal:featured_item>
+</div>
