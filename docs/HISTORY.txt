@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.1-dev - (unreleased)
-----------------------
+4.1 - (2011-11-18)
+------------------
 * Change: Added ThemesField to be used with ThemeTaggable Content-Types
   [voineali #4694]
 * Change: Made Themes tab hidden as it already in Categorization tab
