@@ -10,6 +10,19 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.component import getUtility
 from zope.interface import implements
 
+class ThemesField(StringField):
+    """ Save themes as annotation """
+
+    def set(self, instance, value, **kwargs):
+        """ Save as annotation
+        """
+        IThemeTagging(instance).tags = [val for val in value if val]
+
+    def get(self, instance, **kwargs):
+        """ Get from annotation
+        """
+        return IThemeTagging(instance).tags
+
 class MaxValuesValidator(object):
     """ Validator
     """
@@ -32,7 +45,7 @@ validation.register(MaxValuesValidator('maxValues'))
 
 schema = Schema((
 
-    StringField(
+    ThemesField(
         name='themes',
         schemata='categorization',
         validators=('maxValues',),

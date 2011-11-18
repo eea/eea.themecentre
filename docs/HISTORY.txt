@@ -3,6 +3,8 @@ Changelog
 
 4.1-dev - (unreleased)
 ----------------------
+* Change: Added ThemesField to be used with ThemeTaggable Content-Types
+  [voineali #4694]
 
 4.0 - (2011-11-18)
 ------------------
