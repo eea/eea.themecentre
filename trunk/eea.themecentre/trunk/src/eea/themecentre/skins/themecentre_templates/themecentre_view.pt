@@ -23,7 +23,7 @@
         <div class="visualClear"><!--&nbsp; --></div>
                     <!-- keyfacts slideshow-->
                     <metal:keyfacts tal:define="view nocall:context/@@soer_frontpage_logic;
-                                                background_img_path python:context.getCanonical().absolute_url() + '/theme_image/image_xlarge'">
+                                                background_img_path python:context.getCanonical().absolute_url() + '/theme_image/image_large'">
                             <div metal:use-macro="here/soer_frontpage/macros/keyfacts-slider">
                                 keyfacts
                             </div>
