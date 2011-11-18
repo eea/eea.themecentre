@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<div metal:fill-slot="main"> 
+<metal:macro metal:define-macro="main"
+     tal:define="view context/@@themes_rdf;
+                 items view/full_items;
+                 Batch python: modules['Products.CMFPlone'].Batch;
+                 b_size python: 20;
+                 b_start python: 0;
+                 b_start request/b_start | b_start">
+
+    <h1 tal:content="view/title">Title</h1>
+     <div tal:replace="structure provider:plone.documentactions" />
+
+
+    <div tal:define="batch python: Batch(items, b_size, int(b_start), orphan=1)"
+         tal:condition="items">
+        <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+        <dl class="allitems">
+            <tal:batch tal:repeat="item batch">
+            <dt>
+                <a href="" tal:attributes="href item/url"
+                           tal:content="item/title" />
+            </dt>
+            <dd>
+                <tal:cover tal:condition="item/image">
+                <span class="figure-right">
+                    <span class="figure">
+                        <a href="#" title="Read more" class=""
+                           tal:attributes="href item/url">
+                            <img src="" alt=""
+                                tal:attributes="src item/image; alt item/title;" />
+                        </a>
+                    </span>
+                </span>
+                </tal:cover>
+                <br />
+                <tal:date tal:condition="python:item.published">
+                Published: <span tal:replace="item/published" />
+                </tal:date>
+                <div class="visualClear"> <!-- &nbsp; --> </div>
+                </dd>
+            </tal:batch>
+        </dl>
+
+        <div metal:use-macro="here/batch_macros/macros/navigation" />
+    </div>
+</metal:macro>
+</div>
+
+</body>
+</html>

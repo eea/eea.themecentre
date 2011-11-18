@@ -1,0 +1,36 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone">
+<body>
+
+<metal:portlet define-macro="portlet"
+       i18n:domain="plone"
+       tal:define="view context/@@relatedtopics;
+                   menu view/menu"
+       tal:condition="context/@@plone_context_state/is_view_template">
+
+       <dl class="portlet portlet-navigation-tree eea-accordion-portlet" tal:condition="menu">
+    <dt class="portletHeader eea-accordion-header">
+        <span class="tile">
+            Related topics
+        </span>
+    </dt>
+
+    <dd class="portletItem"> 
+        <ul class="portletNavigationTree">
+            <li tal:repeat="item menu" class="navTreeItem">
+                <div tal:attributes="class string:visualIcon contenttype-${item/portal_type}">
+                    <a href="#" tal:content="item/title"
+                       tal:attributes="class string:visualIconPadding state-${item/wf_state};
+                                       href item/url" />
+                </div>
+            </li>
+        <ul>
+    </dd>
+    <div class="hiddenStructure template-file-name">portlet_relatedthemes.pt</div>
+</dl>
+
+</metal:portlet>
+
+</body>
+</html>
