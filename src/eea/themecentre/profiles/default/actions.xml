@@ -9,7 +9,7 @@
       <property name="permissions">
         <element value="Modify portal content"/>
       </property>
-      <property name="visible">True</property>
+      <property name="visible">False</property>
     </object>
     <!--remove promote to theme centre from tab" -->
     <object name="promote_themecentre" remove="True"/>
