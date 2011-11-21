@@ -74,7 +74,8 @@ class ThemeTaggable(object):
             mapping = annotations[KEY] = PersistentDict(themes)
         self.mapping = mapping
 
-    def gett(self):
+    @property
+    def tags(self):
         """ Get tags
         """
         anno = IAnnotations(self.context)
@@ -82,7 +83,8 @@ class ThemeTaggable(object):
         tags = list(mapping['themes'])
         return getMergedThemes(self.context, tags)
 
-    def sett(self, value):
+    @tags.setter
+    def tags(self, value):
         """ Set tags
         """
         # if the value didn't change we don't need to do anything
@@ -102,6 +104,7 @@ class ThemeTaggable(object):
         info = Attributes(IThemeTagging, 'tags')
         notify(ObjectModifiedEvent(self, info))
 
+    @property
     def nondeprecated_tags(self):
         """ Non deprecated tags
         """
@@ -110,8 +113,6 @@ class ThemeTaggable(object):
         current_themes = [term.value for term in vocab(self)]
         return [tag for tag in tags if tag in current_themes]
 
-    tags = property(gett, sett)
-    nondeprecated_tags = property(nondeprecated_tags)
 
 class MainThemeTaggable(ThemeTaggable):
     """ Main Theme Taggable
