@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n" name="portal_actions">
+  <object name="object">
+    <object name="themes_edit" meta_type="CMF Action" i18n:domain="eea">
+      <property name="title" i18n:translate="">Themes</property>
+      <property name="description" i18n:translate=""/>
+      <property name="url_expr">string:${object_url}/themes_edit.html</property>
+      <property name="available_expr">python:'eea.themecentre.interfaces.IThemeTaggable' in object.restrictedTraverse('@@get_interfaces')()</property>
+      <property name="permissions">
+        <element value="Modify portal content"/>
+      </property>
+      <property name="visible">False</property>
+    </object>
+    <!--remove promote to theme centre from tab" -->
+    <object name="promote_themecentre" remove="True"/>
+  </object>
+  <object name="object_buttons">
+    <object name="promote_themecentre" meta_type="CMF Action" i18n:domain="eea">
+      <property name="title" i18n:translate="">Promote to theme centre</property>
+      <property name="description" i18n:translate="">Promote to theme centre</property>
+      <property name="url_expr">string:${object_url}/@@promote2ThemeCentre</property>
+      <property name="available_expr">python:'Products.ATContentTypes.interfaces.folder.IATBTreeFolder' in object.restrictedTraverse('@@get_interfaces')()</property>
+      <property name="permissions">
+        <element value="EEA: promote to theme centre"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="depromote_themecentre" meta_type="CMF Action" i18n:domain="eea">
+      <property name="title" i18n:translate="">Depromote a theme centre</property>
+      <property name="description" i18n:translate="">Depromote a theme centre</property>
+      <property name="url_expr">string:${object_url}/@@depromote2ThemeCentre</property>
+      <property name="available_expr">python:'eea.themecentre.interfaces.IThemeCentre' in object.restrictedTraverse('@@get_interfaces')()</property>
+      <property name="permissions">
+        <element value="EEA: promote to theme centre"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
+  </object>
+</object>

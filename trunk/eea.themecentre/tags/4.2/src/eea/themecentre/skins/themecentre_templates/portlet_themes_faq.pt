@@ -1,0 +1,22 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone">
+<body>
+
+<tal:comment replace="nothing">
+#NOTE: plone4 replace with this define if you need the portlet macro with details of the faq
+
+<metal:portlet use-macro="here/portlet_themes_common/macros/portlet" />
+</tal:comment>
+
+<div metal:define-macro="portlet"
+    tal:define="
+            portlet context/@@themes_faq;
+            view_name string:themes_faq;
+            title string:Latest FAQ"
+     tal:omit-tag="">
+
+    <metal:portlet use-macro="here/portlet_themes_common/macros/simple-list" />
+
+</div>
+</body>
+</html>
