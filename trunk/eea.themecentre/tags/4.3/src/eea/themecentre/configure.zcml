@@ -1,0 +1,145 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="eea">
+
+    <include package="Products.ATVocabularyManager" />
+    <include package="Products.PloneHelpCenter" />
+    <include package="Products.LinguaPlone" />
+    <include package="Products.EEAPloneAdmin" />
+    <include package="Products.EEAContentTypes" />
+    <include package="eea.promotion" />
+    <include package="eea.design" />
+    <include package="eea.vocab" />
+    <include package="eea.versions" />
+    <include package="eea.mediacentre" />
+    <include package="eea.rdfrepository" />
+    <include package="p4a.video" />
+    <include package="valentine.linguaflow" />
+
+    <include file="profiles.zcml" />
+    <include file="skins.zcml" />
+    <include file="permissions.zcml"/>
+
+    <include package=".browser" />
+    <include package=".upgrades" />
+
+    <!-- Add marker interfaces to those content types that should be taggable -->
+
+    <class class="Products.Archetypes.public.BaseObject">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.Archetypes.public.BaseContent">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.topic.ATTopic">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="plone.app.blob.content.ATBlob">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.file.ATFile">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.image.ATImage">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.newsitem.ATNewsItem">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.event.ATEvent">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.link.ATLink">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.document.ATDocument">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <class class="Products.ATContentTypes.content.folder.ATFolder">
+        <implements interface="eea.themecentre.interfaces.IPossibleThemeCentre" />
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
+    <adapter factory=".themetaggable.ThemeTaggable" />
+    <adapter provides=".interfaces.IMainThemeTagging"
+             factory=".themetaggable.MainThemeTaggable" />
+    <adapter for=".interfaces.IThemeTaggable"
+             provides="zope.annotation.interfaces.IAnnotations"
+             factory="zope.annotation.attribute.AttributeAnnotations" />
+    <adapter factory=".themetaggable.ThemeCentreTaggable" />
+
+    <adapter for=".interfaces.IThemeCentre"
+             factory=".themetaggable.ThemeTaggable" />
+
+    <adapter for=".interfaces.IThemeCentre"
+             provides="zope.annotation.interfaces.IAnnotations"
+             factory="zope.annotation.attribute.AttributeAnnotations" />
+
+    <adapter factory=".related.ThemeRelationAdapter" />
+
+    <utility component=".vocabulary.ThemesVocabularyFactory"
+             name="Allowed themes" />
+
+    <utility component=".vocabulary.ThemesEditVocabularyFactory"
+             name="Allowed themes for edit" />
+
+    <utility component=".vocabulary.ThemeCentresVocabularyFactory"
+             name="Theme Centres" />
+
+    <!-- Makes path expression traversal work for widgets that use zope3
+       page template engine. Plone and Five use zope2 page template
+       engine mostly, but OrderedMultiSelectWidget is using zope3
+       template engine to render itself. -->
+  <adapter for="zope.app.form.browser.interfaces.IInputWidget"
+           provides="zope.traversing.interfaces.ITraversable"
+           factory="zope.traversing.adapters.DefaultTraversable" />
+
+  <adapter factory=".themecentre.objectTitle" />
+  <adapter factory=".themecentre.imageUrl" />
+
+  <adapter factory=".links.LinkAdapter" />
+  <adapter factory=".links.MediaLink"
+           for="p4a.video.interfaces.IVideoEnhanced" />
+  <adapter factory=".links.MediaLink"
+           for="Products.ATContentTypes.content.image.ATImage" />
+
+  <!-- Catalog indexers -->
+  <adapter name="getThemes"
+           factory=".catalog.getThemesForIndex" />
+  <adapter name="media_types"
+           factory=".catalog.getMediaTypes" />
+
+  <subscriber for=".interfaces.IThemeCentre
+                   .themecentre.PromotedToThemeCentreEvent"
+              handler=".themecentre.promoted" />
+
+  <subscriber for="*
+                   zope.lifecycleevent.interfaces.IObjectAddedEvent"
+              handler=".themecentre.objectAdded" />
+
+  <subscriber for="*
+                   zope.lifecycleevent.interfaces.IObjectMovedEvent"
+              handler=".themecentre.objectMoved" />
+
+  <subscriber for="*
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".themecentre.objectThemeTagged" />
+
+  <subscriber for=".interfaces.IThemeTaggable
+                   Products.LinguaPlone.events.IObjectTranslatedEvent"
+              handler=".themetaggable.tagTranslation" />
+
+</configure>
