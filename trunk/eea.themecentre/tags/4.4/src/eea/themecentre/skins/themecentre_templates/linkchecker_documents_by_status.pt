@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      >
+<tal:block metal:fill-slot="top_slot">
+   <tal:block tal:define="dummy python:request.set('disable_border', 1)" />
+</tal:block>
+
+<metal:block metal:fill-slot="main"
+    i18n:domain="linkchecker">
+
+   <link rel="Stylesheet" href="lc_colors.css" type="text/css"/>
+
+   <h1 i18n:translate="header_all_documents_in_status">
+     All documents in state
+     <span i18n:name="state" i18n:translate="" 
+       tal:content="request/link_state">
+       red
+     </span>
+   </h1>
+
+       <a tal:attributes="href string:${here/absolute_url}/linkchecker_summary" i18n:translate="label_up_to_summary" class="link-parent">Up to linkchecker summary</a>
+
+  <table class="listing"
+          id="sortable"
+          tal:attributes="id string:sortable"
+          summary="Link listing"
+          i18n:attributes="summary">
+    <thead>
+        <tr>
+          <th i18n:translate="link_header_document">
+            Document
+          </th>
+          <th class="red"
+            i18n:translate=""
+              tal:attributes="class request/link_state"
+              tal:content="request/link_state">
+          </th>
+          <th i18n:translate="">
+            total
+          </th>
+          <th i18n:translate="link_header_owner">
+            Owner
+          </th>
+        </tr>
+    </thead>
+
+    <tr tal:repeat="doc context/@@linkchecker-objects/documents">
+      <td>
+          <a class="navItem navLevel1"
+            tal:attributes="
+              href doc/document/getURL;
+              title doc/document/Description" >
+          <img class="navIcon" height="16" widht="16"
+            tal:attributes="
+              src string:$portal_url/${doc/document/getIcon};
+              title doc/document/portal_type;" />
+            <span class="navItemText" tal:content="doc/document/Title">
+              asdf
+            </span>
+          </a>
+          
+          <td style="text-align: right"
+            tal:content="doc/instate">
+            8
+          </td>
+          <td style="text-align: right"
+            tal:content="doc/total">
+            20
+          </td>
+          <td>
+            <a 
+              tal:attributes="href string:mailto:${doc/owner_mail}"
+              tal:content="doc/owner">
+              asdf
+            </a>
+          </td>
+    </tr>
+ 
+  </table>
+
+</metal:block>
+</html>
+
+
+
