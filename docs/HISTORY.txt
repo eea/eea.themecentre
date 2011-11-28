@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.4-dev - (unreleased)
-----------------------
+4.4 - (2011-11-28)
+------------------
  * Bug fix: Fixed the all items links of whatsnewgallery in dc view 
   [demarant #4784]
 
