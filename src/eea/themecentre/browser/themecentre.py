@@ -125,3 +125,8 @@ class ThemecentreUtils(BrowserView):
             name = [name.capitalize() if name else ''].pop()
             return name
 
+    def getThemeName(self):
+        """ Get theme name of the context to construct the url to the
+            themecentre and the datacentre page
+        """
+        return getTheme(self.context.aq_inner)

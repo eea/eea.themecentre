@@ -3,11 +3,12 @@
 <div class="shortcut-default roundedCorners"
     tal:define="themecentre_view context/@@themecentre_utils;
     title themecentre_view/getDataCentreName|nothing;
-    eea_datacentres python:('Air Pollution','Biodiversity','Climate change','Land use','Water')"
+    theme themecentre_view/getThemeName;
+    eea_datacentres python:('Air Pollution','Biodiversity','Climate change','Land use','Water');
+    local python:'SITE' if 'localhost' in context.REQUEST['URL0'] else '';"
     tal:condition="python: title and isViewTemplate">
         <h3>
-            <a href="dc" class="internal-link" title="Data centre overview">
-
+            <a tal:attributes="href string:${context/@@plone_portal_state/portal_url}/${local}/themes/${theme}/dc;" class="internal-link" title="Data centre overview">
                     <span tal:condition="python: title in eea_datacentres" id="theme-datacentre">
                         <tal:title tal:content="string:${title}">title</tal:title>
                         <tal:datacentre i18n:translate="themecentre_datacentre">data centre</tal:datacentre>
