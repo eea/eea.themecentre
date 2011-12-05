@@ -3,6 +3,7 @@ Changelog
 
 4.5-dev - (unreleased)
 ----------------------
+ * Bug fix: made dc view point to theme/dc instead of a relative link to dc [ichimdav #4819]
 
 4.4 - (2011-11-28)
 ------------------
