@@ -1,0 +1,4 @@
+
+<tal:themepromo define="promotions here/@@themesMenuPromotion" metal:define-macro="portlet">
+      <metal:portlet use-macro="here/portlet_promotions/macros/portlet" />
+</tal:themepromo>
