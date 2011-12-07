@@ -24,6 +24,10 @@
 
     <!-- Add marker interfaces to those content types that should be taggable -->
 
+    <class class="OFS.Folder.Folder">
+        <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
+    </class>
+
     <class class="Products.Archetypes.public.BaseObject">
         <implements interface="eea.themecentre.interfaces.IThemeTaggable" />
     </class>
