@@ -134,10 +134,14 @@ body.section-themes #content div.plain blockquote {
 
 #subtopics {
     margin: 0 0 2em 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 2px #888888;
     -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+   -webkit-box-shadow: 0 2px 2px #888888;
+      -moz-box-shadow: 0 2px 2px #888888;
+       -ms-box-shadow: 0 2px 2px #888888;
+        -o-box-shadow: 0 2px 2px #888888;
+           box-shadow: 0 2px 2px #888888;
 }
 
 #subtopics li {
