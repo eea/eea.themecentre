@@ -130,15 +130,15 @@
                    .themecentre.PromotedToThemeCentreEvent"
               handler=".themecentre.promoted" />
 
-  <subscriber for="*
+  <subscriber for="Products.Archetypes.interfaces.base.IBaseObject
                    zope.lifecycleevent.interfaces.IObjectAddedEvent"
               handler=".themecentre.objectAdded" />
 
-  <subscriber for="*
+  <subscriber for="Products.Archetypes.interfaces.base.IBaseObject
                    zope.lifecycleevent.interfaces.IObjectMovedEvent"
               handler=".themecentre.objectMoved" />
 
-  <subscriber for="*
+  <subscriber for="Products.Archetypes.interfaces.base.IBaseObject
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".themecentre.objectThemeTagged" />
 
