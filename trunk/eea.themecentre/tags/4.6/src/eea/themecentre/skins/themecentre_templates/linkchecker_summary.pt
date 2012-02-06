@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      >
+<metal:css fill-slot='css_slot'>
+<link type='text/css'
+    rel='stylesheet'
+    media='all'
+    tal:condition='here/lc_colors.css'
+    tal:attributes='href here/lc_colors.css/absolute_url' />
+</metal:css>
+<tal:block metal:fill-slot="top_slot">
+<tal:block tal:define="dummy python:request.set('disable_border', 1)" />
+</tal:block>
+
+<metal:block metal:fill-slot="main"
+    i18n:domain="linkchecker"
+    tal:define="status context/@@linkchecker">
+
+  <h1 i18n:translate="heading_balanced_score_card">
+    Link management overview
+  </h1>
+
+   <p>
+     This page gives you information about the links in your themecentre.
+   </p>
+
+   <h2 i18n:translate="label_total_links">Total links</h2>
+    <div class="field">
+      <strong i18n:translate="label_total">Total:</strong>
+      <span tal:replace="status/totalLinks"/> <br/>
+      <strong i18n:translate="label_distinct">Distinct:</strong>
+      <span tal:replace="status/totalDistinctLinks"/>
+    </div>
+        
+   <h2 i18n:translate="label_total_documents">Total documents</h2>
+   <div class="field">
+     <strong i18n:translate="label_total">Total:</strong>
+     <span tal:replace="status/totalDocuments"/> <br/>
+   </div>
+
+    <h2 i18n:translate="label_links_in_state">Links in the state ...</h2>
+    
+    <div class="field">
+      <tal:block repeat="state_tuple status/states">
+        <tal:block define="
+          state python:state_tuple[0];
+          state_name python:state_tuple[1]">
+            <a class="red" 
+              tal:omit-tag="not: python:status['links'][state]"
+              tal:attributes="
+                class state;
+                href string:${here/absolute_url}/linkchecker_links_by_status?link_state=${state}">
+              <strong i18n:translate=""
+                tal:content="state_name">
+                Red:
+              </strong>
+              <span tal:replace="python:status['links'][state]"/>
+              (<span tal:replace="python: '%2.2f' % status['linksPct'][state]"/>%) 
+              <img tal:condition="python:status['links'][state]"
+                tal:attributes="src string:$portal_url/linkTransparent.gif"/>
+            </a><br/>
+
+        </tal:block>
+      </tal:block>
+
+    </div>
+
+
+  <tal:block tal:condition="status/documents">
+    <h2 i18n:translate="label_documents_in_state">
+      Documents containing links in the state ...
+    </h2>
+    <div class="field">
+      <tal:block repeat="state_tuple status/states">
+        <tal:block define="
+          state python:state_tuple[0];
+          state_name python:state_tuple[1]">
+            <a class="red" 
+              tal:omit-tag="not:python:status['documents'][state]" 
+              tal:attributes="
+                class state;
+                href string:${here/absolute_url}/linkchecker_documents_by_status?link_state=${state}">
+                <strong i18n:translate=""
+                  tal:content="state_name">
+                  Red
+                </strong>:
+                <span tal:replace="python:status['documents'][state]"/>
+                (<span tal:replace="python: '%2.2f' % status['documentsPct'][state]"/>%)
+                <img tal:condition="python:status['documents'][state]" 
+                  tal:attributes="src string:$portal_url/linkOpaque.gif"/>
+              </a><br/>
+        </tal:block>
+      </tal:block>
+      
+    </div>
+  </tal:block>
+</metal:block>
+</html>
+
+
+
