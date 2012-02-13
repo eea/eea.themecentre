@@ -4,16 +4,16 @@
   i18n:domain="plone">
   <body>
 
-    <div metal:fill-slot="main"
-      tal:define="
-      view_name view_name | request/view_name;
-      portlet python:path('context/@@'+view_name);
-      view nocall:portlet;
-      items view/full_items;
-      Batch python: modules['Products.CMFPlone'].Batch;
-      b_size python: 20;
-      b_start python: 0;
-      b_start request/b_start | b_start">
+    <div metal:fill-slot="main" tal:define="view_name view_name | request/view_name | nothing;" >
+      <tal:cond tal:condition="view_name">
+      <tal:def define="
+                      portlet python:path('context/@@'+view_name);
+                      view nocall:portlet;
+                      items view/full_items;
+                      Batch python: modules['Products.CMFPlone'].Batch;
+                      b_size python: 20;
+                      b_start python: 0;
+                      b_start request/b_start | b_start">
 
       <div tal:define="batch python: Batch(items, b_size, int(b_start), orphan=1)"
         tal:condition="items">
@@ -33,6 +33,8 @@
         <div metal:use-macro="here/batch_macros/macros/navigation" />
       </div>
 
+      </tal:def>
+      </tal:cond>
     </div>
 
   </body>

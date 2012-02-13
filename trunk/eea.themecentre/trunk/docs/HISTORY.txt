@@ -3,6 +3,8 @@ Changelog
 
 4.7-dev - (unreleased)
 ----------------------
+ * Bug fix: avoid server error on listall view for themes when view_name is
+   not provided [tiberich #4947]
 
 4.6 - (2012-02-06)
 ------------------
