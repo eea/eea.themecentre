@@ -35,7 +35,7 @@ float:left;
 width:47%;
 }
 .column-list li {
-    background: url("bullet.gif") no-repeat scroll 0 0 transparent;
+    background: url("&dtml-portal_url;/bullet.gif") no-repeat scroll 0 0 transparent;
     display: inline-block !important;
     padding-left: 10px;
     width: 213px;
@@ -145,7 +145,7 @@ body.section-themes #content div.plain blockquote {
 }
 
 #subtopics li {
-    background: url("bullet.gif") no-repeat scroll 0 0 transparent;
+    background: url("&dtml-portal_url;/bullet.gif") no-repeat scroll 0 0 transparent;
     display: inline-block !important;
     padding: 0 15px;
     margin-right: 20px;
