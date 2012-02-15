@@ -3,6 +3,8 @@ Changelog
 
 4.8-dev - (unreleased)
 ----------------------
+ * Bug fix: renamed stylesheet to dtml; inserted portal_url to image links
+   [tiberich #4956]
 
 4.7 - (2012-02-15)
 ------------------
