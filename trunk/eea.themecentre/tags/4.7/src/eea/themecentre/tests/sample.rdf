@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  <channel rdf:about="http://epaedia.eea.europa.eu/rss/epaedia_maps.php">
+    <title>Epaedia - Maps - Environment explained</title>
+    <link>http://epaedia.eea.europa.eu</link>
+    <description>This channel provides all the maps published on Epaedia.</description>
+    <items>
+      <rdf:Seq>
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=40" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=52" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=62" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=63" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=64" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=65" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=66" />
+         <rdf:li resource="http://epaedia.eea.europa.eu/map.php?mid=67" />
+      </rdf:Seq>
+    </items>
+  </channel>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=40">
+      <title>Climate change factspots - Europe</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=40</link>
+      <description>Map Folder</description>
+      <dc:subject>Agriculture</dc:subject>
+      <dc:subject>Arctic sea ice</dc:subject>
+      <dc:subject>Atmosphere and Climate</dc:subject>
+      <dc:subject>Bird Survival</dc:subject>
+      <dc:subject>Climate change</dc:subject>
+      <dc:subject>Climate change and biodiversity</dc:subject>
+      <dc:subject>Climate change and water</dc:subject>
+      <dc:subject>Glaciers</dc:subject>
+      <dc:subject>Glaciers, Snow & Ice</dc:subject>
+      <dc:subject>Growing Seasons</dc:subject>
+      <dc:subject>Health implications of climate change</dc:subject>
+      <dc:subject>Marine species</dc:subject>
+      <dc:subject>Marine Systems</dc:subject>
+      <dc:subject>Mountain distribution of plants</dc:subject>
+      <dc:subject>Plant species</dc:subject>
+      <dc:subject>Rise in sea level</dc:subject>
+      <dc:subject>Sea temperatures</dc:subject>
+      <dc:subject>Snow cover</dc:subject>
+      <dc:date>2006-01-01</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=52">
+      <title>Health factspots worldwide</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=52</link>
+      <description>Map Folder</description>
+      <dc:subject>Air quality</dc:subject>
+      <dc:subject>Body disorder - causes</dc:subject>
+      <dc:subject>Brain and body</dc:subject>
+      <dc:subject>Brain disorder - causes</dc:subject>
+      <dc:subject>Breathing problems</dc:subject>
+      <dc:subject>Cancer</dc:subject>
+      <dc:subject>Cancer in children</dc:subject>
+      <dc:subject>Chemicals in our bodies</dc:subject>
+      <dc:subject>Human health</dc:subject>
+      <dc:subject>Human health concerns</dc:subject>
+      <dc:subject>Indoor environment</dc:subject>
+      <dc:subject>Snapshot of human health concerns</dc:subject>
+      <dc:subject>Wildlife early warning signs</dc:subject>
+      <dc:date>2006-01-01</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=62">
+      <title>Resource factspots in Europe</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=62</link>
+      <description>Map Folder</description>
+      <dc:subject>Cod example</dc:subject>
+      <dc:subject>Construction minerals</dc:subject>
+      <dc:subject>Consumption drivers</dc:subject>
+      <dc:subject>Development</dc:subject>
+      <dc:subject>Economics</dc:subject>
+      <dc:subject>EU forest strategy</dc:subject>
+      <dc:subject>Fish resources under pressure</dc:subject>
+      <dc:subject>Forests resources</dc:subject>
+      <dc:subject>Fossil fuel resources</dc:subject>
+      <dc:subject>Historical lessons for sustainable resources</dc:subject>
+      <dc:subject>Land contamination</dc:subject>
+      <dc:subject>Land erosion</dc:subject>
+      <dc:subject>Land resources</dc:subject>
+      <dc:subject>Land use for agriculture</dc:subject>
+      <dc:subject>Metals</dc:subject>
+      <dc:subject>Old Biodiversity</dc:subject>
+      <dc:subject>Population</dc:subject>
+      <dc:subject>Sustainable resources</dc:subject>
+      <dc:date>2006-01-01</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=63">
+      <title>Water factspots in Europe</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=63</link>
+      <description>Map Folder</description>
+      <dc:subject>Climate change and water</dc:subject>
+      <dc:subject>Europe's freshwater</dc:subject>
+      <dc:subject>Europe's seas and coasts</dc:subject>
+      <dc:subject>Freshwater quality and pollution</dc:subject>
+      <dc:subject>Historical late lessons from early warnings</dc:subject>
+      <dc:subject>History of European water pollution control</dc:subject>
+      <dc:subject>How we use freshwater</dc:subject>
+      <dc:subject>Impact of fisheries and aquaculture</dc:subject>
+      <dc:subject>Impact of pollution and intervention</dc:subject>
+      <dc:subject>Impact of tourism and industry on coastal areas</dc:subject>
+      <dc:subject>Late lessons from marine anti fouling paints</dc:subject>
+      <dc:subject>Lessons from the great North American lakes</dc:subject>
+      <dc:subject>Rise in sea level</dc:subject>
+      <dc:subject>Sea temperatures</dc:subject>
+      <dc:subject>The Baltic Sea</dc:subject>
+      <dc:subject>The Barents Sea</dc:subject>
+      <dc:subject>The Black Sea</dc:subject>
+      <dc:subject>The Celtic-Biscay Shelf Sea</dc:subject>
+      <dc:subject>The Iberian Coast Sea</dc:subject>
+      <dc:subject>The Mediterranean Sea</dc:subject>
+      <dc:subject>The North Sea</dc:subject>
+      <dc:subject>Urban waste water treatment</dc:subject>
+      <dc:subject>Water</dc:subject>
+      <dc:date>2006-01-01</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=64">
+      <title>Consumption factspots - Europe</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=64</link>
+      <description>Map Folder</description>
+      <dc:subject>Household consumption</dc:subject>
+      <dc:date>2006-01-01</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=65">
+      <title>Transport fact spots</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=65</link>
+      <description>Map Folder</description>
+      <dc:subject>Distance related charges</dc:subject>
+      <dc:subject>Engines and vehicles</dc:subject>
+      <dc:subject>Freight transport</dc:subject>
+      <dc:subject>Fuels</dc:subject>
+      <dc:subject>New technology</dc:subject>
+      <dc:subject>Passenger transport</dc:subject>
+      <dc:subject>Pollution</dc:subject>
+      <dc:subject>Transport</dc:subject>
+      <dc:date>2006-07-19</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=66">
+      <title>Biodiversity european factspots</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=66</link>
+      <description>Map Folder</description>
+      <dc:subject>Agricultural habitats</dc:subject>
+      <dc:subject>Agricultural species</dc:subject>
+      <dc:subject>Agriculture ecosystems</dc:subject>
+      <dc:subject>Air pollution and forests</dc:subject>
+      <dc:subject>Biodiversity</dc:subject>
+      <dc:subject>Biodiversity drivers</dc:subject>
+      <dc:subject>Forest clearcutting</dc:subject>
+      <dc:subject>Forest fires</dc:subject>
+      <dc:subject>Forest habitats and species</dc:subject>
+      <dc:subject>Forest management</dc:subject>
+      <dc:subject>Forests</dc:subject>
+      <dc:subject>Freshwater ecosystems</dc:subject>
+      <dc:subject>Freshwater management</dc:subject>
+      <dc:subject>Freshwater species</dc:subject>
+      <dc:subject>Marine and coastal ecosystems</dc:subject>
+      <dc:subject>Marine ecosystems and habitats</dc:subject>
+      <dc:subject>Marine invasive species</dc:subject>
+      <dc:subject>Marine management</dc:subject>
+      <dc:subject>Marine species and communities</dc:subject>
+      <dc:subject>Mountain biodiversity trends</dc:subject>
+      <dc:subject>Mountain management</dc:subject>
+      <dc:subject>Mountain reindeer example</dc:subject>
+      <dc:subject>Mountains</dc:subject>
+      <dc:subject>The biodiversity crisis</dc:subject>
+      <dc:subject>The biodiversity crisis</dc:subject>
+      <dc:subject>Wetland habitats and species</dc:subject>
+      <dc:subject>Wetland pressures</dc:subject>
+      <dc:subject>Wetlands</dc:subject>
+      <dc:date>2006-12-21</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+    <item rdf:about="http://epaedia.eea.europa.eu/map.php?mid=67">
+      <title>Biodiversity worldwide factspots</title>
+      <link>http://epaedia.eea.europa.eu/map.php?mid=67</link>
+      <description>Map Folder</description>
+      <dc:subject>Biodiversity</dc:subject>
+      <dc:subject>Biodiversity drivers</dc:subject>
+      <dc:subject>Freshwater ecosystems</dc:subject>
+      <dc:subject>The biodiversity crisis</dc:subject>
+      <dc:subject>The biodiversity crisis</dc:subject>
+      <dc:date>2006-12-21</dc:date>
+      <dc:rights>Copyright EEA</dc:rights>
+      <dc:publisher>European Environment Ageny (EEA)</dc:publisher>
+    </item>
+
+</rdf:RDF>
