@@ -3,6 +3,9 @@ Changelog
 
 4.8-dev - (unreleased)
 ----------------------
+ * Bug fix: use themes ids instead of titles when checking if it is data centre.
+   Fixed bug where Air pollution was not recongnised as data centre.
+   [demarant #4979]
  * Bug fix: renamed stylesheet to dtml; inserted portal_url to image links
    [tiberich #4956]
 
