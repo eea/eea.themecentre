@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.8-dev - (unreleased)
-----------------------
+4.8 - (2012-03-05)
+------------------
  * Bug fix: use themes ids instead of titles when checking if it is data centre.
    Fixed bug where Air pollution was not recongnised as data centre.
    [demarant #4979]
