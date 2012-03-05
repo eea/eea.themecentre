@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<head>
+<metal:cssslot fill-slot="css_slot">
+    <link rel="stylesheet" href="video.css"
+          tal:attributes="href string:$portal_url/++resource++videostyles/video.css"
+          />
+</metal:cssslot>
+</head>
+<body>
+<metal:video metal:fill-slot="main"
+     tal:define="media_provider context/@@media_provider;
+                 mediatype request/mediatype | nothing;
+                 video_items python: media_provider.media_items(mediatype);
+                 themename context/@@theme/name"
+     tal:on-error="string:Deprecated theme">
+
+    <metal:block use-macro="here/media_type_common/macros/header" />
+    <metal:block use-macro="here/media_type_common/macros/header2" />
+    <div metal:use-macro="here/media_type_common/macros/main" />
+
+</metal:video>
+
+</body>
+</html>
