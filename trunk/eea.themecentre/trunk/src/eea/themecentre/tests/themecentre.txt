@@ -110,7 +110,6 @@ tags.
 
   >>> copy = self.portal.manage_copyObjects(['copy_and_paste'])
   >>> paste = themeCentre.manage_pasteObjects(copy)
-  Event: ...
   >>> IThemeTagging(getattr(themeCentre, 'copy_and_paste')).tags
   ['climate', 'air']
 
@@ -119,7 +118,6 @@ and to the 'air' themecentre.
 
   >>> copy = themeCentre.highlights.manage_copyObjects(['newsobj'])
   >>> paste = themeCentre.highlights.manage_pasteObjects(copy)
-  Event: ...
   >>> IThemeTagging(getattr(themeCentre.highlights, 'copy_of_newsobj')).tags
   ['air']
 
