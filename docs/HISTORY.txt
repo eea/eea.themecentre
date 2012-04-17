@@ -3,6 +3,7 @@ Changelog
 
 4.9-dev - (unreleased)
 ----------------------
+ * Bug fix: fix tests broken due to changes in eea.versions [tiberich]
 
 4.8 - (2012-03-05)
 ------------------
