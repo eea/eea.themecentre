@@ -31,7 +31,6 @@
 	    </form>
        </div>
 
-       <div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
        <h3 i18n:translate="">Browse catalogue</h3>
        <tal:datapage tal:define="datapage string:dcview; 
                      more_hrefs python: ['dm', 'dm#c1=Data', 'dm#c1=Map', 'dm#c1=Interactive+map', 'dm#c1=Indicator', 'dm#c1=Graph']" >
@@ -68,8 +67,6 @@
             </a>
         </h3>
     </div>
-
-        <h2 i18n:translate="">In the spotlight</h2>
 	<!-- promotions_gallery_slideshow-->
         <metal:promotions tal:define="frontpage python: False;
                         promo_view context/@@data_and_maps_logic;">
@@ -78,10 +75,12 @@
                 </div>
         </metal:promotions>
         <!-- end promotions_gallery_slideshow -->
-
+        
         <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
                 <div tal:replace="structure dcview/render_nav_portlet" />
         </metal:listingmacro>
+	
+	<div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
 
     </div>
     </metal:main-macro>
