@@ -37,6 +37,22 @@
                      more_hrefs python: ['dm', 'dm#c1=Data', 'dm#c1=Map', 'dm#c1=Interactive+map', 'dm#c1=Indicator', 'dm#c1=Graph']" >
             <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
        </tal:datapage>
+       
+       			<!-- Popular tags --> 
+       <div id="faceted-form"> 
+	    <div id="tag-cloud"> 
+	      <div id="tag-cloud-content" tal:define="faceted_path python:'dm'"> 
+		  <metal:tags use-macro="here/portlet_soer_tagcloud/macros/portlet" /> 
+		  
+	      </div> 
+	      <div class="portletFooter">
+		  <p><a href="dm" class="standardButton" title="archive">Advanced search
+		     </a>
+		  </p>
+	      </div>
+	    </div> 
+       </div> 	
+			
     </div>
 
     <div class="right-column-area">
