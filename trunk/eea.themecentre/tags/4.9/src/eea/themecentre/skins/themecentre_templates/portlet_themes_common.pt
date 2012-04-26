@@ -1,0 +1,174 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  i18n:domain="plone">
+
+  <body>
+
+    <div metal:define-macro="portlet"
+        tal:condition="portlet"
+        tal:define="portal_url context/@@plone_portal_state/portal_url;"
+      tal:omit-tag="">
+
+      <dl class="portlet portlet-rss">
+        <dt class="portletHeader">
+          <a href="" class="feedButton" tal:attributes="href portlet/feed_link"
+            tal:condition="portlet/feed_link">
+            <img alt="RSS" title="news items" 
+              tal:attributes="title string:RSS subscription feed for ${portlet/title};src string:${portal_url}/RSSFeedRecipe_icon.png" />
+          </a>
+
+          <tal:allLink condition="portlet/all_link">
+            <a href="" title="title" class="title"
+              tal:content="portlet/title"
+              tal:attributes="href portlet/all_link;
+              title portlet/title">
+              Title
+            </a>
+          </tal:allLink>
+          <tal:noLink
+            condition="not: portlet/all_link"
+            content="portlet/title">Title</tal:noLink>
+        </dt>
+
+        <!-- Events map portlet disabled -->
+        <!-- tal:block condition="python:portlet['title'] == 'Upcoming events'">
+  <dt><metal:macro use-macro="here/map_portlet/macros/themes-map" /></dt>
+    </tal:block -->
+
+    <tal:items tal:repeat="item portlet/entries">
+
+      <dt class="portletItem">
+        <tal:cover
+          tal:condition="item/Image|nothing">
+          <a href="#" title="Read report" class="thumbnail-right"
+            tal:attributes="href item/url"><img src="" alt=""
+              tal:attributes="src item/Image;
+              alt item/title;" /></a>
+        </tal:cover>
+        <tal:nolinkclass condition="not: linkclass|nothing">
+          <a href="" tal:attributes="href item/url">
+            <span tal:replace="item/title">Item title</span>
+          </a>
+        </tal:nolinkclass>
+        <tal:linkclass condition="linkclass|nothing">
+          <a href="" tal:attributes="href python:test(item['url'].endswith('view'), item['url'], '%s/view' % item['url']);
+            class linkclass">
+            <span tal:replace="item/title">Item title</span>
+          </a>
+        </tal:linkclass>
+      </dt>
+
+      <dd class="portletItem date" tal:content="structure item/detail"
+        tal:condition="item/detail">
+        07 Dec 2005
+      </dd>
+
+    </tal:items>
+
+    <dd class="portletFooter">
+      <a href="" title="" class="moreLink"
+        tal:condition="portlet/all_link"
+        tal:attributes="href portlet/all_link;
+        title portlet/title">
+        <span i18n:translate="box_morelink">More</span>
+      </a>
+    </dd>
+
+  </dl>
+</div>
+
+
+<div metal:define-macro="simple-list"
+  tal:define="portlet python:path('context/@@'+view_name);
+  view nocall:portlet;
+  items view/short_items;
+  title title|view/title"
+  tal:condition="items"
+  tal:omit-tag="">
+
+  <dl class="portlet portlet-rss"
+    tal:attributes="id view_name">
+
+    <dt class="portletHeader">
+      <tal:allLink condition="view/all_link">
+        <a href="" title="title" class="tile"
+          tal:content="title|view/title"
+          tal:attributes="href view/all_link">Title</a>
+      </tal:allLink>
+      <tal:noLink
+        condition="not: view/all_link"
+        content="title|view/title">Title</tal:noLink>
+    </dt>
+
+    <dd class="portletItem">
+      <ul>
+        <tal:items tal:repeat="item items">
+          <li class="portletItem">
+            <a href="" tal:attributes="href item/url"
+              tal:content="item/title">Item title</a>
+          </li>
+        </tal:items>
+      </ul>
+    </dd>
+
+  </dl>
+</div>
+
+
+<div metal:define-macro="thumbnail-list"
+  tal:define="portlet python:path('context/@@'+view_name);
+  view nocall:portlet;
+  items view/short_items;
+  title title|view/title"
+  tal:condition="items"
+  tal:omit-tag="">
+
+  <dl class="portlet portlet-rss" id=""
+    tal:attributes="id view_name">
+
+    <dt class="portletHeader">
+      <tal:allLink condition="view/all_link">
+        <a href="" title="title" class="title"
+          tal:content="title|view/title"
+          tal:attributes="href view/all_link"
+          i18n:translate="">Title</a>
+      </tal:allLink>
+      <tal:noLink
+        condition="not: view/all_link"
+        content="title|view/title"
+        i18n:translate="">Title</tal:noLink>
+    </dt>
+
+    <tal:items tal:repeat="item items">
+
+      <dt class="portletItem">
+        <a href="" tal:attributes="href item/url">
+          <img src="" alt="Theme image"
+            tal:attributes="src string:${item/image}; alt item/title" /> <span tal:replace="item/title">Item title</span>
+        </a>
+      </dt>
+
+
+      <dd class="portletItem date" tal:content="item/detail"
+        tal:condition="item/detail">
+        07 Dec 2005
+      </dd>
+
+    </tal:items>
+
+    <dd class="portletFooter">
+      <a href="" title="" class="moreLink"
+        tal:condition="view/all_link|view_name|nothing"
+        tal:attributes="href view/all_link;
+        title title">
+        <span i18n:translate="box_morelink">More</span>
+      </a>
+    </dd>
+
+  </dl>
+</div>
+
+
+
+</body>
+</html>
