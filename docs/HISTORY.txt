@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.9-dev - (unreleased)
-----------------------
+4.9 - (2012-04-26)
+------------------
  * Change: improved layout of data centre page after feedback from users.
    Browse catalogue more visible. moved featured indicator to the right column.
    [demarant]
