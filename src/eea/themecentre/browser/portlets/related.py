@@ -5,7 +5,7 @@ from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeRelation
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.browser.portlets.catalog import BasePortlet
-from eea.themecentre import _
+from eea.themecentre import eeaMessageFactory as _
 
 class RelatedPortlet(BasePortlet):
     """ Related Portlet

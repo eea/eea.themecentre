@@ -103,3 +103,7 @@ class IDCViewLogic(Interface):
 
     def folder_contents(size_limit):
         """ Folder contents """
+        
+class IThemesView(Interface):
+    """ Marker interface for themes view logic
+    """        

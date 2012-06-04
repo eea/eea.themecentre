@@ -13,7 +13,7 @@ from eea.themecentre.interfaces import (
 from eea.themecentre.themecentre import getTheme, getThemeTitle
 from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
 from eea.mediacentre.interfaces import IMediaCentre
-from eea.themecentre import _
+from eea.themecentre import eeaMessageFactory as _
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime

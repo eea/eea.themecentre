@@ -2,7 +2,7 @@
 """
 from Products.EEAContentTypes.browser import smartfolder
 from eea.themecentre.themecentre import getThemeCentre
-from eea.themecentre import _
+from eea.themecentre import eeaMessageFactory as _
 
 class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
     """ Smart Folder Portlets
