@@ -5,6 +5,9 @@
 -----------------------
 * Bug fix: fixed markup of HISTORY.txt file
   [ciobabog refs #5231]
+* Bug Fix: Fix the themes'view: now the content
+  comes from the site and the po files 
+  [prospchr fixes #5237]
 
 4.9 - (2012-04-26)
 ------------------

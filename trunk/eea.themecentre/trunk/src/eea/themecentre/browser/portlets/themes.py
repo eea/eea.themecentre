@@ -2,7 +2,7 @@
 """
 
 from Products.CMFCore.utils import getToolByName
-from eea.themecentre import _
+from eea.themecentre import eeaMessageFactory as _
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.interfaces import IThemeTagging

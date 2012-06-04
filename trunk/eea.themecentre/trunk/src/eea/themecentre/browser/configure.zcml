@@ -156,6 +156,15 @@
       permission="zope.Public"
       allowed_interface=".interfaces.IDCViewLogic"
       />
+      
+  <browser:page
+      for="*"
+      name="themes_view"
+      class=".themes_view.ThemesView"
+      permission="zope2.View"
+      allowed_interface=".interfaces.IThemesView"      
+      />      
+      
   
   <!-- themes portlet now as viewlet shown as tags below the title -->
   <browser:viewlet
