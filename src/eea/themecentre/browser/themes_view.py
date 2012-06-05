@@ -15,33 +15,42 @@ class ThemesView(BrowserView):
         return self.template_view()
     
     def getCurrentLanguage(self):
-        # Get user current language
+        """ Getthe current user language """
         context = aq_inner(self.context)
         plt = getToolByName(context, 'portal_languages')
         return plt.getPreferredLanguage()        
     
     def getPromotions(self):
-        """ Get the 5 promotions """
+        """ Get the 5 promotions to show on top """
         
         pl = self.getCurrentLanguage()
         
         # define promotions
         ret_promotions = [] 
-        promotions = [("0d2e3d3da1d2f8f1cc4f029a27b931d0",
-                       "not-just-hot-air",
-                       _(u"visit-pollution-website", default = u"Visit our air pollution website")),
-                      ("cd6bef0c97b6c8ea3e216267af7f1605",
-                       "assessing-biodiversity",
-                       _(u"visit-biodiversity-website", default = u"Visit our biodiversity website")),
-                      ("6723e6872d33d022a07eeae0e235ac48",
-                       "new-estimates-confirm-the-declining-trend-in-eu-greenhouse-gas-emissions",
-                       _(u"visit-climate-website", default = u"Visit our climate change website")),
-                      ("5412da76e31aedcea4ce1d520518604f",
-                       "discover-europe2019s-landscape-through-satellite-and-ground-level-pictures-1",
-                       _(u"visit-land-use-website", default = u"Visit our land use website")),
-                      ("b6ef38c3f2e84948314b397d7668ea41",
-                       "heading-for-your-favourite-beach-is-the-bathing-water-clean",
-                       _(u"visit-water-website", default = u"Visit our water website"))]
+        promotions = [
+              ("0d2e3d3da1d2f8f1cc4f029a27b931d0",
+               "not-just-hot-air",
+               _(u"visit-pollution-website", 
+                 default = u"Visit our air pollution website")),
+              ("cd6bef0c97b6c8ea3e216267af7f1605",
+               "assessing-biodiversity",
+               _(u"visit-biodiversity-website", 
+                 default = u"Visit our biodiversity website")),
+              ("6723e6872d33d022a07eeae0e235ac48",
+               "new-estimates-confirm-the-declining-" +
+               "trend-in-eu-greenhouse-gas-emissions",
+               _(u"visit-climate-website", 
+                 default = u"Visit our climate change website")),
+              ("5412da76e31aedcea4ce1d520518604f",
+               "discover-europe2019s-landscape-through" + 
+               "-satellite-and-ground-level-pictures-1",
+               _(u"visit-land-use-website", 
+                 default = u"Visit our land use website")),
+              ("b6ef38c3f2e84948314b397d7668ea41",
+               "heading-for-your-favourite-beach-is-the-bathing-water-clean",
+               _(u"visit-water-website", 
+                 default = u"Visit our water website"))
+        ]
         
         # get promotion attributes and title in current language
         context = aq_inner(self.context)
@@ -50,7 +59,11 @@ class ThemesView(BrowserView):
         for promo in promotions:
             o = context.reference_catalog.lookupObject(promo[0])
             if o.hasTranslation(pl):
-                t = o.getTranslation(pl), promo[1], tr_tool.translate(promo[2], domain = "eea", target_language = pl), o.absolute_url()
+                t = (o.getTranslation(pl), 
+                    promo[1], 
+                    tr_tool.translate(promo[2], domain = "eea", 
+                                      target_language = pl), 
+                    o.absolute_url())
                 ret_promotions.append(t)
             else:
                 t = o, promo[1], promo[2], o.absolute_url()
@@ -59,8 +72,10 @@ class ThemesView(BrowserView):
         return ret_promotions
     
     def getThemes(self):
-        
-        # The order of the themes was previously defined, we use a list of uid to keep the same order 
+        """ Get the themes translated 
+            The order of the themes was previously defined,
+            we use a list of uid to keep the same order 
+        """
         themes = [["0d2e3d3da1d2f8f1cc4f029a27b931d0",
                    "cd6bef0c97b6c8ea3e216267af7f1605",
                    "619d5ebc70dbdf9895dda7c815c5364b",
