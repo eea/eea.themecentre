@@ -1,0 +1,25 @@
+<metal:portlet metal:define-macro="portlet">
+<tal:cond tal:define="isViewTemplate context/@@plone_context_state/is_view_template;" tal:condition="isViewTemplate">
+<div class="shortcut-default roundedCorners"
+    tal:define="themecentre_view context/@@themecentre_utils;
+    title themecentre_view/getDataCentreName|nothing;
+    theme themecentre_view/getThemeName;
+    eea_datacentres python:('air','biodiversity','climate','landuse','water');
+    local python:'SITE' if 'localhost' in context.REQUEST['URL0'] else '';"
+    tal:condition="python: title and isViewTemplate">
+        <h3>
+            <a tal:attributes="href string:${context/@@plone_portal_state/portal_url}/${local}/themes/${theme}/dc;" class="internal-link" title="Data centre overview">
+                    <span tal:condition="python: theme in eea_datacentres" id="theme-datacentre">
+                        <tal:title tal:content="string:${title}">title</tal:title>
+                        <tal:datacentre i18n:translate="themecentre_datacentre">data centre</tal:datacentre>
+                    </span>
+                    <span tal:condition="python: not (theme in eea_datacentres)" id="theme-datacentre">
+                        <tal:title tal:content="string:${title}">title</tal:title>
+                        <tal:dataservice i18n:translate="themecentre_dataservice">data service</tal:dataservice>
+                    </span>
+            </a>
+        </h3>
+    </div>
+</tal:cond>
+</metal:portlet>
+        

@@ -1,0 +1,178 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="eea">
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeTaggable"
+      name="themes_edit.html"
+      permission="cmf.ModifyPortalContent"
+      class=".themes.ThemeEditForm"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IPossibleThemeCentre"
+      name="promote2ThemeCentre"
+      permission="eea.PromoteThemeCentre"
+      class=".themecentre.PromoteThemeCentre"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="themecentre_edit.html"
+      permission="eea.PromoteThemeCentre"
+      class=".themecentre.ThemeCentreEdit"
+      />
+
+  <!-- listing views -->
+
+  <browser:page
+      for="*"
+      name="themes_faq"
+      class=".portlets.faq.FaqPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+   <browser:page
+      for="*"
+      name="themes-object"
+      class=".portlets.themes.ObjectThemesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes-related"
+      class=".portlets.related.RelatedPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes_rdf"
+      class=".portlets.rdf.RDFPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themes-rdftitles"
+      class=".portlets.rdftitles.RDFTitlesPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="themesMenuPromotion"
+      class=".portlets.promotion.ThemeCentreMenuPromotion"
+      permission="zope.Public"
+      allowed_attributes="promotions"
+      />
+
+  <browser:page for="*"
+                name="theme_portlets"
+                class=".portlets.smartfolder.SmartFolderPortlets"
+                allowed_interface=".interfaces.IPortlet"
+                permission="zope.Public" />
+
+  <browser:page
+      for="*"
+      name="portlet_faceted_logic"
+      class=".portlets.faceted.FacetedPortlet"
+      allowed_interface=".interfaces.IPortlet"
+      permission="zope.Public"
+      />
+
+   <adapter for="..interfaces.IThemeCentre
+                Products.CMFPlone.browser.interfaces.ISiteMap"
+            factory=".sitemap.SitemapThemeCentreStrategy"
+            provides="plone.app.layout.navigation.interfaces.INavtreeStrategy" />
+
+  <!-- provides videos that are shown in the themecentre's multimedia section -->
+  <browser:page
+      for="*"
+      name="themecentre_multimedia"
+      class=".themecentre.Multimedia"
+      permission="zope.Public"
+      allowed_attributes="types media_items"
+      />
+
+  <browser:page
+      for="*"
+      name="theme"
+      class=".themecentre.Theme"
+      permission="zope.Public"
+      allowed_attributes="name"
+      />
+
+  <browser:page
+      for="*"
+      name="themecentre_utils"
+      class=".themecentre.ThemecentreUtils"
+      permission="zope.Public"
+      />
+
+  <!-- provides info for the related topics portlet -->
+  <browser:page
+      for="*"
+      name="relatedtopics"
+      class=".related.Topics"
+      permission="zope.Public"
+      allowed_attributes="menu"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeCentre"
+      name="contentbytypeview"
+      class=".content.ContentByType"
+      permission="zope.Public"
+      allowed_attributes="title description content"
+      />
+
+  <browser:page
+      for="*"
+      name="dataCentreReporting"
+      class=".datareporting.DataCentreReporting"
+      permission="zope.Public"
+      allowed_attributes="relatedReportingObligations"
+      />
+
+  <browser:page
+      for="*"
+      name="reportingObligationInfo"
+      class=".datareporting.ReportingObligationInfo"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="*"
+      name="dc_view_logic"
+      class=".dc_view_logic.DCViewLogic"
+      permission="zope.Public"
+      allowed_interface=".interfaces.IDCViewLogic"
+      />
+      
+  <browser:page
+      for="*"
+      name="themes_view"
+      class=".themes_view.ThemesView"
+      permission="zope2.View"
+      allowed_interface=".interfaces.IThemesView"      
+      />      
+      
+  
+  <!-- themes portlet now as viewlet shown as tags below the title -->
+  <browser:viewlet
+        name="eea.themestags"
+        class=".viewlets.ThemesTagsViewlet"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+        layer="eea.design.browser.interfaces.IEEACommonLayer"
+        permission="zope2.View"
+        />
+
+</configure>
