@@ -3,6 +3,8 @@
 
 4.11-dev - (unreleased)
 -----------------------
+* Bug Fix: Fixed i18n missing tags in eea.themecentre 
+  [prospchr refs #5162]
 
 4.10 - (2012-06-13)
 -------------------

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="eea">
 
 <head>
 </head>
@@ -35,11 +35,11 @@
 	     tal:define="themecentre_view context/@@themecentre_utils; 
 	                 folders themecentre_view/getSubtopics;" id="subtopics"
 			 tal:condition="folders"> 
-	   <h2>Subtopics</h2> 
+	   <h2 i18n:translate="subtopics">Subtopics</h2> 
 	   <ul>  
 		<li tal:repeat="folder folders">  
 		    <a tal:attributes="href folder/getURL; title folder/Title;" 
-		    tal:content="folder/Title">Folder links</a> 
+		       tal:content="folder/Title">Folder links</a> 
 		</li> 
            </ul> 
 	</div> 

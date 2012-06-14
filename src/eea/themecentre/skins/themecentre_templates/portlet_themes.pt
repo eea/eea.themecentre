@@ -1,6 +1,6 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      i18n:domain="plone">
+      i18n:domain="eea">
 <body>
 
 <div metal:define-macro="portlet"
@@ -52,7 +52,7 @@
                 SUBTREE
             </li>
         </ul>
-        <div class="hiddenStructure template-file-name">portlet_themes.pt</div>
+        <div class="hiddenStructure template-file-name" i18n:translate="">portlet_themes.pt</div>
     </dd>
 </dl>
 <div class="visualClear"><!-- &nbsp;--></div>

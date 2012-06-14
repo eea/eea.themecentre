@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="eea">
 <body>
 
 <div metal:fill-slot="main"> 
@@ -13,7 +13,7 @@
                  b_start python: 0;
                  b_start request/b_start | b_start">
 
-    <h1 tal:content="view/title">Title</h1>
+     <h1 tal:content="view/title">Title</h1>
      <div tal:replace="structure provider:plone.documentactions" />
 
 
@@ -32,6 +32,7 @@
                 <span class="figure-right">
                     <span class="figure">
                         <a href="#" title="Read more" class=""
+                           i18n:attributes="title read-more"
                            tal:attributes="href item/url">
                             <img src="" alt=""
                                 tal:attributes="src item/image; alt item/title;" />
@@ -41,7 +42,7 @@
                 </tal:cover>
                 <br />
                 <tal:date tal:condition="python:item.published">
-                Published: <span tal:replace="item/published" />
+                    <span i18n:translate="published">Published:</span>&nbsp;<span tal:replace="item/published" />
                 </tal:date>
                 <div class="visualClear"> <!-- &nbsp; --> </div>
                 </dd>

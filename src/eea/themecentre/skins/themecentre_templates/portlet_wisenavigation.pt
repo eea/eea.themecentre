@@ -7,13 +7,19 @@
 <dl class="portlet" id="portlet-wise-navigation" tal:define="language context/@@plone_portal_state/language" tal:condition="python:language == 'en'">
 
     <dt class="portletHeader">
-        <span class="tile">
+        <span class="tile" i18n:translate="">
             WISE Menu
         </span>
     </dt>
     <dd id="wise-logo" class="portletItem active-promo" style="display: block;">
-        <a title="Water Information System for Europe" class="" href="http://water.europa.eu/en/welcome">
-            <img title="Water Information System for Europe" alt="Water Information System for Europe" src="http://www.eea.europa.eu/themes/water/wise/image_thumb">
+        <a title="Water Information System for Europe"
+           i18n:attributes="title water_information" 
+           class="" 
+           href="http://water.europa.eu/en/welcome">
+            <img title="Water Information System for Europe" 
+                 alt="Water Information System for Europe" 
+                 src="http://www.eea.europa.eu/themes/water/wise/image_thumb"
+                 i18n:attributes="alt water_information; title water_information" />
         </a>
     </dd>
 

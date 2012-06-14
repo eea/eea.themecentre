@@ -23,7 +23,7 @@
     Link management overview
   </h1>
 
-   <p>
+   <p i18n:translate="">
      This page gives you information about the links in your themecentre.
    </p>
 

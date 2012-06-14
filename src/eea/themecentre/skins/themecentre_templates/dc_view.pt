@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="eea">
 
 <body>
     <div metal:fill-slot="content-core">
@@ -19,15 +19,17 @@
 
 
     <div class="column-area">
-       <a href="dm" class="archives advanced-search-link" title="Go to advanced search">
-       <span>Advanced search</span></a>
+       <a href="dm" class="archives advanced-search-link" title="Go to advanced search" i18n:attributes="title">
+       <span i18n:translate="advanced_search">Advanced search</span></a>
        <div class="featured">
        <h2 i18n:translate="featured_global_search">Search</h2>
 	    <form action="dm" method="get" id="faceted-text-search" class="searchforms faceted-external-search">
-                                <p>
-                                    <input type="text" name="c12" title="Search data, maps, indicators">
-                                    <input type="submit" value="Search" name="search" class="searchButton" style="cursor: pointer; cursor: hand;">
-                                </p>
+            <p>
+                <input type="text" name="c12" title="Search data, maps, indicators" i18n:attributes="title" />
+                <input type="submit" value="Search" name="search" class="searchButton" 
+                       style="cursor: hand;"
+                       i18n:attributes="value" />
+            </p>
 	    </form>
        </div>
 
@@ -45,8 +47,10 @@
 		  
 	      </div> 
 	      <div class="portletFooter">
-		  <p><a href="dm" class="standardButton" title="archive">Advanced search
-		     </a>
+		  <p><a href="dm" class="standardButton" 
+		        title="archive"
+		        i18n:attributes="title"
+		        i18n:translate="advanced-search">Advanced search</a>
 		  </p>
 	      </div>
 	    </div> 
