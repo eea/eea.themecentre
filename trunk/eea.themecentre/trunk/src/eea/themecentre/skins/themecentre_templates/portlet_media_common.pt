@@ -1,6 +1,6 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      i18n:domain="plone">
+      i18n:domain="eea">
 
 <body>
 
@@ -12,9 +12,11 @@
      tal:condition="items">
 
     <dt class="portletHeader">
-        <a href="" title="title" class="tile"
+        <a href="" class="tile"
             tal:content="title"
-            tal:attributes="href view/all_link">ITem title</a>
+            tal:attributes="title title;
+                            href view/all_link">
+                    ITem title</a>
     </dt>
 
     <dt class="portletItem">

@@ -48,7 +48,7 @@
     </thead>
 
     <tr tal:repeat="doc context/@@linkchecker-objects/documents">
-      <td>
+        <td>
           <a class="navItem navLevel1"
             tal:attributes="
               href doc/document/getURL;
@@ -61,22 +61,22 @@
               asdf
             </span>
           </a>
-          
+        </td>
           <td style="text-align: right"
             tal:content="doc/instate">
             8
-          </td>
-          <td style="text-align: right"
+        </td>
+        <td style="text-align: right"
             tal:content="doc/total">
             20
-          </td>
-          <td>
+        </td>
+        <td>
             <a 
               tal:attributes="href string:mailto:${doc/owner_mail}"
               tal:content="doc/owner">
               asdf
             </a>
-          </td>
+        </td>
     </tr>
  
   </table>

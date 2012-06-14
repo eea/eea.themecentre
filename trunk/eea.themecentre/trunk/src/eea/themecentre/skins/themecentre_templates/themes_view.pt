@@ -40,7 +40,7 @@
                 <a href="resolveuid/25f41725a7916d7368797edf78f06cad" i18n:translate="">Environment and health</a></li>
             <li>
                 <img src="resolveuid/5412da76e31aedcea4ce1d520518604f/theme_image/image_icon" />
-                <a class="internal-link" href="resolveuid/5412da76e31aedcea4ce1d520518604f" title="Land use" i18n:translate="">Land use</a></li>
+                <a class="internal-link" href="resolveuid/5412da76e31aedcea4ce1d520518604f" i18n:translate="">Land use</a></li>
             <li>
                 <img src="resolveuid/c64f9ed39bae175c77ee5fe3729472f6/theme_image/image_icon" />
                 <a href="resolveuid/c64f9ed39bae175c77ee5fe3729472f6" i18n:translate="">Natural resources</a></li>
@@ -125,7 +125,7 @@
         <ul>
             <li>
                 <img src="resolveuid/0742501c1bd96c82e8bb993ee49f120c/theme_image/image_icon" />
-                <a class="internal-link" href="resolveuid/0742501c1bd96c82e8bb993ee49f120c" title="Environmental technology" i18n:translate="">Environmental technology</a>
+                <a class="internal-link" href="resolveuid/0742501c1bd96c82e8bb993ee49f120c" i18n:translate="">Environmental technology</a>
             </li>
             <li>
                 <img src="resolveuid/f68e62dd80ecbc75f123197e48ef3ceb/theme_image/image_icon" />

@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="eea">
 
 <body>
     <div metal:fill-slot="main">
@@ -9,20 +9,23 @@
                                                       rodsinfo here/@@reportingObligationInfo;
                                                       object_title context/@@plone_context_state/object_title">
         <h1 class="documentFirstHeading">
-            <span tal:content="object_title">Title or id</span> &mdash; related reporting obligations
+            <span tal:content="object_title">Title or id</span>&nbsp;&mdash;&nbsp;<span i18n:translate="">related reporting obligations</span>
         </h1>
 
         <div tal:replace="structure provider:plone.documentactions" />
 
         <div class="visualClear"></div>
-        <div class="documentDescription">
-        Reporting obligations are requirements to provide information agreed between countries and international bodies such as the EEA or international conventions. 
-        Reporting obligations provide the basis for most environmental information flows.  
+        <div class="documentDescription" i18n:translate="document_description">
+            Reporting obligations are requirements to provide information agreed between countries and international bodies such as the EEA or international conventions. 
+            Reporting obligations provide the basis for most environmental information flows.  
         </div>
-        <h2>Reporting obligations related to data stored at EEA</h2>
+        <h2 i18n:translate="">Reporting obligations related to data stored at EEA</h2>
         <table id="related-dc-rods" class="sortable listing">
         <thead>
-        <th class="sort">ID</th><th style="width:100em">Title/Description</th><th>Reporting frequency</th><th>Next report deadline</th>
+            <th class="sort" i18n:translate="">ID</th>
+            <th style="width:100em" i18n:translate="">Title/Description</th>
+            <th i18n:translate="">Reporting frequency</th>
+            <th i18n:translate="">Next report deadline</th>
         </thead>
         <tbody>
         <tr tal:repeat="roditem view/relatedReportingObligations">

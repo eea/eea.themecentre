@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      i18n:domain="plone">
+      i18n:domain="eea">
 <body>
 
     <div metal:define-macro="main"
@@ -19,10 +19,15 @@
         </tal:block>
 
         <div class="discreet"
-           i18n:translate="text_no_media_file_uploaded"
            tal:condition="python:not video_items">
-          <p>No media files of this kind yet.</p> 
-          <p>Choose another media type or <a href="/multimedia" title="EEA Multimedia Centre">browse all multimedia products</a> (via EEA Multimedia Centre).</p>
+          <p i18n:translate="text_no_media_file_uploaded">No media files of this kind yet.</p> 
+          <p i18n:translate="">Choose another media type or 
+              <span i18n:name="multimedia_center">
+                <a href="/multimedia" title="EEA Multimedia Centre" 
+                   i18n:attributes="title" 
+                   i18n:translate="">browse all multimedia products</a>
+              </span> (via EEA Multimedia Centre).
+          </p>
         </div>
 
         <!-- Navigation -->
