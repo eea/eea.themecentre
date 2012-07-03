@@ -9,7 +9,7 @@
 </tal:block>
 
 <metal:block metal:fill-slot="main"
-    i18n:domain="linkchecker">
+    i18n:domain="eea">
 
    <link rel="Stylesheet" href="lc_colors.css" type="text/css"/>
 

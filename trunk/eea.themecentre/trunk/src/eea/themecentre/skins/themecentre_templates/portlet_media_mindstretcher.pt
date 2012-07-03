@@ -1,5 +1,5 @@
 <html xmlns:metal="http://xml.zope.org/namespaces/metal"
-      i18n:domain="plone">
+      i18n:domain="eea">
 <body>
 <metal:portlet define-macro="portlet"
      tal:define="media_type string:mindstretcher;
