@@ -4,7 +4,7 @@
 <body>
 
 <div metal:define-macro="portlet"
-       i18n:domain="plone"
+       i18n:domain="eea"
        tal:omit-tag=""
        tal:define="view context/@@themes_navigation_view;
                    root view/navigationRoot;

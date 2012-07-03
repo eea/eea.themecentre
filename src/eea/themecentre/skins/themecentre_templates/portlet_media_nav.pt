@@ -1,9 +1,9 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      i18n:domain="plone">
+      i18n:domain="eea">
 <body>
 <div metal:define-macro="portlet"
-       i18n:domain="plone"
+       i18n:domain="eea"
        tal:omit-tag=""
        tal:define="view context/@@media_navigation;
                    media_types view/media_types;

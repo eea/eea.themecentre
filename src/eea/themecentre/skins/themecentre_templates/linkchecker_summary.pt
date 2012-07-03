@@ -16,7 +16,7 @@
 </tal:block>
 
 <metal:block metal:fill-slot="main"
-    i18n:domain="linkchecker"
+    i18n:domain="eea"
     tal:define="status context/@@linkchecker">
 
   <h1 i18n:translate="heading_balanced_score_card">
