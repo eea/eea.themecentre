@@ -36,7 +36,7 @@
         <a href="" title="" class="moreLink"
             tal:attributes="href view/all_link;
                             title title">
-            <span i18n:translate="more">More</span>
+            <span i18n:translate="">More</span>
         </a>
     </dd>
   
