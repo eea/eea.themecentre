@@ -42,7 +42,7 @@
                 </tal:cover>
                 <br />
                 <tal:date tal:condition="python:item.published">
-                    <span i18n:translate="">Published:</span>&nbsp;<span tal:replace="item/published" />
+                    <span i18n:translate="" />
                 </tal:date>
                 <div class="visualClear"> <!-- &nbsp; --> </div>
                 </dd>

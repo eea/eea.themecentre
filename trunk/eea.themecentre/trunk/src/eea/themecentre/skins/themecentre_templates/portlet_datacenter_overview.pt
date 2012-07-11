@@ -16,11 +16,11 @@
                i18n:attributes="title">
                     <span tal:condition="python: theme in eea_datacentres" id="theme-datacentre">
                         <tal:title tal:content="string:${title}"></tal:title>
-                        <tal:datacentre i18n:translate="themecentre_datacentre">data centre</tal:datacentre>
+                        <tal:datacentre i18n:translate="">data centre</tal:datacentre>
                     </span>
                     <span tal:condition="python: not (theme in eea_datacentres)" id="theme-datacentre">
                         <tal:title tal:content="string:${title}"></tal:title>
-                        <tal:dataservice i18n:translate="themecentre_dataservice">data service</tal:dataservice>
+                        <tal:dataservice i18n:translate="">data service</tal:dataservice>
                     </span>
             </a>
         </h3>

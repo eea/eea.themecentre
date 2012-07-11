@@ -35,7 +35,7 @@
 	     tal:define="themecentre_view context/@@themecentre_utils; 
 	                 folders themecentre_view/getSubtopics;" id="subtopics"
 			 tal:condition="folders"> 
-	   <h2 i18n:translate="subtopics">Subtopics</h2> 
+	   <h2 i18n:translate="">Subtopics</h2> 
 	   <ul>  
 		<li tal:repeat="folder folders">  
 		    <a tal:attributes="href folder/getURL; title folder/Title;" 

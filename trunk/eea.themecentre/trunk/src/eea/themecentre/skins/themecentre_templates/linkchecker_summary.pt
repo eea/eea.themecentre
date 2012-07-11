@@ -19,7 +19,7 @@
     i18n:domain="eea"
     tal:define="status context/@@linkchecker">
 
-  <h1 i18n:translate="heading_balanced_score_card">
+  <h1 i18n:translate="">
     Link management overview
   </h1>
 
@@ -27,21 +27,21 @@
      This page gives you information about the links in your themecentre.
    </p>
 
-   <h2 i18n:translate="label_total_links">Total links</h2>
+   <h2 i18n:translate="">Total links</h2>
     <div class="field">
-      <strong i18n:translate="label_total">Total:</strong>
+      <strong i18n:translate="">Total:</strong>
       <span tal:replace="status/totalLinks"/> <br/>
-      <strong i18n:translate="label_distinct">Distinct:</strong>
+      <strong i18n:translate="">Distinct:</strong>
       <span tal:replace="status/totalDistinctLinks"/>
     </div>
         
-   <h2 i18n:translate="label_total_documents">Total documents</h2>
+   <h2 i18n:translate="">Total documents</h2>
    <div class="field">
-     <strong i18n:translate="label_total">Total:</strong>
+     <strong i18n:translate="">Total:</strong>
      <span tal:replace="status/totalDocuments"/> <br/>
    </div>
 
-    <h2 i18n:translate="label_links_in_state">Links in the state ...</h2>
+    <h2 i18n:translate="">Links in the state ...</h2>
     
     <div class="field">
       <tal:block repeat="state_tuple status/states">
@@ -70,7 +70,7 @@
 
 
   <tal:block tal:condition="status/documents">
-    <h2 i18n:translate="label_documents_in_state">
+    <h2 i18n:translate="">
       Documents containing links in the state ...
     </h2>
     <div class="field">

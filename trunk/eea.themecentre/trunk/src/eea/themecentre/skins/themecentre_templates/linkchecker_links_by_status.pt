@@ -25,24 +25,24 @@
                 searchterm request/SearchableText|nothing;
                 ">
     
-    <h1 i18n:translate="header_all_links_in_state">
+    <h1 i18n:translate="">
       All links in state <span i18n:name="state"
                              i18n:translate="" 
                              tal:content="request/link_state" />
     </h1>
     
     <a tal:attributes="href string:${here/absolute_url}/linkchecker_summary"
-       i18n:translate="label_up_to_summary" 
+       i18n:translate="" 
        class="link-parent">
       Up to linkchecker summary
     </a>
     
     <metal:block use-macro="here/lc_macros/macros/batchTable">
       <metal:block fill-slot="header_cols">
-        <th i18n:translate="link_header_document">
+        <th i18n:translate="">
           Document
         </th>
-        <th i18n:translate="link_header_owner">
+        <th i18n:translate="">
           Owner
         </th>
       </metal:block>
