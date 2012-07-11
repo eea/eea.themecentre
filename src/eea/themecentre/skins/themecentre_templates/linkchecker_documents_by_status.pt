@@ -21,7 +21,7 @@
      </span>
    </h1>
 
-       <a tal:attributes="href string:${here/absolute_url}/linkchecker_summary" i18n:translate="">Up to linkchecker summary</a>
+<a tal:attributes="href string:${here/absolute_url}/linkchecker_summary" i18n:translate="label_up_to_summary" class="link-parent">Up to linkchecker summary</a>
 
   <table class="listing"
           id="sortable"
