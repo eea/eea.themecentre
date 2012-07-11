@@ -41,7 +41,7 @@
                                           class string:$selectedClass visualIconPadding;">
                        <span tal:omit-tag=""
                              tal:condition="python:root == portal"
-                             i18n:translate="tabs_home">Home</span>
+                             i18n:translate="">Home</span>
                        <span tal:condition="python:root != portal"
                              tal:replace="root/Title">Home</span>
                        </a>

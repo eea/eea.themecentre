@@ -20,9 +20,9 @@
 
     <div class="column-area">
        <a href="dm" class="archives advanced-search-link" title="Go to advanced search" i18n:attributes="title">
-       <span i18n:translate="advanced_search">Advanced search</span></a>
+       <span i18n:translate="">Advanced search</span></a>
        <div class="featured">
-       <h2 i18n:translate="featured_global_search">Search</h2>
+       <h2 i18n:translate="">Search</h2>
 	    <form action="dm" method="get" id="faceted-text-search" class="searchforms faceted-external-search">
             <p>
                 <input type="text" name="c12" title="Search data, maps, indicators" i18n:attributes="title" />
@@ -50,7 +50,7 @@
 		  <p><a href="dm" class="standardButton" 
 		        title="archive"
 		        i18n:attributes="title"
-		        i18n:translate="advanced-search">Advanced search</a>
+		        i18n:translate="">Advanced search</a>
 		  </p>
 	      </div>
 	    </div> 
@@ -63,10 +63,10 @@
 <div class="shortcut-default roundedCorners">
         <h3 tal:define="themecentre_view context/@@themecentre_utils;
                     title themecentre_view/getDataCentreName|nothing;">
-                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage" i18n:translate="themes-featured-homepage">
+                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage" i18n:translate="">
                     <span id="theme-datacentre">
                         <tal:title tal:content="string:${title}">title</tal:title>
-                        <tal:homepage i18n:translate="themecentre_homepage">homepage</tal:homepage>
+                        <tal:homepage i18n:translate="">homepage</tal:homepage>
                     </span>
             </a>
         </h3>

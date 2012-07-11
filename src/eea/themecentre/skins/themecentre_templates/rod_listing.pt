@@ -15,7 +15,7 @@
         <div tal:replace="structure provider:plone.documentactions" />
 
         <div class="visualClear"></div>
-        <div class="documentDescription" i18n:translate="document_description">
+        <div class="documentDescription" i18n:translate="">
             Reporting obligations are requirements to provide information agreed between countries and international bodies such as the EEA or international conventions. 
             Reporting obligations provide the basis for most environmental information flows.  
         </div>

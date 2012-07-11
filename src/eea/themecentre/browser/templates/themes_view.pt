@@ -48,10 +48,10 @@
 <tal:block tal:define="themes view/getThemes">
 
     <div id="all-topics-list" class="themes-view-image-icon">
-        <h2 i18n:translate="all-topics">All topics</h2>
+        <h2 i18n:translate="">All topics</h2>
         
         <div class="contentColumnOne">
-            <h3 i18n:translate="what-environmental-issue">What is happening?<br />Environmental issues</h3>
+            <h3 i18n:translate="">What is happening?<br />Environmental issues</h3>
             <ul tal:define="items python:themes[0]">
                 <li tal:repeat="item items">
                     <tal:block tal:define="original_obj_url python:item[0];
@@ -65,7 +65,7 @@
         </div>
         
         <div class="contentColumnTwo themes-view-image-icon">
-            <h3 i18n:translate="why-sectors-activities">Why is it happening?<br />Sectors and activities</h3>
+            <h3 i18n:translate="">Why is it happening?<br />Sectors and activities</h3>
             <ul tal:define="items python:themes[1]">
                 <li tal:repeat="item items">
                     <tal:block tal:define="original_obj_url python:item[0];
@@ -82,7 +82,7 @@
     
     <div class="visualClear">
         <div class="contentColumnOne themes-view-image-icon">
-            <h3 i18n:translate="environment-different-regions">Environment in different regions and specific areas</h3>
+            <h3 i18n:translate="">Environment in different regions and specific areas</h3>
             <ul tal:define="items python:themes[2]">
                 <li tal:repeat="item items">
                     <tal:block tal:define="original_obj_url python:item[0];
@@ -96,7 +96,7 @@
         </div>
     
         <div class="contentColumnTwo themes-view-image-icon">
-            <h3 i18n:translate="across-environmental-issues">Across environmental issues and sectors</h3>
+            <h3 i18n:translate="">Across environmental issues and sectors</h3>
             <ul tal:define="items python:themes[3]">
                 <li tal:repeat="item items">
                     <tal:block tal:define="original_obj_url python:item[0];

@@ -13,7 +13,7 @@
 
    <link rel="Stylesheet" href="lc_colors.css" type="text/css"/>
 
-   <h1 i18n:translate="header_all_documents_in_status">
+   <h1 i18n:translate="">
      All documents in state
      <span i18n:name="state" i18n:translate="" 
        tal:content="request/link_state">
@@ -21,7 +21,7 @@
      </span>
    </h1>
 
-       <a tal:attributes="href string:${here/absolute_url}/linkchecker_summary" i18n:translate="label_up_to_summary" class="link-parent">Up to linkchecker summary</a>
+       <a tal:attributes="href string:${here/absolute_url}/linkchecker_summary" i18n:translate="">Up to linkchecker summary</a>
 
   <table class="listing"
           id="sortable"
@@ -30,7 +30,7 @@
           i18n:attributes="summary">
     <thead>
         <tr>
-          <th i18n:translate="link_header_document">
+          <th i18n:translate="">
             Document
           </th>
           <th class="red"
@@ -41,7 +41,7 @@
           <th i18n:translate="">
             total
           </th>
-          <th i18n:translate="link_header_owner">
+          <th i18n:translate="">
             Owner
           </th>
         </tr>

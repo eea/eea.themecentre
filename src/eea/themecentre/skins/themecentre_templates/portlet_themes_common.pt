@@ -76,7 +76,7 @@
         tal:condition="portlet/all_link"
         tal:attributes="href portlet/all_link;
         title portlet/title">
-        <span i18n:translate="box_morelink">More</span>
+        <span i18n:translate="">More</span>
       </a>
     </dd>
 
@@ -171,7 +171,7 @@
         tal:condition="view/all_link|view_name|nothing"
         tal:attributes="href view/all_link;
         title title">
-        <span i18n:translate="box_morelink">More</span>
+        <span i18n:translate="">More</span>
       </a>
     </dd>
 

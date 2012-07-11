@@ -11,7 +11,7 @@
 
     <dl class="portlet portlet-navigation-tree eea-accordion-portlet" tal:condition="menu">
         <dt class="portletHeader eea-accordion-header">
-            <span class="tile" i18n:translate="related_topics">
+            <span class="tile" i18n:translate="">
                 Related topics
             </span>
         </dt>

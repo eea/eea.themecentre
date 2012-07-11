@@ -20,7 +20,7 @@
 
         <div class="discreet"
            tal:condition="python:not video_items">
-          <p i18n:translate="text_no_media_file_uploaded">No media files of this kind yet.</p> 
+          <p i18n:translate="">No media files of this kind yet.</p> 
           <p i18n:translate="">Choose another media type or 
               <span i18n:name="multimedia_center">
                 <a href="/multimedia" title="EEA Multimedia Centre" 
@@ -36,7 +36,7 @@
     </div>
 
     <div metal:define-macro="header">
-        <h1 i18n:translate="Multimedia" class="documentFirstHeading">Multimedia</h1>
+        <h1 i18n:translate="">Multimedia</h1>
 
  <div tal:replace="structure provider:plone.documentactions" />
 
