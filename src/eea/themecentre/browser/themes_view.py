@@ -30,26 +30,21 @@ class ThemesView(BrowserView):
         promotions = [
               ("0d2e3d3da1d2f8f1cc4f029a27b931d0",
                "not-just-hot-air",
-               _(u"visit-pollution-website", 
-                 default = u"Visit our air pollution website")),
+               _(u"Visit our air pollution website")),
               ("cd6bef0c97b6c8ea3e216267af7f1605",
                "assessing-biodiversity",
-               _(u"visit-biodiversity-website", 
-                 default = u"Visit our biodiversity website")),
+               _(u"Visit our biodiversity website")),
               ("6723e6872d33d022a07eeae0e235ac48",
                "new-estimates-confirm-the-declining-" +
                "trend-in-eu-greenhouse-gas-emissions",
-               _(u"visit-climate-website", 
-                 default = u"Visit our climate change website")),
+               _(u"Visit our climate change website")),
               ("5412da76e31aedcea4ce1d520518604f",
                "discover-europe2019s-landscape-through" + 
                "-satellite-and-ground-level-pictures-1",
-               _(u"visit-land-use-website", 
-                 default = u"Visit our land use website")),
+               _(u"Visit our land use website")),
               ("b6ef38c3f2e84948314b397d7668ea41",
                "heading-for-your-favourite-beach-is-the-bathing-water-clean",
-               _(u"visit-water-website", 
-                 default = u"Visit our water website"))
+               _(u"Visit our water website"))
         ]
         
         # get promotion attributes and title in current language

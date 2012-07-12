@@ -32,7 +32,7 @@
                 <span class="figure-right">
                     <span class="figure">
                         <a href="#" title="Read more" class=""
-                           i18n:attributes="title read-more"
+                           i18n:attributes="title"
                            tal:attributes="href item/url">
                             <img src="" alt=""
                                 tal:attributes="src item/image; alt item/title;" />
