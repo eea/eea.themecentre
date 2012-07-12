@@ -44,7 +44,7 @@
           tal:condition="item/Image|nothing">
           <a href="#" 
              title="Read report"
-             i18n:attributes="title read-report" 
+             i18n:attributes="title" 
              class="thumbnail-right"
              tal:attributes="href item/url">
              <img src="" alt=""
