@@ -1,8 +1,8 @@
 ﻿Changelog
 =========
 
-4.11-dev - (unreleased)
------------------------
+5.0 - (2012-07-13)
+------------------
 * Bug Fix: Fixed i18n missing tags, i18n:domain and duplicate keys 
   in *.pt 
   [prospchr refs #5162]
