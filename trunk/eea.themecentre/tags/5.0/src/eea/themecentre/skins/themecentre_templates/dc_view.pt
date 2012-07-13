@@ -1,0 +1,93 @@
+<tal:block tal:define="foo python:request.set('disable_plone.leftcolumn', 1);
+            bar python:request.set('disable_plone.rightcolumn', 1);"/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="eea">
+
+<body>
+    <div metal:fill-slot="content-core">
+    <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
+
+        <div class="visualClear"></div>
+
+        <div class="plain" tal:condition="context/CookedBody|nothing">
+            <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
+              tal:replace="structure text" />
+        </div>
+
+
+
+    <div class="column-area">
+       <a href="dm" class="archives advanced-search-link" title="Go to advanced search" i18n:attributes="title">
+       <span i18n:translate="">Advanced search</span></a>
+       <div class="featured">
+       <h2 i18n:translate="">Search</h2>
+	    <form action="dm" method="get" id="faceted-text-search" class="searchforms faceted-external-search">
+            <p>
+                <input type="text" name="c12" title="Search data, maps, indicators" i18n:attributes="title" />
+                <input type="submit" value="Search" name="search" class="searchButton" 
+                       style="cursor: hand;"
+                       i18n:attributes="value" />
+            </p>
+	    </form>
+       </div>
+
+       <h3 i18n:translate="">Browse catalogue</h3>
+       <tal:datapage tal:define="datapage string:dcview; 
+                     more_hrefs python: ['dm', 'dm#c1=Data', 'dm#c1=Map', 'dm#c1=Interactive+map', 'dm#c1=Indicator', 'dm#c1=Graph']" >
+            <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
+       </tal:datapage>
+       
+       			<!-- Popular tags --> 
+       <div id="faceted-form"> 
+	    <div id="tag-cloud"> 
+	      <div id="tag-cloud-content" tal:define="faceted_path python:'dm'"> 
+		  <metal:tags use-macro="here/portlet_soer_tagcloud/macros/portlet" /> 
+		  
+	      </div> 
+	      <div class="portletFooter">
+		  <p><a href="dm" class="standardButton" 
+		        title="archive"
+		        i18n:attributes="title"
+		        i18n:translate="">Advanced search</a>
+		  </p>
+	      </div>
+	    </div> 
+       </div> 	
+			
+    </div>
+
+    <div class="right-column-area">
+
+<div class="shortcut-default roundedCorners">
+        <h3 tal:define="themecentre_view context/@@themecentre_utils;
+                    title themecentre_view/getDataCentreName|nothing;">
+                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage">
+                    <span id="theme-datacentre">
+                        <tal:title tal:content="string:${title}">title</tal:title>
+                        <tal:homepage i18n:translate="">homepage</tal:homepage>
+                    </span>
+            </a>
+        </h3>
+    </div>
+	<!-- promotions_gallery_slideshow-->
+        <metal:promotions tal:define="frontpage python: False;
+                        promo_view context/@@data_and_maps_logic;">
+                <div metal:use-macro="here/portlet_promo_gallery/macros/portlet">
+                    promoted item
+                </div>
+        </metal:promotions>
+        <!-- end promotions_gallery_slideshow -->
+        
+        <metal:listingmacro define-macro="listing" tal:define="dcview here/@@dc_view_logic">
+                <div tal:replace="structure dcview/render_nav_portlet" />
+        </metal:listingmacro>
+	
+	<div metal:use-macro="here/portlet_featured_indicator/macros/portlet" />
+
+    </div>
+    </metal:main-macro>
+    </div>
+</body>
+</html>

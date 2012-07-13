@@ -1,0 +1,23 @@
+<!-- environmental topics tags -->
+
+<metal tal:condition="view/available">
+    <div tal:define="portlet python:path('context/@@themes-object');
+      views nocall:portlet;
+      items views/short_items;
+      title title|views/title"
+      tal:condition="items"
+      tal:omit-tag="">
+
+      <div tal:attributes="id string:themes-tags" class="documentByLine">
+            <span class="listHead" i18n:translate="">Topics:</span>
+            <tal:items tal:repeat="item items">
+              <span>
+                <a class="link-category" rel="tag" href="" tal:attributes="href item/url"
+                  tal:content="item/title">Item title</a>
+                  <span class="separator">, </span>
+              </span>
+            </tal:items>
+      </div>
+
+    </div>
+</metal>

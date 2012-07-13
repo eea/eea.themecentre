@@ -1,0 +1,47 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="eea">
+
+<body>
+
+<dl metal:define-macro="portlet" class="portlet"
+     tal:define="view context/@@media_portlet;
+                 items python: view.short_items(media_type);
+                 media_player view/media_player;
+                 title title|view/title"
+     tal:condition="items">
+
+    <dt class="portletHeader">
+        <a href="" class="tile"
+            tal:content="title"
+            tal:attributes="title title;
+                            href view/all_link">
+                    ITem title</a>
+    </dt>
+
+    <dt class="portletItem">
+        <div tal:replace="structure media_player"></div>
+    </dt>
+
+    <dt class="portletItem">
+        <tal:items tal:repeat="item python: items[1:]">
+        <a href="" tal:attributes="href item/url">
+             <span tal:replace="item/title">Item title</span>
+        </a>
+        <br />
+        </tal:items>
+    </dt>
+
+    <dd class="portletFooter">
+        <a href="" title="" class="moreLink"
+            tal:attributes="href view/all_link;
+                            title title">
+            <span i18n:translate="">More</span>
+        </a>
+    </dd>
+  
+</dl>
+
+
+</body>
+</html>

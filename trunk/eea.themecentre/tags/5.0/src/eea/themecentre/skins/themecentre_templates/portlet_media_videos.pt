@@ -1,0 +1,12 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="eea">
+<body>
+<div metal:define-macro="portlet"
+     tal:define="media_type string:video;
+                 title string:Videos">
+
+    <metal:portlet use-macro="here/portlet_media_common/macros/portlet" />
+
+</div>
+</body>
+</html>

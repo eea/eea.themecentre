@@ -1,0 +1,121 @@
+<tal:block tal:define="foo python:request.set('disable_plone.leftcolumn', 1);
+                       bar python:request.set('disable_plone.rightcolumn', 1);"/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="eea">
+
+<head>
+</head>
+
+<body>
+<div id="themes-sitemap"  metal:fill-slot="content-core">
+
+<div id="top-news-area">
+
+      <div class="portlet-promotions" tal:repeat="promo view/getPromotions">
+
+            <dl tal:define="item python:promo[0];
+                            ptitle python:promo[2];
+                            orig_url python:promo[3]" 
+                tal:attributes="id string:${item/id}-portlet" 
+                class="portlet promo-nav-portlet">
+
+                <dd tal:attributes="id python:promo[1]" class="portletItem">
+                    <a tal:attributes="href string:${item/absolute_url};
+                                       title ptitle">
+                        <img tal:attributes="title ptitle;
+                                             alt ptitle;
+                                             src string:${orig_url}/theme_image/image_mini"/>
+                    </a>
+                    <a tal:attributes="title ptitle;
+                                       href string:${item/absolute_url}" 
+                       class="portletHeader" 
+                       tal:content="ptitle"></a>
+                    <div class="portletHeader">
+                        <a tal:attributes="href string:${item/absolute_url}" 
+                           tal:content="item/Title"></a>
+                    </div>
+                </dd>
+
+            </dl>
+        </div>
+
+    
+<div class="visualClear"><!-- &nbsp; --></div>
+</div>
+
+<tal:block tal:define="themes view/getThemes">
+
+    <div id="all-topics-list" class="themes-view-image-icon">
+        <h2 i18n:translate="">All topics</h2>
+        
+        <div class="contentColumnOne">
+            <h3 i18n:translate="">What is happening?<br />Environmental issues</h3>
+            <ul tal:define="items python:themes[0]">
+                <li tal:repeat="item items">
+                    <tal:block tal:define="original_obj_url python:item[0];
+                                           trans_obj python:item[1]">
+                        <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
+                        <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                           tal:content="trans_obj/Title"></a>                    
+                    </tal:block>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="contentColumnTwo themes-view-image-icon">
+            <h3 i18n:translate="">Why is it happening?<br />Sectors and activities</h3>
+            <ul tal:define="items python:themes[1]">
+                <li tal:repeat="item items">
+                    <tal:block tal:define="original_obj_url python:item[0];
+                                           trans_obj python:item[1]">
+                        <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
+                        <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                           tal:content="trans_obj/Title"></a>                    
+                    </tal:block>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    
+    <div class="visualClear">
+        <div class="contentColumnOne themes-view-image-icon">
+            <h3 i18n:translate="">Environment in different regions and specific areas</h3>
+            <ul tal:define="items python:themes[2]">
+                <li tal:repeat="item items">
+                    <tal:block tal:define="original_obj_url python:item[0];
+                                           trans_obj python:item[1]">
+                        <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
+                        <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                           tal:content="trans_obj/Title"></a>                    
+                    </tal:block>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="contentColumnTwo themes-view-image-icon">
+            <h3 i18n:translate="">Across environmental issues and sectors</h3>
+            <ul tal:define="items python:themes[3]">
+                <li tal:repeat="item items">
+                    <tal:block tal:define="original_obj_url python:item[0];
+                                           trans_obj python:item[1]">
+                        <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
+                        <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                           tal:content="trans_obj/Title"></a>                    
+                    </tal:block>
+                </li>
+            </ul>
+        </div>        
+    </div>
+
+</tal:block>
+
+
+<div class="visualClear"><!-- --></div>
+<br /><br />
+
+</div>
+</body>
+</html>
