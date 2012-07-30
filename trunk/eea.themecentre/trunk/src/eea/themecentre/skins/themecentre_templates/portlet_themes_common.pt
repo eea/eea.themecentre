@@ -32,10 +32,12 @@
             content="portlet/title">Title</tal:noLink>
         </dt>
 
-        <!-- Events map portlet disabled -->
-        <!-- tal:block condition="python:portlet['title'] == 'Upcoming events'">
-  <dt><metal:macro use-macro="here/map_portlet/macros/themes-map" /></dt>
-    </tal:block -->
+        <tal:comment tal:replace="nothing">
+          <!-- Events map portlet disabled -->
+          <!-- tal:block condition="python:portlet['title'] == 'Upcoming events'">
+            <dt><metal:macro use-macro="here/map_portlet/macros/themes-map" /></dt>
+          </tal:block -->
+        </tal:comment>
 
     <tal:items tal:repeat="item portlet/entries">
 
