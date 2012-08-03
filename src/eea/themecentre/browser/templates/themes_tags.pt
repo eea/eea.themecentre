@@ -1,6 +1,6 @@
 <!-- environmental topics tags -->
 
-<metal tal:condition="view/available">
+<metal:cond tal:condition="view/available">
     <div tal:define="portlet python:path('context/@@themes-object');
       views nocall:portlet;
       items views/short_items;
@@ -20,4 +20,4 @@
       </div>
 
     </div>
-</metal>
+</metal:cond>
