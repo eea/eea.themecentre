@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="eea">
+
+<head>
+</head>
+<body>
+
+    <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main"
+    tal:define="frontpage_view context/@@frontpage_highlights;">
+
+        <div class="content-column-one">
+         <tal:datapage tal:define="datapage string:themecentre">
+            <div metal:use-macro="here/frontpage_view/macros/whatsnew-gallery">
+                whatsnew gallery
+            </div>
+         </tal:datapage>
+        </div>
+
+    </metal:main-macro>
+    </div>
+
+</body>
+</html>
