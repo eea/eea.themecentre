@@ -18,7 +18,6 @@
 
 <div id="all-topics-list" class="themes-view-image-icon">
     <h2 i18n:translate="">All topics</h2>
-
     <div class="contentColumnOne">
         <h3 i18n:translate="">What is happening?<br />Environmental issues</h3>
         <ul>

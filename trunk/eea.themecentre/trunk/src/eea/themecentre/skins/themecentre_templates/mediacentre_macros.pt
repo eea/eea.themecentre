@@ -7,9 +7,8 @@
                     mediatypes media/types">
         <li><a href="#" 
                tal:attributes="href context/absolute_url"
-               tal:omit-tag="python:request.get('QUERY_STRING').find('mediatype')<0">
-                All
-            </a>
+               tal:omit-tag="python:request.get('QUERY_STRING').find('mediatype')<0"
+               i18n:translate="">All</a>
         </li>
         <li tal:repeat="type mediatypes">
            <a tal:attributes="href string:?mediatype=${type/typeid}"
