@@ -2,7 +2,7 @@
 """
 from eea.themecentre.themecentre import getTheme
 from Products.CMFCore.utils import getToolByName
-from p4a.video.interfaces import IVideoEnhanced
+from eea.mediacentre.interfaces import IVideo
 from DateTime.DateTime import DateTime
 from eea.promotion.interfaces import IPromotion
 
@@ -60,7 +60,7 @@ class ThemeCentreMenuPromotion(object):
                     'Title' : brain.Title,
                     'url' : promo.url,
                     'absolute_url' : brain.getURL(),
-                    'is_video' : IVideoEnhanced.providedBy(obj),
+                    'is_video' : IVideo.providedBy(obj),
                 })
 
         return promotions

@@ -3,6 +3,8 @@
 
 5.2-dev - (unreleased)
 ----------------------
+* Change: use IVideo when searching for videos
+  [ichimdav #5480]
 
 5.1 - (2012-08-28)
 ------------------
