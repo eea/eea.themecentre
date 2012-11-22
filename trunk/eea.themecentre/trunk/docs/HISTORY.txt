@@ -1,6 +1,9 @@
 ﻿Changelog
 =========
 
+5.3-dev - (unreleased)
+----------------------
+
 5.2 - (2012-11-22)
 ------------------
 * Change: use IVideo when searching for videos
