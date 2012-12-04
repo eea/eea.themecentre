@@ -222,7 +222,7 @@ def getThemeCentre(context):
     while context and not IPloneSiteRoot.providedBy(context) and \
           not IThemeCentre.providedBy(context):
 
-        #TODO: plone4 migration
+        # plone4 migration
         # If type(context) == 'plone.keyring.keyring.Keyring'
         #  enters a infinite cycle or
         #  context is <plone.app.portlets.portlets.navigation ..
