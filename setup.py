@@ -43,7 +43,7 @@ setup(name='eea.themecentre',
           'eea.rdfrepository',
           'eea.vocab',
           'Products.EEAContentTypes',
-          'eea.versions', #because of @@get_interfaces. TODO plone4: fix this
+          'eea.versions', #because of @@get_interfaces. plone4: fix this
       ],
       entry_points="""
       # -*- Entry points: -*-
