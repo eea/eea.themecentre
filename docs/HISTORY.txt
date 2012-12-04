@@ -3,6 +3,8 @@
 
 5.3-dev - (unreleased)
 ----------------------
+* Bug Fix: fixed themes title on topics index page. 
+  [prospchr fixes #10114]
 
 5.2 - (2012-11-22)
 ------------------
