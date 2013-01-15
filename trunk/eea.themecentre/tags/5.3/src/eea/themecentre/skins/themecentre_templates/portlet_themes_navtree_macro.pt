@@ -1,0 +1,40 @@
+<tal:master define="level options/level|python:2;
+                    children options/children | nothing;
+                    bottomLevel options/bottomLevel | nothing;
+                    normalizeString nocall:context/plone_utils/normalizeString;
+                    viewActions here/portal_properties/site_properties/typesUseViewActionInListings|python:();
+                    member context/portal_membership/getAuthenticatedMember|nothing;
+                    member_id member/getId|nothing">
+
+<metal:main define-macro="nav_main">
+<tal:navitem repeat="node children">
+<li class="navTreeItem visualNoMarker"
+    tal:define="children   node/children;
+                item       node/item;
+                useView    python:item.portal_type in viewActions;
+                itemUrl    python:test(useView, node['getURL'] + '/view', node['getURL']);
+                linkRemote python:(item.getRemoteUrl or item.getUrl ) and item.Creator != member_id;
+                isCurrent  node/currentItem;"
+    tal:attributes="class python:test(node['currentItem'], 'navTreeCurrentItem visualMoMarker', 'navTreeItem visualNoMarker');"
+    tal:condition="python: bottomLevel &lt;= 0 or level &lt; bottomLevel-1">
+
+    <tal:level define="item_type_class     python: 'contenttype-' + normalizeString(item.portal_type);
+                       item_wf_state_class python: 'state-' + normalizeString(item.review_state);">
+
+        <a tal:attributes="href itemUrldd;
+                           title item/Description;
+			   class python:test(isCurrent, 'navItemLevel%s navItemLevel%scurrent' % (level, level),'navItemLevel%s' % level);"
+            tal:content="item/Title">
+            Selected Item Title 
+        </a>
+        
+    <ul tal:define="level python:level+1;"
+        tal:attributes="class python:'portletNavigationTree navTreeLevel'+str(level+1)"
+	tal:condition="nocall:children">
+        <metal:recurse use-macro="here/portlet_navtree_macro/macros/nav_main"/>
+    </ul>
+    </tal:level>
+</li>
+</tal:navitem>
+</metal:main>
+</tal:master>
