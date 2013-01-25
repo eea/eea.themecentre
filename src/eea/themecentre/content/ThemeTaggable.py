@@ -2,7 +2,7 @@
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.LinguaPlone.public import InAndOutWidget, BaseContent
-from Products.LinguaPlone.public import Schema, StringField
+from Products.LinguaPlone.public import Schema, LinesField
 from Products.validation.config import validation
 from Products.validation.interfaces.IValidator import IValidator
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
@@ -10,7 +10,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.component import getUtility
 from zope.interface import implements
 
-class ThemesField(StringField):
+class ThemesField(LinesField):
     """ Save themes as annotation """
 
     def set(self, instance, value, **kwargs):
