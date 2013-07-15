@@ -40,7 +40,6 @@ setup(name='eea.themecentre',
           'eea.design',
           'eea.promotion',
           'eea.mediacentre',
-          'eea.rdfrepository',
           'eea.vocab',
           'Products.EEAContentTypes',
           'eea.versions', #because of @@get_interfaces. plone4: fix this

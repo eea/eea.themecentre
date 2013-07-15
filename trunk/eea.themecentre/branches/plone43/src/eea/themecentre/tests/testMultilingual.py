@@ -2,12 +2,10 @@
 """
 from zope.testing import doctest
 from Products.ATContentTypes.content.newsitem import ATNewsItem
-from eea.rdfrepository.rdfrepository import RDFRepository
 from eea.themecentre.interfaces import (
     IThemeTaggable,
     IThemeCentreSchema
 )
-from eea.rdfrepository.interfaces import IRDFRepository
 from zope.annotation.interfaces import IAnnotations
 from zope.annotation.attribute import AttributeAnnotations
 from zope.app.component.hooks import setSite
@@ -38,7 +36,6 @@ class TestMultilingual(EEAThemeCentreTestCase):
         provideAdapter(ThemeTaggableMerged)
         provideAdapter(AttributeAnnotations, provides=IAnnotations,
                 adapts=[IThemeTaggable])
-        provideUtility(RDFRepository())
         classImplements(ATNewsItem, IThemeTaggable)
         self.setRoles('Manager')
 
@@ -58,7 +55,6 @@ class TestMultilingual(EEAThemeCentreTestCase):
 
         self.portal.invokeFactory('Folder', id='feedfolder')
         self.portal.feedfolder.setLanguage('en')
-        alsoProvides(self.portal.feedfolder, IRDFRepository)
         self.portal.feedfolder.reindexObject()
 
         self.portal.portal_languages.addSupportedLanguage('sv')

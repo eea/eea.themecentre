@@ -11,7 +11,6 @@
     <include package="eea.vocab" />
     <include package="eea.versions" />
     <include package="eea.mediacentre" />
-    <include package="eea.rdfrepository" />
     <include package="p4a.video" />
     <include package="valentine.linguaflow" />
 
