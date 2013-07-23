@@ -35,6 +35,7 @@ class LinkAdapter(object):
     def url(self, theme):
         """ URL
         """
+        #import pdb; pdb.set_trace()
         self.themecentre = self._themecentre(theme)
         if self.themecentre is None:
             return ''
