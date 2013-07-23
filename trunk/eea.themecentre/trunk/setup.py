@@ -31,7 +31,6 @@ setup(name='eea.themecentre',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'p4a.video',
           'Products.PloneHelpCenter',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',

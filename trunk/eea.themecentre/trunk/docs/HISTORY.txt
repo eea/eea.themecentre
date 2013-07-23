@@ -3,6 +3,8 @@ Changelog
 
 5.7-dev - (unreleased)
 ----------------------
+* Change: removed dependency on p4a.* packages
+  [ichimdav #15234]
 
 5.6 - (2013-01-25)
 ------------------
