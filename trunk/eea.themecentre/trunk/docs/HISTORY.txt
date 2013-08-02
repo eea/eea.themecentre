@@ -5,10 +5,12 @@ Changelog
 ----------------------
 * Change: removed dependency on p4a.* packages
   [ichimdav #15234]
+* Change: removed eea.rdfrepository dependency
+  [batradav refs #8329]
 
 5.6 - (2013-01-25)
 ------------------
-* Bug fix: make ThemesField a LinesField, to allow showing 
+* Bug fix: make ThemesField a LinesField, to allow showing
   differences with CMFDiff
   [tiberich #13700]
 
@@ -20,7 +22,7 @@ Changelog
 
 5.4-dev - (2013-01-15)
 ----------------------
-* Bug Fix: fixed themes title on topics index page. 
+* Bug Fix: fixed themes title on topics index page.
   [prospchr fixes #10114]
 
 5.2 - (2012-11-22)
@@ -43,7 +45,7 @@ Changelog
 * Bug fix: fixed markup of HISTORY.txt file
   [ciobabog refs #5231]
 * Bug Fix: Fix the themes'view: now the content
-  comes from the site and the po files 
+  comes from the site and the po files
   [prospchr fixes #5237]
 
 4.9 - (2012-04-26)
@@ -51,9 +53,9 @@ Changelog
 * Change: improved layout of data centre page after feedback from users.
   Browse catalogue more visible. moved featured indicator to the right column.
   [demarant]
-* Feature: added tag cloud on data centre page 
+* Feature: added tag cloud on data centre page
   [demarant]
-* Bug fix: fix tests broken due to changes in eea.versions 
+* Bug fix: fix tests broken due to changes in eea.versions
   [tiberich]
 
 4.8 - (2012-03-05)
@@ -82,7 +84,7 @@ Changelog
 
 4.4 - (2011-11-28)
 ------------------
-* Bug fix: Fixed the all items links of whatsnewgallery in dc view 
+* Bug fix: Fixed the all items links of whatsnewgallery in dc view
   [demarant #4784]
 
 4.3 - (2011-11-22)
