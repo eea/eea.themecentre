@@ -1,9 +1,7 @@
 """ Test theme centre
 """
 from Products.ATContentTypes.content.newsitem import ATNewsItem
-from eea.rdfrepository.rdfrepository import RDFRepository
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
-from eea.rdfrepository.interfaces import IRDFRepository
 from zope.annotation.interfaces import IAnnotations
 from zope.annotation.attribute import AttributeAnnotations
 from zope.site.hooks import setSite
@@ -25,7 +23,6 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         provideAdapter(ThemeTaggableMerged)
         provideAdapter(AttributeAnnotations, provides=IAnnotations,
                 adapts=[IThemeTaggable])
-        provideUtility(RDFRepository())
         classImplements(ATNewsItem, IThemeTaggable)
         self.setRoles('Manager')
 
@@ -36,7 +33,6 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         themes.tags = ['agriculture']
         self.portal.portal_catalog.reindexObject(self.portal.news1)
 
-        alsoProvides(self.portal, IRDFRepository)
         self.portal.portal_catalog.reindexObject(self.portal)
 
     def testSearchTheme(self):
