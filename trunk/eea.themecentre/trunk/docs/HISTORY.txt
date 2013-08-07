@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.8-dev - (unreleased)
+----------------------
+
 5.7 - (2013-08-07)
 ------------------
 * Change: removed dependency on p4a.* packages
