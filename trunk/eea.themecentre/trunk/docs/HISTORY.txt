@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.7-dev - (unreleased)
-----------------------
+5.7 - (2013-08-07)
+------------------
 * Change: removed dependency on p4a.* packages
   [ichimdav #15234]
 * Change: removed eea.rdfrepository dependency
