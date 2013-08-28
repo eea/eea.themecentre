@@ -9,8 +9,8 @@ from eea.themecentre.interfaces import (
 from zope.annotation.interfaces import IAnnotations
 from zope.annotation.attribute import AttributeAnnotations
 from zope.app.component.hooks import setSite
-from zope.component import provideAdapter, provideUtility
-from zope.interface import classImplements, alsoProvides
+from zope.component import provideAdapter
+from zope.interface import classImplements
 from Products.PloneTestCase.PloneTestCase import (
     default_user,
     default_password

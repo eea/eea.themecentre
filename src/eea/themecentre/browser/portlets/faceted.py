@@ -34,7 +34,7 @@ class FacetedPortlet(BasePortlet):
                                        name=u'faceted_query')
         if facetednav is None:
             logging.warn("faceted_query view could not be found for %s, "
-                         "returning nothing." % context)
+                         "returning nothing.", context)
             return []
         query = facetednav.default_criteria
         return facetednav.query(batch=False, sort=True, **query)
