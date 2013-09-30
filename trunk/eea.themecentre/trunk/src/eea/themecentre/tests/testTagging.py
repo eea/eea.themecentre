@@ -5,7 +5,7 @@ from Testing.ZopeTestCase import FunctionalDocFileSuite
 from zope.testing import doctest
 from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
-from zope.app.component.hooks import setSite
+from zope.component.hooks import setSite
 
 optionflags =  (doctest.ELLIPSIS |
                 doctest.NORMALIZE_WHITESPACE |
