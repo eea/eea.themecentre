@@ -3,6 +3,9 @@ Changelog
 
 5.8-dev - (unreleased)
 ----------------------
+* Change: Removed popular tags portlet after removal of the tags widget from 
+  the site
+  [ichimdav refs #16914]
 
 5.7 - (2013-08-07)
 ------------------
