@@ -1,6 +1,6 @@
 """ Theme centre module
 """
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from zope.component.interfaces import ObjectEvent
 from zope.component import adapter
 from zope.interface import Interface, implementer
@@ -17,12 +17,13 @@ from eea.themecentre.vocabulary import ThemesVocabularyFactory
 
 RDF_THEME_KEY = 'eea.themecentre.rdf'
 
+
 class PromotedToThemeCentreEvent(ObjectEvent):
     """ A theme tag has been added to an object.
     """
 
 def promoted(obj, event):
-    """ No AT field is changed on the object, so noone else knows that the
+    """ No AT field is changed on the object, so none else knows that the
         folder should be reindexed because of the new interface we added
     """
     obj.reindexObject()
@@ -74,7 +75,7 @@ def promoted(obj, event):
                                    'string')
 
         # add a smart folder to the news folder that shows all news and
-        # highlighs
+        # highlights
         _createObjectByType('Topic', newsobj, id='highlights_topic',
                 title='Highlights')
         topic = getattr(newsobj, 'highlights_topic')
