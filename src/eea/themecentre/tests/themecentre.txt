@@ -5,7 +5,7 @@ A folder can be promoted to a Theme Centre by calling a view.
   >>> from eea.themecentre.interfaces import IThemeTagging
   >>> from eea.themecentre.interfaces import IThemeCentreSchema
   >>> from eea.themecentre.browser.themecentre import PromoteThemeCentre
-  >>> from zope.app.component.hooks import setSite
+  >>> from zope.component.hooks import setSite
   >>> setSite(self.portal)
 
   >>> folder = self.portal.to_be_promoted
