@@ -6,7 +6,7 @@ Changelog
 * Change: updated zope imports with the versions that require minimum Plone 4.1
   for eea.themecentre
   [ichimdav refs #15651]
-* Change: Removed popular tags portlet after removal of the tags widget from 
+* Change: Removed popular tags portlet after removal of the tags widget from
   the site
   [ichimdav refs #16914]
 
