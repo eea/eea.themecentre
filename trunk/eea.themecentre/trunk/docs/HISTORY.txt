@@ -3,6 +3,9 @@ Changelog
 
 5.9-dev - (unreleased)
 ----------------------
+* Change: removed getSite import from zope.app.component missed in previous
+  egg release
+  [ichimdav refs #15651]
 
 5.8 - (2013-10-04)
 ------------------
