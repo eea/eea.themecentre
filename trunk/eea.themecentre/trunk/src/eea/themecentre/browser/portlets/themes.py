@@ -36,15 +36,14 @@ class ObjectThemesPortlet(BasePortlet):
         catalog = getToolByName(context, 'portal_catalog')
         language = self.request.get('LANGUAGE', 'en')
 
-        query = { 'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
-                  'getId' : themeIds,
-                  'review_state' : 'published',
-                  'Language' : language }
+        query = {'object_provides': 'eea.themecentre.interfaces.IThemeCentre',
+                  'getId': themeIds,
+                  'review_state': 'published',
+                  'sort_on': 'effective',
+                  'sort_order': 'reverse',
+                  'sort_limit': 3,
+                  'Language': language}
         result = catalog.searchResults(query)
-
-        # return only the first 3 if more
-        if len(result) > 3:
-            result = result[:3]
 
         # arrange the themes in the order they are stored on the object
         themes_dict = {}

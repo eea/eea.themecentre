@@ -3,6 +3,9 @@ Changelog
 
 5.8-dev - (unreleased)
 ----------------------
+* Change: return only three results on ObjectThemesPortlet instead of slicing
+  the results
+  [ichimdav]
 * Change: updated zope imports with the versions that require minimum Plone 4.1
   for eea.themecentre
   [ichimdav refs #15651]
