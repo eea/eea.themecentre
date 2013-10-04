@@ -3,6 +3,8 @@ Changelog
 
 5.9-dev - (unreleased)
 ----------------------
+* Bug fix: Cleanup deprecated listfeed to avoid errors in themecentre
+  [tiberich #8329]
 * Change: removed getSite import from zope.app.component missed in previous
   egg release
   [ichimdav refs #15651]
