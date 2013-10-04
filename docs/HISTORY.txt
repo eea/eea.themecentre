@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.9-dev - (unreleased)
-----------------------
+5.9 - (2013-10-04)
+------------------
 * Bug fix: Cleanup deprecated listfeed to avoid errors in themecentre
   [tiberich #8329]
 * Change: removed getSite import from zope.app.component missed in previous
