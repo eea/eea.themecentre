@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.8-dev - (unreleased)
-----------------------
+5.8 - (2013-10-04)
+------------------
 * Change: return only three results on ObjectThemesPortlet instead of slicing
   the results
   [ichimdav]
