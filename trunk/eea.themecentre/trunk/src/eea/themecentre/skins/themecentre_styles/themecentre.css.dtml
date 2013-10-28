@@ -158,6 +158,12 @@ body.section-themes #content div.plain blockquote {
     padding: 0px;
 }
 
+#all-topics-list span.en_icon, .topics-bottom span.en_icon
+{
+    background: url(&dtml-portal_url;/en_icon.png) no-repeat scroll right 0px transparent !important;
+    padding: 5px 30px 0 0;
+}
+
 
 /***** Theme promotions *****/
 #top-news-area {
@@ -173,6 +179,7 @@ body.section-themes #content div.plain blockquote {
     font-weight: normal;
     /* border: 0px;  */
     background: transparent;
+    display: inline;
     padding: 5px 8px 5px 8px;
 }
 
@@ -211,6 +218,13 @@ body.section-themes #content div.plain blockquote {
     border-top-left-radius: 1em 1em;
     border-top-right-radius: 1em 1em;
 }
+
+#top-news-area span.en_icon
+{
+    background: url(&dtml-portal_url;/en_icon.png) no-repeat scroll right 0px transparent !important;
+    padding-right: 20px;
+}
+
 
 /* YOUR CSS RULES STOP HERE */
 
