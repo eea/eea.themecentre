@@ -54,14 +54,17 @@ class ThemesView(BrowserView):
         for promo in promotions:
             o = context.reference_catalog.lookupObject(promo[0])
             if o.hasTranslation(pl):
+                # Tuple containing the object, the title, the url and
+                # a parameter for the langue: nothing if translated, 
+                # 'en' for english
                 t = (o.getTranslation(pl), 
                     promo[1], 
                     tr_tool.translate(promo[2], domain = "eea", 
                                       target_language = pl), 
-                    o.absolute_url())
+                    o.absolute_url(), "")
                 ret_promotions.append(t)
             else:
-                t = o, promo[1], promo[2], o.absolute_url()
+                t = o, promo[1], promo[2], o.absolute_url(), "en"
                 ret_promotions.append(t)
                             
         return ret_promotions
@@ -98,7 +101,8 @@ class ThemesView(BrowserView):
                    "f68e62dd80ecbc75f123197e48ef3ceb",
                    "bd4c672611920251e0ae681dfcbfd285"]]
         
-        # We get the translation for each theme
+        # We get the translation for each theme, otherwise we
+        # return the theme in english
         pl = self.getCurrentLanguage()        
         ret_themes = []
         context = aq_inner(self.context)
@@ -107,8 +111,14 @@ class ThemesView(BrowserView):
             ret_list = []
             for theme in lthemes:
                 o = context.reference_catalog.lookupObject(theme)
-                t = o.absolute_url(), o.getTranslation(pl)
-                ret_list.append(t)
+                if o.hasTranslation(pl):
+                    # Tuple containing the url, the object and a parameter
+                    # nothing if translated, 'en' for english otherwise
+                    t = o.absolute_url(), o.getTranslation(pl), ""
+                    ret_list.append(t)
+                else:
+                    t = o.absolute_url(), o, "en"
+                    ret_list.append(t)
             ret_themes.append(ret_list)
             
         return ret_themes

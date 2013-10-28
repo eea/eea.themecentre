@@ -3,6 +3,9 @@ Changelog
 
 6.0-dev - (unreleased)
 ----------------------
+* Bug fix: Fixed main theme page in case a theme is not translated. Now, 
+  when a translation is missing the English version comes up with an icon.
+  [prospchr fixes #17288]  
 
 5.9 - (2013-10-04)
 ------------------
