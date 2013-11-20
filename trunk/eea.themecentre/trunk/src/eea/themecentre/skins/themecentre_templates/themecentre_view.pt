@@ -31,7 +31,7 @@
 
         <div class="visualClear"><!--&nbsp; --></div>
         
-	<div metal:define-macro="subtopics" class="portletGradientStandard"
+	<div metal:define-macro="subtopics" class=""
 	     tal:define="themecentre_view context/@@themecentre_utils; 
 	                 folders themecentre_view/getSubtopics;" id="subtopics"
 			 tal:condition="folders"> 
