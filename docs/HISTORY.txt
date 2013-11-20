@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.0-dev - (unreleased)
-----------------------
+6.0 - (2013-11-20)
+------------------
 * Change: removed round corners, box shadow on subtopics area.
   [demarant refs #16676]
 * Bug fix: Fixed main theme page in case a theme is not translated. Now, 
