@@ -1,13 +1,16 @@
 Changelog
 =========
 
+6.1-dev - (unreleased)
+----------------------
+
 6.0 - (2013-11-20)
 ------------------
 * Change: removed round corners, box shadow on subtopics area.
   [demarant refs #16676]
-* Bug fix: Fixed main theme page in case a theme is not translated. Now, 
+* Bug fix: Fixed main theme page in case a theme is not translated. Now,
   when a translation is missing the English version comes up with an icon.
-  [prospchr fixes #17288]  
+  [prospchr fixes #17288]
 
 5.9 - (2013-10-04)
 ------------------
