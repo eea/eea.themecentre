@@ -3,6 +3,8 @@ Changelog
 
 6.2-dev - (unreleased)
 ----------------------
+* Bug fix: Fixed the double 'en' icon appearing on the theme page.
+  [prospchr fixes #17756]
 
 6.1 - (2013-12-10)
 ------------------

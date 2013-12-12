@@ -34,7 +34,8 @@
                        tal:content="ptitle"></a>
                     <div class="portletHeader">
                         <span tal:attributes="class python:promo[4]=='en' and 'en_icon' or 'no_icon';">
-                            <a tal:attributes="href string:${item/absolute_url};"
+                            <a tal:attributes="href string:${item/absolute_url};
+                                               class string:link-plain"
                                tal:content="item/Title"></a>
                         </span>
                     </div>
@@ -60,7 +61,8 @@
                                     trans_obj python:item[1];">
                         <span tal:attributes="class python:item[2]=='en' and 'en_icon' or 'no_icon'">
                             <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
-                            <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                            <a tal:attributes ="href string:${trans_obj/absolute_url};
+                                                class string:link-plain"
                                tal:content="trans_obj/Title"></a>                    
                         </span>
                     </li>
@@ -76,7 +78,8 @@
                                     trans_obj python:item[1]">
                         <span tal:attributes="class python:item[2]=='en' and 'en_icon' or 'no_icon'">
                             <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
-                            <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                            <a tal:attributes ="href string:${trans_obj/absolute_url};
+                                                class string:link-plain"
                                tal:content="trans_obj/Title"></a>                    
                         </span>
                     </li>
@@ -95,7 +98,8 @@
                                     trans_obj python:item[1]">
                         <span tal:attributes="class python:item[2]=='en' and 'en_icon' or 'no_icon'">
                             <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
-                            <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                            <a tal:attributes ="href string:${trans_obj/absolute_url};
+                                                class string:link-plain"
                                tal:content="trans_obj/Title"></a>                    
                         </span>
                     </li>
@@ -111,7 +115,8 @@
                                     trans_obj python:item[1]">
                         <span tal:attributes="class python:item[2]=='en' and 'en_icon' or 'no_icon'">
                             <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
-                            <a tal:attributes ="href string:${trans_obj/absolute_url}"
+                            <a tal:attributes ="href string:${trans_obj/absolute_url};
+                                                class string:link-plain"
                                tal:content="trans_obj/Title"></a>                    
                         </span>
                     </li>
