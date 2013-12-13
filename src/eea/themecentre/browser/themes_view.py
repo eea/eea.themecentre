@@ -54,17 +54,16 @@ class ThemesView(BrowserView):
         for promo in promotions:
             o = context.reference_catalog.lookupObject(promo[0])
             if o.hasTranslation(pl):
-                # Tuple containing the object, the title, the url and
-                # a parameter for the langue: nothing if translated, 
-                # 'en' for english
+                # Tuple containing the object, the title, the url 
+                # The content of the tuple depends on the translation 
                 t = (o.getTranslation(pl), 
                     promo[1], 
                     tr_tool.translate(promo[2], domain = "eea", 
                                       target_language = pl), 
-                    o.absolute_url(), "")
+                    o.absolute_url())
                 ret_promotions.append(t)
             else:
-                t = o, promo[1], promo[2], o.absolute_url(), "en"
+                t = o, promo[1], promo[2], o.absolute_url()
                 ret_promotions.append(t)
                             
         return ret_promotions
@@ -112,12 +111,11 @@ class ThemesView(BrowserView):
             for theme in lthemes:
                 o = context.reference_catalog.lookupObject(theme)
                 if o.hasTranslation(pl):
-                    # Tuple containing the url, the object and a parameter
-                    # nothing if translated, 'en' for english otherwise
-                    t = o.absolute_url(), o.getTranslation(pl), ""
+                    # Tuple containing the url, the object
+                    t = o.absolute_url(), o.getTranslation(pl)
                     ret_list.append(t)
                 else:
-                    t = o.absolute_url(), o, "en"
+                    t = o.absolute_url(), o
                     ret_list.append(t)
             ret_themes.append(ret_list)
             
