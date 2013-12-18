@@ -3,6 +3,12 @@ Changelog
 
 6.2-dev - (unreleased)
 ----------------------
+* Feature: allow the portlet_datacentre_overview to function within contexts
+  where an object has a theme
+  [ichimdav fixes #16969]
+* Change: removed roundedCorners class usage in since we no longer use rounded
+  corners within the site design
+  [ichimdav]
 * Bug fix: Reverted previous changes and removed the 'en' icon 
   on the theme page.
   [prospchr refs #17756]

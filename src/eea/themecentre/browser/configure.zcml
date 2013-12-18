@@ -99,6 +99,7 @@
       name="themecentre_utils"
       class=".themecentre.ThemecentreUtils"
       permission="zope.Public"
+      allowed_attributes="getDataCentreName getThemeName"
       />
 
   <!-- provides info for the related topics portlet -->

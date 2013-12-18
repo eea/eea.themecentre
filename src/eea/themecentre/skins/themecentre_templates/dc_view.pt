@@ -45,7 +45,7 @@
 
     <div class="right-column-area">
 
-<div class="shortcut-default roundedCorners">
+<div class="shortcut-default">
         <h3 tal:define="themecentre_view context/@@themecentre_utils;
                     title themecentre_view/getDataCentreName|nothing;">
                     <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage">
