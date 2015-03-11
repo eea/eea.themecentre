@@ -3,9 +3,11 @@ Changelog
 
 6.3-dev - (unreleased)
 ----------------------
+* Cleanup: Removed "Global promotions" portlet references
+  [voineali refs #23725]
 * Change: Switched to curl in the jenkins build install script
   [olimpiurob refs #22402]
-* Change: Changed fetch url for jenkins build install script to the install 
+* Change: Changed fetch url for jenkins build install script to the install
   script from the main EEA CPB repository
   [olimpiurob refs #22402]
 
@@ -17,7 +19,7 @@ Changelog
 * Change: removed roundedCorners class usage in since we no longer use rounded
   corners within the site design
   [ichimdav]
-* Bug fix: Reverted previous changes and removed the 'en' icon 
+* Bug fix: Reverted previous changes and removed the 'en' icon
   on the theme page.
   [prospchr refs #17756]
 

@@ -10,9 +10,7 @@
                    root view/navigationRoot;
                    title view/title">
 
-<metal:globalPromotion use-macro="here/portlet_globalpromotion/macros/portlet" />
-
-<dl class="portlet eea-accordion-portlet" id="portlet-navigation-tree" 
+<dl class="portlet eea-accordion-portlet" id="portlet-navigation-tree"
     tal:condition="view/display">
     <dt class="portletHeader" id="firstHeader">
         <metal:header use-macro="here/portlet_navigation/macros/header" />
