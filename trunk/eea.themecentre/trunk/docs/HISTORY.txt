@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.3-dev - (unreleased)
-----------------------
+6.3 - (2015-03-17)
+------------------
 * Cleanup: Removed "Global promotions" portlet references
   [voineali refs #23725]
 * Change: Switched to curl in the jenkins build install script
