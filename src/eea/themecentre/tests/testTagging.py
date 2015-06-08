@@ -7,9 +7,10 @@ from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.interfaces import IThemeTagging
 from zope.component.hooks import setSite
 
-optionflags =  (doctest.ELLIPSIS |
-                doctest.NORMALIZE_WHITESPACE |
-                doctest.REPORT_ONLY_FIRST_FAILURE)
+optionflags = (doctest.ELLIPSIS |
+               doctest.NORMALIZE_WHITESPACE |
+               doctest.REPORT_ONLY_FIRST_FAILURE)
+
 
 class TestTagging(EEAThemeCentreTestCase):
     """ Test tagging
@@ -25,6 +26,7 @@ class TestTagging(EEAThemeCentreTestCase):
         air = self.portal.portal_vocabularies.themes.air
         self.portal.portal_workflow.doActionFor(air, 'publish')
 
+
 def createObject(parent, portal_type, oid):
     """ Convenience method for creating and cataloging object
     """
@@ -32,6 +34,7 @@ def createObject(parent, portal_type, oid):
     newobj = getattr(parent, oid, None)
     if newobj is not None:
         newobj.reindexObject()
+
 
 class TestThemeCentre(EEAThemeCentreTestCase):
     """ Test Theme Centre
@@ -53,25 +56,26 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         self.portal.invokeFactory('Event', id='event_link')
         self.portal.invokeFactory('Document', id='doc_link')
 
+
 def test_suite():
     """ Test suite
     """
 
     suite = TestSuite((
         FunctionalDocFileSuite('tagging.txt',
-                     test_class=TestTagging,
-                     package = 'eea.themecentre.tests',
-                     optionflags=optionflags,
-                     ),
+                               test_class=TestTagging,
+                               package='eea.themecentre.tests',
+                               optionflags=optionflags,
+                               ),
         FunctionalDocFileSuite('themecentre.txt',
-                     test_class=TestThemeCentre,
-                     package = 'eea.themecentre.tests',
-                     optionflags=optionflags,
-                     ),
+                               test_class=TestThemeCentre,
+                               package='eea.themecentre.tests',
+                               optionflags=optionflags,
+                               ),
         FunctionalDocFileSuite('bugs.txt',
-                     test_class=TestTagging,
-                     package = 'eea.themecentre.tests',
-                     optionflags=optionflags,
-                     ),
-        ))
+                               test_class=TestTagging,
+                               package='eea.themecentre.tests',
+                               optionflags=optionflags,
+                               ),
+    ))
     return suite

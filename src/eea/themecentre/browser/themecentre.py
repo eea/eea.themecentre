@@ -17,7 +17,8 @@ from eea.themecentre import eeaMessageFactory as _
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
-ENABLE = 1 # Manual mode from ATContentTypes.lib.constraintypes
+ENABLE = 1  # Manual mode from ATContentTypes.lib.constraintypes
+
 
 class PromoteThemeCentre(object):
     """ Promote a folder to a theme centre.
@@ -30,14 +31,15 @@ class PromoteThemeCentre(object):
     def __call__(self):
         alsoProvides(self.context, IThemeCentre)
         types = ['Folder', 'Document', 'Link', 'File', 'Image', 'Event',
-                 'HelpCenterFAQFolder', 'FlashFile' ]
+                 'HelpCenterFAQFolder', 'FlashFile']
 
-        self.context.setLocallyAllowedTypes( types + ['Topic'] )
-        self.context.setImmediatelyAddableTypes( types )
+        self.context.setLocallyAllowedTypes(types + ['Topic'])
+        self.context.setImmediatelyAddableTypes(types)
         self.context.setConstrainTypesMode(ENABLE)
 
         return self.request.RESPONSE.redirect(
             self.context.absolute_url() + '/themecentre_edit.html')
+
 
 class ThemeCentreEdit(EditForm):
     """ Form for setting theme for a theme centre.
@@ -45,6 +47,7 @@ class ThemeCentreEdit(EditForm):
 
     form_fields = Fields(IThemeCentreSchema, IThemeRelation)
     label = u'Promote theme centre'
+
 
 class Multimedia(object):
     """ Provides multimedia information for a themecentre's multimedia section.
@@ -57,24 +60,25 @@ class Multimedia(object):
     def types(self):
         """ Types
         """
-        #mediacentre = getUtility(IMediaCentre)
-        #types = sorted(mediacentre.getMediaTypes())
+        # mediacentre = getUtility(IMediaCentre)
+        # types = sorted(mediacentre.getMediaTypes())
         vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
         # we have titles of single name so we add 's' and since we know it's in
         # english
-        types_ = [{'typeid':term.value, 'title':_(term.title+'s')}
+        types_ = [{'typeid': term.value, 'title': _(term.title+'s')}
                   for term in vocab if term.value != 'other']
-        types_.append({'typeid':'other', 'title': _(u'Other')})
+        types_.append({'typeid': 'other', 'title': _(u'Other')})
         return types_
 
     def media_items(self):
         """ Media items
         """
-        currentTheme = getTheme(self.context)
+        currenttheme = getTheme(self.context)
         mediacentre = getUtility(IMediaCentre)
-        search = { MEDIA_SEARCH_KEY: { 'theme': currentTheme }}
+        search = {MEDIA_SEARCH_KEY: {'theme': currenttheme}}
         return [mfile['object']
-                    for mfile in mediacentre.getMedia(search=search)]
+                for mfile in mediacentre.getMedia(search=search)]
+
 
 class Theme(object):
     """ Provides information about this theme/themecentre.
@@ -88,6 +92,7 @@ class Theme(object):
         """ Name
         """
         return getThemeTitle(self.context)
+
 
 class ThemecentreUtils(BrowserView):
     """ Themecentre catalog search and utils methods """
@@ -112,7 +117,7 @@ class ThemecentreUtils(BrowserView):
         }
 
         if path:
-            del(query['navSection'])
+            del query['navSection']
             query['portal_type'] = ('Topic', 'Collection')
         res = self.catalog.searchResults(query)
         return res

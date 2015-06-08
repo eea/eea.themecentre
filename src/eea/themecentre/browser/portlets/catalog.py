@@ -4,6 +4,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from eea.themecentre.themecentre import getThemeCentre, getTheme
 
+
 class BasePortlet(BrowserView):
     """ Base portlet
     """
@@ -30,8 +31,8 @@ class BasePortlet(BrowserView):
         """ All link
         """
         context = self.context
-        themeCentre = getThemeCentre(context)
-        if themeCentre:
+        theme_centre = getThemeCentre(context)
+        if theme_centre:
             # first let's see if view_name is in the request
             # if not we check the view_name class attribute
             view_name = getattr(self, 'view_name', None)
@@ -40,7 +41,7 @@ class BasePortlet(BrowserView):
             if not view_name:
                 view_name = self.request.get('view_name', None)
             if view_name:
-                return themeCentre.absolute_url() + \
+                return theme_centre.absolute_url() + \
                        '/listall?view_name=' + view_name
 
         return ''
@@ -57,7 +58,7 @@ class BasePortlet(BrowserView):
             time = time[:-1] + 'Z'
 
         localized_time = translation.ulocalized_time(time, None, None, context,
-                domain='plone')
+                                                     domain='plone')
         return localized_time
 
     @property
@@ -65,6 +66,7 @@ class BasePortlet(BrowserView):
         """ Size
         """
         return 3
+
 
 class CatalogBasePortlet(BasePortlet):
     """ Catalog Base Portlet
@@ -75,10 +77,10 @@ class CatalogBasePortlet(BasePortlet):
         """
         context = self.context
         portal_catalog = getToolByName(context, 'portal_catalog')
-        currentTheme = getTheme(context)
+        current_theme = getTheme(context)
 
-        if currentTheme:
-            self.query['getThemes'] = currentTheme
+        if current_theme:
+            self.query['getThemes'] = current_theme
             res = portal_catalog.searchResults(self.query)
         else:
             res = []
@@ -88,16 +90,16 @@ class CatalogBasePortlet(BasePortlet):
     def item_to_short_dict(self, item):
         """ Item to short dict
         """
-        return { 'title': item.Title,
-                 'description': item.Description,
-                 'url': item.getURL(),
-                 'detail': self.localized_time(item.Date) }
+        return {'title': item.Title,
+                'description': item.Description,
+                'url': item.getURL(),
+                'detail': self.localized_time(item.Date)}
 
     def item_to_full_dict(self, item):
         """ Item to full dict
         """
-        return { 'title': item.Title,
-                 'description': item.Description,
-                 'url': item.getURL(),
-                 'body': item.Description,
-                 'published': item.Date }
+        return {'title': item.Title,
+                'description': item.Description,
+                'url': item.getURL(),
+                'body': item.Description,
+                'published': item.Date}

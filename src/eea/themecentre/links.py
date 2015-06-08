@@ -21,8 +21,8 @@ class LinkAdapter(object):
     def _find_topic(self):
         """ Find topic """
         catalog = getToolByName(self.context, 'portal_catalog')
-        query = { 'portal_type': 'Topic',
-                  'path': '/'.join(self.themecentre.getPhysicalPath()) }
+        query = {'portal_type': 'Topic',
+                 'path': '/'.join(self.themecentre.getPhysicalPath())}
         brains = catalog.searchResults(query)
         topics = [brain.getObject() for brain in brains]
         for topic in topics:
@@ -45,7 +45,8 @@ class LinkAdapter(object):
         else:
             portal_type = self.context.portal_type
             return self.themecentre.absolute_url() + \
-                    '/contentbytype?contenttype=' + portal_type
+                   '/contentbytype?contenttype=' + portal_type
+
 
 class MediaLink(LinkAdapter):
     """ Media link """

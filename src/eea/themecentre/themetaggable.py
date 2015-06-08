@@ -17,6 +17,7 @@ from zope.schema.interfaces import IVocabularyFactory
 
 KEY = 'eea.themecentre.themetaggable'
 
+
 def getMergedThemes(context, themes):
     """ Get Merged Themes
     """
@@ -32,15 +33,15 @@ def getMergedThemes(context, themes):
 
     extra_themes = []
     synonyms = []
-    synObjs = {}
+    syn_objs = {}
     for obj in root.objectValues():
         theme = obj.Title()
         synonyms.append(theme)
-        synObjs[theme] = obj
+        syn_objs[theme] = obj
 
     for theme in themes:
         if theme in synonyms:
-            merged = synObjs[theme]
+            merged = syn_objs[theme]
             for synonym in merged.objectValues():
                 synonym = synonym.Title()
                 if synonym not in themes and synonym not in extra_themes:
@@ -48,16 +49,18 @@ def getMergedThemes(context, themes):
 
     return themes + extra_themes
 
+
 def checkTheme(context, themes):
     """ Make sure the object is tagged with the current themecentre
     """
     themecentre = getThemeCentre(context)
     if themecentre:
-        themeCentreThemes = IThemeCentreSchema(themecentre)
-        if themeCentreThemes.tags:
-            tag = themeCentreThemes.tags
+        theme_centre_themes = IThemeCentreSchema(themecentre)
+        if theme_centre_themes.tags:
+            tag = theme_centre_themes.tags
             if tag not in themes:
                 themes.append(tag)
+
 
 class ThemeTaggable(object):
     """ Theme Taggable
@@ -70,7 +73,7 @@ class ThemeTaggable(object):
         annotations = IAnnotations(context)
         mapping = annotations.get(KEY)
         if mapping is None:
-            themes =  { 'themes': PersistentList() }
+            themes = {'themes': PersistentList()}
             mapping = annotations[KEY] = PersistentDict(themes)
         self.mapping = mapping
 
@@ -120,6 +123,7 @@ class MainThemeTaggable(ThemeTaggable):
     implements(IMainThemeTagging)
     adapts(IThemeTaggable)
 
+
 class ThemeCentreTaggable(object):
     """ Theme Centre Taggable
     """
@@ -136,6 +140,7 @@ class ThemeCentreTaggable(object):
         if len(tags) > 0:
             return tags[0]
         return None
+
     def sett(self, value):
         """ Set tags
         """
@@ -147,10 +152,11 @@ class ThemeCentreTaggable(object):
         IThemeTagging(self.context).tags = (value,)
         if value and should_promote:
             notify(PromotedToThemeCentreEvent(self.context))
-        #vocab = getUtility(IVocabularyFactory, 'Allowed themes')
-        #themes = vocab(self)
+            # vocab = getUtility(IVocabularyFactory, 'Allowed themes')
+            # themes = vocab(self)
 
     tags = property(gett, sett)
+
 
 def tagTranslation(obj, event):
     """ Tag Translation

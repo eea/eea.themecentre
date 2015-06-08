@@ -2,6 +2,7 @@
 """
 from zope.interface import Interface
 
+
 class IRelatedPortlet(Interface):
     """ Related Portlet
     """
@@ -10,6 +11,7 @@ class IRelatedPortlet(Interface):
         """ Return theme centres that are related to the current theme.
         """
 
+
 class IRDFPortlet(Interface):
     """ RDF Portlet
     """
@@ -17,6 +19,7 @@ class IRDFPortlet(Interface):
     def feeds():
         """ Returns the feeds that matches the current theme.
         """
+
 
 class IRDFTitlesPortlet(Interface):
     """ RDF Titles Portlet
@@ -30,6 +33,7 @@ class IRDFTitlesPortlet(Interface):
         """ Returns the theme of the current theme centre.
         """
 
+
 class ILinksPortlet(Interface):
     """ Links Portlet
     """
@@ -38,6 +42,7 @@ class ILinksPortlet(Interface):
         """ Returns the links that match the current theme.
         """
 
+
 class IFaqPortlet(Interface):
     """ Faq Portlet
     """
@@ -45,6 +50,7 @@ class IFaqPortlet(Interface):
     def published_faq_items():
         """ Returns the faq objects that match the current theme.
         """
+
 
 class IPortlet(Interface):
     """ Portlet
@@ -70,6 +76,7 @@ class IPortlet(Interface):
         """
         pass
 
+
 class INewsPortlet(Interface):
     """ News Portlet
     """
@@ -84,9 +91,11 @@ class INewsPortlet(Interface):
         """
         pass
 
+
 class IEventsPortlet(Interface):
     """ EventsPortlet
     """
+
     def published_events():
         """ Published events
         """
@@ -97,13 +106,15 @@ class IEventsPortlet(Interface):
         """
         pass
 
+
 class IDCViewLogic(Interface):
     """ Marker interface DC ViewLogic
     """
 
     def folder_contents(size_limit):
         """ Folder contents """
-        
+
+
 class IThemesView(Interface):
     """ Marker interface for themes view logic
-    """        
+    """

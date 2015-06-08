@@ -10,6 +10,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.component import getUtility
 from zope.interface import implements
 
+
 class ThemesField(LinesField):
     """ Save themes as annotation """
 
@@ -23,22 +24,22 @@ class ThemesField(LinesField):
         """
         return IThemeTagging(instance).tags
 
+
 class MaxValuesValidator(object):
     """ Validator
     """
     implements(IValidator)
 
-    def __init__( self, name, title='', description=''):
+    def __init__(self, name, title='', description=''):
         self.name = name
         self.title = title or name
         self.description = description
 
     def __call__(self, value, instance, *args, **kwargs):
-        maxValues = getattr(kwargs['field'].widget, 'maxValues', None)
-        value = [ val for val in value
-                      if val ]
-        if maxValues is not None and len(value)>maxValues:
-            return "To many values, please choose max %s." % maxValues
+        max_values = getattr(kwargs['field'].widget, 'maxValues', None)
+        value = [val for val in value if val]
+        if max_values is not None and len(value) > max_values:
+            return "To many values, please choose max %s." % max_values
         return 1
 
 validation.register(MaxValuesValidator('maxValues'))
@@ -73,6 +74,7 @@ schema = Schema((
 
 ThemeTaggable_schema = schema.copy()
 
+
 class ThemeTaggable(BaseContent):
     """ Theme Taggable Content-Type
     """
@@ -94,7 +96,7 @@ class ThemeTaggable(BaseContent):
     security.declareProtected(ModifyPortalContent, 'setThemes')
     def setThemes(self, value, **kw):
         """ Use the tagging adapter to set the themes. """
-        #value = filter(None, value)
+        # value = filter(None, value)
         value = [val for val in value if val]
         tagging = IThemeTagging(self)
         tagging.tags = value

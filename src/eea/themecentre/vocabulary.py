@@ -6,6 +6,7 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
 from zope.component.hooks import getSite
 
+
 class ThemesVocabulary(object):
     """ Themes Vocabulary
     """
@@ -18,7 +19,9 @@ class ThemesVocabulary(object):
         terms = [SimpleTerm(key, key, value) for key, value in themes.items()]
         return SimpleVocabulary(terms)
 
+
 ThemesVocabularyFactory = ThemesVocabulary()
+
 
 class ThemesEditVocabulary(object):
     """ Theme vocabulary that is used for the 'themes' tab. This vocabulary
@@ -40,7 +43,9 @@ class ThemesEditVocabulary(object):
                 terms.append(SimpleTerm(key, key, theme.Title()))
         return SimpleVocabulary(terms)
 
+
 ThemesEditVocabularyFactory = ThemesEditVocabulary()
+
 
 class ThemeCentresVocabulary(object):
     """ Theme Centres Vocabulary
@@ -48,18 +53,19 @@ class ThemeCentresVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, themeCentreAdapted):
-        themeCentre = themeCentreAdapted.context
-        catalog = getToolByName(themeCentre, 'portal_catalog')
+        theme_centre = themeCentreAdapted.context
+        catalog = getToolByName(theme_centre, 'portal_catalog')
         iface = 'eea.themecentre.interfaces.IThemeCentre'
-        res = catalog.searchResults({ 'Language' : 'en',
-                                      'object_provides' : iface })
+        res = catalog.searchResults({'Language': 'en',
+                                     'object_provides': iface})
         terms = []
         for brain in res:
             obj = brain.getObject()
             uid = obj.UID()
             # add the theme centre to vocabulary if it's not the current theme
-            if uid != themeCentre.UID():
+            if uid != theme_centre.UID():
                 terms.append(SimpleTerm(uid, uid, brain.Title))
         return SimpleVocabulary(terms)
+
 
 ThemeCentresVocabularyFactory = ThemeCentresVocabulary()
