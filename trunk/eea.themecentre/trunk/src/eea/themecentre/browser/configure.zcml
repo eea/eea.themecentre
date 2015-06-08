@@ -99,7 +99,7 @@
       name="themecentre_utils"
       class=".themecentre.ThemecentreUtils"
       permission="zope.Public"
-      allowed_attributes="getDataCentreName getThemeName"
+      allowed_attributes="getDataCentreName getThemeName getSubtopics"
       />
 
   <!-- provides info for the related topics portlet -->
