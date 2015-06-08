@@ -3,6 +3,9 @@ Changelog
 
 6.4.dev0 - (unreleased)
 -----------------------
+* Feature: added ability to set path for themcentre subtopics selection since
+  we need to display the soer briefings as part of the subtopics
+  [ichimdav refs #26069]
 
 6.3 - (2015-03-17)
 ------------------

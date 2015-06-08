@@ -30,19 +30,36 @@
                     </metal:keyfacts>   
 
         <div class="visualClear"><!--&nbsp; --></div>
-        
-	<div metal:define-macro="subtopics" class=""
-	     tal:define="themecentre_view context/@@themecentre_utils; 
-	                 folders themecentre_view/getSubtopics;" id="subtopics"
-			 tal:condition="folders"> 
-	   <h2 i18n:translate="">Subtopics</h2> 
-	   <ul>  
-		<li tal:repeat="folder folders">  
-		    <a tal:attributes="href folder/getURL; title folder/Title;" 
-		       tal:content="folder/Title">Folder links</a> 
-		</li> 
-           </ul> 
-	</div> 
+
+        <div metal:define-macro="subtopics" class="" id="subtopics"
+                tal:define="themecentre_view context/@@themecentre_utils;
+                folders themecentre_view/getSubtopics;
+                soer_topic_path python: '/' + context.absolute_url(1) + '/briefings-soer';
+                soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);">
+
+            <h2 i18n:translate="">Subtopics</h2>
+            <tal:existssoer tal:condition="soer_topic">
+                <tal:defines tal:define="
+                        soer_topic python:soer_topic[0].getObject();
+                        soer_topics python:soer_topic.queryCatalog()">
+                    <h4 tal:content="soer_topic/Title">Folder links</h4>
+                    <ul class="border-bottom-spacer">
+                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics">
+                            <a tal:attributes="href folder/getURL; title folder/Title;"
+                                    tal:content="folder/Title">Folder links</a>
+                        </li>
+                    </ul>
+                </tal:defines>
+            </tal:existssoer>
+
+            <ul>
+                <li tal:repeat="folder folders">
+                    <a tal:attributes="href folder/getURL; title folder/Title;"
+                            tal:content="folder/Title">Folder links</a>
+                </li>
+            </ul>
+
+        </div>
 
 
         <metal:portlets use-macro="context/themecentre_overview/macros/main" />

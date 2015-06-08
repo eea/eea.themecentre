@@ -136,12 +136,21 @@ body.section-themes #content div.plain blockquote {
     margin: 0 0 2em 0;
 }
 
+#subtopics > h4 {
+    color: &dtml-corporateBlueTwo;;
+    margin-bottom: 0;
+}
+.border-bottom-spacer {
+    padding-bottom: 2em;
+    border-bottom: 1px solid &dtml-mediumBackgroundColor;;
+}
+
+#subtopics > ul {
+    margin:0 0 1em 0;
+}
+
 #subtopics li {
-    background: url("&dtml-portal_url;/bullet.gif") no-repeat scroll 0 0 transparent;
-    display: inline-block !important;
-    padding: 0 15px;
-    margin-right: 20px;
-    width: 220px;
+    margin-right: 0;
     vertical-align: top;
 }
 

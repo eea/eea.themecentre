@@ -97,18 +97,23 @@ class ThemecentreUtils(BrowserView):
         self.catalog = getToolByName(context, 'portal_catalog')
         self.now = DateTime()
 
-    def getSubtopics(self):
+    def getSubtopics(self, path=None):
         """ get sub objects from current theme object
         that are assigned to nav section topics, this is
         regarded as the subtopics of the theme. Return list sorted on title."""
         folder_path = '/'.join(self.context.getPhysicalPath())
+        folder_path = path if path else folder_path
         query = {
-                'navSection' : 'topics',
-                'review_state'       : 'published',
-                'sort_on'            : 'sortable_title',
-                'path'               : {'query': folder_path, 'depth': 1},
-                'effectiveRange'     : self.now
+            'navSection': 'topics',
+            'review_state': 'published',
+            'sort_on': 'sortable_title',
+            'path': {'query': folder_path, 'depth': 1},
+            'effectiveRange': self.now
         }
+
+        if path:
+            del(query['navSection'])
+            query['portal_type'] = ('Topic', 'Collection')
         res = self.catalog.searchResults(query)
         return res
 
