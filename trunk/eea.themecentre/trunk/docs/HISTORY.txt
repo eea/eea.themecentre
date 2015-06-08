@@ -3,6 +3,9 @@ Changelog
 
 6.4.dev0 - (unreleased)
 -----------------------
+* Change: cleaned package of pylint errors found after upgrading jenkins to use
+  latest pylint at this time
+  [ichimdav]
 * Feature: added ability to set path for themcentre subtopics selection since
   we need to display the soer briefings as part of the subtopics
   [ichimdav refs #26069]

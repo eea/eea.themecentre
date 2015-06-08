@@ -7,6 +7,7 @@ from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 from eea.themecentre import eeaMessageFactory as _
 
+
 class RelatedPortlet(BasePortlet):
     """ Related Portlet
     """
@@ -23,38 +24,38 @@ class RelatedPortlet(BasePortlet):
         """
         context = self.context
         reference_catalog = getToolByName(context, 'reference_catalog')
-        currentThemeCentre = getThemeCentre(context)
+        current_theme_centre = getThemeCentre(context)
         result = []
-        if currentThemeCentre:
+        if current_theme_centre:
             catalog = getToolByName(context, 'portal_catalog')
             query = {
-               'object_provides' : 'eea.themecentre.interfaces.IThemeCentre',
-               'review_state' : 'published' }
+                'object_provides': 'eea.themecentre.interfaces.IThemeCentre',
+                'review_state': 'published'}
             tcs = catalog.searchResults(query)
-            tcsIds = [ brain.getId for brain in tcs ]
-            relation = IThemeRelation(currentThemeCentre)
+            tcs_ids = [brain.getId for brain in tcs]
+            relation = IThemeRelation(current_theme_centre)
             language = self.request.get('LANGUAGE', 'en')
             for uid in relation.related:
-                themeCentre = reference_catalog.lookupObject(uid)
-                if themeCentre is not None and themeCentre.getId() in tcsIds:
-                    if themeCentre.hasTranslation(language):
-                        themeCentre = themeCentre.getTranslation(language)
-                    result.append(themeCentre)
+                theme_centre = reference_catalog.lookupObject(uid)
+                if theme_centre is not None and theme_centre.getId() in tcs_ids:
+                    if theme_centre.hasTranslation(language):
+                        theme_centre = theme_centre.getTranslation(language)
+                    result.append(theme_centre)
 
         return result
 
     def item_to_short_dict(self, item):
         """ Item to short dict
         """
-        return { 'title': item.Title(),
-                 'url': item.absolute_url(),
-                 'detail': None,
-                 'image' : IThemeCentreImageUrl(item) }
+        return {'title': item.Title(),
+                'url': item.absolute_url(),
+                'detail': None,
+                'image': IThemeCentreImageUrl(item)}
 
     def item_to_full_dict(self, item):
         """ Item to full dict
         """
-        return { 'title': item.Title(),
-                 'url': item.absolute_url(),
-                 'published': None,
-                 'image' : IThemeCentreImageUrl(item) }
+        return {'title': item.Title(),
+                'url': item.absolute_url(),
+                'published': None,
+                'image': IThemeCentreImageUrl(item)}

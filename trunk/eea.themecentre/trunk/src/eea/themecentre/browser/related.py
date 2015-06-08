@@ -8,6 +8,7 @@ from Products.EEAContentTypes.interfaces import IRelations
 # This is what is used in ZMI for navigation_sections_left and right
 TOPICS_ID = 'topics'
 
+
 class Topics(object):
     """ Provides related topic data for portlets.
     """
@@ -23,10 +24,10 @@ class Topics(object):
         propstool = getToolByName(self.context, 'portal_properties')
         siteprops = getattr(propstool, 'site_properties', None)
         if siteprops:
-            viewActions = siteprops.getProperty(
+            view_actions = siteprops.getProperty(
                 'typesUseViewActionInListings', [])
         else:
-            viewActions = []
+            view_actions = []
 
         themecentre = getThemeCentre(self.context)
         if themecentre is None:
@@ -34,7 +35,7 @@ class Topics(object):
 
         themecentre_url = themecentre.absolute_url()
         tags = IThemeTagging(themecentre).tags
-        query = { 'navSection': TOPICS_ID }
+        query = {'navSection': TOPICS_ID}
         memtool = getToolByName(self.context, 'portal_membership')
         if memtool is not None and memtool.isAnonymousUser():
             query['review_state'] = 'published'
@@ -52,16 +53,16 @@ class Topics(object):
             themes = [theme for theme in brain.getThemes if theme not in tags]
             if len(themes) > 0:
                 wf_state = plone_utils.normalizeString(brain.review_state)
-                if brain.portal_type in viewActions:
+                if brain.portal_type in view_actions:
                     url = brain.getURL() + '/view'
                 else:
                     url = brain.getURL()
 
-                item = { 'title': brain.Title,
-                         'url': url,
-                         'portal_type': plone_utils.normalizeString(
-                                            brain.portal_type),
-                         'wf_state': wf_state, }
+                item = {'title': brain.Title,
+                        'url': url,
+                        'portal_type': plone_utils.normalizeString(
+                            brain.portal_type),
+                        'wf_state': wf_state, }
 
                 menu.append(item)
 

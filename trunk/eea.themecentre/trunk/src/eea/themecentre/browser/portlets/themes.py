@@ -29,20 +29,20 @@ class ObjectThemesPortlet(BasePortlet):
         if adapter is None:
             return []
 
-        themeIds = adapter.tags
-        if themeIds == 'default':
+        theme_ids = adapter.tags
+        if theme_ids == 'default':
             return []
 
         catalog = getToolByName(context, 'portal_catalog')
         language = self.request.get('LANGUAGE', 'en')
 
         query = {'object_provides': 'eea.themecentre.interfaces.IThemeCentre',
-                  'getId': themeIds,
-                  'review_state': 'published',
-                  'sort_on': 'effective',
-                  'sort_order': 'reverse',
-                  'sort_limit': 3,
-                  'Language': language}
+                 'getId': theme_ids,
+                 'review_state': 'published',
+                 'sort_on': 'effective',
+                 'sort_order': 'reverse',
+                 'sort_limit': 3,
+                 'Language': language}
         result = catalog.searchResults(query)
 
         # arrange the themes in the order they are stored on the object
@@ -55,32 +55,32 @@ class ObjectThemesPortlet(BasePortlet):
                 theme = translation
             themes_dict[theme.getId()] = theme
 
-        for themeId in themeIds:
+        for themeId in theme_ids:
             theme = themes_dict.get(themeId, None)
             if theme:
                 themes_sorted.append(theme)
 
-        currentTheme = getThemeCentre(context)
-        if currentTheme and currentTheme in themes_sorted:
-            themes_sorted.remove(currentTheme)
+        current_theme = getThemeCentre(context)
+        if current_theme and current_theme in themes_sorted:
+            themes_sorted.remove(current_theme)
 
         return themes_sorted
 
     def item_to_short_dict(self, item):
         """ Item to short dict
         """
-        res =  { 'title': item.Title(),
-                 'url': item.absolute_url(),
-                 'id': item.getId(),
-                 'detail': None,
-                 'image' : IThemeCentreImageUrl(item) }
+        res = {'title': item.Title(),
+               'url': item.absolute_url(),
+               'id': item.getId(),
+               'detail': None,
+               'image': IThemeCentreImageUrl(item)}
         return res
 
     def item_to_full_dict(self, item):
         """ Item to full dict
         """
-        return { 'title': item.Title(),
-                 'url': item.absolute_url(),
-                 'id': item.getId(),
-                 'published': None,
-                 'image' : IThemeCentreImageUrl(item) }
+        return {'title': item.Title(),
+                'url': item.absolute_url(),
+                'id': item.getId(),
+                'published': None,
+                'image': IThemeCentreImageUrl(item)}

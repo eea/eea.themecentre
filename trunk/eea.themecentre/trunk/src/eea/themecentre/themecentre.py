@@ -281,7 +281,7 @@ def getTheme(context):
 
     return None
 
-class O:
+class O(object):
     """ Dummy class
     """
     pass

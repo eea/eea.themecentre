@@ -8,9 +8,10 @@ from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 
-optionflags =  (doctest.ELLIPSIS |
-                doctest.NORMALIZE_WHITESPACE |
-                doctest.REPORT_ONLY_FIRST_FAILURE)
+optionflags = (doctest.ELLIPSIS |
+               doctest.NORMALIZE_WHITESPACE |
+               doctest.REPORT_ONLY_FIRST_FAILURE)
+
 
 class PortletTestCase(EEAThemeCentreTestCase):
     """ Portlet Test Case
@@ -39,14 +40,15 @@ class PortletTestCase(EEAThemeCentreTestCase):
         themecentre = IThemeCentreSchema(context)
         themecentre.tags = u'energy'
 
+
 def test_suite():
     """ Test suite
     """
 
     return TestSuite((
         FunctionalDocFileSuite('promotion.txt',
-                     package = 'eea.themecentre.browser.portlets',
-                     test_class = PortletTestCase,
-                     optionflags=optionflags,
-                     ),
-        ))
+                               package='eea.themecentre.browser.portlets',
+                               test_class=PortletTestCase,
+                               optionflags=optionflags,
+                               ),
+    ))

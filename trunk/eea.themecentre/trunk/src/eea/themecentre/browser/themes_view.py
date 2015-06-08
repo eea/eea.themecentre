@@ -6,72 +6,73 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.themecentre import eeaMessageFactory as _
 
+
 class ThemesView(BrowserView):
     """ Themes view logic """
-    
+
     template_view = ViewPageTemplateFile('templates/themes_view.pt')
 
     def __call__(self):
         return self.template_view()
-    
+
     def getCurrentLanguage(self):
         """ Getthe current user language """
         context = aq_inner(self.context)
         plt = getToolByName(context, 'portal_languages')
-        return plt.getPreferredLanguage()        
-    
+        return plt.getPreferredLanguage()
+
     def getPromotions(self):
         """ Get the 5 promotions to show on top """
-        
+
         pl = self.getCurrentLanguage()
-        
+
         # define promotions
-        ret_promotions = [] 
+        ret_promotions = []
         promotions = [
-              ("0d2e3d3da1d2f8f1cc4f029a27b931d0",
-               "not-just-hot-air",
-               _(u"Visit our air pollution website")),
-              ("cd6bef0c97b6c8ea3e216267af7f1605",
-               "assessing-biodiversity",
-               _(u"Visit our biodiversity website")),
-              ("6723e6872d33d022a07eeae0e235ac48",
-               "new-estimates-confirm-the-declining-" +
-               "trend-in-eu-greenhouse-gas-emissions",
-               _(u"Visit our climate change website")),
-              ("5412da76e31aedcea4ce1d520518604f",
-               "discover-europe2019s-landscape-through" + 
-               "-satellite-and-ground-level-pictures-1",
-               _(u"Visit our land use website")),
-              ("b6ef38c3f2e84948314b397d7668ea41",
-               "heading-for-your-favourite-beach-is-the-bathing-water-clean",
-               _(u"Visit our water website"))
+            ("0d2e3d3da1d2f8f1cc4f029a27b931d0",
+             "not-just-hot-air",
+             _(u"Visit our air pollution website")),
+            ("cd6bef0c97b6c8ea3e216267af7f1605",
+             "assessing-biodiversity",
+             _(u"Visit our biodiversity website")),
+            ("6723e6872d33d022a07eeae0e235ac48",
+             "new-estimates-confirm-the-declining-" +
+             "trend-in-eu-greenhouse-gas-emissions",
+             _(u"Visit our climate change website")),
+            ("5412da76e31aedcea4ce1d520518604f",
+             "discover-europe2019s-landscape-through" +
+             "-satellite-and-ground-level-pictures-1",
+             _(u"Visit our land use website")),
+            ("b6ef38c3f2e84948314b397d7668ea41",
+             "heading-for-your-favourite-beach-is-the-bathing-water-clean",
+             _(u"Visit our water website"))
         ]
-        
+
         # get promotion attributes and title in current language
         context = aq_inner(self.context)
         tr_tool = getToolByName(context, 'translation_service')
-        
+
         for promo in promotions:
             o = context.reference_catalog.lookupObject(promo[0])
             if o.hasTranslation(pl):
-                # Tuple containing the object, the title, the url 
-                # The content of the tuple depends on the translation 
-                t = (o.getTranslation(pl), 
-                    promo[1], 
-                    tr_tool.translate(promo[2], domain = "eea", 
-                                      target_language = pl), 
-                    o.absolute_url())
+                # Tuple containing the object, the title, the url
+                # The content of the tuple depends on the translation
+                t = (o.getTranslation(pl),
+                     promo[1],
+                     tr_tool.translate(promo[2], domain="eea",
+                                       target_language=pl),
+                     o.absolute_url())
                 ret_promotions.append(t)
             else:
                 t = o, promo[1], promo[2], o.absolute_url()
                 ret_promotions.append(t)
-                            
+
         return ret_promotions
-    
+
     def getThemes(self):
-        """ Get the themes translated 
+        """ Get the themes translated
             The order of the themes was previously defined,
-            we use a list of uid to keep the same order 
+            we use a list of uid to keep the same order
         """
         themes = [["0d2e3d3da1d2f8f1cc4f029a27b931d0",
                    "cd6bef0c97b6c8ea3e216267af7f1605",
@@ -99,13 +100,13 @@ class ThemesView(BrowserView):
                   ["0742501c1bd96c82e8bb993ee49f120c",
                    "f68e62dd80ecbc75f123197e48ef3ceb",
                    "bd4c672611920251e0ae681dfcbfd285"]]
-        
+
         # We get the translation for each theme, otherwise we
         # return the theme in english
-        pl = self.getCurrentLanguage()        
+        pl = self.getCurrentLanguage()
         ret_themes = []
         context = aq_inner(self.context)
-        
+
         for lthemes in themes:
             ret_list = []
             for theme in lthemes:
@@ -118,8 +119,5 @@ class ThemesView(BrowserView):
                     t = o.absolute_url(), o
                     ret_list.append(t)
             ret_themes.append(ret_list)
-            
+
         return ret_themes
-    
-        
-    

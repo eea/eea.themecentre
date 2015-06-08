@@ -20,9 +20,10 @@ from Testing.ZopeTestCase import FunctionalDocFileSuite
 from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.mergedtheme import ThemeTaggableMerged
 
-optionflags =  (doctest.ELLIPSIS |
-                doctest.NORMALIZE_WHITESPACE |
-                doctest.REPORT_ONLY_FIRST_FAILURE)
+optionflags = (doctest.ELLIPSIS |
+               doctest.NORMALIZE_WHITESPACE |
+               doctest.REPORT_ONLY_FIRST_FAILURE)
+
 
 class TestMultilingual(EEAThemeCentreTestCase):
     """ Test Multilingual
@@ -35,7 +36,7 @@ class TestMultilingual(EEAThemeCentreTestCase):
 
         provideAdapter(ThemeTaggableMerged)
         provideAdapter(AttributeAnnotations, provides=IAnnotations,
-                adapts=[IThemeTaggable])
+                       adapts=[IThemeTaggable])
         classImplements(ATNewsItem, IThemeTaggable)
         self.setRoles('Manager')
 
@@ -60,14 +61,15 @@ class TestMultilingual(EEAThemeCentreTestCase):
         self.portal.portal_languages.addSupportedLanguage('sv')
         self.basic_auth = '%s:%s' % (default_user, default_password)
 
+
 def test_suite():
     """ Suite
     """
     suite = TestSuite((
         FunctionalDocFileSuite('portlets.txt',
-                     test_class=TestMultilingual,
-                     package = 'eea.themecentre.tests',
-                     optionflags=optionflags,
-                     ),
-        ))
+                               test_class=TestMultilingual,
+                               package='eea.themecentre.tests',
+                               optionflags=optionflags,
+                               ),
+    ))
     return suite
