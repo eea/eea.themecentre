@@ -5,22 +5,6 @@
 
 /* YOUR CSS RULES START HERE */
 
-
-/* remove if we won't use portlet_themes_related */
-#themes-related dt img {
-   float: left;
-   margin: 0 0.5em 0.2em 0;
-}
-
-#portlet-multimedia-tree dd ul li {
-   clear: both;
-   padding: 2px 0;
-}
-
-body.section-themes #themes-sitemap h2 {
-   clear: both;
-}
-
 .contentColumnOne {
 float:left;
 width:47%;
@@ -31,14 +15,6 @@ float:right;
 width:47%;
 }
 
-
-
-/***** New design of portlets for now only under themes *****/
-body.section-themes #content dt.portletItem img {
-    margin-right: 1em;
-    float: left;
-    margin-bottom: 1em;
-}
 
 
 /***** Themes view (themes_view.pt) *****/
@@ -80,20 +56,13 @@ body.section-themes #content dt.portletItem img {
 
 #subtopics h2, #subtopics h3 {
     background: none;
-    padding: 0px;
-}
-
-#all-topics-list span.en_icon, .topics-bottom span.en_icon
-{
-    background: url(&dtml-portal_url;/en_icon.png) no-repeat scroll right 0px transparent !important;
-    padding: 5px 30px 0 0;
+    padding: 0;
 }
 
 
 /***** Theme promotions *****/
 #top-news-area {
     font-size: 1.2em;
-    width: 998px;
 }
 
 #top-news-area .portlet-promotions .portletHeader a {
@@ -112,7 +81,7 @@ body.section-themes #content dt.portletItem img {
     opacity: 0.8;
     margin-top: -47px;
     text-align: left;
-    padding: 0px;
+    padding: 0;
 }
 
 #top-news-area .portlet-promotions {
@@ -131,12 +100,6 @@ body.section-themes #content dt.portletItem img {
     width: 100%;
     height: 110px;
     border-radius: 1em 1em;
-}
-
-#top-news-area span.en_icon
-{
-    background: url(&dtml-portal_url;/en_icon.png) no-repeat scroll right 0px transparent !important;
-    padding-right: 20px;
 }
 
 
