@@ -40,54 +40,10 @@ body.section-themes #content dt.portletItem img {
     margin-bottom: 1em;
 }
 
-body.section-themes #content dt.portletItem a {
-}
-
-.allitems dt {
-    font-weight: bold;
-}
-
-.theme-article-section {
-    clear: left;
-}
-
-.theme-article-image {
-    float: left;
-    margin: 0.5em 1em 0.5em 0;
-    border: 1px solid black;
-}
-
-body.section-themes #content div.plain div,
-body.section-themes #content div.plain p,
-body.section-themes #content div.plain h2 {
-    clear: left;
-}
-
-body.section-themes #content div.plain div div,
-body.section-themes #content div.plain div p,
-body.section-themes #content div.plain p div,
-body.section-themes #content div.plain p p {
-    clear: none;
-}
-
-body.section-themes #content .image-left {
-    clear: none;
-    float: left;
-}
-
-body.section-themes #content .image-left div {
-/*    float: left; */
-}
-
-body.section-themes #content div.plain blockquote {
-    width: 50%;
-    margin: 0 0 0 10%;
-}
 
 /***** Themes view (themes_view.pt) *****/
 .themes-view-image-icon ul {
-    list-style-image: none !important;
-    list-style-type: none !important;
+    list-style: none none !important;
     font-weight: bold;
 }
 
@@ -136,7 +92,6 @@ body.section-themes #content div.plain blockquote {
 
 /***** Theme promotions *****/
 #top-news-area {
-    /* background: #E5E6E8; */
     font-size: 1.2em;
     width: 998px;
 }
@@ -146,7 +101,6 @@ body.section-themes #content div.plain blockquote {
     font-size: 15px;
     line-height: 18px;
     font-weight: normal;
-    /* border: 0px;  */
     background: transparent;
     display: inline;
     padding: 5px 8px 5px 8px;
@@ -164,7 +118,6 @@ body.section-themes #content div.plain blockquote {
 #top-news-area .portlet-promotions {
     width: 20%;
     float: left;
-/*    border: 1px solid #c6c6c7; */
 }
 
 #top-news-area .portlet,
@@ -173,19 +126,11 @@ body.section-themes #content div.plain blockquote {
     padding: 0;
 }
 
-/*
-#top-news-area dd  {
-     border: 3px solid #FFF;
-}
-*/
 
 #top-news-area .portlet-promotions img {
     width: 100%;
     height: 110px;
-    border-bottom-left-radius: 1em 1em;
-    border-bottom-right-radius: 1em 1em;
-    border-top-left-radius: 1em 1em;
-    border-top-right-radius: 1em 1em;
+    border-radius: 1em 1em;
 }
 
 #top-news-area span.en_icon
