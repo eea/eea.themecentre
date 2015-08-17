@@ -5,20 +5,11 @@
 
 /* YOUR CSS RULES START HERE */
 
-#content .content-column-one {
-    float: left;
-    width: 100%;
-    padding-right: 1em;
-}
 
+/* remove if we won't use portlet_themes_related */
 #themes-related dt img {
    float: left;
    margin: 0 0.5em 0.2em 0;
-}
-
-.media-nav-icon {
-    float: left;
-    margin-right: 5px;
 }
 
 #portlet-multimedia-tree dd ul li {
@@ -34,12 +25,6 @@ body.section-themes #themes-sitemap h2 {
 float:left;
 width:47%;
 }
-.column-list li {
-    background: url("&dtml-portal_url;/bullet.gif") no-repeat scroll 0 0 transparent;
-    display: inline-block !important;
-    padding-left: 10px;
-    width: 213px;
-}
 
 .contentColumnTwo {
 float:right;
@@ -49,14 +34,6 @@ width:47%;
 
 
 /***** New design of portlets for now only under themes *****/
-body.section-themes .portlet-rss .portletHeader {
-   padding: 0.5em;
-}
-
-body.section-themes .portlet-rss .portletItem {
-   padding-left: 0.5em;
-}
-
 body.section-themes #content dt.portletItem img {
     margin-right: 1em;
     float: left;
@@ -64,11 +41,6 @@ body.section-themes #content dt.portletItem img {
 }
 
 body.section-themes #content dt.portletItem a {
-}
-
-.commonThemes {
-    font-size: 65%;
-    color: grey;
 }
 
 .allitems dt {
@@ -83,10 +55,6 @@ body.section-themes #content dt.portletItem a {
     float: left;
     margin: 0.5em 1em 0.5em 0;
     border: 1px solid black;
-}
-
-.articleSection {
-/*    clear: left; */
 }
 
 body.section-themes #content div.plain div,
