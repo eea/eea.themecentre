@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.5.dev0 - (unreleased)
------------------------
+6.5 - (2015-08-18)
+------------------
 * Change: cleaned themecentre.css of obsolete styles
   [ichimdav refs #27220]
 
