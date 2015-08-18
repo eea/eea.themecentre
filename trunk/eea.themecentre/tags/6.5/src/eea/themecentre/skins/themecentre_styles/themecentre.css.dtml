@@ -1,0 +1,108 @@
+/*
+  <dtml-with base_properties>
+  <dtml-call "REQUEST.set('portal_url', portal_url())">
+*/
+
+/* YOUR CSS RULES START HERE */
+
+.contentColumnOne {
+float:left;
+width:47%;
+}
+
+.contentColumnTwo {
+float:right;
+width:47%;
+}
+
+
+
+/***** Themes view (themes_view.pt) *****/
+.themes-view-image-icon ul {
+    list-style: none none !important;
+    font-weight: bold;
+}
+
+.themes-view-image-icon img {
+    height: 28px;
+    width: 28px;
+}
+
+#themes-sitemap #all-topics-list {
+    margin:4em 0 0 0;
+}
+
+#subtopics {
+    margin: 0 0 2em 0;
+}
+
+#subtopics > h4 {
+    color: &dtml-corporateBlueTwo;;
+    margin-bottom: 0;
+}
+.border-bottom-spacer {
+    padding-bottom: 2em;
+    border-bottom: 1px solid &dtml-mediumBackgroundColor;;
+}
+
+#subtopics > ul {
+    margin:0 0 1em 0;
+}
+
+#subtopics li {
+    margin-right: 0;
+    vertical-align: top;
+}
+
+#subtopics h2, #subtopics h3 {
+    background: none;
+    padding: 0;
+}
+
+
+/***** Theme promotions *****/
+#top-news-area {
+    font-size: 1.2em;
+}
+
+#top-news-area .portlet-promotions .portletHeader a {
+    color: &dtml-linkHeadingColor;;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: normal;
+    background: transparent;
+    display: inline;
+    padding: 5px 8px 5px 8px;
+}
+
+#top-news-area div.portletHeader {
+    background: none repeat scroll 0 0 white;
+    height: 47px;
+    opacity: 0.8;
+    margin-top: -47px;
+    text-align: left;
+    padding: 0;
+}
+
+#top-news-area .portlet-promotions {
+    width: 20%;
+    float: left;
+}
+
+#top-news-area .portlet,
+#top-news-area dl.portlet, #top-news-area dd {
+    margin: 0;
+    padding: 0;
+}
+
+
+#top-news-area .portlet-promotions img {
+    width: 100%;
+    height: 110px;
+    border-radius: 1em 1em;
+}
+
+
+/* YOUR CSS RULES STOP HERE */
+
+/* </dtml-with> */
