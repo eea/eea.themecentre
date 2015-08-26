@@ -102,7 +102,12 @@ width:47%;
     border-radius: 1em 1em;
 }
 
-
+/* #28213 topic selection should be hidden on themes
+   since the results are already filtered by theme */
+.section-themes #topic-selector,
+.section-themes .filter-topic {
+    display: none;
+}
 /* YOUR CSS RULES STOP HERE */
 
 /* </dtml-with> */
