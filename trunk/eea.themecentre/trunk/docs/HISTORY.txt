@@ -3,6 +3,9 @@ Changelog
 
 6.6.dev0 - (unreleased)
 -----------------------
+* Bug fix: Topic filtering are now hidden on themes
+  pages since the results are already filtered by theme
+  [ichimdav refs #28213]
 
 6.5 - (2015-08-18)
 ------------------
