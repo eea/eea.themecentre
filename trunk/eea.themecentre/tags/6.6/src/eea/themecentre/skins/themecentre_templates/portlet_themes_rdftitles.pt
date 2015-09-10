@@ -1,0 +1,12 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="eea">
+<body>
+<div metal:define-macro="portlet"
+     tal:define="portlet context/@@themes-rdftitles"
+     tal:omit-tag="">
+
+    <metal:portlet use-macro="here/portlet_themes_common/macros/portlet" />
+
+</div>
+</body>
+</html>
