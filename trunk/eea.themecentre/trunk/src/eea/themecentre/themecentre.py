@@ -33,7 +33,7 @@ def promoted(obj, event):
     obj.invokeFactory('Folder', id='highlights', title='Highlights')
     obj.invokeFactory('Folder', id='events', title='Upcoming events')
     obj.invokeFactory('Folder', id='links', title='External links')
-    obj.invokeFactory('HelpCenterFAQFolder', id='faq', title='FAQ')
+    obj.invokeFactory('Folder', id='faq', title='FAQ')
     obj.invokeFactory('Folder', id='multimedia', title='Multimedia')
     multimedia = getattr(obj, 'multimedia')
     multimedia.setLayout('mediacentre_view')

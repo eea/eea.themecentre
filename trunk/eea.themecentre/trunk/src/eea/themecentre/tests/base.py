@@ -7,7 +7,6 @@ from Products.Five import fiveconfigure
 import eea.themecentre
 
 PloneTestCase.installProduct('ATVocabularyManager')
-PloneTestCase.installProduct('PloneHelpCenter')
 PloneTestCase.installProduct('LinguaPlone')
 PloneTestCase.installProduct('EEAPloneAdmin')
 PloneTestCase.installProduct('EEAContentTypes')

@@ -31,7 +31,6 @@ setup(name='eea.themecentre',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.PloneHelpCenter',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
           'Products.EEAPloneAdmin',

@@ -3,6 +3,8 @@ Changelog
 
 6.7.dev0 - (unreleased)
 -----------------------
+* Cleanup: Remove PloneHelpCenter references
+  [voineali refs #27692]
 
 6.6 - (2015-09-10)
 ------------------
