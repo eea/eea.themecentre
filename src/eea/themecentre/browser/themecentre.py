@@ -31,7 +31,7 @@ class PromoteThemeCentre(object):
     def __call__(self):
         alsoProvides(self.context, IThemeCentre)
         types = ['Folder', 'Document', 'Link', 'File', 'Image', 'Event',
-                 'HelpCenterFAQFolder', 'FlashFile']
+                 'FlashFile']
 
         self.context.setLocallyAllowedTypes(types + ['Topic'])
         self.context.setImmediatelyAddableTypes(types)

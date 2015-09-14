@@ -9,7 +9,7 @@ class FaqPortlet(CatalogBasePortlet):
     """ Faq Portlet
     """
 
-    query = {'portal_type': 'HelpCenterFAQ',
+    query = {'portal_type': 'helpcenter_faq',
              'sort_on': 'Date',
              'sort_order': 'reverse',
              'review_state': 'published'}
