@@ -28,10 +28,6 @@
                                              alt ptitle;
                                              src string:${orig_url}/theme_image/image_mini"/>
                     </a>
-                    <a tal:attributes="title ptitle;
-                                       href string:${item/absolute_url}" 
-                       class="portletHeader" 
-                       tal:content="ptitle"></a>
                     <div class="portletHeader">
                         <a tal:attributes="href string:${item/absolute_url};
                                            class string:link-plain"
