@@ -204,7 +204,7 @@ def objectThemeTagged(obj, event):
         copied to eventual translations, and catalog is updated.
     """
     for desc in event.descriptions:
-        if desc.interface == IThemeTagging:
+        if getattr(desc, 'interface', None) == IThemeTagging:
             try:
                 context = obj.context
             except AttributeError:
