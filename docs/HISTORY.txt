@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.8.dev0 - (unreleased)
+-----------------------
+
 6.7 - (2015-09-22)
 ------------------
 * Bug fix: Safely get 'interface' attr from request object in order to avoid
