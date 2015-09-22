@@ -3,6 +3,9 @@ Changelog
 
 6.7.dev0 - (unreleased)
 -----------------------
+* Bug fix: Safely get 'interface' attr from request object in order to avoid
+  AttributeError: interface exceptions
+  [voineali refs #28998]
 * Cleanup: Remove PloneHelpCenter references
   [voineali refs #27692]
 
