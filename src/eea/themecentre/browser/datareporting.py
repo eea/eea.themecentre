@@ -3,10 +3,12 @@
 from eea.themecentre.themecentre import getTheme  # , getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
+import socket
 import xmlrpclib
 
-# from eea.dataservice.config import ROD_SERVER
+# from eea.dataservice.config import ROD_SERVER, SOCKET_TIMEOUT
 ROD_SERVER = 'http://rod.eionet.europa.eu/rpcrouter'
+SOCKET_TIMEOUT = 2.0 # in seconds
 
 
 class DataCentreReporting(object):
@@ -29,8 +31,17 @@ class DataCentreReporting(object):
         rodsdone = []
         now = DateTime()
         rodsinfo = {}
-        server = xmlrpclib.Server(ROD_SERVER)
-        result = server.WebRODService.getROComplete()
+        result = None
+
+        try:
+            socket.setdefaulttimeout(SOCKET_TIMEOUT) #set the timeout
+            server = xmlrpclib.Server(ROD_SERVER)
+            result = server.WebRODService.getROComplete()
+            socket.setdefaulttimeout(None)  #sets the default back
+        except Exception, err:
+            logger.exception(err)
+            result = []
+
         if result:
             for obligation in result:
                 rodsinfo[int(obligation['PK_RA_ID'])] = obligation
@@ -73,8 +84,17 @@ class ReportingObligationInfo(object):
         """ Return a struct with full info for obligation with id=rodid
         """
         rods = {}
-        server = xmlrpclib.Server(ROD_SERVER)
-        result = server.WebRODService.getROComplete()
+        result = None
+
+        try:
+            socket.setdefaulttimeout(SOCKET_TIMEOUT) #set the timeout
+            server = xmlrpclib.Server(ROD_SERVER)
+            result = server.WebRODService.getROComplete()
+            socket.setdefaulttimeout(None)  #sets the default back
+        except Exception, err:
+            logger.exception(err)
+            result = []
+
         if result:
             for obligation in result:
                 rods[int(obligation['PK_RA_ID'])] = obligation
