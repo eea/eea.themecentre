@@ -4,8 +4,8 @@ from eea.themecentre.themecentre import getTheme  # , getThemeCentre
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
 import logging
-import socket
-import xmlrpclib
+import eventlet
+
 
 # from eea.dataservice.config import ROD_SERVER, SOCKET_TIMEOUT
 ROD_SERVER = 'http://rod.eionet.europa.eu/rpcrouter'
@@ -34,15 +34,15 @@ class DataCentreReporting(object):
         now = DateTime()
         rodsinfo = {}
         result = None
+        xmlrpclib = eventlet.import_patched('xmlrpclib')
 
-        try:
-            socket.setdefaulttimeout(SOCKET_TIMEOUT) #set the timeout
-            server = xmlrpclib.Server(ROD_SERVER)
-            result = server.WebRODService.getROComplete()
-            socket.setdefaulttimeout(None)  #sets the default back
-        except Exception, err:
-            logger.exception(err)
-            result = []
+        with eventlet.timeout.Timeout(SOCKET_TIMEOUT):
+            try:
+                server = xmlrpclib.Server(ROD_SERVER)
+                result = server.WebRODService.getROComplete()
+            except Exception, err:
+                logger.exception(err)
+                result = []
 
         if result:
             for obligation in result:
@@ -87,15 +87,15 @@ class ReportingObligationInfo(object):
         """
         rods = {}
         result = None
+        xmlrpclib = eventlet.import_patched('xmlrpclib')
 
-        try:
-            socket.setdefaulttimeout(SOCKET_TIMEOUT) #set the timeout
-            server = xmlrpclib.Server(ROD_SERVER)
-            result = server.WebRODService.getROComplete()
-            socket.setdefaulttimeout(None)  #sets the default back
-        except Exception, err:
-            logger.exception(err)
-            result = []
+        with eventlet.timeout.Timeout(SOCKET_TIMEOUT):
+            try:
+                server = xmlrpclib.Server(ROD_SERVER)
+                result = server.WebRODService.getROComplete()
+            except Exception, err:
+                logger.exception(err)
+                result = []
 
         if result:
             for obligation in result:
