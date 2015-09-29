@@ -40,6 +40,7 @@ setup(name='eea.themecentre',
           'eea.mediacentre',
           'eea.vocab',
           'Products.EEAContentTypes',
+          'eventlet',
           'eea.versions', #because of @@get_interfaces. plone4: fix this
       ],
       entry_points="""

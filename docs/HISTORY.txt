@@ -4,6 +4,7 @@ Changelog
 6.8.dev0 - (unreleased)
 -----------------------
 * Bugfix: set socket timeout to prevent Zope instances hanging out when the external service is not responding
+* Bugfix: greenening xmlrpclib to prevent hanging out connection
   [lucas refs #29063]
   
 6.7 - (2015-09-22)
