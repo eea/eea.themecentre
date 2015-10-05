@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+ <index name="media_types" meta_type="KeywordIndex">
+  <indexed_attr value="media_types"/>
+ </index>
+ <index name="getThemes" meta_type="KeywordIndex">
+  <indexed_attr value="getThemes"/>
+ </index>
+ <column value="media_types"/>
+ <column value="getThemes"/>
+</object>

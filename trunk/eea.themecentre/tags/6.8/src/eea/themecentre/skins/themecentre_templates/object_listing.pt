@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<body>
+
+    <metal:listing define-macro="listing"
+        tal:define="contentobjects view/batch;
+                    batch view/batch">
+
+ <div tal:replace="structure provider:plone.documentactions" />
+
+    <h1 tal:content="view/title" class="documentFirstHeading">
+        Title or id
+    </h1>
+
+    <div class="documentDescription" tal:content="structure view/description">
+        Description
+    </div>
+
+    <!-- Navigation -->
+    <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+    <dl tal:condition="contentobjects">
+        <tal:object repeat="object contentobjects">
+        <dt><a href="#"
+                tal:content="object/title"
+                tal:attributes="href object/url;
+                                title object/url_title" />
+        </dt>
+        <dd tal:content="object/description" />
+        </tal:object>
+    </dl>
+
+    <p class="discreet"
+        tal:condition="not: contentobjects"
+        i18n:domain="eea"
+        i18n:translate="">
+        There are currently no results for this search.
+    </p>
+
+    <!-- Navigation -->
+    <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+    </metal:listing>
+
+</body>
+</html>
