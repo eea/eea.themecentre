@@ -19,11 +19,11 @@
                title="Data centre overview"
                i18n:attributes="title">
                     <span tal:condition="python: theme in eea_datacentres" id="theme-datacentre">
-                        <tal:title tal:content="title">Title</tal:title>
+                        <tal:title content="title">Title</tal:title>
                         <tal:datacentre i18n:translate="">data centre</tal:datacentre>
                     </span>
                     <span tal:condition="python: not (theme in eea_datacentres)" id="theme-datacentre">
-                        <tal:title tal:content="title">Title</tal:title>
+                        <tal:title content="title">Title</tal:title>
                         <tal:dataservice i18n:translate="">data service</tal:dataservice>
                     </span>
             </a>

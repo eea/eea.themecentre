@@ -3,6 +3,9 @@ Changelog
 
 6.9.dev0 - (unreleased)
 -----------------------
+* Update eea.translations with the latest translation strings -
+  fixed errors in templates
+  [chiridra refs #69753]
 
 6.8 - (2015-10-05)
 ------------------
