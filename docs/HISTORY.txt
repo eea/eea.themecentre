@@ -1,6 +1,9 @@
 Changelog
 =========
 
+7.0.dev0 - (unreleased)
+-----------------------
+
 6.9 - (2016-05-04)
 ------------------
 * Update eea.translations with the latest translation strings -
