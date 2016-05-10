@@ -9,9 +9,10 @@ class BasePortlet(BrowserView):
     """ Base portlet
     """
 
-    def short_items(self, items):
+    def short_items(self):
         """ Short items
         """
+        items = self.items()
         result = []
         for item in items[:self.size]:
             result.append(self.item_to_short_dict(item))
