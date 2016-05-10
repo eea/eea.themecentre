@@ -1,12 +1,15 @@
 """ Faceted
 """
-from zope.component import queryMultiAdapter
-from eea.themecentre.browser.portlets.catalog import BasePortlet
-from types import GeneratorType
 import itertools
 import logging
 
+from types import GeneratorType
+
+from eea.themecentre.browser.portlets.catalog import BasePortlet
+from zope.component import queryMultiAdapter
+
 log = logging.getLogger("eea.themecentre")
+
 
 class FacetedPortlet(BasePortlet):
     """ Faceted Portlet

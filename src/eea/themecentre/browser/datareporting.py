@@ -1,15 +1,16 @@
 """ Data reporting
 """
-from eea.themecentre.themecentre import getTheme  # , getThemeCentre
-from Products.CMFCore.utils import getToolByName
-from DateTime.DateTime import DateTime
 import logging
-import eventlet
 
+import eventlet
+from DateTime.DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
 
 # from eea.dataservice.config import ROD_SERVER, SOCKET_TIMEOUT
+from eea.themecentre.themecentre import getTheme
+
 ROD_SERVER = 'http://rod.eionet.europa.eu/rpcrouter'
-SOCKET_TIMEOUT = 2.0 # in seconds
+SOCKET_TIMEOUT = 2.0  # in seconds
 logger = logging.getLogger('eea.themecentre.datareporting')
 
 

@@ -1,24 +1,26 @@
 """ Multilingual
 """
-from zope.testing import doctest
-from Products.ATContentTypes.content.newsitem import ATNewsItem
-from eea.themecentre.interfaces import (
-    IThemeTaggable,
-    IThemeCentreSchema
-)
-from zope.annotation.interfaces import IAnnotations
-from zope.annotation.attribute import AttributeAnnotations
-from zope.component.hooks import setSite
-from zope.component import provideAdapter
+from unittest import TestSuite
+
 from zope.interface import classImplements
+
+from Products.ATContentTypes.content.newsitem import ATNewsItem
 from Products.PloneTestCase.PloneTestCase import (
     default_user,
     default_password
 )
-from unittest import TestSuite
 from Testing.ZopeTestCase import FunctionalDocFileSuite
-from eea.themecentre.tests.base import EEAThemeCentreTestCase
+from zope.annotation.attribute import AttributeAnnotations
+from zope.annotation.interfaces import IAnnotations
+from zope.component import provideAdapter
+from zope.component.hooks import setSite
+from zope.testing import doctest
+from eea.themecentre.interfaces import (
+    IThemeTaggable,
+    IThemeCentreSchema
+)
 from eea.themecentre.mergedtheme import ThemeTaggableMerged
+from eea.themecentre.tests.base import EEAThemeCentreTestCase
 
 optionflags = (doctest.ELLIPSIS |
                doctest.NORMALIZE_WHITESPACE |

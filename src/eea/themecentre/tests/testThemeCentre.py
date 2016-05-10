@@ -1,15 +1,18 @@
 """ Test theme centre
 """
+from unittest import TestSuite, makeSuite
+
+from zope.interface import classImplements
+
 from Products.ATContentTypes.content.newsitem import ATNewsItem
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
-from zope.annotation.interfaces import IAnnotations
-from zope.annotation.attribute import AttributeAnnotations
-from zope.site.hooks import setSite
-from zope.component import provideAdapter
-from zope.interface import classImplements
-from unittest import TestSuite, makeSuite
-from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from eea.themecentre.mergedtheme import ThemeTaggableMerged
+from eea.themecentre.tests.base import EEAThemeCentreTestCase
+from zope.annotation.attribute import AttributeAnnotations
+from zope.annotation.interfaces import IAnnotations
+from zope.component import provideAdapter
+from zope.site.hooks import setSite
+
 
 class TestThemeCentre(EEAThemeCentreTestCase):
     """ Test Theme Centre
