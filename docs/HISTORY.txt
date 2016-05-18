@@ -5,6 +5,8 @@ Changelog
 -----------------------
 * Bug fix: Fix pylint warnings
   [ichim-david refs #71940]
+* Bug fix: "All items" in topic search does not lead to topic results anymore
+  [lucas refs #71614]
 
 6.9 - (2016-05-04)
 ------------------
