@@ -12,7 +12,9 @@
     tal:define="frontpage_view context/@@frontpage_highlights;">
 
         <div class="content-column-one">
-         <tal:datapage tal:define="datapage string:themecentre">
+         <tal:datapage tal:define="datapage string:themecentre;
+                                   more_href_datamaps string:dc;
+                                   more_href string:help/advanced-search#c6=${context/getId}">
             <div metal:use-macro="here/frontpage_view/macros/whatsnew-gallery">
                 whatsnew gallery
             </div>
