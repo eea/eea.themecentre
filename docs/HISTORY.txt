@@ -3,6 +3,9 @@ Changelog
 
 7.1.dev0 - (unreleased)
 -----------------------
+* Change: modified more_hrefs to have a value for each type since we now hide
+  tabs without value
+  [ichim-david refs #73701]
 
 7.0 - (2016-05-19)
 ------------------

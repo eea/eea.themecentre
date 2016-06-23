@@ -35,7 +35,7 @@
 
        <h3 i18n:translate="">Browse catalogue</h3>
        <tal:datapage tal:define="datapage string:dcview; 
-                     more_hrefs python: ['dm', 'dm#c1=Data', 'dm#c1=Map', 'dm#c1=Interactive+map', 'dm#c1=Indicator', 'dm#c1=Graph']" >
+                     more_hrefs python: {'All data products':'dm', 'Datasets':'dm#c1=Data', 'Maps':'dm#c1=Map', 'Interactive maps':'dm#c1=Interactive+map', 'Indicators':'dm#c1=Indicator', 'Graphs':'dm#c1=Graph'}" >
             <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
        </tal:datapage>
        
