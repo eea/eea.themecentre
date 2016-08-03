@@ -1,8 +1,11 @@
 Changelog
 =========
 
-7.1.dev0 - (unreleased)
+7.2.dev0 - (unreleased)
 -----------------------
+
+7.1 - (2016-07-07)
+------------------
 * Change: modified more_hrefs to have a value for each type since we now hide
   tabs without value
   [ichim-david refs #73701]
