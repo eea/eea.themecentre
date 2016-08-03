@@ -35,7 +35,7 @@
                 tal:define="themecentre_view context/@@themecentre_utils;
                 folders themecentre_view/getSubtopics;
                 soer_topic_path python: '/' + context.absolute_url(1) + '/briefings-soer';
-                soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);">
+                soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);" tal:condition="python:soer_topic or folders">
 
             <h2 i18n:translate="">Subtopics</h2>
             <tal:existssoer tal:condition="soer_topic">
@@ -52,7 +52,7 @@
                 </tal:defines>
             </tal:existssoer>
 
-            <ul>
+            <ul tal:condition="folders">
                 <li tal:repeat="folder folders">
                     <a tal:attributes="href folder/getURL; title folder/Title;"
                             tal:content="folder/Title">Folder links</a>

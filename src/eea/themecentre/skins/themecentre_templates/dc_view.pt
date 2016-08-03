@@ -9,19 +9,10 @@
     <div metal:fill-slot="content-core">
     <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
 
-        <div class="visualClear"></div>
-
-        <div class="plain" tal:condition="context/CookedBody|nothing">
-            <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
-              tal:replace="structure text" />
-        </div>
-
-
-
     <div class="column-area">
        <a href="dm" class="archives advanced-search-link" title="Go to advanced search" i18n:attributes="title">
        <span i18n:translate="">Advanced search</span></a>
-       <div class="featured">
+       <div class="faceted-search">
        <h2 i18n:translate="">Search</h2>
 	    <form action="dm" method="get" id="faceted-text-search" class="searchforms faceted-external-search">
             <p>
@@ -33,12 +24,15 @@
 	    </form>
        </div>
 
-       <h3 i18n:translate="">Browse catalogue</h3>
-       <tal:datapage tal:define="datapage string:dcview; 
-                     more_hrefs python: {'All data products':'dm', 'Datasets':'dm#c1=Data', 'Maps':'dm#c1=Map', 'Interactive maps':'dm#c1=Interactive+map', 'Indicators':'dm#c1=Indicator', 'Graphs':'dm#c1=Graph'}" >
-            <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
-       </tal:datapage>
-       
+        <div class="whatsnew-listing">
+            <h3 i18n:translate="">Browse catalogue</h3>
+            <tal:datapage tal:define="datapage string:dcview;
+                    more_hrefs python: {'All data products':'dm', 'Datasets':'dm#c1=Data', 'Maps':'dm#c1=Map',
+                    'Interactive maps':'dm#c1=Interactive+map', 'Indicators':'dm#c1=Indicator', 'Graphs':'dm#c1=Graph'}">
+                <div metal:use-macro="here/datamaps_view/macros/whatsnew-gallery" />
+            </tal:datapage>
+        </div>
+
 	
 			
     </div>
