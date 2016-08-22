@@ -11,11 +11,11 @@
 
     <div class="visualClear"></div>
     <div class="column-area">
-        <div class="plain" tal:condition="context/CookedBody|nothing">
+        <div class="plain body-content" tal:condition="context/CookedBody|nothing">
             <tal:text tal:define="text python:context.CookedBody(stx_level=2);"
               tal:replace="structure text" />
         </div>
-       <a href="dm" class="archives advanced-search-link" title="Go to advanced search" i18n:attributes="title">
+       <a href="dm" class="archives" title="Go to advanced search" i18n:attributes="title">
        <span i18n:translate="">Advanced search</span></a>
        <div class="faceted-search">
        <h2 i18n:translate="">Search</h2>
