@@ -3,6 +3,8 @@ Changelog
 
 7.2.dev0 - (unreleased)
 -----------------------
+* Change: do now show themes on themes_view if theme is expired
+  [ichim-david refs #75265]
 * Change: added body-content class to dc_view body content in order to
   hide content in case we do not have any real content as a blank space
   shouldn't count as having content entered
