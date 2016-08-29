@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.2.dev0 - (unreleased)
------------------------
+7.2 - (2016-08-29)
+------------------
 * Change: do now show themes on themes_view if theme is expired
   [ichim-david refs #75265]
 * Change: added body-content class to dc_view body content in order to
