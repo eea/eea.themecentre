@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.3.dev0 - (unreleased)
------------------------
+7.3 - (2016-10-03)
+------------------
 * Bug fix: Safely get promotions from hard-coded themes UIDs
   [voineali refs #76162]
 
