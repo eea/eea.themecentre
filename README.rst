@@ -1,4 +1,19 @@
+================
+EEA Theme Centre
+================
+.. image:: http://ci.eionet.europa.eu/job/eea.themecentre-www/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea.themecentre-www/lastBuild
+.. image:: http://ci.eionet.europa.eu/job/eea.themecentre-plone4/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea.themecentre-plone4/lastBuild
+
+
 Theme Centre is a folder that contains content on a certain theme.
+
+Contents
+========
+
+.. contents::
+
 
 To get it working
 =================
@@ -28,10 +43,10 @@ Then migrate old objects to new theme tagging funcionallity SITE/@@migrateThemeT
 
 Migrate Plone and ATCT (15-30min)
 Reinstall older products (not necessary) (2-10min)
-Install FiveSite 
+Install FiveSite
 Install ThemeCentre (this takes time because we add a new index and reindex the catalog) (10-20 min)
-If you don't have anything in portal_skins/custom you 
-  Go to portal_setup -> properties, select EEA WWW and import skins tool 
+If you don't have anything in portal_skins/custom you
+  Go to portal_setup -> properties, select EEA WWW and import skins tool
 otherwise
   manually add themecentre_* layers to the skins.
 
@@ -60,3 +75,32 @@ If you are using eeadesign2006-bundle (not devel)
 Make sure you don't have Archetypes, PortalTransforms and PloneLanguageTool in your bundle. They are not removed automically.
 copy data.fs from production site
 restart your zope
+
+Source code
+===========
+
+- Latest source code (Plone 4 compatible):
+  https://github.com/eea/eea.themecentre
+
+
+Copyright and license
+=====================
+The Initial Owner of the Original Code is European Environment Agency (EEA).
+All Rights Reserved.
+
+The EEA Theme Centre (the Original Code) is free software;
+you can redistribute it and/or modify it under the terms of the GNU
+General Public License as published by the Free Software Foundation;
+either version 2 of the License, or (at your option) any later
+version.
+
+More details under docs/License.txt
+
+
+Funding
+=======
+
+EEA_ - European Environment Agency (EU)
+
+.. _EEA: http://www.eea.europa.eu/
+
