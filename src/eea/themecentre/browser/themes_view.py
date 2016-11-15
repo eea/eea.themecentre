@@ -23,53 +23,27 @@ class ThemesView(BrowserView):
 
     def getPromotions(self):
         """ Get the 5 promotions to show on top """
-
         pl = self.getCurrentLanguage()
-
-        # define promotions
-        ret_promotions = []
-        promotions = [
-            ("0d2e3d3da1d2f8f1cc4f029a27b931d0",
-             "not-just-hot-air",
-             _(u"Visit our air pollution website")),
-            ("cd6bef0c97b6c8ea3e216267af7f1605",
-             "assessing-biodiversity",
-             _(u"Visit our biodiversity website")),
-            ("6723e6872d33d022a07eeae0e235ac48",
-             "new-estimates-confirm-the-declining-" +
-             "trend-in-eu-greenhouse-gas-emissions",
-             _(u"Visit our climate change website")),
-            ("5412da76e31aedcea4ce1d520518604f",
-             "discover-europe2019s-landscape-through" +
-             "-satellite-and-ground-level-pictures-1",
-             _(u"Visit our land use website")),
-            ("b6ef38c3f2e84948314b397d7668ea41",
-             "heading-for-your-favourite-beach-is-the-bathing-water-clean",
-             _(u"Visit our water website"))
-        ]
-
-        # get promotion attributes and title in current language
+        ret_themes = []
         context = aq_inner(self.context)
-        tr_tool = getToolByName(context, 'translation_service')
+        if pl != 'en':
+            context = context.getCanonical()
+        topics = context.getFolderContents(contentFilter={
+            'portal_type': 'Topic', 'sort_on': 'getObjPositionInParent',
+            'sort_order':  'reverse'})
+        for topic in topics:
+            ret_dict = {}
+            tobj = topic.getObject()
+            tobj_title = tobj.Title()
+            ret_dict[tobj_title] = []
+            ret_list = ret_dict[tobj_title]
+            brains = tobj.queryCatalog()
+            for brain in brains:
+                t = brain.getURL(), brain
+                ret_list.append(t)
+            ret_themes.append(ret_dict)
 
-        for promo in promotions:
-            o = context.reference_catalog.lookupObject(promo[0])
-            if not o:
-                continue
-            if o.hasTranslation(pl):
-                # Tuple containing the object, the title, the url
-                # The content of the tuple depends on the translation
-                t = (o.getTranslation(pl),
-                     promo[1],
-                     tr_tool.translate(promo[2], domain="eea",
-                                       target_language=pl),
-                     o.absolute_url())
-                ret_promotions.append(t)
-            else:
-                t = o, promo[1], promo[2], o.absolute_url()
-                ret_promotions.append(t)
-
-        return ret_promotions
+        return ret_themes
 
     def getThemes(self):
         """ Get the themes translated

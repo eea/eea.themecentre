@@ -13,32 +13,26 @@
 
 <div id="top-news-area">
 
-      <div class="portlet-promotions" tal:repeat="promo view/getPromotions">
 
-            <dl tal:define="item python:promo[0];
-                            ptitle python:promo[2];
-                            orig_url python:promo[3];" 
-                tal:attributes="id string:${item/id}-portlet" 
-                class="portlet promo-nav-portlet"
-                tal:condition="python:item.ExpirationDate() == 'None'">
-
-                <dd tal:attributes="id python:promo[1]" class="portletItem">
-                    <a tal:attributes="href string:${item/absolute_url};
-                                       title ptitle">
-                        <img tal:attributes="title ptitle;
-                                             alt ptitle;
-                                             src string:${orig_url}/theme_image/image_mini"/>
-                    </a>
-                    <div class="portletHeader">
-                        <a tal:attributes="href string:${item/absolute_url};
-                                           class string:link-plain"
-                           tal:content="item/Title"></a>
+    <div id="megatopics-area">
+        <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
+            <dl class="portlet promo-nav-portlet" id="air-and-climate-megatopic"
+                tal:define="promo_title python:promo.keys()[0];
+                            promo_list python:promo[promo_title];
+                            promo_url python:promo_list[0][1].getObject().getCanonical().absolute_url();">
+                <dd class="portletItem">
+                    <img  tal:attributes="title promo_title; src string:${promo_url}/theme_image/image_mini">
+                    <div class="portletHeader" tal:content="python:context.translate(promo_title)">
+                        Air and climate
                     </div>
+                    <ul class="">
+                        <li tal:repeat="theme promo_list">
+                            <a tal:attributes="href python:theme[0]" tal:content="python:theme[1].Title">Air pollution</a></li>
+                    </ul>
                 </dd>
-
             </dl>
         </div>
-
+    </div>
     
 <div class="visualClear"><!-- &nbsp; --></div>
 </div>
@@ -47,7 +41,7 @@
 
     <div id="all-topics-list" class="themes-view-image-icon">
         <h2 i18n:translate="">All topics</h2>
-        
+
         <div class="contentColumnOne">
             <h3 i18n:translate="">What is happening?<br />Environmental issues</h3>
             <ul tal:define="items python:themes[0]">
@@ -57,12 +51,12 @@
                         <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
                         <a tal:attributes ="href string:${trans_obj/absolute_url};
                                             class string:link-plain"
-                           tal:content="trans_obj/Title"></a>                    
+                           tal:content="trans_obj/Title"></a>
                     </li>
                 </tal:block>
             </ul>
         </div>
-        
+
         <div class="contentColumnTwo themes-view-image-icon">
             <h3 i18n:translate="">Why is it happening?<br />Sectors and activities</h3>
             <ul tal:define="items python:themes[1]">
@@ -72,15 +66,15 @@
                         <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
                         <a tal:attributes ="href string:${trans_obj/absolute_url};
                                             class string:link-plain"
-                           tal:content="trans_obj/Title"></a>                    
+                           tal:content="trans_obj/Title"></a>
                     </li>
                 </tal:block>
             </ul>
         </div>
 
     </div>
-    
-    <div class="visualClear topics-bottom"> 
+
+    <div class="visualClear topics-bottom">
         <div class="contentColumnOne themes-view-image-icon">
             <h3 i18n:translate="">Environment in different regions and specific areas</h3>
             <ul tal:define="items python:themes[2]">
@@ -90,12 +84,12 @@
                         <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
                         <a tal:attributes ="href string:${trans_obj/absolute_url};
                                             class string:link-plain"
-                           tal:content="trans_obj/Title"></a>                    
+                           tal:content="trans_obj/Title"></a>
                     </li>
                 </tal:block>
             </ul>
         </div>
-    
+
         <div class="contentColumnTwo themes-view-image-icon">
             <h3 i18n:translate="">Across environmental issues and sectors</h3>
             <ul tal:define="items python:themes[3]">
@@ -105,15 +99,14 @@
                         <img tal:attributes="src string:${original_obj_url}/theme_image/image_icon"  />
                         <a tal:attributes ="href string:${trans_obj/absolute_url};
                                             class string:link-plain"
-                           tal:content="trans_obj/Title"></a>                    
+                           tal:content="trans_obj/Title"></a>
                     </li>
                 </tal:block>
             </ul>
-        </div>        
+        </div>
     </div>
 
 </tal:block>
-
 
 <div class="visualClear"><!-- --></div>
 <br /><br />
