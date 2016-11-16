@@ -28,7 +28,10 @@ class ThemesView(BrowserView):
         context = aq_inner(self.context)
         if pl != 'en':
             context = context.getCanonical()
-        topics = context.getFolderContents(contentFilter={
+        collections = context.restrictedTraverse('megatopics-collections', None)
+        if not collections:
+            return None
+        topics = collections.getFolderContents(contentFilter={
             'portal_type': 'Topic', 'sort_on': 'getObjPositionInParent',
             'sort_order':  'reverse'})
         for topic in topics:
