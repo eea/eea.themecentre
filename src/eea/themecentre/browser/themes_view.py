@@ -10,7 +10,7 @@ from eea.themecentre import eeaMessageFactory as _
 class ThemesView(BrowserView):
     """ Themes view logic """
 
-    template_view = ViewPageTemplateFile('templates/themes_view.pt')
+    # template_view = ViewPageTemplateFile('templates/themes_view.pt')
 
     def __call__(self):
         return self.template_view()

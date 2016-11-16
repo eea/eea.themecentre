@@ -144,7 +144,7 @@
 
   <browser:page
       for="*"
-      name="themes_view"
+      name="themes_browser_view"
       class=".themes_view.ThemesView"
       permission="zope2.View"
       allowed_interface=".interfaces.IThemesView"
