@@ -9,10 +9,9 @@
 </head>
 
 <body>
-<div id="themes-sitemap"  metal:fill-slot="content-core">
+<div id="themes-sitemap"  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view">
 
 <div id="top-news-area">
-
 
     <div id="megatopics-area">
         <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
