@@ -3,14 +3,12 @@
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from eea.themecentre import eeaMessageFactory as _
+import DateTime
 
 
 class ThemesView(BrowserView):
     """ Themes view logic """
 
-    # template_view = ViewPageTemplateFile('templates/themes_view.pt')
 
     def __call__(self):
         return self.template_view()
@@ -28,9 +26,12 @@ class ThemesView(BrowserView):
         context = aq_inner(self.context)
         if pl != 'en':
             context = context.getCanonical()
-        topics = context.getFolderContents(contentFilter={
-            'portal_type': 'Topic', 'sort_on': 'getObjPositionInParent',
-            'sort_order':  'reverse'})
+        collections = context.restrictedTraverse('megatopics-collections', None)
+        if not collections:
+            return None
+        topics = collections.getFolderContents(contentFilter={
+            'portal_type': 'Topic', 'sort_on': 'getObjPositionInParent'})
+        now = DateTime.DateTime()
         for topic in topics:
             ret_dict = {}
             tobj = topic.getObject()
@@ -39,7 +40,15 @@ class ThemesView(BrowserView):
             ret_list = ret_dict[tobj_title]
             brains = tobj.queryCatalog()
             for brain in brains:
-                t = brain.getURL(), brain
+                url = brain.getURL()
+                t = url, brain
+                # do not show expired content
+                if brain.expires <= now:
+                    continue
+                if 'eea.promotion.interfaces.IPromoted' in \
+                    brain.object_provides:
+                    can_url = brain.getObject().getCanonical().absolute_url()
+                    ret_list.insert(0, can_url)
                 ret_list.append(t)
             ret_themes.append(ret_dict)
 
