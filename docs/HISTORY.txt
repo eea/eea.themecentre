@@ -3,6 +3,9 @@ Changelog
 
 7.4.dev0 - (unreleased)
 -----------------------
+* Change: themes_view is now a skins template with collections
+  and new style design brought from EEA frontpage
+  [ichim-david refs #74553]
 
 7.3 - (2016-10-03)
 ------------------
