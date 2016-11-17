@@ -3,6 +3,9 @@ Changelog
 
 7.4.dev0 - (unreleased)
 -----------------------
+* Upgrade step: import megatopic-collections.zexp within www/SITE/themes
+  found within ticket as attachment
+  [ichim-david refs #74553]
 * Change: themes_view is now a skins template with collections
   and new style design brought from EEA frontpage
   [ichim-david refs #74553]
