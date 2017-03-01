@@ -3,6 +3,8 @@ Changelog
 
 7.5.dev0 - (unreleased)
 -----------------------
+* Bug fix: fixed rendering of themes tags on translated content
+  [alecghica refs #81880]
 
 7.4 - (2016-11-21)
 ------------------

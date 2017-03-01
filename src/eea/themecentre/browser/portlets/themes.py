@@ -42,9 +42,9 @@ class ObjectThemesPortlet(BasePortlet):
                  'sort_on': 'effective',
                  'sort_order': 'reverse',
                  'sort_limit': 3,
-                 'Language': language}
+                 'Language': 'en'}
         result = catalog.searchResults(query)
-
+        
         # arrange the themes in the order they are stored on the object
         themes_dict = {}
         themes_sorted = []
@@ -53,7 +53,7 @@ class ObjectThemesPortlet(BasePortlet):
             translation = theme.getTranslation(language)
             if translation is not None:
                 theme = translation
-            themes_dict[theme.getId()] = theme
+            themes_dict[theme.getCanonical().getId()] = theme
 
         for themeId in theme_ids:
             theme = themes_dict.get(themeId, None)
