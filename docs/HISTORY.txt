@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.5.dev0 - (unreleased)
------------------------
+7.5 - (2017-03-02)
+------------------
 * Bug fix: Get resources over https
   [avoinea refs #82562]
 * Bug fix: fixed rendering of themes tags on translated content
