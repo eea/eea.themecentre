@@ -1,10 +1,24 @@
 """ Promotion
 """
+from zope.interface import Interface
+from zope.component import queryAdapter
 from eea.themecentre.themecentre import getTheme
 from Products.CMFCore.utils import getToolByName
-from eea.mediacentre.interfaces import IVideo
 from DateTime.DateTime import DateTime
-from eea.promotion.interfaces import IPromotion
+try:
+    from eea.promotion import interfaces as pinterfaces
+    IPromotion = pinterfaces.IPromotion
+except (ImportError, AttributeError):
+    class IPromotion(Interface):
+        """ IPromotion """
+
+try:
+    from eea.mediacentre import interfaces as minterfaces
+    IVideo = minterfaces.IVideo
+except (ImportError, AttributeError):
+    class IVideo(Interface):
+        """ IVideo """
+
 
 class ThemeCentreMenuPromotion(object):
     """ Return the promotion to show as part of navigation. Most of the time an
@@ -36,7 +50,9 @@ class ThemeCentreMenuPromotion(object):
 
         for brain in result:
             obj = brain.getObject()
-            promo = IPromotion(obj)
+            promo = queryAdapter(obj, IPromotion)
+            if not promo:
+                continue
             if not promo.display_on_themepage:
                 continue
             if not promo.themes or not currentTheme == promo.themes[0]:

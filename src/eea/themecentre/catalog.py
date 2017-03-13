@@ -3,8 +3,13 @@
 from zope.component.interfaces import ComponentLookupError
 from zope.interface import Interface
 from eea.themecentre.interfaces import IThemeTagging
-from eea.mediacentre.interfaces import IMediaType
 from plone.indexer.decorator import indexer
+try:
+    from eea.mediacentre import interfaces
+    IMediaType = interfaces.IMediaType
+except (ImportError, AttributeError):
+    class IMediaType(Interface):
+        """ IMediaType """
 
 @indexer(Interface)
 def getThemesForIndex(obj, **kwargs):

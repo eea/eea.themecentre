@@ -19,15 +19,10 @@ def setup_themecentre():
     zcml.load_config('configure.zcml', eea.themecentre)
     fiveconfigure.debug_mode = False
 
-    PloneTestCase.installPackage('valentine.linguaflow')
-    PloneTestCase.installPackage('eea.design')
-    PloneTestCase.installPackage('eea.vocab')
-
 setup_themecentre()
 PloneTestCase.setupPloneSite(extension_profiles=(
-                                         'eea.themecentre:default',
-                                         'Products.EEAContentTypes:default',
-                                         'Products.EEAPloneAdmin:default'))
+    'eea.themecentre:default',
+))
 
 class EEAThemeCentreTestCase(PloneTestCase.FunctionalTestCase):
     """ Test case class used for functional themecentre tests.

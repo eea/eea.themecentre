@@ -1,22 +1,28 @@
 """ Browser themecentre module
 """
 from zope.schema.interfaces import IVocabularyFactory
-from zope.interface import alsoProvides
-from zope.component import getUtility
+from zope.interface import alsoProvides, Interface
+from zope.component import queryUtility
 from zope.formlib.form import Fields
 from five.formlib.formbase import EditForm
-from eea.themecentre.interfaces import (
-    IThemeCentreSchema,
-    IThemeRelation,
-    IThemeCentre
-)
+from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.interfaces import IThemeRelation
+from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.themecentre import getTheme, getThemeTitle
-from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
-from eea.mediacentre.interfaces import IMediaCentre
 from eea.themecentre import eeaMessageFactory as _
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
+try:
+    from eea.mediacentre import mediacentre
+    MEDIA_SEARCH_KEY = mediacentre.MEDIA_SEARCH_KEY
+    from eea.mediacentre import interfaces
+    IMediaCentre = interfaces.IMediaCentre
+except (ImportError, AttributeError):
+    MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
+    class IMediaCentre(Interface):
+        """ IMediaCentre """
+
 ENABLE = 1  # Manual mode from ATContentTypes.lib.constraintypes
 
 
@@ -60,9 +66,8 @@ class Multimedia(object):
     def types(self):
         """ Types
         """
-        # mediacentre = getUtility(IMediaCentre)
-        # types = sorted(mediacentre.getMediaTypes())
-        vocab = getUtility(IVocabularyFactory, name="Media types")(self.context)
+        vocab = queryUtility(IVocabularyFactory, name="Media types")
+        vocab = vocab(self.context)
         # we have titles of single name so we add 's' and since we know it's in
         # english
         types_ = [{'typeid': term.value, 'title': _(term.title+'s')}
@@ -74,10 +79,12 @@ class Multimedia(object):
         """ Media items
         """
         currenttheme = getTheme(self.context)
-        mediacentre = getUtility(IMediaCentre)
+        mcentre = queryUtility(IMediaCentre)
+        if not mcentre:
+            return []
         search = {MEDIA_SEARCH_KEY: {'theme': currenttheme}}
         return [mfile['object']
-                for mfile in mediacentre.getMedia(search=search)]
+                for mfile in mcentre.getMedia(search=search)]
 
 
 class Theme(object):

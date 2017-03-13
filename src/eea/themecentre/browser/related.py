@@ -1,9 +1,16 @@
 """ Related
 """
+from zope.interface import Interface
+from zope.component import queryAdapter
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeTagging
-from Products.EEAContentTypes.interfaces import IRelations
+try:
+    from Products.EEAContentTypes import interfaces
+    IRelations = interfaces.IRelations
+except (ImportError, AttributeError):
+    class IRelations(Interface):
+        """ IRelations """
 
 # This is what is used in ZMI for navigation_sections_left and right
 TOPICS_ID = 'topics'
@@ -41,11 +48,14 @@ class Topics(object):
             query['review_state'] = 'published'
 
         # get all objects that have the same theme as the current themecentre
-        related_brains = IRelations(themecentre).byTheme(getBrains=True,
-                                                         constraints=query)
-        # ignore the objects that are stored in the current themecentre
-        related_brains = [brain for brain in related_brains
-                          if not brain.getURL().startswith(themecentre_url)]
+        rel = queryAdapter(themecentre, IRelations)
+        if rel:
+            related_brains = rel.byTheme(getBrains=True, constraints=query)
+            # ignore the objects that are stored in the current themecentre
+            related_brains = [brain for brain in related_brains
+                if not brain.getURL().startswith(themecentre_url)]
+        else:
+            related_brains = []
 
         menu = []
         for brain in related_brains:

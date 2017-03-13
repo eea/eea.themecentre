@@ -156,7 +156,6 @@
         name="eea.themestags"
         class=".viewlets.ThemesTagsViewlet"
         manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
-        layer="eea.design.browser.interfaces.IEEACommonLayer"
         permission="zope2.View"
         />
 

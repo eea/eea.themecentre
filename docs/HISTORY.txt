@@ -3,6 +3,8 @@ Changelog
 
 7.6.dev0 - (unreleased)
 -----------------------
+* Cleanup: Remove un-necessary dependecies
+  [avoinea refs #83219]
 
 7.5 - (2017-03-02)
 ------------------

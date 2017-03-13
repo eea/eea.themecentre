@@ -52,7 +52,6 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         IThemeTagging(self.portal.copy_and_paste).tags = ['climate']
         self.createObject = createObject
 
-        self.portal.invokeFactory('PressRelease', id='pr_link')
         self.portal.invokeFactory('Event', id='event_link')
         self.portal.invokeFactory('Document', id='doc_link')
 

@@ -8,6 +8,12 @@ from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from Products.CMFCore.utils import getToolByName
 from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
 
+try:
+    from eea.promotion import interfaces as HAS_PROMOTION
+except ImportError:
+    HAS_PROMOTION = False
+
+
 optionflags = (doctest.ELLIPSIS |
                doctest.NORMALIZE_WHITESPACE |
                doctest.REPORT_ONLY_FIRST_FAILURE)
@@ -44,11 +50,13 @@ class PortletTestCase(EEAThemeCentreTestCase):
 def test_suite():
     """ Test suite
     """
-
-    return TestSuite((
-        FunctionalDocFileSuite('promotion.txt',
-                               package='eea.themecentre.browser.portlets',
-                               test_class=PortletTestCase,
-                               optionflags=optionflags,
-                               ),
-    ))
+    suite = TestSuite()
+    if HAS_PROMOTION:
+        suite.addTest(
+            FunctionalDocFileSuite('promotion.txt',
+                                   package='eea.themecentre.browser.portlets',
+                                   test_class=PortletTestCase,
+                                   optionflags=optionflags,
+                                   ),
+        )
+    return suite

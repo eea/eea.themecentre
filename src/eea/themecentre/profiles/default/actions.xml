@@ -5,7 +5,7 @@
       <property name="title" i18n:translate="">Themes</property>
       <property name="description" i18n:translate=""/>
       <property name="url_expr">string:${object_url}/themes_edit.html</property>
-      <property name="available_expr">python:'eea.themecentre.interfaces.IThemeTaggable' in object.restrictedTraverse('@@get_interfaces')()</property>
+      <property name="available_expr">python:object.restrictedTraverse('@@plone_interface_info').provides('eea.themecentre.interfaces.IThemeTaggable')</property>
       <property name="permissions">
         <element value="Modify portal content"/>
       </property>
@@ -19,7 +19,7 @@
       <property name="title" i18n:translate="">Promote to theme centre</property>
       <property name="description" i18n:translate="">Promote to theme centre</property>
       <property name="url_expr">string:${object_url}/@@promote2ThemeCentre</property>
-      <property name="available_expr">python:'Products.ATContentTypes.interfaces.folder.IATBTreeFolder' in object.restrictedTraverse('@@get_interfaces')()</property>
+      <property name="available_expr">python:object.restrictedTraverse('@@plone_interface_info').provides('Products.ATContentTypes.interfaces.folder.IATBTreeFolder')</property>
       <property name="permissions">
         <element value="EEA: promote to theme centre"/>
       </property>
@@ -29,7 +29,7 @@
       <property name="title" i18n:translate="">Depromote a theme centre</property>
       <property name="description" i18n:translate="">Depromote a theme centre</property>
       <property name="url_expr">string:${object_url}/@@depromote2ThemeCentre</property>
-      <property name="available_expr">python:'eea.themecentre.interfaces.IThemeCentre' in object.restrictedTraverse('@@get_interfaces')()</property>
+      <property name="available_expr">python:object.restrictedTraverse('@@plone_interface_info').provides('eea.themecentre.interfaces.IThemeCentre')</property>
       <property name="permissions">
         <element value="EEA: promote to theme centre"/>
       </property>

@@ -1,10 +1,16 @@
 """ Smart folder
 """
-from Products.EEAContentTypes.browser import smartfolder
 from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre import eeaMessageFactory as _
+try:
+    from Products.EEAContentTypes.browser import smartfolder
+    SFP = smartfolder.SmartFolderPortlets
+except (ImportError, AttributeError):
+    from Products.Five.browser import BrowserView
+    class SFP(BrowserView):
+        """ Smart Folder Portlets """
 
-class SmartFolderPortlets(smartfolder.SmartFolderPortlets):
+class SmartFolderPortlets(SFP):
     """ Smart Folder Portlets
     """
 

@@ -3,9 +3,7 @@
  <description>EEA Theme Centre profile</description>
  <version>4.0</version>
  <dependencies>
-  <dependency>profile-Products.ATVocabularyManager:default</dependency>
   <dependency>profile-Products.LinguaPlone:LinguaPlone</dependency>
-  <dependency>profile-Products.EEAContentTypes:default</dependency>
   <dependency>profile-eea.vocab:default</dependency>
  </dependencies>
 </metadata>

@@ -31,19 +31,13 @@ setup(name='eea.themecentre',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.ATVocabularyManager',
           'Products.LinguaPlone',
-          'Products.EEAPloneAdmin',
-          'valentine.linguaflow',
-          'eea.design',
-          'eea.promotion',
-          'eea.mediacentre',
           'eea.vocab',
-          'Products.EEAContentTypes',
           'eventlet',
-          'eea.versions', #because of @@get_interfaces. plone4: fix this
       ],
       entry_points="""
       # -*- Entry points: -*-
+      [z3c.autoinclude.plugin]
+      target = plone
       """,
       )

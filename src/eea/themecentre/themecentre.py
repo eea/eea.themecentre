@@ -8,12 +8,17 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
 from Acquisition import aq_parent, aq_base
 from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
 from eea.themecentre.interfaces import IThemeCentreSchema
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
+try:
+    from Products.EEAPloneAdmin.browser import interfaces
+    IObjectTitle = interfaces.IObjectTitle
+except (ImportError, AttributeError):
+    class IObjectTitle(Interface):
+        """ Fallback IObjectTitle """
 
 RDF_THEME_KEY = 'eea.themecentre.rdf'
 

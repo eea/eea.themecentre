@@ -127,8 +127,6 @@ point to the smart folders in the themecentre. Documents don't have a smart fold
 in themecentre so a document should get a link to themecentre/contentbytype?contenttype=<theme>
 
   >>> from eea.themecentre.interfaces import IThemeMoreLink
-  >>> IThemeMoreLink(self.folder.pr_link).url('agriculture')
-  'http://nohost/plone/to_be_promoted2/highlights/highlights_topic'
   >>> IThemeMoreLink(self.folder.event_link).url('agriculture')
   'http://nohost/plone/to_be_promoted2/events/events_topic'
   >>> IThemeMoreLink(self.folder.doc_link).url('agriculture')

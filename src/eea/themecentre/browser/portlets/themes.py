@@ -44,7 +44,7 @@ class ObjectThemesPortlet(BasePortlet):
                  'sort_limit': 3,
                  'Language': 'en'}
         result = catalog.searchResults(query)
-        
+
         # arrange the themes in the order they are stored on the object
         themes_dict = {}
         themes_sorted = []
