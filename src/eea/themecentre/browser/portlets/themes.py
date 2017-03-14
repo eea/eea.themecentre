@@ -41,7 +41,7 @@ class ObjectThemesPortlet(BasePortlet):
                  'review_state': 'published',
                  'sort_on': 'effective',
                  'sort_order': 'reverse',
-                 'sort_limit': 3,
+                 'sort_limit': self.size,
                  'Language': 'en'}
         result = catalog.searchResults(query)
 

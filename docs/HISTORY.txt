@@ -3,6 +3,8 @@ Changelog
 
 7.6.dev0 - (unreleased)
 -----------------------
+* Bug fix: Fix hard-coded size limit within themes viewlet
+  [avoinea refs #83219]
 * Cleanup: Remove un-necessary dependecies
   [avoinea refs #83219]
 
