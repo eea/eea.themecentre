@@ -14,9 +14,8 @@ from eea.themecentre.interfaces import IThemeCentreSchema
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
 try:
-    from Products.EEAPloneAdmin.browser import interfaces
-    IObjectTitle = interfaces.IObjectTitle
-except (ImportError, AttributeError):
+    from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
+except ImportError:
     class IObjectTitle(Interface):
         """ Fallback IObjectTitle """
 

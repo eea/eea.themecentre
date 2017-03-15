@@ -6,16 +6,14 @@ from eea.themecentre.themecentre import getTheme
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
 try:
-    from eea.promotion import interfaces as pinterfaces
-    IPromotion = pinterfaces.IPromotion
-except (ImportError, AttributeError):
+    from eea.promotion.interfaces import IPromotion
+except ImportError:
     class IPromotion(Interface):
         """ IPromotion """
 
 try:
-    from eea.mediacentre import interfaces as minterfaces
-    IVideo = minterfaces.IVideo
-except (ImportError, AttributeError):
+    from eea.mediacentre.interfaces import IVideo
+except ImportError:
     class IVideo(Interface):
         """ IVideo """
 

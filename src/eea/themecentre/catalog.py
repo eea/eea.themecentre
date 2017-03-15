@@ -5,9 +5,8 @@ from zope.interface import Interface
 from eea.themecentre.interfaces import IThemeTagging
 from plone.indexer.decorator import indexer
 try:
-    from eea.mediacentre import interfaces
-    IMediaType = interfaces.IMediaType
-except (ImportError, AttributeError):
+    from eea.mediacentre.interfaces import IMediaType
+except ImportError:
     class IMediaType(Interface):
         """ IMediaType """
 

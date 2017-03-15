@@ -6,9 +6,8 @@ from Products.CMFCore.utils import getToolByName
 from eea.themecentre.themecentre import getThemeCentre
 from eea.themecentre.interfaces import IThemeTagging
 try:
-    from Products.EEAContentTypes import interfaces
-    IRelations = interfaces.IRelations
-except (ImportError, AttributeError):
+    from Products.EEAContentTypes.interfaces import IRelations
+except ImportError:
     class IRelations(Interface):
         """ IRelations """
 

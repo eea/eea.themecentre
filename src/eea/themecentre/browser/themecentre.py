@@ -14,11 +14,9 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
 try:
-    from eea.mediacentre import mediacentre
-    MEDIA_SEARCH_KEY = mediacentre.MEDIA_SEARCH_KEY
-    from eea.mediacentre import interfaces
-    IMediaCentre = interfaces.IMediaCentre
-except (ImportError, AttributeError):
+    from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
+    from eea.mediacentre.interfaces import IMediaCentre
+except ImportError:
     MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
     class IMediaCentre(Interface):
         """ IMediaCentre """
