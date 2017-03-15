@@ -18,36 +18,33 @@ from zope.schema.interfaces import IVocabularyFactory
 KEY = 'eea.themecentre.themetaggable'
 
 
-def getMergedThemes(context, themes):
+def _getMergedThemes(context, themes):
     """ Get Merged Themes
     """
     if not themes:
-        return themes
+        return
 
     vocabularies = getToolByName(context, 'portal_vocabularies', None)
     root = None
     if vocabularies is not None:
         root = vocabularies.getVocabularyByName('themesmerged')
     if root is None:
-        return themes
+        return
 
-    extra_themes = []
-    synonyms = []
-    syn_objs = {}
-    for obj in root.objectValues():
-        theme = obj.Title()
-        synonyms.append(theme)
-        syn_objs[theme] = obj
-
+    synonyms = dict((term.Title(), term) for term in root.values())
     for theme in themes:
-        if theme in synonyms:
-            merged = syn_objs[theme]
-            for synonym in merged.objectValues():
-                synonym = synonym.Title()
-                if synonym not in themes and synonym not in extra_themes:
-                    extra_themes.append(synonym)
+        if theme not in synonyms:
+            yield theme
+            continue
 
-    return themes + extra_themes
+        for synonym in synonyms[theme].values():
+            yield synonym.Title()
+
+
+def getMergedThemes(context, themes):
+    """ Get Merged Themes
+    """
+    return [theme for theme in _getMergedThemes(context, themes)]
 
 
 def checkTheme(context, themes):

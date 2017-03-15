@@ -2,6 +2,20 @@
            xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="eea">
 
+  <!-- => 8.0 -->
+  <genericsetup:upgradeSteps
+    source="4.0"
+    destination="8.0"
+    profile="eea.themecentre:default">
+
+    <genericsetup:upgradeDepends
+      title="Import profile steps with changes: eea-themecentre-various"
+      import_steps="eea-themecentre-various"
+      />
+
+  </genericsetup:upgradeSteps>
+
+  <!-- => 4.0 -->
   <genericsetup:upgradeSteps source="*"
                              destination="4.0"
                              profile="eea.themecentre:default">

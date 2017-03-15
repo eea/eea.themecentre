@@ -72,7 +72,7 @@ class TestThemeCentre(EEAThemeCentreTestCase):
 
         res = self.portal.portal_catalog.searchResults(
                 getThemes=['air_quality'], portal_type='News Item')
-        self.assertEqual(len(res), 1)
+        self.assertEqual(len(res), 0)
         # only air is mapped to air_quality not the other way around
         res = self.portal.portal_catalog.searchResults(
                                                      getThemes=['air'],
