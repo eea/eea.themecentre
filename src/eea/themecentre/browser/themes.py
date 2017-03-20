@@ -7,6 +7,7 @@ from zope.formlib.form import Fields
 from eea.themecentre.interfaces import IThemeTagging
 from eea.themecentre.vocabulary import ThemesEditVocabularyFactory
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
+from Products.Five.browser import BrowserView
 
 class ThemesOrderedWidget(OrderedMultiSelectWidget):
     """ Widget showing the themes that are selected and available.
@@ -77,3 +78,10 @@ class ThemeEditForm(EditForm):
             self.form_fields['tags'].field.max_length = None
 
         return super(ThemeEditForm, self).__call__()
+
+class ThemeSyncVersions(BrowserView):
+    """ Sync old versions
+    """
+    def __call__(self, *args, **kwargs):
+        return "Not implemented yet"
+    

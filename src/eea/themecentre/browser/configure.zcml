@@ -5,6 +5,13 @@
 
   <browser:page
       for="eea.themecentre.interfaces.IThemeTaggable"
+      name="synchronize-version-themes"
+      permission="cmf.ModifyPortalContent"
+      class=".themes.ThemeSyncVersions"
+      />
+
+  <browser:page
+      for="eea.themecentre.interfaces.IThemeTaggable"
       name="themes_edit.html"
       permission="cmf.ModifyPortalContent"
       class=".themes.ThemeEditForm"
