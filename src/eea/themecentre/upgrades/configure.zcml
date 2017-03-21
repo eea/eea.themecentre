@@ -9,7 +9,7 @@
     profile="eea.themecentre:default">
 
     <genericsetup:upgradeDepends
-      title="Import profile steps with changes: eea-themecentre-various"
+      title="Import profile steps with changes: eea-themecentre-various actions"
       import_steps="eea-themecentre-various actions"
       />
 
