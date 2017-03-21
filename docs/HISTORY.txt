@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.0.dev0 - (unreleased)
------------------------
+8.0 - (2017-03-21)
+------------------
 * Feature: Add object action to manually sync older versions topics
   [avoinea refs #83219]
 * Change: Use `themesmerged` vocabulary as mapping for older and deprecated themes
