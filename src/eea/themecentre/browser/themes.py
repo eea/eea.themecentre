@@ -1,13 +1,23 @@
 """ Themes
 """
+import logging
 from Products.CMFCore.utils import getToolByName
 from five.formlib.formbase import EditForm
 from zope.app.form.browser.itemswidgets import OrderedMultiSelectWidget
 from zope.formlib.form import Fields
+from Products.statusmessages.interfaces import IStatusMessage
+from Products.Five.browser import BrowserView
 from eea.themecentre.interfaces import IThemeTagging
 from eea.themecentre.vocabulary import ThemesEditVocabularyFactory
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
-from Products.Five.browser import BrowserView
+
+try:
+    from eea.versions.interfaces import IVersionControl
+except ImportError:
+    IVersionControl = None
+
+logger = logging.getLogger("eea.themecentre")
+
 
 class ThemesOrderedWidget(OrderedMultiSelectWidget):
     """ Widget showing the themes that are selected and available.
@@ -61,6 +71,7 @@ class ThemesOrderedWidget(OrderedMultiSelectWidget):
         """
         return False
 
+
 class ThemeEditForm(EditForm):
     """ Form for editing themes.
     """
@@ -79,9 +90,82 @@ class ThemeEditForm(EditForm):
 
         return super(ThemeEditForm, self).__call__()
 
+
 class ThemeSyncVersions(BrowserView):
     """ Sync old versions
     """
+    def __init__(self, context, request):
+        super(ThemeSyncVersions, self).__init__(context, request)
+        self.ignore_states = ['marked_for_deletion']
+
+    def _redirect(self, msg, mtype="info"):
+        """ Redirect
+        """
+        if self.request:
+            url = self.context.absolute_url()
+            IStatusMessage(self.request).addStatusMessage(msg, type=mtype)
+            self.request.response.redirect(url)
+        return msg
+
+    def fixVersion(self, version):
+        """  Fix objects by version id
+        """
+        ctool = getToolByName(self.context, 'portal_catalog')
+        brains = ctool(getVersionId=version)
+        if len(brains) < 2:
+            return
+
+        try:
+            brains = sorted(brains, reverse=1, key=lambda b: max(
+                b.effective.asdatetime(), b.created.asdatetime()))
+        except Exception as err:
+            logger.exception(err)
+            return self._redirect("Couldn't synchronize older versions", "warn")
+
+        themes = None
+        state = None
+        for brain in brains:
+            try:
+                old_themes = brain.getThemes
+                old_state = brain.review_state
+            except Exception as err:
+                logger.exception(err)
+                continue
+
+            # Skip some revisions
+            if old_state in self.ignore_states:
+                continue
+
+            # Latest version state
+            if not state:
+                state = old_state
+
+            # Latest version themes
+            if not themes:
+                themes = old_themes
+                continue
+
+            # Nothing changed
+            if sorted(themes) == sorted(old_themes):
+                continue
+
+            try:
+                doc = brain.getObject()
+                IThemeTagging(doc).tags = themes
+                doc.reindexObject(idxs=["getThemes"])
+            except Exception as err:
+                logger.exception(err)
+
+        return self._redirect(
+            "Succesfully synchronized topics on older versions")
+
     def __call__(self, *args, **kwargs):
-        return "Not implemented yet"
-    
+        if not IVersionControl:
+            return self._redirect("eea.versions NOT installed", "warn")
+
+        try:
+            version = IVersionControl(self.context)
+            return self.fixVersion(version.getVersionId())
+        except Exception as err:
+            logger.exception(err)
+            return self._redirect("Couldn't synchronize older versions", "warn")
