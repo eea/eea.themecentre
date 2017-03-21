@@ -28,7 +28,10 @@ def _getMergedThemes(context, themes):
     root = None
     if vocabularies is not None:
         root = vocabularies.getVocabularyByName('themesmerged')
+
     if root is None:
+        for theme in themes:
+            yield theme
         return
 
     synonyms = dict((term.Title(), term) for term in root.values())
