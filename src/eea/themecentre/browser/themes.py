@@ -1,6 +1,8 @@
 """ Themes
 """
 import logging
+from DateTime import DateTime
+from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from five.formlib.formbase import EditForm
 from zope.app.form.browser.itemswidgets import OrderedMultiSelectWidget
@@ -155,9 +157,35 @@ class ThemeSyncVersions(BrowserView):
                 doc.reindexObject(idxs=["getThemes"])
             except Exception as err:
                 logger.exception(err)
+            else:
+                self.updateHistory(doc, themes, old_themes)
 
         return self._redirect(
             "Succesfully synchronized topics on older versions")
+
+    def updateHistory(self, obj, themes, old_themes):
+        """ Update obj workflow history)
+        """
+        wf = getToolByName(self.context, 'portal_workflow')
+        history = obj.workflow_history
+        review_state = wf.getInfoFor(obj, 'review_state', 'None')
+        actor = getSecurityManager().getUser().getId()
+        for key in history:
+            if 'linguaflow' in key:
+                continue
+            if 'BKUP' in key:
+                continue
+            msg = 'Sync Themes with latest version from "{a}" to "{b}"'.format(
+                a=', '.join(old_themes),
+                b=', '.join(themes)
+            )
+            history[key] += ({
+                'action': 'Synchronize',
+                'actor': actor,
+                'comments': msg,
+                'review_state': review_state,
+                'time': DateTime()
+            },)
 
     def __call__(self, *args, **kwargs):
         if not IVersionControl:
