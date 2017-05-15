@@ -3,18 +3,17 @@
 from unittest import TestSuite
 
 from zope.interface import classImplements
-
+from zope.annotation.attribute import AttributeAnnotations
+from zope.annotation.interfaces import IAnnotations
+from zope.component import provideAdapter
+from zope.component.hooks import setSite
+from zope.testing import doctest
 from Products.ATContentTypes.content.newsitem import ATNewsItem
 from Products.PloneTestCase.PloneTestCase import (
     default_user,
     default_password
 )
 from Testing.ZopeTestCase import FunctionalDocFileSuite
-from zope.annotation.attribute import AttributeAnnotations
-from zope.annotation.interfaces import IAnnotations
-from zope.component import provideAdapter
-from zope.component.hooks import setSite
-from zope.testing import doctest
 from eea.themecentre.interfaces import (
     IThemeTaggable,
     IThemeCentreSchema

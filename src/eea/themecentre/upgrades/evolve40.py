@@ -1,12 +1,12 @@
 """ Upgrade scripts for 4.0 version of this package
 """
+import logging
 import transaction
 from zope.interface import alsoProvides
 from Products.CMFCore.utils import getToolByName
+from Products.ZCatalog.ProgressHandler import ZLogHandler
 from plone.app.layout.navigation.interfaces import INavigationRoot
 
-import logging
-from Products.ZCatalog.ProgressHandler import ZLogHandler
 logger = logging.getLogger("eea.themecentre upgrades 4.0")
 
 def fix_themes_navigation(context):

@@ -1,8 +1,8 @@
 """ Themes view logic
 """
 from Products.Five import BrowserView
-from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Acquisition import aq_inner
 import DateTime
 
 

@@ -2,13 +2,13 @@
 """
 from zope.interface import implements
 from zope.component import adapts
-from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from zope.annotation.interfaces import IAnnotations
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
-from persistent.list import PersistentList
 from zope.event import notify
+from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.themetaggable import getMergedThemes
 from eea.themecentre.themetaggable import ThemeTaggable, KEY, checkTheme
+from persistent.list import PersistentList
 
 
 class ThemeTaggableMerged(ThemeTaggable):

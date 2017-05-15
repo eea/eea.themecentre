@@ -7,8 +7,8 @@ from eea.themecentre.themecentre import PromotedToThemeCentreEvent
 from eea.themecentre.themecentre import getThemeCentre
 from persistent.list import PersistentList
 from persistent.dict import PersistentDict
-from zope.annotation.interfaces import IAnnotations
 from Products.CMFCore.utils import getToolByName
+from zope.annotation.interfaces import IAnnotations
 from zope.component import adapts, getUtility
 from zope.event import notify
 from zope.interface import implements

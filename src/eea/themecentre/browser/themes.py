@@ -4,11 +4,11 @@ import logging
 from DateTime import DateTime
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
+from Products.statusmessages.interfaces import IStatusMessage
+from Products.Five.browser import BrowserView
 from five.formlib.formbase import EditForm
 from zope.app.form.browser.itemswidgets import OrderedMultiSelectWidget
 from zope.formlib.form import Fields
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.Five.browser import BrowserView
 from eea.themecentre.interfaces import IThemeTagging
 from eea.themecentre.vocabulary import ThemesEditVocabularyFactory
 from eea.themecentre.vocabulary import ThemesVocabularyFactory
