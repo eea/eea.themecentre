@@ -137,7 +137,7 @@ class ThemeCentreTaggable(object):
         """ Get tags
         """
         tags = IThemeTagging(self.context).tags
-        if len(tags) > 0:
+        if tags:
             return tags[0]
         return None
 

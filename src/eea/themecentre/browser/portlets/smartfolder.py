@@ -7,8 +7,10 @@ try:
     SFP = smartfolder.SmartFolderPortlets
 except (ImportError, AttributeError):
     from Products.Five.browser import BrowserView
+
     class SFP(BrowserView):
         """ Smart Folder Portlets """
+
 
 class SmartFolderPortlets(SFP):
     """ Smart Folder Portlets
@@ -18,8 +20,7 @@ class SmartFolderPortlets(SFP):
         themecentre = getThemeCentre(self.context)
         if themecentre is None:
             return []
-        else:
-            return self.portlets(themecentre)
+        return self.portlets(themecentre)
 
     def _sort_key(self, topic):
         """ Sort key of topic
@@ -31,10 +32,9 @@ class SmartFolderPortlets(SFP):
         elif tid == 'events_topic':
             # we want events at the end
             return "zzz"
-        else:
-            # all topics don't need to be hardcoded, for the rest we
-            # rely on the topic id for sorting
-            return tid
+        # all topics don't need to be hardcoded, for the rest we
+        # rely on the topic id for sorting
+        return tid
 
     def _title(self, topic):
         """ Returns harcoded titles if matched criteria otherwise default title

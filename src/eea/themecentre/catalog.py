@@ -2,13 +2,14 @@
 """
 from zope.component.interfaces import ComponentLookupError
 from zope.interface import Interface
-from eea.themecentre.interfaces import IThemeTagging
 from plone.indexer.decorator import indexer
 try:
     from eea.mediacentre.interfaces import IMediaType
 except ImportError:
     class IMediaType(Interface):
         """ IMediaType """
+from eea.themecentre.interfaces import IThemeTagging
+
 
 @indexer(Interface)
 def getThemesForIndex(obj, **kwargs):
@@ -23,6 +24,7 @@ def getThemesForIndex(obj, **kwargs):
 
         # The catalog expects AttributeErrors when a value can't be found
         raise AttributeError
+
 
 @indexer(Interface)
 def getMediaTypes(obj, **kwargs):

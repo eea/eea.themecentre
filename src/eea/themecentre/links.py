@@ -6,6 +6,7 @@ from eea.themecentre.themecentre import getThemeCentreByName
 from zope.component import adapts
 from zope.interface import Interface, implements
 
+
 class LinkAdapter(object):
     """ Link adapter """
     adapts(Interface)
@@ -42,10 +43,9 @@ class LinkAdapter(object):
         topic = self._find_topic()
         if topic:
             return topic.absolute_url()
-        else:
-            portal_type = self.context.portal_type
-            return self.themecentre.absolute_url() + \
-                   '/contentbytype?contenttype=' + portal_type
+        portal_type = self.context.portal_type
+        return self.themecentre.absolute_url() + \
+            '/contentbytype?contenttype=' + portal_type
 
 
 class MediaLink(LinkAdapter):

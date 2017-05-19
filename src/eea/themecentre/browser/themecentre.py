@@ -1,23 +1,26 @@
 """ Browser themecentre module
 """
+from DateTime import DateTime
+
 from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import alsoProvides, Interface
 from zope.component import queryUtility
 from zope.formlib.form import Fields
 from five.formlib.formbase import EditForm
+from Products.Five import BrowserView
+from Products.CMFCore.utils import getToolByName
+
 from eea.themecentre.interfaces import IThemeCentreSchema
 from eea.themecentre.interfaces import IThemeRelation
 from eea.themecentre.interfaces import IThemeCentre
 from eea.themecentre.themecentre import getTheme, getThemeTitle
 from eea.themecentre import eeaMessageFactory as _
-from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
-from DateTime import DateTime
 try:
     from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
     from eea.mediacentre.interfaces import IMediaCentre
 except ImportError:
     MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
+
     class IMediaCentre(Interface):
         """ IMediaCentre """
 
@@ -68,7 +71,7 @@ class Multimedia(object):
         vocab = vocab(self.context)
         # we have titles of single name so we add 's' and since we know it's in
         # english
-        types_ = [{'typeid': term.value, 'title': _(term.title+'s')}
+        types_ = [{'typeid': term.value, 'title': _(term.title + 's')}
                   for term in vocab if term.value != 'other']
         types_.append({'typeid': 'other', 'title': _(u'Other')})
         return types_
@@ -135,10 +138,9 @@ class ThemecentreUtils(BrowserView):
         name = getThemeTitle(self.context)
         if name:
             return name.capitalize()
-        else:
-            name = getThemeTitle(self.context.aq_inner.aq_parent)
-            name = [name.capitalize() if name else ''].pop()
-            return name
+        name = getThemeTitle(self.context.aq_inner.aq_parent)
+        name = [name.capitalize() if name else ''].pop()
+        return name
 
     def getThemeName(self):
         """ Get theme name of the context to construct the url to the

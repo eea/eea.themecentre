@@ -8,16 +8,17 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Acquisition import aq_parent, aq_base
-from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
-from eea.themecentre.interfaces import IThemeCentreSchema
-from eea.themecentre.interfaces import IThemeCentreImageUrl
-from eea.themecentre.vocabulary import ThemesVocabularyFactory
 try:
     from Products.EEAPloneAdmin.browser.interfaces import IObjectTitle
 except ImportError:
     class IObjectTitle(Interface):
         """ Fallback IObjectTitle """
+from Acquisition import aq_parent, aq_base
+
+from eea.themecentre.interfaces import IThemeTagging, IThemeCentre
+from eea.themecentre.interfaces import IThemeCentreSchema
+from eea.themecentre.interfaces import IThemeCentreImageUrl
+from eea.themecentre.vocabulary import ThemesVocabularyFactory
 
 RDF_THEME_KEY = 'eea.themecentre.rdf'
 
@@ -250,8 +251,7 @@ def getThemeCentre(context):
 
     if IThemeCentre.providedBy(context):
         return context
-    else:
-        return None
+    return None
 
 def getThemeCentreByName(name):
     """ Get Theme Centre by Name
@@ -322,5 +322,4 @@ def imageUrl(context):
     image = getattr(tc, 'theme_image', None)
     if image:
         return '%s/image_icon' % image.absolute_url()
-    else:
-        return ''
+    return ''

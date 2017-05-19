@@ -4,14 +4,14 @@ from unittest import TestSuite
 from zope.interface import alsoProvides
 from zope.testing import doctest
 from Testing.ZopeTestCase import FunctionalDocFileSuite
-from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
-from eea.themecentre.tests.base import EEAThemeCentreTestCase
 from Products.CMFCore.utils import getToolByName
 
 try:
     from eea.promotion import interfaces as HAS_PROMOTION
 except ImportError:
     HAS_PROMOTION = False
+from eea.themecentre.interfaces import IThemeCentre, IThemeCentreSchema
+from eea.themecentre.tests.base import EEAThemeCentreTestCase
 
 
 optionflags = (doctest.ELLIPSIS |

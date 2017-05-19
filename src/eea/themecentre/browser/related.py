@@ -3,13 +3,15 @@
 from zope.interface import Interface
 from zope.component import queryAdapter
 from Products.CMFCore.utils import getToolByName
-from eea.themecentre.themecentre import getThemeCentre
-from eea.themecentre.interfaces import IThemeTagging
+
 try:
     from Products.EEAContentTypes.interfaces import IRelations
 except ImportError:
     class IRelations(Interface):
         """ IRelations """
+
+from eea.themecentre.themecentre import getThemeCentre
+from eea.themecentre.interfaces import IThemeTagging
 
 # This is what is used in ZMI for navigation_sections_left and right
 TOPICS_ID = 'topics'
@@ -51,16 +53,18 @@ class Topics(object):
         if rel:
             related_brains = rel.byTheme(getBrains=True, constraints=query)
             # ignore the objects that are stored in the current themecentre
-            related_brains = [brain for brain in related_brains
+            related_brains = [
+                brain for brain in related_brains
                 if not brain.getURL().startswith(themecentre_url)]
         else:
             related_brains = []
 
         menu = []
         for brain in related_brains:
-            # check that the related object doesn't belong to a deprecated theme
+            # check that the related object doesn't belong
+            # to a deprecated theme
             themes = [theme for theme in brain.getThemes if theme not in tags]
-            if len(themes) > 0:
+            if themes:
                 wf_state = plone_utils.normalizeString(brain.review_state)
                 if brain.portal_type in view_actions:
                     url = brain.getURL() + '/view'

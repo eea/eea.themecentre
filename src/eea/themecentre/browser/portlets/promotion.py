@@ -2,7 +2,6 @@
 """
 from zope.interface import Interface
 from zope.component import queryAdapter
-from eea.themecentre.themecentre import getTheme
 from Products.CMFCore.utils import getToolByName
 from DateTime.DateTime import DateTime
 try:
@@ -16,6 +15,7 @@ try:
 except ImportError:
     class IVideo(Interface):
         """ IVideo """
+from eea.themecentre.themecentre import getTheme
 
 
 class ThemeCentreMenuPromotion(object):
