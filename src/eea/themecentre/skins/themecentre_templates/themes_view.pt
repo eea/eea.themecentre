@@ -18,7 +18,7 @@
             <dl class="portlet promo-nav-portlet" id="air-and-climate-megatopic"
                 tal:define="promo_title python:promo.keys()[0];
                             promo_list python:promo[promo_title];
-                            promo_url python:promo_list[0] if promo_list else [];
+                            promo_url python:promo_list[0][0] if promo_list else [];
                             promo_list python: promo_list[1:]"
                 tal:condition="promo_list">
                 <dd class="portletItem">
@@ -28,7 +28,7 @@
                     </div>
                     <ul class="">
                         <li tal:repeat="theme promo_list">
-                            <a tal:attributes="href python:theme[0]" tal:content="python:theme[1].Title">Air pollution</a></li>
+                        <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
                     </ul>
                 </dd>
             </dl>
@@ -38,3 +38,4 @@
 </div>
 </body>
 </html>
+

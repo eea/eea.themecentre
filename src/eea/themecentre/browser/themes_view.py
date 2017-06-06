@@ -41,14 +41,11 @@ class ThemesView(BrowserView):
             brains = tobj.queryCatalog()
             for brain in brains:
                 url = brain.getURL()
-                t = url, brain
                 # do not show expired content
                 if brain.expires <= now:
                     continue
-                if 'eea.promotion.interfaces.IPromoted' in \
-                    brain.object_provides:
-                    can_url = brain.getObject().getCanonical().absolute_url()
-                    ret_list.insert(0, can_url)
+                can_url = brain.getObject().getCanonical().absolute_url()
+                t = can_url, url, brain
                 ret_list.append(t)
             ret_themes.append(ret_dict)
 
@@ -108,3 +105,4 @@ class ThemesView(BrowserView):
             ret_themes.append(ret_list)
 
         return ret_themes
+
