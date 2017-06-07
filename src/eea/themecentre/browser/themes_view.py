@@ -105,4 +105,3 @@ class ThemesView(BrowserView):
             ret_themes.append(ret_list)
 
         return ret_themes
-
