@@ -19,15 +19,13 @@
                 tal:define="promo_title python:promo.keys()[0];
                             promo_list python:promo[promo_title];
                             promo_url python:promo_list[0][0] if promo_list else [];
-                            promo_list python: promo_list[1:]"
+                            "
                 tal:condition="promo_list">
                 <dd class="portletItem">
-                    <a tal:attributes="href promo_url">
                         <img  tal:attributes="title promo_title; src string:${promo_url}/theme_image/image_mini">
                         <div class="portletHeader" tal:content="python:context.translate(promo_title)">
                             Air and climate
                         </div>
-                    </a>
                     <ul class="">
                         <li tal:repeat="theme promo_list">
                         <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
