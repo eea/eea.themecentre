@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.6.dev0 - (unreleased)
------------------------
+8.6 - (2017-06-12)
+------------------
 * Bug fix: remove link from promo images and show links to the promoted themes
   that had images
   [ichim-david refs #85790]
