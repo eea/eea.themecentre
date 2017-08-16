@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.8.dev0 - (unreleased)
+-----------------------
+
 8.7 - (2017-08-16)
 ------------------
 * Bug fix W3C compliance modifications
