@@ -16,8 +16,8 @@
 
         <div class="visualClear"></div>
         <div class="documentDescription" i18n:translate="">
-            Reporting obligations are requirements to provide information agreed between countries and international bodies such as the EEA or international conventions. 
-            Reporting obligations provide the basis for most environmental information flows.  
+            Reporting obligations are requirements to provide information agreed between countries and international bodies such as the EEA or international conventions.
+            Reporting obligations provide the basis for most environmental information flows.
         </div>
         <h2 i18n:translate="">Reporting obligations related to data stored at EEA</h2>
         <table id="related-dc-rods" class="sortable listing">
@@ -33,20 +33,20 @@
              <td>
                 <h3><a href="" tal:attributes="href roditem/url" class="moreLink"><span tal:replace="roditem/Title">title</span></a>
                 <tal:terminated define="terminated python:rodsinfo[int(roditem['id'])]['TERMINATE']">
-                   <span tal:condition="python:terminated=='Y'">(TERMINATED)</span>
+                   <span tal:condition="python:terminated=='Y'" i18n:translate="">(TERMINATED)</span>
                 </tal:terminated>
                 </h3>
              <span tal:content="roditem/Description">description</span></td>
              <td tal:define="months python:rodsinfo[int(roditem['id'])]['REPORT_FREQ_MONTHS']">
                 <span tal:condition="python:months!='0' and months!=''" tal:replace="python:months+' months'"></span>
                 <span tal:condition="python:months==''" tal:content="python:rodsinfo[int(roditem['id'])]['NEXT_REPORTING']"></span>
-                <span tal:condition="python:months=='0'">One time only</span>
+                <span tal:condition="python:months=='0'" i18n:translate="">One time only</span>
              </td>
              <td tal:content="python:rodsinfo[int(roditem['id'])]['NEXT_DEADLINE']"></td>
         </tr>
         </tbody>
         </table>
-        
+
     </metal:main-macro>
     </div>
 </body>

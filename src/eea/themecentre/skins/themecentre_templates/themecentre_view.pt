@@ -18,7 +18,7 @@
         <div tal:replace="structure provider:plone.belowcontenttitle" />
         <p class="documentDescription">
            <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
-           <a tal:condition="python:context.has_key('intro')" class="internal-link moreLink" href="intro">More</a>
+           <a tal:condition="python:context.has_key('intro')" class="internal-link moreLink" href="intro" i18n:translate="">More</a>
         </p>
         <div class="visualClear"><!--&nbsp; --></div>
                     <!-- keyfacts slideshow-->
@@ -27,7 +27,7 @@
                             <div metal:use-macro="here/soer_frontpage/macros/keyfacts-slider">
                                 keyfacts
                             </div>
-                    </metal:keyfacts>   
+                    </metal:keyfacts>
 
         <div class="visualClear"><!--&nbsp; --></div>
 
