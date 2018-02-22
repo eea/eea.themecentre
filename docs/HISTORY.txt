@@ -3,6 +3,8 @@ Changelog
 
 8.9.dev0 - (unreleased)
 -----------------------
+* Change: fixed themes_view list link after css reorganization
+  [ichim-david refs #91590]
 
 8.8 - (2017-12-12)
 ------------------

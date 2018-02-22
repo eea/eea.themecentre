@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <div metal:fill-slot="main">
+    <div metal:fill-slot="main" class="content-core">
     <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
 
         <h1 tal:content="object_title" class="documentFirstHeading">
