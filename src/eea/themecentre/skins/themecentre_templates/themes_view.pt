@@ -21,7 +21,7 @@
                             promo_url python:promo_list[0][0] if promo_list else [];
                             "
                 tal:condition="promo_list">
-                <div class="portletItem">
+                <div>
                         <img tal:attributes="title promo_title; alt promo_title;
                             src string:${promo_url}/theme_image/image_mini">
                         <div class="portletHeader" tal:content="python:context.translate(promo_title)">

@@ -11,6 +11,10 @@ from Products.ATContentTypes.content.newsitem import ATNewsItem
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.mergedtheme import ThemeTaggableMerged
 from eea.themecentre.tests.base import EEAThemeCentreTestCase
+try:
+    from Products.CMFCore.indexing import processQueue
+except ImportError:
+    processQueue = lambda: 1
 
 
 class TestThemeCentre(EEAThemeCentreTestCase):
@@ -34,8 +38,8 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         themes = IThemeTagging(obj)
         themes.tags = ['agriculture']
         self.portal.portal_catalog.reindexObject(self.portal.news1)
-
         self.portal.portal_catalog.reindexObject(self.portal)
+        processQueue()
 
     def testSearchTheme(self):
         """ There should be one item with the 'agriculture' themes tag
@@ -68,6 +72,7 @@ class TestThemeCentre(EEAThemeCentreTestCase):
         themes = IThemeTagging(obj)
         themes.tags = ['air_quality']
         self.portal.portal_catalog.reindexObject(self.portal.news3)
+        processQueue()
 
         res = self.portal.portal_catalog.searchResults(
                 getThemes=['air_quality'], portal_type='News Item')
