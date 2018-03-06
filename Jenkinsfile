@@ -3,6 +3,7 @@ pipeline {
 
   environment {
         GIT_NAME = "eea.themecentre"
+        GIT_VERSIONFILE = "src/eea/themecentre/version.txt"
     }
 
   stages {
