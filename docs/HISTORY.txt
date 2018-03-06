@@ -1,8 +1,10 @@
 Changelog
 =========
 
-8.9.dev0 - (unreleased)
------------------------
+8.9 - (2018-03-05)
+------------------
+* Feature: Fix tests to work with Products.CMFCore >= 2.2.12
+  [avoinea refs #92869]
 * Change: fixed themes_view list link after css reorganization
   [ichim-david refs #91590]
 
