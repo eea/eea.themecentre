@@ -1,5 +1,9 @@
 Changelog
 =========
+9.0 - (unreleased)
+------------------
+* Bug fix: added dc_view.css used for dc_view template
+  [ichim-david refs #93914]
 
 8.9 - (2018-03-05)
 ------------------
