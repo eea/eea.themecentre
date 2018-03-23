@@ -40,5 +40,32 @@
 .progressbar-viewlet {
     display: none;
 }
+
+/* dc_view specific fixes */
+.faceted-search input[type="text"] {
+   padding: 5px;
+   min-width: 40%;
+}
+
+.faceted-search input[type="submit"] {
+   margin-left: -4px;
+}
+
+#promo-gallery-wrapper ul, #promo-gallery-content ul, #promo-gallery-content-sm ul {
+   list-style: none !important;
+}
+
+.content-core {
+   overflow: hidden;
+}
+#eea-versions-portlet {
+   clear: both;
+   margin-top: 1.5em;
+}
+
+.eea-accordion-panel .pane {
+    background-color: #FFF;
+}
 /* </dtml-let> */
 /* </dtml-with> */
+
