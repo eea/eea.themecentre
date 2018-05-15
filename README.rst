@@ -1,8 +1,12 @@
 ================
 EEA Theme Centre
 ================
-.. image:: http://ci.eionet.europa.eu/job/eea/job/eea.themecentre/job/master/badge/icon
-  :target: http://ci.eionet.europa.eu/job/eea/job/eea.themecentre/job/master/display/redirect
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.themecentre/develop
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.themecentre/job/develop/display/redirect
+  :alt: develop
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.themecentre/master
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.themecentre/job/master/display/redirect
+  :alt: master
 
 Theme Centre is a folder that contains content on a certain theme.
 

@@ -1,0 +1,71 @@
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-let xurl="portal_url().replace('https://', 'http://').replace('http://', '//')"> */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+/* used by dc_view and portlet_datacenter_overview */
+#theme-datacentre {
+    padding: 15px 0 25px 70px;
+    height: 56px;
+    background: transparent url('&dtml-xurl;/sprite-eeaimages.png') no-repeat -401px -469px;
+    display: block;
+    line-height: 1.3;
+    border: 0;
+}
+/* /used by dc_view and portlet_datacenter_overview */
+
+/*.template-facetednavigation_view .content-header,*/
+/*.template-datamaps_view .content-header,*/
+.content-header,
+.column-area {
+    padding: 1.5em;
+    background-color: &dtml-lightBackgroundColor;;
+}
+
+.content-header {
+    width: 100%;
+}
+
+/* 71710 dc_view transformations in order to have right-column area act like portal-column-two */
+.content-header,
+.column-area {
+    float: left;
+    padding-top: 0;
+}
+
+.content-header {
+    padding-top: 1.5em;
+    padding-bottom: 0;
+}
+
+.progressbar-viewlet {
+    display: none;
+}
+
+/* dc_view specific fixes */
+.faceted-search input[type="text"] {
+   padding: 5px;
+   min-width: 40%;
+}
+
+.faceted-search input[type="submit"] {
+   margin-left: -4px;
+}
+
+#promo-gallery-wrapper ul, #promo-gallery-content ul, #promo-gallery-content-sm ul {
+   list-style: none !important;
+}
+
+.content-core {
+   overflow: hidden;
+}
+#eea-versions-portlet {
+   clear: both;
+   margin-top: 1.5em;
+}
+
+.eea-accordion-panel .pane {
+    background-color: #FFF;
+}
+/* </dtml-let> */
+/* </dtml-with> */
+
