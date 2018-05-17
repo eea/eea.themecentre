@@ -1,5 +1,11 @@
 Changelog
 =========
+
+9.1 - (2018-05-17)
+-----------------------
+* Bug fix: Fix HISTORY.txt
+  [avoinea]
+
 9.0 - (2018-05-09)
 ------------------
 * Bug fix: added dc_view.css used for dc_view template
@@ -9,7 +15,7 @@ Changelog
 ------------------
 * Feature: Fix tests to work with Products.CMFCore >= 2.2.12
   [avoinea refs #92869]
-* Change: fixed themes_view list link after css reorganization 
+* Change: fixed themes_view list link after css reorganization
   [ichim-david refs #91590]
 
 8.8 - (2017-12-12)
@@ -417,4 +423,3 @@ Changelog
 ------------------
 * Fixed bug where modifications to themes were not copied to translations
   [thuliper #2587]
-
