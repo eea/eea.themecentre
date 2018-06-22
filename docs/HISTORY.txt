@@ -1,6 +1,11 @@
 Changelog
 =========
 
+9.2 - (2018-06-20)
+---------------------
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
+
 9.1 - (2018-05-17)
 -----------------------
 * Bug fix: Fix HISTORY.txt

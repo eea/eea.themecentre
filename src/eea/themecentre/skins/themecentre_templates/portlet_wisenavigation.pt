@@ -35,7 +35,7 @@
             </li>
 
             <li>
-                <a href="#" class="" tal:attributes="href string:http://www.eea.europa.eu/themes/water/" i18n:translate="">Themes and data</a>
+                <a href="#" class="" tal:attributes="href string:https://www.eea.europa.eu/themes/water/" i18n:translate="">Themes and data</a>
             </li>
 
             <li>
@@ -43,7 +43,7 @@
             </li>
 
             <li>
-                <a href="#" class="" tal:attributes="href string:http://water.europa.eu/links" i18n:translate="">Links</a>
+                <a href="#" class="" tal:attributes="href string:https://water.europa.eu/links" i18n:translate="">Links</a>
             </li>
 
        </ul>
