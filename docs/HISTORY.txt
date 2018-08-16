@@ -3,6 +3,8 @@ Changelog
 
 9.3-dev0 - (unreleased)
 ---------------------
+* Bug fix: fixed templates display title for Folder
+  [alecghica refs #97573]
 
 9.2 - (2018-06-20)
 ---------------------
