@@ -3,6 +3,8 @@ Changelog
 
 9.4-dev0 - (unreleased)
 ---------------------
+* Bug fix: updated URL to rod.eionet.europa.eu/rpcrouter
+  [alecghica refs #101332]
 
 9.3 - (2018-08-17)
 ---------------------

@@ -9,7 +9,7 @@ from Products.CMFCore.utils import getToolByName
 # from eea.dataservice.config import ROD_SERVER, SOCKET_TIMEOUT
 from eea.themecentre.themecentre import getTheme
 
-ROD_SERVER = 'http://rod.eionet.europa.eu/rpcrouter'
+ROD_SERVER = 'https://rod.eionet.europa.eu/rpcrouter'
 SOCKET_TIMEOUT = 2.0  # in seconds
 logger = logging.getLogger('eea.themecentre.datareporting')
 
