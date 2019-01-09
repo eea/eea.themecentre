@@ -1,6 +1,11 @@
 Changelog
 =========
 
+9.4 - (2019-01-09)
+---------------------
+* Bug fix: updated URL to rod.eionet.europa.eu/rpcrouter
+  [alecghica refs #101332]
+
 9.3 - (2018-08-17)
 ---------------------
 * Bug fix: fixed templates display title for Folder
