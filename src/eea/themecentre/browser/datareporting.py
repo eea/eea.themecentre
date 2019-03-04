@@ -1,12 +1,9 @@
 """ Data reporting
 """
 import logging
-
 import eventlet
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-
-# from eea.dataservice.config import ROD_SERVER, SOCKET_TIMEOUT
 from eea.themecentre.themecentre import getTheme
 
 ROD_SERVER = 'https://rod.eionet.europa.eu/rpcrouter'
@@ -62,12 +59,22 @@ class DataCentreReporting(object):
             reso = res.getObject()
             for rodid in reso.reportingObligations:
                 if rodid not in rodsdone:
+
+                    try:
+                        rodinfo = rodsinfo[int(rodid)]
+                    except KeyError, err:
+                        # Obligation not found
+                        logger.exception(err)
+                        continue
+
                     rodsdone.append(rodid)
                     rodurl = rodbaseurl + rodid
+                    roddescription = rodinfo['DESCRIPTION']
+                    rodtitle = rodinfo['TITLE']
                     rods.append({
                         'id': rodid,
-                        'Description': rodsinfo[int(rodid)]['DESCRIPTION'],
-                        'Title': rodsinfo[int(rodid)]['TITLE'],
+                        'Description': roddescription,
+                        'Title': rodtitle,
                         'url': rodurl,
                         'absolute_url': rodurl,
                     })

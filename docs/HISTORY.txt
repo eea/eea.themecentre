@@ -3,6 +3,9 @@ Changelog
 
 9.6-dev0 - (unreleased)
 ---------------------
+* Bug fix: fixed error on "Countries data reporting — related reporting obligations" page
+  for certain topics.
+  [alecghica refs #102898]
 
 9.5 - (2019-01-28)
 ---------------------
