@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.6-dev0 - (unreleased)
+9.6 - (2019-03-04)
 ---------------------
 * Bug fix: fixed error on "Countries data reporting — related reporting obligations" page
   for certain topics.
