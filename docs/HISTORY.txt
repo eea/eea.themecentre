@@ -1,6 +1,12 @@
 Changelog
 =========
 
+9.6 - (2019-03-04)
+---------------------
+* Bug fix: fixed error on "Countries data reporting — related reporting obligations" page
+  for certain topics.
+  [alecghica refs #102898]
+
 9.5 - (2019-01-28)
 ---------------------
 * Jenkins: Add sonarqube step
