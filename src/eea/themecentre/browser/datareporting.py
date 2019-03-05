@@ -71,7 +71,7 @@ class DataCentreReporting(object):
                     rodurl = rodbaseurl + rodid
                     rods.append({
                         'id': rodid,
-                        'Description': rodinfo,get('DESCRIPTION', ''),
+                        'Description': rodinfo.get('DESCRIPTION', ''),
                         'Title': rodinfo.get('TITLE', ''),
                         'url': rodurl,
                         'absolute_url': rodurl,
