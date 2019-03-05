@@ -64,17 +64,15 @@ class DataCentreReporting(object):
                         rodinfo = rodsinfo[int(rodid)]
                     except KeyError, err:
                         # Obligation not found
-                        logger.exception(err)
+                        logger.warn(err)
                         continue
 
                     rodsdone.append(rodid)
                     rodurl = rodbaseurl + rodid
-                    roddescription = rodinfo['DESCRIPTION']
-                    rodtitle = rodinfo['TITLE']
                     rods.append({
                         'id': rodid,
-                        'Description': roddescription,
-                        'Title': rodtitle,
+                        'Description': rodinfo,get('DESCRIPTION', ''),
+                        'Title': rodinfo.get('TITLE', ''),
                         'url': rodurl,
                         'absolute_url': rodurl,
                     })
