@@ -4,6 +4,12 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
 import DateTime
+from eea.themecentre.themecentre import getTheme
+
+try:
+    from eea.promotion import interfaces as HAS_PROMOTION
+except ImportError:
+    HAS_PROMOTION = False
 
 
 class ThemesView(BrowserView):
@@ -105,3 +111,46 @@ class ThemesView(BrowserView):
             ret_themes.append(ret_list)
 
         return ret_themes
+
+    def getThemeIndexPromotions(self, noOfItems=3):
+        """ utility function to retrieve external and internal promotions """
+        if not HAS_PROMOTION:
+            return
+        query = {
+            'object_provides': {
+                'query': [
+                    'eea.promotion.interfaces.IPromoted',
+                    'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
+                ],
+                'operator': 'or',
+            },
+            'review_state': 'published',
+            'sort_on': 'effective',
+            'sort_order': 'reverse'
+        }
+
+        context = self.context.aq_inner
+        catalog = getToolByName(context, 'portal_catalog')
+        result = catalog(query)
+        cPromos = []
+        for brain in result:
+            obj = brain.getObject()
+            promo = HAS_PROMOTION.IPromotion(obj)
+            if not getattr(promo, 'display_in_topics_index_page', None):
+                continue
+            if not promo.active:
+                continue
+            themes_object = obj.restrictedTraverse('@@themes-object', None)
+            themes = {}
+            if themes_object:
+                themes = themes_object.short_items()
+
+            promo_versionIds = [b[0].getVersionId for b in cPromos]
+            # Add to promo list if we do not already have a newer version of this
+            # versionId in the promo list
+            if not brain.getVersionId in promo_versionIds:
+                cPromos.append((brain, themes))
+            if len(cPromos) == noOfItems:
+                break
+        return cPromos
+
