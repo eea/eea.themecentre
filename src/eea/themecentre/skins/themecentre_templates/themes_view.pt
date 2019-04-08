@@ -39,29 +39,34 @@
 
     <div class="eea-tiles">
         <div class="eea-tile" tal:repeat="promo_list view/getThemeIndexPromotions">
-
+            <div class="eea-tileInner">
             <tal:defines tal:define="promo python:promo_list[0]; themes python: promo_list[1]">
-                <a href="#" tal:attributes="href promo/getURL"  class="eea-tileInner">
+                <a href="#" tal:attributes="href promo/getURL"  class="eea-tileLink">
                     <div class="eea-tileHead">
                         <div class="eea-tileThumb">
                             <img src="#" alt="Title" tal:attributes="src string:${promo/getURL}/image_preview;">
                         </div>
                     </div>
+                </a>
                     <div class="eea-tileBody">
-                        <h2 class="eea-tileTitle" tal:content="promo/Title">Title</h2>
-                        <div class="eea-tileDescription" tal:content="promo/Description">Description
-                        </div>
+                        <a href="#" tal:attributes="href promo/getURL"  class="eea-tileLink">
+                            <h2 class="eea-tileTitle" tal:content="promo/Title">Title</h2>
+                            <div class="eea-tileDescription" tal:content="promo/Description">Description
+                            </div>
+                        </a>
                         <div class="eea-tileMetadata">
-                            <div class="eea-tileTopic" tal:repeat="theme themes">
-                                <em href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink">Theme topic</em>
+                            <div class="eea-tileTopic" >
+                                <tal:topics tal:repeat="theme themes">
+                                    <a href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink eea-btn eea-btn-light">Theme topic</a>
+                                </tal:topics>
                             </div>
 
                             <time  tal:attributes="datetime promo/EffectiveDate" class="eea-tileIssued" tal:content="python: toLocalizedTime(promo.effective)">26 Mar 2019
                             </time>
                         </div>
                     </div>
-                </a>
             </tal:defines>
+        </div>
         </div>
     </div>
 
