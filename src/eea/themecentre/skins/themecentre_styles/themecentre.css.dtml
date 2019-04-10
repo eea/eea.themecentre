@@ -100,6 +100,28 @@ width:47%;
 .section-themes .filter-topic {
     display: none;
 }
+
+#editors-choice {
+    padding-top: 50px;
+    position: relative;
+}
+@media (min-width: 1200px) {
+    #editors-choice:before {
+        background-color: &dtml-greyBackgroundColor;;
+        content: " ";
+        display: block;
+        height: 350px;
+        overflow: visible;
+        position: absolute;
+        top: 0;
+        transform: translateX(calc((82.5em - 100vw) / 2));
+        width: 100vw;
+        z-index: -1;
+        border-width: 1px 0 1px 0;
+        border-color: &dtml-mediumBackgroundColor;;
+        border-style: solid;
+    }
+}
 /* YOUR CSS RULES STOP HERE */
 
 /* </dtml-with> */
