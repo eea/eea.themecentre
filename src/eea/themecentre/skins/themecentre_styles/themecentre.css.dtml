@@ -102,19 +102,20 @@ width:47%;
 }
 
 #editors-choice {
-    padding-top: 50px;
+    padding-top: 40px;
     position: relative;
+    clear: both;
 }
-@media (min-width: 1200px) {
-    #editors-choice:before {
+@media screen and (min-width: 1200px) {
+    #editors-choice::before {
         background-color: &dtml-greyBackgroundColor;;
         content: " ";
         display: block;
         height: 350px;
+        margin-left: calc(50% - 50vw);
         overflow: visible;
         position: absolute;
         top: 0;
-        transform: translateX(calc((82.5em - 100vw) / 2));
         width: 100vw;
         z-index: -1;
         border-width: 1px 0 1px 0;
