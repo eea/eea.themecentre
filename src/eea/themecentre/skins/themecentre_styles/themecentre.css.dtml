@@ -101,6 +101,40 @@ width:47%;
     display: none;
 }
 
+.eea-input-box {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.eea-input-submit {
+    background: none;
+    border: 0;
+    color: #ccc;
+    cursor: pointer;
+    margin-left: -5.5em;
+    outline: none;
+    padding: 1em;
+}
+.eea-icon-submit-icon {
+    font-size: 2.5em;
+}
+
+.eea-input-query {
+    box-shadow: 0 4px 3px -1px rgba(0,0,0,.2);
+    background-color: white;
+    border-radius: 50px;
+    font-size: 200%;
+    padding: 0.5em 1.5em;
+    width: 80%;
+}
+.eea-input-box .autocomplete-items {
+    text-align: left;
+    width: 72%;
+    margin-left: 3em;
+}
+
 #editors-choice {
     padding-top: 40px;
     position: relative;

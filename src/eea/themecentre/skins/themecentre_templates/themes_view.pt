@@ -36,7 +36,23 @@
         </div>
     </div>
 </div>
+    <section id="topics-search" tal:define="
+            search_apps string:${context/portal_url}/eea-custom-search;
+            action python:search_apps;
+            tags string:${context/portal_url}/eea-custom-search.tags">
 
+            <form method="get" class="gsc-search-box gsc-search-box-tools" tal:attributes="action action" autocomplete="off">
+                <div class="eea-input-box">
+                    <input type="text" name="q" class="gsc-input-query eea-input-query" tal:attributes="
+                            placeholder python:'Search topics';
+                            data-tags-url tags" />
+                    <button class="eea-input-submit">
+                        <span class="eea-icon eea-icon-search eea-icon-marginless eea-icon-submit-icon"></span>
+                    </button>
+                    <input name="source" type="hidden"><div class="autocomplete-items eea-input-autocomplete"></div>
+                </div>
+            </form>
+    </section>
 <section id="editors-choice">
     <h1 i18n:translate="" class="h1">Editor's choice</h1>
     <div class="eea-tiles">
@@ -54,7 +70,7 @@
                       </div>
                       </a>
                       <div class="eea-tileBody">
-                      <a href="#" tal:attributes="href url"  class="eea-tileLink">
+                      <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileLinkBody">
                       <h2 class="eea-tileTitle" tal:content="title">Title</h2>
                       <div class="eea-tileDescription" tal:content="promo/Description">Description
                       </div>
