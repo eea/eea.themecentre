@@ -102,10 +102,11 @@ width:47%;
 }
 
 .eea-input-box {
-    text-align: center;
-    display: flex;
     align-items: center;
+    display: flex;
+    justify-content: center;
     position: relative;
+    text-align: center;
 }
 
 .eea-input-submit {
