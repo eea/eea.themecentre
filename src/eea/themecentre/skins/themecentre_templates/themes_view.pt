@@ -13,35 +13,13 @@
 
 <div id="top-news-area">
 
-    <div id="megatopics-area">
-        <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
-            <div class="portlet promo-nav-portlet"
-                tal:define="promo_title python:promo.keys()[0];
-                            promo_list python:promo[promo_title];
-                            promo_url python:promo_list[0][0] if promo_list else [];
-                            "
-                tal:condition="promo_list">
-                <div>
-                        <img tal:attributes="title promo_title; alt promo_title;
-                            src string:${promo_url}/theme_image/image_mini">
-                        <div class="portletHeader" tal:content="python:context.translate(promo_title)">
-                            Air and climate
-                        </div>
-                    <ul class="">
-                        <li tal:repeat="theme promo_list">
-                        <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
     <section id="topics-search" tal:define="
             search_apps string:${context/portal_url}/eea-custom-search;
             action python:search_apps;
             tags string:${context/portal_url}/eea-custom-search.tags">
 
-            <form method="get" class="gsc-search-box gsc-search-box-tools" tal:attributes="action action" autocomplete="off">
+            <form method="get" class="gsc-search-box gsc-search-box-tools eea-input-form" tal:attributes="action action" autocomplete="off">
                 <div class="eea-input-box">
                     <input type="text" name="q" class="gsc-input-query eea-input-query" tal:attributes="
                             placeholder python:'Search topics';
@@ -52,6 +30,43 @@
                     <input name="source" type="hidden"><div class="autocomplete-items eea-input-autocomplete"></div>
                 </div>
             </form>
+
+
+        <div id="themes-megatopics-area">
+            <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
+                <div class="promo-nav-portlet"
+                         tal:define="promo_title python:promo.keys()[0];
+                                promo_list python:promo[promo_title];
+                                        promo_url python:promo_list[0][0] if promo_list else [];
+                                "
+                         tal:condition="promo_list">
+                        <div class="portletHeader" tal:content="python:context.translate(promo_title)">
+                            Air and climate
+                        </div>
+
+                        <tal:mainthemes tal:repeat="theme promo_list">
+                            <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
+                                    folders themecentre_view/getSubtopics;">
+                           <h2 class="eea-header-plain" tal:condition="python:not folders">
+                               <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                           </h2>
+                                <ul class="eea-no-list-style" tal:condition="folders">
+                                    <li>
+                                        <h3 class="eea-list-header mb-0" tal:attributes="id python: theme[2].id">
+                                            <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                        </h3>
+                                    </li>
+                                    <li tal:repeat="folder folders">
+                                        <a tal:attributes="href folder/getURL; title folder/Title;"
+                                                 tal:content="folder/Title">Folder links</a>
+                                    </li>
+                                </ul>
+                            </tal:subtopics>
+                        </tal:mainthemes>
+                </div>
+            </div>
+        </div>
+
     </section>
 <section id="editors-choice">
     <h1 i18n:translate="" class="h1">Editor's choice</h1>
