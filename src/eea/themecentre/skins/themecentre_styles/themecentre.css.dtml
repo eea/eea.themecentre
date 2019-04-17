@@ -108,11 +108,11 @@ width:47%;
 
 #themes-megatopics-area {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -&dtml-padding-base;;
     padding-top: 1.5em;
     position: relative;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 0 -&dtml-padding-base;;
 }
 
 #themes-megatopics-area .portletHeader {
@@ -131,44 +131,41 @@ width:47%;
 @media screen and (min-width: 900px) {
     #themes-megatopics-area:before,
     #themes-megatopics-area:after {
+        border-top: 1px solid &dtml-globalBorderColor;;
         content: ' ';
         display: block;
-        position: absolute;
-        width: 100vw;
-        border-top: 1px solid &dtml-globalBorderColor;;
         margin-left: calc(50% - 50vw);
+        position: absolute;
         top: 0;
+        width: 100vw;
     }
 
     #themes-megatopics-area:after {
         box-shadow: 0 1px 2px 0 &dtml-globalBorderColor;;
     }
     #themes-megatopics-area:after {
-        top: 8%;
         left: 0;
+        top: 8%;
     }
 
 }
 
 #themes-megatopics-area .portlet-megatopic {
-    white-space: normal;
-    padding: 0 &dtml-padding-base;;
     flex-direction: column;
+    padding: 0 &dtml-padding-base;;
+    white-space: normal;
 }
 
 /* 102564 IE11 hack as the hiddenStructure without display will count
 * for justify-content: space-between since it doesn't support clip-path */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     #themes-megatopics-area .portlet-megatopic {
-        width: 225px;
         flex: auto;
+        width: 225px;
     }
 
     #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
         width: 285px;
-    }
-    .autocomplete-items {
-        left: 11% !important;
     }
     /* input within IE appends an x on right of input which overlaps our search icon */
     input[type=text]::-ms-clear {
@@ -182,9 +179,7 @@ width:47%;
 .eea-input-box {
     align-items: center;
     display: flex;
-    justify-content: center;
     position: relative;
-    text-align: center;
 }
 
 .eea-input-submit {
@@ -201,27 +196,42 @@ width:47%;
 }
 
 .eea-input-query {
-    box-shadow: 0 4px 3px -1px rgba(0,0,0,.2);
     background-color: white;
-    border-radius: 50px;
-    font-size: 200%;
+    box-shadow: 0 4px 3px -1px rgba(0,0,0,.2);
+    font-size: 150%;
     padding: 0.5em 1.5em;
-    width: 80%;
-}
-.eea-input-box .autocomplete-items {
-    text-align: left;
-    width: 72%;
-    margin-left: 3em;
+    width: 100%;
 }
 
 #editors-choice {
+    clear: both;
     padding-top: 40px;
     position: relative;
-    clear: both;
+}
+
+@media screen and (min-width: 861px) {
+    .eea-input-box {
+        justify-content: center;
+        text-align: center;
+    }
+    .eea-input-query {
+        border-radius: 50px;
+        font-size: 200%;
+        width: 80%;
+    }
+    .eea-input-box .autocomplete-items {
+        left: 2%;
+        margin: 0 auto;
+        text-align: left;
+        width: 72%;
+    }
 }
 @media screen and (min-width: 1200px) {
     #editors-choice::before {
         background-color: &dtml-greyBackgroundColor;;
+        border-color: &dtml-mediumBackgroundColor;;
+        border-style: solid;
+        border-width: 1px 0 1px 0;
         content: " ";
         display: block;
         height: 350px;
@@ -231,9 +241,6 @@ width:47%;
         top: 0;
         width: 100vw;
         z-index: -1;
-        border-width: 1px 0 1px 0;
-        border-color: &dtml-mediumBackgroundColor;;
-        border-style: solid;
     }
 }
 /* YOUR CSS RULES STOP HERE */
