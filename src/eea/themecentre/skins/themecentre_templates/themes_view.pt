@@ -34,7 +34,7 @@
 
         <div id="themes-megatopics-area">
             <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
-                <div class="promo-nav-portlet"
+                <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
                                 promo_list python:promo[promo_title];
                                         promo_url python:promo_list[0][0] if promo_list else [];
@@ -63,7 +63,7 @@
                                 </ul>
                             </tal:subtopics>
                         </tal:mainthemes>
-                </div>
+            </tal:defines>
             </div>
         </div>
 

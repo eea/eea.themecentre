@@ -144,7 +144,8 @@ width:47%;
         box-shadow: 0 1px 2px 0 &dtml-globalBorderColor;;
     }
     #themes-megatopics-area:after {
-        top: 9%;
+        top: 8%;
+        left: 0;
     }
 
 }
@@ -152,6 +153,27 @@ width:47%;
 #themes-megatopics-area .portlet-megatopic {
     white-space: normal;
     padding: 0 &dtml-padding-base;;
+    flex-direction: column;
+}
+
+/* 102564 IE11 hack as the hiddenStructure without display will count
+* for justify-content: space-between since it doesn't support clip-path */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    #themes-megatopics-area .portlet-megatopic {
+        width: 225px;
+        flex: auto;
+    }
+
+    #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
+        width: 285px;
+    }
+    .autocomplete-items {
+        left: 11% !important;
+    }
+    /* input within IE appends an x on right of input which overlaps our search icon */
+    input[type=text]::-ms-clear {
+        display: none;
+    }
 }
 
 .eea-input-form {
