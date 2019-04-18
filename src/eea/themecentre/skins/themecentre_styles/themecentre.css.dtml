@@ -108,6 +108,7 @@ width:47%;
 }
 #topics-search {
     margin-bottom: &dtml-padding-double;;
+    position: relative;
 }
 
 #themes-megatopics-area {
@@ -184,11 +185,11 @@ width:47%;
     border: 0;
     outline: none;
 }
-.eea-input-box {
-    align-items: center;
-    display: flex;
-    position: relative;
-}
+/*.eea-input-box {*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    position: relative;*/
+/*}*/
 
 .eea-input-submit {
     background: none;
@@ -219,20 +220,19 @@ width:47%;
 }
 
 @media screen and (min-width: 861px) {
-    .eea-input-box {
-        justify-content: center;
-        text-align: center;
+    .eea-input-form {
+        width: 80%;
+        margin: 0 auto;
     }
     .eea-input-query {
         border-radius: 50px;
         font-size: 200%;
-        /*width: 80%;*/
     }
-    .eea-input-box .autocomplete-items {
-        left: 2%;
+    #topics-search .autocomplete-items {
+        left: 0;
         margin: 0 auto;
         text-align: left;
-        width: 72%;
+        width: 90%;
     }
 }
 @media screen and (min-width: 1200px) {

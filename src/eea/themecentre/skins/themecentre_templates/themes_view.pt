@@ -16,25 +16,14 @@
 </div>
     <section id="topics-search" tal:define="
             search_apps string:${context/portal_url}/eea-custom-search;
-            action python:search_apps;
+            custom_action python:search_apps;
             use_search_links python:False;
             search_button_class string:eea-input-submit;
-            search_input_class string:eea-input-query;
+            search_input_class string:js-gsc-input-query eea-input-query;
             search_input_placeholder_text string:Search topics;
+            search_form_class string:eea-input-form;
             tags string:${context/portal_url}/eea-custom-search.tags">
             <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
-            <form method="get" class="gsc-search-box gsc-search-box-tools eea-input-form" tal:attributes="action action" autocomplete="off">
-                <div class="eea-input-box">
-                    <input type="text" name="q" class="gsc-input-query eea-input-query" tal:attributes="
-                            placeholder python:'Search topics';
-                            data-tags-url tags" />
-                    <button class="eea-input-submit">
-                        <span class="eea-icon eea-icon-search eea-icon-marginless eea-icon-submit-icon"></span>
-                    </button>
-                    <input name="source" type="hidden"><div class="autocomplete-items eea-input-autocomplete"></div>
-                </div>
-            </form>
-
 
         <div id="themes-megatopics-area">
             <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
