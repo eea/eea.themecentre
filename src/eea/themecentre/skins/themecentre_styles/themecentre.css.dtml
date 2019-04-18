@@ -102,6 +102,10 @@ width:47%;
 }
 
 /* #104467 theme view redesign */
+#content-core .gsc-search-box {
+    display: table;
+    overflow: visible;
+}
 #topics-search {
     margin-bottom: &dtml-padding-double;;
 }
@@ -145,7 +149,7 @@ width:47%;
     }
     #themes-megatopics-area:after {
         left: 0;
-        top: 8%;
+        top: 5.35em;
     }
 
 }
@@ -176,6 +180,10 @@ width:47%;
 .eea-input-form {
     margin-bottom: 2em;
 }
+#topics-search .gsc-input {
+    border: 0;
+    outline: none;
+}
 .eea-input-box {
     align-items: center;
     display: flex;
@@ -187,11 +195,11 @@ width:47%;
     border: 0;
     color: #ccc;
     cursor: pointer;
-    margin-left: -5.5em;
+    margin-left: -6.5em;
     outline: none;
     padding: 1em;
 }
-.eea-icon-submit-icon {
+.eea-input-submit .eea-icon-search {
     font-size: 2.5em;
 }
 
@@ -201,6 +209,7 @@ width:47%;
     font-size: 150%;
     padding: 0.5em 1.5em;
     width: 100%;
+    outline: none;
 }
 
 #editors-choice {
@@ -217,7 +226,7 @@ width:47%;
     .eea-input-query {
         border-radius: 50px;
         font-size: 200%;
-        width: 80%;
+        /*width: 80%;*/
     }
     .eea-input-box .autocomplete-items {
         left: 2%;

@@ -17,8 +17,12 @@
     <section id="topics-search" tal:define="
             search_apps string:${context/portal_url}/eea-custom-search;
             action python:search_apps;
+            use_search_links python:False;
+            search_button_class string:eea-input-submit;
+            search_input_class string:eea-input-query;
+            search_input_placeholder_text string:Search topics;
             tags string:${context/portal_url}/eea-custom-search.tags">
-
+            <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
             <form method="get" class="gsc-search-box gsc-search-box-tools eea-input-form" tal:attributes="action action" autocomplete="off">
                 <div class="eea-input-box">
                     <input type="text" name="q" class="gsc-input-query eea-input-query" tal:attributes="
