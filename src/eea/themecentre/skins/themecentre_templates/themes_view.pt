@@ -22,41 +22,55 @@
             search_input_class string:js-gsc-input-query eea-input-query;
             search_input_placeholder_text string:Search topics;
             search_form_class string:eea-input-form;
+            lang lang|here/Language|string:en;
+            is_en python:lang in ('en', '');
             tags string:${context/portal_url}/eea-custom-search.tags">
             <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
 
         <div id="themes-megatopics-area">
-            <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
+            <div class="eea-accordion-panels">
+            <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo view/getPromotions">
                 <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
                                 promo_list python:promo[promo_title];
                                         promo_url python:promo_list[0][0] if promo_list else [];
                                 "
                          tal:condition="promo_list">
-                        <div class="portletHeader" tal:content="python:context.translate(promo_title)">
+                        <div class="promoHeader eea-accordion-title notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
                             Air and climate
                         </div>
 
+                    <tal:others tal:condition="not:is_en">
+                        <div class="pane">
+                            <ul class="eea-no-list-style">
+                                <li tal:repeat="theme promo_list">
+                                    <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
+                            </ul>
+                        </div>
+                    </tal:others>
+                    <tal:english tal:condition="is_en">
                         <tal:mainthemes tal:repeat="theme promo_list">
                             <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
                                     folders themecentre_view/getSubtopics;">
-                           <h2 class="eea-header-plain" tal:condition="python:not folders">
-                               <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
-                           </h2>
-                                <ul class="eea-no-list-style" tal:condition="folders">
-                                    <li>
-                                        <h3 class="eea-list-header mb-0" tal:attributes="id python: theme[2].id">
-                                            <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
-                                        </h3>
-                                    </li>
-                                    <li tal:repeat="folder folders">
-                                        <a tal:attributes="href folder/getURL; title folder/Title;"
-                                                 tal:content="folder/Title">Folder links</a>
-                                    </li>
-                                </ul>
+                                    <h3 class="h2 no-anchor eea-header-plain ma-0" tal:condition="python:not folders">
+                                        <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                    </h3>
+                                    <ul class="eea-no-list-style mt-0" tal:condition="folders">
+                                        <li>
+                                            <h3 class="eea-list-header mb-0" tal:attributes="id python: theme[2].id">
+                                                <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                            </h3>
+                                        </li>
+                                        <li tal:repeat="folder folders">
+                                            <a tal:attributes="href folder/getURL; title folder/Title;"
+                                                     tal:content="folder/Title">Folder links</a>
+                                        </li>
+                                    </ul>
                             </tal:subtopics>
                         </tal:mainthemes>
+                    </tal:english>
             </tal:defines>
+            </div>
             </div>
         </div>
 
