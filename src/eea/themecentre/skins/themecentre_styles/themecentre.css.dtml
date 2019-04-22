@@ -243,7 +243,7 @@ width:47%;
     background-color: white;
     box-shadow: 0 4px 3px -1px rgba(0,0,0,.2);
     font-size: 150%;
-    padding: 0.5em 1.5em;
+    padding: 1em 1.5em;
     width: 100%;
     outline: none;
 }
@@ -262,6 +262,7 @@ width:47%;
     .eea-input-query {
         border-radius: 50px;
         font-size: 200%;
+        padding: 0.5em 1.5em;
     }
     #topics-search .autocomplete-items {
         left: 0;
