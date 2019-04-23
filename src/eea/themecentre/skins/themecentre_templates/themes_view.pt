@@ -28,7 +28,7 @@
             <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
 
         <div id="themes-megatopics-area">
-            <div class="eea-accordion-panels">
+            <div class="eea-accordion-panels eea-accordion-panels-inverse">
             <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo view/getPromotions">
                 <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
@@ -41,7 +41,7 @@
                         </div>
 
                     <tal:others tal:condition="not:is_en">
-                        <div class="pane">
+                        <div class="pane pane-inverse">
                             <ul class="eea-no-list-style">
                                 <li tal:repeat="theme promo_list">
                                     <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
@@ -50,7 +50,7 @@
                     </tal:others>
                     <tal:english tal:condition="is_en">
 
-                        <div class="pane">
+                        <div class="pane pane-inverse">
                         <tal:mainthemes tal:repeat="theme promo_list">
                             <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
                                     folders themecentre_view/getSubtopics;">
@@ -98,7 +98,7 @@
                       </a>
                       <div class="eea-tileBody">
                       <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileLinkBody">
-                      <h2 class="eea-tileTitle" tal:content="title">Title</h2>
+                      <h2 class="eea-tileTitle no-anchor" tal:content="title">Title</h2>
                       <div class="eea-tileDescription" tal:content="promo/Description">Description
                       </div>
                       </a>

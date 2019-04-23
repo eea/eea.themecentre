@@ -131,6 +131,17 @@ width:47%;
     #themes-megatopics-area {
         display: block;
     }
+
+    .eea-accordion-panels-inverse .eea-accordion-title,
+    .eea-accordion-panel > h2 {
+        background-color: &dtml-lightBackgroundColor;;
+    }
+    .eea-accordion-panels-inverse .pane {
+        background-color: &dtml-corporateBlue;;
+    }
+    .pane-inverse a {
+        color: &dtml-lightBackgroundColor;;
+    }
 }
 
 @media screen and (min-width: 481px) {
