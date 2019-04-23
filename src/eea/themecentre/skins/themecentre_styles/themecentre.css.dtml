@@ -162,6 +162,7 @@ width:47%;
     #themes-megatopics-area .pane {
         display: block !important;
         padding: 0;
+        border: 0;
     }
 
     #themes-megatopics-area .eea-accordion-panels {
@@ -261,10 +262,36 @@ width:47%;
 
 #editors-choice {
     clear: both;
-    padding-top: 40px;
     position: relative;
 }
 
+@media screen and (max-width: 767px) {
+    .eea-input-query {
+        padding: 1em 0.5em;
+    }
+
+    .eea-input-submit {
+        margin-left: -4em;
+        padding: 1em 0;
+    }
+    #content-core .gsc-search-box,
+    .eea-input-form {
+        margin-bottom: 0;
+    }
+    #themes-megatopics-area {
+        padding-top: 0;
+    }
+
+    #topics-search .gsc-control-cse {
+        position: relative;
+        z-index: 1;
+    }
+
+    #topics-search .gsc-search-button {
+        width: 0;
+
+    }
+}
 @media screen and (min-width: 861px) {
     .eea-input-form {
         width: 80%;
@@ -280,6 +307,9 @@ width:47%;
         margin: 0 auto;
         text-align: left;
         width: 90%;
+    }
+    #editors-choice {
+        padding-top: 40px;
     }
 }
 @media screen and (min-width: 1200px) {
