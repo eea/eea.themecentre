@@ -58,7 +58,10 @@ width:47%;
     background: none;
     padding: 0;
 }
-
+/* #104468 hide related items on themes view*/
+.template-themes_view #relatedItems {
+    display: none;
+}
 
 /***** Theme promotions *****/
 
@@ -107,7 +110,6 @@ width:47%;
     overflow: visible;
 }
 #topics-search {
-    margin-bottom: &dtml-padding-double;;
     position: relative;
 }
 
@@ -130,6 +132,7 @@ width:47%;
 @media screen and (max-width: 480px) {
     #themes-megatopics-area {
         display: block;
+        padding-top: 0;
     }
 
     .eea-accordion-panels-inverse .eea-accordion-title,
@@ -171,6 +174,28 @@ width:47%;
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #themes-megatopics-area .promoHeader {
+        white-space: normal;
+    }
+    #editors-choice-1 {
+        text-align: center;
+    }
+    .eea-tiles {
+        flex-direction: column;
+        align-items: center;
+    }
+    .eea-tile {
+        width: 350px;
+        max-width: 100%;
+    }
+}
+@media screen and (min-width: 768px) {
+    #topics-search {
+        margin-bottom: &dtml-padding-double;;
     }
 }
 @media screen and (max-width: 899px) {
@@ -263,6 +288,23 @@ width:47%;
 #editors-choice {
     clear: both;
     position: relative;
+    padding-top: 15px;
+}
+
+#editors-choice:before {
+    background-color: &dtml-greyBackgroundColor;;
+    border-color: &dtml-mediumBackgroundColor;;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    content: " ";
+    display: block;
+    height: 350px;
+    margin-left: calc(50% - 50vw);
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
 }
 
 @media screen and (max-width: 767px) {
@@ -277,9 +319,6 @@ width:47%;
     #content-core .gsc-search-box,
     .eea-input-form {
         margin-bottom: 0;
-    }
-    #themes-megatopics-area {
-        padding-top: 0;
     }
 
     #topics-search .gsc-control-cse {
@@ -310,23 +349,6 @@ width:47%;
     }
     #editors-choice {
         padding-top: 40px;
-    }
-}
-@media screen and (min-width: 1200px) {
-    #editors-choice::before {
-        background-color: &dtml-greyBackgroundColor;;
-        border-color: &dtml-mediumBackgroundColor;;
-        border-style: solid;
-        border-width: 1px 0 1px 0;
-        content: " ";
-        display: block;
-        height: 350px;
-        margin-left: calc(50% - 50vw);
-        overflow: visible;
-        position: absolute;
-        top: 0;
-        width: 100vw;
-        z-index: -1;
     }
 }
 /* YOUR CSS RULES STOP HERE */
