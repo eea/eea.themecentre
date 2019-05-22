@@ -154,3 +154,18 @@ class ThemesView(BrowserView):
                 break
         return cPromos
 
+    def getPopularSearches(self):
+        """
+        :return:
+        :rtype:
+        """
+
+        context = self.context.aq_inner
+        pv = getToolByName(context, 'portal_vocabularies')
+        vocab = pv.get('popular-searches')
+        if not vocab:
+            return []
+        terms = []
+        for item in vocab.objectValues():
+            terms.append([item.id, item.title])
+        return terms

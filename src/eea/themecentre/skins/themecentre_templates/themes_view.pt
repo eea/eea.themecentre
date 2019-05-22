@@ -12,13 +12,34 @@
 <div id="themes-sitemap"  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view">
 
 <div id="top-news-area">
-    <h2 i18n:translate="">Popular searches</h2>
-    <p i18n:translate="">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
-    <p i18n:translate="">Clicking on a keyword will open the search result page for the desired keyword</p>
-    <div class="topic-search-links">
-        <a href="#" i18n:translate="" class="topic-search-more">Show more keywords...</a>
-    </div>
+    <div class="topic-search"  tal:define="search_items view/getPopularSearches" tal:condition="search_items">
+        <h2 i18n:translate="">Popular searches</h2>
+        <p i18n:translate="">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
+        <p i18n:translate="">Clicking on a keyword will open the search result page for the desired keyword</p>
 
+        <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search" >
+            <input type="hidden" name="q" tal:attributes="
+                    value string:''" id="topic-search-value" />
+            <tal:items tal:repeat="item search_items">
+                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+            </tal:items>
+            <div class="topic-search-links">
+
+                <tal:manykeywords>
+                <a href="#" i18n:translate="" class="topic-search-more">Show more keywords...</a>
+                    <div class="topic-search-extra"></div>
+                </tal:manykeywords>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(function($){
+            var $topic_search_value = $("#topic-search-value");
+           $(".js-topic-search-btn").click(function(ev){
+               $topic_search_value.val(ev.target.value);
+           });
+        });
+    </script>
     <section id="topics-search" tal:define="
             search_apps string:${context/portal_url}/eea-custom-search;
             custom_action python:search_apps;

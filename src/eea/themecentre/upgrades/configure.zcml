@@ -2,6 +2,17 @@
            xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="eea">
 
+
+  <!-- => 4.0 -->
+  <genericsetup:upgradeSteps source="8.0"
+    destination="9.7"
+    profile="eea.themecentre:default">
+
+    <genericsetup:upgradeStep title="Add Popular search vocabulary from eea.themecentre"
+      handler="eea.themecentre.upgrades.evolve97.setupATVocabularies" />
+
+  </genericsetup:upgradeSteps>
+
   <!-- => 8.0 -->
   <genericsetup:upgradeSteps
     source="4.0"

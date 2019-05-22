@@ -69,3 +69,22 @@ class ThemeCentresVocabulary(object):
 
 
 ThemeCentresVocabularyFactory = ThemeCentresVocabulary()
+
+vocabs = {
+    'popular-searches': (
+        ('air-quality', 'Air quality'),
+        ('greenhouse-gases', 'Greenhouse gases'),
+        ('carbon-farming', 'Carbon farming'),
+        ('bathing-water', 'Bathing water'),
+        ('loss-biodiversity', 'Loss of biodiversity'),
+        ('environmental-policy-instruments',
+            'Environmental policy instruments'),
+        ('waste-management', 'Waste management'),
+        ('renewable-energy', 'Renewable energy'),
+        ('carbon-footprint', 'Carbon footprint'),
+        ('water-stress', 'Water stress'),
+        ('particulate-matter', 'Particulate matter'),
+        ('lrtap', 'Lrtap'),
+        ('wei', 'Wei')
+    )
+}
