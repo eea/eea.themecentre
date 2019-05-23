@@ -20,14 +20,17 @@
         <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search" >
             <input type="hidden" name="q" tal:attributes="
                     value string:''" id="topic-search-value" />
-            <tal:items tal:repeat="item search_items">
+            <tal:items tal:repeat="item python:search_items[0]">
                 <button tal:attributes="value python:item[1]; class string:js-topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
             </tal:items>
             <div class="topic-search-links">
-
-                <tal:manykeywords>
-                <a href="#" i18n:translate="" class="topic-search-more">Show more keywords...</a>
-                    <div class="topic-search-extra"></div>
+                <tal:manykeywords tal:condition="python:search_items[1]">
+                <a href="#" i18n:translate="" class="topic-search-more js-eea-toggle" data-target=".topic-search-extra">Show more keywords...</a>
+                    <div class="topic-search-extra eea-collapsible">
+                        <tal:items tal:repeat="item python:search_items[1]">
+                            <button tal:attributes="value python:item[1]; class string:js-topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                        </tal:items>
+                    </div>
                 </tal:manykeywords>
             </div>
         </form>

@@ -154,7 +154,7 @@ class ThemesView(BrowserView):
                 break
         return cPromos
 
-    def getPopularSearches(self):
+    def getPopularSearches(self, no_of_items=12):
         """
         :return:
         :rtype:
@@ -168,4 +168,7 @@ class ThemesView(BrowserView):
         terms = []
         for item in vocab.objectValues():
             terms.append([item.id, item.title])
-        return terms
+        num_terms = len(terms)
+        if num_terms > no_of_items:
+            return [terms[0: no_of_items], terms[no_of_items:]]
+        return [terms, []]
