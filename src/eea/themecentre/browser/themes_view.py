@@ -4,7 +4,6 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
 import DateTime
-from eea.themecentre.themecentre import getTheme
 
 try:
     from eea.promotion import interfaces as HAS_PROMOTION
@@ -154,7 +153,7 @@ class ThemesView(BrowserView):
                 break
         return cPromos
 
-    def getPopularSearches(self, no_of_items=12):
+    def getPopularSearches(self, no_of_items=9):
         """
         :return:
         :rtype:
