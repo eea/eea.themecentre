@@ -155,8 +155,8 @@ class ThemesView(BrowserView):
 
     def getPopularSearches(self, no_of_items=9):
         """
-        :return:
-        :rtype:
+        :return: list of popular searches from portal_vocabularies
+        :rtype: list
         """
 
         context = self.context.aq_inner
