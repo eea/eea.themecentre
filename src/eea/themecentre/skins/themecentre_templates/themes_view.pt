@@ -9,30 +9,35 @@
 </head>
 
 <body>
-<div id="themes-sitemap"  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view">
+<div id="themes-sitemap"  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view;
+        lang lang|here/Language|string:en;
+        is_en python:lang in ('en', '');">
 
-<div id="top-news-area">
-    <div class="topic-search"  tal:define="search_items view/getPopularSearches" tal:condition="search_items">
+<!--?<div id="top-news-area">-->
+    <section id="topics-search">
+    <div class="topic-search"  tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="search_items">
         <h2 i18n:translate="">Popular searches</h2>
         <p i18n:translate="">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
         <p i18n:translate="">Clicking on a keyword will open the search result page for the desired keyword</p>
 
-        <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search" >
+        <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
+        tal:define="more_items python:search_items[1]">
             <input type="hidden" name="q" tal:attributes="
                     value string:''" id="topic-search-value" />
+
+        <div class="topic-search-links">
             <tal:items tal:repeat="item python:search_items[0]">
-                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
             </tal:items>
-            <div class="topic-search-links">
-                <tal:manykeywords tal:condition="python:search_items[1]">
-                <a href="#" i18n:translate="" class="topic-search-more js-eea-toggle" data-target=".topic-search-extra">Show more keywords...</a>
-                    <div class="topic-search-extra eea-collapsible">
-                        <tal:items tal:repeat="item python:search_items[1]">
-                            <button tal:attributes="value python:item[1]; class string:js-topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                <tal:manykeywords tal:condition="python:more_items">
+                <a href="#" i18n:translate="" class="topic-search-more js-eea-toggle"  data-target=".topic-search-extra">Show more keywords...</a>
+                    <div class="topic-search-extra eea-collapsible" data-display="flex">
+                        <tal:items tal:repeat="item more_items">
+                            <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
                         </tal:items>
                     </div>
                 </tal:manykeywords>
-            </div>
+        </div>
         </form>
     </div>
     <script>
@@ -43,7 +48,7 @@
            });
         });
     </script>
-    <section id="topics-search" tal:define="
+    <div tal:define="
             search_apps string:${context/portal_url}/eea-custom-search;
             custom_action python:search_apps;
             use_search_links python:False;
@@ -51,13 +56,13 @@
             search_input_class string:js-gsc-input-query eea-input-query;
             search_input_placeholder_text string:Search topics;
             search_form_class string:eea-input-form;
-            lang lang|here/Language|string:en;
-            is_en python:lang in ('en', '');
             tags string:${context/portal_url}/eea-custom-search.tags">
             <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
+    </div>
+    </section>
 
-        <div id="themes-megatopics-area">
-            <div class="eea-accordion-panels eea-accordion-panels-inverse">
+    <section id="themes-megatopics-area">
+        <div class="eea-accordion-panels eea-accordion-panels-inverse">
             <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo view/getPromotions">
                 <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
@@ -65,9 +70,9 @@
                                         promo_url python:promo_list[0][0] if promo_list else [];
                                 "
                          tal:condition="promo_list">
-                        <div class="promoHeader eea-accordion-title notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
-                            Air and climate
-                        </div>
+                    <div class="promoHeader eea-accordion-title notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
+                        Air and climate
+                    </div>
 
                     <tal:others tal:condition="not:is_en">
                         <div class="pane pane-inverse">
@@ -80,34 +85,32 @@
                     <tal:english tal:condition="is_en">
 
                         <div class="pane pane-inverse">
-                        <tal:mainthemes tal:repeat="theme promo_list">
-                            <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
-                                    folders themecentre_view/getSubtopics;">
+                            <tal:mainthemes tal:repeat="theme promo_list">
+                                <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
+                                        folders themecentre_view/getSubtopics;">
 
                                     <h3 class="h2 no-anchor eea-header-plain ma-0" tal:condition="python:not folders">
                                         <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
                                     </h3>
 
-                                        <ul class="eea-no-list-style mt-0" tal:condition="folders">
-                                                      <li>
-                                                      <h3 class="eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
-                                                      <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
-                                                      </h3>
-                                                      </li>
-                                                      <li tal:repeat="folder folders">
-                                                      <a tal:attributes="href folder/getURL; title folder/Title;"
-                                                      tal:content="folder/Title">Folder links</a>
-                                                      </li>
-                                                      </ul>
-                            </tal:subtopics>
-                        </tal:mainthemes>
+                                    <ul class="eea-no-list-style mt-0" tal:condition="folders">
+                                        <li>
+                                            <h3 class="eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
+                                                <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                            </h3>
+                                        </li>
+                                        <li tal:repeat="folder folders">
+                                            <a tal:attributes="href folder/getURL; title folder/Title;"
+                                                     tal:content="folder/Title">Folder links</a>
+                                        </li>
+                                    </ul>
+                                </tal:subtopics>
+                            </tal:mainthemes>
                         </div>
                     </tal:english>
-            </tal:defines>
-            </div>
+                </tal:defines>
             </div>
         </div>
-
     </section>
 <section id="editors-choice">
     <h1 i18n:translate="" class="h1">Editor's choice</h1>
@@ -147,7 +150,6 @@
                       </div>
                       </div>
 </section>
-</div>
 
 </div>
 </body>

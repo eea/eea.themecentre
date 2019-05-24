@@ -308,6 +308,10 @@ width:47%;
     z-index: -1;
 }
 
+#topic-search {
+    position: relative;
+}
+
 @media screen and (max-width: 767px) {
     .eea-input-query {
         padding: 1em 0.5em;
@@ -331,7 +335,63 @@ width:47%;
         width: 0;
 
     }
+    .topic-search-links,
+    .topic-search-extra {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .topic-search-btn {
+        width: 47%;
+        margin: 5px 0;
+    }
+
+    .topic-search-more {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .topic-search-extra {
+        width: 100%;
+    }
 }
+
+@media screen and (min-width: 768px) {
+    #topics-search:before {
+        background-color: #004B87;
+        border-color: #ececec;
+        border-style: solid;
+        border-width: 1px 0 1px 0;
+        content: " ";
+        display: block;
+        height: 145%;
+        margin-left: calc(50% - 50vw);
+        overflow: visible;
+        position: absolute;
+        top: -60%;
+        width: 100vw;
+        z-index: -1;
+    }
+    .documentFirstHeading,
+    #topics-search,
+    #article-language > a,
+    #article-language .eea-icon,
+    #languageCodes,
+    #popular-searches,
+    .documentByLine,
+    .topic-search-more,
+    .topic-search-more:hover
+    {
+        color: #FFF !important;
+    }
+    
+    .topic-search-btn {
+       margin: 5px 10px 10px 0;
+    }
+
+}
+
 @media screen and (min-width: 861px) {
     .eea-input-form {
         width: 80%;
