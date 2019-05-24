@@ -154,6 +154,7 @@
       name="themes_browser_view"
       class=".themes_view.ThemesView"
       permission="zope2.View"
+      allowed_attributes="getPopularSearches"
       allowed_interface=".interfaces.IThemesView"
       />
 
