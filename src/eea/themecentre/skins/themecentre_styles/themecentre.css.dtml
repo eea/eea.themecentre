@@ -385,7 +385,10 @@ width:47%;
     {
         color: #FFF !important;
     }
-    
+
+    .topic-search-extra {
+        flex-wrap: wrap;
+    }
     .topic-search-btn {
        margin: 5px 10px 10px 0;
     }
