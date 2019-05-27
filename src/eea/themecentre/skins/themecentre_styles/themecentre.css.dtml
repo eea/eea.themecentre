@@ -358,21 +358,29 @@ width:47%;
 }
 
 @media screen and (min-width: 768px) {
-    #topics-search:before {
+    #topics-search:before,
+    .content-header:before {
         background-color: #004B87;
-        border-color: #ececec;
-        border-style: solid;
-        border-width: 1px 0 1px 0;
         content: " ";
         display: block;
-        height: 145%;
+        height: 100%;
         margin-left: calc(50% - 50vw);
         overflow: visible;
         position: absolute;
-        top: -60%;
+        top: 0;
         width: 100vw;
         z-index: -1;
     }
+
+    #topics-search:before {
+        top: -3em;
+    }
+
+   .userrole-anonymous .content-header:before {
+       height: 160%;
+       top: -3.5em;
+   }
+
     .documentFirstHeading,
     #topics-search,
     #article-language > a,
@@ -381,7 +389,9 @@ width:47%;
     #popular-searches,
     .documentByLine,
     .topic-search-more,
-    .topic-search-more:hover
+    .topic-search-more:hover,
+    #content-history > a,
+    .documentByLineAuthor > a
     {
         color: #FFF !important;
     }
