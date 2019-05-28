@@ -30,7 +30,7 @@
                 <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
             </tal:items>
                 <tal:manykeywords tal:condition="python:more_items">
-                    <a href="#" i18n:translate="" class="topic-search-more js-eea-toggle"  data-target=".topic-search-extra">Show <span class="topic-search-more js-hidden-toggle" i18n:translate="">more</span><span class="topic-search-less js-hidden-toggle is-eea-hidden" i18n:translate="">less</span> keywords...</a>
+                    <a href="#" i18n:translate="" class="topic-search-more-btn js-eea-toggle"  data-target=".topic-search-extra">Show <span class="topic-search-more js-hidden-toggle" i18n:translate="">more</span><span class="topic-search-less js-hidden-toggle is-eea-hidden" i18n:translate="">less</span> keywords...</a>
                     <div class="topic-search-extra eea-collapsible" data-display="flex">
                         <tal:items tal:repeat="item more_items">
                             <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>

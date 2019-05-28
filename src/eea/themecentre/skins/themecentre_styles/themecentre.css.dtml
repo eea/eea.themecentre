@@ -212,10 +212,14 @@ width:47%;
         border-top: 1px solid &dtml-globalBorderColor;;
         content: ' ';
         display: block;
-        margin-left: calc(49.2% - 50vw);
+        /*margin-left: calc(49.2% - 50vw);*/
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         position: absolute;
         top: 0;
-        width: 100vw;
+        width: 99.3vw;
     }
 
     #themes-megatopics-area:after {
@@ -300,11 +304,16 @@ width:47%;
     content: " ";
     display: block;
     height: 350px;
-    margin-left: calc(49.2% - 50vw);
+    /*margin-left: calc(49.2% - 50vw);*/
+
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     overflow: visible;
     position: absolute;
     top: 0;
-    width: 100vw;
+    width: 99.3vw;
     z-index: -1;
 }
 
@@ -347,7 +356,7 @@ width:47%;
         margin: 5px 0;
     }
 
-    .topic-search-more {
+    .topic-search-more-btn {
         display: block;
         width: 100%;
         text-align: center;
@@ -364,11 +373,16 @@ width:47%;
         content: " ";
         display: block;
         height: 100%;
-        margin-left: calc(49.2% - 50vw);
+        /*margin-left: calc(49.2% - 50vw);*/
+
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         overflow: visible;
         position: absolute;
         top: 0;
-        width: 100vw;
+        width: 99.3vw;
         z-index: -1;
     }
 
@@ -388,8 +402,8 @@ width:47%;
     #languageCodes,
     #popular-searches,
     .documentByLine,
-    .topic-search-more,
-    .topic-search-more:hover,
+    .topic-search-more-btn,
+    .topic-search-more-btn:hover,
     #content-history > a,
     .documentByLineAuthor > a
     {
