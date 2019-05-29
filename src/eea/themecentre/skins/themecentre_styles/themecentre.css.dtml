@@ -4,7 +4,9 @@
 */
 
 /* YOUR CSS RULES START HERE */
-
+body {
+    overflow-x: hidden;
+}
 .contentColumnOne {
 float:left;
 width:47%;
@@ -219,14 +221,13 @@ width:47%;
         margin-right: -50vw;
         position: absolute;
         top: 0;
-        width: 99.3vw;
+        width: 100vw;
     }
 
     #themes-megatopics-area:after {
         box-shadow: 0 1px 2px 0 &dtml-globalBorderColor;;
     }
     #themes-megatopics-area:after {
-        left: 0;
         top: 5.35em;
     }
 
@@ -288,6 +289,11 @@ width:47%;
     padding: 1em 1.5em;
     width: 100%;
     outline: none;
+    line-height: 1.3;
+    color: #777;
+}
+.eea-input-query:focus {
+    color: #333;
 }
 
 #editors-choice {
@@ -313,7 +319,7 @@ width:47%;
     overflow: visible;
     position: absolute;
     top: 0;
-    width: 99.3vw;
+    width: 100vw;
     z-index: -1;
 }
 
@@ -382,7 +388,7 @@ width:47%;
         overflow: visible;
         position: absolute;
         top: 0;
-        width: 99.3vw;
+        width: 100vw;
         z-index: -1;
     }
 
@@ -396,7 +402,7 @@ width:47%;
    }
 
     .documentFirstHeading,
-    #topics-search,
+    .topic-search,
     #article-language > a,
     #article-language .eea-icon,
     #languageCodes,
