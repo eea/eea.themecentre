@@ -4,7 +4,6 @@
 */
 
 /* YOUR CSS RULES START HERE */
-
 /* #104478 body needs overflow-x hidden in order to hide scrollbar from full
 *  width bg
 */
@@ -21,8 +20,6 @@ width:47%;
 float:right;
 width:47%;
 }
-
-
 
 /***** Themes view (themes_view.pt) *****/
 .themes-view-image-icon ul {
@@ -113,15 +110,51 @@ width:47%;
 }
 
 /* #104467 theme view redesign */
-#content-core .gsc-search-box {
-    display: table;
-    overflow: visible;
-    margin: 0 auto;
-}
+
+/* @popular search */
 #topics-search {
     position: relative;
 }
 
+#topics-search .gsc-search-box {
+    display: table;
+    overflow: visible;
+    margin: 0 auto;
+}
+
+#topics-search .gsc-input {
+    border: 0;
+    outline: none;
+}
+
+.eea-input-query {
+    background-color: white;
+    box-shadow: 0 4px 3px -1px rgba(0,0,0,.2);
+    font-size: 150%;
+    padding: 1em 1.5em;
+    width: 100%;
+    outline: none;
+    line-height: 1.3;
+    color: #777;
+}
+.eea-input-query:focus {
+    color: #333;
+}
+.eea-input-submit {
+    background: none;
+    border: 0;
+    color: #ccc;
+    cursor: pointer;
+    margin-left: -6.5em;
+    outline: none;
+    padding: 1em;
+}
+.eea-input-submit .eea-icon-search {
+    font-size: 2.5em;
+}
+/* end @popular search */
+
+/* @megatopics area */
 #themes-megatopics-area {
     display: flex;
     flex-wrap: wrap;
@@ -131,17 +164,50 @@ width:47%;
     position: relative;
 }
 
+#themes-megatopics-area .portlet-megatopic {
+    flex-direction: column;
+    padding: 0 &dtml-padding-base;;
+    white-space: normal;
+}
+
 #themes-megatopics-area .promoHeader {
     font-style: italic;
     margin-bottom: 2em;
     white-space: nowrap;
 }
 
+/* end @megatopics area */
+
+/* @editors choice */
+#editors-choice {
+    clear: both;
+    position: relative;
+    padding-top: 15px;
+}
+
+#editors-choice:before {
+    background-color: &dtml-greyBackgroundColor;;
+    border-color: &dtml-mediumBackgroundColor;;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    content: " ";
+    display: block;
+    height: 350px;
+    margin-left: calc(50% - 50vw);
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+}
+/* end @editors choice */
+
 
 @media screen and (max-width: 480px) {
     #themes-megatopics-area {
         display: block;
         padding-top: 0;
+        margin-bottom: 1.5em;
     }
 
     .eea-accordion-panels-inverse .eea-accordion-title,
@@ -210,7 +276,6 @@ width:47%;
 @media screen and (max-width: 899px) {
     #themes-megatopics-area .promoHeader {
         margin-bottom: 0;
-        /*margin-top: 1em;*/
     }
 }
 
@@ -234,123 +299,12 @@ width:47%;
     }
 
 }
-
-#themes-megatopics-area .portlet-megatopic {
-    flex-direction: column;
-    padding: 0 &dtml-padding-base;;
-    white-space: normal;
-}
-
-/* 102564 IE11 hack as the hiddenStructure without display will count
-* for justify-content: space-between since it doesn't support clip-path */
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    #themes-megatopics-area .portlet-megatopic {
-        flex: auto;
-        width: 225px;
-    }
-
-    #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
-        width: 285px;
-    }
-    /* input within IE appends an x on right of input which overlaps our search icon */
-    input[type=text]::-ms-clear {
-        display: none;
-    }
-}
-
-.eea-input-form {
-    margin-bottom: 2em;
-}
-#topics-search .gsc-input {
-    border: 0;
-    outline: none;
-}
-
-.eea-input-submit {
-    background: none;
-    border: 0;
-    color: #ccc;
-    cursor: pointer;
-    margin-left: -6.5em;
-    outline: none;
-    padding: 1em;
-}
-.eea-input-submit .eea-icon-search {
-    font-size: 2.5em;
-}
-
-.eea-input-query {
-    background-color: white;
-    box-shadow: 0 4px 3px -1px rgba(0,0,0,.2);
-    font-size: 150%;
-    padding: 1em 1.5em;
-    width: 100%;
-    outline: none;
-    line-height: 1.3;
-    color: #777;
-}
-.eea-input-query:focus {
-    color: #333;
-}
-
-#editors-choice {
-    clear: both;
-    position: relative;
-    padding-top: 15px;
-}
-
-#editors-choice:before {
-    background-color: &dtml-greyBackgroundColor;;
-    border-color: &dtml-mediumBackgroundColor;;
-    border-style: solid;
-    border-width: 1px 0 1px 0;
-    content: " ";
-    display: block;
-    height: 350px;
-    margin-left: calc(50% - 50vw);
-    overflow: visible;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    z-index: -1;
-}
-
-#topic-search {
-    position: relative;
-}
-
-.topic-search-links {
-  margin-bottom: 3em;
-}
-
 @media screen and (max-width: 767px) {
-    .eea-input-query {
-        padding: 1em 0.5em;
-    }
-
-    .eea-input-submit {
-        margin-left: -4em;
-        padding: 1em 0;
-    }
-    #content-core .gsc-search-box,
-    .eea-input-form {
-        margin-bottom: 0;
-    }
-
-    #topics-search .gsc-control-cse {
-        position: relative;
-        z-index: 1;
-    }
-
-    #topics-search .gsc-search-button {
-        width: 0;
-
-    }
     .topic-search-links,
     .topic-search-extra {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .topic-search-btn {
@@ -366,8 +320,35 @@ width:47%;
     .topic-search-extra {
         width: 100%;
     }
+    
+    #topics-search .gsc-control-cse {
+        position: relative;
+        z-index: 1;
+    }
+    #topics-search .gsc-search-box {
+        margin-bottom: 0;
+    }
+
+    .eea-input-query {
+        padding: 1em 0.5em;
+    }
+
+    .eea-input-submit {
+        margin-left: -4em;
+        padding: 1em 0;
+    }
+
+    #topics-search .gsc-search-button {
+        width: 0;
+
+    }
 }
 
+@media screen and (max-width: 768px) {
+    #editor-choice-header {
+        text-align: center;
+    }
+}
 @media screen and (min-width: 768px) {
     #topics-search:before,
     .content-header:before {
@@ -382,16 +363,18 @@ width:47%;
         width: 100vw;
         z-index: -1;
     }
-
+    /* needed in order to join blue bg of popular search and content-header */
     #topics-search:before {
         top: -2.2em;
     }
 
+    /* needed in order to join blue bg content-header  and above content area */
    .userrole-anonymous .content-header:before {
        height: 275%;
        top: -3.5em;
    }
 
+    /* elements needed to have white color since they receive the full width bg*/
     .documentFirstHeading,
     .topic-search,
     .topic-search-heading,
@@ -408,7 +391,7 @@ width:47%;
         color: #FFF !important;
     }
 
-    #content-core .gsc-search-box {
+    #topics-search .gsc-search-box {
         width: 95%;
     }
     .topic-search-extra {
@@ -418,10 +401,6 @@ width:47%;
        margin: 5px 10px 10px 0;
     }
 
-    .eea-input-form {
-        width: 80%;
-        margin: 0 auto;
-    }
     .eea-input-query {
         border-radius: 50px;
         font-size: 200%;
@@ -433,6 +412,7 @@ width:47%;
         text-align: left;
         width: 90%;
     }
+
     #editors-choice {
         padding-top: 40px;
     }
@@ -443,14 +423,13 @@ width:47%;
         margin: 0 auto;
         width: 90%;
     }
+    .portlet-megatopic {
+        margin-bottom: 1em;
+    }
     #themes-megatopics-area .promoHeader {
         position: relative;
         padding: 1em 0;
     }
-    .portlet-megatopic {
-        margin-bottom: 1em;
-    }
-
     .promoHeader:after,
     .promoHeader:before {
         border-top: 1px solid #cccccc;
@@ -462,9 +441,30 @@ width:47%;
         width: 100vw;
         height: 100%;
     }
-
     .promoHeader:after {
         top: 100%;
+    }
+
+    .topic-search-links {
+        margin-bottom: 3em;
+    }
+
+}
+
+/* 102564 IE11 hack as the hiddenStructure without display will count
+* for justify-content: space-between since it doesn't support clip-path */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    #themes-megatopics-area .portlet-megatopic {
+        flex: auto;
+        width: 225px;
+    }
+
+    #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
+        width: 285px;
+    }
+    /* input within IE appends an x on right of input which overlaps our search icon */
+    input[type=text]::-ms-clear {
+        display: none;
     }
 }
 /* YOUR CSS RULES STOP HERE */
