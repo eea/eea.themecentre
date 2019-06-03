@@ -220,6 +220,14 @@ width:47%;
     .pane-inverse a {
         color: &dtml-lightBackgroundColor;;
     }
+    
+    .topic-search-more-btn {
+        margin: 1em 0;
+    }
+    .eea-input-query {
+        box-shadow: 0 2px 7px 0 rgba(0,0,0,.2);
+        border: 0;
+    }
 }
 
 @media screen and (min-width: 481px) {
@@ -256,7 +264,7 @@ width:47%;
     #themes-megatopics-area .promoHeader {
         white-space: normal;
     }
-    #editors-choice-1 {
+    #editors-choice-header {
         text-align: center;
     }
     .eea-tiles {
@@ -319,6 +327,7 @@ width:47%;
     }
     .topic-search-extra {
         width: 100%;
+        margin-bottom: 1em;
     }
     
     #topics-search .gsc-control-cse {
@@ -344,11 +353,6 @@ width:47%;
     }
 }
 
-@media screen and (max-width: 768px) {
-    #editor-choice-header {
-        text-align: center;
-    }
-}
 @media screen and (min-width: 768px) {
     #topics-search:before,
     .content-header:before {
@@ -369,10 +373,18 @@ width:47%;
     }
 
     /* needed in order to join blue bg content-header  and above content area */
-   .userrole-anonymous .content-header:before {
-       height: 275%;
-       top: -3.5em;
-   }
+   .userrole-anonymous #eea-above-columns:after {
+        background-color: #004B87;
+        content: " ";
+        display: block;
+        height: 50%;
+        margin-left: calc(50% - 50vw);
+        overflow: visible;
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        z-index: -1;
+    }
 
     /* elements needed to have white color since they receive the full width bg*/
     .documentFirstHeading,
@@ -400,6 +412,9 @@ width:47%;
     .topic-search-btn {
        margin: 5px 10px 10px 0;
     }
+    .topic-search-links {
+        margin-bottom: 3em;
+    }
 
     .eea-input-query {
         border-radius: 50px;
@@ -413,6 +428,9 @@ width:47%;
         width: 90%;
     }
 
+}
+
+@media screen and (min-width: 769px)  {
     #editors-choice {
         padding-top: 40px;
     }
@@ -445,11 +463,9 @@ width:47%;
         top: 100%;
     }
 
-    .topic-search-links {
-        margin-bottom: 3em;
-    }
 
 }
+
 
 /* 102564 IE11 hack as the hiddenStructure without display will count
 * for justify-content: space-between since it doesn't support clip-path */
