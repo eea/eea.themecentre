@@ -32,10 +32,6 @@ body {
     width: 28px;
 }
 
-#themes-sitemap #all-topics-list {
-    margin:4em 0 0 0;
-}
-
 #subtopics {
     margin: 0 0 2em 0;
 }
@@ -161,7 +157,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 -&dtml-padding-base;;
-    padding-top: 1.5em;
+    padding: 1.5em 0;
     position: relative;
 }
 
@@ -211,7 +207,7 @@ body {
     #themes-megatopics-area {
         display: block;
         margin-bottom: 1.5em;
-        padding-top: 0;
+        padding: 0;
     }
 
     .eea-accordion-panels-inverse .eea-accordion-title,
