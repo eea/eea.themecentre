@@ -120,6 +120,7 @@ width:47%;
     display: table;
     overflow: visible;
     margin: 0 auto;
+    font-size: 1em;
 }
 
 #topics-search .gsc-input {
@@ -224,9 +225,6 @@ width:47%;
         color: &dtml-lightBackgroundColor;;
     }
     
-    .topic-search-more-btn {
-        margin: 1em 0;
-    }
     .eea-input-query {
         box-shadow: 0 2px 7px 0 rgba(0,0,0,.2);
         border: 0;
@@ -277,6 +275,12 @@ width:47%;
     .eea-tile {
         width: 350px;
         max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .topic-search-more-btn {
+        margin: 1em 0;
     }
 }
 @media screen and (min-width: 768px) {
