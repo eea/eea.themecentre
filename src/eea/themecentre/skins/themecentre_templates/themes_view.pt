@@ -6,64 +6,65 @@
       i18n:domain="eea">
 
 <head>
+    <tal:js metal:fill-slot="javascript_head_slot">
+        <script>
+            $(function($){
+                var $topic_search_value = $("#topic-search-value");
+                $(".js-topic-search-btn").click(function(ev){
+                    $topic_search_value.val(ev.target.value);
+                });
+            });
+        </script>
+    </tal:js>
 </head>
 
 <body>
-<div id="themes-sitemap"  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view;
+<tal:body  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view;
         lang lang|here/Language|string:en;
         is_en python:lang in ('en', '');">
 
-<!--?<div id="top-news-area">-->
-    <section id="topics-search">
-    <div class="topic-search"  tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="search_items">
-        <h2 i18n:translate="" class="topic-search-heading">Popular searches</h2>
-        <p i18n:translate="" class="mb-half">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
-        <p i18n:translate="">Clicking on a keyword will open the search result page for the desired keyword</p>
+    <section id="topics-search" tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="python:search_items">
+        <div class="topic-search">
+            <h2 i18n:translate="" class="topic-search-heading">Popular searches</h2>
+            <p i18n:translate="" class="mb-half">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
+            <p i18n:translate="">Clicking on a keyword will open the search result page for the desired keyword</p>
 
-        <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
-        tal:define="more_items python:search_items[1]">
-            <input type="hidden" name="q" tal:attributes="
-                    value string:''" id="topic-search-value" />
+            <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
+                     tal:define="more_items python:search_items[1]">
+                <input type="hidden" name="q" tal:attributes="
+                        value string:''" id="topic-search-value" />
 
-        <div class="topic-search-links">
-            <tal:items tal:repeat="item python:search_items[0]">
-                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
-            </tal:items>
-                <tal:manykeywords tal:condition="python:more_items">
-                    <a href="#" i18n:translate="" class="topic-search-more-btn js-eea-toggle"  data-target=".topic-search-extra">Show <span class="topic-search-more js-hidden-toggle" i18n:translate="">more</span><span class="topic-search-less js-hidden-toggle is-eea-hidden" i18n:translate="">less</span> keywords...</a>
-                    <div class="topic-search-extra eea-collapsible" data-display="flex">
-                        <tal:items tal:repeat="item more_items">
-                            <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
-                        </tal:items>
-                    </div>
-                </tal:manykeywords>
+                <div class="topic-search-links">
+                    <tal:items tal:repeat="item python:search_items[0]">
+                        <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                    </tal:items>
+                    <tal:manykeywords tal:condition="python:more_items">
+                        <a href="#" i18n:translate="" class="topic-search-more-btn js-eea-toggle"  data-target=".topic-search-extra">Show <span class="topic-search-more js-hidden-toggle" i18n:translate="">more</span><span class="topic-search-less js-hidden-toggle is-eea-hidden" i18n:translate="">less</span> keywords...</a>
+                        <div class="topic-search-extra eea-collapsible" data-display="flex">
+                            <tal:items tal:repeat="item more_items">
+                                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                            </tal:items>
+                        </div>
+                    </tal:manykeywords>
+                </div>
+            </form>
         </div>
-        </form>
-    </div>
-    <script>
-        $(function($){
-            var $topic_search_value = $("#topic-search-value");
-           $(".js-topic-search-btn").click(function(ev){
-               $topic_search_value.val(ev.target.value);
-           });
-        });
-    </script>
-    <div tal:define="
-            search_apps string:${context/portal_url}/eea-custom-search;
-            custom_action python:search_apps;
-            use_search_links python:False;
-            search_button_class string:eea-input-submit;
-            search_input_class string:js-gsc-input-query eea-input-query;
-            search_input_placeholder_text string:Search topics;
-            search_form_class string:eea-input-form;
-            tags string:${context/portal_url}/eea-custom-search.tags">
+        <div tal:define="
+                search_apps string:${context/portal_url}/eea-custom-search;
+                custom_action python:search_apps;
+                use_search_links python:False;
+                search_button_class string:eea-input-submit;
+                search_input_class string:js-gsc-input-query eea-input-query;
+                search_input_placeholder_text string:Search topics;
+                search_form_class string:eea-input-form;
+                tags string:${context/portal_url}/eea-custom-search.tags">
             <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
-    </div>
+        </div>
     </section>
 
-    <section id="themes-megatopics-area">
+    <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos">
         <div class="eea-accordion-panels eea-accordion-panels-inverse">
-            <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo view/getPromotions">
+            <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo promos">
                 <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
                                 promo_list python:promo[promo_title];
@@ -112,46 +113,47 @@
             </div>
         </div>
     </section>
-<section id="editors-choice">
-    <h1 i18n:translate="" class="h1" id="editors-choice-header">Editor's choice</h1>
-    <div class="eea-tiles">
-                      <div class="eea-tile" tal:repeat="promo_list view/getThemeIndexPromotions">
-                      <div class="eea-tileInner">
-                      <tal:defines tal:define="promo python:promo_list[0];
-                      themes python: promo_list[1];
-                      url promo/getURL;
-                      title promo/Title;">
-                      <a href="#" tal:attributes="href url"  class="eea-tileLink">
-                      <div class="eea-tileHead">
-                      <div class="eea-tileThumb">
-                      <img src="#" alt="Title" class="eea-tileThumbImg"  tal:attributes="src string:${url}/image_preview; alt title">
-                      </div>
-                      </div>
-                      </a>
-                      <div class="eea-tileBody">
-                      <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileLinkBody">
-                      <h2 class="eea-tileTitle no-anchor" tal:content="title">Title</h2>
-                      <div class="eea-tileDescription" tal:content="promo/Description">Description
-                      </div>
-                      </a>
-                      <div class="eea-tileMetadata">
-                      <div class="eea-tileTopic" >
-                      <tal:topics tal:repeat="theme themes">
-                      <a href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink eea-btn eea-btn-light">Theme topic</a>
-                      </tal:topics>
-                      </div>
 
-                      <time  tal:attributes="datetime promo/EffectiveDate" class="eea-tileIssued" tal:content="python: toLocalizedTime(promo.effective)">26 Mar 2019
-                      </time>
-                      </div>
-                      </div>
-                      </tal:defines>
-                      </div>
-                      </div>
-                      </div>
-</section>
+    <section id="editors-choice" tal:define="promos view/getThemeIndexPromotions" tal:condition="python:promos">
+        <h1 i18n:translate="" class="h1" id="editors-choice-header">Editor's choice</h1>
+        <div class="eea-tiles">
+            <div class="eea-tile" tal:repeat="promo_list promos">
+                <div class="eea-tileInner">
+                    <tal:defines tal:define="promo python:promo_list[0];
+                            themes python: promo_list[1];
+                            url promo/getURL;
+                            title promo/Title;">
+                        <a href="#" tal:attributes="href url"  class="eea-tileLink">
+                            <div class="eea-tileHead">
+                                <div class="eea-tileThumb">
+                                    <img src="#" alt="Title" class="eea-tileThumbImg"  tal:attributes="src string:${url}/image_preview; alt title">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="eea-tileBody">
+                            <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileLinkBody">
+                                <h2 class="eea-tileTitle no-anchor" tal:content="title">Title</h2>
+                                <div class="eea-tileDescription" tal:content="promo/Description">Description
+                                </div>
+                            </a>
+                            <div class="eea-tileMetadata">
+                                <div class="eea-tileTopic" >
+                                    <tal:topics tal:repeat="theme themes">
+                                        <a href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink eea-btn eea-btn-light">Theme topic</a>
+                                    </tal:topics>
+                                </div>
 
-</div>
+                                <time  tal:attributes="datetime promo/EffectiveDate" class="eea-tileIssued" tal:content="python: toLocalizedTime(promo.effective)">26 Mar 2019
+                                </time>
+                            </div>
+                        </div>
+                    </tal:defines>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</tal:body>>
 </body>
 </html>
 
