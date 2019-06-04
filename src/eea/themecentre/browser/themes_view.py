@@ -119,7 +119,8 @@ class ThemesView(BrowserView):
             'object_provides': {
                 'query': [
                     'eea.promotion.interfaces.IPromoted',
-                    'Products.EEAContentTypes.content.interfaces.IExternalPromotion',
+                    'Products.EEAContentTypes.content.interfaces.'
+                    'IExternalPromotion',
                 ],
                 'operator': 'or',
             },
@@ -145,8 +146,8 @@ class ThemesView(BrowserView):
                 themes = themes_object.short_items()
 
             promo_versionIds = [b[0].getVersionId for b in cPromos]
-            # Add to promo list if we do not already have a newer version of this
-            # versionId in the promo list
+            # Add to promo list if we do not already have a newer version of
+            # this versionId in the promo list
             if not brain.getVersionId in promo_versionIds:
                 cPromos.append((brain, themes))
             if len(cPromos) == noOfItems:
