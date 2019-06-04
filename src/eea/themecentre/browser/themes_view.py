@@ -112,7 +112,7 @@ class ThemesView(BrowserView):
         return ret_themes
 
     def getThemeIndexPromotions(self, noOfItems=3):
-        """ utility function to retrieve external and internal promotions """
+        """ Get the last 3 promotions to show on editors choice section """
         if not HAS_PROMOTION:
             return
         query = {
