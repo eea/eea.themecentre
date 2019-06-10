@@ -90,13 +90,13 @@
                                 <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
                                         folders themecentre_view/getSubtopics;">
 
-                                    <h3 class="h2 no-anchor eea-header-plain ma-0" tal:condition="python:not folders">
+                                    <h3 class="no-anchor eea-header-plain ma-0" tal:condition="python:not folders">
                                         <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
                                     </h3>
 
                                     <ul class="eea-no-list-style mt-0" tal:condition="folders">
                                         <li>
-                                            <h3 class="eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
+                                            <h3 class="portlet-megatopic-subtitle eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
                                                 <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
                                             </h3>
                                         </li>
