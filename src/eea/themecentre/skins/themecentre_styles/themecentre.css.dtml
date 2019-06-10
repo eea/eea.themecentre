@@ -22,6 +22,13 @@ body {
 }
 
 /***** Themes view (themes_view.pt) *****/
+
+/* 104478 fit megatopics on one line by bumping max width of visual-portal-wrapper
+ * on resolutions of minimum 1280px */
+.template-themes_view #visual-portal-wrapper {
+    max-width: 1215px;
+}
+
 .themes-view-image-icon ul {
     font-weight: bold;
     list-style: none none !important;
@@ -110,6 +117,10 @@ body {
 /* @popular search */
 #topics-search {
     position: relative;
+}
+
+.topic-search-more-btn {
+    font-style: italic;
 }
 
 #topics-search .gsc-search-box {
