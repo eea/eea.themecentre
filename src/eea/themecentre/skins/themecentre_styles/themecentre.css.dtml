@@ -502,7 +502,7 @@ body {
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     #themes-megatopics-area .portlet-megatopic {
         flex: auto;
-        width: 225px;
+        width: 310px;
     }
 
     #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
