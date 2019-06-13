@@ -9,7 +9,6 @@
 */
 .template-themes_view {
     overflow-x: hidden;
-    font-size: 85%;
 }
 
 .contentColumnOne {
