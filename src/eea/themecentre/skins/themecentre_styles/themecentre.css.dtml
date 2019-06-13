@@ -7,7 +7,7 @@
 /* #104478 body needs overflow-x hidden in order to hide scrollbar from full
 *  width bg
 */
-body {
+.template-themes_view {
     overflow-x: hidden;
     font-size: 85%;
 }
