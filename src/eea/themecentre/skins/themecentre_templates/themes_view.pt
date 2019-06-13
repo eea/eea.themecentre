@@ -27,7 +27,8 @@
         <div class="topic-search">
             <h2 i18n:translate="" class="topic-search-heading">Popular searches</h2>
             <p i18n:translate="" class="mb-half">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
-            <p i18n:translate="">Clicking on a keyword will open the search result page for the desired keyword</p>
+            <p i18n:translate="" class="mb-half">Clicking on a keyword will open the search result page for the desired keyword</p>
+
 
             <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
                      tal:define="more_items python:search_items[1]">
