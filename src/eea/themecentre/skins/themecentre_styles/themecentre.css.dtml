@@ -401,7 +401,7 @@ body {
     }
 
     /* needed in order to join blue bg content-header  and above content area */
-   .userrole-anonymous .template-themes_view #eea-above-columns:after {
+   .userrole-anonymous.template-themes_view #eea-above-columns:after {
         background-color: #004B87;
         content: " ";
         display: block;
