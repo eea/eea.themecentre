@@ -380,7 +380,7 @@ body {
 
 @media screen and (min-width: 768px) {
     #topics-search:before,
-    .content-header:before {
+    .template-themes_view .content-header:before {
         background-color: #004B87;
         content: " ";
         display: block;
@@ -401,7 +401,7 @@ body {
     }
 
     /* needed in order to join blue bg content-header  and above content area */
-   .userrole-anonymous #eea-above-columns:after {
+   .userrole-anonymous .template-themes_view #eea-above-columns:after {
         background-color: #004B87;
         content: " ";
         display: block;
@@ -418,18 +418,18 @@ body {
     }
 
     /* elements needed to have white color since they receive the full width bg*/
-    .documentFirstHeading,
+    .template-themes_view .documentFirstHeading,
     .topic-search,
     .topic-search-heading,
-    #article-language > a,
-    #article-language .eea-icon,
-    #languageCodes,
+    .template-themes_view #article-language > a,
+    .template-themes_view #article-language .eea-icon,
+    .template-themes_view #languageCodes,
     #popular-searches,
-    .documentByLine,
+    .template-themes_view .documentByLine,
     .topic-search-more-btn,
     .topic-search-more-btn:hover,
-    #content-history > a,
-    .documentByLineAuthor > a
+    .template-themes_view #content-history > a,
+    .template-themes_view .documentByLineAuthor > a
     {
         color: #FFF !important;
     }
