@@ -7,6 +7,9 @@
 /* #104478 body needs overflow-x hidden in order to hide scrollbar from full
 *  width bg
 */
+body {
+    font-size: 87.5%;
+}
 .template-themes_view {
     overflow-x: hidden;
 }
@@ -184,7 +187,7 @@
 }
 
 .portlet-megatopic-subtitle {
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 #themes-megatopics-area .promoHeader {
@@ -449,7 +452,7 @@
 
     .eea-input-query {
         border-radius: 50px;
-        font-size: 200%;
+        font-size: 175%;
         padding: 0.5em 1.5em;
     }
     #topics-search .autocomplete-items {
