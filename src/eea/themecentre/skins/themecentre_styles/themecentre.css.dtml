@@ -369,6 +369,7 @@ body {
 
     .eea-input-query {
         padding: 1em 0.5em;
+        font-size: 125%;
     }
 
     .eea-input-submit {
@@ -428,7 +429,7 @@ body {
     .template-themes_view #article-language .eea-icon,
     .template-themes_view #languageCodes,
     #popular-searches,
-    .template-themes_view .documentByLine,
+    .template-themes_view .content-header .documentByLine,
     .topic-search-more-btn,
     .topic-search-more-btn:hover,
     .template-themes_view #content-history > a,
