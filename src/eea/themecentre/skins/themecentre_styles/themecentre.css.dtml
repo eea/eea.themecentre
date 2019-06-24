@@ -448,7 +448,7 @@ body {
        margin: 5px 10px 10px 0;
     }
     .topic-search-links {
-        margin-bottom: 3em;
+        margin-bottom: 2.5em;
     }
 
     .eea-input-query {
