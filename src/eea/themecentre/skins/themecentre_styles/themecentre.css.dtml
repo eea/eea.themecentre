@@ -503,11 +503,11 @@ body {
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     #themes-megatopics-area .portlet-megatopic {
         flex: auto;
-        width: 310px;
+        width: 290px;
     }
 
     #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
-        width: 285px;
+        width: 330px;
     }
     /* input within IE appends an x on right of input which overlaps our search icon */
     input[type=text]::-ms-clear {
