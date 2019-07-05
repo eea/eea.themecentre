@@ -405,7 +405,7 @@ body {
         background-color: #004B87;
         content: " ";
         display: block;
-        height: 150px;
+        height: 250px;
         left: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
@@ -503,7 +503,7 @@ body {
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     #themes-megatopics-area .portlet-megatopic {
         flex: auto;
-        width: 290px;
+        width: 295px;
     }
 
     #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
