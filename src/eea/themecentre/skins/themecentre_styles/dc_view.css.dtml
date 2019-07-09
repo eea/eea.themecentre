@@ -43,8 +43,9 @@
 
 /* dc_view specific fixes */
 .faceted-search input[type="text"] {
-   padding: 5px;
-   min-width: 40%;
+    padding: 5px;
+    min-width: 40%;
+    height: 32px;
 }
 
 .faceted-search input[type="submit"] {
