@@ -26,12 +26,6 @@ body {
 
 /***** Themes view (themes_view.pt) *****/
 
-/* 104478 fit megatopics on one line by bumping max width of visual-portal-wrapper
- * on resolutions of minimum 1280px */
-.template-themes_view #visual-portal-wrapper {
-    max-width: 1215px;
-}
-
 .themes-view-image-icon ul {
     font-weight: bold;
     list-style: none none !important;
