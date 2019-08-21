@@ -63,6 +63,7 @@ body {
     padding: 0;
 }
 /* #104468 hide related items on themes view*/
+.template-themes_view .documentExportActions,
 .template-themes_view #relatedItems,
 .template-themes_view #eea-versions-portlet {
     display: none;
@@ -114,6 +115,9 @@ body {
 /* @popular search */
 #topics-search {
     position: relative;
+}
+.topics-search-translations {
+    margin-top: 4em;
 }
 
 .topic-search-more-btn {
@@ -217,6 +221,16 @@ body {
     width: 100vw;
     z-index: -1;
 }
+
+#editors-choice-header {
+    text-align: center;
+}
+.eea-tiles {
+    justify-content: center;
+}
+.eea-tile {
+    max-width: 475px;
+}
 /* end @editors choice */
 
 
@@ -271,6 +285,7 @@ body {
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0;
+        width: 100%;
     }
 }
 

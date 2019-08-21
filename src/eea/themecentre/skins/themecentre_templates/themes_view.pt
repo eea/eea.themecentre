@@ -23,12 +23,9 @@
         lang lang|here/Language|string:en;
         is_en python:lang in ('en', '');">
 
-    <section id="topics-search" tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="python:search_items">
-        <div class="topic-search">
+    <section id="topics-search" tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="python:search_items" tal:attributes="class python: 'topics-search-translations' if not is_en else ''">
+        <div class="topic-search" tal:condition="is_en">
             <h2 i18n:translate="" class="topic-search-heading">Popular searches</h2>
-            <p i18n:translate="" class="mb-half">Based on the data gathered from search tendencies on our platform over time, we recommend the following keywords for faster navigation.</p>
-            <p i18n:translate="" class="mb-half">Clicking on a keyword will open the search result page for the desired keyword</p>
-
 
             <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
                      tal:define="more_items python:search_items[1]">
@@ -116,7 +113,7 @@
     </section>
 
     <section id="editors-choice" tal:define="promos view/getThemeIndexPromotions" tal:condition="python:promos">
-        <h1 i18n:translate="" class="h1" id="editors-choice-header">Editor's choice</h1>
+        <h1 i18n:translate="" class="h1" id="editors-choice-header">Featured content</h1>
         <div class="eea-tiles">
             <div class="eea-tile" tal:repeat="promo_list promos">
                 <div class="eea-tileInner">
