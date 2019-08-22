@@ -4,6 +4,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
 import DateTime
+import random
 
 try:
     from eea.promotion import interfaces as HAS_PROMOTION
@@ -113,6 +114,21 @@ class ThemesView(BrowserView):
 
     def getThemeIndexPromotions(self, noOfItems=3):
         """ Get the last 3 promotions to show on editors choice section """
+        cPromos = []
+        lang = self.context.getLanguage()
+        # 108571 get 3 random results for translations
+        if lang != 'en':
+            fh = self.context.restrictedTraverse('@@frontpage_highlights')
+            all_products = random.sample(fh.getAllProducts(), k=noOfItems)
+            for brain in all_products:
+                obj = brain.getObject()
+                themes_object = obj.restrictedTraverse('@@themes-object', None)
+                themes = {}
+                if themes_object:
+                    themes = themes_object.short_items()
+                cPromos.append((brain, themes))
+            return cPromos
+
         if not HAS_PROMOTION:
             return
         query = {
@@ -132,7 +148,6 @@ class ThemesView(BrowserView):
         context = self.context.aq_inner
         catalog = getToolByName(context, 'portal_catalog')
         result = catalog(query)
-        cPromos = []
         for brain in result:
             obj = brain.getObject()
             promo = HAS_PROMOTION.IPromotion(obj)

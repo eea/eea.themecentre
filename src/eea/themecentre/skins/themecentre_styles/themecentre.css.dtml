@@ -63,7 +63,6 @@ body {
     padding: 0;
 }
 /* #104468 hide related items on themes view*/
-.template-themes_view .documentExportActions,
 .template-themes_view #relatedItems,
 .template-themes_view #eea-versions-portlet {
     display: none;
@@ -115,9 +114,7 @@ body {
 /* @popular search */
 #topics-search {
     position: relative;
-}
-.topics-search-translations {
-    margin-top: 4em;
+    padding-top: 4em;
 }
 
 .topic-search-more-btn {
@@ -429,14 +426,10 @@ body {
     /* elements needed to have white color since they receive the full width bg*/
     .template-themes_view .documentFirstHeading,
     .topic-search,
-    .topic-search-heading,
     .template-themes_view #article-language > a,
     .template-themes_view #article-language .eea-icon,
     .template-themes_view #languageCodes,
-    #popular-searches,
     .template-themes_view .content-header .documentByLine,
-    .topic-search-more-btn,
-    .topic-search-more-btn:hover,
     .template-themes_view #content-history > a,
     .template-themes_view .documentByLineAuthor > a
     {
@@ -475,7 +468,7 @@ body {
     }
 }
 
-@media screen and (min-width: 768px) and (max-width:860px) {
+@media screen and (min-width: 768px) and (max-width:899px) {
     #themes-megatopics-area {
         margin: 0 auto;
         width: 90%;
@@ -506,6 +499,12 @@ body {
     }
 }
 
+
+@media screen and (min-width: 1100px) {
+    .themes-megatopics-area-translations .portlet-megatopic {
+        flex: none;
+    }
+}
 
 /* 102564 IE11 hack as the hiddenStructure without display will count
 * for justify-content: space-between since it doesn't support clip-path */
