@@ -24,7 +24,41 @@ body {
     width:47%;
 }
 
+/***** Themecentre view (themecentre_view.pt) *****/
+.topic-img {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100vw;
+    max-width: none !important;
+    right: 0;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.template-themecentre_view .whatsnew-listing {
+    background-color: #FFF;
+}
+.template-themecentre_view .documentFirstHeading,
+.template-themecentre_view .topic-intro,
+.template-themecentre_view .topic-intro.moreLink:before {
+   color: #FFF;
+}
+.template-themecentre_view #browse-catalogue,
+.template-themecentre_view .whatsnew-listing > h3 {
+    padding: 1em 0 0 1em;
+    margin-bottom: 0.5em;
+}
+
+
 /***** Themes view (themes_view.pt) *****/
+
+.template-themecentre_view .progressbar-viewlet,
+.template-themes_view .progressbar-viewlet
+{
+    display: none;
+}
 
 .themes-view-image-icon ul {
     font-weight: bold;

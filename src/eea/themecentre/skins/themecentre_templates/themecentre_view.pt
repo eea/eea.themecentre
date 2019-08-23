@@ -1,4 +1,4 @@
-<tal:block tal:define="foo python:request.set('disable_plone.leftcolumn', 1);" />
+<tal:block tal:define="foo python:request.set('disable_plone.rightcolumn', 1);"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
@@ -15,21 +15,13 @@
             Title or id
         </h1>
 
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
-        <p class="documentDescription">
-           <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
-           <a tal:condition="python:context.has_key('intro')" class="internal-link moreLink" href="intro" i18n:translate="">More</a>
-        </p>
-        <div class="visualClear"><!--&nbsp; --></div>
-                    <!-- keyfacts slideshow-->
-                    <metal:keyfacts tal:define="view nocall:context/@@soer_frontpage_logic;
-                                                background_img_path python:context.getCanonical().absolute_url() + '/theme_image/image_large'">
-                            <div metal:use-macro="here/soer_frontpage/macros/keyfacts-slider">
-                                keyfacts
-                            </div>
-                    </metal:keyfacts>
+        <div class="topic-intros">
+            <a href="#" i18n:translate="" class="moreLink topic-intro">Intro</a>
+            <a href="#" i18n:translate="" class="moreLink topic-intro">EU policies</a>
+            <a href="#" i18n:translate="" class="moreLink topic-intro">EEA activities</a>
+        </div>
 
-        <div class="visualClear"><!--&nbsp; --></div>
+        <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img" />
 
         <div metal:define-macro="subtopics" class="" id="subtopics"
                 tal:define="themecentre_view context/@@themecentre_utils;
