@@ -142,8 +142,64 @@ class ThemecentreUtils(BrowserView):
         name = [name.capitalize() if name else ''].pop()
         return name
 
+    def getPromotedItem(self, ctype=None, itype=None):
+        """ get promoted item
+        """
+        query = {
+            'object_provides': {
+                'query': [
+                    'eea.promotion.interfaces.IPromoted',
+                    itype
+                ],
+            },
+            'review_state': 'published',
+            'sort_on': 'effective',
+            'sort_order': 'reverse',
+            'portal_type': ctype
+        }
+
+        context = self.context.aq_inner
+        catalog = getToolByName(context, 'portal_catalog')
+        result = catalog(query)
+        item = None
+        for brain in result:
+            item = brain.getObject()
+            break
+        return item
+
     def getThemeName(self):
         """ Get theme name of the context to construct the url to the
             themecentre and the datacentre page
         """
         return getTheme(self.context.aq_inner)
+
+    def getStorytelling(self):
+        """ Get Latest Storytelling items for themecentre
+        """
+        return []
+
+    def getGISMaps(self):
+        """ Get Latest GIS Maps items for themecentre
+        """
+        return []
+
+    def getIndicators(self):
+        """ Get Latest indicators items for themecentre
+        """
+        return []
+
+    def getNews(self):
+        """ Get Latest news items for themecentre
+        """
+        return []
+
+    def getPublications(self):
+        """ Get Latest publication items for themecentre
+        """
+        return self.getPromotedItem('Publication')
+
+    def getMultimedia(self):
+        """ Get Latest multimedia items for themecentre
+        """
+        return self.getPromotedItem(itype='Products.EEAContentTypes.'
+                                          'content.interfaces.ICloudVideo')

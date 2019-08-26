@@ -35,8 +35,8 @@
                         soer_topic python:soer_topic[0].getObject();
                         soer_topics python:soer_topic.queryCatalog()">
                     <h4 tal:content="soer_topic/Title">Folder links</h4>
-                    <ul class="border-bottom-spacer">
-                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics">
+                    <ul class="border-bottom-spacer inline-list-style ma-0">
+                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics" class="subtopic-list-item">
                             <a tal:attributes="href folder/getURL; title folder/Title;"
                                     tal:content="folder/Title">Folder links</a>
                         </li>
@@ -44,14 +44,42 @@
                 </tal:defines>
             </tal:existssoer>
 
-            <ul tal:condition="folders">
+            <ul tal:condition="folders" class="inline-list-style ma-0">
                 <li tal:repeat="folder folders">
                     <a tal:attributes="href folder/getURL; title folder/Title;"
-                            tal:content="folder/Title">Folder links</a>
+                            tal:content="folder/Title" class="light-color">Folder links</a>
                 </li>
             </ul>
 
         </div>
+
+        <!--?    themecentre sections     -->
+        <metal:sections tal:replace="nothing">
+        <section class="themecentre-section section-storytelling"
+             tal:define="stories view/getStorytelling" tal:condition="stories">
+        </section>
+
+        <section class="themecentre-section section-gismap"
+                 tal:define="gismaps view/getGISMaps" tal:condition="gismaps">
+        </section>
+
+        <section class="themecentre-section section-indicators"
+                 tal:define="indicators view/getIndicators" tal:condition="indicators">
+        </section>
+
+        <section class="themecentre-section section-news"
+                 tal:define="news view/getNews" tal:condition="news">
+        </section>
+
+        <section class="themecentre-section section-publications"
+                 tal:define="publications view/getPublications" tal:condition="publications">
+        </section>
+
+        <section class="themecentre-section section-multimedia"
+                 tal:define="multimedia view/getMultimedia" tal:condition="multimedia">
+        </section>
+        </metal:sections>
+        <!--?   end themecentre sections     -->
 
 
         <metal:portlets use-macro="context/themecentre_overview/macros/main" />
