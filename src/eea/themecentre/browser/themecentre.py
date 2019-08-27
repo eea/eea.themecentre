@@ -19,7 +19,7 @@ try:
     from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
     from eea.mediacentre.interfaces import IMediaCentre
 except ImportError:
-    MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
+    MEDIA_SEARCH_KEY = "eea.mediacentre.search"
 
     class IMediaCentre(Interface):
         """ IMediaCentre """
@@ -149,7 +149,7 @@ class ThemecentreUtils(BrowserView):
             'object_provides': {
                 'query': [
                     'eea.promotion.interfaces.IPromoted',
-                    itype
+                    itype if itype else ''
                 ],
             },
             'review_state': 'published',
@@ -176,30 +176,37 @@ class ThemecentreUtils(BrowserView):
     def getStorytelling(self):
         """ Get Latest Storytelling items for themecentre
         """
-        return []
+        return self.context.getFolderContents(contentFilter={
+                            'portal_type': 'Storytelling'}, full_objects=True)
 
     def getGISMaps(self):
         """ Get Latest GIS Maps items for themecentre
         """
-        return []
+        return self.getPromotedItem(ctype="GIS Application")
 
     def getIndicators(self):
         """ Get Latest indicators items for themecentre
         """
-        return []
+        data_maps = self.context.restrictedTraverse("data_and_maps_logic")
+        return data_maps.getLatestIndicators()
 
     def getNews(self):
         """ Get Latest news items for themecentre
         """
-        return []
+        frontpage = self.context.restrictedTraverse("frontpage_highlights")
+        return frontpage.getLatest("news")
 
     def getPublications(self):
         """ Get Latest publication items for themecentre
         """
-        return self.getPromotedItem('Publication')
+        return self.getPromotedItem("Report")
 
     def getMultimedia(self):
         """ Get Latest multimedia items for themecentre
         """
-        return self.getPromotedItem(itype='Products.EEAContentTypes.'
-                                          'content.interfaces.ICloudVideo')
+        return self.getPromotedItem(itype="eea.mediacentre.interfaces.IVideo")
+
+    def getTableauDashboard(self):
+        """ Get Latest Tableau Dashboard items for themecentre
+        """
+        return self.getPromotedItem(ctype="Dashboard")

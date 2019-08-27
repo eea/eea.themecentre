@@ -9,7 +9,10 @@
 <body>
 
     <div metal:fill-slot="main" class="content-core">
-    <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
+    <metal:main-macro define-macro="main" tal:define="
+            object_title context/@@plone_context_state/object_title;
+            themecentre_view context/@@themecentre_utils;
+            ">
 
         <h1 tal:content="object_title" class="documentFirstHeading">
             Title or id
@@ -24,7 +27,7 @@
         <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img" />
 
         <div metal:define-macro="subtopics" class="" id="subtopics"
-                tal:define="themecentre_view context/@@themecentre_utils;
+                tal:define="
                 folders themecentre_view/getSubtopics;
                 soer_topic_path python: '/' + context.absolute_url(1) + '/briefings-soer';
                 soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);" tal:condition="python:soer_topic or folders">
@@ -54,31 +57,42 @@
         </div>
 
         <!--?    themecentre sections     -->
-        <metal:sections tal:replace="nothing">
         <section class="themecentre-section section-storytelling"
-             tal:define="stories view/getStorytelling" tal:condition="stories">
+             tal:define="stories themecentre_view/getStorytelling" tal:condition="stories">
         </section>
 
         <section class="themecentre-section section-gismap"
-                 tal:define="gismaps view/getGISMaps" tal:condition="gismaps">
+                 tal:define="gismaps themecentre_view/getGISMaps" tal:condition="gismaps">
+        </section>
+
+        <section class="themecentre-section section-dashboard"
+                 tal:define="dashboard themecentre_view/getTableauDashboard" tal:condition="dashboard">
+            <h2 tal:content="dashboard/absolute_url"></h2>
         </section>
 
         <section class="themecentre-section section-indicators"
-                 tal:define="indicators view/getIndicators" tal:condition="indicators">
+                 tal:define="indicators themecentre_view/getIndicators" tal:condition="indicators">
+            <tal:items tal:repeat="indicator indicators">
+                <h1 tal:content="indicator/Title"></h1>
+                <h2 tal:content="indicator/getURL"></h2>
+            </tal:items>
         </section>
 
         <section class="themecentre-section section-news"
-                 tal:define="news view/getNews" tal:condition="news">
+                 tal:define="news themecentre_view/getNews" tal:condition="news">
         </section>
 
         <section class="themecentre-section section-publications"
-                 tal:define="publications view/getPublications" tal:condition="publications">
+                 tal:define="publication themecentre_view/getPublications" tal:condition="publication">
+                <h2 tal:content="publication/absolute_url"></h2>
         </section>
 
         <section class="themecentre-section section-multimedia"
-                 tal:define="multimedia view/getMultimedia" tal:condition="multimedia">
+                 tal:define="multimedia themecentre_view/getMultimedia" tal:condition="multimedia">
+            <h2 tal:content="multimedia/Title"></h2>
+            <a href="#">Multimedia</a>
+            <img tal:attributes="src string:${multimedia/absolute_url}/image_fullwidth" />
         </section>
-        </metal:sections>
         <!--?   end themecentre sections     -->
 
 
