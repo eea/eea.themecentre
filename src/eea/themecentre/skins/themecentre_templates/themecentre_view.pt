@@ -24,7 +24,9 @@
             <a href="#" i18n:translate="" class="moreLink topic-intro">EEA activities</a>
         </div>
 
-        <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img" />
+        <div class="topic-img-container">
+            <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img" />
+        </div>
 
         <div metal:define-macro="subtopics" class="" id="subtopics"
                 tal:define="
@@ -62,16 +64,20 @@
         </section>
 
         <section class="themecentre-section section-gismap"
-                 tal:define="gismaps themecentre_view/getPromotedGISMap" tal:condition="gismaps">
+                 tal:define="gismap themecentre_view/getPromotedGISMap" tal:condition="gismap">
+            <h2 tal:content="gismap/Title"></h2>
+            <tal:block tal:replace="structure gismap/gis_inline" />
         </section>
 
         <section class="themecentre-section section-dashboard"
                  tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
-            <h2 tal:content="dashboard/absolute_url"></h2>
+            <h2 tal:content="dashboard/Title"></h2>
+            <tal:embed  content="structure dashboard/embed" />
         </section>
 
         <section class="themecentre-section section-indicators"
                  tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
+            <a href="#">Indicators</a>
             <tal:items tal:repeat="indicator indicators">
                 <h1 tal:content="indicator/Title"></h1>
                 <h2 tal:content="indicator/getURL"></h2>
@@ -90,7 +96,9 @@
                  tal:define="multimedia themecentre_view/getPromotedMultimedia" tal:condition="multimedia">
             <h2 tal:content="multimedia/Title"></h2>
             <a href="#">Multimedia</a>
-            <img tal:attributes="src string:${multimedia/absolute_url}/image_fullwidth" />
+            <a  tal:define="objhref multimedia/absolute_url; cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl or objhref" target="_blank">
+                <img tal:attributes="src string:${objhref}/image_fullwidth" />
+            </a>
         </section>
         <!--?   end themecentre sections     -->
 

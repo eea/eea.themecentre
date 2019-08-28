@@ -23,6 +23,11 @@ except ImportError:
 
     class IMediaCentre(Interface):
         """ IMediaCentre """
+try:
+    from eea.promotion.interfaces import IPromotion
+except ImportError:
+    class IPromotion(Interface):
+        """ IPromotion """
 
 ENABLE = 1  # Manual mode from ATContentTypes.lib.constraintypes
 
@@ -142,21 +147,24 @@ class ThemecentreUtils(BrowserView):
         name = [name.capitalize() if name else ''].pop()
         return name
 
-    def getPromotedItem(self, ctype=None, itype=None):
+    def getPromotedItem(self, ptype=None, itype=None):
         """ get promoted item
         """
         query = {
             'object_provides': {
                 'query': [
-                    'eea.promotion.interfaces.IPromoted',
-                    itype if itype else ''
+                    'eea.promotion.interfaces.IPromoted'
                 ],
             },
             'review_state': 'published',
             'sort_on': 'effective',
             'sort_order': 'reverse',
-            'portal_type': ctype
         }
+        if itype:
+            query['object_provides']['operator'] = 'and'
+            query['object_provides']['query'].append(itype)
+        if ptype:
+            query['portal_type'] = ptype
 
         context = self.context.aq_inner
         catalog = getToolByName(context, 'portal_catalog')
@@ -164,6 +172,11 @@ class ThemecentreUtils(BrowserView):
         item = None
         for brain in result:
             item = brain.getObject()
+            promo = IPromotion(item)
+            if not promo.display_on_themepage:
+                continue
+            if not promo.active:
+                continue
             break
         return item
 
@@ -202,7 +215,7 @@ class ThemecentreUtils(BrowserView):
     def getPromotedGISMap(self):
         """ Get Latest promoted GIS Maps items for themecentre
         """
-        return self.getPromotedItem(ctype="GIS Application")
+        return self.getPromotedItem(ptype="GIS Application")
 
 
     def getPromotedMultimedia(self):
@@ -213,4 +226,4 @@ class ThemecentreUtils(BrowserView):
     def getPromotedTableauDashboard(self):
         """ Get Latest promoted Tableau Dashboard item for themecentre
         """
-        return self.getPromotedItem(ctype="Dashboard")
+        return self.getPromotedItem(ptype="Dashboard")
