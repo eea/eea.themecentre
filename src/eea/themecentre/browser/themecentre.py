@@ -173,40 +173,44 @@ class ThemecentreUtils(BrowserView):
         """
         return getTheme(self.context.aq_inner)
 
-    def getStorytelling(self):
+    def getLatestStorytelling(self):
         """ Get Latest Storytelling items for themecentre
         """
         return self.context.getFolderContents(contentFilter={
                             'portal_type': 'Storytelling'}, full_objects=True)
 
-    def getGISMaps(self):
-        """ Get Latest GIS Maps items for themecentre
-        """
-        return self.getPromotedItem(ctype="GIS Application")
-
-    def getIndicators(self):
+    def getLatestIndicators(self):
         """ Get Latest indicators items for themecentre
         """
         data_maps = self.context.restrictedTraverse("data_and_maps_logic")
         return data_maps.getLatestIndicators()
 
-    def getNews(self):
+    def getLatestNews(self):
         """ Get Latest news items for themecentre
         """
         frontpage = self.context.restrictedTraverse("frontpage_highlights")
-        return frontpage.getLatest("news")
+        return frontpage.getLatest("newsandarticles",
+                                   products_category='getThemecentreProducts')
 
-    def getPublications(self):
-        """ Get Latest publication items for themecentre
+    def getLatestPublications(self):
+        """ Get Latest publications items for themecentre
         """
-        return self.getPromotedItem("Report")
+        frontpage = self.context.restrictedTraverse("frontpage_highlights")
+        return frontpage.getLatest("publications",
+                                   products_category='getThemecentreProducts')
 
-    def getMultimedia(self):
-        """ Get Latest multimedia items for themecentre
+    def getPromotedGISMap(self):
+        """ Get Latest promoted GIS Maps items for themecentre
+        """
+        return self.getPromotedItem(ctype="GIS Application")
+
+
+    def getPromotedMultimedia(self):
+        """ Get Latest promoted multimedia item for themecentre
         """
         return self.getPromotedItem(itype="eea.mediacentre.interfaces.IVideo")
 
-    def getTableauDashboard(self):
-        """ Get Latest Tableau Dashboard items for themecentre
+    def getPromotedTableauDashboard(self):
+        """ Get Latest promoted Tableau Dashboard item for themecentre
         """
         return self.getPromotedItem(ctype="Dashboard")

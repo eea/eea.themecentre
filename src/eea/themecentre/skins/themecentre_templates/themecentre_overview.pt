@@ -15,6 +15,7 @@
             <div class="whatsnew-listing">
                 <h3 i18n:translate="">Browse catalogue</h3>
                  <tal:datapage tal:define="datapage string:themecentre;
+                                           getProducts string:getThemecentreProducts;
                                            more_href_datamaps string:dc;
                                            more_href string:help/advanced-search#c6=${context/getId}">
                     <div metal:use-macro="here/frontpage_view/macros/whatsnew-gallery">

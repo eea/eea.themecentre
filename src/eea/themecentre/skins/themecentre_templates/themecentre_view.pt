@@ -58,20 +58,20 @@
 
         <!--?    themecentre sections     -->
         <section class="themecentre-section section-storytelling"
-             tal:define="stories themecentre_view/getStorytelling" tal:condition="stories">
+             tal:define="stories themecentre_view/getLatestStorytelling" tal:condition="stories">
         </section>
 
         <section class="themecentre-section section-gismap"
-                 tal:define="gismaps themecentre_view/getGISMaps" tal:condition="gismaps">
+                 tal:define="gismaps themecentre_view/getPromotedGISMap" tal:condition="gismaps">
         </section>
 
         <section class="themecentre-section section-dashboard"
-                 tal:define="dashboard themecentre_view/getTableauDashboard" tal:condition="dashboard">
+                 tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
             <h2 tal:content="dashboard/absolute_url"></h2>
         </section>
 
         <section class="themecentre-section section-indicators"
-                 tal:define="indicators themecentre_view/getIndicators" tal:condition="indicators">
+                 tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
             <tal:items tal:repeat="indicator indicators">
                 <h1 tal:content="indicator/Title"></h1>
                 <h2 tal:content="indicator/getURL"></h2>
@@ -79,16 +79,15 @@
         </section>
 
         <section class="themecentre-section section-news"
-                 tal:define="news themecentre_view/getNews" tal:condition="news">
+                 tal:define="news themecentre_view/getLatestNews" tal:condition="news">
         </section>
 
         <section class="themecentre-section section-publications"
-                 tal:define="publication themecentre_view/getPublications" tal:condition="publication">
-                <h2 tal:content="publication/absolute_url"></h2>
+                 tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
         </section>
 
         <section class="themecentre-section section-multimedia"
-                 tal:define="multimedia themecentre_view/getMultimedia" tal:condition="multimedia">
+                 tal:define="multimedia themecentre_view/getPromotedMultimedia" tal:condition="multimedia">
             <h2 tal:content="multimedia/Title"></h2>
             <a href="#">Multimedia</a>
             <img tal:attributes="src string:${multimedia/absolute_url}/image_fullwidth" />
