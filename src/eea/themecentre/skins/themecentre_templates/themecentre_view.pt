@@ -11,6 +11,7 @@
     <div metal:fill-slot="main" class="content-core">
     <metal:main-macro define-macro="main" tal:define="
             object_title context/@@plone_context_state/object_title;
+            object_title_lowercase object_title/lower;
             themecentre_view context/@@themecentre_utils;
             ">
 
@@ -65,31 +66,82 @@
 
         <section class="themecentre-section section-gismap"
                  tal:define="gismap themecentre_view/getPromotedGISMap" tal:condition="gismap">
+            <a href="#">GIS Map Application</a>
             <h2 tal:content="gismap/Title"></h2>
             <tal:block tal:replace="structure gismap/gis_inline" />
+
+            <a href="" tal:attributes="href string:gis" class="readMore" i18n:translate="">
+                <span i18n:translate="">All GIS Map Application on</span>
+                <span i18n:translate="" tal:content="object_title_lowercase"></span>
+            </a>
         </section>
 
         <section class="themecentre-section section-dashboard"
                  tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
+            <a href="#">Dashboard</a>
             <h2 tal:content="dashboard/Title"></h2>
             <tal:embed  content="structure dashboard/embed" />
+
+            <a href="" tal:attributes="href string:interactive" class="readMore" i18n:translate="">
+                <span i18n:translate="">All Tableau Dashboards on</span>
+                <span i18n:translate="" tal:content="object_title_lowercase"></span>
+            </a>
         </section>
 
         <section class="themecentre-section section-indicators"
                  tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
             <a href="#">Indicators</a>
             <tal:items tal:repeat="indicator indicators">
-                <h1 tal:content="indicator/Title"></h1>
-                <h2 tal:content="indicator/getURL"></h2>
+                    <div class="card" tal:define="url indicator/getURL">
+                        <h2 tal:content="indicator/Title"></h2>
+                        <img src="" tal:attributes="src string:${url}/image_preview" alt="" />
+                        <a href="" tal:attributes="href url" class="readMore" i18n:translate="">Read more</a>
+                    </div>
             </tal:items>
+
+            <a href="" tal:attributes="href string:indicators" class="readMore" i18n:translate="">
+                <span i18n:translate="">All indicators on</span>
+                <span i18n:translate="" tal:content="object_title_lowercase"></span>
+            </a>
+
         </section>
 
         <section class="themecentre-section section-news"
                  tal:define="news themecentre_view/getLatestNews" tal:condition="news">
+            <a href="#">News</a>
+
+            <tal:items tal:repeat="snews news">
+                <div class="card">
+                    <h2 tal:content="snews/Title"></h2>
+                    <img src="" tal:attributes="src string:${snews/getURL}/image_preview" alt="" />
+                    <p tal:content="snews/Description"></p>
+                </div>
+                
+            </tal:items>
+
+            <a href="" tal:attributes="href string:indicators" class="readMore" i18n:translate="">
+                <span i18n:translate="">All News on</span>
+                <span i18n:translate="" tal:content="object_title_lowercase"></span>
+            </a>
         </section>
 
         <section class="themecentre-section section-publications"
                  tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
+            <a href="#">Publication</a>
+
+            <tal:items tal:repeat="publication publications">
+                <div class="card">
+                    <h2 tal:content="publication/Title"></h2>
+                    <img src="" tal:attributes="src string:${publication/getURL}/image_preview" alt="" />
+                    <p tal:content="publication/Description"></p>
+                </div>
+
+            </tal:items>
+
+            <a href="" tal:attributes="href string:publications" class="readMore" i18n:translate="">
+                <span i18n:translate="">All Publication on</span>
+                <span i18n:translate="" tal:content="object_title_lowercase"></span>
+            </a>
         </section>
 
         <section class="themecentre-section section-multimedia"
@@ -98,6 +150,11 @@
             <a href="#">Multimedia</a>
             <a  tal:define="objhref multimedia/absolute_url; cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl or objhref" target="_blank">
                 <img tal:attributes="src string:${objhref}/image_fullwidth" />
+            </a>
+
+            <a href="" tal:attributes="href string:multimedia" class="readMore" i18n:translate="">
+                <span i18n:translate="">All Multimedia on</span>
+                <span i18n:translate="" tal:content="object_title_lowercase"></span>
             </a>
         </section>
         <!--?   end themecentre sections     -->
