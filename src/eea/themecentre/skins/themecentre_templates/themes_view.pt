@@ -101,13 +101,13 @@
 
                 <div class="topic-search-links">
                     <tal:items tal:repeat="item python:search_items[0]">
-                        <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                        <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-radius eea-btn-light" tal:content="python:item[1]"></button>
                     </tal:items>
                     <tal:manykeywords tal:condition="python:more_items">
                         <a href="#" i18n:translate="" class="topic-search-more-btn js-eea-toggle inline-block"  data-target=".topic-search-extra">Show <span class="topic-search-more js-hidden-toggle" i18n:translate="">more</span><span class="topic-search-less js-hidden-toggle is-eea-hidden" i18n:translate="">less</span> keywords...</a>
                         <div class="topic-search-extra eea-collapsible" data-display="flex">
                             <tal:items tal:repeat="item more_items">
-                                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light" tal:content="python:item[1]"></button>
+                                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light eea-btn-radius" tal:content="python:item[1]"></button>
                             </tal:items>
                         </div>
                     </tal:manykeywords>
@@ -140,7 +140,7 @@
                             <div class="eea-tileMetadata">
                                 <div class="eea-tileTopic" >
                                     <tal:topics tal:repeat="theme themes">
-                                        <a href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink eea-btn eea-btn-light">Theme topic</a>
+                                        <a href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink eea-btn eea-btn-light eea-btn-radius">Theme topic</a>
                                     </tal:topics>
                                 </div>
 

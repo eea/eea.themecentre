@@ -37,6 +37,19 @@ body {
     margin-right: -50vw;
 }
 
+.themecentre-section {
+    margin: 1em 0;
+}
+.eea-card {
+    width: 350px;
+    float: left;
+    margin-right: 1em;
+}
+.section-footer {
+    clear: both;
+    text-align: right;
+}
+
 .template-themecentre_view .whatsnew-listing {
     background-color: #FFF;
 }
