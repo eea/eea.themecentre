@@ -36,9 +36,10 @@
                 tags string:${context/portal_url}/eea-custom-search.tags">
             <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
         </div>
+
     </section>
 
-    <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos" tal:attributes="class python:'themes-megatopics-area-translations' if not is_en else ''">
+  <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos" tal:attributes="class python:'themes-megatopics-area-translations' if not is_en else ''">
         <div class="eea-accordion-panels eea-accordion-panels-inverse">
             <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo promos">
                 <tal:defines
@@ -90,8 +91,8 @@
         </div>
     </section>
 
-    <section id="themes-search-shortcuts" tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="python:search_items">
-        <div class="topic-search" tal:condition="is_en">
+    <section id="themes-search-shortcuts" tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="python:search_items" class="content-header">
+        <div class="topic-search clearfix" tal:condition="is_en">
             <h2 i18n:translate="" class="topic-search-heading">Popular searches</h2>
 
             <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
@@ -104,12 +105,9 @@
                         <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-radius eea-btn-light" tal:content="python:item[1]"></button>
                     </tal:items>
                     <tal:manykeywords tal:condition="python:more_items">
-                        <a href="#" i18n:translate="" class="topic-search-more-btn js-eea-toggle inline-block"  data-target=".topic-search-extra">Show <span class="topic-search-more js-hidden-toggle" i18n:translate="">more</span><span class="topic-search-less js-hidden-toggle is-eea-hidden" i18n:translate="">less</span> keywords...</a>
-                        <div class="topic-search-extra eea-collapsible" data-display="flex">
                             <tal:items tal:repeat="item more_items">
                                 <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light eea-btn-radius" tal:content="python:item[1]"></button>
                             </tal:items>
-                        </div>
                     </tal:manykeywords>
                 </div>
             </form>

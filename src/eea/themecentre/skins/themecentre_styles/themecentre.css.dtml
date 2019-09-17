@@ -159,10 +159,6 @@ body {
     padding-top: 4em;
 }
 
-.topic-search-more-btn {
-    font-style: italic;
-    font-size: 12px;
-}
 
 .topic-search-btn {
     font-size: 12px;
@@ -341,11 +337,6 @@ body {
     }
 }
 
-@media screen and (max-width: 767px) {
-    .topic-search-more-btn {
-        margin: 1em 0;
-    }
-}
 @media screen and (min-width: 768px) {
     #topics-search {
         margin-bottom: &dtml-padding-double;;
@@ -381,11 +372,11 @@ body {
 
 }
 @media screen and (max-width: 767px) {
-    .topic-search-links,
-    .topic-search-extra {
+    .topic-search-links {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-bottom: 2em;
     }
 
     .topic-search-btn {
@@ -393,16 +384,6 @@ body {
         width: 46%;
     }
 
-    .topic-search-more-btn {
-        display: block;
-        text-align: center;
-        width: 100%;
-    }
-    .topic-search-extra {
-        margin-bottom: 1em;
-        width: 100%;
-    }
-    
     #topics-search .gsc-control-cse {
         position: relative;
         z-index: 1;
@@ -481,14 +462,15 @@ body {
     #topics-search .gsc-search-box {
         width: 95%;
     }
-    .topic-search-extra {
-        flex-wrap: wrap;
+    .topic-search {
+        padding: 2em 0;
+    }
+    .topic-search-heading {
+        margin-top: 0;
+        color: #FFF;
     }
     .topic-search-btn {
        margin: 5px 10px 10px 0;
-    }
-    .topic-search-links {
-        margin-bottom: 2.5em;
     }
 
     .eea-input-query {
