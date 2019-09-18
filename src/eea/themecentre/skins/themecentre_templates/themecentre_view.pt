@@ -61,18 +61,17 @@
         </div>
 
         <!--?    themecentre sections     -->
-        <section class="themecentre-section section-storytelling"
+        <section class="themecentre-section section-storytelling overflow_auto"
              tal:define="storytelling themecentre_view/getLatestStorytelling" tal:condition="storytelling">
-            <div class="storytelling-wrapper" tal:define="relations storytelling/@@relations">
-                <h2 tal:content="storytelling/Title"></h2>
-                <h2 tal:content="storytelling/Description"></h2>
-                <tal:items tal:repeat="relation relations">
-                    <div class="eea-card" tal:define="url relation/getURL">
+            <div class="storytelling-wrapper" tal:define="storyitem python:storytelling[0]; relations_macro nocall:storyitem/@@eea.relations.macro; relations relations_macro/forward;">
+                <h2 tal:content="storyitem/Title"></h2>
+                <tal:items tal:repeat="relation python:relations[0][1]" tal:condition="relations">
+                    <div class="eea-card" tal:define="url relation/absolute_url; relation_with_description python: repeat['relation'].index == 2" tal:attributes="class python:'eea-card' if not relation_with_description else 'eea-card eea-card--fullwidth'">
                         <div class="eea-card-header">
                             <h2 tal:content="relation/Title"></h2>
                             <img src="" tal:attributes="src string:${url}/image_preview" alt="" />
                         </div>
-                        <div class="eea-card-body" tal:condition="python: repeat.index == 3">
+                        <div class="eea-card-body" tal:condition="python: relation_with_description">
                             <p tal:content="relation/Description"></p>
                         </div>
                     </div>
