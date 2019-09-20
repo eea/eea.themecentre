@@ -63,27 +63,32 @@
         <!--?    themecentre sections     -->
         <section class="themecentre-section section-storytelling overflow_auto"
              tal:define="storytelling themecentre_view/getLatestStorytelling" tal:condition="storytelling">
-            <div class="storytelling-wrapper" tal:define="storyitem python:storytelling[0]; relations_macro nocall:storyitem/@@eea.relations.macro; relations_list relations_macro/forward;">
-                <h2 tal:content="storyitem/Title"></h2>
-                <tal:items tal:repeat="relation relations" tal:condition="relations_list"
-                          tal:define="relations python:relations_list[0][1];">
-                  <tal:defines tal:define="num_of_relations python: len(relations);
-                      titles python:storyitem.getStory_titles().split('\r\n');
-                      repeat_num python: repeat['relation'].index;
-                      titles_len python: len(titles);">
-                    <div class="eea-card" tal:define="url relation/absolute_url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--fullwidth'">
-                      <div class="eea-card-header">
-                        <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation.Title()"></h2>
-                        <img src="" tal:attributes="src string:${url}/${image_scale}" alt=""
-                             tal:define="image_scale python: 'image_preview' if not fullwidth else 'image_fullwidth'" />
-                      </div>
-                      <div class="eea-card-body" tal:condition="fullwidth">
-                        <p tal:content="relation/Description"></p>
-                      </div>
-                    </div>
-                  </tal:defines>
-                </tal:items>
+          <div class="storytelling-wrapper" tal:define="storyitem python:storytelling[0];
+              relations storyitem/getRelatedItemsRaw;">
+            <div class="storytelling-header">
+              <h2 tal:content="storyitem/Title"></h2>
+              <p tal:content="storyitem/Description"></p>
             </div>
+            <div class="storytelling-body">
+              <tal:items tal:repeat="relation relations" tal:condition="relations">
+                <tal:defines tal:define="num_of_relations python: len(relations);
+                    titles python:storyitem.getStory_titles().split('\r\n');
+                    repeat_num python: repeat['relation'].index;
+                    titles_len python: len(titles);">
+                  <div class="eea-card" tal:define="url relation/url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--fullwidth'">
+                    <div class="eea-card-header">
+                      <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
+                      <img src="" tal:attributes="src string:${url}/${image_scale}" alt=""
+                           tal:define="image_scale python: 'image_preview' if not fullwidth else 'image_fullwidth'" />
+                    </div>
+                    <div class="eea-card-body" tal:condition="fullwidth">
+                      <p tal:replace="structure storyitem/full_story_description"></p>
+                    </div>
+                  </div>
+                </tal:defines>
+              </tal:items>
+            </div>
+          </div>
         </section>
 
         <section class="themecentre-section section-gismap"
