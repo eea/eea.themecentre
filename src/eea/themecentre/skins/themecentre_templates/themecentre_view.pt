@@ -27,7 +27,7 @@
 
         <div class="topic-img-container">
 <!--?            <div class="topic-img-bg lazy" tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'"></div>-->
-            <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img" />
+            <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img skip_lazy" />
         </div>
 
         <div metal:define-macro="subtopics" class="" id="subtopics"
@@ -92,15 +92,12 @@
         </section>
 
         <section class="themecentre-section section-gismap"
-                 tal:define="gismap themecentre_view/getPromotedGISMap; global lazy_load python:True" tal:condition="gismap">
+                 tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
             <div class="section-type">
                 <a href="#" class="eea-btn eea-btn-md eea-btn-multimedia">GIS Map Application</a>
             </div>
             <h2 tal:content="gismap/Title"></h2>
-
-          <tal:defines tal:define="global lazy_load python:True">
-            <tal:block tal:replace="structure gismap/gis_inline" />
-          </tal:defines>
+            <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src')" />
 
             <a href="" tal:attributes="href string:gis" class="eea-btn moreLink eea-btn-md eea-btn-multimedia" i18n:translate="">
                 <span i18n:translate="">All GIS Map Application on</span>
@@ -114,7 +111,7 @@
                 <a href="#" class="eea-btn eea-btn-md eea-btn-multimedia">Dashboard</a>
             </div>
             <h2 tal:content="dashboard/Title"></h2>
-            <tal:embed  content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
+            <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
 
             <div class="section-footer">
                 <a href="" tal:attributes="href string:interactive" class="eea-btn moreLink eea-btn-md eea-btn-multimedia" i18n:translate="">
