@@ -26,7 +26,7 @@
         </div>
 
         <div class="topic-img-container">
-<!--?            <div class="topic-img-bg lazy" tal:attributes="data-src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'"></div>-->
+<!--?            <div class="topic-img-bg lazy" tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'"></div>-->
             <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img" />
         </div>
 
@@ -78,8 +78,8 @@
                   <div class="eea-card" tal:define="url relation/url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--fullwidth'">
                     <div class="eea-card-header">
                       <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
-                      <img src="" tal:attributes="src string:${url}/${image_scale}" alt=""
-                           tal:define="image_scale python: 'image_preview' if not fullwidth else 'image_fullwidth'" />
+                      <img tal:attributes="src string:${url}/${image_scale}" alt=""
+                           tal:define="image_scale python: 'image_preview' if not fullwidth else 'image_fullwidth'"  />
                     </div>
                     <div class="eea-card-body" tal:condition="fullwidth">
                       <p tal:replace="structure storyitem/full_story_description"></p>
@@ -92,12 +92,15 @@
         </section>
 
         <section class="themecentre-section section-gismap"
-                 tal:define="gismap themecentre_view/getPromotedGISMap" tal:condition="gismap">
+                 tal:define="gismap themecentre_view/getPromotedGISMap; global lazy_load python:True" tal:condition="gismap">
             <div class="section-type">
                 <a href="#" class="eea-btn eea-btn-md eea-btn-multimedia">GIS Map Application</a>
             </div>
             <h2 tal:content="gismap/Title"></h2>
+
+          <tal:defines tal:define="global lazy_load python:True">
             <tal:block tal:replace="structure gismap/gis_inline" />
+          </tal:defines>
 
             <a href="" tal:attributes="href string:gis" class="eea-btn moreLink eea-btn-md eea-btn-multimedia" i18n:translate="">
                 <span i18n:translate="">All GIS Map Application on</span>
@@ -111,7 +114,7 @@
                 <a href="#" class="eea-btn eea-btn-md eea-btn-multimedia">Dashboard</a>
             </div>
             <h2 tal:content="dashboard/Title"></h2>
-            <tal:embed  content="structure dashboard/embed" />
+            <tal:embed  content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
 
             <div class="section-footer">
                 <a href="" tal:attributes="href string:interactive" class="eea-btn moreLink eea-btn-md eea-btn-multimedia" i18n:translate="">
@@ -130,7 +133,7 @@
                     <div class="eea-card" tal:define="url indicator/getURL">
                         <div class="eea-card-header">
                             <h2 tal:content="indicator/Title"></h2>
-                            <img src="" tal:attributes="src string:${url}/image_preview" alt="" />
+                            <img  tal:attributes="src string:${url}/image_preview"  alt="" />
                         </div>
                         <div class="eea-card-body">
                             <a href="" tal:attributes="href url" class="eea-btn moreLink eea-btn-md eea-btn-multimedia" i18n:translate="">Read more</a>
@@ -157,7 +160,7 @@
                 <div class="eea-card" tal:define="url snews/getURL">
                     <div class="eea-card-header">
                         <h2 tal:content="snews/Title"></h2>
-                        <img src="" tal:attributes="src string:${url}/image_preview" alt="" />
+                        <img  tal:attributes="src string:${url}/image_preview"  alt="" />
                     </div>
                     <div class="eea-card-body">
                         <p tal:content="snews/Description"></p>
@@ -187,7 +190,7 @@
                         <h2 tal:content="publication/Title"></h2>
                     </div>
                     <div class="eea-card-body">
-                        <img src="" tal:attributes="src string:${url}/image_preview" alt="" />
+                        <img tal:attributes="src string:${url}/image_preview"  alt="" />
 
                         <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.getEffectiveDate())">
                         <p tal:content="publication/Description"></p>
@@ -211,7 +214,7 @@
             </div>
             <h2 tal:content="multimedia/Title"></h2>
             <a  tal:define="objhref multimedia/absolute_url; cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl or objhref" target="_blank">
-                <img tal:attributes="src string:${objhref}/image_fullwidth" />
+                <img tal:attributes="src string:${objhref}/image_fullwidth"  />
             </a>
 
             <div class="section-footer">
