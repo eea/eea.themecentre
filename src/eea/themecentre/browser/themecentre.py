@@ -167,6 +167,7 @@ class ThemecentreUtils(BrowserView):
             query['portal_type'] = ptype
 
         context = self.context.aq_inner
+        query['getThemes'] = getTheme(context)
         catalog = getToolByName(context, 'portal_catalog')
         result = catalog(query)
         item = None
