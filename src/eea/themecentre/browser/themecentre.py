@@ -210,7 +210,7 @@ class ThemecentreUtils(BrowserView):
         """ Get Latest publications items for themecentre
         """
         frontpage = self.context.restrictedTraverse("frontpage_highlights")
-        frontpage.noOfEachProduct = 2
+        frontpage.noOfLow = 2
         return frontpage.searchResults("publications", searchtype='Report')
 
     def getPromotedGISMap(self):
