@@ -25,7 +25,9 @@ body {
 }
 
 /***** Themecentre view (themecentre_view.pt) *****/
-.topic-img {
+.topic-img-bg {
+    background-repeat: no-repeat;
+    height: 1000px;
     position: absolute;
     top: -30px;
     z-index: -1;
@@ -35,6 +37,19 @@ body {
     left: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    background-size: cover
+}
+
+.topic-img-bg:before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    background-color: rgba(0, 41, 60, 0.5);
 }
 
 .themecentre-section {

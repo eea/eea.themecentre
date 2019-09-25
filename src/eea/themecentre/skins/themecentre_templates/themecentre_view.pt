@@ -26,8 +26,7 @@
         </div>
 
         <div class="topic-img-container">
-<!--?            <div class="topic-img-bg lazy" tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'"></div>-->
-            <img tal:attributes="src python:context.getCanonical().absolute_url() + '/theme_image/image_panoramic'" alt="" class="topic-img skip_lazy" />
+            <div class="topic-img-bg" tal:attributes="style python:'background-image:url(' + context.getCanonical().absolute_url() + '/theme_image/image_panoramic' + ')'"></div>
         </div>
 
         <div metal:define-macro="subtopics" class="" id="subtopics"
@@ -79,7 +78,7 @@
                     <div class="eea-card-header">
                       <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
                       <img tal:attributes="src string:${url}/${image_scale}" alt=""
-                           tal:define="image_scale python: 'image_preview' if not fullwidth else 'image_fullwidth'"  />
+                           tal:define="image_scale python: 'image_preview' if not fullwidth else 'image_bodysize'"  />
                     </div>
                     <div class="eea-card-body" tal:condition="fullwidth">
                       <p tal:replace="structure storyitem/full_story_description"></p>
@@ -211,7 +210,7 @@
             </div>
             <h2 tal:content="multimedia/Title"></h2>
             <a  tal:define="objhref multimedia/absolute_url; cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl or objhref" target="_blank">
-                <img tal:attributes="src string:${objhref}/image_fullwidth"  />
+                <img tal:attributes="src string:${objhref}/image_bodysize"  />
             </a>
 
             <div class="section-footer">
