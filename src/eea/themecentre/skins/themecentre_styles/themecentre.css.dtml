@@ -55,11 +55,39 @@ body {
 .themecentre-section {
     margin: 1em 0;
 }
-.eea-card {
-    width: 350px;
-    float: left;
-    margin-right: 1em;
+
+.storytelling-wrapper {
+    width: 70%;
+    margin: 0 auto;
+    background-color: lightgray;
+    padding: 1.5em;
 }
+
+.storytelling-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 130%;
+    margin-left: -15%;
+}
+
+.eea-card {
+    display: inline-block;
+    background-color: lightblue;
+    padding: 1em;
+    margin: 1em 0 3em 0;
+    width: 46%;
+}
+.eea-card--fullwidth {
+    width: 100%;
+}
+
+.eea-card-header > img {
+    width: 100%;
+    margin-left: -3em;
+    margin-bottom: -3em;
+}
+
 .section-footer {
     clear: both;
     text-align: right;
