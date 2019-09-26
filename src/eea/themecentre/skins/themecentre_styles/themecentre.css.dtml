@@ -83,6 +83,13 @@ body {
     flex: 1;
 }
 
+.eea-card--double {
+    width: 46%;
+    flex: none;
+    max-width: inherit;
+    margin: 1em;
+}
+
 .eea-card:first-of-type {
    background-color: &dtml-corporateGreen;;
     color: &dtml-corporateGreen;;
@@ -99,6 +106,8 @@ body {
 }
 .eea-card--fullwidth {
     width: 100%;
+    max-width: 100%;
+    flex: none;
 }
 
 .eea-card-header > h2 {
@@ -125,11 +134,15 @@ body {
 
 .eea-card-image {
     width: 100%;
+    /*margin-bottom: -3em;*/
+    margin-right: 1em;
+}
+.eea-card-image--pull {
     margin-left: -3em;
-    margin-bottom: -3em;
 }
 .eea-card-body {
     color: #FFF;
+    display: flex;
 }
 
 .eea-btn.moreLink {
