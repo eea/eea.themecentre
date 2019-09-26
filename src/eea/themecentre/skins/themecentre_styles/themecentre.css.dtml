@@ -70,22 +70,70 @@ body {
     width: 130%;
     margin-left: -15%;
 }
-
+.eea-card-listing {
+   display: flex;
+    justify-content: space-between;
+}
 .eea-card {
     display: inline-block;
-    background-color: lightblue;
     padding: 1em;
     margin: 1em 0 3em 0;
-    width: 46%;
+    /*width: 46%;*/
+    max-width: 370px;
+    flex: 1;
+}
+
+.eea-card:first-of-type {
+   background-color: &dtml-corporateGreen;;
+    color: &dtml-corporateGreen;;
+}
+
+.eea-card:nth-of-type(2n) {
+    background-color: &dtml-corporateBlue;;
+    color: &dtml-corporateBlue;;
+}
+
+.eea-card:nth-of-type(3n) {
+    background-color: &dtml-corporateDarkOrange;;
+    color: &dtml-corporateDarkOrange;;
 }
 .eea-card--fullwidth {
     width: 100%;
 }
 
-.eea-card-header > img {
+.eea-card-header > h2 {
+    color: #FFF;
+}
+
+.eea-card-title-wrapper {
+    height: 75px;
+    overflow: hidden;
+}
+
+.eea-card-title {
+    color: #FFF;
+}
+.eea-card-image-wrapper {
+    height: 235px;
+    background-color: currentColor;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 120%;
+    margin: 1em 0 1em -10%;
+    border: 3px solid currentColor;
+}
+
+.eea-card-image {
     width: 100%;
     margin-left: -3em;
     margin-bottom: -3em;
+}
+.eea-card-body {
+    color: #FFF;
+}
+
+.eea-btn.moreLink {
+    color: #FFF !important;
 }
 
 .section-footer {
