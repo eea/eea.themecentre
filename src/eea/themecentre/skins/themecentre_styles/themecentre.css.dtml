@@ -57,7 +57,7 @@ body {
 }
 
 .storytelling-wrapper {
-    width: 70%;
+    width: 77%;
     margin: 0 auto;
     background-color: lightgray;
     padding: 1.5em;
@@ -75,6 +75,7 @@ body {
     justify-content: space-between;
 }
 .eea-card {
+    position: relative;
     display: inline-block;
     padding: 1em;
     margin: 1em 0 3em 0;
@@ -88,6 +89,9 @@ body {
     flex: none;
     max-width: inherit;
     margin: 1em;
+    display: flex;
+    margin-bottom: 2em;
+    /*flex-wrap: wrap;*/
 }
 
 .eea-card:first-of-type {
@@ -95,19 +99,51 @@ body {
     color: &dtml-corporateGreen;;
 }
 
+.storytelling-body .eea-card:first-of-type {
+    background-color: &dtml-corporateDarkGreen;;
+    color: &dtml-corporateDarkGreen;;
+}
+
 .eea-card:nth-of-type(2n) {
     background-color: &dtml-corporateBlue;;
     color: &dtml-corporateBlue;;
+}
+
+.storytelling-body .eea-card:nth-of-type(2n) {
+    background-color: &dtml-corporateDarkBlue;;
+    color: &dtml-corporateDarkBlue;;
 }
 
 .eea-card:nth-of-type(3n) {
     background-color: &dtml-corporateDarkOrange;;
     color: &dtml-corporateDarkOrange;;
 }
+
+.eea-card.eea-card--fullwidth {
+    background-color: &dtml-corporateGreen;;
+    color: &dtml-corporateGreen;;
+}
 .eea-card--fullwidth {
     width: 100%;
     max-width: 100%;
     flex: none;
+    margin-top: 3em;
+}
+.storytelling-body .eea-card-header {
+    width: 92%;
+    height: 105px;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+.storytelling-body .moreLink {
+    position: absolute;
+    right: 35px;
+    top: 35px;
+}
+
+.storytelling-body .moreLink:before {
+    font-size: 4em;
+    color: #FFF;
 }
 
 .eea-card-header > h2 {
@@ -119,31 +155,48 @@ body {
     overflow: hidden;
 }
 
-.eea-card-title {
+.eea-card-title, .eea-card-title > h2 {
     color: #FFF;
 }
 .eea-card-image-wrapper {
+    margin: 0;
+    align-self: flex-end;
+}
+
+.eea-card-image-bg-wrapper {
     height: 235px;
-    background-color: currentColor;
+    background-color: inherit;
     background-repeat: no-repeat;
     background-size: cover;
     width: 120%;
     margin: 1em 0 1em -10%;
     border: 3px solid currentColor;
 }
-
-.eea-card-image {
-    width: 100%;
-    /*margin-bottom: -3em;*/
+.eea-card-image-wrapper {
     margin-right: 1em;
 }
-.eea-card-image--pull {
-    margin-left: -3em;
+.eea-card-image {
+    width: 100%;
+    margin-right: 1em;
 }
+
+.storytelling-body .eea-card-image {
+    width: 105%;
+    max-width: initial !important;
+}
+
+.storytelling-body .eea-card-image-wrapper {
+    margin: 0;
+}
+.storytelling-body .eea-card-image {
+    margin-bottom: -3em;
+}
+
 .eea-card-body {
     color: #FFF;
     display: flex;
 }
+
 
 .eea-btn.moreLink {
     color: #FFF !important;
@@ -632,6 +685,25 @@ body {
     .themes-megatopics-area-translations .portlet-megatopic {
         flex: none;
     }
+}
+
+@media screen and (min-width: 768px) {
+    .eea-card--fullwidth .eea-card-img,
+    .eea-card--fullwidth .eea-card-body-text {
+        width: 50%;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .eea-card-image--pull {
+        margin-left: -3em;
+        margin-bottom: -3em;
+    }
+
+    .eea-card--fullwidth .eea-card-image {
+        margin-bottom: -3em;
+        width: 103%;
+    }
+
 }
 
 /* 102564 IE11 hack as the hiddenStructure without display will count

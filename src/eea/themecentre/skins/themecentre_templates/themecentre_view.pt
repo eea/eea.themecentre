@@ -74,20 +74,23 @@
                     titles python:storyitem.getStory_titles().split('\r\n');
                     repeat_num python: repeat['relation'].index;
                     titles_len python: len(titles);">
-                  <div class="eea-card" tal:define="url relation/url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--fullwidth'">
+                  <div class="eea-card" tal:define="url relation/url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card eea-card--double direction-column' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--fullwidth'">
                     <div class="eea-card-header">
                       <div class="eea-card-title">
                         <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
                       </div>
                     </div>
                     <div class="eea-card-body">
-                      <div class="eea-card-img">
+                      <div class="eea-card-image-wrapper">
                         <img tal:attributes="src string:${url}/${image_scale}" alt=""
-                             tal:define="image_scale python: 'image_preview'" class="eea-card-image eea-card-image--pull skip_lazy"  />
+                             tal:define="image_scale python: 'image_large' if not fullwidth else 'image_large'" class="eea-card-image eea-card-image--pull skip_lazy"  />
                       </div>
                       <div class="eea-card-body-text"  tal:condition="fullwidth">
                         <p tal:replace="structure storyitem/full_story_description"></p>
                       </div>
+                    </div>
+                    <div class="eea-card-footer">
+                      <a href="#" tal:attributes="href url" class="moreLink">&nbsp;</a>
                     </div>
                   </div>
                 </tal:defines>
@@ -139,7 +142,7 @@
                               <h2 tal:content="indicator/Title" class="eea-card-title"></h2>
                             </div>
 
-                          <div class="eea-card-image-wrapper" tal:attributes="style python:'background-image:url(' + url + '/image_preview' + ')'">
+                          <div class="eea-card-image-bg-wrapper" tal:attributes="style python:'background-image:url(' + url + '/image_preview' + ')'">
                           </div>
                         </div>
                         <div class="eea-card-footer text-right">
@@ -196,7 +199,7 @@
 
             <div class="eea-card-listing">
               <tal:items tal:repeat="publication publications">
-                <div class="eea-card eea-card--double" tal:define="url publication/getURL">
+                <div class="eea-card eea-card--double direction-column" tal:define="url publication/getURL">
                   <div class="eea-card-header">
                     <h2 tal:content="publication/Title"></h2>
                   </div>
