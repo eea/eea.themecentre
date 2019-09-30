@@ -10,6 +10,7 @@
 body {
     font-size: 87.5%;
 }
+
 .template-themes_view {
     overflow-x: hidden;
 }
@@ -55,6 +56,24 @@ body {
 .themecentre-section {
     margin: 1em 0;
 }
+
+.bg-green {
+    background-color: &dtml-corporateGreen;;
+}
+
+.bg-light-blue {
+    background-color: &dtml-themesDataColor;;
+}
+.bg-blue {
+    background-color: &dtml-corporateBlue;;
+}
+.bg-dark-blue {
+    background-color: &dtml-corporateDarkBlue;;
+}
+.bg-purple {
+    background-color: &dtml-themesMultimediaColor;;
+}
+
 
 .storytelling-wrapper {
     width: 77%;
@@ -155,8 +174,8 @@ body {
     overflow: hidden;
 }
 
-.eea-card-title, .eea-card-title > h2 {
-    color: #FFF;
+.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn {
+    color: #FFF !important;
 }
 .eea-card-image-wrapper {
     margin: 0;
