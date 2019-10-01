@@ -78,7 +78,7 @@ body {
 .storytelling-wrapper {
     width: 77%;
     margin: 0 auto;
-    background-color: lightgray;
+    background-color: &dtml-greyBackgroundColor;;
     padding: 1.5em;
 }
 
@@ -150,32 +150,62 @@ body {
 }
 .storytelling-body .eea-card-header {
     width: 92%;
-    height: 105px;
-    margin-bottom: 1em;
-    overflow: hidden;
+    /*max-height: 105px;*/
+    /*margin-bottom: 1em;*/
+    /*overflow: hidden;*/
 }
 .storytelling-body .moreLink {
     position: absolute;
-    right: 35px;
-    top: 35px;
+    right: 40px;
+    top: 15px;
 }
 
 .storytelling-body .moreLink:before {
     font-size: 4em;
     color: #FFF;
 }
+.eea-card-header {
+    position: relative;
+}
+.section-news .eea-card {
+    background-color: transparent;
+    border: 1px solid #d3d3d3;
+}
+.section-news .eea-card-header:before {
+    background-color: currentColor;
+    width: 108%;
+    content: " ";
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    margin-left: -14px;
+    top: -14px;
+}
 
+.section-news .eea-card-body,
+.section-news .eea-card-footer .eea-btn-news
+{
+    color: #333 !important;
+}
 .eea-card-header > h2 {
     color: #FFF;
 }
 
 .eea-card-title-wrapper {
-    height: 75px;
     overflow: hidden;
+    min-height: 75px;
+    max-height: 105px;
+    margin-bottom: 1em;
 }
 
-.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn {
+.template-themecentre_view .eea-btn {
+    font-size: 14px;
+}
+.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn-md {
     color: #FFF !important;
+}
+.eea-card-image-link {
+    color: inherit !important;
 }
 .eea-card-image-wrapper {
     margin: 0;
@@ -189,6 +219,9 @@ body {
     background-size: cover;
     width: 120%;
     margin: 1em 0 1em -10%;
+    border: 3px solid currentColor;
+}
+.eea-card-image-bordered {
     border: 3px solid currentColor;
 }
 .eea-card-image-wrapper {
@@ -212,13 +245,19 @@ body {
 }
 
 .eea-card-body {
-    color: #FFF;
     display: flex;
 }
 
+.eea-card-body-text {
+    color: #FFF;
+}
 
-.eea-btn.moreLink {
+.eea-btn-moreLink {
     color: #FFF !important;
+    padding: 0.6em 1em;
+    vertical-align: baseline;
+    display: inline-flex;
+    font-size: 145%;
 }
 
 .section-footer {
@@ -233,6 +272,9 @@ body {
 .template-themecentre_view .topic-intro,
 .template-themecentre_view .topic-intro.moreLink:before {
    color: #FFF;
+}
+.topic-intros {
+    margin-bottom: 1em;
 }
 .template-themecentre_view #browse-catalogue,
 .template-themecentre_view .whatsnew-listing > h3 {
@@ -260,7 +302,7 @@ body {
 }
 
 #subtopics {
-    margin: 0 0 2em 0;
+    margin: 0 0 6em 0;
 }
 
 #subtopics > h4 {

@@ -71,7 +71,7 @@
                                         <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
                                     </h3>
 
-                                    <ul class="eea-no-list-style mt-0" tal:condition="folders">
+                                    <ul class="eea-no-list-style" tal:condition="folders">
                                         <li>
                                             <h3 class="portlet-megatopic-subtitle eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
                                                 <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>

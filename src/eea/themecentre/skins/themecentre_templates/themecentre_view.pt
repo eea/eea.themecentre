@@ -15,7 +15,7 @@
             themecentre_view context/@@themecentre_utils;
             ">
 
-        <h1 tal:content="object_title" class="documentFirstHeading">
+        <h1 tal:content="object_title" class="documentFirstHeading mb-0">
             Title or id
         </h1>
 
@@ -35,7 +35,7 @@
                 soer_topic_path python: '/' + context.absolute_url(1) + '/briefings-soer';
                 soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);" tal:condition="python:soer_topic or folders">
 
-            <h2 i18n:translate="">Subtopics</h2>
+            <h2 i18n:translate="" class="mb-half">Subtopics:</h2>
             <tal:existssoer tal:condition="soer_topic">
                 <tal:defines tal:define="
                         soer_topic python:soer_topic[0].getObject();
@@ -67,7 +67,7 @@
             <div class="storytelling-header">
 
               <a href="#" class="storytelling-link" tal:attributes="href storyitem/absolute_url">
-                <h2 tal:content="storyitem/Title"></h2>
+                <h2 tal:content="storyitem/Title" class="dark-color"></h2>
               </a>
               <p tal:content="storyitem/Description"></p>
             </div>
@@ -79,15 +79,17 @@
                     titles_len python: len(titles);">
                   <div class="eea-card" tal:define="url relation/url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card eea-card--double direction-column' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--fullwidth'">
                     <div class="eea-card-header">
-                      <div class="eea-card-title">
-                        <a href="#" class="eea-card-link" tal:attributes="href url">
-                          <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
-                        </a>
+                      <div class="eea-card-title-wrapper">
+                        <div class="eea-card-title">
+                          <a href="#" class="eea-card-link" tal:attributes="href url">
+                            <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
+                          </a>
+                        </div>
                       </div>
                     </div>
                     <div class="eea-card-body">
                       <div class="eea-card-image-wrapper">
-                        <a href="#" class="eea-card-link" tal:attributes="href url">
+                        <a href="#" class="eea-card-image-link" tal:attributes="href url">
                           <img tal:attributes="src string:${url}/${image_scale}" alt=""
                                tal:define="image_scale python: 'image_large' if not fullwidth else 'image_large'" class="eea-card-image eea-card-image--pull skip_lazy"  />
                         </a>
@@ -109,7 +111,10 @@
         <section class="themecentre-section section-gismap"
                  tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
             <div class="section-type">
-                <a href="#" class="eea-btn eea-btn-md eea-btn-gismap bg-light-blue">GIS Map Application</a>
+              <p class="inline-block eea-btn-md eea-btn-gismap bg-light-blue">
+                <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
+                <span>GIS Map Application</span>
+              </p>
             </div>
 
             <a href="#" class="section-link" tal:attributes="href gismap/absolute_url">
@@ -118,9 +123,10 @@
             <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src')" />
 
           <div class="section-footer text-right">
-            <a href="" tal:attributes="href string:gis" class="eea-btn moreLink eea-btn-md  bg-light-blue" i18n:translate="">
-              <span i18n:translate="">All GIS Map Application on</span>
-              <span i18n:translate="" tal:content="object_title_lowercase"></span>
+            <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-light-blue eea-btn-moreLink" i18n:translate="">
+              <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+              <span i18n:translate="">All GIS Map Application on &nbsp;</span>
+              <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
             </a>
           </div>
         </section>
@@ -128,7 +134,10 @@
         <section class="themecentre-section section-dashboard"
                  tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
             <div class="section-type">
-                <a href="#" class="eea-btn eea-btn-md eea-btn-dashboard  bg-light-blue">Dashboard</a>
+                <p class="inline-block eea-btn-md eea-btn-dashboard  bg-light-blue">
+                  <span class="eea-icon eea-icon-bar-chart"><!-- ?--></span>
+                  <span>Dashboard</span>
+                </p>
             </div>
 
             <a href="#" class="section-link" tal:attributes="href dashboard/absolute_url">
@@ -138,9 +147,10 @@
             <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
 
             <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:interactive" class="eea-btn moreLink eea-btn-md bg-light-blue" i18n:translate="">
-                    <span i18n:translate="">All Tableau Dashboards on</span>
-                    <span i18n:translate="" tal:content="object_title_lowercase"></span>
+                <a href="" tal:attributes="href string:interactive" class="eea-btn  eea-btn-moreLink eea-btn-md bg-light-blue" i18n:translate="">
+                    <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                    <span i18n:translate="">All Tableau Dashboards on &nbsp;</span>
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
         </section>
@@ -148,9 +158,12 @@
         <section class="themecentre-section section-indicators"
                  tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
             <div class="section-type">
-                <a href="#" class="eea-btn eea-btn-md eea-btn-indicators bg-light-blue">Indicators</a>
+              <p class="inline-block eea-btn-md eea-btn-indicators bg-light-blue">
+                <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
+                <span>Indicators</span>
+              </p>
             </div>
-            <div class="eea-card-listing">
+          <div class="eea-card-listing">
             <tal:items tal:repeat="indicator indicators">
                     <div class="eea-card" tal:define="url indicator/getURL">
                         <div class="eea-card-header">
@@ -160,7 +173,7 @@
                               </a>
                             </div>
 
-                          <a href="#" class="eea-card-link" tal:attributes="href url">
+                          <a href="#" class="eea-card-image-link" tal:attributes="href url">
                             <div class="eea-card-image-bg-wrapper" tal:attributes="style python:'background-image:url(' + url + '/image_preview' + ')'">
                             </div>
                           </a>
@@ -172,9 +185,10 @@
             </tal:items>
             </div>
           <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:indicators" class="eea-btn moreLink eea-btn-md eea-btn-indicators" i18n:translate="">
-                    <span i18n:translate="">All indicators on</span>
-                    <span i18n:translate="" tal:content="object_title_lowercase"></span>
+                <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-indicators" i18n:translate="">
+                    <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                    <span i18n:translate="">All indicators on &nbsp;</span>
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
 
@@ -183,20 +197,32 @@
         <section class="themecentre-section section-news"
                  tal:define="news themecentre_view/getLatestNews" tal:condition="news">
             <div class="section-type">
-                <a href="#" class="eea-btn eea-btn-md eea-btn-news bg-green">News</a>
+              <p class="inline-block eea-btn-md eea-btn-news bg-green">
+                <span class="eea-icon eea-icon-newspaper-o"><!-- ?--></span>
+                <span>News</span>
+              </p>
             </div>
 
             <div class="eea-card-listing">
               <tal:items tal:repeat="snews news">
                 <div class="eea-card direction-column" tal:define="url snews/getURL">
                   <div class="eea-card-header">
-                    <a href="#" class="eea-card-link" tal:attributes="href url">
-                      <h2 tal:content="snews/Title"></h2>
+                    <div class="eea-card-title-wrapper">
+                      <a href="#" class="eea-card-link" tal:attributes="href url">
+                        <h2 tal:content="snews/Title"></h2>
+                      </a>
+                    </div>
+                    <p class="eea-card-link">
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(snews.getEffectiveDate())"></span>
+                    </p>
+
+                    <a href="#" class="eea-card-image-link" tal:attributes="href url">
+                      <div class="eea-card-image-bg-wrapper" tal:attributes="style python:'background-image:url(' + url + '/image_preview' + ')'">
+                      </div>
                     </a>
-                    <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(snews.getEffectiveDate())"></span>
-                    <a href="#" class="eea-card-link" tal:attributes="href url">
-                      <img  tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image" />
-                    </a>
+<!--?                    <a href="#" class="eea-card-image-link" tal:attributes="href url">-->
+<!--?                      <img  tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image" />-->
+<!--?                    </a>-->
                   </div>
                   <div class="eea-card-body">
                     <p tal:content="snews/Description"></p>
@@ -209,9 +235,10 @@
             </div>
 
             <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:indicators" class="eea-btn moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
-                    <span i18n:translate="">All News on</span>
-                    <span i18n:translate="" tal:content="object_title_lowercase"></span>
+                <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">All News on &nbsp;</span>
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
         </section>
@@ -219,21 +246,25 @@
         <section class="themecentre-section section-publications"
                  tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
             <div class="section-type">
-                <a href="#" class="eea-btn eea-btn-md eea-btn-publications bg-blue">Publication</a>
+                <p class="inline-block eea-btn-md eea-btn-publications bg-blue">
+                  <span class="eea-icon eea-icon-file-pdf-o"><!-- ?--></span>
+                  <span>Publication</span>
+                </p>
             </div>
 
             <div class="eea-card-listing">
               <tal:items tal:repeat="publication publications">
                 <div class="eea-card eea-card--double direction-column" tal:define="url publication/getURL">
                   <div class="eea-card-header">
-
-                    <a href="#" class="eea-card-link" tal:attributes="href url">
-                      <h2 tal:content="publication/Title"></h2>
-                    </a>
+                    <div class="eea-card-title-wrapper">
+                      <a href="#" class="eea-card-link" tal:attributes="href url">
+                        <h2 tal:content="publication/Title"></h2>
+                      </a>
+                    </div>
                   </div>
                   <div class="eea-card-body">
-<!--?                    <a href="#" class="eea-card-link" tal:attributes="href url">-->
-                      <img tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image eea-card-image--pull" />
+<!--?                    <a href="#" class="eea-card-image-link" tal:attributes="href url">-->
+                      <img tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image eea-card-image--pull eea-card-image-bordered" />
 <!--?                    </a>-->
 
                     <div class="eea-card-body-text">
@@ -246,9 +277,10 @@
             </div>
 
             <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:publications" class="eea-btn moreLink eea-btn-md eea-btn-publications bg-blue" i18n:translate="">
-                    <span i18n:translate="">All Publication on</span>
-                    <span i18n:translate="" tal:content="object_title_lowercase"></span>
+                <a href="" tal:attributes="href string:publications" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-publications bg-blue" i18n:translate="">
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">All Publication on &nbsp;</span>
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
         </section>
@@ -256,18 +288,19 @@
         <section class="themecentre-section section-multimedia"
                  tal:define="multimedia themecentre_view/getPromotedMultimedia" tal:condition="multimedia">
             <div class="section-type">
-                <a href="#" class="eea-btn eea-btn-md eea-btn-multimedia bg-purple"><span class="eea-icon eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></a>
+                <p class="inline-block eea-btn-md eea-btn-multimedia bg-purple"><span class="eea-icon eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></p>
             </div>
 
             <a  tal:define="objhref multimedia/absolute_url; cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl or objhref" target="_blank">
               <h2 tal:content="multimedia/Title"></h2>
-              <img tal:attributes="src string:${objhref}/image_landscape"  />
+              <img tal:attributes="src string:${objhref}/image_panoramic"  />
             </a>
 
             <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:multimedia" class="eea-btn moreLink eea-btn-md eea-btn-multimedia bg-purple" i18n:translate="">
-                    <span i18n:translate="">All Multimedia on</span>
-                    <span i18n:translate="" tal:content="object_title_lowercase"></span>
+                <a href="" tal:attributes="href string:multimedia" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-multimedia bg-purple" i18n:translate="">
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">All Multimedia on &nbsp;</span>
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
         </section>
