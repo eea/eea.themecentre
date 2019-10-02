@@ -213,6 +213,10 @@ body {
     /*min-height: inherit;*/
 }
 
+.video_player_link {
+    height: 700px !important;
+}
+
 .storytelling-body .eea-card--double .eea-card-title-wrapper {
     height: 105px;
 }
