@@ -291,10 +291,15 @@
                 <p class="inline-block eea-btn-md eea-btn-multimedia bg-purple"><span class="eea-icon eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></p>
             </div>
 
-            <a  tal:define="objhref multimedia/absolute_url; cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl or objhref" target="_blank">
+          <tal:defines tal:define="objhref multimedia/absolute_url;">
+            <a  tal:attributes="href python: objhref">
               <h2 tal:content="multimedia/Title"></h2>
-              <img tal:attributes="src string:${objhref}/image_panoramic"  />
             </a>
+            <a tal:define="cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl;
+               style python:'background-image:url(' + objhref + '/image_panoramic' + ')' " target="_blank" class="lazy video_player_link">
+              <img class="video_player_image" tal:attributes="src string:${portal_url}/YouTube_light_logo.png">
+            </a>
+          </tal:defines>
 
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:multimedia" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-multimedia bg-purple" i18n:translate="">
