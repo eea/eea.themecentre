@@ -235,7 +235,7 @@
             </div>
 
             <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
+                <a href="" tal:attributes="href string:highlights" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
                   <span i18n:translate="">All News on &nbsp;</span>
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
@@ -254,7 +254,7 @@
 
             <div class="eea-card-listing">
               <tal:items tal:repeat="publication publications">
-                <div class="eea-card eea-card--double direction-column" tal:define="url publication/getURL">
+                <div class="eea-card eea-card--double eea-card--portrait direction-column" tal:define="url publication/getURL">
                   <div class="eea-card-header">
                     <div class="eea-card-title-wrapper">
                       <a href="#" class="eea-card-link" tal:attributes="href url">

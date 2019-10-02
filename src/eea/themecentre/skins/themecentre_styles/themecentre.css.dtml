@@ -197,6 +197,13 @@ body {
     max-height: 105px;
     margin-bottom: 1em;
 }
+.eea-card--portrait .eea-card-title-wrapper {
+    min-height: inherit;
+}
+
+.storytelling-body .eea-card--double .eea-card-title-wrapper {
+    height: 105px;
+}
 
 .template-themecentre_view .eea-btn {
     font-size: 14px;
@@ -214,7 +221,7 @@ body {
 
 .eea-card-image-bg-wrapper {
     height: 235px;
-    background-color: inherit;
+    background-color: currentColor;
     background-repeat: no-repeat;
     background-size: cover;
     width: 120%;
@@ -247,6 +254,18 @@ body {
 .eea-card-body {
     display: flex;
 }
+.eea-card--portrait .eea-card-body {
+    height: 100%;
+    display: block;
+}
+
+.eea-card--portrait .eea-card-image {
+    width: 50%;
+    margin-right: 1em;
+    margin-bottom: 0;
+    float: left;
+}
+
 
 .eea-card-body-text {
     color: #FFF;
