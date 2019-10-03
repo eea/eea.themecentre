@@ -108,6 +108,46 @@
           </div>
         </section>
 
+      <section class="themecentre-section section-indicators"
+           tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
+        <div class="section-type">
+          <p class="inline-block eea-btn-md eea-btn-indicators bg-light-blue">
+            <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
+            <span>Indicators</span>
+          </p>
+        </div>
+        <div class="eea-card-listing">
+          <tal:items tal:repeat="indicator indicators">
+            <div class="eea-card" tal:define="url indicator/getURL">
+              <div class="eea-card-header">
+                <div class="eea-card-title-wrapper">
+                  <a href="#" class="eea-card-link" tal:attributes="href url">
+                    <h2 tal:content="indicator/Title" class="eea-card-title"></h2>
+                  </a>
+                </div>
+
+                <a href="#" class="eea-card-image-link" tal:attributes="href url">
+                  <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
+                  </div>
+                </a>
+              </div>
+              <div class="eea-card-footer text-right">
+                <a href="" tal:attributes="href url" class="eea-btn moreLink eea-btn-md eea-btn-indicators" i18n:translate="">Read more</a>
+              </div>
+            </div>
+          </tal:items>
+        </div>
+        <div class="section-footer text-right">
+          <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-indicators bg-light-blue" i18n:translate="">
+            <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+            <span i18n:translate="">All indicators on &nbsp;</span>
+            <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+          </a>
+        </div>
+
+      </section>
+
+
         <section class="themecentre-section section-gismap"
                  tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
             <div class="section-type">
@@ -118,7 +158,7 @@
             </div>
 
             <a href="#" class="section-link" tal:attributes="href gismap/absolute_url">
-              <h2 tal:content="gismap/Title"></h2>
+              <h2 tal:content="gismap/Title" class="section-title"></h2>
             </a>
             <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src')" />
 
@@ -141,7 +181,7 @@
             </div>
 
             <a href="#" class="section-link" tal:attributes="href dashboard/absolute_url">
-              <h2 tal:content="dashboard/Title"></h2>
+              <h2 tal:content="dashboard/Title" class="section-title"></h2>
             </a>
 
             <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
@@ -153,45 +193,6 @@
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
-        </section>
-
-        <section class="themecentre-section section-indicators"
-                 tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
-            <div class="section-type">
-              <p class="inline-block eea-btn-md eea-btn-indicators bg-light-blue">
-                <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
-                <span>Indicators</span>
-              </p>
-            </div>
-          <div class="eea-card-listing">
-            <tal:items tal:repeat="indicator indicators">
-                    <div class="eea-card" tal:define="url indicator/getURL">
-                        <div class="eea-card-header">
-                            <div class="eea-card-title-wrapper">
-                              <a href="#" class="eea-card-link" tal:attributes="href url">
-                                <h2 tal:content="indicator/Title" class="eea-card-title"></h2>
-                              </a>
-                            </div>
-
-                          <a href="#" class="eea-card-image-link" tal:attributes="href url">
-                            <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
-                            </div>
-                          </a>
-                        </div>
-                        <div class="eea-card-footer text-right">
-                            <a href="" tal:attributes="href url" class="eea-btn moreLink eea-btn-md eea-btn-indicators" i18n:translate="">Read more</a>
-                        </div>
-                    </div>
-            </tal:items>
-            </div>
-          <div class="section-footer text-right">
-                <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn-moreLink eea-btn-md eea-btn-indicators bg-light-blue" i18n:translate="">
-                    <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                    <span i18n:translate="">All indicators on &nbsp;</span>
-                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
-                </a>
-            </div>
-
         </section>
 
         <section class="themecentre-section section-news"
@@ -293,7 +294,7 @@
           <div class="section-body">
             <tal:defines tal:define="objhref multimedia/absolute_url;">
               <a  tal:attributes="href python: objhref">
-                <h2 tal:content="multimedia/Title"></h2>
+                <h2 tal:content="multimedia/Title" class="section-title"></h2>
               </a>
               <a tal:define="cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl;
                   data-src python: objhref + '/image_panoramic'" target="_blank" class="lazy video_player_link">
