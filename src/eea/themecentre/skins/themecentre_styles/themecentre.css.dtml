@@ -159,6 +159,7 @@ body {
     position: absolute;
     right: 40px;
     top: 15px;
+    line-height: 1;
 }
 
 .storytelling-body .moreLink:before {
@@ -296,6 +297,9 @@ body {
     font-size: 145%;
 }
 
+.section-body {
+    margin-bottom: 1em;
+}
 .section-footer {
     clear: both;
     text-align: right;
