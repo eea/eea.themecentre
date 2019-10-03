@@ -174,7 +174,7 @@
                             </div>
 
                           <a href="#" class="eea-card-image-link" tal:attributes="href url">
-                            <div class="eea-card-image-bg-wrapper" tal:attributes="style python:'background-image:url(' + url + '/image_preview' + ')'">
+                            <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
                             </div>
                           </a>
                         </div>
@@ -217,7 +217,7 @@
                     </p>
 
                     <a href="#" class="eea-card-image-link" tal:attributes="href url">
-                      <div class="eea-card-image-bg-wrapper" tal:attributes="style python:'background-image:url(' + url + '/image_preview' + ')'">
+                      <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
                       </div>
                     </a>
 <!--?                    <a href="#" class="eea-card-image-link" tal:attributes="href url">-->
@@ -296,7 +296,7 @@
               <h2 tal:content="multimedia/Title"></h2>
             </a>
             <a tal:define="cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl;
-               style python:'background-image:url(' + objhref + '/image_panoramic' + ')' " target="_blank" class="lazy video_player_link">
+                data-src python: objhref + '/image_panoramic'" target="_blank" class="lazy video_player_link">
               <img class="video_player_image" tal:attributes="src string:${portal_url}/YouTube_light_logo.png">
             </a>
           </tal:defines>
