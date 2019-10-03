@@ -32,7 +32,7 @@ body {
     position: absolute;
     top: -30px;
     z-index: -1;
-    width: 100vw;
+    width: 99.3vw;
     max-width: none !important;
     right: 0;
     left: 50%;
@@ -90,8 +90,9 @@ body {
     margin-left: -15%;
 }
 .eea-card-listing {
-   display: flex;
+    display: flex;
     justify-content: space-between;
+    margin: 0 0.5em;
 }
 .eea-card {
     position: relative;
