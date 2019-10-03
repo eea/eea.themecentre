@@ -213,7 +213,7 @@
                       </a>
                     </div>
                     <p class="eea-card-link">
-                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(snews.getEffectiveDate())"></span>
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(snews.effective)"></span>
                     </p>
 
                     <a href="#" class="eea-card-image-link" tal:attributes="href url">
@@ -268,7 +268,7 @@
 <!--?                    </a>-->
 
                     <div class="eea-card-body-text">
-                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.getEffectiveDate())"></span>
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.effective)"></span>
                       <p tal:content="publication/Description"></p>
                     </div>
                   </div>

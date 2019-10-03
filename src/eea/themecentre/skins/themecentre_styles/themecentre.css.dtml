@@ -179,7 +179,9 @@ body {
     height: 70%;
     content: " ";
     left: 0;
+    background-color: #FFF;
     bottom: 0;
+    z-index: -1;
 }
 .section-news .eea-card-header:before {
     background-color: currentColor;
