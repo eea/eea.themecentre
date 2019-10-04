@@ -1,0 +1,349 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2019-10-04 08:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: eea\n"
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:36
+msgid "(TERMINATED)"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:144
+msgid "<span class=\"eea-icon eea-icon-chevron-circle-right \"><!-- ?--></span> <span>x</span> <span class=\"text-italic\">x</span>"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/dc_view.pt:19
+msgid "Advanced search"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/mediacentre_macros.pt:8
+msgid "All"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:168
+msgid "All GIS Map Application on &nbsp;"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:309
+msgid "All Multimedia on &nbsp;"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:241
+msgid "All News on &nbsp;"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:283
+msgid "All Publication on &nbsp;"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:192
+msgid "All Tableau Dashboards on &nbsp;"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:18
+msgid "All documents in state ${state}"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:143
+msgid "All indicators on &nbsp;"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_links_by_status.pt:29
+msgid "All links in state ${state}"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/overview.pt:16
+msgid "An overview of the available content on this site. Keep the pointer still over an item for a few seconds to get its description."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/dc_view.pt:33
+#: ../../themecentre/skins/themecentre_templates/themecentre_overview.pt:16
+msgid "Browse catalogue"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/media_type_common.pt:25
+msgid "Choose another media type or ${multimedia_center} (via EEA Multimedia Centre)."
+msgstr ""
+
+#: ../../themecentre/profiles/default/actions.xml
+msgid "Depromote a theme centre"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:34
+msgid "Distinct:"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:33
+#: ../../themecentre/skins/themecentre_templates/linkchecker_links_by_status.pt:42
+msgid "Document"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:73
+msgid "Documents containing links in the state ..."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/media_type_common.pt:26
+msgid "EEA Multimedia Centre"
+msgstr ""
+
+#: ../../themecentre/profiles.zcml:10
+msgid "EEA Theme Centre"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:25
+msgid "EEA activities"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:24
+msgid "EU policies"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themes_view.pt:118
+msgid "Featured content"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/dc_view.pt:18
+msgid "Go to advanced search"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_themes.pt:40
+msgid "Home"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:25
+msgid "ID"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:23
+msgid "Intro"
+msgstr ""
+
+#: ../../themecentre/browser/portlets/smartfolder.py:49
+msgid "Latest FAQ"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:26
+msgid "Link listing"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:22
+msgid "Link management overview"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_wisenavigation.pt:46
+msgid "Links"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:44
+msgid "Links in the state ..."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_themes.pt:26
+msgid "Menu"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_media_common.pt:39
+#: ../../themecentre/skins/themecentre_templates/portlet_themes_common.pt:81
+msgid "More"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/media_type_common.pt:39
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:292
+msgid "Multimedia"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:28
+msgid "Next report deadline"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/media_type_common.pt:23
+msgid "No media files of this kind yet."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:43
+msgid "One time only"
+msgstr ""
+
+#: ../../themecentre/browser/themecentre.py:81
+msgid "Other"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:44
+#: ../../themecentre/skins/themecentre_templates/linkchecker_links_by_status.pt:45
+msgid "Owner"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_wisenavigation.pt:34
+msgid "Policy"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themes_view.pt:96
+msgid "Popular searches"
+msgstr ""
+
+#: ../../themecentre/profiles.zcml:10
+msgid "Profile for EEA Theme Centre"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_wisenavigation.pt:42
+msgid "Projects"
+msgstr ""
+
+#: ../../themecentre/profiles/default/actions.xml
+msgid "Promote to theme centre"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:217
+msgid "Published"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/listall.pt:29
+msgid "Published:"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_themes_common.pt:16
+msgid "RSS"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:135
+msgid "Read more"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_themes_common.pt:47
+msgid "Read report"
+msgstr ""
+
+#: ../../themecentre/browser/portlets/related.py:20
+msgid "Related themes"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_relatedthemes.pt:14
+msgid "Related topics"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:27
+msgid "Reporting frequency"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:18
+msgid "Reporting obligations are requirements to provide information agreed between countries and international bodies such as the EEA or international conventions. Reporting obligations provide the basis for most environmental information flows."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:22
+msgid "Reporting obligations related to data stored at EEA"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/dc_view.pt:21
+msgid "Search"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/dc_view.pt:24
+msgid "Search data, maps, indicators"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/overview.pt:14
+msgid "Site map"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:38
+msgid "Subtopics:"
+msgstr ""
+
+#: ../../themecentre/profiles/default/actions.xml
+msgid "Synchronize older versions topics"
+msgstr ""
+
+#: ../../themecentre/profiles/default/actions.xml
+msgid "Themes"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_wisenavigation.pt:38
+msgid "Themes and data"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/object_listing.pt:33
+msgid "There are currently no results for this search."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:26
+msgid "This page gives you information about the links in your themecentre."
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:26
+msgid "Title/Description"
+msgstr ""
+
+#: ../../themecentre/browser/portlets/themes.py:22
+msgid "Topics"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:38
+msgid "Total documents"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:30
+msgid "Total links"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_summary.pt:32
+msgid "Total:"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:24
+#: ../../themecentre/skins/themecentre_templates/linkchecker_links_by_status.pt:34
+msgid "Up to linkchecker summary"
+msgstr ""
+
+#: ../../themecentre/browser/portlets/smartfolder.py:47
+msgid "Upcoming events"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_wisenavigation.pt:13
+msgid "WISE Menu"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/media_type_common.pt:26
+msgid "browse all multimedia products"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/dc_view.pt:53
+msgid "homepage"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_relatedthemes.pt:30
+msgid "portlet_relatedthemes.pt"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/portlet_themes.pt:53
+msgid "portlet_themes.pt"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/rod_listing.pt:12
+msgid "related reporting obligations"
+msgstr ""
+
+#: ../../themecentre/browser/themecentre.py:79
+msgid "s"
+msgstr ""
+
+#: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:41
+msgid "total"
+msgstr ""
+
+#. Default: "Water Information System for Europe"
+#: ../../themecentre/skins/themecentre_templates/portlet_wisenavigation.pt:18
+msgid "water_information"
+msgstr ""
