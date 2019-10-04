@@ -113,7 +113,7 @@
         <div class="section-type">
           <p class="inline-block eea-btn-md eea-btn-indicators bg-light-blue">
             <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
-            <span>Indicators</span>
+            <span i18n:translate="">Indicators</span>
           </p>
         </div>
         <div class="eea-card-listing">
@@ -153,7 +153,7 @@
         <div class="section-type">
           <p class="inline-block eea-btn-md eea-btn-gismap bg-light-blue">
             <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
-            <span>GIS Map Application</span>
+            <span i18n:translate="">GIS Map Application</span>
           </p>
         </div>
 
@@ -179,7 +179,7 @@
             <div class="section-type">
                 <p class="inline-block eea-btn-md eea-btn-dashboard  bg-light-blue">
                   <span class="eea-icon eea-icon-bar-chart"><!-- ?--></span>
-                  <span>Dashboard</span>
+                  <span i18n:translate="">Dashboard</span>
                 </p>
             </div>
 
@@ -205,7 +205,7 @@
             <div class="section-type">
               <p class="inline-block eea-btn-md eea-btn-news bg-green">
                 <span class="eea-icon eea-icon-newspaper-o"><!-- ?--></span>
-                <span>News</span>
+                <span i18n:translate="">News</span>
               </p>
             </div>
 
@@ -254,7 +254,7 @@
             <div class="section-type">
                 <p class="inline-block eea-btn-md eea-btn-publications bg-blue">
                   <span class="eea-icon eea-icon-file-pdf-o"><!-- ?--></span>
-                  <span>Publication</span>
+                  <span i18n:translate="">Publication</span>
                 </p>
             </div>
 
