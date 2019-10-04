@@ -162,6 +162,11 @@ body {
     line-height: 1;
 }
 
+.topic-intros .topic-intro:before,
+.themecentre-section .moreLink:before {
+    top: 0;
+}
+
 .storytelling-body .moreLink:before {
     font-size: 4em;
     color: #FFF;

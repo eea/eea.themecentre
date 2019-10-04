@@ -41,8 +41,8 @@
                         soer_topic python:soer_topic[0].getObject();
                         soer_topics python:soer_topic.queryCatalog()">
                     <h4 tal:content="soer_topic/Title">Folder links</h4>
-                    <ul class="border-bottom-spacer inline-list-style ma-0">
-                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics" class="subtopic-list-item">
+                    <ul class="border-bottom-spacer inline-list-style bullet-list ma-0">
+                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics" class="subtopics-list-item">
                             <a tal:attributes="href folder/getURL; title folder/Title;"
                                     tal:content="folder/Title">Folder links</a>
                         </li>
@@ -50,8 +50,8 @@
                 </tal:defines>
             </tal:existssoer>
 
-            <ul tal:condition="folders" class="inline-list-style ma-0">
-                <li tal:repeat="folder folders">
+            <ul tal:condition="folders" class="inline-list-style bullet-list  ma-0">
+                <li tal:repeat="folder folders" class="subtopics-list-item">
                     <a tal:attributes="href folder/getURL; title folder/Title;"
                             tal:content="folder/Title" class="light-color">Folder links</a>
                 </li>
