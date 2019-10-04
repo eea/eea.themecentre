@@ -148,28 +148,31 @@
       </section>
 
 
-        <section class="themecentre-section section-gismap"
-                 tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
-            <div class="section-type">
-              <p class="inline-block eea-btn-md eea-btn-gismap bg-light-blue">
-                <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
-                <span>GIS Map Application</span>
-              </p>
-            </div>
+      <section class="themecentre-section section-gismap"
+           tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
+        <div class="section-type">
+          <p class="inline-block eea-btn-md eea-btn-gismap bg-light-blue">
+            <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
+            <span>GIS Map Application</span>
+          </p>
+        </div>
 
-            <a href="#" class="section-link" tal:attributes="href gismap/absolute_url">
-              <h2 tal:content="gismap/Title" class="section-title"></h2>
-            </a>
-            <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src')" />
+        <a href="#" class="section-link" tal:attributes="href gismap/absolute_url">
+          <h2 tal:content="gismap/Title" class="section-title"></h2>
+        </a>
 
-          <div class="section-footer text-right">
-            <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-light-blue eea-btn-moreLink" i18n:translate="">
-              <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-              <span i18n:translate="">All GIS Map Application on &nbsp;</span>
-              <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
-            </a>
-          </div>
-        </section>
+        <div class="section-body">
+          <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src')" />
+        </div>
+
+        <div class="section-footer text-right">
+          <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-light-blue eea-btn-moreLink" i18n:translate="">
+            <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+            <span i18n:translate="">All GIS Map Application on &nbsp;</span>
+            <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+          </a>
+        </div>
+      </section>
 
         <section class="themecentre-section section-dashboard"
                  tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
@@ -184,7 +187,9 @@
               <h2 tal:content="dashboard/Title" class="section-title"></h2>
             </a>
 
-            <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
+            <div class="section-body">
+              <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
+            </div>
 
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:interactive" class="eea-btn  eea-btn-moreLink eea-btn-md bg-light-blue" i18n:translate="">
