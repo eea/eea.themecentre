@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-05-17 16:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+msgid "Intro"
+msgstr ""
+
+msgid "EU policies"
+msgstr ""
+
+msgid "EEA activities"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "Publication"
+msgstr ""
+
+msgid "All News on"
+msgstr ""
+
+msgid "All Publication on"
+msgstr ""
+
+msgid "Infographic"
+msgstr ""
+
+msgid "Countries"
+msgstr ""
+
+msgid "Search topics"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "topics"
+msgstr ""
+
+msgid "Air & Climate"
+msgstr ""
+
+msgid "Air"
+msgstr ""
+
+msgid "Climate"
+msgstr ""
+
+msgid "Nature"
+msgstr ""
+
+msgid "Sustainability and well-being"
+msgstr ""
+
+msgid "Sustainability"
+msgstr ""
+
+msgid "well-being"
+msgstr ""
+
+msgid "Economic sectors"
+msgstr ""
+
+msgid "Economic"
+msgstr ""
+
+msgid "sectors"
+msgstr ""
+
+msgid "Featured content"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "content"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "The EEA is an agency of the European Union"
+msgstr ""
+
+msgid "Log in to CMS"
+msgstr ""
+
+msgid "EEA homepage in your language"
+msgstr ""
+
+msgid "Download as PDF"
+msgstr ""
+
+msgid "Switch language to"
+msgstr ""
+
+msgid "More photos"
+msgstr ""
+
+msgid "Metadata sheet on semantic"
+msgstr ""
+
+msgid "Share on StumbleUpon"
+msgstr ""
+
+msgid "Share on reddit"
+msgstr ""
+
+msgid "Share on Blogger"
+msgstr ""
+
+msgid "Share on LinkedIn"
+msgstr ""
+
+msgid "No recent content is available for this topic"
+msgstr ""

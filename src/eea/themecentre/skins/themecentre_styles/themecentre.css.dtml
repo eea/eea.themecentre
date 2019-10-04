@@ -54,7 +54,19 @@ body {
 }
 
 .themecentre-section {
-    margin: 1em 0;
+    margin: 3em 0;
+}
+
+.section-title {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.5em;
+}
+.section-body {
+    margin-bottom: 2em;
+}
+.section-footer {
+    clear: both;
+    text-align: right;
 }
 
 .bg-green {
@@ -73,7 +85,6 @@ body {
 .bg-purple {
     background-color: &dtml-themesMultimediaColor;;
 }
-
 
 .storytelling-wrapper {
     width: 77%;
@@ -98,7 +109,7 @@ body {
     position: relative;
     display: inline-block;
     padding: 1em;
-    margin: 1em 0 3em 0;
+    margin: 1em 0 2em 0;
     /*width: 46%;*/
     max-width: 370px;
     flex: 1;
@@ -304,17 +315,6 @@ body {
     display: inline-flex;
     font-size: 145%;
 }
-.section-title {
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 0.5em;
-}
-.section-body {
-    margin-bottom: 1em;
-}
-.section-footer {
-    clear: both;
-    text-align: right;
-}
 
 .template-themecentre_view .whatsnew-listing {
     background-color: #FFF;
@@ -353,7 +353,7 @@ body {
 }
 
 #subtopics {
-    margin: 0 0 6em 0;
+    margin: 2em 0 6em 0;
 }
 
 #subtopics > h4 {
