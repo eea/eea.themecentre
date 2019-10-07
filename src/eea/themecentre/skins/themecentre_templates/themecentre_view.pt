@@ -269,9 +269,9 @@
                     </div>
                   </div>
                   <div class="eea-card-body">
-<!--?                    <a href="#" class="eea-card-image-link" tal:attributes="href url">-->
+                    <a href="#" class="eea-card-image-link" tal:attributes="href url">
                       <img tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image eea-card-image--pull eea-card-image-bordered" />
-<!--?                    </a>-->
+                    </a>
 
                     <div class="eea-card-body-text">
                       <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.effective)"></span>

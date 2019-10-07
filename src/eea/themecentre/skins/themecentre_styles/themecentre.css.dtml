@@ -286,7 +286,7 @@ body {
     border: 3px solid currentColor;
 }
 .eea-card-image-bordered {
-    border: 3px solid currentColor;
+    border: 3px solid currentColor !important;
 }
 /* /end @Card listing */
 
