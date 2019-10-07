@@ -115,7 +115,6 @@ body {
     display: inline-block;
     padding: 1em;
     margin: 1em 0 2em 0;
-    /*width: 46%;*/
     max-width: 370px;
     flex: 1;
 }
@@ -172,7 +171,6 @@ body {
     max-width: inherit;
     display: flex;
     margin: 1em 1em 2em;
-    /*flex-wrap: wrap;*/
 }
 
 .eea-card--fullwidth {
@@ -204,8 +202,6 @@ body {
 
 .eea-card-title-wrapper {
     overflow: hidden;
-    /*min-height: 75px;*/
-    /*max-height: 105px;*/
     height: 105px;
     margin-bottom: 1em;
 }
@@ -228,8 +224,7 @@ body {
     top: 0;
 }
 .eea-card--bg-light .eea-card-body,
-.eea-card--bg-light .moreLink
-{
+.eea-card--bg-light .moreLink {
     color: #333 !important;
 }
 

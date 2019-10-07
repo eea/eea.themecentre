@@ -226,9 +226,6 @@
                       <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
                       </div>
                     </a>
-<!--?                    <a href="#" class="eea-card-image-link" tal:attributes="href url">-->
-<!--?                      <img  tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image" />-->
-<!--?                    </a>-->
                   </div>
                   <div class="eea-card-body">
                     <p tal:content="snews/Description"></p>
