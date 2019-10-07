@@ -807,7 +807,11 @@ body {
     }
 
     .eea-card {
-        flex: auto;
+        flex: 0 0 auto;
+    }
+
+    .eea-card--landscape .moreLink:before {
+        font-size: 48px;
     }
 }
 /* YOUR CSS RULES STOP HERE */
