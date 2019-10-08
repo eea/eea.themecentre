@@ -54,7 +54,7 @@ body {
 }
 
 .themecentre-section {
-    margin: 3em 0;
+    margin: 10em 0;
 }
 
 .section-title {
@@ -86,10 +86,14 @@ body {
     background-color: &dtml-themesMultimediaColor;;
 }
 
+.bg-dark-orange {
+    background-color: &dtml-corporateDarkOrange;;
+}
+
 .storytelling-wrapper {
     width: 77%;
     margin: 0 auto;
-    background-color: &dtml-greyBackgroundColor;;
+    background-color: rgba(234, 234, 234, 0.8);
     padding: 1.5em;
 }
 
@@ -102,7 +106,7 @@ body {
 }
 
 .template-themecentre_view .eea-btn {
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 /* @card listing */
 .eea-card-listing {
@@ -231,6 +235,9 @@ body {
 .eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn-md {
     color: #FFF !important;
 }
+.eea-card-link > h2 {
+    font-size: 20px;
+}
 
 .eea-card-body {
     display: flex;
@@ -339,11 +346,16 @@ body {
 
 .subtopics-list-item {
     color: #FFF;
+    font-size: 24px !important;
+    float: none !important;
 }
 #subtopics h2, #subtopics h3 {
     background: none;
     padding: 0;
     color: #FFF;
+}
+#subtopics > h2 {
+    font-size: 32px;
 }
 /* #104468 hide related items on themes view*/
 .template-themes_view #relatedItems,

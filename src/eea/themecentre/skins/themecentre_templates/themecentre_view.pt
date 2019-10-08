@@ -111,7 +111,7 @@
       <section class="themecentre-section section-indicators"
            tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
         <div class="section-type">
-          <p class="inline-block eea-btn-md eea-btn-indicators bg-light-blue">
+          <p class="inline-block eea-btn-md eea-btn-indicators bg-blue">
             <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
             <span i18n:translate="">Indicators</span>
           </p>
@@ -138,7 +138,7 @@
           </tal:items>
         </div>
         <div class="section-footer text-right">
-          <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-indicators bg-light-blue" i18n:translate="">
+          <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-indicators bg-blue" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
             <span i18n:translate="">All indicators on &nbsp;</span>
             <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
@@ -151,7 +151,7 @@
       <section class="themecentre-section section-gismap"
            tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
         <div class="section-type">
-          <p class="inline-block eea-btn-md eea-btn-gismap bg-light-blue">
+          <p class="inline-block eea-btn-md eea-btn-gismap bg-dark-orange">
             <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
             <span i18n:translate="">GIS Map Application</span>
           </p>
@@ -166,7 +166,7 @@
         </div>
 
         <div class="section-footer text-right">
-          <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-light-blue eea-btn--moreLink" i18n:translate="">
+          <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-dark-orange eea-btn--moreLink" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
             <span i18n:translate="">All GIS Map Application on &nbsp;</span>
             <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
