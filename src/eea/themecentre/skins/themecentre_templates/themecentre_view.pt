@@ -111,10 +111,10 @@
       <section class="themecentre-section section-indicators"
            tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
         <div class="section-type">
-          <p class="inline-block eea-btn-md eea-btn-indicators bg-blue">
+          <a href="indicators" class="inline-block eea-btn-md eea-btn-indicators bg-blue">
             <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
             <span i18n:translate="">Indicators</span>
-          </p>
+          </a>
         </div>
         <div class="eea-card-listing">
           <tal:items tal:repeat="indicator indicators">
@@ -151,10 +151,10 @@
       <section class="themecentre-section section-gismap"
            tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
         <div class="section-type">
-          <p class="inline-block eea-btn-md eea-btn-gismap bg-dark-orange">
+          <a href="gis" class="inline-block eea-btn-md eea-btn-gismap bg-dark-orange">
             <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
             <span i18n:translate="">GIS Map Application</span>
-          </p>
+          </a>
         </div>
 
         <a href="#" class="section-link" tal:attributes="href gismap/absolute_url">
@@ -162,7 +162,7 @@
         </a>
 
         <div class="section-body">
-          <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src')" />
+          <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src') if '<iframe' in body else body" />
         </div>
 
         <div class="section-footer text-right">
@@ -177,10 +177,10 @@
         <section class="themecentre-section section-dashboard"
                  tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
             <div class="section-type">
-                <p class="inline-block eea-btn-md eea-btn-dashboard  bg-light-blue">
+                <a href="interactive" class="inline-block eea-btn-md eea-btn-dashboard  bg-light-blue">
                   <span class="eea-icon eea-icon-bar-chart"><!-- ?--></span>
                   <span i18n:translate="">Dashboard</span>
-                </p>
+                </a>
             </div>
 
             <a href="#" class="section-link" tal:attributes="href dashboard/absolute_url">
@@ -188,7 +188,7 @@
             </a>
 
             <div class="section-body">
-              <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src')" />
+              <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src') if '<iframe' in body else body" />
             </div>
 
             <div class="section-footer text-right">
@@ -203,10 +203,10 @@
         <section class="themecentre-section section-news"
                  tal:define="news themecentre_view/getLatestNews" tal:condition="news">
             <div class="section-type">
-              <p class="inline-block eea-btn-md eea-btn-news bg-green">
+              <a href="highlights" class="inline-block eea-btn-md eea-btn-news bg-green">
                 <span class="eea-icon eea-icon-newspaper-o"><!-- ?--></span>
                 <span i18n:translate="">News</span>
-              </p>
+              </a>
             </div>
 
             <div class="eea-card-listing">
@@ -249,10 +249,10 @@
         <section class="themecentre-section section-publications"
                  tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
             <div class="section-type">
-                <p class="inline-block eea-btn-md eea-btn-publications bg-blue">
+                <a href="publications" class="inline-block eea-btn-md eea-btn-publications bg-blue">
                   <span class="eea-icon eea-icon-file-pdf-o"><!-- ?--></span>
                   <span i18n:translate="">Publication</span>
-                </p>
+                </a>
             </div>
 
             <div class="eea-card-listing">
@@ -291,7 +291,7 @@
         <section class="themecentre-section section-multimedia"
                  tal:define="multimedia themecentre_view/getPromotedMultimedia" tal:condition="multimedia">
             <div class="section-type">
-                <p class="inline-block eea-btn-md eea-btn-multimedia bg-purple"><span class="eea-icon eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></p>
+                <a href="multimedia" class="inline-block eea-btn-md eea-btn-multimedia bg-purple"><span class="eea-icon eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></a>
             </div>
           <div class="section-body">
             <tal:defines tal:define="objhref multimedia/absolute_url;">
