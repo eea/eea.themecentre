@@ -32,7 +32,7 @@ for country in countries:
         try:
             iso = pycountry.languages.get(alpha_2=country).alpha_3.upper()
         except:
-            print "ERROR GETTINT ISO FOR %s" % country
+            print "ERROR GETTING ISO FOR %s" % country
 
     path = os.getcwd() + "/" + country + "/csv/%s-formatted.csv" % country
     from_file = open(path) 
@@ -43,4 +43,4 @@ for country in countries:
     to_file = open(path, mode="w")
     to_file.write(line)
     shutil.copyfileobj(from_file, to_file)
-    print "Finished setting ISO codes for country %s" % iso
+    print "Finished setting ISO code for country %s" % iso
