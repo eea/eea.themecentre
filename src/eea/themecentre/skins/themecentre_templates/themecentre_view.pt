@@ -62,50 +62,7 @@
         <!--?    themecentre sections     -->
         <section class="themecentre-section section-storytelling overflow_auto"
              tal:define="storytelling themecentre_view/getLatestStorytelling" tal:condition="storytelling">
-          <div class="storytelling-wrapper" tal:define="storyitem python:storytelling[0];
-              relations storyitem/getRelatedItemsRaw;">
-            <div class="storytelling-header">
-
-              <a href="#" class="storytelling-link" tal:attributes="href storyitem/absolute_url">
-                <h2 tal:content="storyitem/Title" class="dark-color"></h2>
-              </a>
-              <p tal:content="storyitem/Description"></p>
-            </div>
-            <div class="storytelling-body">
-              <tal:items tal:repeat="relation relations" tal:condition="relations">
-                <tal:defines tal:define="num_of_relations python: len(relations);
-                    titles python:storyitem.getStory_titles().split('\r\n');
-                    repeat_num python: repeat['relation'].index;
-                    titles_len python: len(titles);">
-                  <div class="eea-card" tal:define="url relation/url; relation_with_description python: repeat_num == 2; fullwidth python: relation_with_description or num_of_relations == 1" tal:attributes="class python:'eea-card eea-card--double eea-card--landscape direction-column' if not relation_with_description and num_of_relations != 1 else 'eea-card eea-card--landscape eea-card--fullwidth'">
-                    <div class="eea-card-header">
-                      <div class="eea-card-title-wrapper">
-                        <div class="eea-card-title">
-                          <a href="#" class="eea-card-link" tal:attributes="href url">
-                            <h2 tal:content="python: titles[repeat_num] if repeat_num < titles_len else relation['title']"></h2>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="eea-card-body">
-                      <div class="eea-card-image-wrapper">
-                        <a href="#" class="eea-card-image-link" tal:attributes="href url">
-                          <img tal:attributes="src string:${url}/${image_scale}" alt=""
-                               tal:define="image_scale python: 'image_large'" class="skip_lazy eea-card-image eea-card-image--pull"  />
-                        </a>
-                      </div>
-                      <div class="eea-card-body-text"  tal:condition="fullwidth">
-                        <p tal:replace="structure storyitem/full_story_description"></p>
-                      </div>
-                    </div>
-                    <div class="eea-card-footer">
-                      <a href="#" tal:attributes="href url" class="moreLink">&nbsp;</a>
-                    </div>
-                  </div>
-                </tal:defines>
-              </tal:items>
-            </div>
-          </div>
+          <metal:storyitem tal:define="story python:storytelling[0];" metal:use-macro="story/storytelling_view/macros/storybody"></metal:storyitem>
         </section>
 
       <section class="themecentre-section section-indicators"
