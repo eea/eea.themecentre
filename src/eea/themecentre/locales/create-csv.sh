@@ -8,6 +8,7 @@
 # loop through each folder
 for d in */ ; do
     OutFileName="${d::-1}-merged.csv"
+    FormattedFileName="${d::-1}-formatted.csv"
     # echo "${d::-1}-merged.csv"
 
     # create csv folder
@@ -19,7 +20,7 @@ for d in */ ; do
     # loop through csv files and merge them into 1
     index=0
     for filename in $d/csv/*.csv; do
-        if [ "$filename"  != "$d/csv/$OutFileName" ] ;
+        if [ "$filename"  != "$d/csv/$OutFileName" ] && [ "$filename" != "$d/csv/$FormattedFileName" ] ;
         then 
           if [[ $index -eq 0 ]] ; then 
               head -1  "$filename" >   "$d/csv/$OutFileName" # Copy header if it is the first file
@@ -28,4 +29,16 @@ for d in */ ; do
           index=$(( $index + 1 ))
         fi
     done
+
+    # empty formatted file
+    > "$d/csv/$FormattedFileName"
+
+    # remove first column containing location
+    cut -d, -f1 --complement "$d/csv/$OutFileName" >> "$d/csv/$FormattedFileName"
+
+    # replace headers
+    sed -i '1s/.*/message in EN, message in <ISO-code>/' "$d/csv/$FormattedFileName"
 done
+
+# format headers with iso codes
+python iso_codes.py
