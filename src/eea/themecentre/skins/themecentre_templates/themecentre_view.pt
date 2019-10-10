@@ -73,7 +73,7 @@
             <span i18n:translate="">Indicators</span>
           </a>
         </div>
-        <div class="eea-card-listing">
+        <div class="eea-card-listing eea-card-three-of-kind">
           <tal:items tal:repeat="indicator indicators">
             <div class="eea-card" tal:define="url indicator/getURL">
               <div class="eea-card-header">
@@ -166,7 +166,7 @@
               </a>
             </div>
 
-            <div class="eea-card-listing">
+            <div class="eea-card-listing eea-card-three-of-kind">
               <tal:items tal:repeat="snews news">
                 <div class="eea-card eea-card--bg-light direction-column" tal:define="url snews/getURL">
                   <div class="eea-card-header">

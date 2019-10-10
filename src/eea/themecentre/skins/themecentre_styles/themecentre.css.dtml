@@ -170,7 +170,7 @@ body {
 
 /* card modifiers */
 .eea-card--double {
-    width: 46%;
+    width: 45%;
     flex: none;
     max-width: inherit;
     display: flex;
@@ -206,7 +206,7 @@ body {
 
 .eea-card-title-wrapper {
     overflow: hidden;
-    height: 105px;
+    height: 90px;
     margin-bottom: 1em;
 }
 .eea-card--fullwidth .eea-card-title-wrapper {
@@ -777,7 +777,6 @@ body {
     }
 }
 
-
 @media screen and (min-width: 1100px) {
     .themes-megatopics-area-translations .portlet-megatopic {
         flex: none;
@@ -788,6 +787,49 @@ body {
     .eea-card--fullwidth .eea-card-img,
     .eea-card--fullwidth .eea-card-body-text {
         width: 50%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .eea-card--double {
+        width: 47%;
+        margin: 1em 0 2em;
+    }
+}
+@media (max-width: 1023px) {
+    .eea-card--landscape .eea-card-image-wrapper {
+        width: 100%;
+    }
+    .eea-card--fullwidth .eea-card-img,
+    .eea-card--fullwidth .eea-card-body-text {
+        width: 100%;
+    }
+    .eea-card-body {
+        flex-wrap: wrap;
+    }
+    .eea-card--landscape .eea-card-image {
+        margin-bottom: 1em;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .eea-card-image-wrapper {
+        align-self: flex-start;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .eea-card--landscape .eea-card-image {
+        width: 95%;
+    }
+    .eea-card-listing {
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+   .eea-card-three-of-kind .eea-card {
+        max-width: 100%;
+        flex: 0 0 38%;
     }
 }
 @media screen and (min-width: 1280px) {
