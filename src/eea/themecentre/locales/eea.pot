@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-10-09 08:35+0000\n"
+"POT-Creation-Date: 2019-10-10 11:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,8 @@ msgstr ""
 msgid "(TERMINATED)"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:144
-msgid "<span class=\"eea-icon eea-icon-chevron-circle-right \"><!-- ?--></span> <span>x</span> <span class=\"text-italic\">x</span>"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:101
+msgid "<span class=\"eea-icon eea-icon-chevron-circle-right \"><!-- ?--></span> <span>x</span>&nbsp; <span class=\"text-italic\">x</span>"
 msgstr ""
 
 #: ../../themecentre/skins/themecentre_templates/dc_view.pt:19
@@ -33,32 +33,32 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:171
-msgid "All GIS Map Application on &nbsp;"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:128
+msgid "All GIS Map Application on"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:311
-msgid "All Multimedia on &nbsp;"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:268
+msgid "All Multimedia on"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:243
-msgid "All News on &nbsp;"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:200
+msgid "All News on"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:285
-msgid "All Publication on &nbsp;"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:242
+msgid "All Publication on"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:197
-msgid "All Tableau Dashboards on &nbsp;"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:154
+msgid "All Tableau Dashboards on"
 msgstr ""
 
 #: ../../themecentre/skins/themecentre_templates/linkchecker_documents_by_status.pt:18
 msgid "All documents in state ${state}"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:143
-msgid "All indicators on &nbsp;"
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:100
+msgid "All indicators on"
 msgstr ""
 
 #: ../../themecentre/skins/themecentre_templates/linkchecker_links_by_status.pt:29
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Choose another media type or ${multimedia_center} (via EEA Multimedia Centre)."
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:182
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:139
 msgid "Dashboard"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Featured content"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:156
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:113
 msgid "GIS Map Application"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:116
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:73
 msgid "Indicators"
 msgstr ""
 
@@ -173,11 +173,11 @@ msgid "More"
 msgstr ""
 
 #: ../../themecentre/skins/themecentre_templates/media_type_common.pt:39
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:294
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:251
 msgid "Multimedia"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:208
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:165
 msgid "News"
 msgstr ""
 
@@ -222,11 +222,11 @@ msgstr ""
 msgid "Promote to theme centre"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:254
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:211
 msgid "Publication"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:222
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:179
 msgid "Published"
 msgstr ""
 
@@ -238,7 +238,7 @@ msgstr ""
 msgid "RSS"
 msgstr ""
 
-#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:135
+#: ../../themecentre/skins/themecentre_templates/themecentre_view.pt:92
 msgid "Read more"
 msgstr ""
 

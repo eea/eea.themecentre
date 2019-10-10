@@ -20,7 +20,7 @@ for d in */ ; do
     # loop through csv files and merge them into 1
     index=0
     for filename in $d/csv/*.csv; do
-        if [ "$filename"  != "$d/csv/$OutFileName" ] && [ "$filename" != "$d/csv/$FormattedFileName" ] ;
+        if [ "$filename"  != "$d/csv/$OutFileName" ] && [ "$filename" != "$d/csv/$FormattedFileName" ] && [ "$filename" != "$d/csv/eea.csv" ] ;
         then 
           if [[ $index -eq 0 ]] ; then 
               head -1  "$filename" >   "$d/csv/$OutFileName" # Copy header if it is the first file
@@ -30,7 +30,7 @@ for d in */ ; do
         fi
     done
 
-    # empty formatted file
+    # empty formatted file, disable empty after correct generation
     > "$d/csv/$FormattedFileName"
 
     # remove first column containing location
