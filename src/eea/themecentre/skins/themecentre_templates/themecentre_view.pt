@@ -110,7 +110,7 @@
         <div class="section-type">
           <a href="gis" class="inline-block eea-btn-md eea-btn-gismap bg-dark-orange">
             <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
-            <span i18n:translate="">GIS Map Application</span>
+            <span i18n:translate="">Interactive map</span>
           </a>
         </div>
 
@@ -136,7 +136,7 @@
             <div class="section-type">
                 <a href="interactive" class="inline-block eea-btn-md eea-btn-dashboard  bg-light-blue">
                   <span class="eea-icon eea-icon-bar-chart"><!-- ?--></span>
-                  <span i18n:translate="">Dashboard</span>
+                  <span i18n:translate="">Interactive chart</span>
                 </a>
             </div>
 
