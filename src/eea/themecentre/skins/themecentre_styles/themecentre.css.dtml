@@ -797,6 +797,16 @@ body {
         width: 47%;
         margin: 1em 0 2em;
     }
+    .eea-card--portrait {
+        width: 80%;
+    }
+
+    .eea-card--portrait .eea-card-title-wrapper {
+        height: auto;
+    }
+    .eea-card--portrait .eea-card-image {
+        margin-left: -3em;
+    }
 }
 @media (max-width: 1023px) {
     .eea-card--landscape .eea-card-image-wrapper {
