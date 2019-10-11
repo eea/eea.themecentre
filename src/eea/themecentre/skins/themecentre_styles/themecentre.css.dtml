@@ -293,8 +293,10 @@ body {
 /* /end @Card listing */
 
 .themecentre-section .video_player_link {
-    height: 700px !important;
+    height: auto;
     border: 1px solid #D3D3D3;
+    min-height: 460px;
+    background-size: cover;
 }
 
 .template-themecentre_view .whatsnew-listing {
@@ -851,6 +853,9 @@ body {
         width: 103%;
     }
 
+    .themecentre-section .video_player_link {
+        min-height: 700px;
+    }
 }
 
 /* 102564 IE11 hack as the hiddenStructure without display will count
