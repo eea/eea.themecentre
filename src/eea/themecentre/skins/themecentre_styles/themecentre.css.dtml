@@ -192,13 +192,14 @@ body {
 }
 .eea-card--bg-light .eea-card-header:before {
     background-color: currentColor;
-    width: 108%;
+    width: 102%;
     content: " ";
     height: 100%;
     position: absolute;
     z-index: -1;
     margin-left: -14px;
     top: -14px;
+    padding: 0 1em;
 }
 .eea-card-header > h2 {
     color: #FFF;
@@ -206,7 +207,7 @@ body {
 
 .eea-card-title-wrapper {
     overflow: hidden;
-    height: 90px;
+    height: 89px;
     margin-bottom: 1em;
 }
 .eea-card--fullwidth .eea-card-title-wrapper {
@@ -547,6 +548,14 @@ body {
         border: 0;
         box-shadow: 0 2px 7px 0 rgba(0,0,0,.2);
     }
+
+    .eea-card--bg-light .eea-card-header:before {
+        margin-left: -13px;
+        width: 99%;
+    }
+    .eea-card-image-bg-wrapper {
+        border: 0;
+    }
 }
 
 @media screen and (min-width: 481px) {
@@ -660,6 +669,31 @@ body {
 
     #topics-search .gsc-search-button {
         width: 0;
+    }
+    .eea-card-listing {
+        flex-wrap: wrap;
+    }
+    .eea-card--double {
+        width: 100%;
+        margin: 2em 0;
+    }
+    .eea-card-three-of-kind {
+        justify-content: space-around;
+        margin: 0;
+    }
+    .eea-card-three-of-kind .eea-card {
+        flex: 1 1 100%;
+        max-width: 480px;
+    }
+    .eea-card-image-bg-wrapper {
+        width: 100%;
+        margin-left: 0;
+    }
+    .eea-card.eea-card--bg-light:before {
+        width: 101%
+    }
+    .eea-card--bg-light .eea-card-header:before {
+        top: -3px;
     }
 }
 
