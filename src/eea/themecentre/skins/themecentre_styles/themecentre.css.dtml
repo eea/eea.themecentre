@@ -561,7 +561,19 @@ body {
     }
 
     .storytelling-wrapper {
-        width: 92%;
+        width: 100%;
+        margin: 0;
+    }
+    .storytelling-body {
+        width: 100%;
+        margin-left: 0;
+    }
+    .eea-card--landscape .moreLink:before {
+        font-size: 3em;
+        margin-left: 0;
+    }
+    .template-themecentre_view .eea-btn {
+        font-size: 1.1rem;
     }
     .eea-card-image-bg-wrapper {
         border: 0;
@@ -693,8 +705,12 @@ body {
     .eea-card--landscape .eea-card-header {
         width: 83%;
     }
+    .eea-card--bg-light .eea-card-header:before {
+        width: 100%;
+    }
     .eea-card-listing {
         flex-wrap: wrap;
+        margin: 0;
     }
     .eea-card--double {
         width: 100%;
@@ -712,11 +728,11 @@ body {
         width: 100%;
         margin-left: 0;
     }
-    .eea-card.eea-card--bg-light:before {
-        width: 101%
-    }
     .eea-card--bg-light .eea-card-header:before {
         top: -3px;
+    }
+    .eea-card-title-wrapper {
+        height: auto;
     }
 }
 
