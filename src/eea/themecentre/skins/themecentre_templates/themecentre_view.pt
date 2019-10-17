@@ -5,6 +5,10 @@
       i18n:domain="eea">
 
 <head>
+  <metal:fill-slot fill-slot="top_slot">
+    <style tal:content="structure context/themecentre_critical.css">
+    </style>
+  </metal:fill-slot>
 </head>
 <body>
 
@@ -41,7 +45,7 @@
                         soer_topic python:soer_topic[0].getObject();
                         soer_topics python:soer_topic.queryCatalog()">
                     <h4 tal:content="soer_topic/Title">Folder links</h4>
-                    <ul class="border-bottom-spacer inline-list-style bullet-list ma-0">
+                    <ul class="border-bottom-spacer bullet-list ma-0">
                         <li tal:repeat="folder soer_topics" tal:condition="soer_topics" class="subtopics-list-item">
                             <a tal:attributes="href folder/getURL; title folder/Title;"
                                     tal:content="folder/Title">Folder links</a>
@@ -50,7 +54,7 @@
                 </tal:defines>
             </tal:existssoer>
 
-            <ul tal:condition="folders" class="inline-list-style bullet-list  ma-0">
+            <ul tal:condition="folders" class="bullet-list  ma-0">
                 <li tal:repeat="folder folders" class="subtopics-list-item">
                     <a tal:attributes="href folder/getURL; title folder/Title;"
                             tal:content="folder/Title" class="light-color">Folder links</a>
