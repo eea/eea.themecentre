@@ -146,11 +146,11 @@ body {
     position: relative;
 }
 .eea-card--landscape .eea-card-header {
-    width: 92%;
+    width: 90%;
 }
 .eea-card--bg-light .eea-card-header:before {
     background-color: currentColor;
-    width: 102%;
+    width: 100%;
     content: " ";
     height: 100%;
     position: absolute;
@@ -642,8 +642,10 @@ body {
     .eea-card--landscape .eea-card-header {
         width: 83%;
     }
-    .eea-card--bg-light .eea-card-header:before {
-        width: 100%;
+    .eea-card--bg-light .eea-card-header:before,
+    .eea-card.eea-card--bg-light:before
+    {
+        width: 99%;
     }
     .eea-card-listing {
         flex-wrap: wrap;
