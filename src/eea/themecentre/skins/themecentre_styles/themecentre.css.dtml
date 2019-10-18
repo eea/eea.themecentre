@@ -427,6 +427,9 @@ body {
         padding: 0;
     }
 
+    .two-columns.subtopics-mobile-column {
+        columns: 1;
+    }
     .eea-accordion-panels-inverse .eea-accordion-title,
     .eea-accordion-panel > h2 {
         background-color: &dtml-lightBackgroundColor;;
