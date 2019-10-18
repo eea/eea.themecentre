@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
  <description>EEA Theme Centre profile</description>
- <version>9.7</version>
+ <version>9.8</version>
  <dependencies>
   <dependency>profile-Products.LinguaPlone:LinguaPlone</dependency>
   <dependency>profile-eea.vocab:default</dependency>

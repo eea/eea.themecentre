@@ -3,7 +3,20 @@
            i18n_domain="eea">
 
 
-  <!-- => 4.0 -->
+  <!-- => 9.8 -->
+  <genericsetup:upgradeSteps
+    source="9.7"
+    destination="9.8"
+    profile="eea.themecentre:default">
+
+    <genericsetup:upgradeDepends
+      title="Import profile steps with changes: cssregistry"
+      import_steps="cssregistry"
+    />
+
+  </genericsetup:upgradeSteps>
+
+  <!-- => 9.7 -->
   <genericsetup:upgradeSteps source="8.0"
     destination="9.7"
     profile="eea.themecentre:default">

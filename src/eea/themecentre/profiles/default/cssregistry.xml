@@ -7,10 +7,22 @@
              compression="safe"
              cookable="True"
              enabled="1"
-             expression=""
+             expression="python: '/themes' in request.URL0"
              id="themecentre.css"
+             insert-after="organisations.css"
              media="screen"
              rel="stylesheet"
-             rendering="import"/>
+             rendering="link"/>
 
+ <stylesheet title=""
+   cacheable="True"
+   compression="safe"
+   cookable="True"
+   enabled="1"
+   expression="python: '/themes' in request.URL0"
+   id="themecentre_critical.css"
+   insert-after="critical.css"
+   media="screen"
+   rel="stylesheet"
+   rendering="inline"/>
 </object>
