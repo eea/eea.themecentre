@@ -10,19 +10,19 @@
              expression="python: '/themes' in request.URL0"
              id="themecentre.css"
              insert-after="organisations.css"
-             media="screen"
+             media=""
              rel="stylesheet"
              rendering="link"/>
 
  <stylesheet title=""
    cacheable="True"
-   compression="safe"
+   compression="none"
    cookable="True"
    enabled="1"
    expression="python: '/themes' in request.URL0"
    id="themecentre_critical.css"
    insert-after="critical.css"
-   media="screen"
+   media=""
    rel="stylesheet"
    rendering="inline"/>
 </object>
