@@ -2,9 +2,15 @@
   color: #FFF !important;
   }
 
-h1 {
+.documentFirstHeading {
   font-size: 280%;
   margin-bottom: 0;
+  }
+
+h2.dark-color {
+  font-size: 175%;
+  margin: 0 0 0.83em 0;
+  color: #000;
   }
 .topic-img-bg {
   background-repeat: no-repeat;
@@ -73,6 +79,13 @@ h1 {
   font-size: 32px;
   margin-bottom: 0.5em;
   }
+.moreLink {
+  border: 0 !important;
+  display: inline-block;
+  padding-left: 20px;
+  font-size: 12px;
+  position: relative;
+  }
 
 .bullet-list {
   columns: 2;
@@ -138,13 +151,13 @@ h1 {
   margin-top: 3em;
   }
 
+.eea-card-link > h2 {
+  font-size: 20px;
+  }
 .eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn-md {
     color: #FFF !important;
 }
 
 .eea-card-body-text {
   color: #FFF;
-  }
-.eea-card-link > h2 {
-  font-size: 20px;
   }
