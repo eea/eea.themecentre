@@ -1,3 +1,11 @@
+.light-color {
+  color: #FFF !important;
+  }
+
+h1 {
+  font-size: 280%;
+  margin-bottom: 0;
+  }
 .topic-img-bg {
   background-repeat: no-repeat;
   height: 1000px;
@@ -23,6 +31,10 @@
   display: block;
   z-index: 0;
   background-color: rgba(0, 41, 60, 0.5);
+  }
+
+.topic-intros {
+  margin-bottom: 1em;
   }
 
 .themecentre-section {
@@ -59,4 +71,80 @@
   }
 #subtopics > h2 {
   font-size: 32px;
+  margin-bottom: 0.5em;
+  }
+
+.bullet-list {
+  columns: 2;
+  margin: 0;
+}
+.bullet-list > li {
+  position: relative;
+  padding-left: 1em;
+  }
+
+.bullet-list > li:before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: inherit;
+  font-size: 2em;
+  }
+
+
+.storytelling-wrapper {
+  width: 77%;
+  margin: 0 auto;
+  background-color: rgba(234, 234, 234, 0.8);
+  padding: 1.5em;
+  }
+
+.storytelling-body {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 130%;
+  margin-left: -15%;
+  }
+.direction-column {
+    flex-direction: column;
+    display: flex;
+}
+
+
+.eea-card {
+  background-color: #008675;
+  position: relative;
+  display: inline-block;
+  padding: 1em;
+  margin: 1em 0 2em 0;
+  max-width: 370px;
+  flex: 1;
+  }
+
+/* card modifiers */
+.eea-card--double {
+  width: 45%;
+  flex: none;
+  max-width: inherit;
+  display: flex;
+  margin: 1em 1em 2em;
+  }
+
+.eea-card--fullwidth {
+  width: 100%;
+  max-width: 100%;
+  flex: none;
+  margin-top: 3em;
+  }
+
+.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn-md {
+    color: #FFF !important;
+}
+
+.eea-card-body-text {
+  color: #FFF;
+  }
+.eea-card-link > h2 {
+  font-size: 20px;
   }
