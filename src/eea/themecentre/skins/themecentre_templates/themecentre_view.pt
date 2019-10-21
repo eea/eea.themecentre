@@ -68,8 +68,8 @@
       <section class="themecentre-section section-indicators"
            tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
         <div class="section-type">
-          <a href="indicators" class="inline-block eea-btn-md eea-btn-indicators bg-blue">
-            <span class="eea-icon eea-icon-area-chart"><!-- ?--></span>
+          <a href="indicators" class="inline-block eea-btn-md eea-btn-indicators bg-grey text-bold">
+            <span class="eea-icon eea-icon-lg eea-icon-area-chart"><!-- ?--></span>
             <span i18n:translate="">Indicators</span>
           </a>
         </div>
@@ -108,8 +108,8 @@
       <section class="themecentre-section section-gismap"
            tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
         <div class="section-type">
-          <a href="gis" class="inline-block eea-btn-md eea-btn-gismap bg-dark-orange">
-            <span class="eea-icon eea-icon-line-chart"><!-- ?--></span>
+          <a href="gis" class="inline-block eea-btn-md eea-btn-gismap bg-grey text-bold">
+            <span class="eea-icon eea-icon-lg eea-icon-line-chart"><!-- ?--></span>
             <span i18n:translate="">Interactive map</span>
           </a>
         </div>
@@ -134,8 +134,8 @@
         <section class="themecentre-section section-dashboard"
                  tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
             <div class="section-type">
-                <a href="interactive" class="inline-block eea-btn-md eea-btn-dashboard  bg-light-blue">
-                  <span class="eea-icon eea-icon-bar-chart"><!-- ?--></span>
+                <a href="interactive" class="inline-block eea-btn-md eea-btn-dashboard text-bold bg-grey">
+                  <span class="eea-icon eea-icon-lg eea-icon-bar-chart"><!-- ?--></span>
                   <span i18n:translate="">Interactive chart</span>
                 </a>
             </div>
@@ -160,8 +160,8 @@
         <section class="themecentre-section section-news"
                  tal:define="news themecentre_view/getLatestNews" tal:condition="news">
             <div class="section-type">
-              <a href="highlights" class="inline-block eea-btn-md eea-btn-news bg-green">
-                <span class="eea-icon eea-icon-newspaper-o"><!-- ?--></span>
+              <a href="highlights" class="inline-block eea-btn-md eea-btn-news bg-grey text-bold">
+                <span class="eea-icon eea-icon-lg eea-icon-newspaper-o"><!-- ?--></span>
                 <span i18n:translate="">News</span>
               </a>
             </div>
@@ -206,8 +206,8 @@
         <section class="themecentre-section section-publications"
                  tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
             <div class="section-type">
-                <a href="publications" class="inline-block eea-btn-md eea-btn-publications bg-blue">
-                  <span class="eea-icon eea-icon-file-pdf-o"><!-- ?--></span>
+                <a href="publications" class="inline-block eea-btn-md eea-btn-publications bg-grey text-bold">
+                  <span class="eea-icon eea-icon-lg eea-icon-file-pdf-o"><!-- ?--></span>
                   <span i18n:translate="">Publication</span>
                 </a>
             </div>
@@ -248,7 +248,7 @@
         <section class="themecentre-section section-multimedia"
                  tal:define="multimedia themecentre_view/getPromotedMultimedia" tal:condition="multimedia">
             <div class="section-type">
-                <a href="multimedia" class="inline-block eea-btn-md eea-btn-multimedia bg-purple"><span class="eea-icon eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></a>
+                <a href="multimedia" class="inline-block eea-btn-md eea-btn-multimedia bg-grey text-bold"><span class="eea-icon eea-icon-lg eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></a>
             </div>
           <div class="section-body">
             <tal:defines tal:define="objhref multimedia/absolute_url;">

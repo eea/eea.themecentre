@@ -42,6 +42,9 @@ h2.dark-color {
 .topic-intros {
   margin-bottom: 1em;
   }
+.topic-intro {
+  margin-right: 1em;
+  }
 
 .themecentre-section {
   margin: 10em 0;
@@ -83,7 +86,6 @@ h2.dark-color {
   border: 0 !important;
   display: inline-block;
   padding-left: 20px;
-  font-size: 12px;
   position: relative;
   }
 
@@ -154,7 +156,7 @@ h2.dark-color {
 .eea-card-link > h2 {
   font-size: 20px;
   }
-.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn-md {
+.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn {
     color: #FFF !important;
 }
 

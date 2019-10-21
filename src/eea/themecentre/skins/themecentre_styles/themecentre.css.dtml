@@ -43,6 +43,9 @@ body {
 .bg-purple {
     background-color: &dtml-themesMultimediaColor;;
 }
+.bg-grey {
+    background-color: &dtml-greyBackgroundColor;;
+}
 
 .bg-dark-orange {
     background-color: &dtml-corporateDarkOrange;;
