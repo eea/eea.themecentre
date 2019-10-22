@@ -35,7 +35,7 @@
                 soer_topic_path python: '/' + context.absolute_url(1) + '/briefings-soer';
                 soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);" tal:condition="python:soer_topic or folders">
 
-            <h2 i18n:translate="" class="mb-half">Subtopics:</h2>
+            <h2 i18n:translate="" class="mb-half">Subtopics</h2>
             <tal:existssoer tal:condition="soer_topic">
                 <tal:defines tal:define="
                         soer_topic python:soer_topic[0].getObject();
@@ -97,7 +97,7 @@
         <div class="section-footer text-right">
           <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-indicators bg-blue" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-            <span i18n:translate="">All indicators on</span>&nbsp;
+            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="indicator">Indicator</span> on</span>&nbsp;
             <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
           </a>
         </div>
@@ -125,7 +125,7 @@
         <div class="section-footer text-right">
           <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-dark-orange eea-btn--moreLink" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-            <span i18n:translate="">All GIS Map Application on</span>&nbsp;
+            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="interactive-map">Interactive Map</span> on</span>&nbsp;
             <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
           </a>
         </div>
@@ -151,7 +151,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:interactive" class="eea-btn  eea-btn--moreLink eea-btn-md bg-light-blue" i18n:translate="">
                     <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                    <span i18n:translate="">All Tableau Dashboards on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="interactive-chart">Interactive chart</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
@@ -197,7 +197,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:highlights" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All News on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="news">News</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
@@ -239,7 +239,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:publications" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-publications bg-blue" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All Publication on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="publication">Publication</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
@@ -265,7 +265,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:multimedia" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-multimedia bg-purple" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All Multimedia on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="multimedia">Multimedia</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
