@@ -97,7 +97,7 @@
         <div class="section-footer text-right">
           <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-indicators bg-blue" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="indicator">Indicator</span> on</span>&nbsp;
+            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="indicator">indicators</span> on</span>&nbsp;
             <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
           </a>
         </div>
@@ -110,7 +110,7 @@
         <div class="section-type">
           <a href="gis" class="inline-block eea-btn-md eea-btn-gismap bg-grey text-bold">
             <span class="eea-icon eea-icon-lg eea-icon-line-chart"><!-- ?--></span>
-            <span i18n:translate="">Interactive map</span>
+            <span i18n:translate="">Interactive maps</span>
           </a>
         </div>
 
@@ -125,7 +125,7 @@
         <div class="section-footer text-right">
           <a href="" tal:attributes="href string:gis" class="eea-btn eea-btn-md  bg-dark-orange eea-btn--moreLink" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="interactive-map">Interactive Map</span> on</span>&nbsp;
+            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="interactive-map">interactive maps</span> on</span>&nbsp;
             <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
           </a>
         </div>
@@ -136,7 +136,7 @@
             <div class="section-type">
                 <a href="interactive" class="inline-block eea-btn-md eea-btn-dashboard text-bold bg-grey">
                   <span class="eea-icon eea-icon-lg eea-icon-bar-chart"><!-- ?--></span>
-                  <span i18n:translate="">Interactive chart</span>
+                  <span i18n:translate="">Interactive charts</span>
                 </a>
             </div>
 
@@ -151,7 +151,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:interactive" class="eea-btn  eea-btn--moreLink eea-btn-md bg-light-blue" i18n:translate="">
                     <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="interactive-chart">Interactive chart</span> on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="interactive-chart">interactive charts</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
@@ -197,7 +197,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:highlights" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="news">News</span> on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="news">news</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
@@ -208,7 +208,7 @@
             <div class="section-type">
                 <a href="publications" class="inline-block eea-btn-md eea-btn-publications bg-grey text-bold">
                   <span class="eea-icon eea-icon-lg eea-icon-file-pdf-o"><!-- ?--></span>
-                  <span i18n:translate="">Publication</span>
+                  <span i18n:translate="">Publications</span>
                 </a>
             </div>
 
@@ -239,7 +239,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:publications" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-publications bg-blue" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="publication">Publication</span> on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="publication">publications</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
@@ -265,7 +265,7 @@
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:multimedia" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-multimedia bg-purple" i18n:translate="">
                   <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="multimedia">Multimedia</span> on</span>&nbsp;
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="multimedia">multimedia</span> on</span>&nbsp;
                     <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
                 </a>
             </div>
