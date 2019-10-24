@@ -810,7 +810,7 @@ body {
     .eea-card--landscape .eea-card-image {
         width: 95%;
     }
-    .video_player_link {
+    .template-themecentre_view .video_player_link {
         min-height: 510px;
     }
 }
@@ -847,7 +847,6 @@ body {
         flex: auto;
         width: 295px;
     }
-
     #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
         width: 330px;
     }
