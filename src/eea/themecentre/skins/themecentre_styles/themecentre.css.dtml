@@ -447,7 +447,7 @@ body {
     .pane-inverse a {
         color: &dtml-lightBackgroundColor;;
     }
-
+    
     .eea-input-query {
         border: 0;
         box-shadow: 0 2px 7px 0 rgba(0,0,0,.2);
@@ -795,7 +795,6 @@ body {
     .eea-card--landscape .eea-card-image {
         margin-bottom: 1em;
         width: 100%;
-        height: auto;
     }
 }
 
@@ -821,19 +820,6 @@ body {
    .eea-card-three-of-kind .eea-card {
         max-width: 100%;
         flex: 0 0 38%;
-    }
-}
-
-@media screen and (max-width: 1023px) {
-    .eea-card-image--portrait {
-        max-height: 100%;
-        height: auto;
-    }
-}
-@media screen and (min-width: 1024px) {
-    .eea-card-image--portrait {
-        max-height: 350px;
-        width: 250px !important;
     }
 }
 @media screen and (min-width: 1280px) {
@@ -878,4 +864,3 @@ body {
 /* YOUR CSS RULES STOP HERE */
 
 /* </dtml-with> */
-
