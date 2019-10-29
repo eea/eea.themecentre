@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-17 16:06+0000\n"
+"POT-Creation-Date: 2019-10-29 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,22 @@ msgstr ""
 msgid "Air & Climate"
 msgstr ""
 
-msgid "All"
+msgid "All indicators on"
 msgstr ""
 
-msgid "All News on"
+msgid "All interactive charts on"
 msgstr ""
 
-msgid "All Publication on"
+msgid "All interactive maps on"
+msgstr ""
+
+msgid "All multimedia on"
+msgstr ""
+
+msgid "All news on"
+msgstr ""
+
+msgid "All publications on"
 msgstr ""
 
 msgid "Article"
@@ -62,7 +71,16 @@ msgstr ""
 msgid "Featured content"
 msgstr ""
 
+msgid "Indicators"
+msgstr ""
+
 msgid "Infographic"
+msgstr ""
+
+msgid "Interactive charts"
+msgstr ""
+
+msgid "Interactive maps"
 msgstr ""
 
 msgid "Intro"
@@ -77,16 +95,16 @@ msgstr ""
 msgid "More photos"
 msgstr ""
 
-msgid "Nature"
+msgid "Multimedia"
 msgstr ""
 
-msgid "News"
+msgid "Nature"
 msgstr ""
 
 msgid "No recent content is available for this topic"
 msgstr ""
 
-msgid "Publication"
+msgid "Publications"
 msgstr ""
 
 msgid "Search"
@@ -105,6 +123,9 @@ msgid "Share on StumbleUpon"
 msgstr ""
 
 msgid "Share on reddit"
+msgstr ""
+
+msgid "Subtopics"
 msgstr ""
 
 msgid "Sustainability"

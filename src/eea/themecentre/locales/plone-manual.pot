@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-17 16:06+0000\n"
+"POT-Creation-Date: 2019-10-29 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,19 +23,37 @@ msgstr ""
 msgid "EEA activities"
 msgstr ""
 
-msgid "All"
+msgid "All news on"
 msgstr ""
 
-msgid "News"
+msgid "All publications on"
 msgstr ""
 
-msgid "Publication"
+msgid "All indicators on"
 msgstr ""
 
-msgid "All News on"
+msgid "All interactive charts on"
 msgstr ""
 
-msgid "All Publication on"
+msgid "All interactive maps on"
+msgstr ""
+
+msgid "All multimedia on"
+msgstr ""
+
+msgid "Multimedia"
+msgstr ""
+
+msgid "Publications"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "Interactive maps"
+msgstr ""
+
+msgid "Interactive charts"
 msgstr ""
 
 msgid "Infographic"
@@ -51,6 +69,9 @@ msgid "Search"
 msgstr ""
 
 msgid "topics"
+msgstr ""
+
+msgid "Subtopics"
 msgstr ""
 
 msgid "Air & Climate"
