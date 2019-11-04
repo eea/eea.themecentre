@@ -20,9 +20,9 @@
         </h1>
 
         <div class="topic-intros">
-            <a href="intro" i18n:translate="" class="moreLink topic-intro">Intro</a>
-            <a href="policy-context" i18n:translate="" class="moreLink topic-intro">EU policies</a>
-            <a href="eea-activities" i18n:translate="" class="moreLink topic-intro">EEA activities</a>
+            <a href="intro" i18n:translate="" class="moreLink topic-intro" tal:condition="python: not themecentre_view.is_expired_or_unpublished('intro')">Intro</a>
+            <a href="policy-context" i18n:translate="" class="moreLink topic-intro" tal:condition="python: not themecentre_view.is_expired_or_unpublished('policy-context')">EU policies</a>
+            <a href="eea-activities" i18n:translate="" class="moreLink topic-intro" tal:condition="python: not themecentre_view.is_expired_or_unpublished('eea-activities')">EEA activities</a>
         </div>
 
         <div class="topic-img-container">

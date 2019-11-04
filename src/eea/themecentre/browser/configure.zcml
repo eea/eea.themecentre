@@ -106,7 +106,7 @@
       name="themecentre_utils"
       class=".themecentre.ThemecentreUtils"
       permission="zope.Public"
-      allowed_attributes="getDataCentreName getThemeName getSubtopics getPromotedItem"
+      allowed_attributes="getDataCentreName getThemeName getSubtopics getPromotedItem is_expired_or_unpublished"
       />
 
   <!-- provides info for the related topics portlet -->

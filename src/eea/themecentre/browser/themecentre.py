@@ -228,3 +228,22 @@ class ThemecentreUtils(BrowserView):
         """ Get Latest promoted Tableau Dashboard item for themecentre
         """
         return self.getPromotedItem(ptype="Dashboard")
+
+    def is_expired_or_unpublished(self, pid):
+        """
+        :param pid:  object id to check if object is expired or unpublished
+        :return: boolean
+        """
+        obj = self.context.restrictedTraverse(pid)
+        if not obj:
+            return True
+        wftool = getToolByName(obj, 'portal_workflow')
+        review_state = wftool.getInfoFor(obj, 'review_state')
+        if review_state != 'published':
+            return True
+        if obj.restrictedTraverse('@@plone_interface_info').provides(
+                'eea.workflow.interfaces.IObjectArchived'):
+            return True
+        return False
+
+
