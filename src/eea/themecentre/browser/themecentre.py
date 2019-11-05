@@ -234,7 +234,7 @@ class ThemecentreUtils(BrowserView):
         :param pid:  object id to check if object is expired or unpublished
         :return: boolean
         """
-        obj = self.context.restrictedTraverse(pid)
+        obj = self.context.restrictedTraverse(pid, None)
         if not obj:
             return True
         wftool = getToolByName(obj, 'portal_workflow')
