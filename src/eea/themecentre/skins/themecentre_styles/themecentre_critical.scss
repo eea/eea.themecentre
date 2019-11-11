@@ -153,13 +153,13 @@ h2.dark-color {
   margin-top: 3em;
   }
 
-.eea-card-link > h2 {
-  font-size: 20px;
-  }
-.eea-card-title, .eea-card-link > h2, .eea-card-link, .eea-btn {
+.eea-card-title, .eea-card-link > h2, .eea-card-link, .template-themecentre_view .eea-btn {
     color: #FFF !important;
 }
 
 .eea-card-body-text {
   color: #FFF;
+  }
+.eea-card-link > h2 {
+  font-size: 20px;
   }
