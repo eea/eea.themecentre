@@ -1,4 +1,4 @@
-<tal:block tal:define="foo python:request.set('disable_plone.leftcolumn', 1);" />
+<tal:block tal:define="foo python:request.set('disable_plone.rightcolumn', 1);"/>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
@@ -9,42 +9,40 @@
 <body>
 
     <div metal:fill-slot="main" class="content-core">
-    <metal:main-macro define-macro="main" tal:define="object_title context/@@plone_context_state/object_title;">
+    <metal:main-macro define-macro="main" tal:define="
+            object_title context/@@plone_context_state/object_title;
+            object_title_lowercase object_title/lower;
+            themecentre_view context/@@themecentre_utils;
+            ">
 
-        <h1 tal:content="object_title" class="documentFirstHeading">
+        <h1 tal:content="object_title" class="documentFirstHeading mb-0">
             Title or id
         </h1>
 
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
-        <p class="documentDescription">
-           <span tal:condition="context/Description" tal:replace="context/Description">Description</span>
-           <a tal:condition="python:context.has_key('intro')" class="internal-link moreLink" href="intro" i18n:translate="">More</a>
-        </p>
-        <div class="visualClear"><!--&nbsp; --></div>
-                    <!-- keyfacts slideshow-->
-                    <metal:keyfacts tal:define="view nocall:context/@@soer_frontpage_logic;
-                                                background_img_path python:context.getCanonical().absolute_url() + '/theme_image/image_large'">
-                            <div metal:use-macro="here/soer_frontpage/macros/keyfacts-slider">
-                                keyfacts
-                            </div>
-                    </metal:keyfacts>
+        <div class="topic-intros">
+            <a href="intro" i18n:translate="" class="moreLink topic-intro" tal:condition="python: not themecentre_view.is_expired_or_unpublished('intro')">Intro</a>
+            <a href="policy-context" i18n:translate="" class="moreLink topic-intro" tal:condition="python: not themecentre_view.is_expired_or_unpublished('policy-context')">EU policies</a>
+            <a href="eea-activities" i18n:translate="" class="moreLink topic-intro" tal:condition="python: not themecentre_view.is_expired_or_unpublished('activities')">EEA activities</a>
+        </div>
 
-        <div class="visualClear"><!--&nbsp; --></div>
+        <div class="topic-img-container">
+            <div class="topic-img-bg" tal:attributes="style python:'background-image:url(' + context.getCanonical().absolute_url() + '/theme_image/image_panoramic' + ')'"></div>
+        </div>
 
         <div metal:define-macro="subtopics" class="" id="subtopics"
-                tal:define="themecentre_view context/@@themecentre_utils;
+                tal:define="
                 folders themecentre_view/getSubtopics;
                 soer_topic_path python: '/' + context.absolute_url(1) + '/briefings-soer';
                 soer_topic python: themecentre_view.getSubtopics(path=soer_topic_path);" tal:condition="python:soer_topic or folders">
 
-            <h2 i18n:translate="">Subtopics</h2>
+            <h2 i18n:translate="" class="mb-half">Subtopics</h2>
             <tal:existssoer tal:condition="soer_topic">
                 <tal:defines tal:define="
                         soer_topic python:soer_topic[0].getObject();
                         soer_topics python:soer_topic.queryCatalog()">
                     <h4 tal:content="soer_topic/Title">Folder links</h4>
-                    <ul class="border-bottom-spacer">
-                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics">
+                    <ul class="border-bottom-spacer bullet-list two-columns subtopics-mobile-column ma-0">
+                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics" class="subtopics-list-item">
                             <a tal:attributes="href folder/getURL; title folder/Title;"
                                     tal:content="folder/Title">Folder links</a>
                         </li>
@@ -52,15 +50,225 @@
                 </tal:defines>
             </tal:existssoer>
 
-            <ul tal:condition="folders">
-                <li tal:repeat="folder folders">
+            <ul tal:condition="folders" class="bullet-list two-columns subtopics-mobile-column ma-0">
+                <li tal:repeat="folder folders" class="subtopics-list-item">
                     <a tal:attributes="href folder/getURL; title folder/Title;"
-                            tal:content="folder/Title">Folder links</a>
+                            tal:content="folder/Title" class="light-color">Folder links</a>
                 </li>
             </ul>
 
         </div>
 
+        <!--?    themecentre sections     -->
+        <section class="themecentre-section section-storytelling overflow_auto"
+             tal:define="storytelling themecentre_view/getLatestStorytelling" tal:condition="storytelling">
+          <metal:storyitem tal:define="story python:storytelling[0];" metal:use-macro="story/storytelling_view/macros/storybody"></metal:storyitem>
+        </section>
+
+      <section class="themecentre-section section-indicators"
+           tal:define="indicators themecentre_view/getLatestIndicators" tal:condition="indicators">
+        <div class="section-type">
+          <a href="indicators" class="inline-block eea-btn-md eea-btn-indicators bg-grey text-bold">
+            <span class="eea-icon eea-icon-lg eea-icon-area-chart"><!-- ?--></span>
+            <span i18n:translate="">Indicators</span>
+          </a>
+        </div>
+        <div class="eea-card-listing eea-card-three-of-kind">
+          <tal:items tal:repeat="indicator indicators">
+            <div class="eea-card" tal:define="url indicator/getURL">
+              <div class="eea-card-header">
+                <div class="eea-card-title-wrapper">
+                  <a href="#" class="eea-card-link" tal:attributes="href url">
+                    <h2 tal:content="indicator/Title" class="eea-card-title"></h2>
+                  </a>
+                </div>
+
+                <a href="#" class="eea-card-image-link" tal:attributes="href url">
+                  <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
+                  </div>
+                </a>
+              </div>
+              <div class="eea-card-footer text-right">
+                <a href="" tal:attributes="href url" class="eea-btn moreLink eea-btn-md eea-btn-indicators" i18n:translate="">Read more</a>
+              </div>
+            </div>
+          </tal:items>
+        </div>
+        <div class="section-footer text-right">
+          <a href="" tal:attributes="href string:indicators" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-indicators bg-blue" i18n:translate="">
+            <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+            <span i18n:translate="">All <span tal:omit-tag="" i18n:name="indicator">indicators</span> on</span>&nbsp;
+            <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+          </a>
+        </div>
+
+      </section>
+
+
+      <section class="themecentre-section section-gismap"
+           tal:define="gismap themecentre_view/getPromotedGISMap;" tal:condition="gismap">
+        <div class="section-type">
+          <a href="gis" class="inline-block eea-btn-md eea-btn-gismap bg-grey text-bold">
+            <span class="eea-icon eea-icon-lg eea-icon-line-chart"><!-- ?--></span>
+            <span i18n:translate="">Interactive maps</span>
+          </a>
+        </div>
+
+        <a href="#" class="section-link" tal:attributes="href gismap/absolute_url">
+          <h2 tal:content="gismap/Title" class="section-title"></h2>
+        </a>
+
+        <div class="section-body">
+          <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src') if '<iframe' in body else body" />
+        </div>
+
+        <div class="section-footer text-right">
+          <a href="" tal:attributes="href string:dc" class="eea-btn eea-btn-md  bg-dark-orange eea-btn--moreLink" i18n:translate="">
+            <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+            <span i18n:translate="">See all data products</span>
+          </a>
+        </div>
+      </section>
+
+        <section class="themecentre-section section-dashboard"
+                 tal:define="dashboard themecentre_view/getPromotedTableauDashboard" tal:condition="dashboard">
+            <div class="section-type">
+                <a href="interactive" class="inline-block eea-btn-md eea-btn-dashboard text-bold bg-grey">
+                  <span class="eea-icon eea-icon-lg eea-icon-bar-chart"><!-- ?--></span>
+                  <span i18n:translate="">Interactive charts</span>
+                </a>
+            </div>
+
+            <a href="#" class="section-link" tal:attributes="href dashboard/absolute_url">
+              <h2 tal:content="dashboard/Title" class="section-title"></h2>
+            </a>
+
+            <div class="section-body">
+              <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src') if '<iframe' in body else body" />
+            </div>
+
+            <div class="section-footer text-right">
+                <a href="" tal:attributes="href string:dc" class="eea-btn  eea-btn--moreLink eea-btn-md bg-light-blue" i18n:translate="">
+                    <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">See all data products</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="themecentre-section section-news"
+                 tal:define="news themecentre_view/getLatestNews" tal:condition="news">
+            <div class="section-type">
+              <a href="highlights" class="inline-block eea-btn-md eea-btn-news bg-grey text-bold">
+                <span class="eea-icon eea-icon-lg eea-icon-newspaper-o"><!-- ?--></span>
+                <span i18n:translate="">News</span>
+              </a>
+            </div>
+
+            <div class="eea-card-listing eea-card-three-of-kind">
+              <tal:items tal:repeat="snews news">
+                <div class="eea-card eea-card--bg-light direction-column" tal:define="url snews/getURL">
+                  <div class="eea-card-header">
+                    <div class="eea-card-title-wrapper">
+                      <a href="#" class="eea-card-link" tal:attributes="href url">
+                        <h2 tal:content="snews/Title"></h2>
+                      </a>
+                    </div>
+                    <p class="eea-card-link">
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(snews.effective)"></span>
+                    </p>
+
+                    <a href="#" class="eea-card-image-link" tal:attributes="href url">
+                      <div class="eea-card-image-bg-wrapper lazy" tal:attributes="data-src python: url + '/image_preview'">
+                      </div>
+                    </a>
+                  </div>
+                  <div class="eea-card-body">
+                    <p tal:content="snews/Description"></p>
+                  </div>
+                  <div class="eea-card-footer text-right mt-a">
+                    <a href="" tal:attributes="href url" class="eea-btn moreLink eea-btn-md eea-btn-news" i18n:translate="">Read more</a>
+                  </div>
+                </div>
+              </tal:items>
+            </div>
+
+            <div class="section-footer text-right">
+                <a href="" tal:attributes="href string:highlights" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-news bg-green" i18n:translate="">
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="news">news</span> on</span>&nbsp;
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+                </a>
+            </div>
+        </section>
+
+        <section class="themecentre-section section-publications"
+                 tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
+            <div class="section-type">
+                <a href="publications" class="inline-block eea-btn-md eea-btn-publications bg-grey text-bold">
+                  <span class="eea-icon eea-icon-lg eea-icon-file-pdf-o"><!-- ?--></span>
+                  <span i18n:translate="">Publications</span>
+                </a>
+            </div>
+
+            <div class="eea-card-listing">
+              <tal:items tal:repeat="publication publications">
+                <div class="eea-card eea-card--double eea-card--portrait direction-column" tal:define="url publication/getURL">
+                  <div class="eea-card-header">
+                    <div class="eea-card-title-wrapper">
+                      <a href="#" class="eea-card-link" tal:attributes="href url">
+                        <h2 tal:content="publication/Title"></h2>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="eea-card-body">
+                    <a href="#" class="eea-card-image-link" tal:attributes="href url">
+                      <img tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image eea-card-image--pull eea-card-image-bordered" />
+                    </a>
+
+                    <div class="eea-card-body-text">
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.effective)"></span>
+                      <p tal:content="publication/Description"></p>
+                    </div>
+                  </div>
+                </div>
+              </tal:items>
+            </div>
+
+            <div class="section-footer text-right">
+                <a href="" tal:attributes="href string:publications" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-publications bg-blue" i18n:translate="">
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="publication">publications</span> on</span>&nbsp;
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+                </a>
+            </div>
+        </section>
+
+        <section class="themecentre-section section-multimedia"
+                 tal:define="multimedia themecentre_view/getPromotedMultimedia" tal:condition="multimedia">
+            <div class="section-type">
+                <a href="multimedia" class="inline-block eea-btn-md eea-btn-multimedia bg-grey text-bold"><span class="eea-icon eea-icon-lg eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></a>
+            </div>
+          <div class="section-body">
+            <tal:defines tal:define="objhref multimedia/absolute_url;">
+              <a  tal:attributes="href python: objhref">
+                <h2 tal:content="multimedia/Title" class="section-title"></h2>
+              </a>
+              <a tal:define="cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl;
+                  data-src python: objhref + '/image_panoramic'" target="_blank" class="lazy video_player_link">
+                <img class="video_player_image" tal:attributes="src string:${portal_url}/YouTube_light_logo.png">
+              </a>
+            </tal:defines>
+          </div>
+
+            <div class="section-footer text-right">
+                <a href="" tal:attributes="href string:multimedia" class="eea-btn eea-btn--moreLink eea-btn-md eea-btn-multimedia bg-purple" i18n:translate="">
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <span i18n:translate="">All <span tal:omit-tag="" i18n:name="multimedia">multimedia</span> on</span>&nbsp;
+                    <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+                </a>
+            </div>
+        </section>
+        <!--?   end themecentre sections     -->
 
         <metal:portlets use-macro="context/themecentre_overview/macros/main" />
 

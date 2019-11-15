@@ -6,37 +6,154 @@
       i18n:domain="eea">
 
 <head>
+    <tal:js metal:fill-slot="javascript_head_slot">
+        <script>
+            $(function($){
+                var $topic_search_value = $("#topic-search-value");
+                $(".js-topic-search-btn").click(function(ev){
+                    $topic_search_value.val(ev.target.value);
+                });
+            });
+        </script>
+    </tal:js>
 </head>
 
 <body>
-<div id="themes-sitemap"  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view">
+<tal:body  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view;
+        lang lang|here/Language|string:en;
+        is_en python:lang in ('en', '');">
 
-<div id="top-news-area">
+    <section id="topics-search">
 
-    <div id="megatopics-area">
-        <div class="portlet-megatopic" tal:repeat="promo view/getPromotions">
-            <div class="portlet promo-nav-portlet"
-                tal:define="promo_title python:promo.keys()[0];
-                            promo_list python:promo[promo_title];
-                            promo_url python:promo_list[0][0] if promo_list else [];
-                            "
-                tal:condition="promo_list">
-                <div>
-                        <img tal:attributes="title promo_title; alt promo_title;
-                            src string:${promo_url}/theme_image/image_mini">
-                        <div class="portletHeader" tal:content="python:context.translate(promo_title)">
-                            Air and climate
+        <div tal:define="
+                search_apps string:${context/portal_url}/eea-custom-search;
+                custom_action python:search_apps;
+                use_search_links python:False;
+                search_button_class string:eea-input-submit;
+                search_input_class string:js-gsc-input-query eea-input-query;
+                search_input_placeholder_text string:Search topics;
+                search_form_class string:eea-input-form;
+                tags string:${context/portal_url}/eea-custom-search.tags">
+            <tal:search metal:use-macro="context/eea_searchbox/macros/quick_search_form" />
+        </div>
+
+    </section>
+
+  <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos" tal:attributes="class python:'themes-megatopics-area-translations' if not is_en else ''">
+        <div class="eea-accordion-panels eea-accordion-panels-inverse">
+            <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo promos">
+                <tal:defines
+                         tal:define="promo_title python:promo.keys()[0];
+                                promo_list python:promo[promo_title];
+                                        promo_url python:promo_list[0][0] if promo_list else [];
+                                "
+                         tal:condition="promo_list">
+                    <div class="promoHeader eea-accordion-title notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
+                        Air and climate
+                    </div>
+
+                    <tal:others tal:condition="not:is_en">
+                        <div class="pane pane-inverse">
+                            <ul class="eea-no-list-style">
+                                <li tal:repeat="theme promo_list">
+                                    <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
+                            </ul>
                         </div>
-                    <ul class="">
-                        <li tal:repeat="theme promo_list">
-                        <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
-                    </ul>
+                    </tal:others>
+                    <tal:english tal:condition="is_en">
+
+                        <div class="pane pane-inverse">
+                            <tal:mainthemes tal:repeat="theme promo_list">
+                                <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
+                                        folders themecentre_view/getSubtopics;">
+
+                                    <h3 class="no-anchor portlet-megatopic-subtitle ma-0" tal:condition="python:not folders">
+                                        <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                    </h3>
+
+                                    <ul class="eea-no-list-style" tal:condition="folders">
+                                        <li>
+                                            <h3 class="portlet-megatopic-subtitle eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
+                                                <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                            </h3>
+                                        </li>
+                                        <li tal:repeat="folder folders">
+                                            <a tal:attributes="href folder/getURL; title folder/Title;"
+                                                     tal:content="folder/Title">Folder links</a>
+                                        </li>
+                                    </ul>
+                                </tal:subtopics>
+                            </tal:mainthemes>
+                        </div>
+                    </tal:english>
+                </tal:defines>
+            </div>
+        </div>
+    </section>
+
+    <section id="themes-search-shortcuts" tal:define="search_items python:view.getPopularSearches(no_of_items=8)" tal:condition="python:search_items" class="content-header">
+        <div class="topic-search clearfix" tal:condition="is_en">
+            <h2 i18n:translate="" class="topic-search-heading">Popular searches</h2>
+
+            <form method="get" class="topic-search-form" tal:attributes="action string:${context/portal_url}/eea-custom-search"
+                     tal:define="more_items python:search_items[1]">
+                <input type="hidden" name="q" tal:attributes="
+                        value string:''" id="topic-search-value" />
+
+                <div class="topic-search-links">
+                    <tal:items tal:repeat="item python:search_items[0]">
+                        <button tal:attributes="value python:item[1]; class string:js-topic-search-btn topic-search-btn eea-btn eea-btn-radius eea-btn-light" tal:content="python:item[1]"></button>
+                    </tal:items>
+                    <tal:manykeywords tal:condition="python:more_items">
+                            <tal:items tal:repeat="item more_items">
+                                <button tal:attributes="value python:item[1]; class string:js-topic-search-btn  topic-search-btn eea-btn eea-btn-light eea-btn-radius" tal:content="python:item[1]"></button>
+                            </tal:items>
+                    </tal:manykeywords>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="editors-choice" tal:define="promos view/getThemeIndexPromotions" tal:condition="python:promos">
+        <h1 i18n:translate="" class="h1" id="editors-choice-header">Featured content</h1>
+        <div class="eea-tiles">
+            <div class="eea-tile" tal:repeat="promo_list promos">
+                <div class="eea-tileInner">
+                    <tal:defines tal:define="promo python:promo_list[0];
+                            themes python: promo_list[1];
+                            url promo/getURL;
+                            title promo/Title;">
+                        <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileHeadLink">
+                            <div class="eea-tileHead">
+                                <div class="eea-tileThumb lazy" tal:attributes="data-src string:${url}/image_preview">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="eea-tileBody">
+                            <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileLinkBody">
+                                <h2 class="eea-tileTitle no-anchor" tal:content="title">Title</h2>
+                                <div class="eea-tileDescription" tal:content="promo/Description">Description
+                                </div>
+                            </a>
+                            <div class="eea-tileMetadata">
+                                <div class="eea-tileTopic" >
+                                    <tal:topics tal:repeat="theme themes">
+                                        <a href="#" tal:attributes="href theme/url" tal:content="theme/title" class="eea-tileTopicLink eea-btn eea-btn-light eea-btn-radius">Theme topic</a>
+                                    </tal:topics>
+                                </div>
+
+                                <time  tal:attributes="datetime promo/EffectiveDate" class="eea-tileIssued" tal:content="python: toLocalizedTime(promo.effective)">26 Mar 2019
+                                </time>
+                            </div>
+                        </div>
+                    </tal:defines>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
+    </section>
+
+</tal:body>
 </body>
 </html>
+
 

@@ -106,7 +106,7 @@
       name="themecentre_utils"
       class=".themecentre.ThemecentreUtils"
       permission="zope.Public"
-      allowed_attributes="getDataCentreName getThemeName getSubtopics"
+      allowed_attributes="getDataCentreName getThemeName getSubtopics getPromotedItem is_expired_or_unpublished"
       />
 
   <!-- provides info for the related topics portlet -->
@@ -154,6 +154,7 @@
       name="themes_browser_view"
       class=".themes_view.ThemesView"
       permission="zope2.View"
+      allowed_attributes="getPopularSearches"
       allowed_interface=".interfaces.IThemesView"
       />
 

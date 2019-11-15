@@ -47,9 +47,9 @@ Reinstall older products (not necessary) (2-10min)
 Install FiveSite
 Install ThemeCentre (this takes time because we add a new index and reindex the catalog) (10-20 min)
 If you don't have anything in portal_skins/custom you
-  Go to portal_setup -> properties, select EEA WWW and import skins tool
-otherwise
-  manually add themecentre_* layers to the skins.
+
+Go to portal_setup -> properties, select EEA WWW and import skins tool
+otherwise manually add themecentre_* layers to the skins.
 
 Make sure portal_fiveactions is in portal_actions -> action providers
 
@@ -71,7 +71,8 @@ How to migrate themes for the LAZY one :)
 Configure zope to use Plone-2.5.2-1 and Plone-2.5.2-1/CacheFu
 update bundle
 If you are using eeadesign2006-bundle (not devel)
-  Install Five 1.4.2 and our Plone4ArtistVideo tar ( we have a tar since svn checkout isn't allowed from pelican)
+
+Install Five 1.4.2 and our Plone4ArtistVideo tar ( we have a tar since svn checkout isn't allowed from pelican)
 
 Make sure you don't have Archetypes, PortalTransforms and PloneLanguageTool in your bundle. They are not removed automically.
 copy data.fs from production site
@@ -104,4 +105,5 @@ Funding
 EEA_ - European Environment Agency (EU)
 
 .. _EEA: https://www.eea.europa.eu/
+
 

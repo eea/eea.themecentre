@@ -19,10 +19,15 @@ try:
     from eea.mediacentre.mediacentre import MEDIA_SEARCH_KEY
     from eea.mediacentre.interfaces import IMediaCentre
 except ImportError:
-    MEDIA_SEARCH_KEY = 'eea.mediacentre.search'
+    MEDIA_SEARCH_KEY = "eea.mediacentre.search"
 
     class IMediaCentre(Interface):
         """ IMediaCentre """
+try:
+    from eea.promotion.interfaces import IPromotion
+except ImportError:
+    class IPromotion(Interface):
+        """ IPromotion """
 
 ENABLE = 1  # Manual mode from ATContentTypes.lib.constraintypes
 
@@ -142,8 +147,103 @@ class ThemecentreUtils(BrowserView):
         name = [name.capitalize() if name else ''].pop()
         return name
 
+    def getPromotedItem(self, ptype=None, itype=None):
+        """ get promoted item
+        """
+        query = {
+            'object_provides': {
+                'query': [
+                    'eea.promotion.interfaces.IPromoted'
+                ],
+            },
+            'review_state': 'published',
+            'sort_on': 'effective',
+            'sort_order': 'reverse',
+        }
+        if itype:
+            query['object_provides']['operator'] = 'and'
+            query['object_provides']['query'].append(itype)
+        if ptype:
+            query['portal_type'] = ptype
+
+        context = self.context.aq_inner
+        query['getThemes'] = getTheme(context)
+        catalog = getToolByName(context, 'portal_catalog')
+        result = catalog(query)
+        item = None
+        for brain in result:
+            item = brain.getObject()
+            promo = IPromotion(item)
+            if not promo.display_on_themepage:
+                continue
+            if not promo.active:
+                continue
+            break
+        return item
+
     def getThemeName(self):
         """ Get theme name of the context to construct the url to the
             themecentre and the datacentre page
         """
         return getTheme(self.context.aq_inner)
+
+    def getLatestStorytelling(self):
+        """ Get Latest Storytelling items for themecentre
+        """
+        return self.context.getFolderContents(contentFilter={
+                            'portal_type': 'Storytelling'}, full_objects=True)
+
+    def getLatestIndicators(self):
+        """ Get Latest indicators items for themecentre
+        """
+        data_maps = self.context.restrictedTraverse("data_and_maps_logic")
+        return data_maps.getLatestIndicators()
+
+    def getLatestNews(self):
+        """ Get Latest news items for themecentre
+        """
+        frontpage = self.context.restrictedTraverse("frontpage_highlights")
+        return frontpage.getLatest("newsandarticles",
+                                   products_category='getThemecentreProducts')
+
+    def getLatestPublications(self):
+        """ Get Latest publications items for themecentre
+        """
+        frontpage = self.context.restrictedTraverse("frontpage_highlights")
+        frontpage.noOfLow = 2
+        return frontpage.searchResults("publications", searchtype='Report')
+
+    def getPromotedGISMap(self):
+        """ Get Latest promoted GIS Maps items for themecentre
+        """
+        return self.getPromotedItem(ptype="GIS Application")
+
+
+    def getPromotedMultimedia(self):
+        """ Get Latest promoted multimedia item for themecentre
+        """
+        return self.getPromotedItem(itype="eea.mediacentre.interfaces.IVideo")
+
+    def getPromotedTableauDashboard(self):
+        """ Get Latest promoted Tableau Dashboard item for themecentre
+        """
+        return self.getPromotedItem(ptype="Dashboard")
+
+    def is_expired_or_unpublished(self, pid):
+        """
+        :param pid:  object id to check if object is expired or unpublished
+        :return: boolean
+        """
+        obj = self.context.restrictedTraverse(pid, None)
+        if not obj:
+            return True
+        wftool = getToolByName(obj, 'portal_workflow')
+        review_state = wftool.getInfoFor(obj, 'review_state')
+        if review_state != 'published':
+            return True
+        if obj.restrictedTraverse('@@plone_interface_info').provides(
+                'eea.workflow.interfaces.IObjectArchived'):
+            return True
+        return False
+
+
