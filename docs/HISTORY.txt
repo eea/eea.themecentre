@@ -57,7 +57,7 @@ Changelog
 * Bug fix W3C compliance modifications
   [valipod refs #86295]
 * Upgrade step: Remove customized views at **ZMI > portal_skins/custom:
-  themes_view
+  themes_view**
   [valipod refs #86295]
 
 8.6 - (2017-06-12)
@@ -452,3 +452,4 @@ Changelog
 ------------------
 * Fixed bug where modifications to themes were not copied to translations
   [thuliper #2587]
+
