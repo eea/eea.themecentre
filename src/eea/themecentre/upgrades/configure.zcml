@@ -5,7 +5,7 @@
 
   <!-- => 9.8 -->
   <genericsetup:upgradeSteps
-    source="9.7"
+    source="8.0"
     destination="9.8"
     profile="eea.themecentre:default">
 
@@ -13,16 +13,6 @@
       title="Import profile steps with changes: cssregistry"
       import_steps="cssregistry"
     />
-
-  </genericsetup:upgradeSteps>
-
-  <!-- => 9.7 -->
-  <genericsetup:upgradeSteps source="8.0"
-    destination="9.7"
-    profile="eea.themecentre:default">
-
-    <genericsetup:upgradeStep title="Add Popular search vocabulary from eea.themecentre"
-      handler="eea.themecentre.upgrades.evolve97.setupATVocabularies" />
 
   </genericsetup:upgradeSteps>
 
