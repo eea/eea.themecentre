@@ -257,9 +257,6 @@ Changelog
 ------------------
 
 5.4 - (2013-01-15)
-------------------
-
-5.4 - (2013-01-15)
 ----------------------
 * Bug Fix: fixed themes title on topics index page.
   [prospchr fixes #10114]
