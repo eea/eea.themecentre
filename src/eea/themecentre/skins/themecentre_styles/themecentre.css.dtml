@@ -131,7 +131,7 @@ body {
 
 .eea-card-title-wrapper {
     overflow: hidden;
-    height: 89px;
+    height: 75px;
     margin-bottom: 1em;
 }
 .eea-card--fullwidth .eea-card-title-wrapper {
