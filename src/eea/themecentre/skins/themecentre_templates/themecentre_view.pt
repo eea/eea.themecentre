@@ -220,14 +220,18 @@
                       </a>
                     </div>
                   </div>
-                  <div class="eea-card-body">
-                    <a href="#" class="eea-card-image-link" tal:attributes="href url">
-                      <img tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image eea-card-image--pull eea-card-image-bordered" />
+                  <div class="eea-card-body" tal:define="effective python:publication.effective;
+                      description publication/Description;
+                      has_body_text python: effective or description;
+                      base_link_class python:'eea-card-image-link  eea-card-image--pull eea-card-image-bordered';">
+                    <a href="#" class="eea-card-image-link  eea-card-image--pull eea-card-image-bordered" tal:attributes="href url;
+                          class python: base_class if not has_body_text else  base_link_class + ' eea-card-with-text'">
+                      <img tal:attributes="src string:${url}/image_large"  alt="" class="eea-card-image" />
                     </a>
 
-                    <div class="eea-card-body-text">
-                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.effective)"></span>
-                      <p tal:content="publication/Description"></p>
+                    <div class="eea-card-body-text"  tal:condition="has_body_text">
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(effective)"></span>
+                      <p tal:content="description"></p>
                     </div>
                   </div>
                 </div>
