@@ -1,8 +1,13 @@
 Changelog
 =========
 
-9.7-dev0 - (unreleased)
+9.8-dev0 - (unreleased)
+---------------------------
+
+9.7 - (2019-11-15)
 --------------------------
+* Change: Refs #110952
+  [ichim-david]
 
 9.6 - (2019-03-04)
 --------------------------
@@ -449,4 +454,3 @@ Changelog
 ------------------
 * Fixed bug where modifications to themes were not copied to translations
   [thuliper #2587]
-
