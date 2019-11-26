@@ -1,6 +1,11 @@
 Changelog
 =========
 
+9.8 - (2019-11-26)
+---------------------------
+* Bug fix: fixed link to themes centre back from the dc view 
+  [ichim-david refs #111443]
+
 9.7 - (2019-11-15)
 --------------------------
 * Change: Refs #110952
@@ -451,4 +456,3 @@ Changelog
 ------------------
 * Fixed bug where modifications to themes were not copied to translations
   [thuliper #2587]
-

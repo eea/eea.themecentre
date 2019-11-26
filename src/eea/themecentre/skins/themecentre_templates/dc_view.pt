@@ -47,7 +47,7 @@
 <div class="shortcut-default">
         <h3 tal:define="themecentre_view context/@@themecentre_utils;
                     title themecentre_view/getDataCentreName|nothing;" id="theme-datacentre">
-                    <a href="./" class="internal-link" tal:attributes="title string:${title} environmental theme homepage"  >
+                    <a href="../" class="internal-link" tal:attributes="title string:${title} environmental theme homepage"  >
                     <span>
                         <tal:title tal:content="string:${title}"></tal:title>
                         <tal:homepage i18n:translate="">homepage</tal:homepage>

@@ -90,7 +90,6 @@ h2.dark-color {
   }
 
 .bullet-list {
-  columns: 2;
   margin: 0;
 }
 .bullet-list > li {
@@ -139,11 +138,11 @@ h2.dark-color {
 
 /* card modifiers */
 .eea-card--double {
-  width: 45%;
+  width: 47%;
   flex: none;
   max-width: inherit;
   display: flex;
-  margin: 1em 1em 2em;
+  margin: 1em 0 2em;
   }
 
 .eea-card--fullwidth {

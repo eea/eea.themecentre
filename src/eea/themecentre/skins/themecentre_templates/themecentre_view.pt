@@ -39,10 +39,10 @@
             <tal:existssoer tal:condition="soer_topic">
                 <tal:defines tal:define="
                         soer_topic python:soer_topic[0].getObject();
-                        soer_topics python:soer_topic.queryCatalog()">
+                        soer_topics python:soer_topic.queryCatalog()" tal:condition="soer_topics">
                     <h4 tal:content="soer_topic/Title">Folder links</h4>
                     <ul class="border-bottom-spacer bullet-list two-columns subtopics-mobile-column ma-0">
-                        <li tal:repeat="folder soer_topics" tal:condition="soer_topics" class="subtopics-list-item">
+                        <li tal:repeat="folder soer_topics"  class="subtopics-list-item">
                             <a tal:attributes="href folder/getURL; title folder/Title;"
                                     tal:content="folder/Title">Folder links</a>
                         </li>
@@ -50,7 +50,9 @@
                 </tal:defines>
             </tal:existssoer>
 
-            <ul tal:condition="folders" class="bullet-list two-columns subtopics-mobile-column ma-0">
+            <ul tal:condition="folders"
+                 tal:define="base_class python:'bullet-list subtopics-mobile-column ma-0';"
+                    tal:attributes="class python: base_class + ' two-columns' if len(folders) > 6 else base_class" >
                 <li tal:repeat="folder folders" class="subtopics-list-item">
                     <a tal:attributes="href folder/getURL; title folder/Title;"
                             tal:content="folder/Title" class="light-color">Folder links</a>
@@ -165,7 +167,7 @@
             </div>
 
             <div class="eea-card-listing eea-card-three-of-kind">
-              <tal:items tal:repeat="snews news">
+              <tal:items tal:repeat="snews python:news[:-1] if len(news) > 3 else news">
                 <div class="eea-card eea-card--bg-light direction-column" tal:define="url snews/getURL">
                   <div class="eea-card-header">
                     <div class="eea-card-title-wrapper">
@@ -220,14 +222,18 @@
                       </a>
                     </div>
                   </div>
-                  <div class="eea-card-body">
-                    <a href="#" class="eea-card-image-link" tal:attributes="href url">
-                      <img tal:attributes="src string:${url}/image_preview"  alt="" class="eea-card-image eea-card-image--pull eea-card-image-bordered" />
+                  <div class="eea-card-body" tal:define="effective python:publication.effective;
+                      description publication/Description;
+                      has_body_text python: effective or description;
+                      base_link_class python:'eea-card-image-link  eea-card-image--pull eea-card-image-bordered';">
+                    <a href="#" class="eea-card-image-link  eea-card-image--pull eea-card-image-bordered" tal:attributes="href url;
+                          class python: base_class if not has_body_text else  base_link_class + ' eea-card-with-text'">
+                      <img tal:attributes="src string:${url}/image_large"  alt="" class="eea-card-image" />
                     </a>
 
-                    <div class="eea-card-body-text">
-                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(publication.effective)"></span>
-                      <p tal:content="publication/Description"></p>
+                    <div class="eea-card-body-text"  tal:condition="has_body_text">
+                      <strong  i18n:translate="Published">Published</strong>: <span tal:replace="python:plone_view.toLocalizedTime(effective)"></span>
+                      <p tal:content="description"></p>
                     </div>
                   </div>
                 </div>
