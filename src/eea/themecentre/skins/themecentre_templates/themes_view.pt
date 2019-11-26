@@ -67,7 +67,7 @@
                                 <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
                                         folders themecentre_view/getSubtopics;">
 
-                                    <h3 class="no-anchor portlet-megatopic-subtitle ma-0" tal:condition="python:not folders">
+                                    <h3 class="no-anchor portlet-megatopic-subtitle" tal:condition="python:not folders">
                                         <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
                                     </h3>
 
