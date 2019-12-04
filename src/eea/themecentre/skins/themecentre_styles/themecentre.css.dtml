@@ -425,6 +425,7 @@ body {
 }
 
 .eea-tileHead,
+.eea-tileThumb,
 .eea-tileHeadLink {
    min-height: 230px;
 }
