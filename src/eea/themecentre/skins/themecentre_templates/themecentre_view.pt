@@ -121,6 +121,7 @@
         </a>
 
         <div class="section-body">
+          <p tal:content="gismap/Description" class="documentDescription"></p>
           <tal:embed  tal:content="structure lazy_loaded" tal:define="body gismap/gis_inline; lazy_loaded python: body.replace('src', 'data-src') if '<iframe' in body else body" />
         </div>
 
@@ -146,6 +147,7 @@
             </a>
 
             <div class="section-body">
+              <p tal:content="dashboard/Description" class="documentDescription"></p>
               <tal:embed  tal:content="structure lazy_loaded" tal:define="body dashboard/embed; lazy_loaded python: body.replace('src', 'data-src') if '<iframe' in body else body" />
             </div>
 
