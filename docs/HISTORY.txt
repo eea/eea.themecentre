@@ -3,6 +3,9 @@ Changelog
 
 9.9-dev0 - (unreleased)
 ---------------------------
+* Change: improve storytelling image positioning when landscape&portrait are
+  side-by-side
+  [ichim-david refs #111967]
 * Bug fix: fixed background image height of featured content on Firefox
   [ichim-david refs #111637]
 
