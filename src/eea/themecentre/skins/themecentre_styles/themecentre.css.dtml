@@ -82,6 +82,10 @@ body {
     color: &dtml-corporateDarkBlue;;
 }
 
+.storytelling-body  .eea-card {
+    min-height: 300px;
+}
+
 .eea-card:nth-of-type(3n) {
     background-color: &dtml-corporateDarkOrange;;
     color: &dtml-corporateDarkOrange;;
@@ -543,9 +547,6 @@ body {
         min-width: 232px;
     }
 
-    .eea-card--double .eea-card-with-text {
-        min-width: 44.5%;
-    }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -874,6 +875,7 @@ body {
     }
 
     .eea-card-image-bordered.eea-card-image--portrait {
+        /*height: calc(37vw - 30%);*/
         max-height: 364px;
         width: auto;
     }
@@ -882,11 +884,6 @@ body {
     }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1279px) {
-    .eea-card-image-bordered.eea-card-image--portrait {
-        max-height: calc(37vw - 40%) !important;
-    }
-}
 @media screen and (min-width: 1280px) {
     .eea-card-image--pull {
         margin-left: -2.90em;
