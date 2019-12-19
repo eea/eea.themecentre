@@ -544,7 +544,7 @@ body {
 
     .eea-card-with-text {
         margin-right: 1em;
-        min-width: 232px;
+        float: left;
     }
 
 }
@@ -875,9 +875,9 @@ body {
     }
 
     .eea-card-image-bordered.eea-card-image--portrait {
-        /*height: calc(37vw - 30%);*/
-        max-height: 364px;
+        max-height: 410px;
         width: auto;
+        max-width: initial !important;
     }
     .eea-card--double.eea-card--landscape  .eea-card-image {
         width: auto;
