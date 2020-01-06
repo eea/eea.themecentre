@@ -137,6 +137,18 @@ h2.dark-color {
   }
 
 /* card modifiers */
+.eea-card-header {
+  position: relative;
+  }
+.eea-card--landscape .eea-card-header {
+  width: 90%;
+  }
+
+.eea-card-title-wrapper {
+  overflow: hidden;
+  height: 75px;
+  margin-bottom: 1em;
+  }
 .eea-card--double {
   width: 47%;
   flex: none;
@@ -161,4 +173,105 @@ h2.dark-color {
   }
 .eea-card-link > h2 {
   font-size: 20px;
+  }
+
+.eea-card-image {
+  max-width: 100%;
+  }
+
+
+.eea-card--landscape .eea-card-image:not(.eea-card-image--portrait) {
+  width: 100%;
+  height: auto;
+  }
+
+
+@media screen and (min-width: 481px) {
+  .eea-card--portrait .eea-card-image-link {
+    max-width: 250px;
+    margin-right: 1em;
+    }
+
+  .eea-card-with-text {
+    margin-right: 1em;
+    float: left;
+    }
+  .eea-card--fullwidth .eea-card-image:not(.eea-card-image--portrait) {
+    min-width: 360px;
+    }
+  }
+
+@media screen and (min-width: 768px) {
+  .eea-card--fullwidth .eea-card-body-text {
+    width: 74%;
+    float: left;
+    }
+  .eea-card-image-bordered {
+    border: 3px solid currentColor !important;
+    }
+
+  .eea-card--landscape .eea-card-image-link,
+  .eea-card--portrait .eea-card-image-link {
+    margin-left: -2.9em;
+    display: block;
+    }
+
+  .eea-card--landscape .eea-card-image-link {
+    margin-bottom: -3em;
+    }
+
+  }
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .eea-card--portrait {
+    width: 80%;
+    }
+  .storytelling-body .eea-card--double {
+    width: 80%;
+    margin: 2em auto;
+
+    }
+
+  .eea-card--landscape .eea-card-image {
+    width: auto;
+    }
+
+  }
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .eea-card-image-wrapper {
+    align-self: flex-start;
+    }
+  }
+
+@media screen and (min-width: 1024px) {
+  .eea-card--portrait .eea-card-image {
+    max-width: initial !important;
+    }
+
+  .eea-card-image-bordered.eea-card-image--portrait {
+    max-height: 410px;
+    max-width: 360px !important;
+    }
+
+  .eea-card--fullwidth .eea-card-image--portrait {
+    width: auto;
+    }
+  }
+
+@media screen and (min-width: 1280px) {
+  .eea-card-image--pull {
+    margin-left: -2.90em;
+    }
+  .eea-card--landscape .eea-card-image--pull {
+    margin-bottom: -3em;
+    }
+
+  .storytelling-body  .eea-card--double .eea-card-with-text {
+    max-width: 360px;
+    }
+  .themecentre-section .video_player_link {
+    min-height: 700px;
+    }
   }
