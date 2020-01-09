@@ -63,7 +63,7 @@ body {
 }
 
 .eea-card:first-of-type {
-   background-color: &dtml-corporateGreen;;
+    background-color: &dtml-corporateGreen;;
     color: &dtml-corporateGreen;;
 }
 
@@ -80,6 +80,10 @@ body {
 .storytelling-body .eea-card:nth-of-type(2n) {
     background-color: &dtml-corporateDarkBlue;;
     color: &dtml-corporateDarkBlue;;
+}
+
+.storytelling-body  .eea-card {
+    min-height: 300px;
 }
 
 .eea-card:nth-of-type(3n) {
@@ -108,12 +112,6 @@ body {
 }
 
 /* card modifiers */
-.eea-card-header {
-    position: relative;
-}
-.eea-card--landscape .eea-card-header {
-    width: 90%;
-}
 .eea-card--bg-light .eea-card-header:before {
     background-color: currentColor;
     width: 100%;
@@ -129,10 +127,10 @@ body {
     color: #FFF;
 }
 
-.eea-card-title-wrapper {
-    overflow: hidden;
-    height: 85px;
-    margin-bottom: 1em;
+
+#content .eea-card-title .link-external a {
+    background: none;
+    padding: 0;
 }
 
 .eea-card--landscape .moreLink {
@@ -162,10 +160,10 @@ body {
     display: block;
 }
 
-/*.storytelling-body .eea-card--double .eea-card-body {*/
-/*    height: 100%;*/
-/*    align-items: flex-end;*/
-/*}*/
+.eea-card-body-text a {
+    color: #FFF;
+    border-color: #FFF !important;
+}
 
 
 .eea-card-image-wrapper {
@@ -421,12 +419,13 @@ body {
     max-width: 475px;
 }
 .eea-tile .languageCodes {
-   display: none !important;
+    display: none !important;
 }
 
 .eea-tileHead,
+.eea-tileThumb,
 .eea-tileHeadLink {
-   min-height: 230px;
+    min-height: 230px;
 }
 /* end @editors choice */
 
@@ -527,19 +526,7 @@ body {
         width: 100%;
     }
 
-    /*.eea-card-image--portrait {*/
-    /*    max-width: 250px !important;*/
-    /*}*/
 
-    .eea-card--portrait .eea-card-image-link {
-        max-width: 250px;
-        margin-right: 1em;
-    }
-
-    .eea-card-with-text {
-        margin-right: 1em;
-        min-width: 235px;
-    }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -673,9 +660,6 @@ body {
         margin-bottom: 1em;
     }
 
-    /*.eea-card-title-wrapper {*/
-    /*    height: auto;*/
-    /*}*/
 }
 
 @media screen and (min-width: 768px) {
@@ -701,7 +685,7 @@ body {
     }
 
     /* needed in order to join blue bg content-header  and above content area */
-   .userrole-anonymous.template-themes_view #eea-above-columns:after {
+    .userrole-anonymous.template-themes_view #eea-above-columns:after {
         background-color: #004B87;
         content: " ";
         display: block;
@@ -741,7 +725,7 @@ body {
         color: #FFF;
     }
     .topic-search-btn {
-       margin: 5px 10px 10px 0;
+        margin: 5px 10px 10px 0;
     }
 
     .eea-input-query {
@@ -800,80 +784,9 @@ body {
     }
 }
 
-@media screen and (min-width: 768px) {
-    .eea-card--fullwidth .eea-card-body-text {
-        width: 50%;
-        float: left;
-    }
-    .eea-card-image-bordered {
-        border: 3px solid currentColor !important;
-    }
 
-    .eea-card--landscape .eea-card-image-link,
-    .eea-card--portrait .eea-card-image-link {
-        margin-left: -3em;
-        display: block;
-    }
-
-    .eea-card--landscape .eea-card-image-link {
-        height: 303px;
-        overflow: hidden;
-        margin-bottom: -3em;
-    }
-
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    .eea-card--portrait {
-        width: 80%;
-    }
-
-    /*.eea-card--portrait .eea-card-title-wrapper {*/
-    /*    height: auto;*/
-    /*}*/
-
-    .eea-card--landscape .eea-card-image {
-        height: 100%;
-        max-width: initial !important;
-        width: auto;
-        min-width: 230px;
-    }
-
-}
-
-/*@media (min-width: 980px) {*/
-/*}*/
-/*@media (max-width: 1023px) {*/
-    /*.eea-card--landscape .eea-card-image-wrapper {*/
-    /*    width: 100%;*/
-    /*}*/
-    /*.eea-card--fullwidth .eea-card-img,*/
-    /*.eea-card--fullwidth .eea-card-body-text {*/
-    /*    width: 100%;*/
-    /*}*/
-    /*.eea-card--landscape .eea-card-image {*/
-    /*    min-width: 215px;*/
-    /*    height: auto;*/
-    /*}*/
-
-/*}*/
-    /*.eea-card--landscape .eea-card-image:not(.eea-card-image--portrait) {*/
-    /*    margin-bottom: 1em;*/
-    /*    width: 100% !important;*/
-    /*    height: auto !important;*/
-    /*}*/
-}
-
-@media (min-width: 768px) and (max-width: 1279px) {
-    .eea-card-image-wrapper {
-        align-self: flex-start;
-    }
-}
 
 @media (min-width: 1024px) and (max-width: 1279px) {
-    /*.eea-card--landscape .eea-card-image {*/
-    /*    width: 95%;*/
-    /*}*/
     .template-themecentre_view .video_player_link {
         min-height: 510px;
     }
@@ -883,7 +796,7 @@ body {
         justify-content: space-around;
         flex-wrap: wrap;
     }
-   .eea-card-three-of-kind .eea-card {
+    .eea-card-three-of-kind .eea-card {
         max-width: 100%;
         flex: 0 0 38%;
     }
@@ -891,41 +804,14 @@ body {
 
 @media screen and (max-width: 1023px) {
     .eea-card-image--portrait {
-        max-height: 100%;
+        max-height: 330px;
         height: auto;
     }
 }
+
 @media screen and (min-width: 1024px) {
-    /*.eea-card-image--portrait {*/
-    /*    max-height: 350px;*/
-    /*    width: 250px !important;*/
-    /*}*/
-
-    .eea-card--portrait .eea-card-image {
-        max-width: initial !important;
-    }
-    .eea-card--double.eea-card--landscape  .eea-card-image-link {
-        width: 108%;
-    }
     .eea-card--double.eea-card--landscape  .eea-card-image {
-        width: 100%;
-        height: auto;
-    }
-}
-@media screen and (min-width: 1280px) {
-    .eea-card-image--pull {
-        margin-left: -2.90em;
-    }
-    .eea-card--landscape .eea-card-image--pull {
-        margin-bottom: -3em;
-    }
-    /*.eea-card--fullwidth .eea-card-image {*/
-        /*margin-bottom: -3em;*/
-        /*width: 103%;*/
-    /*}*/
-
-    .themecentre-section .video_player_link {
-        min-height: 700px;
+        width: auto;
     }
 }
 
@@ -951,6 +837,14 @@ body {
     .eea-card--landscape .moreLink:before {
         font-size: 48px;
     }
+
+    .eea-card-image-bg-wrapper {
+        min-width: 350px;
+    }
+    .eea-card-image-link {
+        max-width: 100%;
+    }
+
 }
 /* YOUR CSS RULES STOP HERE */
 

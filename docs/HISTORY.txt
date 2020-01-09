@@ -1,6 +1,14 @@
 Changelog
 =========
 
+9.9 - (2020-01-07)
+---------------------------
+* Change: improve storytelling image positioning when landscape&portrait are
+  side-by-side
+  [ichim-david refs #111967]
+* Bug fix: fixed background image height of featured content on Firefox
+  [ichim-david refs #111637]
+
 9.8 - (2019-11-26)
 ---------------------------
 * Bug fix: fixed link to themes centre back from the dc view 
