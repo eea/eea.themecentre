@@ -257,14 +257,21 @@
                 <a href="multimedia" class="inline-block eea-btn-md eea-btn-multimedia bg-grey text-bold"><span class="eea-icon eea-icon-lg eea-icon-video-camera"></span><span i18n:translate="">Multimedia</span></a>
             </div>
           <div class="section-body">
-            <tal:defines tal:define="objhref multimedia/absolute_url;">
+            <tal:defines tal:define="objhref multimedia/absolute_url;
+                cloudurl multimedia/getCloudUrl|string:'';
+                cloud python: {'obj_url': objhref, 'cmshare': cloudurl};">
               <a  tal:attributes="href python: objhref">
                 <h2 tal:content="multimedia/Title" class="section-title"></h2>
               </a>
-              <a tal:define="cloudurl multimedia/getCloudUrl|nothing" tal:attributes="href python: cloudurl;
-                  data-src python: objhref + '/image_panoramic'" target="_blank" class="lazy video_player_link">
+              <a tal:attributes="href python: cloudurl;
+                  data-src python: objhref + '/image_panoramic'" target="_blank" class="lazy video_player_link"
+                tal:condition="python: 'youtube' in cloudurl">
                 <img class="video_player_image" tal:attributes="src string:${portal_url}/YouTube_light_logo.png">
               </a>
+              <tal:cloudvideo tal:condition="python: 'cmshare' in cloudurl">
+                <metal:video_player use-macro="context/eea_multimedia_macros/macros/cmshare_video" />
+              </tal:cloudvideo>
+
             </tal:defines>
           </div>
 
