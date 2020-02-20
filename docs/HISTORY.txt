@@ -3,6 +3,8 @@ Changelog
 
 10.0-dev0 - (unreleased)
 ---------------------------
+* Change: view cmshare videos within themecentre and themes view pages
+  [ichim-david refs #113969]
 
 9.9 - (2020-01-07)
 ---------------------------
