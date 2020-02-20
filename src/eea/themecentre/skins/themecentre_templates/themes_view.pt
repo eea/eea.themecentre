@@ -122,9 +122,11 @@
                     <tal:defines tal:define="promo python:promo_list[0];
                             themes python: promo_list[1];
                             url promo/getURL;
+                            is_video python: 'cmshare' in url;
                             title promo/Title;">
-                        <a href="#" tal:attributes="href url"  class="eea-tileLink eea-tileHeadLink">
-                            <div class="eea-tileHead">
+                        <a href="#" tal:attributes="href url;
+                            class python: base_class if not is_video else base_class + ' video-fancybox'"  tal:define="base_class python:'eea-tileLink eea-tileHeadLink'">
+                            <div  tal:attributes="class python:base_class if not is_video else base_class + ' photoAlbumEntryWrapper'" tal:define="base_class python:'eea-tileHead'">
                                 <div class="eea-tileThumb lazy" tal:attributes="data-src string:${url}/image_preview">
                                 </div>
                             </div>

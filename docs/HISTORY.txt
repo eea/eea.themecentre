@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.0 - (2020-02-20)
+---------------------------
+* Change: view cmshare videos within themecentre and themes view pages
+  [ichim-david refs #113969]
+
 9.9 - (2020-01-07)
 ---------------------------
 * Change: improve storytelling image positioning when landscape&portrait are
