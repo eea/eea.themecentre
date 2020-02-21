@@ -143,8 +143,7 @@ body {
     font-size: 4em;
     color: #FFF;
 }
-.topic-intros .topic-intro:before,
-.themecentre-section .moreLink:before {
+.topic-intros .topic-intro:before {
     top: 0;
 }
 .eea-card--bg-light .eea-card-body,
