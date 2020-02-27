@@ -3,6 +3,9 @@ Changelog
 
 10.1-dev0 - (unreleased)
 ---------------------------
+* Change: removed min-height from themecentre-section video_player_link in
+  order to ensure that preview image isn't clipped
+  [ichim-david refs #113969]
 
 10.0 - (2020-02-20)
 ---------------------------

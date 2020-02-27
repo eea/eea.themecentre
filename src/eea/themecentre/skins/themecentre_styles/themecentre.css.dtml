@@ -208,7 +208,6 @@ body {
 .themecentre-section .video_player_link {
     height: auto;
     border: 1px solid #D3D3D3;
-    min-height: 460px;
     background-size: cover;
 }
 
