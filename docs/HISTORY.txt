@@ -1,8 +1,16 @@
 Changelog
 =========
 
+10.2 - (2020-03-03)
+---------------------------
+* Change: remove the notes that appear as map description   [ichim-david refs #114535]
+  [ichim-david]
+
 10.1 - (2020-02-28)
 ---------------------------
+* Change: reference gis_themecentre_inline instead of gis_inline template on
+  interactive map in order to remove the notes that appear as map description
+  [ichim-david refs #114535]
 * Change: removed min-height from themecentre-section video_player_link in
   order to ensure that preview image isn't clipped
   [ichim-david refs #113969]
