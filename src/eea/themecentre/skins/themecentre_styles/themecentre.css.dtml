@@ -143,8 +143,7 @@ body {
     font-size: 4em;
     color: #FFF;
 }
-.topic-intros .topic-intro:before,
-.themecentre-section .moreLink:before {
+.topic-intros .topic-intro:before {
     top: 0;
 }
 .eea-card--bg-light .eea-card-body,
@@ -209,7 +208,6 @@ body {
 .themecentre-section .video_player_link {
     height: auto;
     border: 1px solid #D3D3D3;
-    min-height: 460px;
     background-size: cover;
 }
 
