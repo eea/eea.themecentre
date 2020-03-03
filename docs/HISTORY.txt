@@ -1,8 +1,10 @@
 Changelog
 =========
 
-10.2-dev0 - (unreleased)
+10.2 - (2020-03-03)
 ---------------------------
+* Change: remove the notes that appear as map description   [ichim-david refs #114535]
+  [ichim-david]
 
 10.1 - (2020-02-28)
 ---------------------------
