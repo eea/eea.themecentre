@@ -1,6 +1,9 @@
 Changelog
 =========
 
+10.2-dev0 - (unreleased)
+---------------------------
+
 10.1 - (2020-02-28)
 ---------------------------
 * Change: reference gis_themecentre_inline instead of gis_inline template on
