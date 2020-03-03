@@ -1,6 +1,9 @@
 Changelog
 =========
 
+10.3-dev0 - (unreleased)
+---------------------------
+
 10.2 - (2020-03-03)
 ---------------------------
 * Change: remove the notes that appear as map description   [ichim-david refs #114535]
