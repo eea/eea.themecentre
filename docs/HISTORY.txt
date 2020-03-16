@@ -3,6 +3,8 @@ Changelog
 
 10.3-dev0 - (unreleased)
 ---------------------------
+* Change: shown current topic as well when showing tags from themes_tags
+  [ichim-david refs #115219]
 
 10.2 - (2020-03-03)
 ---------------------------
