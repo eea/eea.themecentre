@@ -6,7 +6,6 @@ from eea.themecentre import eeaMessageFactory as _
 from eea.themecentre.browser.portlets.catalog import BasePortlet
 from eea.themecentre.interfaces import IThemeCentreImageUrl
 from eea.themecentre.interfaces import IThemeTagging
-from eea.themecentre.themecentre import getThemeCentre
 from zope.component import queryAdapter
 
 
@@ -59,10 +58,6 @@ class ObjectThemesPortlet(BasePortlet):
             theme = themes_dict.get(themeId, None)
             if theme:
                 themes_sorted.append(theme)
-
-        current_theme = getThemeCentre(context)
-        if current_theme and current_theme in themes_sorted:
-            themes_sorted.remove(current_theme)
 
         return themes_sorted
 
