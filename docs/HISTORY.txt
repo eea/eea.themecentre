@@ -1,6 +1,9 @@
 Changelog
 =========
 
+10.4-dev0 - (unreleased)
+---------------------------
+
 10.3 - (2020-03-16)
 ---------------------------
 * Change: shown current topic as well when showing tags from themes_tags
