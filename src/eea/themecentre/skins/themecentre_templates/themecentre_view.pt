@@ -128,7 +128,9 @@
         <div class="section-footer text-right">
           <a href="" tal:attributes="href string:dc" class="eea-btn eea-btn-md  bg-dark-orange eea-btn--moreLink" i18n:translate="">
             <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-            <span i18n:translate="">See all data products</span>
+            <!--<span i18n:translate="">See all data products</span>-->
+            <span i18n:translate="">All <span tal:omit-tag="">data products</span> on</span>&nbsp;
+            <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
           </a>
         </div>
       </section>
@@ -153,8 +155,11 @@
 
             <div class="section-footer text-right">
                 <a href="" tal:attributes="href string:dc" class="eea-btn  eea-btn--moreLink eea-btn-md bg-light-blue" i18n:translate="">
-                    <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
-                  <span i18n:translate="">See all data products</span>
+                  <span class="eea-icon eea-icon-chevron-circle-right "><!-- ?--></span>
+                  <!--<span i18n:translate="">See all data products</span>-->
+                  <span i18n:translate="">All <span tal:omit-tag="">data products</span> on</span>&nbsp;
+                  <span i18n:translate="" tal:content="object_title_lowercase" class="text-italic"></span>
+
                 </a>
             </div>
         </section>
