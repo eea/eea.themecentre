@@ -41,6 +41,12 @@ msgstr ""
 msgid "All multimedia on"
 msgstr ""
 
+msgid "All data products on"
+msgstr ""
+
+msgid "data products"
+msgstr ""
+
 msgid "Multimedia"
 msgstr ""
 
