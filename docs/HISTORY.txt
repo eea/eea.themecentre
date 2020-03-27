@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.4 - (2020-03-27)
+---------------------------
+* Change: Renamed see all products button to all products on topic
+  [iulianpetchesi refs #115429]
+
 10.3 - (2020-03-16)
 ---------------------------
 * Change: shown current topic as well when showing tags from themes_tags
