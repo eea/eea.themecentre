@@ -41,14 +41,14 @@
 
   <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos" tal:attributes="class python:'themes-megatopics-area-translations' if not is_en else ''">
         <div class="eea-accordion-panels eea-accordion-panels-inverse">
-            <div class="portlet-megatopic eea-accordion-panel" tal:repeat="promo promos">
+            <div class="portlet-megatopic" tal:repeat="promo promos">
                 <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
                                 promo_list python:promo[promo_title];
                                         promo_url python:promo_list[0][0] if promo_list else [];
                                 "
                          tal:condition="promo_list">
-                    <div class="promoHeader eea-accordion-title notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
+                    <div class="promoHeader notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
                         Air and climate
                     </div>
 
@@ -62,7 +62,7 @@
                     </tal:others>
                     <tal:english tal:condition="is_en">
 
-                        <div class="pane pane-inverse">
+                        <div class="portlet-megatopic-lists">
                             <tal:mainthemes tal:repeat="theme promo_list">
                                 <tal:subtopics tal:define="theme_obj python: theme[2].getObject(); themecentre_view theme_obj/@@themecentre_utils;
                                         folders themecentre_view/getSubtopics;">

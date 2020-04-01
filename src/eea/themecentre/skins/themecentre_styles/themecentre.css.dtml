@@ -553,23 +553,6 @@ body {
 }
 
 @media screen and (min-width: 900px) {
-    #themes-megatopics-area:before,
-    #themes-megatopics-area:after {
-        border-top: 1px solid &dtml-globalBorderColor;;
-        content: ' ';
-        display: block;
-        left: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        position: absolute;
-        right: 50%;
-        top: 1px;
-        width: 100vw;
-    }
-
-    #themes-megatopics-area:after {
-        box-shadow: 0 1px 2px 0 &dtml-globalBorderColor;;
-    }
     #themes-megatopics-area:after {
         top: 5.35em;
     }
@@ -756,20 +739,6 @@ body {
     #themes-megatopics-area .promoHeader {
         padding: 1em 0;
         position: relative;
-    }
-    .promoHeader:after,
-    .promoHeader:before {
-        border-top: 1px solid #cccccc;
-        content: ' ';
-        display: block;
-        height: 100%;
-        left: 50%;
-        margin-left: -71.5vw;
-        margin-right: -50vw;
-        position: absolute;
-        right: 50%;
-        top: 0;
-        width: 100vw;
     }
     .promoHeader:after {
         top: 100%;
