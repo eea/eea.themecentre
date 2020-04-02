@@ -359,18 +359,33 @@ body {
 
 #themes-megatopics-area .portlet-megatopic {
     flex-direction: column;
-    padding: 0 &dtml-padding-base;;
+    margin: 0 5px;
     white-space: normal;
+    background: &dtml-greyBackgroundColor;;
 }
 
-.portlet-megatopic-subtitle {
+#themes-megatopics-area .list-items {
+    margin: 0;
+}
+
+#themes-megatopics-area .portlet-megatopic-subtitle {
     font-size: 1rem;
+    margin: 2em 0 2em 0;
+}
+#themes-megatopics-area .list-items-header .portlet-megatopic-subtitle {
+    margin-top: 0;
 }
 
-#themes-megatopics-area .promoHeader {
-    font-style: italic;
-    margin-bottom: 2em;
-    white-space: nowrap;
+#themes-megatopics-area .portletHeader {
+    background-color: rgba(0,0,0, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    margin: -58px 0 0 0;
+    height: auto;
+    padding: 1em;
+}
+
+.portlet-megatopic-lists {
+    padding: 1.5em;
 }
 
 #themes-megatopics-area .eea-no-list-style > li {
@@ -378,6 +393,7 @@ body {
     margin-bottom: 0.35em;
     line-height: 1.15;
 }
+
 
 /* end @megatopics area */
 

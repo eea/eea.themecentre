@@ -21,6 +21,7 @@
 <body>
 <tal:body  metal:fill-slot="content-core" tal:define="view nocall:context/@@themes_browser_view;
         lang lang|here/Language|string:en;
+        portal_url context/plone_portal_state/portal_url;
         is_en python:lang in ('en', '');">
 
     <section id="topics-search">
@@ -39,22 +40,28 @@
 
     </section>
 
-  <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos" tal:attributes="class python:'themes-megatopics-area-translations' if not is_en else ''">
+  <section id="themes-megatopics-area" tal:define="promos view/getPromotions" tal:condition="python:promos" tal:attributes="class python:'themes-megatopics-area-translations megatopics-area' if not is_en else 'megatopics-area'">
         <div class="eea-accordion-panels eea-accordion-panels-inverse">
             <div class="portlet-megatopic" tal:repeat="promo promos">
                 <tal:defines
                          tal:define="promo_title python:promo.keys()[0];
-                                promo_list python:promo[promo_title];
+                                promo_list python:promo.get(promo_title, []);
                                         promo_url python:promo_list[0][0] if promo_list else [];
                                 "
-                         tal:condition="promo_list">
-                    <div class="promoHeader notoc eea-icon-right-container" tal:content="python:context.translate(promo_title)">
+                         >
+                  <tal:promoImage tal:condition="promo_list">
+                    <img title="Air and climate" alt="Air and climate"
+                         width="391" height="191" i18n:attributes="title alt"
+                          tal:define="theme_id python:promo_url.split('/')[-1]"
+                         tal:attributes="src string:$portal_url/themes/$theme_id/theme_image/image_preview; title promo_title; alt promo_title" />
+                  </tal:promoImage>
+                    <div class="portletHeader notoc" tal:content="python:context.translate(promo_title)">
                         Air and climate
                     </div>
 
                     <tal:others tal:condition="not:is_en">
                         <div class="pane pane-inverse">
-                            <ul class="eea-no-list-style">
+                            <ul class="list-items">
                                 <li tal:repeat="theme promo_list">
                                     <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a></li>
                             </ul>
@@ -68,13 +75,13 @@
                                         folders themecentre_view/getSubtopics;">
 
                                     <h3 class="no-anchor portlet-megatopic-subtitle" tal:condition="python:not folders">
-                                        <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                        <a tal:attributes="href python:theme[1]" tal:content="python:context.translate(theme[2].Title)">Air pollution</a>
                                     </h3>
 
-                                    <ul class="eea-no-list-style" tal:condition="folders">
-                                        <li>
+                                    <ul class="list-items" tal:condition="folders">
+                                        <li class="list-items-header inline-block">
                                             <h3 class="portlet-megatopic-subtitle eea-list-header mb-0 no-anchor" tal:attributes="id python: theme[2].id">
-                                                <a tal:attributes="href python:theme[1]" tal:content="python:theme[2].Title">Air pollution</a>
+                                                <a tal:attributes="href python:theme[1]" tal:content="python:context.translate(theme[2].Title)">Air pollution</a>
                                             </h3>
                                         </li>
                                         <li tal:repeat="folder folders">
