@@ -351,47 +351,51 @@ body {
 #themes-megatopics-area {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 -&dtml-padding-base;;
+    justify-content: center;
+    margin: 0;
     padding: 1.5em 0;
     position: relative;
 }
 
 #themes-megatopics-area .portlet-megatopic {
     flex-direction: column;
-    margin: 0 5px;
     white-space: normal;
     background: &dtml-greyBackgroundColor;;
 }
 
-#themes-megatopics-area .list-items {
-    margin: 0;
-}
 
-#themes-megatopics-area .portlet-megatopic-subtitle {
+ #themes-megatopics-area .portlet-megatopic-subtitle {
     font-size: 1rem;
-    margin: 2em 0 2em 0;
+    margin: 3em 0 3em 0;
 }
-#themes-megatopics-area .list-items-header .portlet-megatopic-subtitle {
+#themes-megatopics-area .portlet-megatopic-subtitle:first-child {
     margin-top: 0;
+}
+#themes-megatopics-area .portlet-megatopic-subtitle + .list-items {
+     margin-top: -3em;
+     margin-left:0;
+ }
+
+.portlet-megatopic-header {
+    position: relative;
 }
 
 #themes-megatopics-area .portletHeader {
     background-color: rgba(0,0,0, 0.8);
     color: rgba(255, 255, 255, 0.9);
-    margin: -58px 0 0 0;
+    margin: 0;
     height: auto;
     padding: 1em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .portlet-megatopic-lists {
     padding: 1.5em;
 }
-
-#themes-megatopics-area .eea-no-list-style > li {
-    display: list-item;
-    margin-bottom: 0.35em;
-    line-height: 1.15;
+.portlet-megatopic .portlet-megatopic-translated-list {
+    margin: 0;
 }
 
 
@@ -535,7 +539,7 @@ body {
         border: 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: center;
         padding: 0;
         width: 100%;
     }
@@ -555,6 +559,19 @@ body {
         flex-direction: column;
     }
 
+}
+
+
+@media screen and (min-width: 530px) {
+    #themes-megatopics-area .portlet-megatopic {
+        margin: 5px;
+    }
+}
+@media screen and (min-width: 530px) and (max-width: 1265px) {
+    #themes-megatopics-area .portlet-megatopic {
+        width: 48%;
+        flex: auto;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -758,6 +775,18 @@ body {
     }
     .promoHeader:after {
         top: 100%;
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1265px) {
+    .portlet-megatopic-header {
+        position: relative;
+        max-height: 250px;
+        overflow: hidden;
+    }
+
+    .portlet-megatopic-header img {
+        max-height: initial;
     }
 }
 
