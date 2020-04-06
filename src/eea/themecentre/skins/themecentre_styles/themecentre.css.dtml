@@ -349,22 +349,14 @@ body {
 
 /* @megatopics area */
 #themes-megatopics-area {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
     padding: 1.5em 0;
-    position: relative;
 }
 
 #themes-megatopics-area .portlet-megatopic {
-    flex-direction: column;
-    white-space: normal;
     background: &dtml-greyBackgroundColor;;
 }
 
-
- #themes-megatopics-area .portlet-megatopic-subtitle {
+#themes-megatopics-area .portlet-megatopic-subtitle {
     font-size: 1rem;
     margin: 3em 0 3em 0;
 }
@@ -375,29 +367,6 @@ body {
      margin-top: -3em;
      margin-left:0;
  }
-
-.portlet-megatopic-header {
-    position: relative;
-}
-
-#themes-megatopics-area .portletHeader {
-    background-color: rgba(0,0,0, 0.8);
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
-    height: auto;
-    padding: 1em;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.portlet-megatopic-lists {
-    padding: 1.5em;
-}
-.portlet-megatopic .portlet-megatopic-translated-list {
-    margin: 0;
-}
-
 
 /* end @megatopics area */
 
@@ -455,24 +424,8 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-    #themes-megatopics-area {
-        display: block;
-        margin-bottom: 1.5em;
-        padding: 0;
-    }
-
     .two-columns.subtopics-mobile-column {
         columns: 1;
-    }
-    .eea-accordion-panels-inverse .eea-accordion-title,
-    .eea-accordion-panel > h2 {
-        background-color: &dtml-lightBackgroundColor;;
-    }
-    .eea-accordion-panels-inverse .pane {
-        background-color: &dtml-corporateBlue;;
-    }
-    .pane-inverse a {
-        color: &dtml-lightBackgroundColor;;
     }
 
     .eea-input-query {
@@ -514,43 +467,7 @@ body {
 
 }
 
-@media screen and (min-width: 481px) {
-    #themes-megatopics-area .eea-accordion-title {
-        background-color: transparent;
-        border: 0;
-        color: #004B87;
-        cursor: auto;
-        font-size: 160%;
-        font-weight: normal;
-        line-height: 1.4;
-        margin: 0 0 1em 0;
-        padding: 0;
-    }
-    #themes-megatopics-area .eea-icon-right {
-        display: none;
-    }
-    #themes-megatopics-area .pane {
-        border: 0;
-        display: block !important;
-        padding: 0;
-    }
-
-    #themes-megatopics-area .eea-accordion-panels {
-        border: 0;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0;
-        width: 100%;
-    }
-
-
-}
-
 @media screen and (min-width: 481px) and (max-width: 768px) {
-    #themes-megatopics-area .promoHeader {
-        white-space: normal;
-    }
     #editors-choice-header {
         text-align: center;
     }
@@ -561,16 +478,9 @@ body {
 
 }
 
-
 @media screen and (min-width: 530px) {
     #themes-megatopics-area .portlet-megatopic {
         margin: 5px;
-    }
-}
-@media screen and (min-width: 530px) and (max-width: 1265px) {
-    #themes-megatopics-area .portlet-megatopic {
-        width: 48%;
-        flex: auto;
     }
 }
 
@@ -579,18 +489,7 @@ body {
         margin-bottom: &dtml-padding-double;;
     }
 }
-@media screen and (max-width: 899px) {
-    #themes-megatopics-area .promoHeader {
-        margin-bottom: 0;
-    }
-}
 
-@media screen and (min-width: 900px) {
-    #themes-megatopics-area:after {
-        top: 5.35em;
-    }
-
-}
 @media screen and (max-width: 767px) {
     .topic-search-links {
         display: flex;
@@ -766,37 +665,7 @@ body {
         margin: 0 auto;
         width: 90%;
     }
-    .portlet-megatopic {
-        margin-bottom: 1em;
-    }
-    #themes-megatopics-area .promoHeader {
-        padding: 1em 0;
-        position: relative;
-    }
-    .promoHeader:after {
-        top: 100%;
-    }
 }
-
-@media screen and (min-width: 900px) and (max-width: 1265px) {
-    .portlet-megatopic-header {
-        position: relative;
-        max-height: 250px;
-        overflow: hidden;
-    }
-
-    .portlet-megatopic-header img {
-        max-height: initial;
-    }
-}
-
-@media screen and (min-width: 1100px) {
-    .themes-megatopics-area-translations .portlet-megatopic {
-        flex: none;
-    }
-}
-
-
 
 @media (min-width: 1024px) and (max-width: 1279px) {
     .template-themecentre_view .video_player_link {
@@ -830,13 +699,6 @@ body {
 /* 102564 IE11 hack as the hiddenStructure without display will count
 * for justify-content: space-between since it doesn't support clip-path */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    #themes-megatopics-area .portlet-megatopic {
-        flex: auto;
-        width: 295px;
-    }
-    #themes-megatopics-area .portlet-megatopic:nth-of-type(3n) {
-        width: 330px;
-    }
     /* input within IE appends an x on right of input which overlaps our search icon */
     input[type=text]::-ms-clear {
         display: none;

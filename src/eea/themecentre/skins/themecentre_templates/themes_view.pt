@@ -49,19 +49,16 @@
                                 "
                          >
                   <tal:promoImage tal:condition="promo_list">
-                    <div class="portlet-megatopic-header">
-                      <img title="Air and climate" alt="Air and climate"
-                           width="391" height="191" i18n:attributes="title alt"
-                           tal:define="theme_id python:promo_url.split('/')[-1]"
-                           tal:attributes="src string:$portal_url/themes/$theme_id/theme_image/image_preview; title promo_title; alt promo_title" />
-
+                    <div class="portlet-megatopic-header"
+                         tal:define="theme_id python:promo_url.split('/')[-1]; burl string:$portal_url/themes/$theme_id/theme_image/image_preview"
+                        tal:attributes="style python:'background-image:url(' + burl + ')'">
                       <div class="portletHeader notoc" tal:content="python:promo_title">
                         Air and climate
                       </div>
                     </div>
                   </tal:promoImage>
 
-                  <div class="portlet-megatopic-lists">
+                  <div class="portlet-megatopic-body">
                     <tal:others tal:condition="not:is_en">
                       <ul class="list-items portlet-megatopic-translated-list">
                         <li tal:repeat="theme promo_list">
