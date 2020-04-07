@@ -3,6 +3,8 @@ Changelog
 
 10.5-dev0 - (unreleased)
 ---------------------------
+* Change: themes view megatopics redesign
+  [ichim-david refs #116016]
 
 10.4 - (2020-03-27)
 ---------------------------
