@@ -349,7 +349,7 @@ body {
 
 /* @megatopics area */
 #themes-megatopics-area {
-    padding: 1.5em 0;
+    padding: 60px 0;
 }
 
 #themes-megatopics-area .portlet-megatopic {
@@ -364,8 +364,8 @@ body {
     margin-top: 0;
 }
 #themes-megatopics-area .portlet-megatopic-subtitle + .list-items {
-     margin-top: -3em;
-     margin-left:0;
+     margin-top: -2em;
+     margin-left:1em;
  }
 
 /* end @megatopics area */
