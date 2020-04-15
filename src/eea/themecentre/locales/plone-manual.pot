@@ -80,7 +80,7 @@ msgstr ""
 msgid "Subtopics"
 msgstr ""
 
-msgid "Air & Climate"
+msgid "Air and climate"
 msgstr ""
 
 msgid "Air"

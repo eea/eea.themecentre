@@ -17,7 +17,7 @@ msgstr ""
 msgid "Air"
 msgstr ""
 
-msgid "Air & Climate"
+msgid "Air and climate"
 msgstr ""
 
 msgid "All indicators on"
