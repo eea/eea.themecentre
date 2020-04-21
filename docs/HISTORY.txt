@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.5 - (2020-04-07)
+---------------------------
+* Change: themes view megatopics redesign
+  [ichim-david refs #116016]
+
 10.4 - (2020-03-27)
 ---------------------------
 * Change: Renamed see all products button to all products on topic
