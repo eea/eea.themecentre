@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.6-dev0 - (unreleased)
+10.6 - (2020-06-05)
 ---------------------------
 * Change: changed class for theme tags in order to have only one documentByLine
   class
