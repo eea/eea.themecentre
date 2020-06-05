@@ -8,7 +8,7 @@
       tal:condition="items"
       tal:omit-tag="">
 
-      <div tal:attributes="id string:themes-tags" class="documentByLine">
+      <div tal:attributes="id string:themes-tags" class="documentByLineThemes">
             <span class="listHead" i18n:translate="">Topics:</span>
             <tal:items tal:repeat="item items">
               <span>
