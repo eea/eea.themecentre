@@ -3,6 +3,10 @@ Changelog
 
 10.6-dev0 - (unreleased)
 ---------------------------
+* Change: changed class for theme tags in order to have only one documentByLine
+  class
+  [ichim-david refs #117294]
+
 
 10.5 - (2020-04-07)
 ---------------------------
