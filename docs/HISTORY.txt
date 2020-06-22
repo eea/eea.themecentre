@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.7-dev0 - (unreleased)
+10.7 - (2020-06-22)
 ---------------------------
 * Change: removed separator comma from themes tags previously hidden by css
   [ichim-david refs #117295]
