@@ -14,7 +14,6 @@
               <span>
                 <a class="link-category" rel="tag" href="" tal:attributes="href item/url"
                   tal:content="item/title">Item title</a>
-                  <span class="separator">, </span>
               </span>
             </tal:items>
       </div>
