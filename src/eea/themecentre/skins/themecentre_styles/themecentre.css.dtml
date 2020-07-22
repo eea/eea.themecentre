@@ -249,7 +249,8 @@ body {
 }
 
 /* #104468 hide related items on themes view*/
-.template-themes_view #relatedItems,
+.template-themes_view .related-wrapper,
+.template-themes_view .mini-header-below-content,
 .template-themes_view #eea-versions-portlet {
     display: none;
 }
