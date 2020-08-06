@@ -573,7 +573,7 @@ body {
 @media screen and (min-width: 768px) {
     #topics-search:before,
     .template-themes_view .content-header:before {
-        background-color: #004B87;
+        background-color: &dtml-corporateBlue;;
         content: " ";
         display: block;
         height: 100%;
@@ -594,7 +594,7 @@ body {
 
     /* needed in order to join blue bg content-header  and above content area */
     .userrole-anonymous.template-themes_view #eea-above-columns:after {
-        background-color: #004B87;
+        background-color: &dtml-corporateBlue;;
         content: " ";
         display: block;
         height: 250px;
