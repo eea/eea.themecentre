@@ -35,7 +35,7 @@ body {
     background-color: &dtml-themesDataColor;;
 }
 .bg-blue {
-    background-color: &dtml-corporateBlue;;
+    background-color: &dtml-corporateBlueOld;;
 }
 .bg-dark-blue {
     background-color: &dtml-corporateDarkBlue;;
@@ -73,8 +73,8 @@ body {
 }
 
 .eea-card:nth-of-type(2n) {
-    background-color: &dtml-corporateBlue;;
-    color: &dtml-corporateBlue;;
+    background-color: &dtml-corporateBlueOld;;
+    color: &dtml-corporateBlueOld;;
 }
 
 .storytelling-body .eea-card:nth-of-type(2n) {
@@ -573,7 +573,7 @@ body {
 @media screen and (min-width: 768px) {
     #topics-search:before,
     .template-themes_view .content-header:before {
-        background-color: &dtml-corporateBlue;;
+        background-color: &dtml-corporateBlueOld;;
         content: " ";
         display: block;
         height: 100%;
@@ -594,7 +594,7 @@ body {
 
     /* needed in order to join blue bg content-header  and above content area */
     .userrole-anonymous.template-themes_view #eea-above-columns:after {
-        background-color: &dtml-corporateBlue;;
+        background-color: &dtml-corporateBlueOld;;
         content: " ";
         display: block;
         height: 250px;
