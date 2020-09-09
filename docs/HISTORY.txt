@@ -1,8 +1,10 @@
 Changelog
 =========
 
-10.8-dev0 - (unreleased)
+10.8 - (2020-09-09)
 ---------------------------
+* Change: Refs #120363 themecentre nav changes
+  [ichim-david]
 
 10.7 - (2020-06-22)
 ---------------------------
