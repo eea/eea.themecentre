@@ -28,7 +28,7 @@
 /* 71710 dc_view transformations in order to have right-column area act like portal-column-two */
 .content-header,
 .column-area {
-    float: left;
+    /*float: left;*/
     padding-top: 0;
 }
 
