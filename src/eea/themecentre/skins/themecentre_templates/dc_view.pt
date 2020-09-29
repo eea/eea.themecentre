@@ -32,7 +32,7 @@
        </div>
 
         <div class="whatsnew-listing">
-            <h3 i18n:translate="">Browse catalogue</h3>
+            <h3 i18n:translate="" id="news-header">Browse catalogue</h3>
             <tal:datapage tal:define="datapage string:dcview;
                     more_hrefs python: {'All data products':'dm', 'Datasets':'dm#c1=Data', 'Maps':'dm#c1=Map',
                     'Interactive maps':'dm#c1=Interactive+map', 'Indicators':'dm#c1=Indicator', 'Graphs':'dm#c1=Graph'}">
