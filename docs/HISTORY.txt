@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.9-dev0 - (unreleased)
+10.9 - (2020-10-06)
 ---------------------------
 * Change: dc_view mobile search css fixes
   [ichim-david refs #121911]
