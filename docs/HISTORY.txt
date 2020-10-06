@@ -1,6 +1,11 @@
 Changelog
 =========
 
+10.9 - (2020-10-06)
+---------------------------
+* Change: dc_view mobile search css fixes
+  [ichim-david refs #121911]
+  
 10.8 - (2020-09-09)
 ---------------------------
 * Change: Refs #120363 themecentre nav changes
