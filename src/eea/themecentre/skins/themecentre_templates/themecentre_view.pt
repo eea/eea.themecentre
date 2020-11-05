@@ -211,7 +211,7 @@
         </section>
 
         <section class="themecentre-section section-publications"
-                 tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications">
+                 tal:define="publications themecentre_view/getLatestPublications" tal:condition="publications" id="section-publications">
             <div class="section-type">
                 <a href="publications" class="inline-block eea-btn-md eea-btn-publications bg-grey text-bold">
                   <span class="eea-icon eea-icon-lg eea-icon-file-pdf-o"><!-- ?--></span>
