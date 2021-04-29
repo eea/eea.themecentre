@@ -3,6 +3,9 @@ Changelog
 
 11.1-dev0 - (unreleased)
 ---------------------------
+* Change: Modified vocabularies so that they are now using collective.taxonomy
+  instead of ATVocabularyManager
+  [iulianpetchesi refs #131802]
 
 11.0 - (2020-11-10)
 ---------------------------
