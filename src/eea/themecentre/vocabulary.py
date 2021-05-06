@@ -3,12 +3,8 @@
 from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
-from zope.component import queryUtility
+from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
-from collective.taxonomy.interfaces import ITaxonomy
-
-
-utility_name = "collective.taxonomy.themes"
 
 
 class ThemesVocabulary(object):
@@ -17,18 +13,10 @@ class ThemesVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context, checkContext=True):
-        taxonomy = queryUtility(ITaxonomy, name=utility_name)
-
-        try:
-            vocabulary = taxonomy(self)
-        except:
-            vocabulary = taxonomy.makeVocabulary('en')
-
-        terms = [
-            SimpleTerm(key, key, val.encode('ascii', 'ignore').decode('ascii'))
-            for val, key in vocabulary.iterEntries()
-        ]
-
+        site = getSite()
+        portal_vocab = getToolByName(site, 'portal_vocabularies')
+        themes = getattr(portal_vocab, 'themes').getDisplayList(site)
+        terms = [SimpleTerm(key, key, value) for key, value in themes.items()]
         return SimpleVocabulary(terms)
 
 
@@ -42,18 +30,17 @@ class ThemesEditVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        taxonomy = queryUtility(ITaxonomy, name=utility_name)
+        site = getSite()
+        portal_vocab = getToolByName(site, 'portal_vocabularies')
+        wftool = getToolByName(site, 'portal_workflow')
 
-        try:
-            vocabulary = taxonomy(self)
-        except:
-            vocabulary = taxonomy.makeVocabulary('en')
-
-        terms = [
-            SimpleTerm(key, key, val.encode('ascii', 'ignore').decode('ascii'))
-            for val, key in vocabulary.iterEntries()
-        ]
-
+        themes = portal_vocab.themes.objectValues()
+        terms = []
+        for theme in themes:
+            key = theme.getId()
+            state = wftool.getInfoFor(theme, 'review_state', 'published')
+            if state == 'published':
+                terms.append(SimpleTerm(key, key, theme.Title()))
         return SimpleVocabulary(terms)
 
 
