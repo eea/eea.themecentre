@@ -42,6 +42,7 @@ setup(name='eea.themecentre',
           'Products.LinguaPlone',
           'eea.vocab',
           'eventlet',
+          'eea.dexterity.themes',
       ],
       entry_points="""
       # -*- Entry points: -*-

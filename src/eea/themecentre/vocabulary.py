@@ -3,8 +3,12 @@
 from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
-from zope.component.hooks import getSite
+from zope.component import queryUtility
 from Products.CMFCore.utils import getToolByName
+from collective.taxonomy.interfaces import ITaxonomy
+
+
+utility_name = "collective.taxonomy.themes"
 
 
 class ThemesVocabulary(object):
@@ -13,10 +17,18 @@ class ThemesVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context, checkContext=True):
-        site = getSite()
-        portal_vocab = getToolByName(site, 'portal_vocabularies')
-        themes = getattr(portal_vocab, 'themes').getDisplayList(site)
-        terms = [SimpleTerm(key, key, value) for key, value in themes.items()]
+        taxonomy = queryUtility(ITaxonomy, name=utility_name)
+
+        try:
+            vocabulary = taxonomy(self)
+        except:
+            vocabulary = taxonomy.makeVocabulary('en')
+
+        terms = [
+            SimpleTerm(key, key, val.encode('ascii', 'ignore').decode('ascii'))
+            for val, key in vocabulary.iterEntries()
+        ]
+
         return SimpleVocabulary(terms)
 
 
@@ -30,17 +42,18 @@ class ThemesEditVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        site = getSite()
-        portal_vocab = getToolByName(site, 'portal_vocabularies')
-        wftool = getToolByName(site, 'portal_workflow')
+        taxonomy = queryUtility(ITaxonomy, name=utility_name)
 
-        themes = portal_vocab.themes.objectValues()
-        terms = []
-        for theme in themes:
-            key = theme.getId()
-            state = wftool.getInfoFor(theme, 'review_state', 'published')
-            if state == 'published':
-                terms.append(SimpleTerm(key, key, theme.Title()))
+        try:
+            vocabulary = taxonomy(self)
+        except:
+            vocabulary = taxonomy.makeVocabulary('en')
+
+        terms = [
+            SimpleTerm(key, key, val.encode('ascii', 'ignore').decode('ascii'))
+            for val, key in vocabulary.iterEntries()
+        ]
+
         return SimpleVocabulary(terms)
 
 
