@@ -1,7 +1,5 @@
 """ EEA Theme Centre import steps
 """
-from Products.CMFCore.utils import getToolByName
-
 
 def setupVarious(context):
     """ Setup various
