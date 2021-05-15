@@ -1,5 +1,7 @@
 """ Theme taggable module
 """
+import re
+from collective.taxonomy.interfaces import ITaxonomy
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.interfaces import IThemeCentre, IMainThemeTagging
 from eea.themecentre.interfaces import IThemeCentreSchema
@@ -9,11 +11,12 @@ from persistent.list import PersistentList
 from persistent.dict import PersistentDict
 from Products.CMFCore.utils import getToolByName
 from zope.annotation.interfaces import IAnnotations
-from zope.component import adapts, getUtility
+from zope.component import adapts, getUtility, queryUtility
 from zope.event import notify
 from zope.interface import implements
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 from zope.schema.interfaces import IVocabularyFactory
+
 
 KEY = 'eea.themecentre.themetaggable'
 
@@ -24,24 +27,51 @@ def _getMergedThemes(context, themes):
     if not themes:
         return
 
-    vocabularies = getToolByName(context, 'portal_vocabularies', None)
-    root = None
-    if vocabularies is not None:
-        root = vocabularies.getVocabularyByName('themesmerged')
+    taxonomy = queryUtility(ITaxonomy, name='collective.taxonomy.themesmerged')
 
-    if root is None:
+    try:
+        vocabulary = taxonomy(context)
+    except:
+        vocabularies = getToolByName(context, 'portal_vocabularies', None)
+        root = None
+
+        if vocabularies is not None:
+            root = vocabularies.getVocabularyByName('themesmerged')
+
+        if root is None:
+            for theme in themes:
+                yield theme
+            return
+
+        synonyms = dict((term.Title(), term) for term in root.values())
+        print synonyms
         for theme in themes:
-            yield theme
-        return
+            if theme not in synonyms:
+                yield theme
+                continue
 
-    synonyms = dict((term.Title(), term) for term in root.values())
-    for theme in themes:
-        if theme not in synonyms:
-            yield theme
-            continue
+            for synonym in synonyms[theme].values():
+                yield synonym.Title()
 
-        for synonym in synonyms[theme].values():
-            yield synonym.Title()
+    terms = []
+    found = False
+    for val, key in vocabulary.iterEntries():
+        val = "-".join(
+            re.findall(
+                "[A-Z][^A-Z]*",
+                val.encode("ascii", "ignore").decode("ascii").replace(" ", "-"),
+            )
+        ).lower()
+
+        for theme in themes:
+            if theme in val.lower():
+                found = True
+                yield val.lower()
+                yield theme
+                continue
+
+    if not found:
+        yield [theme for theme in themes]
 
 
 def getMergedThemes(context, themes):
