@@ -16,6 +16,7 @@ from zope.event import notify
 from zope.interface import implements
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
 
 
 KEY = 'eea.themecentre.themetaggable'
@@ -44,7 +45,7 @@ def _getMergedThemes(context, themes):
             return
 
         synonyms = dict((term.Title(), term) for term in root.values())
-        print synonyms
+
         for theme in themes:
             if theme not in synonyms:
                 yield theme
@@ -53,8 +54,9 @@ def _getMergedThemes(context, themes):
             for synonym in synonyms[theme].values():
                 yield synonym.Title()
 
-    found = False
+    terms = []
     for val, key in vocabulary.iterEntries():
+        title = val.encode("ascii", "ignore").decode("ascii")
         val = "-".join(
             re.findall(
                 "[A-Z][^A-Z]*",
@@ -62,15 +64,19 @@ def _getMergedThemes(context, themes):
             )
         ).lower()
 
-        for theme in themes:
-            if theme in val.lower():
-                found = True
-                yield val.lower()
-                yield theme
-                continue
+        terms.append(
+            SimpleTerm(key, val, title)
+        )
 
-    if not found:
-        yield [theme for theme in themes]
+    synonyms = dict((term.value, term) for term in terms)
+
+    for theme in themes:
+        if theme not in synonyms:
+            yield theme
+            continue
+
+        for synonym in synonyms[theme].values():
+            yield synonym.value
 
 
 def getMergedThemes(context, themes):
