@@ -3,8 +3,9 @@ Changelog
 
 11.1 - (2021-05-06)
 ---------------------------
-* Change: Merge #131802
-  [Petchesi-Iulian]
+* Change: Modified vocabularies so that they are now using collective.taxonomy
+  instead of ATVocabularyManager
+  [iulianpetchesi refs #131802]
 
 11.0 - (2020-11-10)
 ---------------------------
