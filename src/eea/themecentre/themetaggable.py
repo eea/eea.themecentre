@@ -53,6 +53,7 @@ def _getMergedThemes(context, themes):
 
             for synonym in synonyms[theme].values():
                 yield synonym.Title()
+        return
 
     terms = []
     for val, key in vocabulary.iterEntries():
