@@ -23,6 +23,7 @@ class TestTagging(EEAThemeCentreTestCase):
         self.setRoles(['Manager'])
 
         # make the air theme non deprecated
+        # can no longer deprecate due to #131802
         air = self.portal.portal_vocabularies.themes.air
         self.portal.portal_workflow.doActionFor(air, 'publish')
 

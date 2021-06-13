@@ -4,7 +4,7 @@ from DateTime import DateTime
 
 from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import alsoProvides, Interface
-from zope.component import queryUtility
+from zope.component import queryUtility, getUtility
 from zope.formlib.form import Fields
 from five.formlib.formbase import EditForm
 from Products.Five import BrowserView
@@ -246,4 +246,14 @@ class ThemecentreUtils(BrowserView):
             return True
         return False
 
+    def get_vocabulary_lines(self):
+        """ Imitate vocabulary.getVocabularyLines using taxonomy
+        """
+        vocab = getUtility(IVocabularyFactory, 'Allowed themes')
+        terms = vocab(self)
 
+        themes = []
+        for term in terms:
+            themes.append((term.value, term.title))
+
+        return themes

@@ -25,4 +25,4 @@ Climate change is marked as deprecated in the test set up so then
 we only have air left.
 
   >>> taggable.nondeprecated_tags
-  ['air']
+  ['air', 'climate']

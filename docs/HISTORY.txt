@@ -1,6 +1,12 @@
 Changelog
 =========
 
+12.0 - (2021-05-06)
+---------------------------
+* Change: Modified vocabularies so that they are now using collective.taxonomy
+  instead of ATVocabularyManager
+  [iulianpetchesi refs #131802]
+
 11.0 - (2020-11-10)
 ---------------------------
 * Change: added static id to themecentre section in order for them to be
@@ -11,7 +17,7 @@ Changelog
 ---------------------------
 * Change: dc_view mobile search css fixes
   [ichim-david refs #121911]
-  
+
 10.8 - (2020-09-09)
 ---------------------------
 * Change: Refs #120363 themecentre nav changes
@@ -73,7 +79,7 @@ Changelog
 
 9.8 - (2019-11-26)
 ---------------------------
-* Bug fix: fixed link to themes centre back from the dc view 
+* Bug fix: fixed link to themes centre back from the dc view
   [ichim-david refs #111443]
 
 9.7 - (2019-11-15)
