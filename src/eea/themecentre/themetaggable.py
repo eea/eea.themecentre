@@ -50,9 +50,12 @@ def _getMergedThemes(context, themes):
             if theme not in synonyms:
                 yield theme
                 continue
-
-            for synonym in synonyms[theme].values():
-                yield synonym.Title()
+            theme_synonyms = synonyms[theme]
+            if type(theme_synonyms) == SimpleTerm:
+                yield theme_synonyms.value
+            else:
+                for synonym in synonyms[theme].values():
+                    yield synonym.Title()
         return
 
     terms = []
@@ -75,9 +78,12 @@ def _getMergedThemes(context, themes):
         if theme not in synonyms:
             yield theme
             continue
-
-        for synonym in synonyms[theme].values():
-            yield synonym.value
+        theme_synonyms = synonyms[theme]
+        if type(theme_synonyms) == SimpleTerm:
+            yield theme_synonyms.value
+        else:
+            for synonym in synonyms[theme].values():
+                yield synonym.Title()
 
 
 def getMergedThemes(context, themes):
@@ -127,6 +133,7 @@ class ThemeTaggable(object):
         """ Set tags
         """
         # if the value didn't change we don't need to do anything
+
         if value == self.tags:
             return
 
