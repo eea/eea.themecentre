@@ -1,6 +1,5 @@
 """ Theme taggable module
 """
-import re
 from collective.taxonomy.interfaces import ITaxonomy
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.interfaces import IThemeCentre, IMainThemeTagging
@@ -16,7 +15,6 @@ from zope.event import notify
 from zope.interface import implements
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
 
 
 KEY = 'eea.themecentre.themetaggable'
