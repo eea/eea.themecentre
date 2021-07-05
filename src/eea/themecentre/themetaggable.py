@@ -1,6 +1,5 @@
 """ Theme taggable module
 """
-import re
 from collective.taxonomy.interfaces import ITaxonomy
 from eea.themecentre.interfaces import IThemeTagging, IThemeTaggable
 from eea.themecentre.interfaces import IThemeCentre, IMainThemeTagging
@@ -16,7 +15,6 @@ from zope.event import notify
 from zope.interface import implements
 from zope.lifecycleevent import ObjectModifiedEvent, Attributes
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
 
 
 KEY = 'eea.themecentre.themetaggable'
@@ -50,34 +48,20 @@ def _getMergedThemes(context, themes):
             if theme not in synonyms:
                 yield theme
                 continue
-
+            theme_synonyms = synonyms[theme]
             for synonym in synonyms[theme].values():
                 yield synonym.Title()
         return
 
-    terms = []
-    for val, key in vocabulary.iterEntries():
-        title = val.encode("ascii", "ignore").decode("ascii")
-        val = "-".join(
-            re.findall(
-                "[A-Z][^A-Z]*",
-                val.encode("ascii", "ignore").decode("ascii").replace(" ", "-"),
-            )
-        ).lower()
-
-        terms.append(
-            SimpleTerm(key, val, title)
-        )
-
-    synonyms = dict((term.value, term) for term in terms)
+    synonyms_dict = vocabulary.makeTree()
+    synonyms = synonyms_dict.keys()
 
     for theme in themes:
         if theme not in synonyms:
             yield theme
             continue
-
-        for synonym in synonyms[theme].values():
-            yield synonym.value
+        theme_synonyms = synonyms_dict[theme]
+        yield theme_synonyms.keys()[0]
 
 
 def getMergedThemes(context, themes):
@@ -127,6 +111,7 @@ class ThemeTaggable(object):
         """ Set tags
         """
         # if the value didn't change we don't need to do anything
+
         if value == self.tags:
             return
 

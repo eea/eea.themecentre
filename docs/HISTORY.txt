@@ -1,6 +1,12 @@
 Changelog
 =========
 
+12.1 - (2021-07-02)
+---------------------------
+* Bug fix: use tree values when retrieving merged themes vocabulary
+  so that we can have the proper theme id fallback
+  [ichim-david refs #135950]
+
 12.0 - (2021-05-06)
 ---------------------------
 * Change: Modified vocabularies so that they are now using collective.taxonomy
