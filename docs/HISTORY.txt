@@ -1,6 +1,9 @@
 Changelog
 =========
 
+12.3-dev0 - (unreleased)
+---------------------------
+
 12.2 - (2023-01-10)
 ---------------------------
 * Change: Increased to 5 the number of selected themes
