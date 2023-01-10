@@ -1,6 +1,11 @@
 Changelog
 =========
 
+12.2 - (2023-01-10)
+---------------------------
+* Change: Increased to 5 the number of selected themes
+  [alecghica]
+
 12.1 - (2021-07-02)
 ---------------------------
 * Bug fix: use tree values when retrieving merged themes vocabulary
