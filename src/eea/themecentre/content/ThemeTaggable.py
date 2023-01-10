@@ -52,9 +52,9 @@ schema = Schema((
         validators=('maxValues',),
         widget=InAndOutWidget
         (
-            maxValues=3,
+            maxValues=5,
             label="Themes",
-            description="Choose max 3 themes",
+            description="Choose max 5 themes",
             label_msgid='EEAContentTypes_label_themes',
             description_msgid='EEAContentTypes_help_themes',
             i18n_domain='EEAContentTypes',
