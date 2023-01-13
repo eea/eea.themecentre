@@ -1,7 +1,7 @@
 Changelog
 =========
 
-12.3-dev0 - (unreleased)
+12.3 - (2023-01-13)
 ---------------------------
 * Change: Display 5 topics.
   [alecghica refs #159722]
