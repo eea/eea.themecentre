@@ -3,11 +3,13 @@ Changelog
 
 12.3-dev0 - (unreleased)
 ---------------------------
+* Change: Display 5 topics.
+  [alecghica refs #159722]
 
 12.2 - (2023-01-10)
 ---------------------------
 * Change: Increased to 5 the number of selected themes
-  [alecghica]
+  [alecghica refs #159722]
 
 12.1 - (2021-07-02)
 ---------------------------
