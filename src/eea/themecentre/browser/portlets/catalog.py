@@ -65,7 +65,7 @@ class BasePortlet(BrowserView):
     def size(self):
         """ Size
         """
-        return 3
+        return 5
 
 
 class CatalogBasePortlet(BasePortlet):
